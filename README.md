@@ -1,39 +1,98 @@
-<!--
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
+# UX4G Flutter Design System
 
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/tools/pub/writing-package-pages).
+Flutter package for the UX4G design system, with reusable foundations and UI components ported from the Android Compose implementation.
 
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/to/develop-packages).
--->
+## Included
 
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+- foundations: colors, typography, spacing, radii, icons
+- inputs: buttons, checkbox, toggle, dropdown, selection, input field, search field, text area, slider
+- feedback: toast, tooltip, loader, modal, bottom sheet
+- navigation and progress: pagination, steppers
+- data display: card, badge, tag, chips, avatar, divider
 
-## Features
+## Installation
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
+Add the package to `pubspec.yaml`:
 
-## Getting started
-
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
-
-## Usage
-
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder.
-
-```dart
-const like = 'sample';
+```yaml
+dependencies:
+  ux4g_flutter_design_system:
+    git:
+      url: https://github.com/ux4g-negd/ux4g-flutter-design-system.git
+      ref: main
 ```
 
-## Additional information
+Then run:
 
-TODO: Tell users more about the package: where to find more information, how to
-contribute to the package, how to file issues, what response they can expect
-from the package authors, and more.
+```bash
+flutter pub get
+```
+
+## Basic usage
+
+```dart
+import 'package:flutter/material.dart';
+import 'package:ux4g_flutter_design_system/ux4g_flutter_design_system.dart';
+
+void main() {
+  runApp(
+    const Ux4gTheme(
+      child: MaterialApp(
+        home: DemoScreen(),
+      ),
+    ),
+  );
+}
+
+class DemoScreen extends StatelessWidget {
+  const DemoScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Ux4gButton(
+              onPressed: () {},
+              text: 'Primary action',
+            ),
+            const SizedBox(height: 16),
+            Ux4gCard(
+              title: 'Title',
+              subtitle: 'Subtitle',
+              body: 'Body content',
+              footerType: Ux4gCardFooterType.primaryOnly,
+              primaryButtonText: 'Continue',
+              onPrimaryClick: () {},
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+```
+
+## Showcase
+
+A full component showcase app is included in [example/lib/main.dart](./example/lib/main.dart).
+
+Run it with:
+
+```bash
+cd example
+flutter run
+```
+
+## Notes
+
+- Components are being aligned with the UX4G Android Compose design system.
+- Some APIs expose both simple and rich variants where Android has separate usage patterns.
+- The example app is the best reference for current component coverage and configuration.
+
+## Repository
+
+- Source: https://github.com/ux4g-negd/ux4g-flutter-design-system
