@@ -28,3 +28,4 @@ export 'src/components/input_field.dart';
 export 'src/components/search_field.dart';
 export 'src/components/text_area.dart';
 export 'src/components/input_extensions.dart';
+export 'src/components/otp_input.dart';

@@ -79,6 +79,21 @@ class _ComponentShowcasePageState extends State<ComponentShowcasePage> {
   // TextArea
   String _textAreaVal = '';
 
+  // OTP
+  String _otpDefault = '';
+  String _otpError = '';
+  String _otpSuccess = '123456';
+  String _otpWarning = '';
+  String _otpLocked = '123';
+  String _otpCountdown = '';
+  bool _otpCountdownExpired = false;
+
+  // Interactive OTP Demo
+  String _otpTestValue = '';
+  Ux4gOtpInputStatus _otpTestStatus = Ux4gOtpInputStatus.defaultStatus;
+  int _otpAttemptsLeft = 3;
+  bool _otpIsLocked = false;
+
   List<Ux4gDropdownOption> get _stateOptions => [
     Ux4gDropdownOption(id: 'ap', label: 'Andhra Pradesh'),
     Ux4gDropdownOption(id: 'arp', label: 'Arunachal Pradesh'),
@@ -633,6 +648,228 @@ class _ComponentShowcasePageState extends State<ComponentShowcasePage> {
                               label: 'Search',
                               placeholder: 'Search...',
                               leadingIcon: Icons.search,
+                            ),
+                          ],
+                        ),
+                      ),
+
+                      // ─── 13b. OTP Input ───────────────────────────────
+                      _showcaseCard(
+                        title: 'OTP Input',
+                        typography: typography,
+                        colors: colors,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            // ─── Interactive Demo ───────────────────────────────
+                            Container(
+                              padding: const EdgeInsets.all(16),
+                              decoration: BoxDecoration(
+                                color: colors.primary.withValues(alpha: 0.05),
+                                borderRadius: BorderRadius.circular(Ux4gRadius.radius12),
+                                border: Border.all(color: colors.primary.withValues(alpha: 0.1)),
+                              ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text('Interactive Testing Demo', 
+                                          style: typography.lM_strong.copyWith(color: colors.primary)),
+                                      TextButton(
+                                        onPressed: () {
+                                          setState(() {
+                                            _otpTestValue = '';
+                                            _otpTestStatus = Ux4gOtpInputStatus.defaultStatus;
+                                            _otpAttemptsLeft = 3;
+                                            _otpIsLocked = false;
+                                          });
+                                        },
+                                        child: const Text('Reset Demo'),
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 12),
+                                  Ux4gOtpInput(
+                                    length: 6,
+                                    value: _otpTestValue,
+                                    enabled: !_otpIsLocked,
+                                    status: _otpTestStatus,
+                                    label: 'Enter Verification Code (Default OTP is 123456)',
+                                    captionVariant: _otpIsLocked
+                                        ? Ux4gOtpCaptionVariant.locked
+                                        : (_otpTestStatus == Ux4gOtpInputStatus.success
+                                            ? Ux4gOtpCaptionVariant.success
+                                            : (_otpAttemptsLeft < 3
+                                                ? Ux4gOtpCaptionVariant.attemptWithTimer
+                                                : Ux4gOtpCaptionVariant.plain)),
+                                    captionLeadingText: _otpIsLocked
+                                        ? 'Locked for 30:00'
+                                        : (_otpAttemptsLeft < 3
+                                            ? 'Attempt ${4 - _otpAttemptsLeft} of 3'
+                                            : 'Correct code is 123456'),
+                                    captionTrailingText: _otpIsLocked ? 'Resend OTP' : null,
+                                    onChanged: (v) {
+                                      setState(() {
+                                        _otpTestValue = v;
+                                        // Reset error state when user types again
+                                        if (_otpTestStatus == Ux4gOtpInputStatus.error) {
+                                          _otpTestStatus = Ux4gOtpInputStatus.defaultStatus;
+                                        }
+                                      });
+                                    },
+                                    onCompleted: (v) {
+                                      setState(() {
+                                        if (v == '123456') {
+                                          _otpTestStatus = Ux4gOtpInputStatus.success;
+                                        } else {
+                                          _otpAttemptsLeft--;
+                                          if (_otpAttemptsLeft <= 0) {
+                                            _otpIsLocked = true;
+                                            _otpTestStatus = Ux4gOtpInputStatus.locked;
+                                          } else {
+                                            _otpTestStatus = Ux4gOtpInputStatus.error;
+                                          }
+                                        }
+                                      });
+                                    },
+                                  ),
+                                ],
+                              ),
+                            ),
+                            const SizedBox(height: 16),
+                            
+                            // 4-Digit Demo
+                            Ux4gOtpInput(
+                              length: 4,
+                              value: _otpCountdown,
+                              onChanged: (v) => setState(() => _otpCountdown = v),
+                              label: '4-Digit Mode',
+                              captionVariant: Ux4gOtpCaptionVariant.plain,
+                              captionText: 'Demo of 4-box layout with separators',
+                            ),
+                            const SizedBox(height: 32),
+                            
+                            // Default
+                            Text('Default', style: typography.lS_strong),
+                            const SizedBox(height: 8),
+                            Ux4gOtpInput(
+                              length: 6,
+                              value: _otpDefault,
+                              onChanged: (v) => setState(() => _otpDefault = v),
+                              onCompleted: (v) {},
+                              label: 'Label',
+                              required: true,
+                              labelTrailingIcon: Icons.info_outline,
+                              captionVariant: Ux4gOtpCaptionVariant.resendTimer,
+                              captionLeadingText: "Didn't receive OTP?",
+                              captionTrailingText: 'Resend in 00:30',
+                            ),
+                            const SizedBox(height: 20),
+
+                            // Resend Action
+                            Text('Resend Action', style: typography.lS_strong),
+                            const SizedBox(height: 8),
+                            Ux4gOtpInput(
+                              length: 6,
+                              value: _otpDefault,
+                              onChanged: (v) => setState(() => _otpDefault = v),
+                              captionVariant: Ux4gOtpCaptionVariant.resendAction,
+                              captionLeadingText: "Didn't receive OTP?",
+                              captionTrailingText: 'Resend OTP',
+                              onCaptionTrailingTap: () {},
+                            ),
+                            const SizedBox(height: 20),
+
+                            // Error / Attempt
+                            Text('Error — Attempt 2 of 3', style: typography.lS_strong),
+                            const SizedBox(height: 8),
+                            Ux4gOtpInput(
+                              length: 6,
+                              value: _otpError,
+                              onChanged: (v) => setState(() => _otpError = v),
+                              status: Ux4gOtpInputStatus.error,
+                              captionVariant: Ux4gOtpCaptionVariant.attemptWithTimer,
+                              captionLeadingText: 'Attempt 2 of 3',
+                              captionTrailingText: 'Resend OTP in 00:17',
+                            ),
+                            const SizedBox(height: 20),
+
+                            // Locked
+                            Text('Locked', style: typography.lS_strong),
+                            const SizedBox(height: 8),
+                            Ux4gOtpInput(
+                              length: 6,
+                              value: _otpLocked,
+                              onChanged: (v) => setState(() => _otpLocked = v),
+                              status: Ux4gOtpInputStatus.locked,
+                              captionVariant: Ux4gOtpCaptionVariant.locked,
+                              captionLeadingText: 'Locked for 28:43',
+                              captionTrailingText: 'Resend OTP',
+                              onCaptionTrailingTap: () {},
+                            ),
+                            const SizedBox(height: 20),
+
+                            // Success
+                            Text('Success', style: typography.lS_strong),
+                            const SizedBox(height: 8),
+                            Ux4gOtpInput(
+                              length: 6,
+                              value: _otpSuccess,
+                              onChanged: (v) => setState(() => _otpSuccess = v),
+                              status: Ux4gOtpInputStatus.success,
+                              captionVariant: Ux4gOtpCaptionVariant.success,
+                              captionText: 'Verification successful',
+                            ),
+                            const SizedBox(height: 20),
+
+                            // Warning
+                            Text('Warning', style: typography.lS_strong),
+                            const SizedBox(height: 8),
+                            Ux4gOtpInput(
+                              length: 6,
+                              value: _otpWarning,
+                              onChanged: (v) => setState(() => _otpWarning = v),
+                              status: Ux4gOtpInputStatus.warning,
+                              captionVariant: Ux4gOtpCaptionVariant.warning,
+                              captionText: 'Warning message',
+                            ),
+                            const SizedBox(height: 20),
+
+                            // Auto Countdown (30s)
+                            Text('Auto Countdown (30s)', style: typography.lS_strong),
+                            const SizedBox(height: 8),
+                            Ux4gOtpInput(
+                              length: 4,
+                              value: _otpCountdown,
+                              onChanged: (v) => setState(() => _otpCountdown = v),
+                              captionVariant: _otpCountdownExpired
+                                  ? Ux4gOtpCaptionVariant.resendAction
+                                  : Ux4gOtpCaptionVariant.resendTimer,
+                              captionLeadingText: "Didn't receive OTP?",
+                              captionTrailingText: _otpCountdownExpired
+                                  ? 'Resend OTP'
+                                  : 'Resend in',
+                              onCaptionTrailingTap: _otpCountdownExpired
+                                  ? () => setState(() => _otpCountdownExpired = false)
+                                  : null,
+                              autoCountdownSeconds: 30,
+                              onCountdownComplete:
+                                  () => setState(() => _otpCountdownExpired = true),
+                            ),
+                            const SizedBox(height: 20),
+
+                            // Obscure / Password mode
+                            Text('Obscure (Password mode)', style: typography.lS_strong),
+                            const SizedBox(height: 8),
+                            Ux4gOtpInput(
+                              length: 6,
+                              value: _otpDefault,
+                              onChanged: (v) => setState(() => _otpDefault = v),
+                              obscure: true,
+                              captionVariant: Ux4gOtpCaptionVariant.plain,
+                              captionText: 'Enter your 6-digit PIN',
                             ),
                           ],
                         ),
