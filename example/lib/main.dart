@@ -4077,49 +4077,8 @@ class _ComponentShowcasePageState extends State<ComponentShowcasePage> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-
-                            Text(
-                              'Face capture + liveness detection + UIDAI verification flow',
-                              style: typography.bS_default.copyWith(
-                                color: colors.onSurface,
-                              ),
-                            ),
-                            const SizedBox(height: 16),
-                            SizedBox(
-                              width: double.infinity,
-                              child: Ux4gButton(
-                                onPressed: () {
-                                  Navigator.of(context).push(
-                                    MaterialPageRoute(
-                                      builder: (_) =>
-                                          const BiometricShowcasePage(mockSuccess: true),
-                                    ),
-                                  );
-                                },
-                                text: 'Simulate Success Flow',
-                                leadingIcon: Icons.check_circle_outline,
-                                backgroundColor: Ux4gPalette.green,
-                                contentColor: Ux4gPalette.white,
-                              ),
-                            ),
-                            const SizedBox(height: 12),
-                            SizedBox(
-                              width: double.infinity,
-                              child: Ux4gButton(
-                                onPressed: () {
-                                  Navigator.of(context).push(
-                                    MaterialPageRoute(
-                                      builder: (_) =>
-                                          const BiometricShowcasePage(mockSuccess: false),
-                                    ),
-                                  );
-                                },
-                                text: 'Simulate Failure Flow',
-                                leadingIcon: Icons.error_outline,
-                                backgroundColor: Ux4gPalette.red,
-                                contentColor: Ux4gPalette.white,
-
-                            Text('Original White Icon (As Imported):', style: typography.lS_strong),
+                            Text('Original White Icon (As Imported):',
+                                style: typography.lS_strong),
                             const SizedBox(height: 12),
                             Center(
                               child: Column(
@@ -4136,10 +4095,10 @@ class _ComponentShowcasePageState extends State<ComponentShowcasePage> {
                                   const SizedBox(height: 12),
                                   Text(
                                     _selectedSocialIcon.name.toUpperCase(),
-                                    style: typography.lM_strong.copyWith(color: colors.onBackground),
+                                    style: typography.lM_strong
+                                        .copyWith(color: colors.onBackground),
                                   ),
                                 ],
-
                               ),
                             ),
                           ],
