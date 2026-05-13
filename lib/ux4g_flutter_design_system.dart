@@ -49,3 +49,4 @@ export 'src/components/empty_state.dart';
 export 'src/components/social_links.dart';
 export 'src/components/file_upload.dart';
 export 'src/components/slot_grid.dart';
+export 'src/components/otp_input.dart';
