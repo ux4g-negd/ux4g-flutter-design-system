@@ -328,11 +328,11 @@ class Ux4gOtpCaption extends StatelessWidget {
 
   // Inline: leading text immediately followed by trailing (both left-aligned)
   Widget _inline({required Widget leading, required Widget trailing}) {
-    return Row(
-      mainAxisSize: MainAxisSize.min,
+    return Wrap(
+      crossAxisAlignment: WrapCrossAlignment.center,
+      spacing: 4,
       children: [
         leading,
-        const SizedBox(width: 4),
         trailing,
       ],
     );
@@ -340,9 +340,17 @@ class Ux4gOtpCaption extends StatelessWidget {
 
   // Space-between: leading on left, trailing on right edge
   Widget _spaceBetween({required Widget leading, required Widget trailing}) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [leading, trailing],
+    return SizedBox(
+      width: double.infinity,
+      child: Wrap(
+        alignment: WrapAlignment.spaceBetween,
+        crossAxisAlignment: WrapCrossAlignment.center,
+        runSpacing: 4,
+        children: [
+          leading,
+          trailing,
+        ],
+      ),
     );
   }
 
@@ -633,7 +641,10 @@ class _Ux4gOtpInputState extends State<Ux4gOtpInput> {
       children: [
         // ── Label ────────────────────────────────────────────────────────
         if (widget.label != null) ...[
-          Row(
+          Wrap(
+            crossAxisAlignment: WrapCrossAlignment.center,
+            spacing: 4,
+            runSpacing: 2,
             children: [
               Text(
                 widget.label!,
@@ -643,27 +654,26 @@ class _Ux4gOtpInputState extends State<Ux4gOtpInput> {
                       : colors.onSurface.withValues(alpha: 0.4),
                 ),
               ),
-              if (widget.required) ...[
-                const SizedBox(width: 4),
+              if (widget.required)
                 Text('*',
                     style: typography.bS_strong
                         .copyWith(color: colors.error)),
-              ],
-              if (widget.labelTrailingIcon != null) ...[
-                const SizedBox(width: 4),
+              if (widget.labelTrailingIcon != null)
                 Icon(widget.labelTrailingIcon,
                     size: 16,
                     color: colors.onSurface.withValues(alpha: 0.5)),
-              ],
             ],
           ),
           const SizedBox(height: 10),
         ],
 
         // ── OTP Boxes ─────────────────────────────────────────────────────
-        Row(
-          mainAxisSize: MainAxisSize.min,
-          children: () {
+        FittedBox(
+          fit: BoxFit.scaleDown,
+          alignment: Alignment.centerLeft,
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: () {
             final List<Widget> items = [];
             for (int i = 0; i < widget.length; i++) {
               // Dash separator before each box except the first
@@ -756,6 +766,7 @@ class _Ux4gOtpInputState extends State<Ux4gOtpInput> {
             return items;
           }(),
         ),
+      ),
 
         // ── Caption ───────────────────────────────────────────────────────
         if (effectiveVariant != null) ...[
