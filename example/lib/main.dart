@@ -79,6 +79,13 @@ class _ComponentShowcasePageState extends State<ComponentShowcasePage> {
   // TextArea
   String _textAreaVal = '';
 
+  // Social Links
+  SocialMediaIcon _selectedSocialIcon = SocialMediaIcon.github;
+  Color _selectedTintColor = Ux4gPalette.primary500;
+
+  // File Upload
+  List<UploadedFile> _uploadedFiles = [];
+
   List<Ux4gDropdownOption> get _stateOptions => [
     Ux4gDropdownOption(id: 'ap', label: 'Andhra Pradesh'),
     Ux4gDropdownOption(id: 'arp', label: 'Arunachal Pradesh'),
@@ -1987,6 +1994,340 @@ class _ComponentShowcasePageState extends State<ComponentShowcasePage> {
                         ),
                       ),
 
+                      // ─── Empty State ──────────────────────────────────
+                      _sectionTitle('Empty State', typography, colors),
+                      const SizedBox(height: 12),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          // No results found
+                          Container(
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: colors.onSurface.withValues(alpha: 0.12),
+                              ),
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            child: Ux4gEmptyState(
+                              variant: Ux4gEmptyStateVariant.noResults,
+                              title: 'No results found',
+                              subtitle: 'Did you mean:',
+                              description: 'Driving License, Ration Card',
+                              buttonText: 'Clear all filters',
+                              onButtonPressed: () {},
+                            ),
+                          ),
+
+                          const SizedBox(height: 16),
+
+                          // No active applications
+                          Container(
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: colors.onSurface.withValues(alpha: 0.12),
+                              ),
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            child: Ux4gEmptyState(
+                              variant: Ux4gEmptyStateVariant.noData,
+                              title: 'No active applications',
+                              subtitle: 'Start your application easily',
+                              description: 'by clicking on the button below.',
+                              buttonText: 'Start application',
+                              onButtonPressed: () {},
+                            ),
+                          ),
+
+                          const SizedBox(height: 16),
+
+                          // Coming soon
+                          Container(
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: colors.onSurface.withValues(alpha: 0.12),
+                              ),
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            child: Ux4gEmptyState(
+                              variant: Ux4gEmptyStateVariant.comingSoon,
+                              title: 'Coming soon',
+                              subtitle: 'This feature is under development.',
+                              buttonText: 'Go Back',
+                              onButtonPressed: () {},
+                            ),
+                          ),
+
+                          const SizedBox(height: 16),
+
+                          // Could not load data
+                          Container(
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: colors.onSurface.withValues(alpha: 0.12),
+                              ),
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            child: Ux4gEmptyState(
+                              variant: Ux4gEmptyStateVariant.error,
+                              title: 'Could not load data',
+                              subtitle: 'Last updated: 4 minutes ago',
+                              buttonText: 'Refresh',
+                              onButtonPressed: () {},
+                            ),
+                          ),
+
+                          const SizedBox(height: 16),
+
+                          // Custom variant
+                          Container(
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: colors.onSurface.withValues(alpha: 0.12),
+                              ),
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            child: Ux4gEmptyState(
+                              variant: Ux4gEmptyStateVariant.custom,
+                              icon: Icons.lock_outline_rounded,
+                              iconColor: Ux4gPalette.secondary,
+                              title: 'Access restricted',
+                              subtitle: 'You do not have permission to view this content.',
+                              description: 'Please contact your administrator.',
+                              buttonText: 'Request access',
+                              onButtonPressed: () {},
+                            ),
+                          ),
+                        ],
+                      ),
+
+                      const SizedBox(height: 32),
+
+                      // ─── Social Links ─────────────────────────────────
+                      _sectionTitle('Social Links', typography, colors),
+                      const SizedBox(height: 12),
+
+                      _showcaseCard(
+                        title: 'Icon Variants - Original White',
+                        typography: typography,
+                        colors: colors,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text('Original White Icon (As Imported):', style: typography.lS_strong),
+                            const SizedBox(height: 12),
+                            Center(
+                              child: Column(
+                                children: [
+                                  Ux4gSocialLink(
+                                    icon: _selectedSocialIcon,
+                                    size: SocialLinkSize.xxl,
+                                    color: Ux4gPalette.white,
+                                    enableBackground: true,
+                                    containerSize: 100,
+                                    containerColor: const Color(0xFFF5F5F5),
+                                    tooltip: _selectedSocialIcon.name,
+                                  ),
+                                  const SizedBox(height: 12),
+                                  Text(
+                                    _selectedSocialIcon.name.toUpperCase(),
+                                    style: typography.lM_strong.copyWith(color: colors.onBackground),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+
+                      const SizedBox(height: 16),
+
+                      _showcaseCard(
+                        title: 'Icon Variants - Colored',
+                        typography: typography,
+                        colors: colors,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text('Colored Icon (Original colored version):', style: typography.lS_strong),
+                            const SizedBox(height: 12),
+                            Center(
+                              child: Column(
+                                children: [
+                                  Ux4gSocialLink(
+                                    icon: _selectedSocialIcon,
+                                    size: SocialLinkSize.xxl,
+                                    useColoredIcon: true,
+                                  ),
+                                  const SizedBox(height: 12),
+                                  Text(
+                                    _selectedSocialIcon.name.toUpperCase(),
+                                    style: typography.lM_strong.copyWith(color: colors.onBackground),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+
+                      const SizedBox(height: 16),
+
+                      _showcaseCard(
+                        title: 'Icon Variants - Custom Tint',
+                        typography: typography,
+                        colors: colors,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text('Select Tint Color:', style: typography.lS_strong),
+                            const SizedBox(height: 12),
+                            Wrap(
+                              spacing: 8,
+                              runSpacing: 8,
+                              children: [
+                                (Ux4gPalette.red500, 'Red'),
+                                (Ux4gPalette.green500, 'Green'),
+                                (Ux4gPalette.primary500, 'Blue'),
+                                (Ux4gPalette.gold600, 'Gold'),
+                                (Ux4gPalette.purple500, 'Purple'),
+                                (Ux4gPalette.cyan500, 'Cyan'),
+                              ]
+                                  .map((colorTuple) {
+                                final color = colorTuple.$1;
+                                final label = colorTuple.$2;
+                                final isSelected = _selectedTintColor == color;
+                                return GestureDetector(
+                                  onTap: () => setState(() => _selectedTintColor = color),
+                                  child: AnimatedContainer(
+                                    duration: const Duration(milliseconds: 150),
+                                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                                    decoration: BoxDecoration(
+                                      color: isSelected ? color.withValues(alpha: 0.15) : colors.surface,
+                                      borderRadius: BorderRadius.circular(8),
+                                      border: Border.all(
+                                        color: isSelected ? color : colors.onSurface.withValues(alpha: 0.12),
+                                        width: isSelected ? 1.5 : 1,
+                                      ),
+                                    ),
+                                    child: Text(
+                                      label,
+                                      style: typography.tS_strong.copyWith(
+                                        color: isSelected ? color : colors.onSurface,
+                                      ),
+                                    ),
+                                  ),
+                                );
+                              }).toList(),
+                            ),
+                            const SizedBox(height: 16),
+                            Center(
+                              child: Column(
+                                children: [
+                                  Ux4gSocialLink(
+                                    icon: _selectedSocialIcon,
+                                    size: SocialLinkSize.xxl,
+                                    color: _selectedTintColor,
+                                    enableBackground: true,
+                                    containerSize: 100,
+                                    containerColor: _selectedTintColor.withValues(alpha: 0.1),
+                                    onPressed: () {},
+                                  ),
+                                  const SizedBox(height: 12),
+                                  Text(
+                                    '${_selectedSocialIcon.name.toUpperCase()} with custom tint',
+                                    style: typography.lM_strong.copyWith(color: _selectedTintColor),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+
+                      const SizedBox(height: 16),
+
+                      _showcaseCard(
+                        title: 'Pick an Icon',
+                        typography: typography,
+                        colors: colors,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text('Select Icon to Preview:', style: typography.lS_strong),
+                            const SizedBox(height: 12),
+                            Wrap(
+                              spacing: 8,
+                              runSpacing: 8,
+                              children: SocialMediaIcon.values.map((icon) {
+                                final isSelected = _selectedSocialIcon == icon;
+                                return GestureDetector(
+                                  onTap: () => setState(() => _selectedSocialIcon = icon),
+                                  child: AnimatedContainer(
+                                    duration: const Duration(milliseconds: 150),
+                                    padding: const EdgeInsets.all(8),
+                                    decoration: BoxDecoration(
+                                      color: isSelected
+                                          ? colors.primary.withValues(alpha: 0.15)
+                                          : colors.surface,
+                                      borderRadius: BorderRadius.circular(8),
+                                      border: Border.all(
+                                        color: isSelected
+                                            ? colors.primary
+                                            : colors.onSurface.withValues(alpha: 0.12),
+                                        width: isSelected ? 1.5 : 1,
+                                      ),
+                                    ),
+                                    child: Ux4gSocialLink(
+                                      icon: icon,
+                                      size: SocialLinkSize.m,
+                                      color: isSelected ? colors.primary : colors.onSurface,
+                                    ),
+                                  ),
+                                );
+                              }).toList(),
+                            ),
+                          ],
+                        ),
+                      ),
+
+                      const SizedBox(height: 32),
+
+                      // ─── File Upload ──────────────────────────────────
+                      _sectionTitle('File Upload', typography, colors),
+                      const SizedBox(height: 12),
+
+                      _showcaseCard(
+                        title: 'File Upload Component',
+                        typography: typography,
+                        colors: colors,
+                        child: Ux4gFileUpload(
+                          maxFiles: 5,
+                          maxFileSize: 5 * 1024 * 1024, // 5MB
+                          onFilesChanged: (files) {
+                            setState(() => _uploadedFiles = files);
+                          },
+                          onUpload: (file) async {
+                            // Simulate upload delay
+                            await Future.delayed(const Duration(seconds: 2));
+                            // Return true for success, false for failure
+                            return true;
+                          },
+                        ),
+                      ),
+
+                      const SizedBox(height: 32),
+
+                      // ─── Slot Grid ────────────────────────────────────
+                      _sectionTitle('Slot Grid', typography, colors),
+                      const SizedBox(height: 12),
+
+                      _showcaseCard(
+                        title: 'Slot Grid – Calendar Booking',
+                        typography: typography,
+                        colors: colors,
+                        child: SlotGridShowcase(),
+                      ),
+
                       const SizedBox(height: 80),
                     ],
                   ),
@@ -2054,6 +2395,238 @@ class _ComponentShowcasePageState extends State<ComponentShowcasePage> {
           ),
         ),
       ),
+    );
+  }
+}
+
+// ─── Slot Grid Showcase ──────────────────────────────────────────────────────
+
+class SlotGridShowcase extends StatefulWidget {
+  const SlotGridShowcase({super.key});
+
+  @override
+  State<SlotGridShowcase> createState() => _SlotGridShowcaseState();
+}
+
+class _SlotGridShowcaseState extends State<SlotGridShowcase> {
+  DateTime? _selectedDate;
+  late SlotGridData _data;
+  SlotPickerViewMode _selectedViewMode = SlotPickerViewMode.expanded;
+
+  // Mutable copy of time slots per date key (including "default").
+  // Initialized from _getJsonInput() so bookings persist across taps.
+  Map<String, List<Map<String, dynamic>>> _mutableTimeSlots = {};
+
+  Map<String, dynamic> _getJsonInput() {
+    final now = DateTime.now();
+    final tomorrow = now.add(const Duration(days: 1));
+    final dayAfter = now.add(const Duration(days: 2));
+    final day4 = now.add(const Duration(days: 3));
+
+    return {
+      "year": now.year,
+      "month": now.month,
+      "today": '${now.year}-${now.month.toString().padLeft(2, '0')}-${now.day.toString().padLeft(2, '0')}',
+      "weeklyOffWeekdays": [6, 7],
+      "allowTapOnPublicHoliday": false,
+      "allowTapOnWeeklyOff": false,
+      "viewMode": _selectedViewMode == SlotPickerViewMode.compact ? "compact" : "expanded",
+      "dates": [
+        {
+          "date": '${now.year}-${now.month.toString().padLeft(2, '0')}-${_pad(now.day + 2)}',
+          "status": "publicHoliday"
+        },
+        {
+          "date": '${now.year}-${now.month.toString().padLeft(2, '0')}-${_pad(now.day + 4)}',
+          "status": "noSlots"
+        },
+        {
+          "date": '${now.year}-${now.month.toString().padLeft(2, '0')}-${_pad(now.day + 6)}',
+          "status": "noSlots"
+        },
+      ],
+      "timeSlots": {
+        '${tomorrow.year}-${tomorrow.month.toString().padLeft(2, '0')}-${tomorrow.day.toString().padLeft(2, '0')}': [
+          {"time": "9:00 AM", "slotCount": 2, "status": "available"},
+          {"time": "10:00 AM", "slotCount": 1, "status": "limited"},
+          {"time": "11:00 AM", "slotCount": 0, "status": "noSlots"},
+          {"time": "2:00 PM", "slotCount": 3, "status": "available"},
+        ],
+        '${dayAfter.year}-${dayAfter.month.toString().padLeft(2, '0')}-${dayAfter.day.toString().padLeft(2, '0')}': [
+          {"time": "9:30 AM", "slotCount": 5, "status": "available"},
+          {"time": "10:30 AM", "slotCount": 2, "status": "available"},
+          {"time": "1:00 PM", "slotCount": 4, "status": "available"},
+          {"time": "3:00 PM", "slotCount": 1, "status": "limited"},
+          {"time": "4:00 PM", "slotCount": 0, "status": "noSlots"},
+        ],
+        '${day4.year}-${day4.month.toString().padLeft(2, '0')}-${day4.day.toString().padLeft(2, '0')}': [
+          {"time": "11:00 AM", "slotCount": 8, "status": "available"},
+          {"time": "12:00 PM", "slotCount": 6, "status": "available"},
+          {"time": "1:00 PM", "slotCount": 3, "status": "available"},
+          {"time": "2:30 PM", "slotCount": 1, "status": "limited"},
+        ],
+        "default": [
+          {"time": "9:00 AM", "slotCount": 4, "status": "available"},
+          {"time": "9:30 AM", "slotCount": 6, "status": "available"},
+          {"time": "10:00 AM", "slotCount": 3, "status": "available"},
+          {"time": "10:30 AM", "slotCount": 0, "status": "noSlots"},
+          {"time": "11:00 AM", "slotCount": 8, "status": "available"},
+          {"time": "11:30 AM", "slotCount": 5, "status": "available"},
+          {"time": "12:00 PM", "slotCount": 10, "status": "available"},
+          {"time": "2:00 PM", "slotCount": 5, "status": "available"},
+          {"time": "2:30 PM", "slotCount": 2, "status": "limited"},
+          {"time": "3:00 PM", "slotCount": 2, "status": "limited"},
+          {"time": "3:30 PM", "slotCount": 1, "status": "limited"},
+          {"time": "4:00 PM", "slotCount": 7, "status": "available"},
+          {"time": "4:30 PM", "slotCount": 2, "status": "limited"},
+          {"time": "5:00 PM", "slotCount": 2, "status": "limited"},
+          {"time": "5:30 PM", "slotCount": 0, "status": "noSlots"},
+        ]
+      }
+    };
+  }
+
+  static String _pad(int day) => day.toString().padLeft(2, '0');
+
+  /// Builds the mutable slot map from the JSON definition.
+  Map<String, List<Map<String, dynamic>>> _buildMutableSlots() {
+    final json = _getJsonInput();
+    final raw = json['timeSlots'] as Map<String, dynamic>;
+    return raw.map((key, value) => MapEntry(
+          key,
+          (value as List).map((e) => Map<String, dynamic>.from(e as Map)).toList(),
+        ));
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _mutableTimeSlots = _buildMutableSlots();
+    _data = SlotGridData.fromJson(_getJsonInput());
+  }
+
+  /// Returns current slots for [date], falling back to "default".
+  List<SlotTimeEntry> _timeSlotsFor(DateTime date) {
+    final dateStr = '${date.year}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}';
+    if (_mutableTimeSlots.isEmpty) {
+      _mutableTimeSlots = _buildMutableSlots();
+    }
+    // If no date-specific entry, create one by copying 'default' so mutations are isolated.
+    if (!_mutableTimeSlots.containsKey(dateStr)) {
+      final defaultSlots = _mutableTimeSlots['default'] ?? [];
+      _mutableTimeSlots[dateStr] = defaultSlots
+          .map((e) => Map<String, dynamic>.from(e))
+          .toList();
+    }
+    return _mutableTimeSlots[dateStr]!
+        .map((e) => SlotTimeEntry.fromJson(e))
+        .toList();
+  }
+
+  /// Increments slotCount for [bookedTime] on [date] and updates status.
+  void _onSlotBooked(DateTime date, SlotTimeEntry bookedTime) {
+    final dateStr = '${date.year}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}';
+    if (_mutableTimeSlots.isEmpty) {
+      _mutableTimeSlots = _buildMutableSlots();
+    }
+    // Always use date-specific key (ensured by _timeSlotsFor creating it on tap)
+    final slots = _mutableTimeSlots[dateStr];
+    if (slots == null) return;
+
+    setState(() {
+      for (final slot in slots) {
+        if (slot['time'] == bookedTime.time) {
+          final newCount = (slot['slotCount'] as int) + 1;
+          slot['slotCount'] = newCount;
+          if (newCount == 0) {
+            slot['status'] = 'noSlots';
+          } else if (newCount <= 2) {
+            slot['status'] = 'limited';
+          } else {
+            slot['status'] = 'available';
+          }
+          break;
+        }
+      }
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final colors = Ux4gTheme.colors(context);
+    final typography = Ux4gTheme.typography(context);
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        // View mode toggle buttons
+        Row(
+          mainAxisSize: MainAxisSize.min,
+          spacing: 8,
+          children: [
+            Ux4gButton(
+              onPressed: () {
+                setState(() {
+                  _selectedViewMode = SlotPickerViewMode.expanded;
+                  _data = SlotGridData.fromJson(_getJsonInput());
+                });
+              },
+              text: 'Expanded View',
+              variant: _selectedViewMode == SlotPickerViewMode.expanded
+                  ? Ux4gButtonVariant.primary
+                  : Ux4gButtonVariant.outline,
+            ),
+            Ux4gButton(
+              onPressed: () {
+                setState(() {
+                  _selectedViewMode = SlotPickerViewMode.compact;
+                  _data = SlotGridData.fromJson(_getJsonInput());
+                });
+              },
+              text: 'Compact View',
+              variant: _selectedViewMode == SlotPickerViewMode.compact
+                  ? Ux4gButtonVariant.primary
+                  : Ux4gButtonVariant.outline,
+            ),
+          ],
+        ),
+        const SizedBox(height: 12),
+        SlotGrid(
+          data: _data,
+          timeSlotProvider: _timeSlotsFor,
+          onSlotConfirmed: (date, slot) => _onSlotBooked(date, slot),
+          onDateSelected: (date) {
+            setState(() {
+              _selectedDate = date;
+              final json = _getJsonInput();
+              _data = SlotGridData.fromJson({
+                ...json,
+                'selectedDate':
+                    '${date.year}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}',
+                'year': _data.year,
+                'month': _data.month,
+              });
+            });
+          },
+          onMonthChanged: (year, month) {
+            setState(() {
+              final json = _getJsonInput();
+              _data = SlotGridData.fromJson({
+                ...json,
+                'year': year,
+                'month': month,
+              });
+            });
+          },
+        ),
+        if (_selectedDate != null) ...[
+          const SizedBox(height: 16),
+          Text(
+            'Selected: ${_selectedDate!.day}/${_selectedDate!.month}/${_selectedDate!.year}',
+            style: typography.bS_default.copyWith(color: colors.onBackground),
+          ),
+        ],
+      ],
     );
   }
 }

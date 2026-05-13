@@ -3,6 +3,7 @@ library ux4g_flutter_design_system;
 export 'src/foundation/colors.dart';
 export 'src/foundation/typography.dart';
 export 'src/foundation/dimensions.dart';
+export 'src/foundation/custom_icons.dart';
 export 'src/theme/theme.dart';
 
 export 'src/components/buttons.dart';
@@ -28,3 +29,7 @@ export 'src/components/input_field.dart';
 export 'src/components/search_field.dart';
 export 'src/components/text_area.dart';
 export 'src/components/input_extensions.dart';
+export 'src/components/empty_state.dart';
+export 'src/components/social_links.dart';
+export 'src/components/file_upload.dart';
+export 'src/components/slot_grid.dart';
