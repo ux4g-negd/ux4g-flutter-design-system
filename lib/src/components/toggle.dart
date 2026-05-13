@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import '../foundation/colors.dart';
-import '../foundation/typography.dart';
 import '../theme/theme.dart';
 
 enum Ux4gToggleSize {
@@ -12,15 +10,15 @@ enum Ux4gToggleSize {
   final double height;
   final double thumbSize;
   final double thumbPadding;
-  const Ux4gToggleSize(this.width, this.height, this.thumbSize, this.thumbPadding);
+  const Ux4gToggleSize(
+    this.width,
+    this.height,
+    this.thumbSize,
+    this.thumbPadding,
+  );
 }
 
-enum Ux4gToggleLabelPosition {
-  noLabel,
-  left,
-  right,
-  bothSides
-}
+enum Ux4gToggleLabelPosition { noLabel, left, right, bothSides }
 
 class Ux4gToggle extends StatelessWidget {
   final bool checked;
@@ -56,12 +54,13 @@ class Ux4gToggle extends StatelessWidget {
     final trackColor = !enabled && checked
         ? disabledCheckedTrackColor
         : !enabled && !checked
-            ? disabledUncheckedTrackColor
-            : checked
-                ? checkedTrackColor
-                : uncheckedTrackColor;
+        ? disabledUncheckedTrackColor
+        : checked
+        ? checkedTrackColor
+        : uncheckedTrackColor;
 
-    final thumbColor = colors.surface; // Thumb is always surface color in default setup
+    final thumbColor =
+        colors.surface; // Thumb is always surface color in default setup
 
     final endOffset = size.width - size.thumbSize - size.thumbPadding;
     final startOffset = size.thumbPadding;
@@ -69,7 +68,9 @@ class Ux4gToggle extends StatelessWidget {
     Widget toggleControl = MouseRegion(
       cursor: enabled ? SystemMouseCursors.click : SystemMouseCursors.basic,
       child: GestureDetector(
-        onTap: enabled && onCheckedChange != null ? () => onCheckedChange!(!checked) : null,
+        onTap: enabled && onCheckedChange != null
+            ? () => onCheckedChange!(!checked)
+            : null,
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 150),
           width: size.width,
@@ -97,7 +98,7 @@ class Ux4gToggle extends StatelessWidget {
                               color: Colors.black.withValues(alpha: 0.2),
                               blurRadius: 2,
                               offset: const Offset(0, 1),
-                            )
+                            ),
                           ]
                         : [],
                   ),
@@ -136,7 +137,9 @@ class Ux4gToggle extends StatelessWidget {
             Text(
               label!,
               style: labelStyle.copyWith(
-                color: enabled ? colors.onSurface : colors.onSurface.withValues(alpha: 0.38),
+                color: enabled
+                    ? colors.onSurface
+                    : colors.onSurface.withValues(alpha: 0.38),
               ),
             ),
           if (description != null) ...[
@@ -144,7 +147,9 @@ class Ux4gToggle extends StatelessWidget {
             Text(
               description!,
               style: descStyle.copyWith(
-                color: enabled ? colors.onSurface.withValues(alpha: 0.7) : colors.onSurface.withValues(alpha: 0.38),
+                color: enabled
+                    ? colors.onSurface.withValues(alpha: 0.7)
+                    : colors.onSurface.withValues(alpha: 0.38),
               ),
             ),
           ],

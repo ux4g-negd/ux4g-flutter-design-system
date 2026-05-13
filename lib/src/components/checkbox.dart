@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../foundation/colors.dart';
-import '../foundation/dimensions.dart';
 import '../theme/theme.dart';
 
 enum Ux4gCheckboxSize {
@@ -42,7 +41,9 @@ class Ux4gCheckbox extends StatelessWidget {
     final typography = Ux4gTheme.typography(context);
 
     final descriptionColor = switch (descriptionVariant) {
-      Ux4gCheckboxDescriptionVariant.helper => colors.onSurface.withValues(alpha: 0.7),
+      Ux4gCheckboxDescriptionVariant.helper => colors.onSurface.withValues(
+        alpha: 0.7,
+      ),
       Ux4gCheckboxDescriptionVariant.error => colors.error,
       Ux4gCheckboxDescriptionVariant.warning => Ux4gPalette.secondary700,
       Ux4gCheckboxDescriptionVariant.success => Ux4gPalette.green600,
@@ -72,9 +73,13 @@ class Ux4gCheckbox extends StatelessWidget {
                   onChanged: enabled ? onChanged : null,
                   activeColor: colors.primary,
                   checkColor: colors.onPrimary,
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(4),
+                  ),
                   side: BorderSide(
-                    color: enabled ? colors.onSurface.withValues(alpha: 0.6) : colors.onSurface.withValues(alpha: 0.12),
+                    color: enabled
+                        ? colors.onSurface.withValues(alpha: 0.6)
+                        : colors.onSurface.withValues(alpha: 0.12),
                     width: 1.5,
                   ),
                 ),
@@ -92,12 +97,19 @@ class Ux4gCheckbox extends StatelessWidget {
                           Text(
                             label!,
                             style: labelTextStyle.copyWith(
-                              color: enabled ? colors.onSurface : colors.onSurface.withValues(alpha: 0.38),
+                              color: enabled
+                                  ? colors.onSurface
+                                  : colors.onSurface.withValues(alpha: 0.38),
                             ),
                           ),
                           if (isRequired) ...[
                             const SizedBox(width: 4),
-                            Text("*", style: labelTextStyle.copyWith(color: colors.error)),
+                            Text(
+                              "*",
+                              style: labelTextStyle.copyWith(
+                                color: colors.error,
+                              ),
+                            ),
                           ],
                         ],
                       ),
@@ -105,7 +117,9 @@ class Ux4gCheckbox extends StatelessWidget {
                       const SizedBox(height: 4),
                       Text(
                         description!,
-                        style: typography.lS_default.copyWith(color: descriptionColor),
+                        style: typography.lS_default.copyWith(
+                          color: descriptionColor,
+                        ),
                       ),
                     ],
                   ],

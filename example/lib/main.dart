@@ -1,3 +1,4 @@
+import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:ux4g_flutter_design_system/ux4g_flutter_design_system.dart';
 
@@ -72,12 +73,19 @@ class _ComponentShowcasePageState extends State<ComponentShowcasePage> {
   bool _toggle1 = true;
   bool _toggle2 = false;
 
+  // Accordion
+  int? _expandedAccordionIndex = 2;
+
   // Chips
   int _selectedChoiceChip = 0;
   final Set<int> _selectedFilterChips = {0, 2};
 
   // TextArea
   String _textAreaVal = '';
+
+  // Linear Progress
+  double _progressValue = 0.0;
+  double _circularProgressValue = 0.5;
 
   List<Ux4gDropdownOption> get _stateOptions => [
     Ux4gDropdownOption(id: 'ap', label: 'Andhra Pradesh'),
@@ -311,6 +319,40 @@ class _ComponentShowcasePageState extends State<ComponentShowcasePage> {
                       ),
 
                       // ─── 7. Loaders ───────────────────────────────────
+                      _showcaseCard(
+                        title: 'Accordion',
+                        typography: typography,
+                        colors: colors,
+                        child: Ux4gAccordionGroup(
+                          items: const [
+                            Ux4gAccordionItem(title: 'Accordion Item'),
+                            Ux4gAccordionItem(title: 'Accordion Item'),
+                            Ux4gAccordionItem(title: 'Accordion Item'),
+                            Ux4gAccordionItem(title: 'Accordion Item'),
+                            Ux4gAccordionItem(
+                              title: 'Accordion Item',
+                              enabled: false,
+                            ),
+                          ],
+                          expandedIndex: _expandedAccordionIndex,
+                          onExpandedIndexChange: (value) {
+                            setState(() => _expandedAccordionIndex = value);
+                          },
+                          contentBuilder: (index, item) {
+                            if (index != 2) {
+                              return const SizedBox.shrink();
+                            }
+
+                            return Text(
+                              'Lorem ipsum is a dummy or placeholder text commonly used in graphic design, publishing, and web development. Its purpose is to permit a page layout to be designed, independently of the copy that will subsequently populate it.',
+                              style: typography.bXS_default.copyWith(
+                                color: Ux4gPalette.neutral500,
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+
                       _showcaseCard(
                         title: 'Loaders',
                         typography: typography,
@@ -815,7 +857,473 @@ class _ComponentShowcasePageState extends State<ComponentShowcasePage> {
                         ),
                       ),
 
-                      // ─── 17. Divider Showcase ─────────────────────────
+                      // ─── Carousel Showcase ─────────────────────────
+                      _showcaseCard(
+                        title: 'Carousel (Image Slider)',
+                        typography: typography,
+                        colors: colors,
+                        child: Ux4gCarousel(
+                          autoPlay: true,
+                          autoPlayInterval: const Duration(seconds: 3),
+                          height: 250,
+                          items: List.generate(4, (index) {
+                            return Container(
+                              margin: const EdgeInsets.symmetric(horizontal: 8),
+                              decoration: BoxDecoration(
+                                color: colors.primary.withValues(alpha: 0.1),
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              alignment: Alignment.center,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    'Slide ${index + 1}',
+                                    style: typography.hM_strong,
+                                  ),
+                                  const SizedBox(height: 8),
+                                  Text(
+                                    '(Replace with desired banner content)',
+                                    style: typography.lS_default.copyWith(
+                                      color: Theme.of(context).brightness == Brightness.dark ? Colors.white70 : Colors.black54,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            );
+                          }),
+                        ),
+                      ),
+
+                      // ─── Date Picker Showcase ────────────────────────
+                      _showcaseCard(
+                        title: 'Date Picker',
+                        typography: typography,
+                        colors: colors,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Single Date Selection',
+                              style: typography.lM_default,
+                            ),
+                            const SizedBox(height: 8),
+                            Ux4gDatePicker(
+                              mode: Ux4gDatePickerMode.single,
+                              placeholder: 'Select DOB',
+                              maxDate: DateTime.now(), // Prevent future DOB
+                              onDateSelected: (date) {
+                                print('Selected Date: $date');
+                              },
+                            ),
+                            const SizedBox(height: 16),
+                            Text(
+                              'Date Range Selection',
+                              style: typography.lM_default,
+                            ),
+                            const SizedBox(height: 8),
+                            Ux4gDatePicker(
+                              mode: Ux4gDatePickerMode.range,
+                              placeholder: 'Select range',
+                              onDateRangeSelected: (range) {
+                                print('Selected Range: ${range.start} to ${range.end}');
+                              },
+                            ),
+                          ],
+                        ),
+                      ),
+
+                      // ─── Time Picker Showcase ────────────────────────
+                      _showcaseCard(
+                        title: 'Time Picker',
+                        typography: typography,
+                        colors: colors,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Standard Time Picker',
+                              style: typography.lM_default,
+                            ),
+                            const SizedBox(height: 8),
+                            Ux4gTimePicker(
+                              placeholder: 'Select time',
+                              onTimeSelected: (time) {
+                                print('Selected Time: $time');
+                              },
+                            ),
+                            const SizedBox(height: 16),
+                            Text(
+                              '5-Minute Interval',
+                              style: typography.lM_default,
+                            ),
+                            const SizedBox(height: 8),
+                            Ux4gTimePicker(
+                              placeholder: 'Select time (5m intervals)',
+                              minuteInterval: 5,
+                              onTimeSelected: (time) {
+                                print('Selected Time (Interval): $time');
+                              },
+                            ),
+                          ],
+                        ),
+                      ),
+                      // ─── Status Banners Showcase ─────────────────────
+                      _showcaseCard(
+                        title: 'Status Banners (Top Snackbars)',
+                        typography: typography,
+                        colors: colors,
+                        child: Wrap(
+                          spacing: 12,
+                          runSpacing: 12,
+                          children: [
+                            Ux4gButton(
+                              text: 'Show Complex Warning',
+                              variant: Ux4gButtonVariant.primary,
+                              onPressed: () {
+                                Ux4gBannerManager.show(
+                                  context,
+                                  variant: Ux4gBannerVariant.warningLight,
+                                  leadingIcon: Container(
+                                    width: 32,
+                                    height: 32,
+                                    decoration: BoxDecoration(
+                                      color: const Color(0xFFFFE5B4),
+                                      shape: BoxShape.circle,
+                                    ),
+                                    child: const Icon(Icons.inventory_2_outlined, color: Color(0xFFF58220), size: 16),
+                                  ),
+                                  title: 'Income Certificate Application',
+                                  subtitle: 'Last saved: 10 Apr 2026',
+                                  badge: Container(
+                                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                                    decoration: BoxDecoration(
+                                      color: const Color(0xFFFFE5B4),
+                                      borderRadius: BorderRadius.circular(4),
+                                    ),
+                                    child: Text(
+                                      'Step 3 of 5 Document Upload',
+                                      style: typography.lM_default.copyWith(color: const Color(0xFFF58220), fontSize: 12),
+                                    ),
+                                  ),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () => Ux4gBannerManager.hide(),
+                                      child: Text('Discard', style: typography.bM_strong.copyWith(color: const Color(0xFFC41D7F))),
+                                    ),
+                                    Ux4gButton(
+                                      text: 'Resume',
+                                      variant: Ux4gButtonVariant.primary,
+                                      onPressed: () => Ux4gBannerManager.hide(),
+                                    ),
+                                  ],
+                                  autoDismiss: false,
+                                );
+                              },
+                            ),
+                            Ux4gButton(
+                              text: 'Show Simple Warning',
+                              variant: Ux4gButtonVariant.outline,
+                              onPressed: () {
+                                Ux4gBannerManager.show(
+                                  context,
+                                  variant: Ux4gBannerVariant.warningLight,
+                                  leadingIcon: Container(
+                                    width: 32,
+                                    height: 32,
+                                    decoration: BoxDecoration(
+                                      color: const Color(0xFFFFE5B4),
+                                      shape: BoxShape.circle,
+                                    ),
+                                    child: const Icon(Icons.inventory_2_outlined, color: Color(0xFFF58220), size: 16),
+                                  ),
+                                  title: 'Your draft expires in 5 days',
+                                  badge: Container(
+                                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                                    decoration: BoxDecoration(
+                                      color: const Color(0xFFFFE5B4),
+                                      borderRadius: BorderRadius.circular(4),
+                                    ),
+                                    child: Text(
+                                      '16 Apr',
+                                      style: typography.lM_default.copyWith(color: const Color(0xFFF58220), fontSize: 12),
+                                    ),
+                                  ),
+                                );
+                              },
+                            ),
+                            Ux4gButton(
+                              text: 'Show Solid Warning',
+                              variant: Ux4gButtonVariant.outline,
+                              onPressed: () {
+                                Ux4gBannerManager.show(
+                                  context,
+                                  variant: Ux4gBannerVariant.warningSolid,
+                                  leadingIcon: Container(
+                                    width: 32,
+                                    height: 32,
+                                    decoration: const BoxDecoration(
+                                      color: Colors.white,
+                                      shape: BoxShape.circle,
+                                    ),
+                                    child: const Icon(Icons.inventory_2_outlined, color: Color(0xFFF58220), size: 16),
+                                  ),
+                                  title: 'Your draft expires tomorrow. Submit today',
+                                );
+                              },
+                            ),
+                            Ux4gButton(
+                              text: 'Show Error',
+                              variant: Ux4gButtonVariant.outline,
+                              onPressed: () {
+                                Ux4gBannerManager.show(
+                                  context,
+                                  variant: Ux4gBannerVariant.errorLight,
+                                  leadingIcon: const Icon(Icons.error_outline, color: Color(0xFFFF4D4F), size: 24),
+                                  title: 'Draft expired on 9 April 2026',
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () => Ux4gBannerManager.hide(),
+                                      child: Text('Action', style: typography.bM_strong.copyWith(color: const Color(0xFFA8071A))),
+                                    ),
+                                  ],
+                                );
+                              },
+                            ),
+                            Ux4gButton(
+                              text: 'Show Saving',
+                              variant: Ux4gButtonVariant.outline,
+                              onPressed: () {
+                                Ux4gBannerManager.show(
+                                  context,
+                                  variant: Ux4gBannerVariant.savingLight,
+                                  title: '',
+                                  trailingIcon: Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      const SizedBox(
+                                        width: 16,
+                                        height: 16,
+                                        child: CircularProgressIndicator(strokeWidth: 2, color: Color(0xFF722ED1)),
+                                      ),
+                                      const SizedBox(width: 8),
+                                      Text('Saving', style: typography.bM_default.copyWith(color: Ux4gPalette.neutral500)),
+                                    ],
+                                  ),
+                                );
+                              },
+                            ),
+                            Ux4gButton(
+                              text: 'Show Success (Right Icon)',
+                              variant: Ux4gButtonVariant.outline,
+                              onPressed: () {
+                                Ux4gBannerManager.show(
+                                  context,
+                                  variant: Ux4gBannerVariant.successLight,
+                                  title: '',
+                                  trailingIcon: Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      const Icon(Icons.check_circle_outline, color: Color(0xFF52C41A), size: 20),
+                                      const SizedBox(width: 8),
+                                      Text('Saved 3:14 PM', style: typography.bM_default.copyWith(color: Ux4gPalette.gray900)),
+                                    ],
+                                  ),
+                                );
+                              },
+                            ),
+                            Ux4gButton(
+                              text: 'Show Success (Left Icon)',
+                              variant: Ux4gButtonVariant.outline,
+                              onPressed: () {
+                                Ux4gBannerManager.show(
+                                  context,
+                                  variant: Ux4gBannerVariant.successLight,
+                                  leadingIcon: const Icon(Icons.check_circle_outline, color: Color(0xFF52C41A), size: 24),
+                                  title: 'Draft saved successfully at 3:14 PM',
+                                );
+                              },
+                            ),
+                          ],
+                        ),
+                      ),
+
+                      // ─── Feedback Form Showcase ───────────────────────
+                      _showcaseCard(
+                        title: 'Feedback Form',
+                        typography: typography,
+                        colors: colors,
+                        child: Center(
+                          child: Ux4gFeedbackForm(
+                            improvementOptions: const ['Content accuracy', 'Visual design', 'Performance', 'Navigation'],
+                            minWords: 0,
+                            maxLength: 200,
+                            onSubmit: (rating, chip, comment) {
+                              print('Feedback Submitted: Rating: $rating, Chip: $chip, Comment: $comment');
+                            },
+                            onSkip: () {
+                              print('Feedback Skipped');
+                            },
+                          ),
+                        ),
+                      ),
+
+                      // ─── NPS Feedback Form Showcase ───────────────────
+                      _showcaseCard(
+                        title: 'NPS Feedback Form',
+                        typography: typography,
+                        colors: colors,
+                        child: Center(
+                          child: Ux4gFeedbackFormNps(
+                            onSubmit: (score, comment) {
+                              print('NPS Submitted: Score: $score, Comment: $comment');
+                            },
+                            onSkip: () {
+                              print('NPS Skipped');
+                            },
+                          ),
+                        ),
+                      ),
+
+                      // ─── CSAT Feedback Form Showcase ──────────────────
+                      _showcaseCard(
+                        title: 'CSAT Feedback Form',
+                        typography: typography,
+                        colors: colors,
+                        child: Center(
+                          child: Ux4gFeedbackFormCsat(
+                            onSubmit: (score, comment) {
+                              print('CSAT Submitted: Score: $score, Comment: $comment');
+                            },
+                            onSkip: () {
+                              print('CSAT Skipped');
+                            },
+                          ),
+                        ),
+                      ),
+
+                      // ─── Result Rows Showcase ──────────────────────
+                      _showcaseCard(
+                        title: 'Result Rows (Search / Status)',
+                        typography: typography,
+                        colors: colors,
+                        child: Column(
+                          children: [
+                            // 1. Under Review Variant
+                            Ux4gResultRow(
+                              title: 'Income Certificate',
+                              statusTag: 'Under review',
+                              tagColorScheme: Ux4gTagColor.warning,
+                              actionButtonText: 'Track',
+                              details: const [
+                                Ux4gResultDetail(label: 'Reference Number', value: 'INC-2026-MH-04127'),
+                                Ux4gResultDetail(label: 'Last Updated Date', value: '10 Apr 2026'),
+                                Ux4gResultDetail(label: 'Submitted Date', value: '1 Apr 2026'),
+                                Ux4gResultDetail(label: 'Assigned Officer', value: 'Rahul Sharma'),
+                                Ux4gResultDetail(label: 'Department', value: 'Revenue Department'),
+                                Ux4gResultDetail(label: 'Documents', value: 'ID Proof, Address Proof'),
+                              ],
+                            ),
+
+                            // 2. Download Variant
+                            Ux4gResultRow(
+                              title: 'Income Certificate',
+                              actionButtonText: 'Download',
+                              actionButtonIcon: Icons.file_download_outlined,
+                              details: const [
+                                Ux4gResultDetail(label: 'Issued', value: '05 Apr 2026'),
+                                Ux4gResultDetail(label: 'Valid till', value: '05 Apr 2027'),
+                                Ux4gResultDetail(label: 'Reference Number', value: 'INC-2026-MH-04127'),
+                                Ux4gResultDetail(label: 'Last Updated Date', value: '10 Apr 2026'),
+                                Ux4gResultDetail(label: 'Submitted Date', value: '1 Apr 2026'),
+                                Ux4gResultDetail(label: 'Assigned Officer', value: 'Rahul Sharma'),
+                                Ux4gResultDetail(label: 'Department', value: 'Revenue Department'),
+                                Ux4gResultDetail(label: 'Documents', value: 'ID Proof, Address Proof'),
+                              ],
+                            ),
+
+                            // 3. Metadata Variant (Paid)
+                            Ux4gResultRow(
+                              title: 'Income Certificate',
+                              metadataSegments: const [
+                                Ux4gPillSegment(text: 'Paid', bold: true),
+                                Ux4gPillSegment(text: '₹ 120/-'),
+                                Ux4gPillSegment(text: '20 mins', leading: Icon(Icons.access_time, size: 12)),
+                              ],
+                              actionButtonText: 'Apply',
+                              details: const [
+                                Ux4gResultDetail(label: 'Reference Number', value: 'INC-2026-MH-04127'),
+                                Ux4gResultDetail(label: 'Last Updated Date', value: '10 Apr 2026'),
+                                Ux4gResultDetail(label: 'Submitted Date', value: '1 Apr 2026'),
+                                Ux4gResultDetail(label: 'Assigned Officer', value: 'Rahul Sharma'),
+                                Ux4gResultDetail(label: 'Department', value: 'Revenue Department'),
+                                Ux4gResultDetail(label: 'Documents', value: 'ID Proof, Address Proof'),
+                              ],
+                            ),
+
+                            // 4. Escalated / Overdue Variant
+                            Ux4gResultRow(
+                              title: 'Income Certificate',
+                              statusTag: 'Escalated',
+                              tagColorScheme: Ux4gTagColor.error,
+                              actionButtonText: 'Track',
+                              details: const [
+                                Ux4gResultDetail(label: 'Reference Number', value: 'GRV-2026-04127'),
+                                Ux4gResultDetail(
+                                  label: 'SLA Status',
+                                  value: 'SLA 3 days overdue',
+                                  icon: Icons.priority_high,
+                                  valueColor: Ux4gPalette.orange700,
+                                  isBold: true,
+                                ),
+                                Ux4gResultDetail(label: 'Submitted Date', value: '1 Apr 2026'),
+                                Ux4gResultDetail(label: 'Assigned Officer', value: 'Rahul Sharma'),
+                                Ux4gResultDetail(label: 'Department', value: 'Revenue Department'),
+                                Ux4gResultDetail(label: 'Documents', value: 'ID Proof, Address Proof'),
+                              ],
+                            ),
+
+                            // 5. Receipt Variant
+                            Ux4gResultRow(
+                              title: 'Income Certificate',
+                              statusTag: 'Paid',
+                              tagColorScheme: Ux4gTagColor.success,
+                              actionButtonText: 'Receipt',
+                              actionButtonIcon: Icons.receipt_long_outlined,
+                              detailsColumns: 2,
+                              showBottomDivider: false,
+                              details: const [
+                                Ux4gResultDetail(label: 'Amount paid', value: '₹400/-', isBold: true),
+                                Ux4gResultDetail(label: 'Paid on', value: '12 Apr 2026'),
+                                Ux4gResultDetail(label: 'Submitted Date', value: '1 Apr 2026'),
+                                Ux4gResultDetail(label: 'Assigned Officer', value: 'Rahul Sharma'),
+                                Ux4gResultDetail(label: 'Department', value: 'Revenue Department'),
+                                Ux4gResultDetail(label: 'Documents', value: 'ID Proof, Address Proof'),
+                              ],
+                            ),
+
+                            // 6. Explicit 2-Column & Custom Color Variant
+                            Ux4gResultRow(
+                              title: 'Income Certificate',
+                              statusTag: 'Paid',
+                              tagColorScheme: Ux4gTagColor.success,
+                              actionButtonText: 'Download',
+                              actionButtonIcon: Icons.download,
+                              actionButtonColor: Ux4gPalette.blue700, // Custom Blue Button
+                              detailsColumns: 2, // Explicitly 2 columns
+                              showBottomDivider: false,
+                              details: const [
+                                Ux4gResultDetail(label: 'Reference Number', value: 'INC-2026-MH-04127'),
+                                Ux4gResultDetail(label: 'Last Updated Date', value: '10 Apr 2026'),
+                                Ux4gResultDetail(label: 'Submitted Date', value: '1 Apr 2026'),
+                                Ux4gResultDetail(label: 'Assigned Officer', value: 'Rahul Sharma'),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+
+                      // ─── Divider Showcase ─────────────────────────
                       _showcaseCard(
                         title: 'Dividers',
                         typography: typography,
@@ -1024,6 +1532,7 @@ class _ComponentShowcasePageState extends State<ComponentShowcasePage> {
                             const SizedBox(height: 8),
                             Wrap(
                               spacing: 8,
+                              runSpacing: 8,
                               children: List.generate(4, (i) {
                                 return Ux4gChoiceChip(
                                   text: 'Choice ${i + 1}',
@@ -1038,6 +1547,7 @@ class _ComponentShowcasePageState extends State<ComponentShowcasePage> {
                             const SizedBox(height: 8),
                             Wrap(
                               spacing: 8,
+                              runSpacing: 8,
                               children: List.generate(4, (i) {
                                 return Ux4gFilterChip(
                                   text: 'Filter ${i + 1}',
@@ -1057,6 +1567,7 @@ class _ComponentShowcasePageState extends State<ComponentShowcasePage> {
                             const SizedBox(height: 8),
                             Wrap(
                               spacing: 8,
+                              runSpacing: 8,
                               children: [
                                 Ux4gInputChip(
                                   text: 'Flutter',
@@ -1419,7 +1930,1403 @@ class _ComponentShowcasePageState extends State<ComponentShowcasePage> {
                         ),
                       ),
 
+                      // --- 24. Linear Progress ---
+                      _showcaseCard(
+                        title: 'Linear Progress Indicator',
+                        typography: typography,
+                        colors: colors,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Interactive Demo',
+                              style: typography.lS_strong,
+                            ),
+                            const SizedBox(height: 12),
+                            Ux4gAnimatedLinearProgress(
+                              value: _progressValue,
+                              icon: Icons.rocket_launch_outlined,
+                              iconColor: const Color(0xFF6A4EFF),
+                              iconBackgroundColor: const Color(
+                                0xFF6A4EFF,
+                              ).withValues(alpha: 0.12),
+                              label: 'Upload Progress',
+                              height: 12,
+                              shape: Ux4gProgressShape.rounded,
+                              gradientColors: const [
+                                Color(0xFF6A4EFF),
+                                Color(0xFF9B59B6),
+                              ],
+                              showPercentage: true,
+                              labelPosition: Ux4gProgressLabelPosition.outside,
+                              duration: const Duration(milliseconds: 800),
+                            ),
+                            const SizedBox(height: 12),
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: Ux4gButton(
+                                    onPressed: () =>
+                                        setState(() => _progressValue = 0.0),
+                                    text: 'Reset',
+                                    variant: Ux4gButtonVariant.outline,
+                                  ),
+                                ),
+                                const SizedBox(width: 8),
+                                Expanded(
+                                  child: Ux4gButton(
+                                    onPressed: _progressValue >= 1.0
+                                        ? null
+                                        : () => setState(
+                                            () => _progressValue =
+                                                (_progressValue + 0.1).clamp(
+                                                  0.0,
+                                                  1.0,
+                                                ),
+                                          ),
+                                    text: '+10%',
+                                    enabled: _progressValue < 1.0,
+                                  ),
+                                ),
+                                const SizedBox(width: 8),
+                                Expanded(
+                                  child: Ux4gButton(
+                                    onPressed: () =>
+                                        setState(() => _progressValue = 1.0),
+                                    text: 'Complete',
+                                    backgroundColor: Ux4gPalette.green600,
+                                    contentColor: Ux4gPalette.white,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 24),
+                            Text(
+                              'With Icon, Label & Gradient',
+                              style: typography.lS_strong,
+                            ),
+                            const SizedBox(height: 12),
+                            Ux4gLinearProgress(
+                              value: 0.55,
+                              icon: Icons.cloud_upload_outlined,
+                              iconColor: const Color(0xFF6A4EFF),
+                              iconBackgroundColor: const Color(
+                                0xFF6A4EFF,
+                              ).withValues(alpha: 0.12),
+                              label: 'Label',
+                              hint: 'Hint',
+                              height: 10,
+                              shape: Ux4gProgressShape.rounded,
+                              gradientColors: const [
+                                Color(0xFF6A4EFF),
+                                Color(0xFF9B59B6),
+                              ],
+                            ),
+                            const SizedBox(height: 12),
+                            Ux4gLinearProgress(
+                              value: 0.45,
+                              icon: Icons.bolt_outlined,
+                              iconColor: const Color(0xFFF39C12),
+                              iconBackgroundColor: const Color(
+                                0xFFF39C12,
+                              ).withValues(alpha: 0.12),
+                              label: 'Label',
+                              hint: 'Hint',
+                              height: 10,
+                              shape: Ux4gProgressShape.rounded,
+                              gradientColors: const [
+                                Color(0xFFFFAE00),
+                                Color(0xFFFF5F00),
+                              ],
+                            ),
+                            const SizedBox(height: 12),
+                            Ux4gLinearProgress(
+                              value: 0.35,
+                              icon: Icons.warning_amber_rounded,
+                              iconColor: const Color(0xFFE74C3C),
+                              iconBackgroundColor: const Color(
+                                0xFFE74C3C,
+                              ).withValues(alpha: 0.12),
+                              label: 'Label',
+                              hint: 'Hint',
+                              height: 10,
+                              shape: Ux4gProgressShape.rounded,
+                              gradientColors: const [
+                                Color(0xFFFFB3AE),
+                                Color(0xFFE74C3C),
+                              ],
+                            ),
+                            const SizedBox(height: 12),
+                            Ux4gLinearProgress(
+                              value: 0.6,
+                              icon: Icons.check_circle_outline,
+                              iconColor: const Color(0xFF27AE60),
+                              iconBackgroundColor: const Color(
+                                0xFF27AE60,
+                              ).withValues(alpha: 0.12),
+                              label: 'Label',
+                              hint: 'Hint',
+                              height: 10,
+                              shape: Ux4gProgressShape.rounded,
+                              gradientColors: const [
+                                Color(0xFF90EE90),
+                                Color(0xFF27AE60),
+                              ],
+                            ),
+                            const SizedBox(height: 24),
+                            Text(
+                              'Sharp vs Rounded',
+                              style: typography.lS_strong,
+                            ),
+                            const SizedBox(height: 12),
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        'Sharp',
+                                        style: typography.lS_default.copyWith(
+                                          color: Ux4gPalette.neutral500,
+                                        ),
+                                      ),
+                                      const SizedBox(height: 4),
+                                      Ux4gLinearProgress(
+                                        value: 0.65,
+                                        height: 12,
+                                        shape: Ux4gProgressShape.sharp,
+                                        color: Ux4gPalette.primary,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                const SizedBox(width: 16),
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        'Rounded',
+                                        style: typography.lS_default.copyWith(
+                                          color: Ux4gPalette.neutral500,
+                                        ),
+                                      ),
+                                      const SizedBox(height: 4),
+                                      Ux4gLinearProgress(
+                                        value: 0.65,
+                                        height: 12,
+                                        shape: Ux4gProgressShape.rounded,
+                                        color: Ux4gPalette.primary,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 24),
+                            Text(
+                              'Label Outside vs Inside',
+                              style: typography.lS_strong,
+                            ),
+                            const SizedBox(height: 12),
+                            Column(
+                              children: List.generate(5, (i) {
+                                final val = (i + 1) * 0.2;
+                                return Padding(
+                                  padding: const EdgeInsets.only(bottom: 10),
+                                  child: Row(
+                                    children: [
+                                      Expanded(
+                                        child: Ux4gLinearProgress(
+                                          value: val,
+                                          height: 16,
+                                          shape: Ux4gProgressShape.sharp,
+                                          color: Ux4gPalette.primary,
+                                          showPercentage: true,
+                                          labelPosition:
+                                              Ux4gProgressLabelPosition.outside,
+                                        ),
+                                      ),
+                                      const SizedBox(width: 8),
+                                      Expanded(
+                                        child: Ux4gLinearProgress(
+                                          value: val,
+                                          height: 16,
+                                          shape: Ux4gProgressShape.rounded,
+                                          color: Ux4gPalette.primary,
+                                          showPercentage: true,
+                                          labelPosition:
+                                              Ux4gProgressLabelPosition.outside,
+                                        ),
+                                      ),
+                                      const SizedBox(width: 8),
+                                      Expanded(
+                                        child: Ux4gLinearProgress(
+                                          value: val,
+                                          height: 16,
+                                          shape: Ux4gProgressShape.sharp,
+                                          color: Ux4gPalette.primary,
+                                          showPercentage: true,
+                                          labelPosition:
+                                              Ux4gProgressLabelPosition.inside,
+                                        ),
+                                      ),
+                                      const SizedBox(width: 8),
+                                      Expanded(
+                                        child: Ux4gLinearProgress(
+                                          value: val,
+                                          height: 16,
+                                          shape: Ux4gProgressShape.rounded,
+                                          color: Ux4gPalette.primary,
+                                          showPercentage: true,
+                                          labelPosition:
+                                              Ux4gProgressLabelPosition.inside,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                );
+                              }),
+                            ),
+                          ],
+                        ),
+                      ),
+
                       // ─── 24. Interactive Toast ────────────────────────
+                      _showcaseCard(
+                        title: 'Circular Progress Indicator',
+                        typography: typography,
+                        colors: colors,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Interactive Demo',
+                              style: typography.lS_strong,
+                            ),
+                            const SizedBox(height: 12),
+                            Center(
+                              child: Ux4gAnimatedCircularProgress(
+                                value: _circularProgressValue,
+                                size: Ux4gCircularProgressSize.xxxl,
+                                backgroundColor: Ux4gPalette.gray100,
+                                progressGradient: SweepGradient(
+                                  transform: GradientRotation(-math.pi / 2),
+                                  colors: [
+                                    Color(0xFFDCD4FF),
+                                    Color(0xFF6A4EFF),
+                                  ],
+                                ),
+                                centerValueText:
+                                    '${(_circularProgressValue * 100).round()}%',
+                                centerDescription: 'Description',
+                                label:
+                                    '${(_circularProgressValue * 100).round()}%',
+                                description: 'Description',
+                              ),
+                            ),
+                            const SizedBox(height: 12),
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: Ux4gButton(
+                                    onPressed: () => setState(
+                                      () => _circularProgressValue = 0.0,
+                                    ),
+                                    text: 'Reset',
+                                    variant: Ux4gButtonVariant.outline,
+                                  ),
+                                ),
+                                const SizedBox(width: 8),
+                                Expanded(
+                                  child: Ux4gButton(
+                                    onPressed: _circularProgressValue >= 1.0
+                                        ? null
+                                        : () => setState(
+                                            () => _circularProgressValue =
+                                                (_circularProgressValue + 0.1)
+                                                    .clamp(0.0, 1.0),
+                                          ),
+                                    text: '+10%',
+                                    enabled: _circularProgressValue < 1.0,
+                                  ),
+                                ),
+                                const SizedBox(width: 8),
+                                Expanded(
+                                  child: Ux4gButton(
+                                    onPressed: () => setState(
+                                      () => _circularProgressValue = 1.0,
+                                    ),
+                                    text: 'Complete',
+                                    backgroundColor: Ux4gPalette.green600,
+                                    contentColor: Ux4gPalette.white,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 24),
+                            Text(
+                              'Responsive Size Matrix',
+                              style: typography.lS_strong,
+                            ),
+                            const SizedBox(height: 12),
+                            LayoutBuilder(
+                              builder: (context, constraints) {
+                                final compact = constraints.maxWidth < 780;
+                                final items = [
+                                  ('XS', Ux4gCircularProgressSize.xs, false),
+                                  ('S', Ux4gCircularProgressSize.s, false),
+                                  ('M', Ux4gCircularProgressSize.m, false),
+                                  ('L', Ux4gCircularProgressSize.l, false),
+                                  ('XL', Ux4gCircularProgressSize.xl, true),
+                                  ('2XL', Ux4gCircularProgressSize.xxl, true),
+                                  ('3XL', Ux4gCircularProgressSize.xxxl, true),
+                                ];
+
+                                return Wrap(
+                                  spacing: compact ? 24 : 36,
+                                  runSpacing: compact ? 28 : 40,
+                                  children: items
+                                      .map(
+                                        (item) => SizedBox(
+                                          width: compact ? 112 : 128,
+                                          child: Column(
+                                            mainAxisSize: MainAxisSize.min,
+                                            children: [
+                                              Text(
+                                                item.$1,
+                                                style: typography.lM_strong,
+                                              ),
+                                              const SizedBox(height: 10),
+                                              _circularProgressDemoItem(
+                                                size: item.$2,
+                                                inlineMeta: item.$3,
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      )
+                                      .toList(),
+                                );
+                              },
+                            ),
+                            const SizedBox(height: 24),
+                            Text(
+                              'Color Variants (Rounded)',
+                              style: typography.lS_strong,
+                            ),
+                            const SizedBox(height: 12),
+                            SingleChildScrollView(
+                              scrollDirection: Axis.horizontal,
+                              child: Row(
+                                children: [
+                                  _circularColorVariant(
+                                    colors: colors,
+                                    typography: typography,
+                                    progressColor: const Color(0xFF6A4EFF),
+                                    gradient: const SweepGradient(
+                                      transform: GradientRotation(-math.pi / 2),
+                                      colors: [
+                                        Color(0xFFDCD4FF),
+                                        Color(0xFF6A4EFF),
+                                      ],
+                                    ),
+                                    footerColor: const Color(0xFFEFEAFF),
+                                    footerTextColor: const Color(0xFF6A4EFF),
+                                  ),
+                                  const SizedBox(width: 20),
+                                  _circularColorVariant(
+                                    colors: colors,
+                                    typography: typography,
+                                    progressColor: const Color(0xFFFFA827),
+                                    gradient: const SweepGradient(
+                                      transform: GradientRotation(-math.pi / 2),
+                                      colors: [
+                                        Color(0xFFFFF2D9),
+                                        Color(0xFFFFA827),
+                                      ],
+                                    ),
+                                    footerColor: const Color(0xFFFFF7E6),
+                                    footerTextColor: const Color(0xFFFFA827),
+                                  ),
+                                  const SizedBox(width: 20),
+                                  _circularColorVariant(
+                                    colors: colors,
+                                    typography: typography,
+                                    progressColor: const Color(0xFFF55E57),
+                                    descriptionColor: const Color(0xFFB3251E),
+                                    gradient: const SweepGradient(
+                                      transform: GradientRotation(-math.pi / 2),
+                                      colors: [
+                                        Color(0xFFFFECEE),
+                                        Color(0xFFF55E57),
+                                      ],
+                                    ),
+                                    footerColor: const Color(0xFFFFF0F0),
+                                    footerTextColor: const Color(0xFFF55E57),
+                                  ),
+                                  const SizedBox(width: 20),
+                                  _circularColorVariant(
+                                    colors: colors,
+                                    typography: typography,
+                                    progressColor: const Color(0xFF1AA64A),
+                                    gradient: const SweepGradient(
+                                      transform: GradientRotation(-math.pi / 2),
+                                      colors: [
+                                        Color(0xFFDFF9E8),
+                                        Color(0xFF1AA64A),
+                                      ],
+                                    ),
+                                    footerColor: const Color(0xFFF2FCEF),
+                                    footerTextColor: const Color(0xFF1AA64A),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+
+                      // ─── Status Pipeline ──────────────────────────
+                      _showcaseCard(
+                        title: 'Status Pipeline',
+                        typography: typography,
+                        colors: colors,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            // ── Vertical — Circles Only ──
+                            Text(
+                              'Vertical — Circles Only',
+                              style: typography.bS_strong,
+                            ),
+                            const SizedBox(height: Ux4gSpace.space12),
+                            const Ux4gStatusPipeline(
+                              orientation: Ux4gPipelineOrientation.vertical,
+                              size: Ux4gPipelineSize.m,
+                              currentStep: 1,
+                              showLabels: false,
+                              showDescriptions: false,
+                              steps: [
+                                Ux4gPipelineStep(),
+                                Ux4gPipelineStep(),
+                                Ux4gPipelineStep(),
+                                Ux4gPipelineStep(),
+                                Ux4gPipelineStep(),
+                              ],
+                            ),
+
+                            const SizedBox(height: Ux4gSpace.space24),
+
+                            // ── Vertical — With Labels ──
+                            Text(
+                              'Vertical — With Labels',
+                              style: typography.bS_strong,
+                            ),
+                            const SizedBox(height: Ux4gSpace.space12),
+                            const Ux4gStatusPipeline(
+                              orientation: Ux4gPipelineOrientation.vertical,
+                              size: Ux4gPipelineSize.m,
+                              currentStep: 1,
+                              showDescriptions: false,
+                              steps: [
+                                Ux4gPipelineStep(label: 'Submitted'),
+                                Ux4gPipelineStep(label: 'Verification'),
+                                Ux4gPipelineStep(label: 'Inspection'),
+                                Ux4gPipelineStep(label: 'Decision'),
+                                Ux4gPipelineStep(label: 'Issued'),
+                              ],
+                            ),
+
+                            const SizedBox(height: Ux4gSpace.space24),
+
+                            // ── Vertical — Labels + Descriptions ──
+                            Text(
+                              'Vertical — Labels + Descriptions',
+                              style: typography.bS_strong,
+                            ),
+                            const SizedBox(height: Ux4gSpace.space12),
+                            const Ux4gStatusPipeline(
+                              orientation: Ux4gPipelineOrientation.vertical,
+                              size: Ux4gPipelineSize.m,
+                              currentStep: 1,
+                              steps: [
+                                Ux4gPipelineStep(
+                                  label: 'Submitted',
+                                  description: '5 Apr',
+                                ),
+                                Ux4gPipelineStep(
+                                  label: 'Verification',
+                                  description: 'In progress',
+                                ),
+                                Ux4gPipelineStep(
+                                  label: 'Inspection',
+                                  description: 'Est. 10 Apr',
+                                ),
+                                Ux4gPipelineStep(
+                                  label: 'Decision',
+                                  description: 'Est. 18 Apr',
+                                ),
+                                Ux4gPipelineStep(
+                                  label: 'Issued',
+                                  description: 'Est. 20 Apr',
+                                ),
+                              ],
+                            ),
+
+                            const SizedBox(height: Ux4gSpace.space24),
+
+                            // ── Vertical — With Error & Warning ──
+                            Text(
+                              'Vertical — Error & Warning States',
+                              style: typography.bS_strong,
+                            ),
+                            const SizedBox(height: Ux4gSpace.space12),
+                            const Ux4gStatusPipeline(
+                              orientation: Ux4gPipelineOrientation.vertical,
+                              size: Ux4gPipelineSize.m,
+                              currentStep: -1,
+                              steps: [
+                                Ux4gPipelineStep(
+                                  label: 'Submitted',
+                                  description: '5 Apr',
+                                  state: Ux4gPipelineStepState.completed,
+                                ),
+                                Ux4gPipelineStep(
+                                  label: 'Verification',
+                                  description: 'Failed',
+                                  state: Ux4gPipelineStepState.error,
+                                ),
+                                Ux4gPipelineStep(
+                                  label: 'Inspection',
+                                  description: 'Blocked',
+                                  state: Ux4gPipelineStepState.warning,
+                                ),
+                                Ux4gPipelineStep(
+                                  label: 'Decision',
+                                  state: Ux4gPipelineStepState.upcoming,
+                                ),
+                                Ux4gPipelineStep(
+                                  label: 'Issued',
+                                  state: Ux4gPipelineStepState.upcoming,
+                                ),
+                              ],
+                            ),
+
+                            const SizedBox(height: Ux4gSpace.space24),
+
+                            // ── Vertical — Small Size ──
+                            Text(
+                              'Vertical — Small Size',
+                              style: typography.bS_strong,
+                            ),
+                            const SizedBox(height: Ux4gSpace.space12),
+                            const Ux4gStatusPipeline(
+                              orientation: Ux4gPipelineOrientation.vertical,
+                              size: Ux4gPipelineSize.s,
+                              currentStep: 1,
+                              steps: [
+                                Ux4gPipelineStep(
+                                  label: 'Submitted',
+                                  description: '5 Apr',
+                                ),
+                                Ux4gPipelineStep(
+                                  label: 'Verification',
+                                  description: 'In progress',
+                                ),
+                                Ux4gPipelineStep(label: 'Inspection'),
+                                Ux4gPipelineStep(label: 'Decision'),
+                                Ux4gPipelineStep(label: 'Issued'),
+                              ],
+                            ),
+
+                            const SizedBox(height: Ux4gSpace.space24),
+
+                            // ── Vertical — Large Size ──
+                            Text(
+                              'Vertical — Large Size',
+                              style: typography.bS_strong,
+                            ),
+                            const SizedBox(height: Ux4gSpace.space12),
+                            const Ux4gStatusPipeline(
+                              orientation: Ux4gPipelineOrientation.vertical,
+                              size: Ux4gPipelineSize.l,
+                              currentStep: 2,
+                              steps: [
+                                Ux4gPipelineStep(
+                                  label: 'Submitted',
+                                  description: '5 Apr',
+                                ),
+                                Ux4gPipelineStep(
+                                  label: 'Verification',
+                                  description: '8 Apr',
+                                ),
+                                Ux4gPipelineStep(
+                                  label: 'Inspection',
+                                  description: 'In progress',
+                                ),
+                                Ux4gPipelineStep(label: 'Decision'),
+                                Ux4gPipelineStep(label: 'Issued'),
+                              ],
+                            ),
+
+                            const SizedBox(height: Ux4gSpace.space32),
+
+                            // ══════════════════════════════════════════════
+                            // HORIZONTAL
+                            // ══════════════════════════════════════════════
+                            Text(
+                              'Horizontal — Circles Only',
+                              style: typography.bS_strong,
+                            ),
+                            const SizedBox(height: Ux4gSpace.space12),
+                            const Ux4gStatusPipeline(
+                              orientation: Ux4gPipelineOrientation.horizontal,
+                              size: Ux4gPipelineSize.m,
+                              currentStep: 1,
+                              showLabels: false,
+                              showDescriptions: false,
+                              steps: [
+                                Ux4gPipelineStep(),
+                                Ux4gPipelineStep(),
+                                Ux4gPipelineStep(),
+                                Ux4gPipelineStep(),
+                                Ux4gPipelineStep(),
+                              ],
+                            ),
+
+                            const SizedBox(height: Ux4gSpace.space24),
+
+                            Text(
+                              'Horizontal — With Labels',
+                              style: typography.bS_strong,
+                            ),
+                            const SizedBox(height: Ux4gSpace.space12),
+                            const Ux4gStatusPipeline(
+                              orientation: Ux4gPipelineOrientation.horizontal,
+                              size: Ux4gPipelineSize.m,
+                              currentStep: 1,
+                              showDescriptions: false,
+                              steps: [
+                                Ux4gPipelineStep(label: 'Submitted'),
+                                Ux4gPipelineStep(label: 'Verification'),
+                                Ux4gPipelineStep(label: 'Inspection'),
+                                Ux4gPipelineStep(label: 'Decision'),
+                                Ux4gPipelineStep(label: 'Issued'),
+                              ],
+                            ),
+
+                            const SizedBox(height: Ux4gSpace.space24),
+
+                            Text(
+                              'Horizontal — Labels + Descriptions',
+                              style: typography.bS_strong,
+                            ),
+                            const SizedBox(height: Ux4gSpace.space12),
+                            const Ux4gStatusPipeline(
+                              orientation: Ux4gPipelineOrientation.horizontal,
+                              size: Ux4gPipelineSize.m,
+                              currentStep: 1,
+                              steps: [
+                                Ux4gPipelineStep(
+                                  label: 'Submitted',
+                                  description: '5 Apr',
+                                ),
+                                Ux4gPipelineStep(
+                                  label: 'Verification',
+                                  description: 'In progress',
+                                ),
+                                Ux4gPipelineStep(
+                                  label: 'Inspection',
+                                  description: 'Est. 10 Apr',
+                                ),
+                                Ux4gPipelineStep(
+                                  label: 'Decision',
+                                  description: 'Est. 18 Apr',
+                                ),
+                                Ux4gPipelineStep(
+                                  label: 'Issued',
+                                  description: 'Est. 20 Apr',
+                                ),
+                              ],
+                            ),
+
+                            const SizedBox(height: Ux4gSpace.space24),
+
+                            Text(
+                              'Horizontal — Small Size',
+                              style: typography.bS_strong,
+                            ),
+                            const SizedBox(height: Ux4gSpace.space12),
+                            const Ux4gStatusPipeline(
+                              orientation: Ux4gPipelineOrientation.horizontal,
+                              size: Ux4gPipelineSize.s,
+                              currentStep: 1,
+                              steps: [
+                                Ux4gPipelineStep(
+                                  label: 'Submitted',
+                                  description: '5 Apr',
+                                ),
+                                Ux4gPipelineStep(
+                                  label: 'Verification',
+                                  description: 'In progress',
+                                ),
+                                Ux4gPipelineStep(label: 'Inspection'),
+                                Ux4gPipelineStep(label: 'Decision'),
+                                Ux4gPipelineStep(label: 'Issued'),
+                              ],
+                            ),
+
+                            const SizedBox(height: Ux4gSpace.space24),
+
+                            Text(
+                              'Horizontal — Error & Warning',
+                              style: typography.bS_strong,
+                            ),
+                            const SizedBox(height: Ux4gSpace.space12),
+                            const Ux4gStatusPipeline(
+                              orientation: Ux4gPipelineOrientation.horizontal,
+                              size: Ux4gPipelineSize.m,
+                              currentStep: -1,
+                              steps: [
+                                Ux4gPipelineStep(
+                                  label: 'Submitted',
+                                  description: '5 Apr',
+                                  state: Ux4gPipelineStepState.completed,
+                                ),
+                                Ux4gPipelineStep(
+                                  label: 'Verification',
+                                  description: 'Failed',
+                                  state: Ux4gPipelineStepState.error,
+                                ),
+                                Ux4gPipelineStep(
+                                  label: 'Inspection',
+                                  state: Ux4gPipelineStepState.warning,
+                                ),
+                                Ux4gPipelineStep(
+                                  label: 'Decision',
+                                  state: Ux4gPipelineStepState.upcoming,
+                                ),
+                                Ux4gPipelineStep(
+                                  label: 'Issued',
+                                  state: Ux4gPipelineStepState.upcoming,
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+
+                      // ─── Journey Timeline ───────────────────────────
+                      _showcaseCard(
+                        title: 'Journey Timeline',
+                        typography: typography,
+                        colors: colors,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            // ── Vertical Timeline with header ──
+                            Text(
+                              'Vertical Timeline',
+                              style: typography.bS_strong.copyWith(
+                                color: colors.onSurface,
+                              ),
+                            ),
+                            const SizedBox(height: 16),
+                            Ux4gJourneyTimeline(
+                              header: const Ux4gJourneyHeader(
+                                title: 'Title',
+                                description: 'Description',
+                                icon: Icons.settings_outlined,
+                              ),
+                              currentStep: 1,
+                              steps: [
+                                const Ux4gJourneyStep(
+                                  title: 'Title',
+                                  date: 'Date',
+                                  tag: 'Tag',
+                                ),
+                                const Ux4gJourneyStep(
+                                  title: 'Title',
+                                  date: 'Date',
+                                  tag: 'Tag',
+                                ),
+                                const Ux4gJourneyStep(
+                                  title: 'Title',
+                                  date: 'Date',
+                                  tag: 'Tag',
+                                ),
+                                const Ux4gJourneyStep(
+                                  title: 'Title',
+                                  date: 'Date',
+                                  tag: 'Tag',
+                                ),
+                                const Ux4gJourneyStep(
+                                  title: 'Title',
+                                  date: 'Date',
+                                  tag: 'Tag',
+                                ),
+                              ],
+                            ),
+
+                            const SizedBox(height: 32),
+
+                            // ── Card Variants ──
+                            Text(
+                              'Card Variants',
+                              style: typography.bS_strong.copyWith(
+                                color: colors.onSurface,
+                              ),
+                            ),
+                            const SizedBox(height: 16),
+                            Ux4gJourneyTimeline(
+                              currentStep: 4,
+                              steps: [
+                                // Simple
+                                const Ux4gJourneyStep(
+                                  title: 'Title',
+                                  date: 'Date',
+                                  tag: 'Tag',
+                                ),
+                                // With helping text
+                                const Ux4gJourneyStep(
+                                  title: 'Title',
+                                  date: 'Date',
+                                  tag: 'Tag',
+                                  helpingText: 'Helping Text',
+                                ),
+                                // With icon
+                                const Ux4gJourneyStep(
+                                  title: 'Title',
+                                  date: 'Date',
+                                  tag: 'Tag',
+                                  icon: Icons.link,
+                                ),
+                                // With status
+                                Ux4gJourneyStep(
+                                  title: 'Title',
+                                  date: 'Date',
+                                  tag: 'Tag',
+                                  status: Ux4gJourneyStepStatus(
+                                    text: '2 days remaining',
+                                    dotColor: Ux4gPalette.secondary,
+                                    badgeText: 'Pending',
+                                    badgeColor: Ux4gPalette.secondary
+                                        .withValues(alpha: 0.12),
+                                    badgeTextColor: Ux4gPalette.secondary,
+                                  ),
+                                ),
+                                // Upcoming (gray)
+                                const Ux4gJourneyStep(
+                                  title: 'Title',
+                                  date: 'Date',
+                                  tag: 'Tag',
+                                ),
+                              ],
+                            ),
+
+                            const SizedBox(height: 32),
+
+                            // ── Horizontal Timeline ──
+                            Text(
+                              'Horizontal Timeline',
+                              style: typography.bS_strong.copyWith(
+                                color: colors.onSurface,
+                              ),
+                            ),
+                            const SizedBox(height: 16),
+                            Ux4gJourneyTimeline(
+                              orientation: Ux4gJourneyOrientation.horizontal,
+                              header: const Ux4gJourneyHeader(
+                                title: 'Title',
+                                description: 'Description',
+                                icon: Icons.settings_outlined,
+                              ),
+                              currentStep: 1,
+                              steps: const [
+                                Ux4gJourneyStep(
+                                  title: 'Title',
+                                  date: 'Date',
+                                  tag: 'Tag',
+                                ),
+                                Ux4gJourneyStep(
+                                  title: 'Title',
+                                  date: 'Date',
+                                  tag: 'Tag',
+                                ),
+                                Ux4gJourneyStep(
+                                  title: 'Title',
+                                  date: 'Date',
+                                  tag: 'Tag',
+                                ),
+                                Ux4gJourneyStep(
+                                  title: 'Title',
+                                  date: 'Date',
+                                  tag: 'Tag',
+                                ),
+                                Ux4gJourneyStep(
+                                  title: 'Title',
+                                  date: 'Date',
+                                  tag: 'Tag',
+                                ),
+                                Ux4gJourneyStep(
+                                  title: 'Title',
+                                  date: 'Date',
+                                  tag: 'Tag',
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+
+                      // ─── App Header ─────────────────────────────────
+                      _showcaseCard(
+                        title: 'App Header',
+                        typography: typography,
+                        colors: colors,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            // ── Default: Emblem + Logo + Title + Settings + Avatar ──
+                            Text(
+                              'With Leading Icons + Avatar',
+                              style: typography.bS_strong.copyWith(
+                                color: colors.onSurface,
+                              ),
+                            ),
+                            const SizedBox(height: 12),
+                            ...[
+                              Ux4gAppHeaderVariant.light,
+                              Ux4gAppHeaderVariant.filled,
+                              Ux4gAppHeaderVariant.outlined,
+                            ].map(
+                              (v) => Padding(
+                                padding: const EdgeInsets.only(bottom: 12),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(8),
+                                  child: Ux4gAppHeader(
+                                    title: 'Title',
+                                    variant: v,
+                                    leadingWidgets: [
+                                      Icon(
+                                        Icons.account_balance,
+                                        size: 24,
+                                        color: v == Ux4gAppHeaderVariant.filled
+                                            ? colors.onPrimary
+                                            : colors.onSurface,
+                                      ),
+                                      Icon(
+                                        Icons.waves,
+                                        size: 24,
+                                        color: v == Ux4gAppHeaderVariant.filled
+                                            ? colors.onPrimary
+                                            : colors.primary,
+                                      ),
+                                    ],
+                                    actions: [
+                                      Ux4gAppHeaderAction(
+                                        icon: Icons.settings_outlined,
+                                        onPressed: () {},
+                                      ),
+                                    ],
+                                    showAvatar: true,
+                                    avatarSize: Ux4gAvatarSize.s,
+                                    avatarImageUrl:
+                                        'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100',
+                                  ),
+                                ),
+                              ),
+                            ),
+
+                            const SizedBox(height: 8),
+
+                            // ── Emblem + Logo + Title + Settings + Hamburger ──
+                            Text(
+                              'With Leading Icons + Hamburger Menu',
+                              style: typography.bS_strong.copyWith(
+                                color: colors.onSurface,
+                              ),
+                            ),
+                            const SizedBox(height: 12),
+                            ...[
+                              Ux4gAppHeaderVariant.light,
+                              Ux4gAppHeaderVariant.filled,
+                              Ux4gAppHeaderVariant.outlined,
+                            ].map(
+                              (v) => Padding(
+                                padding: const EdgeInsets.only(bottom: 12),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(8),
+                                  child: Ux4gAppHeader(
+                                    title: 'Title',
+                                    variant: v,
+                                    leadingWidgets: [
+                                      Icon(
+                                        Icons.account_balance,
+                                        size: 24,
+                                        color: v == Ux4gAppHeaderVariant.filled
+                                            ? colors.onPrimary
+                                            : colors.onSurface,
+                                      ),
+                                      Icon(
+                                        Icons.waves,
+                                        size: 24,
+                                        color: v == Ux4gAppHeaderVariant.filled
+                                            ? colors.onPrimary
+                                            : colors.primary,
+                                      ),
+                                    ],
+                                    actions: [
+                                      Ux4gAppHeaderAction(
+                                        icon: Icons.settings_outlined,
+                                        onPressed: () {},
+                                      ),
+                                      Ux4gAppHeaderAction(
+                                        icon: Icons.menu,
+                                        onPressed: () {},
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+
+                            const SizedBox(height: 8),
+
+                            // ── Back + Title (simple) ──
+                            Text(
+                              'Back + Title Only',
+                              style: typography.bS_strong.copyWith(
+                                color: colors.onSurface,
+                              ),
+                            ),
+                            const SizedBox(height: 12),
+                            ...[
+                              Ux4gAppHeaderVariant.light,
+                              Ux4gAppHeaderVariant.filled,
+                              Ux4gAppHeaderVariant.outlined,
+                            ].map(
+                              (v) => Padding(
+                                padding: const EdgeInsets.only(bottom: 12),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(8),
+                                  child: Ux4gAppHeader(
+                                    title: 'Title',
+                                    variant: v,
+                                    showBackButton: true,
+                                    onBackPressed: () {},
+                                  ),
+                                ),
+                              ),
+                            ),
+
+                            const SizedBox(height: 8),
+
+                            // ── Back + Title + 1 Action ──
+                            Text(
+                              'Back + Title + Action',
+                              style: typography.bS_strong.copyWith(
+                                color: colors.onSurface,
+                              ),
+                            ),
+                            const SizedBox(height: 12),
+                            ...[
+                              Ux4gAppHeaderVariant.light,
+                              Ux4gAppHeaderVariant.filled,
+                              Ux4gAppHeaderVariant.outlined,
+                            ].map(
+                              (v) => Padding(
+                                padding: const EdgeInsets.only(bottom: 12),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(8),
+                                  child: Ux4gAppHeader(
+                                    title: 'Title',
+                                    variant: v,
+                                    showBackButton: true,
+                                    onBackPressed: () {},
+                                    actions: [
+                                      Ux4gAppHeaderAction(
+                                        icon: Icons.settings_outlined,
+                                        onPressed: () {},
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+
+                            const SizedBox(height: 8),
+
+                            // ── Back + Title + 2 Actions ──
+                            Text(
+                              'Back + Title + 2 Actions',
+                              style: typography.bS_strong.copyWith(
+                                color: colors.onSurface,
+                              ),
+                            ),
+                            const SizedBox(height: 12),
+                            ...[
+                              Ux4gAppHeaderVariant.light,
+                              Ux4gAppHeaderVariant.filled,
+                              Ux4gAppHeaderVariant.outlined,
+                            ].map(
+                              (v) => Padding(
+                                padding: const EdgeInsets.only(bottom: 12),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(8),
+                                  child: Ux4gAppHeader(
+                                    title: 'Title',
+                                    variant: v,
+                                    showBackButton: true,
+                                    onBackPressed: () {},
+                                    actions: [
+                                      Ux4gAppHeaderAction(
+                                        icon: Icons.settings_outlined,
+                                        onPressed: () {},
+                                      ),
+                                      Ux4gAppHeaderAction(
+                                        icon: Icons.settings_outlined,
+                                        onPressed: () {},
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+
+                            const SizedBox(height: 8),
+
+                            // ── Back + Title + 3 Actions ──
+                            Text(
+                              'Back + Title + 3 Actions',
+                              style: typography.bS_strong.copyWith(
+                                color: colors.onSurface,
+                              ),
+                            ),
+                            const SizedBox(height: 12),
+                            ...[
+                              Ux4gAppHeaderVariant.light,
+                              Ux4gAppHeaderVariant.filled,
+                              Ux4gAppHeaderVariant.outlined,
+                            ].map(
+                              (v) => Padding(
+                                padding: const EdgeInsets.only(bottom: 12),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(8),
+                                  child: Ux4gAppHeader(
+                                    title: 'Title',
+                                    variant: v,
+                                    showBackButton: true,
+                                    onBackPressed: () {},
+                                    actions: [
+                                      Ux4gAppHeaderAction(
+                                        icon: Icons.settings_outlined,
+                                        onPressed: () {},
+                                      ),
+                                      Ux4gAppHeaderAction(
+                                        icon: Icons.settings_outlined,
+                                        onPressed: () {},
+                                      ),
+                                      Ux4gAppHeaderAction(
+                                        icon: Icons.settings_outlined,
+                                        onPressed: () {},
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+
+                            const SizedBox(height: 8),
+
+                            // ── With Status Avatar ──
+                            Text(
+                              'With Status Avatar',
+                              style: typography.bS_strong.copyWith(
+                                color: colors.onSurface,
+                              ),
+                            ),
+                            const SizedBox(height: 12),
+                            ...[
+                              Ux4gAppHeaderVariant.light,
+                              Ux4gAppHeaderVariant.filled,
+                              Ux4gAppHeaderVariant.outlined,
+                            ].map(
+                              (v) => Padding(
+                                padding: const EdgeInsets.only(bottom: 12),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(8),
+                                  child: Ux4gAppHeader(
+                                    title: 'Title',
+                                    variant: v,
+                                    leadingWidgets: [
+                                      Icon(
+                                        Icons.account_balance,
+                                        size: 24,
+                                        color: v == Ux4gAppHeaderVariant.filled
+                                            ? colors.onPrimary
+                                            : colors.onSurface,
+                                      ),
+                                      Icon(
+                                        Icons.waves,
+                                        size: 24,
+                                        color: v == Ux4gAppHeaderVariant.filled
+                                            ? colors.onPrimary
+                                            : colors.primary,
+                                      ),
+                                    ],
+                                    actions: [
+                                      Ux4gAppHeaderAction(
+                                        icon: Icons.settings_outlined,
+                                        onPressed: () {},
+                                      ),
+                                    ],
+                                    avatar: Ux4gStatusAvatar(
+                                      size: Ux4gAvatarSize.s,
+                                      imageUrl:
+                                          'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100',
+                                      variant: Ux4gStatusVariant.online,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+
+                            const SizedBox(height: 8),
+
+                            // ── Back + Title + Status Avatar ──
+                            Text(
+                              'Back + Title + Status Avatar',
+                              style: typography.bS_strong.copyWith(
+                                color: colors.onSurface,
+                              ),
+                            ),
+                            const SizedBox(height: 12),
+                            ...[
+                              Ux4gAppHeaderVariant.light,
+                              Ux4gAppHeaderVariant.filled,
+                              Ux4gAppHeaderVariant.outlined,
+                            ].map(
+                              (v) => Padding(
+                                padding: const EdgeInsets.only(bottom: 12),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(8),
+                                  child: Ux4gAppHeader(
+                                    title: 'Title',
+                                    variant: v,
+                                    showBackButton: true,
+                                    onBackPressed: () {},
+                                    actions: [
+                                      Ux4gAppHeaderAction(
+                                        icon: Icons.settings_outlined,
+                                        onPressed: () {},
+                                      ),
+                                    ],
+                                    avatar: Ux4gStatusAvatar(
+                                      size: Ux4gAvatarSize.s,
+                                      initials: 'JD',
+                                      variant: Ux4gStatusVariant.busy,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+
+                      // ─── Half Circle Progress Indicator ─────────────
+                      _showcaseCard(
+                        title: 'Half Circle Progress Indicator',
+                        typography: typography,
+                        colors: colors,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            // ── Without Scale ──
+                            Text(
+                              'Without Scale',
+                              style: typography.bS_strong.copyWith(
+                                color: colors.onSurface,
+                              ),
+                            ),
+                            const SizedBox(height: 12),
+                            Wrap(
+                              spacing: 24,
+                              runSpacing: 24,
+                              crossAxisAlignment: WrapCrossAlignment.end,
+                              children: [
+                                Ux4gHalfCircleProgress(
+                                  value: 0.5,
+                                  size: Ux4gHalfCircleProgressSize.s,
+                                  description: 'Description',
+                                ),
+                                Ux4gHalfCircleProgress(
+                                  value: 0.5,
+                                  size: Ux4gHalfCircleProgressSize.m,
+                                  description: 'Description',
+                                ),
+                                Ux4gHalfCircleProgress(
+                                  value: 0.5,
+                                  size: Ux4gHalfCircleProgressSize.l,
+                                  description: 'Description',
+                                ),
+                                Ux4gHalfCircleProgress(
+                                  value: 0.5,
+                                  size: Ux4gHalfCircleProgressSize.xl,
+                                  description: 'Description',
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 32),
+
+                            // ── With Scale ──
+                            Text(
+                              'With Scale',
+                              style: typography.bS_strong.copyWith(
+                                color: colors.onSurface,
+                              ),
+                            ),
+                            const SizedBox(height: 12),
+                            Wrap(
+                              spacing: 24,
+                              runSpacing: 24,
+                              crossAxisAlignment: WrapCrossAlignment.end,
+                              children: [
+                                Ux4gHalfCircleProgress(
+                                  value: 0.5,
+                                  size: Ux4gHalfCircleProgressSize.s,
+                                  description: 'Description',
+                                  showScale: true,
+                                ),
+                                Ux4gHalfCircleProgress(
+                                  value: 0.5,
+                                  size: Ux4gHalfCircleProgressSize.m,
+                                  description: 'Description',
+                                  showScale: true,
+                                ),
+                                Ux4gHalfCircleProgress(
+                                  value: 0.5,
+                                  size: Ux4gHalfCircleProgressSize.l,
+                                  description: 'Description',
+                                  showScale: true,
+                                ),
+                                Ux4gHalfCircleProgress(
+                                  value: 0.5,
+                                  size: Ux4gHalfCircleProgressSize.xl,
+                                  description: 'Description',
+                                  showScale: true,
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+
                       _showcaseCard(
                         title: 'Interactive Toasts',
                         typography: typography,
@@ -1987,6 +3894,60 @@ class _ComponentShowcasePageState extends State<ComponentShowcasePage> {
                         ),
                       ),
 
+                      // ─── Biometric Verification ─────────────────────
+                      _showcaseCard(
+                        title: 'Biometric Verification',
+                        typography: typography,
+                        colors: colors,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Face capture + liveness detection + UIDAI verification flow',
+                              style: typography.bS_default.copyWith(
+                                color: colors.onSurface,
+                              ),
+                            ),
+                            const SizedBox(height: 16),
+                            SizedBox(
+                              width: double.infinity,
+                              child: Ux4gButton(
+                                onPressed: () {
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                      builder: (_) =>
+                                          const BiometricShowcasePage(mockSuccess: true),
+                                    ),
+                                  );
+                                },
+                                text: 'Simulate Success Flow',
+                                leadingIcon: Icons.check_circle_outline,
+                                backgroundColor: Ux4gPalette.green,
+                                contentColor: Ux4gPalette.white,
+                              ),
+                            ),
+                            const SizedBox(height: 12),
+                            SizedBox(
+                              width: double.infinity,
+                              child: Ux4gButton(
+                                onPressed: () {
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                      builder: (_) =>
+                                          const BiometricShowcasePage(mockSuccess: false),
+                                    ),
+                                  );
+                                },
+                                text: 'Simulate Failure Flow',
+                                leadingIcon: Icons.error_outline,
+                                backgroundColor: Ux4gPalette.red,
+                                contentColor: Ux4gPalette.white,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+
                       const SizedBox(height: 80),
                     ],
                   ),
@@ -2053,6 +4014,109 @@ class _ComponentShowcasePageState extends State<ComponentShowcasePage> {
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  Widget _circularProgressDemoItem({
+    required Ux4gCircularProgressSize size,
+    required bool inlineMeta,
+  }) {
+    final valueText = '${(_circularProgressValue * 100).round()}%';
+
+    return Ux4gCircularProgress(
+      value: _circularProgressValue,
+      size: size,
+      backgroundColor:
+          (size == Ux4gCircularProgressSize.xl ||
+              size == Ux4gCircularProgressSize.xxl ||
+              size == Ux4gCircularProgressSize.xxxl)
+          ? Ux4gPalette.gray100
+          : null,
+      progressGradient: SweepGradient(
+        transform: GradientRotation(-math.pi / 2),
+        colors: [Color(0xFFDCD4FF), Color(0xFF6A4EFF)],
+      ),
+      centerValueText: valueText,
+      centerDescription: inlineMeta ? 'Description' : null,
+      label: inlineMeta ? null : valueText,
+      description: inlineMeta ? null : 'Description',
+      gap: 6,
+    );
+  }
+}
+
+Widget _circularColorVariant({
+  required Ux4gColors colors,
+  required Ux4gTypography typography,
+  required Color progressColor,
+  required SweepGradient gradient,
+  required Color footerColor,
+  required Color footerTextColor,
+  Color? descriptionColor,
+}) {
+  return Ux4gCircularProgress(
+    value: 0.65,
+    size: Ux4gCircularProgressSize.xl,
+    strokeWidth: 6,
+    strokeCap: StrokeCap.round,
+    progressGradient: gradient,
+    centerValueText: '8',
+    centerDescription: 'days left',
+    label: 'Label',
+    description: 'Description',
+    descriptionStyle: descriptionColor != null
+        ? typography.bS_default.copyWith(color: descriptionColor)
+        : null,
+    footer: Container(
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+      decoration: BoxDecoration(
+        color: footerColor,
+        borderRadius: BorderRadius.circular(4),
+      ),
+      child: Text(
+        'Label',
+        style: typography.bXS_strong.copyWith(color: footerTextColor),
+      ),
+    ),
+  );
+}
+
+// ─── Biometric Showcase Page ──────────────────────────────────────────────
+
+class BiometricShowcasePage extends StatelessWidget {
+  final bool mockSuccess;
+
+  const BiometricShowcasePage({super.key, this.mockSuccess = true});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: BiometricVerificationFlow(
+        onSuccess: (result) {
+          Navigator.of(context).pop();
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text('Verified: ${result.maskedName ?? "Success"}'),
+              backgroundColor: const Color(0xFF1AA64A),
+            ),
+          );
+        },
+        onFailure: (reason, message) {
+          // Handled by the flow internally (retry / OTP)
+        },
+        onDismiss: () => Navigator.of(context).pop(),
+        onAlternateVerify: () {
+          Navigator.of(context).pop();
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('OTP verification flow...')),
+          );
+        },
+        enableBlinkCheck: true,
+        enableLightingCheck: true,
+        enableLiveness: true,
+        maxAttempts: 3,
+        mockSuccess: mockSuccess,
       ),
     );
   }

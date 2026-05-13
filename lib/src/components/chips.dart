@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../foundation/colors.dart';
 import '../foundation/dimensions.dart';
 import '../theme/theme.dart';
 import 'input_field.dart';
@@ -49,22 +48,24 @@ class Ux4gChoiceChip extends StatelessWidget {
     final colors = Ux4gTheme.colors(context);
     final typography = Ux4gTheme.typography(context);
 
-    final height = size == Ux4gChoiceChipSize.s ? 28.0 : 32.0;
     final paddingH = size == Ux4gChoiceChipSize.s ? 12.0 : 16.0;
-    final textStyle = size == Ux4gChoiceChipSize.s ? typography.lM_default : typography.lL_default;
+    final paddingV = size == Ux4gChoiceChipSize.s ? 6.0 : 8.0;
+    final textStyle = size == Ux4gChoiceChipSize.s
+        ? typography.lM_default
+        : typography.lL_default;
 
-    final bgColor = selected 
-        ? (selectedBackgroundColor ?? colors.primary) 
+    final bgColor = selected
+        ? (selectedBackgroundColor ?? colors.primary)
         : (unselectedBackgroundColor ?? colors.surface);
-    
-    final borderColor = selected 
-        ? (selectedBorderColor ?? colors.primary) 
+
+    final borderColor = selected
+        ? (selectedBorderColor ?? colors.primary)
         : (unselectedBorderColor ?? colors.onSurface.withValues(alpha: 0.2));
-    
+
     final borderWidth = selected ? selectedBorderWidth : unselectedBorderWidth;
-    
-    final textColor = selected 
-        ? (selectedTextColor ?? colors.onPrimary) 
+
+    final textColor = selected
+        ? (selectedTextColor ?? colors.onPrimary)
         : (unselectedTextColor ?? colors.onSurface);
 
     return InkWell(
@@ -73,8 +74,10 @@ class Ux4gChoiceChip extends StatelessWidget {
       child: Opacity(
         opacity: enabled ? 1.0 : 0.5,
         child: Container(
-          height: height,
-          padding: EdgeInsets.symmetric(horizontal: paddingH),
+          padding: EdgeInsets.symmetric(
+            horizontal: paddingH,
+            vertical: paddingV,
+          ),
           decoration: BoxDecoration(
             color: bgColor,
             borderRadius: BorderRadius.circular(borderRadius),
@@ -143,20 +146,22 @@ class Ux4gFilterChip extends StatelessWidget {
 
     final height = size == Ux4gFilterChipSize.s ? 28.0 : 32.0;
     final paddingH = size == Ux4gFilterChipSize.s ? 12.0 : 16.0;
-    final textStyle = size == Ux4gFilterChipSize.s ? typography.lM_default : typography.lL_default;
+    final textStyle = size == Ux4gFilterChipSize.s
+        ? typography.lM_default
+        : typography.lL_default;
 
-    final bgColor = selected 
-        ? (selectedBackgroundColor ?? colors.primary.withValues(alpha: 0.08)) 
+    final bgColor = selected
+        ? (selectedBackgroundColor ?? colors.primary.withValues(alpha: 0.08))
         : (unselectedBackgroundColor ?? colors.surface);
-    
-    final borderColor = selected 
-        ? (selectedBorderColor ?? colors.primary) 
+
+    final borderColor = selected
+        ? (selectedBorderColor ?? colors.primary)
         : (unselectedBorderColor ?? colors.onSurface.withValues(alpha: 0.2));
-    
+
     final borderWidth = selected ? selectedBorderWidth : unselectedBorderWidth;
-    
-    final textColor = selected 
-        ? (selectedTextColor ?? colors.primary) 
+
+    final textColor = selected
+        ? (selectedTextColor ?? colors.primary)
         : (unselectedTextColor ?? colors.onSurface);
 
     return InkWell(
@@ -241,7 +246,8 @@ class Ux4gInputChip extends StatelessWidget {
     final iconSize = size == Ux4gInputChipSize.xs ? 12.0 : 16.0;
 
     final finalBgColor = backgroundColor ?? colors.surface;
-    final finalBorderColor = borderColor ?? colors.onSurface.withValues(alpha: 0.2);
+    final finalBorderColor =
+        borderColor ?? colors.onSurface.withValues(alpha: 0.2);
     final finalTextColor = textColor ?? colors.onSurface;
 
     return Opacity(
@@ -265,7 +271,11 @@ class Ux4gInputChip extends StatelessWidget {
             const SizedBox(width: 8),
             GestureDetector(
               onTap: enabled ? onDismiss : null,
-              child: Icon(Icons.close, size: iconSize, color: finalTextColor.withValues(alpha: 0.8)),
+              child: Icon(
+                Icons.close,
+                size: iconSize,
+                color: finalTextColor.withValues(alpha: 0.8),
+              ),
             ),
           ],
         ),
@@ -308,7 +318,9 @@ class Ux4gInputChipField extends StatelessWidget {
             value: value,
             onValueChange: onValueChange,
             placeholder: placeholder,
-            leadingIcon: leadingIcon is Icon ? (leadingIcon as Icon).icon : null,
+            leadingIcon: leadingIcon is Icon
+                ? (leadingIcon as Icon).icon
+                : null,
             onTrailingIconPressed: () {
               if (value.isNotEmpty) {
                 onAddChip(value);
@@ -321,10 +333,14 @@ class Ux4gInputChipField extends StatelessWidget {
         SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           child: Row(
-            children: chips.map((chip) => Padding(
-              padding: const EdgeInsets.only(right: 8),
-              child: chip,
-            )).toList(),
+            children: chips
+                .map(
+                  (chip) => Padding(
+                    padding: const EdgeInsets.only(right: 8),
+                    child: chip,
+                  ),
+                )
+                .toList(),
           ),
         ),
       ],
@@ -338,10 +354,9 @@ class Ux4gInputChipField extends StatelessWidget {
         onAddChip(val);
         onValueChange("");
       },
-      itemBuilder: (context) => dropdownOptions.map((opt) => PopupMenuItem(
-        value: opt,
-        child: Text(opt),
-      )).toList(),
+      itemBuilder: (context) => dropdownOptions
+          .map((opt) => PopupMenuItem(value: opt, child: Text(opt)))
+          .toList(),
       child: Ux4gInputField(
         value: value,
         onValueChange: onValueChange,

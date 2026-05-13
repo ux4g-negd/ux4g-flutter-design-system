@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../foundation/colors.dart';
 import '../theme/theme.dart';
 
 enum Ux4gPaginationVariant { defaultVariant, capsule }
@@ -45,7 +44,8 @@ class Ux4gPaginationIndicator extends StatelessWidget {
     final colors = Ux4gTheme.colors(context);
     final effectiveActiveColor = activeColor ?? colors.primary;
     final effectiveInactiveColor = inactiveColor ?? colors.surface;
-    final effectiveInactiveBorderColor = inactiveBorderColor ?? colors.onSurface.withValues(alpha: 0.3);
+    final effectiveInactiveBorderColor =
+        inactiveBorderColor ?? colors.onSurface.withValues(alpha: 0.3);
 
     Widget content = Row(
       mainAxisSize: MainAxisSize.min,
@@ -64,7 +64,9 @@ class Ux4gPaginationIndicator extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: List.generate(totalPageCount, (index) {
             return Padding(
-              padding: EdgeInsets.only(right: index == totalPageCount - 1 ? 0 : size.spacing),
+              padding: EdgeInsets.only(
+                right: index == totalPageCount - 1 ? 0 : size.spacing,
+              ),
               child: _buildDot(
                 context,
                 index == currentPageIndex,
@@ -95,7 +97,9 @@ class Ux4gPaginationIndicator extends StatelessWidget {
         decoration: BoxDecoration(
           color: colors.surface,
           borderRadius: BorderRadius.circular(999),
-          border: Border.all(color: effectiveActiveColor.withValues(alpha: 0.12)),
+          border: Border.all(
+            color: effectiveActiveColor.withValues(alpha: 0.12),
+          ),
         ),
         child: content,
       );
@@ -116,12 +120,16 @@ class Ux4gPaginationIndicator extends StatelessWidget {
       cursor: enabled ? SystemMouseCursors.click : SystemMouseCursors.basic,
       child: GestureDetector(
         onTap: enabled ? onClick : null,
-        child: Container(
-          width: size.dotSize,
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 300),
+          curve: Curves.easeInOut,
+          width: isSelected ? size.dotSize * 2.5 : size.dotSize,
           height: size.dotSize,
           decoration: BoxDecoration(
-            color: isSelected ? (enabled ? activeColor : activeColor.withValues(alpha: 0.38)) : inactiveColor,
-            shape: BoxShape.circle,
+            color: isSelected
+                ? (enabled ? activeColor : activeColor.withValues(alpha: 0.38))
+                : inactiveColor,
+            borderRadius: BorderRadius.circular(999),
             border: isSelected ? null : Border.all(color: inactiveBorderColor),
           ),
         ),
@@ -145,9 +153,8 @@ class Ux4gPaginationIndicator extends StatelessWidget {
           width: size.arrowSize,
           height: size.arrowSize,
           decoration: BoxDecoration(
-            color: colors.surface,
+            color: activeColor.withValues(alpha: 0.12),
             shape: BoxShape.circle,
-            border: Border.all(color: activeColor.withValues(alpha: 0.12)),
           ),
           alignment: Alignment.center,
           child: Icon(

@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import '../foundation/colors.dart';
-import '../foundation/typography.dart';
 import '../theme/theme.dart';
 
 enum Ux4gBadgeLimit {
@@ -8,13 +6,7 @@ enum Ux4gBadgeLimit {
   doubleDigit, // 99+
 }
 
-enum _Ux4gBadgeInternalType {
-  dot,
-  text,
-  label,
-  icon,
-  readyToUse,
-}
+enum _Ux4gBadgeInternalType { dot, text, label, icon, readyToUse }
 
 class Ux4gBadge extends StatelessWidget {
   final Widget? child;
@@ -33,13 +25,13 @@ class Ux4gBadge extends StatelessWidget {
     this.child,
     this.containerColor,
     this.alignment = Alignment.topRight,
-  })  : _type = _Ux4gBadgeInternalType.dot,
-        label = null,
-        count = null,
-        limit = Ux4gBadgeLimit.singleDigit,
-        icon = null,
-        assetPath = null,
-        contentColor = null;
+  }) : _type = _Ux4gBadgeInternalType.dot,
+       label = null,
+       count = null,
+       limit = Ux4gBadgeLimit.singleDigit,
+       icon = null,
+       assetPath = null,
+       contentColor = null;
 
   const Ux4gBadge.count(
     this.count, {
@@ -49,10 +41,10 @@ class Ux4gBadge extends StatelessWidget {
     this.containerColor,
     this.contentColor,
     this.alignment = Alignment.topRight,
-  })  : _type = _Ux4gBadgeInternalType.text,
-        label = null,
-        icon = null,
-        assetPath = null;
+  }) : _type = _Ux4gBadgeInternalType.text,
+       label = null,
+       icon = null,
+       assetPath = null;
 
   const Ux4gBadge.label(
     this.label, {
@@ -61,11 +53,11 @@ class Ux4gBadge extends StatelessWidget {
     this.containerColor,
     this.contentColor,
     this.alignment = Alignment.topRight,
-  })  : _type = _Ux4gBadgeInternalType.label,
-        count = null,
-        limit = Ux4gBadgeLimit.singleDigit,
-        icon = null,
-        assetPath = null;
+  }) : _type = _Ux4gBadgeInternalType.label,
+       count = null,
+       limit = Ux4gBadgeLimit.singleDigit,
+       icon = null,
+       assetPath = null;
 
   const Ux4gBadge.icon(
     this.icon, {
@@ -74,11 +66,11 @@ class Ux4gBadge extends StatelessWidget {
     this.containerColor,
     this.contentColor,
     this.alignment = Alignment.topRight,
-  })  : _type = _Ux4gBadgeInternalType.icon,
-        label = null,
-        count = null,
-        limit = Ux4gBadgeLimit.singleDigit,
-        assetPath = null;
+  }) : _type = _Ux4gBadgeInternalType.icon,
+       label = null,
+       count = null,
+       limit = Ux4gBadgeLimit.singleDigit,
+       assetPath = null;
 
   const Ux4gBadge.readyToUse(
     this.assetPath, {
@@ -86,12 +78,12 @@ class Ux4gBadge extends StatelessWidget {
     this.child,
     this.contentColor,
     this.alignment = Alignment.topRight,
-  })  : _type = _Ux4gBadgeInternalType.readyToUse,
-        label = null,
-        count = null,
-        limit = Ux4gBadgeLimit.singleDigit,
-        icon = null,
-        containerColor = null;
+  }) : _type = _Ux4gBadgeInternalType.readyToUse,
+       label = null,
+       count = null,
+       limit = Ux4gBadgeLimit.singleDigit,
+       icon = null,
+       containerColor = null;
 
   @override
   Widget build(BuildContext context) {
@@ -136,10 +128,7 @@ class Ux4gBadge extends StatelessWidget {
         return Container(
           width: 8,
           height: 8,
-          decoration: BoxDecoration(
-            color: resolvedBg,
-            shape: BoxShape.circle,
-          ),
+          decoration: BoxDecoration(color: resolvedBg, shape: BoxShape.circle),
         );
       case _Ux4gBadgeInternalType.text:
         if (count == null) return const SizedBox.shrink();
@@ -148,10 +137,7 @@ class Ux4gBadge extends StatelessWidget {
             : (count! > 99 ? "99+" : count.toString());
 
         return Container(
-          constraints: const BoxConstraints(
-            minWidth: 18,
-            minHeight: 18,
-          ),
+          constraints: const BoxConstraints(minWidth: 18, minHeight: 18),
           padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
           decoration: BoxDecoration(
             color: resolvedBg,
@@ -177,7 +163,10 @@ class Ux4gBadge extends StatelessWidget {
           ),
           child: Text(
             label!,
-            style: typography.lS_strong.copyWith(color: resolvedContent, height: 1),
+            style: typography.lS_strong.copyWith(
+              color: resolvedContent,
+              height: 1,
+            ),
           ),
         );
       case _Ux4gBadgeInternalType.icon:
@@ -185,16 +174,9 @@ class Ux4gBadge extends StatelessWidget {
         return Container(
           width: 18,
           height: 18,
-          decoration: BoxDecoration(
-            color: resolvedBg,
-            shape: BoxShape.circle,
-          ),
+          decoration: BoxDecoration(color: resolvedBg, shape: BoxShape.circle),
           alignment: Alignment.center,
-          child: Icon(
-            icon,
-            size: 12,
-            color: resolvedContent,
-          ),
+          child: Icon(icon, size: 12, color: resolvedContent),
         );
       default:
         return const SizedBox.shrink();

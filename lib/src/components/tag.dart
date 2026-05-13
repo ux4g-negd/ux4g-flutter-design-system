@@ -22,6 +22,7 @@ class Ux4gTag extends StatelessWidget {
   final Color? customBackgroundColor;
   final Color? customContentColor;
   final Color? customBorderColor;
+  final BorderRadius? customBorderRadius;
 
   const Ux4gTag({
     super.key,
@@ -35,6 +36,7 @@ class Ux4gTag extends StatelessWidget {
     this.customBackgroundColor,
     this.customContentColor,
     this.customBorderColor,
+    this.customBorderRadius,
   });
 
   @override
@@ -53,9 +55,11 @@ class Ux4gTag extends StatelessWidget {
         ? typography.lS_default
         : typography.lM_default;
 
-    final borderRadius = shape == Ux4gTagShape.circular
-        ? BorderRadius.circular(999)
-        : BorderRadius.circular(Ux4gRadius.radius4);
+    final borderRadius =
+        customBorderRadius ??
+        (shape == Ux4gTagShape.circular
+            ? BorderRadius.circular(999)
+            : BorderRadius.circular(Ux4gRadius.radius4));
 
     return Container(
       height: height,
@@ -74,10 +78,7 @@ class Ux4gTag extends StatelessWidget {
             leadingContent!,
             const SizedBox(width: 6),
           ],
-          Text(
-            text,
-            style: textStyle.copyWith(color: contentColor, height: 1),
-          ),
+          Text(text, style: textStyle.copyWith(color: contentColor, height: 1)),
           if (onDismiss != null) ...[
             const SizedBox(width: 4),
             GestureDetector(
@@ -167,4 +168,132 @@ class _TagColors {
     required this.contentColor,
     required this.borderColor,
   });
+}
+
+// ─── Unified Pill Segment ───────────────────────────────────────────────────
+
+/// A single segment inside a [Ux4gUnifiedPillTag].
+class Ux4gPillSegment {
+  /// Text displayed in this segment.
+  final String text;
+
+  /// Optional widget shown before the text (e.g., a dot indicator).
+  final Widget? leading;
+
+  /// Text color override for this segment.
+  final Color? textColor;
+
+  /// Text style override: `true` for bold, `false` (default) for regular.
+  final bool bold;
+
+  const Ux4gPillSegment({
+    required this.text,
+    this.leading,
+    this.textColor,
+    this.bold = false,
+  });
+}
+
+// ─── Unified Pill Tag ───────────────────────────────────────────────────────
+
+/// A pill-shaped tag that renders multiple [Ux4gPillSegment]s separated by a
+/// thin vertical divider — all inside one unified container.
+///
+/// Example:
+/// ```dart
+/// Ux4gUnifiedPillTag(
+///   segments: [
+///     Ux4gPillSegment(
+///       text: '2 days remaining',
+///       leading: Container(width: 8, height: 8, decoration: BoxDecoration(color: Colors.orange, shape: BoxShape.circle)),
+///     ),
+///     Ux4gPillSegment(text: 'Pending', bold: true, textColor: Colors.orange),
+///   ],
+/// )
+/// ```
+class Ux4gUnifiedPillTag extends StatelessWidget {
+  /// Segments to render inside the pill.
+  final List<Ux4gPillSegment> segments;
+
+  /// Size of the pill.
+  final Ux4gTagSize size;
+
+  /// Background color (defaults to white).
+  final Color? backgroundColor;
+
+  /// Border color (defaults to subtle onSurface).
+  final Color? borderColor;
+
+  /// Divider color between segments.
+  final Color? dividerColor;
+
+  /// Custom border radius override.
+  final BorderRadius? customBorderRadius;
+
+  const Ux4gUnifiedPillTag({
+    super.key,
+    required this.segments,
+    this.size = Ux4gTagSize.l,
+    this.backgroundColor,
+    this.borderColor,
+    this.dividerColor,
+    this.customBorderRadius,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final colors = Ux4gTheme.colors(context);
+    final typography = Ux4gTheme.typography(context);
+
+    final height = size == Ux4gTagSize.m ? 20.0 : 24.0;
+    final horizontalPadding = size == Ux4gTagSize.m ? 8.0 : 12.0;
+    final textStyleDefault = size == Ux4gTagSize.m
+        ? typography.lS_default
+        : typography.lM_default;
+    final textStyleBold = size == Ux4gTagSize.m
+        ? typography.lS_strong
+        : typography.lM_strong;
+
+    final bgColor = backgroundColor ?? Colors.white;
+    final border = borderColor ?? colors.onSurface.withValues(alpha: 0.12);
+    final divider = dividerColor ?? colors.onSurface.withValues(alpha: 0.15);
+    final defaultTextColor = colors.onSurface.withValues(alpha: 0.7);
+
+    return Container(
+      height: height,
+      padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
+      decoration: BoxDecoration(
+        color: bgColor,
+        borderRadius: customBorderRadius ?? BorderRadius.circular(999),
+        border: Border.all(color: border),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          for (int i = 0; i < segments.length; i++) ...[
+            if (i > 0) ...[
+              Container(
+                margin: const EdgeInsets.symmetric(horizontal: 8),
+                width: 1,
+                height: 14,
+                color: divider,
+              ),
+            ],
+            if (segments[i].leading != null) ...[
+              segments[i].leading!,
+              const SizedBox(width: 6),
+            ],
+            Text(
+              segments[i].text,
+              style: (segments[i].bold ? textStyleBold : textStyleDefault)
+                  .copyWith(
+                    color: segments[i].textColor ?? defaultTextColor,
+                    height: 1,
+                  ),
+            ),
+          ],
+        ],
+      ),
+    );
+  }
 }

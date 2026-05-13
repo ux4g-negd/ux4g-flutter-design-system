@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import '../foundation/colors.dart';
 import '../foundation/dimensions.dart';
 import '../theme/theme.dart';
-import 'checkbox.dart';
 import 'chips.dart';
 
 enum Ux4gDropdownFilterType { contains, startsWith, startsWithPerTerm }
@@ -18,7 +16,11 @@ class Ux4gDropdownOption {
   final String label;
   final IconData? leadingIcon;
 
-  const Ux4gDropdownOption({required this.id, required this.label, this.leadingIcon});
+  const Ux4gDropdownOption({
+    required this.id,
+    required this.label,
+    this.leadingIcon,
+  });
 }
 
 // ── ACTION DROPDOWN ──────────────────────────────────────────────────────────
@@ -35,7 +37,8 @@ class Ux4gActionDropdownOption {
   });
 }
 
-typedef Ux4gDropdownTriggerBuilder = Widget Function(BuildContext context, VoidCallback toggleDropdown);
+typedef Ux4gDropdownTriggerBuilder =
+    Widget Function(BuildContext context, VoidCallback toggleDropdown);
 
 class Ux4gActionDropdown extends StatefulWidget {
   final List<Ux4gActionDropdownOption> options;
@@ -222,7 +225,8 @@ class _Ux4gSelectionDropdownState extends State<Ux4gSelectionDropdown> {
   OverlayEntry _createOverlayEntry() {
     return OverlayEntry(
       builder: (context) {
-        final renderBox = _dropdownKey.currentContext?.findRenderObject() as RenderBox?;
+        final renderBox =
+            _dropdownKey.currentContext?.findRenderObject() as RenderBox?;
         final size = renderBox?.hasSize == true ? renderBox!.size : Size.zero;
 
         return Stack(
@@ -267,10 +271,12 @@ class _Ux4gSelectionDropdownState extends State<Ux4gSelectionDropdown> {
         Ux4gDropdownFilterType.contains => label.contains(query),
         Ux4gDropdownFilterType.startsWith => label.startsWith(query),
         Ux4gDropdownFilterType.startsWithPerTerm => () {
-            final queryTerms = query.split(' ').where((t) => t.isNotEmpty);
-            final labelTerms = label.split(' ').where((t) => t.isNotEmpty);
-            return queryTerms.every((qTerm) => labelTerms.any((lTerm) => lTerm.startsWith(qTerm)));
-          }(),
+          final queryTerms = query.split(' ').where((t) => t.isNotEmpty);
+          final labelTerms = label.split(' ').where((t) => t.isNotEmpty);
+          return queryTerms.every(
+            (qTerm) => labelTerms.any((lTerm) => lTerm.startsWith(qTerm)),
+          );
+        }(),
       };
     }).toList();
 
@@ -287,8 +293,13 @@ class _Ux4gSelectionDropdownState extends State<Ux4gSelectionDropdown> {
                 hintText: "Start typing..",
                 prefixIcon: const Icon(Icons.search, size: 20),
                 isDense: true,
-                contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
+                contentPadding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 8,
+                ),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8),
+                ),
               ),
               onChanged: (val) {
                 _searchQuery = val;
@@ -308,7 +319,10 @@ class _Ux4gSelectionDropdownState extends State<Ux4gSelectionDropdown> {
               return InkWell(
                 onTap: () => _handleSelection(option.id),
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 12,
+                    vertical: 8,
+                  ),
                   child: Row(
                     children: [
                       if (widget.mode == Ux4gDropdownMode.multi) ...[
@@ -320,7 +334,9 @@ class _Ux4gSelectionDropdownState extends State<Ux4gSelectionDropdown> {
                               value: isSelected,
                               onChanged: (_) {},
                               activeColor: Ux4gTheme.colors(context).primary,
-                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(4),
+                              ),
                             ),
                           ),
                         ),
@@ -332,14 +348,21 @@ class _Ux4gSelectionDropdownState extends State<Ux4gSelectionDropdown> {
                       Expanded(
                         child: Text(
                           option.label,
-                          style: Ux4gTheme.typography(context).lL_default.copyWith(
-                                color: isSelected ? Ux4gTheme.colors(context).primary : null,
+                          style: Ux4gTheme.typography(context).lL_default
+                              .copyWith(
+                                color: isSelected
+                                    ? Ux4gTheme.colors(context).primary
+                                    : null,
                                 fontWeight: isSelected ? FontWeight.w600 : null,
                               ),
                         ),
                       ),
                       if (widget.mode == Ux4gDropdownMode.single && isSelected)
-                        Icon(Icons.check, color: Ux4gTheme.colors(context).primary, size: 20),
+                        Icon(
+                          Icons.check,
+                          color: Ux4gTheme.colors(context).primary,
+                          size: 20,
+                        ),
                     ],
                   ),
                 ),
@@ -386,10 +409,13 @@ class _Ux4gSelectionDropdownState extends State<Ux4gSelectionDropdown> {
     final borderColor = switch (widget.status) {
       Ux4gDropdownStatus.disabled => colors.onSurface.withValues(alpha: 0.2),
       Ux4gDropdownStatus.error => colors.error,
-      Ux4gDropdownStatus.defaultStatus => _isExpanded ? colors.primary : colors.onSurface.withValues(alpha: 0.2),
+      Ux4gDropdownStatus.defaultStatus =>
+        _isExpanded ? colors.primary : colors.onSurface.withValues(alpha: 0.2),
     };
 
-    final descriptionColor = widget.status == Ux4gDropdownStatus.error ? colors.error : colors.onSurface.withValues(alpha: 0.7);
+    final descriptionColor = widget.status == Ux4gDropdownStatus.error
+        ? colors.error
+        : colors.onSurface.withValues(alpha: 0.7);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -398,7 +424,9 @@ class _Ux4gSelectionDropdownState extends State<Ux4gSelectionDropdown> {
           Text(
             widget.label!,
             style: typography.hS_default.copyWith(
-              color: widget.status == Ux4gDropdownStatus.disabled ? colors.onSurface.withValues(alpha: 0.38) : colors.onSurface,
+              color: widget.status == Ux4gDropdownStatus.disabled
+                  ? colors.onSurface.withValues(alpha: 0.38)
+                  : colors.onSurface,
             ),
           ),
           const SizedBox(height: Ux4gSpace.space4),
@@ -410,9 +438,14 @@ class _Ux4gSelectionDropdownState extends State<Ux4gSelectionDropdown> {
             onTap: _toggleDropdown,
             child: Container(
               constraints: BoxConstraints(minHeight: minHeight),
-              padding: EdgeInsets.symmetric(horizontal: 12, vertical: verticalPadding),
+              padding: EdgeInsets.symmetric(
+                horizontal: 12,
+                vertical: verticalPadding,
+              ),
               decoration: BoxDecoration(
-                color: widget.status == Ux4gDropdownStatus.disabled ? colors.onSurface.withValues(alpha: 0.04) : colors.surface,
+                color: widget.status == Ux4gDropdownStatus.disabled
+                    ? colors.onSurface.withValues(alpha: 0.04)
+                    : colors.surface,
                 borderRadius: BorderRadius.circular(Ux4gRadius.radius8),
                 border: Border.all(color: borderColor),
               ),
@@ -422,28 +455,42 @@ class _Ux4gSelectionDropdownState extends State<Ux4gSelectionDropdown> {
                     child: widget.selectedOptionIds.isEmpty
                         ? Text(
                             widget.placeholder,
-                            style: textStyle.copyWith(color: colors.onSurface.withValues(alpha: 0.38)),
+                            style: textStyle.copyWith(
+                              color: colors.onSurface.withValues(alpha: 0.38),
+                            ),
                           )
                         : (widget.mode == Ux4gDropdownMode.single
-                            ? Text(
-                                widget.options.firstWhere((o) => o.id == widget.selectedOptionIds.first).label,
-                                style: textStyle,
-                              )
-                            : Wrap(
-                                spacing: 4,
-                                runSpacing: 4,
-                                children: widget.selectedOptionIds.map((id) {
-                                  final opt = widget.options.firstWhere((o) => o.id == id);
-                                  return Ux4gInputChip(
-                                    text: opt.label,
-                                    onDismiss: () => _handleSelection(id),
-                                    leadingContent: opt.leadingIcon != null ? Icon(opt.leadingIcon, size: 14) : null,
-                                  );
-                                }).toList(),
-                              )),
+                              ? Text(
+                                  widget.options
+                                      .firstWhere(
+                                        (o) =>
+                                            o.id ==
+                                            widget.selectedOptionIds.first,
+                                      )
+                                      .label,
+                                  style: textStyle,
+                                )
+                              : Wrap(
+                                  spacing: 4,
+                                  runSpacing: 4,
+                                  children: widget.selectedOptionIds.map((id) {
+                                    final opt = widget.options.firstWhere(
+                                      (o) => o.id == id,
+                                    );
+                                    return Ux4gInputChip(
+                                      text: opt.label,
+                                      onDismiss: () => _handleSelection(id),
+                                      leadingContent: opt.leadingIcon != null
+                                          ? Icon(opt.leadingIcon, size: 14)
+                                          : null,
+                                    );
+                                  }).toList(),
+                                )),
                   ),
                   Icon(
-                    _isExpanded ? Icons.keyboard_arrow_up : Icons.keyboard_arrow_down,
+                    _isExpanded
+                        ? Icons.keyboard_arrow_up
+                        : Icons.keyboard_arrow_down,
                     color: colors.onSurface.withValues(alpha: 0.6),
                   ),
                 ],
@@ -456,7 +503,9 @@ class _Ux4gSelectionDropdownState extends State<Ux4gSelectionDropdown> {
           Row(
             children: [
               Icon(
-                widget.status == Ux4gDropdownStatus.error ? Icons.error_outline : Icons.info_outline,
+                widget.status == Ux4gDropdownStatus.error
+                    ? Icons.error_outline
+                    : Icons.info_outline,
                 size: 16,
                 color: descriptionColor,
               ),
