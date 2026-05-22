@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import '../theme/theme.dart';
+import '../foundation/colors.dart';
+import '../foundation/typography.dart';
 
 enum Ux4gPaginationVariant { defaultVariant, capsule }
 
@@ -41,11 +42,13 @@ class Ux4gPaginationIndicator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colors = Ux4gTheme.colors(context);
-    final effectiveActiveColor = activeColor ?? colors.primary;
-    final effectiveInactiveColor = inactiveColor ?? colors.surface;
+    final uxColors = Theme.of(context).extension<Ux4gColors>();
+    final materialTheme = Theme.of(context);
+
+    final effectiveActiveColor = activeColor ?? uxColors?.primary ?? materialTheme.colorScheme.primary;
+    final effectiveInactiveColor = inactiveColor ?? uxColors?.surface ?? materialTheme.colorScheme.surface;
     final effectiveInactiveBorderColor =
-        inactiveBorderColor ?? colors.onSurface.withValues(alpha: 0.3);
+        inactiveBorderColor ?? (uxColors?.onSurface ?? materialTheme.colorScheme.onSurface).withValues(alpha: 0.3);
 
     Widget content = Row(
       mainAxisSize: MainAxisSize.min,
@@ -95,7 +98,7 @@ class Ux4gPaginationIndicator extends StatelessWidget {
       return Container(
         padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
         decoration: BoxDecoration(
-          color: colors.surface,
+          color: uxColors?.surface ?? materialTheme.colorScheme.surface,
           borderRadius: BorderRadius.circular(999),
           border: Border.all(
             color: effectiveActiveColor.withValues(alpha: 0.12),
@@ -144,7 +147,6 @@ class Ux4gPaginationIndicator extends StatelessWidget {
     VoidCallback onClick,
     Color activeColor,
   ) {
-    final colors = Ux4gTheme.colors(context);
     return MouseRegion(
       cursor: canClick ? SystemMouseCursors.click : SystemMouseCursors.basic,
       child: GestureDetector(

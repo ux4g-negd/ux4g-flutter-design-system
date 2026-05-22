@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../foundation/colors.dart';
+import '../foundation/typography.dart';
 import '../foundation/dimensions.dart';
-import '../theme/theme.dart';
 import 'loader.dart';
 
 enum Ux4gSearchFieldVariant { basicSearch, searchWithSubmit, autocomplete }
@@ -127,6 +127,10 @@ class _Ux4gSearchFieldState extends State<Ux4gSearchField> {
   OverlayEntry _createOverlayEntry() {
     return OverlayEntry(
       builder: (context) {
+        final materialTheme = Theme.of(context);
+        final ux4gColors = materialTheme.extension<Ux4gColors>();
+        final surface = ux4gColors?.surface ?? materialTheme.colorScheme.surface;
+
         final renderBox = _fieldKey.currentContext?.findRenderObject() as RenderBox?;
         final width = renderBox?.size.width ?? 0;
 
@@ -145,7 +149,7 @@ class _Ux4gSearchFieldState extends State<Ux4gSearchField> {
               elevation: 6,
               borderRadius: BorderRadius.circular(Ux4gRadius.radius8),
               clipBehavior: Clip.antiAlias,
-              color: Ux4gTheme.colors(context).surface,
+              color: surface,
               child: _buildAutocompleteList(),
             ),
           ),
@@ -155,8 +159,12 @@ class _Ux4gSearchFieldState extends State<Ux4gSearchField> {
   }
 
   Widget _buildAutocompleteList() {
-    final colors = Ux4gTheme.colors(context);
-    final typography = Ux4gTheme.typography(context);
+    final materialTheme = Theme.of(context);
+    final ux4gColors = materialTheme.extension<Ux4gColors>();
+    final ux4gTypography = materialTheme.extension<Ux4gTypography>();
+
+    final onSurface = ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
+    final bM_default = ux4gTypography?.bM_default ?? materialTheme.textTheme.bodyMedium ?? const TextStyle(fontSize: 16);
 
     return Container(
       constraints: const BoxConstraints(maxHeight: 300),
@@ -165,7 +173,7 @@ class _Ux4gSearchFieldState extends State<Ux4gSearchField> {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text("Searching for '${widget.value}'", style: typography.bM_default),
+          Text("Searching for '${widget.value}'", style: bM_default.copyWith(color: onSurface)),
           const SizedBox(height: 16),
           if (widget.isLoading)
             const Center(
@@ -180,7 +188,7 @@ class _Ux4gSearchFieldState extends State<Ux4gSearchField> {
                 padding: const EdgeInsets.all(16.0),
                 child: Text(
                   "No results found",
-                  style: typography.bM_default.copyWith(color: colors.onSurface.withValues(alpha: 0.5)),
+                  style: bM_default.copyWith(color: onSurface.withValues(alpha: 0.5)),
                 ),
               ),
             )
@@ -202,7 +210,7 @@ class _Ux4gSearchFieldState extends State<Ux4gSearchField> {
                       padding: const EdgeInsets.symmetric(vertical: 12),
                       child: Text(
                         option,
-                        style: typography.bM_default.copyWith(color: colors.onSurface.withValues(alpha: 0.8)),
+                        style: bM_default.copyWith(color: onSurface.withValues(alpha: 0.8)),
                       ),
                     ),
                   );
@@ -216,8 +224,18 @@ class _Ux4gSearchFieldState extends State<Ux4gSearchField> {
 
   @override
   Widget build(BuildContext context) {
-    final colors = Ux4gTheme.colors(context);
-    final typography = Ux4gTheme.typography(context);
+    final materialTheme = Theme.of(context);
+    final ux4gColors = materialTheme.extension<Ux4gColors>();
+    final ux4gTypography = materialTheme.extension<Ux4gTypography>();
+
+    final surface = ux4gColors?.surface ?? materialTheme.colorScheme.surface;
+    final onSurface = ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
+    final primary = ux4gColors?.primary ?? materialTheme.colorScheme.primary;
+    final onPrimary = ux4gColors?.onPrimary ?? materialTheme.colorScheme.onPrimary;
+
+    final bM_default = ux4gTypography?.bM_default ?? materialTheme.textTheme.bodyMedium ?? const TextStyle(fontSize: 16);
+    final bM_strong = ux4gTypography?.bM_strong ?? materialTheme.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w700) ?? const TextStyle(fontWeight: FontWeight.w700, fontSize: 16);
+    final bXS_default = ux4gTypography?.bXS_default ?? materialTheme.textTheme.bodySmall ?? const TextStyle(fontSize: 12);
 
     final isSubmitVariant = widget.variant == Ux4gSearchFieldVariant.searchWithSubmit;
     final inputShape = isSubmitVariant
@@ -227,13 +245,13 @@ class _Ux4gSearchFieldState extends State<Ux4gSearchField> {
           )
         : BorderRadius.circular(Ux4gRadius.radius8);
 
-    final borderColor = _getBorderColor(colors);
+    final borderColor = _getBorderColor(materialTheme, ux4gColors);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         if (widget.label != null) ...[
-          Text(widget.label!, style: typography.bM_strong.copyWith(color: _getLabelColor(colors))),
+          Text(widget.label!, style: bM_strong.copyWith(color: _getLabelColor(materialTheme, ux4gColors))),
           const SizedBox(height: 8),
         ],
         Row(
@@ -245,14 +263,14 @@ class _Ux4gSearchFieldState extends State<Ux4gSearchField> {
                 child: Container(
                   height: widget.size.height,
                   decoration: BoxDecoration(
-                    color: widget.enabled ? colors.surface : colors.onSurface.withValues(alpha: 0.05),
+                    color: widget.enabled ? surface : onSurface.withValues(alpha: 0.05),
                     borderRadius: inputShape,
                     border: Border.all(color: borderColor, width: _isFocused ? 2 : 1),
                   ),
                   padding: const EdgeInsets.symmetric(horizontal: 12),
                   child: Row(
                     children: [
-                      Icon(Icons.search, size: 20, color: colors.onSurface.withValues(alpha: 0.5)),
+                      Icon(Icons.search, size: 20, color: onSurface.withValues(alpha: 0.5)),
                       const SizedBox(width: 8),
                       Expanded(
                         child: TextField(
@@ -262,10 +280,10 @@ class _Ux4gSearchFieldState extends State<Ux4gSearchField> {
                           onSubmitted: widget.onSubmitClick,
                           enabled: widget.enabled,
                           readOnly: widget.readOnly,
-                          style: typography.bM_default.copyWith(color: widget.enabled ? colors.onSurface : colors.onSurface.withValues(alpha: 0.4)),
+                          style: bM_default.copyWith(color: widget.enabled ? onSurface : onSurface.withValues(alpha: 0.4)),
                           decoration: InputDecoration(
                             hintText: widget.placeholder,
-                            hintStyle: typography.bM_default.copyWith(color: colors.onSurface.withValues(alpha: 0.4)),
+                            hintStyle: bM_default.copyWith(color: onSurface.withValues(alpha: 0.4)),
                             isDense: true,
                             border: InputBorder.none,
                             contentPadding: EdgeInsets.zero,
@@ -280,14 +298,14 @@ class _Ux4gSearchFieldState extends State<Ux4gSearchField> {
                         const SizedBox(width: 8),
                         InkWell(
                           onTap: widget.onVoiceClick,
-                          child: Icon(Icons.mic, size: 20, color: colors.onSurface.withValues(alpha: 0.5)),
+                          child: Icon(Icons.mic, size: 20, color: onSurface.withValues(alpha: 0.5)),
                         ),
                       ],
                       if (widget.showClearIcon && widget.value.isNotEmpty) ...[
                         const SizedBox(width: 8),
                         InkWell(
                           onTap: widget.onClearClick ?? () => widget.onValueChange(""),
-                          child: Icon(Icons.close, size: 20, color: colors.onSurface.withValues(alpha: 0.5)),
+                          child: Icon(Icons.close, size: 20, color: onSurface.withValues(alpha: 0.5)),
                         ),
                       ],
                     ],
@@ -300,7 +318,7 @@ class _Ux4gSearchFieldState extends State<Ux4gSearchField> {
                 height: widget.size.height,
                 width: widget.size.height,
                 decoration: BoxDecoration(
-                  color: widget.buttonStyle == Ux4gSearchFieldButtonStyle.filled ? colors.primary : colors.primary.withValues(alpha: 0.1),
+                  color: widget.buttonStyle == Ux4gSearchFieldButtonStyle.filled ? primary : primary.withValues(alpha: 0.1),
                   borderRadius: const BorderRadius.only(
                     topRight: Radius.circular(Ux4gRadius.radius8),
                     bottomRight: Radius.circular(Ux4gRadius.radius8),
@@ -312,7 +330,7 @@ class _Ux4gSearchFieldState extends State<Ux4gSearchField> {
                     child: Icon(
                       Icons.search,
                       size: 20,
-                      color: widget.buttonStyle == Ux4gSearchFieldButtonStyle.filled ? colors.onPrimary : colors.primary,
+                      color: widget.buttonStyle == Ux4gSearchFieldButtonStyle.filled ? onPrimary : primary,
                     ),
                   ),
                 ),
@@ -323,9 +341,9 @@ class _Ux4gSearchFieldState extends State<Ux4gSearchField> {
           const SizedBox(height: 4),
           Row(
             children: [
-              Icon(_getStatusIcon() ?? Icons.info_outline, size: 14, color: _getCaptionColor(colors)),
+              Icon(_getStatusIcon() ?? Icons.info_outline, size: 14, color: _getCaptionColor(materialTheme, ux4gColors)),
               const SizedBox(width: 6),
-              Text(widget.caption ?? "", style: typography.bXS_default.copyWith(color: _getCaptionColor(colors))),
+              Text(widget.caption ?? "", style: bXS_default.copyWith(color: _getCaptionColor(materialTheme, ux4gColors))),
             ],
           ),
         ],
@@ -333,34 +351,52 @@ class _Ux4gSearchFieldState extends State<Ux4gSearchField> {
     );
   }
 
-  Color _getBorderColor(Ux4gColors colors) {
-    if (!widget.enabled) return colors.onSurface.withValues(alpha: 0.3);
-    if (_isFocused && widget.variant == Ux4gSearchFieldVariant.autocomplete) return colors.primary;
+  Color _getBorderColor(ThemeData materialTheme, Ux4gColors? ux4gColors) {
+    final onSurface = ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
+    final primary = ux4gColors?.primary ?? materialTheme.colorScheme.primary;
+    final error = ux4gColors?.error ?? materialTheme.colorScheme.error;
+    final warning = ux4gColors?.warning ?? Colors.orange;
+    final success = ux4gColors?.success ?? Colors.green;
+
+    if (!widget.enabled) return onSurface.withValues(alpha: 0.3);
+    if (_isFocused && widget.variant == Ux4gSearchFieldVariant.autocomplete) return primary;
     return switch (widget.status) {
-      Ux4gSearchFieldStatus.error => colors.error,
-      Ux4gSearchFieldStatus.warning => colors.warning,
-      Ux4gSearchFieldStatus.success => colors.success,
-      Ux4gSearchFieldStatus.defaultStatus => _isFocused ? colors.primary : colors.onSurface.withValues(alpha: 0.3),
+      Ux4gSearchFieldStatus.error => error,
+      Ux4gSearchFieldStatus.warning => warning,
+      Ux4gSearchFieldStatus.success => success,
+      Ux4gSearchFieldStatus.defaultStatus => _isFocused ? primary : onSurface.withValues(alpha: 0.3),
     };
   }
 
-  Color _getLabelColor(Ux4gColors colors) {
-    if (!widget.enabled) return colors.onSurface.withValues(alpha: 0.4);
+  Color _getLabelColor(ThemeData materialTheme, Ux4gColors? ux4gColors) {
+    final onSurface = ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
+    final primary = ux4gColors?.primary ?? materialTheme.colorScheme.primary;
+    final onBackground = ux4gColors?.onBackground ?? materialTheme.colorScheme.onSurface;
+    final error = ux4gColors?.error ?? materialTheme.colorScheme.error;
+    final warning = ux4gColors?.warning ?? Colors.orange;
+    final success = ux4gColors?.success ?? Colors.green;
+
+    if (!widget.enabled) return onSurface.withValues(alpha: 0.4);
     return switch (widget.status) {
-      Ux4gSearchFieldStatus.error => colors.error,
-      Ux4gSearchFieldStatus.warning => colors.warning,
-      Ux4gSearchFieldStatus.success => colors.success,
-      Ux4gSearchFieldStatus.defaultStatus => _isFocused ? colors.primary : colors.onBackground,
+      Ux4gSearchFieldStatus.error => error,
+      Ux4gSearchFieldStatus.warning => warning,
+      Ux4gSearchFieldStatus.success => success,
+      Ux4gSearchFieldStatus.defaultStatus => _isFocused ? primary : onBackground,
     };
   }
 
-  Color _getCaptionColor(Ux4gColors colors) {
-    if (!widget.enabled) return colors.onSurface.withValues(alpha: 0.4);
+  Color _getCaptionColor(ThemeData materialTheme, Ux4gColors? ux4gColors) {
+    final onSurface = ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
+    final error = ux4gColors?.error ?? materialTheme.colorScheme.error;
+    final warning = ux4gColors?.warning ?? Colors.orange;
+    final success = ux4gColors?.success ?? Colors.green;
+
+    if (!widget.enabled) return onSurface.withValues(alpha: 0.4);
     return switch (widget.status) {
-      Ux4gSearchFieldStatus.error => colors.error,
-      Ux4gSearchFieldStatus.warning => colors.warning,
-      Ux4gSearchFieldStatus.success => colors.success,
-      Ux4gSearchFieldStatus.defaultStatus => colors.onSurface.withValues(alpha: 0.6),
+      Ux4gSearchFieldStatus.error => error,
+      Ux4gSearchFieldStatus.warning => warning,
+      Ux4gSearchFieldStatus.success => success,
+      Ux4gSearchFieldStatus.defaultStatus => onSurface.withValues(alpha: 0.6),
     };
   }
 

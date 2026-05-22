@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../foundation/colors.dart';
 import '../theme/theme.dart';
 
 enum Ux4gDividerOrientation {
@@ -36,8 +37,9 @@ class Ux4gDivider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colors = Ux4gTheme.colors(context);
-    final dividerColor = color ?? colors.onSurface.withValues(alpha: 0.2);
+    final materialTheme = Theme.of(context);
+    final ux4gColors = materialTheme.extension<Ux4gColors>();
+    final dividerColor = color ?? (ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface).withValues(alpha: 0.2);
 
     if (label != null) {
       if (orientation == Ux4gDividerOrientation.horizontal) {

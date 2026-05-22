@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../foundation/colors.dart';
+import '../foundation/typography.dart';
 import '../foundation/dimensions.dart';
 import '../theme/theme.dart';
 import 'avatar.dart';
@@ -150,25 +151,25 @@ class Ux4gAppHeader extends StatelessWidget implements PreferredSizeWidget {
     this.elevation = 0,
   });
 
-  Color _resolveBackgroundColor(Ux4gColors colors) {
+  Color _resolveBackgroundColor(Ux4gColors? ux4gColors, ThemeData materialTheme) {
     if (backgroundColor != null) return backgroundColor!;
     switch (variant) {
       case Ux4gAppHeaderVariant.light:
       case Ux4gAppHeaderVariant.outlined:
-        return colors.surface;
+        return ux4gColors?.surface ?? materialTheme.colorScheme.surface;
       case Ux4gAppHeaderVariant.filled:
-        return colors.primary;
+        return ux4gColors?.primary ?? materialTheme.colorScheme.primary;
     }
   }
 
-  Color _resolveForegroundColor(Ux4gColors colors) {
+  Color _resolveForegroundColor(Ux4gColors? ux4gColors, ThemeData materialTheme) {
     if (foregroundColor != null) return foregroundColor!;
     switch (variant) {
       case Ux4gAppHeaderVariant.light:
       case Ux4gAppHeaderVariant.outlined:
-        return colors.onSurface;
+        return ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
       case Ux4gAppHeaderVariant.filled:
-        return colors.onPrimary;
+        return ux4gColors?.onPrimary ?? materialTheme.colorScheme.onPrimary;
     }
   }
 
@@ -177,15 +178,16 @@ class Ux4gAppHeader extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colors = Ux4gTheme.colors(context);
-    final typography = Ux4gTheme.typography(context);
+    final materialTheme = Theme.of(context);
+    final ux4gColors = materialTheme.extension<Ux4gColors>();
+    final ux4gTypography = materialTheme.extension<Ux4gTypography>();
 
-    final bg = _resolveBackgroundColor(colors);
-    final fg = _resolveForegroundColor(colors);
+    final bg = _resolveBackgroundColor(ux4gColors, materialTheme);
+    final fg = _resolveForegroundColor(ux4gColors, materialTheme);
 
     final resolvedTitleStyle =
         titleStyle ??
-        typography.tS_strong.copyWith(
+        (ux4gTypography?.tS_strong ?? materialTheme.textTheme.titleSmall?.copyWith(fontWeight: FontWeight.bold) ?? const TextStyle()).copyWith(
           color: fg,
           fontSize: 16,
           fontWeight: FontWeight.w600,
@@ -256,7 +258,7 @@ class Ux4gAppHeader extends StatelessWidget implements PreferredSizeWidget {
     final bottomBorder = variant == Ux4gAppHeaderVariant.outlined
         ? Border(
             bottom: BorderSide(
-              color: borderColor ?? colors.onSurface.withValues(alpha: 0.12),
+              color: borderColor ?? (ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface).withValues(alpha: 0.12),
               width: 1,
             ),
           )

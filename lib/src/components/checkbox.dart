@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../foundation/colors.dart';
+import '../foundation/typography.dart';
 import '../theme/theme.dart';
 
 enum Ux4gCheckboxSize {
@@ -37,22 +38,23 @@ class Ux4gCheckbox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colors = Ux4gTheme.colors(context);
-    final typography = Ux4gTheme.typography(context);
+    final materialTheme = Theme.of(context);
+    final ux4gColors = materialTheme.extension<Ux4gColors>();
+    final ux4gTypography = materialTheme.extension<Ux4gTypography>();
 
     final descriptionColor = switch (descriptionVariant) {
-      Ux4gCheckboxDescriptionVariant.helper => colors.onSurface.withValues(
+      Ux4gCheckboxDescriptionVariant.helper => (ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface).withValues(
         alpha: 0.7,
       ),
-      Ux4gCheckboxDescriptionVariant.error => colors.error,
-      Ux4gCheckboxDescriptionVariant.warning => colors.warning,
-      Ux4gCheckboxDescriptionVariant.success => colors.success,
+      Ux4gCheckboxDescriptionVariant.error => ux4gColors?.error ?? materialTheme.colorScheme.error,
+      Ux4gCheckboxDescriptionVariant.warning => ux4gColors?.warning ?? Colors.orange,
+      Ux4gCheckboxDescriptionVariant.success => ux4gColors?.success ?? Colors.green,
     };
 
     final labelTextStyle = switch (size) {
-      Ux4gCheckboxSize.small => typography.lM_default,
-      Ux4gCheckboxSize.medium => typography.lL_default,
-      Ux4gCheckboxSize.large => typography.lXL_default,
+      Ux4gCheckboxSize.small => ux4gTypography?.lM_default ?? materialTheme.textTheme.labelMedium ?? const TextStyle(),
+      Ux4gCheckboxSize.medium => ux4gTypography?.lL_default ?? materialTheme.textTheme.labelLarge ?? const TextStyle(),
+      Ux4gCheckboxSize.large => ux4gTypography?.lXL_default ?? materialTheme.textTheme.labelLarge?.copyWith(fontSize: 16) ?? const TextStyle(),
     };
 
     return InkWell(
@@ -71,15 +73,15 @@ class Ux4gCheckbox extends StatelessWidget {
                   value: value,
                   tristate: true,
                   onChanged: enabled ? onChanged : null,
-                  activeColor: colors.primary,
-                  checkColor: colors.onPrimary,
+                  activeColor: ux4gColors?.primary ?? materialTheme.colorScheme.primary,
+                  checkColor: ux4gColors?.onPrimary ?? materialTheme.colorScheme.onPrimary,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(4),
                   ),
                   side: BorderSide(
                     color: enabled
-                        ? colors.onSurface.withValues(alpha: 0.6)
-                        : colors.onSurface.withValues(alpha: 0.12),
+                        ? (ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface).withValues(alpha: 0.6)
+                        : (ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface).withValues(alpha: 0.12),
                     width: 1.5,
                   ),
                 ),
@@ -98,8 +100,8 @@ class Ux4gCheckbox extends StatelessWidget {
                             label!,
                             style: labelTextStyle.copyWith(
                               color: enabled
-                                  ? colors.onSurface
-                                  : colors.onSurface.withValues(alpha: 0.38),
+                                  ? (ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface)
+                                  : (ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface).withValues(alpha: 0.38),
                             ),
                           ),
                           if (isRequired) ...[
@@ -107,7 +109,7 @@ class Ux4gCheckbox extends StatelessWidget {
                             Text(
                               "*",
                               style: labelTextStyle.copyWith(
-                                color: colors.error,
+                                color: ux4gColors?.error ?? materialTheme.colorScheme.error,
                               ),
                             ),
                           ],
@@ -117,7 +119,7 @@ class Ux4gCheckbox extends StatelessWidget {
                       const SizedBox(height: 4),
                       Text(
                         description!,
-                        style: typography.lS_default.copyWith(
+                        style: (ux4gTypography?.lS_default ?? materialTheme.textTheme.labelSmall ?? const TextStyle()).copyWith(
                           color: descriptionColor,
                         ),
                       ),

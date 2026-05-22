@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:ux4g_flutter_design_system/src/foundation/typography.dart';
 import '../foundation/colors.dart';
-import '../theme/theme.dart';
+import '../foundation/typography.dart';
 import 'input_field.dart';
 
 enum Ux4gSliderSize {
@@ -59,14 +58,15 @@ class Ux4gSlider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colors = Ux4gTheme.colors(context);
-    final typography = Ux4gTheme.typography(context);
+    final materialTheme = Theme.of(context);
+    final ux4gColors = materialTheme.extension<Ux4gColors>();
+    final ux4gTypography = materialTheme.extension<Ux4gTypography>();
 
     final isError = captionVariant == Ux4gSliderCaptionVariant.error;
     final activeColor = enabled
-        ? (isError ? colors.error : colors.primary)
-        : colors.onSurface.withValues(alpha: 0.38);
-    final inactiveColor = colors.onSurface.withValues(alpha: 0.12);
+        ? (isError ? (ux4gColors?.error ?? materialTheme.colorScheme.error) : (ux4gColors?.primary ?? materialTheme.colorScheme.primary))
+        : (ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface).withValues(alpha: 0.38);
+    final inactiveColor = (ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface).withValues(alpha: 0.12);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -74,14 +74,14 @@ class Ux4gSlider extends StatelessWidget {
         if (label != null || showValueLabels || showInputFields)
           Padding(
             padding: EdgeInsets.symmetric(horizontal: size.thumbSize / 2),
-            child: _buildTopRow(context, typography, colors),
+            child: _buildTopRow(context, ux4gTypography, ux4gColors, materialTheme),
           ),
         SliderTheme(
           data: SliderTheme.of(context).copyWith(
             trackHeight: size.trackHeight,
             thumbShape: _Ux4gThumbShape(
               enabledThumbRadius: size.thumbSize / 2,
-              borderColor: colors.onSurface.withValues(
+              borderColor: (ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface).withValues(
                 alpha: enabled ? 0.12 : 0.38,
               ),
             ),
@@ -89,14 +89,14 @@ class Ux4gSlider extends StatelessWidget {
             tickMarkShape: SliderTickMarkShape.noTickMark,
             activeTrackColor: activeColor,
             inactiveTrackColor: inactiveColor,
-            thumbColor: colors.onPrimary,
+            thumbColor: ux4gColors?.onPrimary ?? materialTheme.colorScheme.onPrimary,
             overlayColor: activeColor.withValues(alpha: 0.12),
             showValueIndicator: showIndicator
                 ? ShowValueIndicator.onDrag
                 : ShowValueIndicator.never,
-            valueIndicatorColor: colors.onSurface,
-            valueIndicatorTextStyle: typography.lS_strong.copyWith(
-              color: colors.surface,
+            valueIndicatorColor: ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface,
+            valueIndicatorTextStyle: (ux4gTypography?.lS_strong ?? materialTheme.textTheme.labelSmall?.copyWith(fontWeight: FontWeight.bold) ?? const TextStyle()).copyWith(
+              color: ux4gColors?.surface ?? materialTheme.colorScheme.surface,
             ),
           ),
           child: Slider(
@@ -113,8 +113,9 @@ class Ux4gSlider extends StatelessWidget {
             offset: const Offset(0, -12),
             child: _buildMarksAndValues(
               context,
-              typography,
-              colors,
+              ux4gTypography,
+              ux4gColors,
+              materialTheme,
               activeColor,
               min,
               value,
@@ -124,7 +125,7 @@ class Ux4gSlider extends StatelessWidget {
           const SizedBox(height: 4),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: size.thumbSize / 2),
-            child: _buildCaption(context, typography, colors),
+            child: _buildCaption(context, ux4gTypography, ux4gColors, materialTheme),
           ),
         ],
       ],
@@ -133,8 +134,9 @@ class Ux4gSlider extends StatelessWidget {
 
   Widget _buildTopRow(
     BuildContext context,
-    Ux4gTypography typography,
-    Ux4gColors colors,
+    Ux4gTypography? ux4gTypography,
+    Ux4gColors? ux4gColors,
+    ThemeData materialTheme,
   ) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -146,17 +148,17 @@ class Ux4gSlider extends StatelessWidget {
               children: [
                 Text(
                   label!,
-                  style: typography.lM_default.copyWith(
+                  style: (ux4gTypography?.lM_default ?? materialTheme.textTheme.labelMedium ?? const TextStyle()).copyWith(
                     color: enabled
-                        ? colors.onSurface
-                        : colors.onSurface.withValues(alpha: 0.38),
+                        ? (ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface)
+                        : (ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface).withValues(alpha: 0.38),
                   ),
                 ),
                 if (isRequired) ...[
                   const SizedBox(width: 4),
                   Text(
                     "*",
-                    style: typography.lM_default.copyWith(color: colors.error),
+                    style: (ux4gTypography?.lM_default ?? materialTheme.textTheme.labelMedium ?? const TextStyle()).copyWith(color: ux4gColors?.error ?? materialTheme.colorScheme.error),
                   ),
                 ],
                 if (labelIcon != null) ...[
@@ -165,8 +167,8 @@ class Ux4gSlider extends StatelessWidget {
                     labelIcon,
                     size: 16,
                     color: enabled
-                        ? colors.onSurface
-                        : colors.onSurface.withValues(alpha: 0.38),
+                        ? (ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface)
+                        : (ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface).withValues(alpha: 0.38),
                   ),
                 ],
               ],
@@ -210,18 +212,18 @@ class Ux4gSlider extends StatelessWidget {
             children: [
               Text(
                 startValueText ?? "${_formatValue(min)}%",
-                style: typography.lM_strong.copyWith(
+                style: (ux4gTypography?.lM_strong ?? materialTheme.textTheme.labelMedium?.copyWith(fontWeight: FontWeight.bold) ?? const TextStyle()).copyWith(
                   color: enabled
-                      ? colors.onSurface
-                      : colors.onSurface.withValues(alpha: 0.38),
+                      ? (ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface)
+                      : (ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface).withValues(alpha: 0.38),
                 ),
               ),
               Text(
                 endValueText ?? "${_formatValue(max)}%",
-                style: typography.lM_strong.copyWith(
+                style: (ux4gTypography?.lM_strong ?? materialTheme.textTheme.labelMedium?.copyWith(fontWeight: FontWeight.bold) ?? const TextStyle()).copyWith(
                   color: enabled
-                      ? colors.onSurface
-                      : colors.onSurface.withValues(alpha: 0.38),
+                      ? (ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface)
+                      : (ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface).withValues(alpha: 0.38),
                 ),
               ),
             ],
@@ -232,8 +234,9 @@ class Ux4gSlider extends StatelessWidget {
 
   Widget _buildMarksAndValues(
     BuildContext context,
-    Ux4gTypography typography,
-    Ux4gColors colors,
+    Ux4gTypography? ux4gTypography,
+    Ux4gColors? ux4gColors,
+    ThemeData materialTheme,
     Color activeColor,
     double activeMin,
     double activeMax,
@@ -254,10 +257,10 @@ class Ux4gSlider extends StatelessWidget {
             children: values.map((val) {
               final isActive = val >= activeMin && val <= activeMax;
               final tickColor = !enabled
-                  ? colors.onSurface.withValues(alpha: 0.12)
+                  ? (ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface).withValues(alpha: 0.12)
                   : (isActive
                         ? activeColor
-                        : colors.onSurface.withValues(alpha: 0.38));
+                        : (ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface).withValues(alpha: 0.38));
               return Container(width: 1, height: 4, color: tickColor);
             }).toList(),
           ),
@@ -268,10 +271,10 @@ class Ux4gSlider extends StatelessWidget {
               final val = values[i];
               final isActive = val >= activeMin && val <= activeMax;
               final textColor = !enabled
-                  ? colors.onSurface.withValues(alpha: 0.38)
+                  ? (ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface).withValues(alpha: 0.38)
                   : (isActive
                         ? activeColor
-                        : colors.onSurface.withValues(alpha: 0.6));
+                        : (ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface).withValues(alpha: 0.6));
 
               TextAlign align = TextAlign.center;
               if (i == 0) align = TextAlign.left;
@@ -281,7 +284,7 @@ class Ux4gSlider extends StatelessWidget {
                 child: Text(
                   _formatValue(val),
                   textAlign: align,
-                  style: typography.lM_default.copyWith(color: textColor),
+                  style: (ux4gTypography?.lM_default ?? materialTheme.textTheme.labelMedium ?? const TextStyle()).copyWith(color: textColor),
                 ),
               );
             }),
@@ -293,16 +296,17 @@ class Ux4gSlider extends StatelessWidget {
 
   Widget _buildCaption(
     BuildContext context,
-    Ux4gTypography typography,
-    Ux4gColors colors,
+    Ux4gTypography? ux4gTypography,
+    Ux4gColors? ux4gColors,
+    ThemeData materialTheme,
   ) {
     final color = switch (captionVariant) {
-      Ux4gSliderCaptionVariant.helper => colors.onSurface.withValues(
+      Ux4gSliderCaptionVariant.helper => (ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface).withValues(
         alpha: 0.7,
       ),
-      Ux4gSliderCaptionVariant.error => colors.error,
-      Ux4gSliderCaptionVariant.warning => colors.warning,
-      Ux4gSliderCaptionVariant.success => colors.success,
+      Ux4gSliderCaptionVariant.error => ux4gColors?.error ?? materialTheme.colorScheme.error,
+      Ux4gSliderCaptionVariant.warning => ux4gColors?.warning ?? Ux4gPalette.secondary,
+      Ux4gSliderCaptionVariant.success => ux4gColors?.success ?? Ux4gPalette.green,
     };
 
     return Row(
@@ -314,7 +318,7 @@ class Ux4gSlider extends StatelessWidget {
           Icon(Icons.info_outline, size: 14, color: color),
           const SizedBox(width: 4),
         ],
-        Text(caption!, style: typography.lS_default.copyWith(color: color)),
+        Text(caption!, style: (ux4gTypography?.lS_default ?? materialTheme.textTheme.labelSmall ?? const TextStyle()).copyWith(color: color)),
       ],
     );
   }
@@ -356,13 +360,14 @@ class Ux4gRangeSlider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colors = Ux4gTheme.colors(context);
-    final typography = Ux4gTheme.typography(context);
+    final materialTheme = Theme.of(context);
+    final ux4gColors = materialTheme.extension<Ux4gColors>();
+    final ux4gTypography = materialTheme.extension<Ux4gTypography>();
 
     final activeColor = enabled
-        ? colors.primary
-        : colors.onSurface.withValues(alpha: 0.38);
-    final inactiveColor = colors.onSurface.withValues(alpha: 0.12);
+        ? (ux4gColors?.primary ?? materialTheme.colorScheme.primary)
+        : (ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface).withValues(alpha: 0.38);
+    final inactiveColor = (ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface).withValues(alpha: 0.12);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -370,26 +375,26 @@ class Ux4gRangeSlider extends StatelessWidget {
         if (label != null || showValueLabels || showInputFields)
           Padding(
             padding: EdgeInsets.symmetric(horizontal: size.thumbSize / 2),
-            child: _buildTopRow(context, typography, colors),
+            child: _buildTopRow(context, ux4gTypography, ux4gColors, materialTheme),
           ),
         SliderTheme(
           data: SliderTheme.of(context).copyWith(
             trackHeight: size.trackHeight,
             rangeThumbShape: _Ux4gRangeThumbShape(
               enabledThumbRadius: size.thumbSize / 2,
-              borderColor: colors.onSurface.withValues(
+              borderColor: (ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface).withValues(
                 alpha: enabled ? 0.12 : 0.38,
               ),
             ),
             rangeTrackShape: _Ux4gRangeTrackShape(
               thumbRadius: size.thumbSize / 2,
             ),
-            rangeTickMarkShape: RoundRangeSliderTickMarkShape(
+            rangeTickMarkShape: const RoundRangeSliderTickMarkShape(
               tickMarkRadius: 0,
             ),
             activeTrackColor: activeColor,
             inactiveTrackColor: inactiveColor,
-            thumbColor: colors.onPrimary,
+            thumbColor: ux4gColors?.onPrimary ?? materialTheme.colorScheme.onPrimary,
             overlayColor: activeColor.withValues(alpha: 0.12),
           ),
           child: RangeSlider(
@@ -409,8 +414,9 @@ class Ux4gRangeSlider extends StatelessWidget {
             offset: const Offset(0, -12),
             child: _buildMarksAndValues(
               context,
-              typography,
-              colors,
+              ux4gTypography,
+              ux4gColors,
+              materialTheme,
               activeColor,
               values.start,
               values.end,
@@ -422,8 +428,9 @@ class Ux4gRangeSlider extends StatelessWidget {
 
   Widget _buildTopRow(
     BuildContext context,
-    Ux4gTypography typography,
-    Ux4gColors colors,
+    Ux4gTypography? ux4gTypography,
+    Ux4gColors? ux4gColors,
+    ThemeData materialTheme,
   ) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -435,17 +442,17 @@ class Ux4gRangeSlider extends StatelessWidget {
               children: [
                 Text(
                   label!,
-                  style: typography.lM_default.copyWith(
+                  style: (ux4gTypography?.lM_default ?? materialTheme.textTheme.labelMedium ?? const TextStyle()).copyWith(
                     color: enabled
-                        ? colors.onSurface
-                        : colors.onSurface.withValues(alpha: 0.38),
+                        ? (ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface)
+                        : (ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface).withValues(alpha: 0.38),
                   ),
                 ),
                 if (isRequired) ...[
                   const SizedBox(width: 4),
                   Text(
                     "*",
-                    style: typography.lM_default.copyWith(color: colors.error),
+                    style: (ux4gTypography?.lM_default ?? materialTheme.textTheme.labelMedium ?? const TextStyle()).copyWith(color: ux4gColors?.error ?? materialTheme.colorScheme.error),
                   ),
                 ],
               ],
@@ -499,18 +506,18 @@ class Ux4gRangeSlider extends StatelessWidget {
             children: [
               Text(
                 startValueText ?? "${_formatValue(values.start)}%",
-                style: typography.lM_strong.copyWith(
+                style: (ux4gTypography?.lM_strong ?? materialTheme.textTheme.labelMedium?.copyWith(fontWeight: FontWeight.bold) ?? const TextStyle()).copyWith(
                   color: enabled
-                      ? colors.onSurface
-                      : colors.onSurface.withValues(alpha: 0.38),
+                      ? (ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface)
+                      : (ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface).withValues(alpha: 0.38),
                 ),
               ),
               Text(
                 endValueText ?? "${_formatValue(values.end)}%",
-                style: typography.lM_strong.copyWith(
+                style: (ux4gTypography?.lM_strong ?? materialTheme.textTheme.labelMedium?.copyWith(fontWeight: FontWeight.bold) ?? const TextStyle()).copyWith(
                   color: enabled
-                      ? colors.onSurface
-                      : colors.onSurface.withValues(alpha: 0.38),
+                      ? (ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface)
+                      : (ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface).withValues(alpha: 0.38),
                 ),
               ),
             ],
@@ -521,8 +528,9 @@ class Ux4gRangeSlider extends StatelessWidget {
 
   Widget _buildMarksAndValues(
     BuildContext context,
-    Ux4gTypography typography,
-    Ux4gColors colors,
+    Ux4gTypography? ux4gTypography,
+    Ux4gColors? ux4gColors,
+    ThemeData materialTheme,
     Color activeColor,
     double activeMin,
     double activeMax,
@@ -542,10 +550,10 @@ class Ux4gRangeSlider extends StatelessWidget {
             children: vals.map((val) {
               final isActive = val >= activeMin && val <= activeMax;
               final tickColor = !enabled
-                  ? colors.onSurface.withValues(alpha: 0.12)
+                  ? (ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface).withValues(alpha: 0.12)
                   : (isActive
                         ? activeColor
-                        : colors.onSurface.withValues(alpha: 0.38));
+                        : (ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface).withValues(alpha: 0.38));
               return Container(width: 1, height: 4, color: tickColor);
             }).toList(),
           ),
@@ -555,10 +563,10 @@ class Ux4gRangeSlider extends StatelessWidget {
               final val = vals[i];
               final isActive = val >= activeMin && val <= activeMax;
               final textColor = !enabled
-                  ? colors.onSurface.withValues(alpha: 0.38)
+                  ? (ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface).withValues(alpha: 0.38)
                   : (isActive
                         ? activeColor
-                        : colors.onSurface.withValues(alpha: 0.6));
+                        : (ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface).withValues(alpha: 0.6));
 
               TextAlign align = TextAlign.center;
               if (i == 0) align = TextAlign.left;
@@ -568,7 +576,7 @@ class Ux4gRangeSlider extends StatelessWidget {
                 child: Text(
                   _formatValue(val),
                   textAlign: align,
-                  style: typography.lM_default.copyWith(color: textColor),
+                  style: (ux4gTypography?.lM_default ?? materialTheme.textTheme.labelMedium ?? const TextStyle()).copyWith(color: textColor),
                 ),
               );
             }),

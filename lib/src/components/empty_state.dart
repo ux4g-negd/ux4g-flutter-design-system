@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../foundation/dimensions.dart';
-import '../theme/theme.dart';
+import '../foundation/colors.dart';
+import '../foundation/typography.dart';
 import 'buttons.dart';
 
 /// Semantic preset for [Ux4gEmptyState].
@@ -121,25 +122,26 @@ class Ux4gEmptyState extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colors = Ux4gTheme.colors(context);
-    final typography = Ux4gTheme.typography(context);
+    final uxColors = Theme.of(context).extension<Ux4gColors>();
+    final uxTypography = Theme.of(context).extension<Ux4gTypography>();
+    final materialTheme = Theme.of(context);
 
     final effectiveIcon = icon ?? _variantIcons[variant]!;
-    final effectiveIconColor = iconColor ?? colors.primary;
+    final effectiveIconColor = iconColor ?? uxColors?.primary ?? materialTheme.colorScheme.primary;
     final effectiveIconSize = iconSize ?? 48.0;
 
     final effectiveTitleStyle =
         titleStyle ??
-        typography.hXXS_strong.copyWith(color: colors.onBackground);
+        (uxTypography?.hXXS_strong ?? materialTheme.textTheme.headlineSmall)?.copyWith(color: uxColors?.onBackground ?? materialTheme.colorScheme.onSurface);
     final effectiveBodyStyle =
         bodyStyle ??
-        typography.bS_default.copyWith(
-          color: colors.onSurface.withValues(alpha: 0.6),
+        (uxTypography?.bS_default ?? materialTheme.textTheme.bodyMedium)?.copyWith(
+          color: (uxColors?.onSurface ?? materialTheme.colorScheme.onSurface).withValues(alpha: 0.6),
         );
 
     // Tonal button: filled light-primary background, primary-coloured text.
-    final buttonBg = colors.primary.withValues(alpha: 0.12);
-    final buttonFg = colors.primary;
+    final buttonBg = (uxColors?.primary ?? materialTheme.colorScheme.primary).withValues(alpha: 0.12);
+    final buttonFg = uxColors?.primary ?? materialTheme.colorScheme.primary;
 
     return Padding(
       padding: padding ?? const EdgeInsets.all(Ux4gSpace.space24),

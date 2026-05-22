@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../foundation/colors.dart';
 import '../foundation/dimensions.dart';
-import '../theme/theme.dart';
+import '../foundation/typography.dart';
 
 enum Ux4gRadioButtonSize {
   small(16.0, 8.0),
@@ -43,15 +43,17 @@ class Ux4gRadioButton<T> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colors = Ux4gTheme.colors(context);
-    final typography = Ux4gTheme.typography(context);
+    final materialTheme = Theme.of(context);
+    final ux4gColors = materialTheme.extension<Ux4gColors>();
+    final ux4gTypography = materialTheme.extension<Ux4gTypography>();
+    
     final isSelected = value == groupValue;
 
     final descriptionColor = switch (descriptionVariant) {
-      Ux4gRadioButtonDescriptionVariant.helper => colors.onSurface.withValues(alpha: 0.7),
-      Ux4gRadioButtonDescriptionVariant.error => colors.error,
-      Ux4gRadioButtonDescriptionVariant.warning => colors.warning,
-      Ux4gRadioButtonDescriptionVariant.success => colors.success,
+      Ux4gRadioButtonDescriptionVariant.helper => (ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface).withValues(alpha: 0.7),
+      Ux4gRadioButtonDescriptionVariant.error => ux4gColors?.error ?? materialTheme.colorScheme.error,
+      Ux4gRadioButtonDescriptionVariant.warning => ux4gColors?.warning ?? Ux4gPalette.secondary,
+      Ux4gRadioButtonDescriptionVariant.success => ux4gColors?.success ?? Ux4gPalette.green,
     };
 
     final descriptionIcon = switch (descriptionVariant) {
@@ -62,22 +64,22 @@ class Ux4gRadioButton<T> extends StatelessWidget {
     };
 
     final labelTextStyle = switch (size) {
-      Ux4gRadioButtonSize.small => typography.lM_default,
-      Ux4gRadioButtonSize.medium => typography.lL_default,
-      Ux4gRadioButtonSize.large => typography.lXL_default,
+      Ux4gRadioButtonSize.small => ux4gTypography?.lM_default ?? materialTheme.textTheme.labelMedium ?? const TextStyle(),
+      Ux4gRadioButtonSize.medium => ux4gTypography?.lL_default ?? materialTheme.textTheme.labelLarge ?? const TextStyle(),
+      Ux4gRadioButtonSize.large => ux4gTypography?.lXL_default ?? materialTheme.textTheme.labelLarge?.copyWith(fontSize: 16) ?? const TextStyle(),
     };
 
     final descriptionTextStyle = switch (size) {
-      Ux4gRadioButtonSize.small => typography.lS_default,
-      Ux4gRadioButtonSize.medium => typography.lM_default,
-      Ux4gRadioButtonSize.large => typography.lL_default,
+      Ux4gRadioButtonSize.small => ux4gTypography?.lS_default ?? materialTheme.textTheme.labelSmall ?? const TextStyle(),
+      Ux4gRadioButtonSize.medium => ux4gTypography?.lM_default ?? materialTheme.textTheme.labelMedium ?? const TextStyle(),
+      Ux4gRadioButtonSize.large => ux4gTypography?.lL_default ?? materialTheme.textTheme.labelLarge ?? const TextStyle(),
     };
 
     final radioColor = !enabled
-        ? colors.onSurface.withValues(alpha: 0.38)
+        ? (ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface).withValues(alpha: 0.38)
         : isSelected
-            ? colors.primary
-            : colors.onSurface.withValues(alpha: 0.6);
+            ? (ux4gColors?.primary ?? materialTheme.colorScheme.primary)
+            : (ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface).withValues(alpha: 0.6);
 
     return InkWell(
       onTap: enabled ? () => onChanged(value) : null,
@@ -121,19 +123,19 @@ class Ux4gRadioButton<T> extends StatelessWidget {
                           Text(
                             label!,
                             style: labelTextStyle.copyWith(
-                              color: enabled ? colors.onSurface : colors.onSurface.withValues(alpha: 0.38),
+                              color: enabled ? (ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface) : (ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface).withValues(alpha: 0.38),
                             ),
                           ),
                           if (isRequired) ...[
                             const SizedBox(width: 4),
-                            Text('*', style: labelTextStyle.copyWith(color: colors.error)),
+                            Text('*', style: labelTextStyle.copyWith(color: ux4gColors?.error ?? materialTheme.colorScheme.error)),
                           ],
                           if (trailingIcon != null) ...[
                             const SizedBox(width: 4),
                             Icon(
                               trailingIcon,
                               size: size.size,
-                              color: enabled ? colors.onSurface : colors.onSurface.withValues(alpha: 0.38),
+                              color: enabled ? (ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface) : (ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface).withValues(alpha: 0.38),
                             ),
                           ],
                         ],
@@ -163,5 +165,3 @@ class Ux4gRadioButton<T> extends StatelessWidget {
     );
   }
 }
-
-

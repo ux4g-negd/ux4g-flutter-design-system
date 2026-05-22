@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../foundation/dimensions.dart';
-import '../theme/theme.dart';
+import '../foundation/colors.dart';
+import '../foundation/typography.dart';
 
 enum Ux4gTooltipPlacement { top, bottom, left, right }
 
@@ -24,8 +25,13 @@ class Ux4gTooltip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colors = Ux4gTheme.colors(context);
-    final typography = Ux4gTheme.typography(context);
+    final materialTheme = Theme.of(context);
+    final ux4gColors = materialTheme.extension<Ux4gColors>();
+    final ux4gTypography = materialTheme.extension<Ux4gTypography>();
+
+    final onSurface = ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
+    final hXXSStrong = ux4gTypography?.hXXS_strong ?? materialTheme.textTheme.titleSmall?.copyWith(fontWeight: FontWeight.bold) ?? const TextStyle();
+    final lSDefault = ux4gTypography?.lS_default ?? materialTheme.textTheme.labelSmall ?? const TextStyle();
 
     return Tooltip(
       message: text,
@@ -33,13 +39,13 @@ class Ux4gTooltip extends StatelessWidget {
           ? TextSpan(
               children: [
                 if (icon != null) WidgetSpan(child: Icon(icon, size: 14, color: Colors.white), alignment: PlaceholderAlignment.middle),
-                if (title != null) TextSpan(text: " $title\n", style: typography.hXXS_strong.copyWith(color: Colors.white)),
-                TextSpan(text: text, style: typography.lS_default.copyWith(color: Colors.white)),
+                if (title != null) TextSpan(text: " $title\n", style: hXXSStrong.copyWith(color: Colors.white)),
+                TextSpan(text: text, style: lSDefault.copyWith(color: Colors.white)),
               ],
             )
           : null,
       decoration: ShapeDecoration(
-        color: colors.onSurface,
+        color: onSurface,
         shape: _TooltipShape(placement: placement),
       ),
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),

@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import '../foundation/colors.dart';
 import '../foundation/dimensions.dart';
 import '../foundation/typography.dart';
-import '../theme/theme.dart';
 import 'tag.dart';
 
 // ─── Step State ─────────────────────────────────────────────────────────────
@@ -200,12 +199,16 @@ class Ux4gJourneyTimeline extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colors = Ux4gTheme.colors(context);
-    final typography = Ux4gTheme.typography(context);
+    final materialTheme = Theme.of(context);
+    final ux4gColors = materialTheme.extension<Ux4gColors>();
+    final ux4gTypography = materialTheme.extension<Ux4gTypography>();
 
-    final resolvedActiveColor = activeColor ?? colors.primary;
+    final primary = ux4gColors?.primary ?? materialTheme.colorScheme.primary;
+    final onSurface = ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
+
+    final resolvedActiveColor = activeColor ?? primary;
     final resolvedInactiveColor =
-        inactiveColor ?? colors.onSurface.withValues(alpha: 0.25);
+        inactiveColor ?? onSurface.withValues(alpha: 0.25);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -215,8 +218,9 @@ class Ux4gJourneyTimeline extends StatelessWidget {
         if (header != null) ...[
           _JourneyHeaderWidget(
             header: header!,
-            typography: typography,
-            colors: colors,
+            ux4gTypography: ux4gTypography,
+            ux4gColors: ux4gColors,
+            materialTheme: materialTheme,
           ),
           const SizedBox(height: Ux4gSpace.space16),
         ],
@@ -226,15 +230,17 @@ class Ux4gJourneyTimeline extends StatelessWidget {
           _buildVertical(
             resolvedActiveColor,
             resolvedInactiveColor,
-            typography,
-            colors,
+            ux4gTypography,
+            ux4gColors,
+            materialTheme,
           )
         else
           _buildHorizontal(
             resolvedActiveColor,
             resolvedInactiveColor,
-            typography,
-            colors,
+            ux4gTypography,
+            ux4gColors,
+            materialTheme,
           ),
       ],
     );
@@ -243,8 +249,9 @@ class Ux4gJourneyTimeline extends StatelessWidget {
   Widget _buildVertical(
     Color activeColor,
     Color inactiveColor,
-    Ux4gTypography typography,
-    Ux4gColors colors,
+    Ux4gTypography? ux4gTypography,
+    Ux4gColors? ux4gColors,
+    ThemeData materialTheme,
   ) {
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -266,8 +273,9 @@ class Ux4gJourneyTimeline extends StatelessWidget {
             cardPadding: cardPadding,
             cardColor: cardColor,
             cardBorderColor: cardBorderColor,
-            typography: typography,
-            colors: colors,
+            ux4gTypography: ux4gTypography,
+            ux4gColors: ux4gColors,
+            materialTheme: materialTheme,
           ),
       ],
     );
@@ -276,8 +284,9 @@ class Ux4gJourneyTimeline extends StatelessWidget {
   Widget _buildHorizontal(
     Color activeColor,
     Color inactiveColor,
-    Ux4gTypography typography,
-    Ux4gColors colors,
+    Ux4gTypography? ux4gTypography,
+    Ux4gColors? ux4gColors,
+    ThemeData materialTheme,
   ) {
     final activeIndex =
         currentStep ??
@@ -323,8 +332,9 @@ class Ux4gJourneyTimeline extends StatelessWidget {
             padding: cardPadding,
             cardColor: cardColor,
             cardBorderColor: cardBorderColor,
-            typography: typography,
-            colors: colors,
+            ux4gTypography: ux4gTypography,
+            ux4gColors: ux4gColors,
+            materialTheme: materialTheme,
           ),
         ],
       ],
@@ -336,17 +346,21 @@ class Ux4gJourneyTimeline extends StatelessWidget {
 
 class _JourneyHeaderWidget extends StatelessWidget {
   final Ux4gJourneyHeader header;
-  final Ux4gTypography typography;
-  final Ux4gColors colors;
+  final Ux4gTypography? ux4gTypography;
+  final Ux4gColors? ux4gColors;
+  final ThemeData materialTheme;
 
   const _JourneyHeaderWidget({
     required this.header,
-    required this.typography,
-    required this.colors,
+    required this.ux4gTypography,
+    required this.ux4gColors,
+    required this.materialTheme,
   });
 
   @override
   Widget build(BuildContext context) {
+    final onSurface = ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
+
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -359,8 +373,8 @@ class _JourneyHeaderWidget extends StatelessWidget {
                 children: [
                   Text(
                     header.title,
-                    style: typography.tS_strong.copyWith(
-                      color: colors.onSurface,
+                    style: (ux4gTypography?.tS_strong ?? materialTheme.textTheme.titleSmall?.copyWith(fontWeight: FontWeight.bold))?.copyWith(
+                      color: onSurface,
                     ),
                   ),
                   if (header.icon != null) ...[
@@ -370,7 +384,7 @@ class _JourneyHeaderWidget extends StatelessWidget {
                       child: Icon(
                         header.icon,
                         size: 20,
-                        color: colors.onSurface.withValues(alpha: 0.6),
+                        color: onSurface.withValues(alpha: 0.6),
                       ),
                     ),
                   ],
@@ -380,8 +394,8 @@ class _JourneyHeaderWidget extends StatelessWidget {
                 const SizedBox(height: Ux4gSpace.space4),
                 Text(
                   header.description!,
-                  style: typography.bS_default.copyWith(
-                    color: colors.onSurface.withValues(alpha: 0.6),
+                  style: (ux4gTypography?.bS_default ?? materialTheme.textTheme.bodySmall)?.copyWith(
+                    color: onSurface.withValues(alpha: 0.6),
                   ),
                 ),
               ],
@@ -411,8 +425,9 @@ class _JourneyStepRow extends StatelessWidget {
   final EdgeInsetsGeometry? cardPadding;
   final Color? cardColor;
   final Color? cardBorderColor;
-  final Ux4gTypography typography;
-  final Ux4gColors colors;
+  final Ux4gTypography? ux4gTypography;
+  final Ux4gColors? ux4gColors;
+  final ThemeData materialTheme;
 
   const _JourneyStepRow({
     required this.step,
@@ -430,8 +445,9 @@ class _JourneyStepRow extends StatelessWidget {
     required this.cardPadding,
     required this.cardColor,
     required this.cardBorderColor,
-    required this.typography,
-    required this.colors,
+    required this.ux4gTypography,
+    required this.ux4gColors,
+    required this.materialTheme,
   });
 
   @override
@@ -485,8 +501,9 @@ class _JourneyStepRow extends StatelessWidget {
                 padding: cardPadding,
                 cardColor: cardColor,
                 cardBorderColor: cardBorderColor,
-                typography: typography,
-                colors: colors,
+                ux4gTypography: ux4gTypography,
+                ux4gColors: ux4gColors,
+                materialTheme: materialTheme,
               ),
             ),
           ),
@@ -528,14 +545,17 @@ class _StepIndicator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colors = Ux4gTheme.colors(context);
+    final materialTheme = Theme.of(context);
+    final ux4gColors = materialTheme.extension<Ux4gColors>();
+    final surface = ux4gColors?.surface ?? materialTheme.colorScheme.surface;
+
     switch (state) {
       case Ux4gJourneyStepState.completed:
         return Container(
           width: size,
           height: size,
           decoration: BoxDecoration(color: activeColor, shape: BoxShape.circle),
-          child: Icon(Icons.check, size: size * 0.6, color: colors.surface),
+          child: Icon(Icons.check, size: size * 0.6, color: surface),
         );
 
       case Ux4gJourneyStepState.current:
@@ -543,7 +563,7 @@ class _StepIndicator extends StatelessWidget {
           width: size,
           height: size,
           decoration: BoxDecoration(
-            color: colors.surface,
+            color: surface,
             shape: BoxShape.circle,
             border: Border.all(color: activeColor, width: 2.5),
           ),
@@ -564,7 +584,7 @@ class _StepIndicator extends StatelessWidget {
           width: size,
           height: size,
           decoration: BoxDecoration(
-            color: colors.surface,
+            color: surface,
             shape: BoxShape.circle,
             border: Border.all(color: inactiveColor, width: 1.5),
           ),
@@ -582,8 +602,9 @@ class _JourneyStepCard extends StatelessWidget {
   final EdgeInsetsGeometry? padding;
   final Color? cardColor;
   final Color? cardBorderColor;
-  final Ux4gTypography typography;
-  final Ux4gColors colors;
+  final Ux4gTypography? ux4gTypography;
+  final Ux4gColors? ux4gColors;
+  final ThemeData materialTheme;
 
   const _JourneyStepCard({
     required this.step,
@@ -592,14 +613,20 @@ class _JourneyStepCard extends StatelessWidget {
     required this.padding,
     required this.cardColor,
     required this.cardBorderColor,
-    required this.typography,
-    required this.colors,
+    required this.ux4gTypography,
+    required this.ux4gColors,
+    required this.materialTheme,
   });
 
   @override
   Widget build(BuildContext context) {
     final isUpcoming = state == Ux4gJourneyStepState.upcoming;
     final textOpacity = isUpcoming ? 0.5 : 1.0;
+
+    final onSurface = ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
+    final surface = ux4gColors?.surface ?? materialTheme.colorScheme.surface;
+    final primary = ux4gColors?.primary ?? materialTheme.colorScheme.primary;
+    final warning = ux4gColors?.warning ?? Colors.orange;
 
     return Container(
       padding:
@@ -609,10 +636,10 @@ class _JourneyStepCard extends StatelessWidget {
             vertical: Ux4gSpace.space12,
           ),
       decoration: BoxDecoration(
-        color: cardColor ?? colors.surface,
+        color: cardColor ?? surface,
         borderRadius: BorderRadius.circular(borderRadius),
         border: Border.all(
-          color: cardBorderColor ?? colors.onSurface.withValues(alpha: 0.1),
+          color: cardBorderColor ?? onSurface.withValues(alpha: 0.1),
         ),
       ),
       child: Column(
@@ -627,8 +654,8 @@ class _JourneyStepCard extends StatelessWidget {
                 if (step.date != null)
                   Text(
                     step.date!,
-                    style: typography.bXS_default.copyWith(
-                      color: colors.onSurface.withValues(
+                    style: (ux4gTypography?.bXS_default ?? materialTheme.textTheme.bodySmall?.copyWith(fontSize: 12))?.copyWith(
+                      color: onSurface.withValues(
                         alpha: isUpcoming ? 0.4 : 0.6,
                       ),
                     ),
@@ -640,13 +667,13 @@ class _JourneyStepCard extends StatelessWidget {
                       vertical: Ux4gSpace.space2,
                     ),
                     decoration: BoxDecoration(
-                      color: colors.onSurface.withValues(alpha: 0.06),
+                      color: onSurface.withValues(alpha: 0.06),
                       borderRadius: BorderRadius.circular(Ux4gRadius.radius4),
                     ),
                     child: Text(
                       step.tag!,
-                      style: typography.bXS_default.copyWith(
-                        color: colors.onSurface.withValues(
+                      style: (ux4gTypography?.bXS_default ?? materialTheme.textTheme.bodySmall?.copyWith(fontSize: 12))?.copyWith(
+                        color: onSurface.withValues(
                           alpha: isUpcoming ? 0.4 : 0.6,
                         ),
                         fontSize: 11,
@@ -661,8 +688,8 @@ class _JourneyStepCard extends StatelessWidget {
             const SizedBox(height: Ux4gSpace.space6),
           Text(
             step.title,
-            style: typography.tS_strong.copyWith(
-              color: colors.onSurface.withValues(alpha: textOpacity),
+            style: (ux4gTypography?.tS_strong ?? materialTheme.textTheme.titleSmall?.copyWith(fontWeight: FontWeight.bold))?.copyWith(
+              color: onSurface.withValues(alpha: textOpacity),
               fontSize: 14,
             ),
           ),
@@ -672,8 +699,8 @@ class _JourneyStepCard extends StatelessWidget {
             const SizedBox(height: Ux4gSpace.space4),
             Text(
               step.helpingText!,
-              style: typography.bXS_default.copyWith(
-                color: colors.onSurface.withValues(alpha: 0.5),
+              style: (ux4gTypography?.bXS_default ?? materialTheme.textTheme.bodySmall?.copyWith(fontSize: 12))?.copyWith(
+                color: onSurface.withValues(alpha: 0.5),
               ),
             ),
           ],
@@ -686,7 +713,7 @@ class _JourneyStepCard extends StatelessWidget {
               size: 18,
               color:
                   step.iconColor ??
-                  colors.primary.withValues(alpha: isUpcoming ? 0.4 : 1.0),
+                  primary.withValues(alpha: isUpcoming ? 0.4 : 1.0),
             ),
           ],
 
@@ -703,7 +730,7 @@ class _JourneyStepCard extends StatelessWidget {
                     width: 8,
                     height: 8,
                     decoration: BoxDecoration(
-                      color: step.status!.dotColor ?? colors.warning,
+                      color: step.status!.dotColor ?? warning,
                       shape: BoxShape.circle,
                     ),
                   ),
@@ -713,7 +740,7 @@ class _JourneyStepCard extends StatelessWidget {
                     text: step.status!.badgeText!,
                     bold: true,
                     textColor:
-                        step.status!.badgeTextColor ?? colors.warning,
+                        step.status!.badgeTextColor ?? warning,
                   ),
               ],
             ),

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
+import '../foundation/colors.dart';
+import '../foundation/typography.dart';
 import '../foundation/dimensions.dart';
-import '../theme/theme.dart';
 import 'avatar.dart';
 import 'buttons.dart';
 import 'divider.dart';
@@ -120,7 +121,9 @@ class Ux4gModal extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colors = Ux4gTheme.colors(context);
+    final materialTheme = Theme.of(context);
+    final ux4gColors = materialTheme.extension<Ux4gColors>();
+    final surface = ux4gColors?.surface ?? materialTheme.colorScheme.surface;
 
     return Dialog(
       insetPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
@@ -165,7 +168,7 @@ class Ux4gModal extends StatelessWidget {
         onLeadingIconPressed: onLeadingIconPressed,
         alignment: alignment,
         showCloseButton: showCloseButton,
-        backgroundColor: backgroundColor ?? colors.surface,
+        backgroundColor: backgroundColor ?? surface,
         cornerRadius: cornerRadius,
       ),
     );
@@ -262,7 +265,15 @@ class Ux4gModalContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colors = Ux4gTheme.colors(context);
+    final materialTheme = Theme.of(context);
+    final ux4gColors = materialTheme.extension<Ux4gColors>();
+    final ux4gTypography = materialTheme.extension<Ux4gTypography>();
+
+    final primary = ux4gColors?.primary ?? materialTheme.colorScheme.primary;
+    final onSurface = ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
+    final surface = ux4gColors?.surface ?? materialTheme.colorScheme.surface;
+    final error = ux4gColors?.error ?? materialTheme.colorScheme.error;
+
     final isCentered = alignment == Ux4gModalAlignment.centered;
     final textAlign = isCentered ? TextAlign.center : TextAlign.start;
     final horizAlign = isCentered
@@ -271,7 +282,7 @@ class Ux4gModalContent extends StatelessWidget {
     final hasImage =
         headerImageStyle != Ux4gModalHeaderImage.none &&
         (headerImageContent != null || headerImageUrl != null);
-    final primaryColor = isDestructive ? colors.error : colors.primary;
+    final primaryColor = isDestructive ? error : primary;
 
     return ConstrainedBox(
       constraints: const BoxConstraints(maxWidth: 560),
@@ -300,6 +311,9 @@ class Ux4gModalContent extends StatelessWidget {
                       hasImage: hasImage,
                       textAlign: textAlign,
                       horizAlign: horizAlign,
+                      ux4gColors: ux4gColors,
+                      ux4gTypography: ux4gTypography,
+                      materialTheme: materialTheme,
                     ),
                   if (showSubtitle || showBody || bodyContent != null)
                     Padding(
@@ -310,9 +324,7 @@ class Ux4gModalContent extends StatelessWidget {
                           if (showSubtitle)
                             Text(
                               subtitleText,
-                              style: Ux4gTheme.typography(
-                                context,
-                              ).tS_strong.copyWith(color: colors.onSurface),
+                              style: (ux4gTypography?.tS_strong ?? materialTheme.textTheme.titleSmall?.copyWith(fontWeight: FontWeight.bold))?.copyWith(color: onSurface),
                               textAlign: textAlign,
                             ),
                           if (showBody) ...[
@@ -322,9 +334,8 @@ class Ux4gModalContent extends StatelessWidget {
                             else
                               Text(
                                 bodyText,
-                                style: Ux4gTheme.typography(context).bM_default
-                                    .copyWith(
-                                      color: colors.onSurface.withValues(
+                                style: (ux4gTypography?.bM_default ?? materialTheme.textTheme.bodyMedium)?.copyWith(
+                                      color: onSurface.withValues(
                                         alpha: 0.6,
                                       ),
                                     ),
@@ -339,7 +350,7 @@ class Ux4gModalContent extends StatelessWidget {
                       children: [
                         if (showDividers)
                           Ux4gDivider(
-                            color: colors.onSurface.withValues(alpha: 0.2),
+                            color: onSurface.withValues(alpha: 0.2),
                           ),
                         _Ux4gModalFooter(
                           footerButtons: footerButtons,
@@ -352,6 +363,8 @@ class Ux4gModalContent extends StatelessWidget {
                           onPrimaryClick: onPrimaryClick ?? onDismiss,
                           onSecondaryClick: onSecondaryClick ?? onDismiss,
                           onLeadingIconClick: onLeadingIconPressed ?? () {},
+                          ux4gColors: ux4gColors,
+                          materialTheme: materialTheme,
                         ),
                       ],
                     ),
@@ -368,7 +381,7 @@ class Ux4gModalContent extends StatelessWidget {
                         width: 32,
                         height: 32,
                         decoration: BoxDecoration(
-                          color: colors.onSurface.withValues(alpha: 0.65),
+                          color: onSurface.withValues(alpha: 0.65),
                           shape: BoxShape.circle,
                         ),
                         child: IconButton(
@@ -377,7 +390,7 @@ class Ux4gModalContent extends StatelessWidget {
                           icon: Icon(
                             Icons.close,
                             size: 16,
-                            color: colors.surface,
+                            color: surface,
                           ),
                         ),
                       )
@@ -391,7 +404,7 @@ class Ux4gModalContent extends StatelessWidget {
                         icon: Icon(
                           Icons.close,
                           size: 20,
-                          color: colors.onSurface,
+                          color: onSurface,
                         ),
                       ),
               ),
@@ -433,9 +446,11 @@ class Ux4gModalContent extends StatelessWidget {
     required bool hasImage,
     required TextAlign textAlign,
     required CrossAxisAlignment horizAlign,
+    required Ux4gColors? ux4gColors,
+    required Ux4gTypography? ux4gTypography,
+    required ThemeData materialTheme,
   }) {
-    final colors = Ux4gTheme.colors(context);
-    final typography = Ux4gTheme.typography(context);
+    final onSurface = ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
     final isCentered = alignment == Ux4gModalAlignment.centered;
 
     return Column(
@@ -462,7 +477,7 @@ class Ux4gModalContent extends StatelessWidget {
                     Icon(
                       leadingIcon,
                       size: 24,
-                      color: leadingIconTint ?? colors.onSurface,
+                      color: leadingIconTint ?? onSurface,
                     ),
                     const SizedBox(width: Ux4gSpace.space8),
                   ],
@@ -480,8 +495,8 @@ class Ux4gModalContent extends StatelessWidget {
                   Flexible(
                     child: Text(
                       headerTitle,
-                      style: typography.tS_strong.copyWith(
-                        color: colors.onSurface,
+                      style: (ux4gTypography?.tS_strong ?? materialTheme.textTheme.titleSmall?.copyWith(fontWeight: FontWeight.bold))?.copyWith(
+                        color: onSurface,
                       ),
                       textAlign: textAlign,
                     ),
@@ -492,8 +507,8 @@ class Ux4gModalContent extends StatelessWidget {
                 const SizedBox(height: Ux4gSpace.space4),
                 Text(
                   descriptionText,
-                  style: typography.bS_default.copyWith(
-                    color: colors.onSurface.withValues(alpha: 0.5),
+                  style: (ux4gTypography?.bS_default ?? materialTheme.textTheme.bodySmall)?.copyWith(
+                    color: onSurface.withValues(alpha: 0.5),
                   ),
                   textAlign: textAlign,
                 ),
@@ -502,7 +517,7 @@ class Ux4gModalContent extends StatelessWidget {
           ),
         ),
         if (showDividers)
-          Ux4gDivider(color: colors.onSurface.withValues(alpha: 0.2)),
+          Ux4gDivider(color: onSurface.withValues(alpha: 0.2)),
       ],
     );
   }
@@ -565,6 +580,8 @@ class _Ux4gModalFooter extends StatelessWidget {
   final VoidCallback onPrimaryClick;
   final VoidCallback onSecondaryClick;
   final VoidCallback onLeadingIconClick;
+  final Ux4gColors? ux4gColors;
+  final ThemeData materialTheme;
 
   const _Ux4gModalFooter({
     required this.footerButtons,
@@ -577,11 +594,16 @@ class _Ux4gModalFooter extends StatelessWidget {
     required this.onPrimaryClick,
     required this.onSecondaryClick,
     required this.onLeadingIconClick,
+    required this.ux4gColors,
+    required this.materialTheme,
   });
 
   @override
   Widget build(BuildContext context) {
-    final colors = Ux4gTheme.colors(context);
+    final primary = ux4gColors?.primary ?? materialTheme.colorScheme.primary;
+    final onPrimary = ux4gColors?.onPrimary ?? materialTheme.colorScheme.onPrimary;
+    final onError = ux4gColors?.onError ?? materialTheme.colorScheme.onError;
+
     final hasLeadingIcon =
         footerButtons == Ux4gModalFooterButtons.oneButtonWithIcon ||
         footerButtons == Ux4gModalFooterButtons.twoButtonsWithIcon;
@@ -610,12 +632,12 @@ class _Ux4gModalFooter extends StatelessWidget {
               width: 40,
               height: 40,
               decoration: BoxDecoration(
-                color: colors.primary.withValues(alpha: 0.08),
+                color: primary.withValues(alpha: 0.08),
                 shape: BoxShape.circle,
               ),
               child: IconButton(
                 onPressed: onLeadingIconClick,
-                icon: Icon(leadingActionIcon, size: 20, color: colors.primary),
+                icon: Icon(leadingActionIcon, size: 20, color: primary),
               ),
             ),
             if (footerAlign != Ux4gModalFooterAlign.split)
@@ -656,8 +678,8 @@ class _Ux4gModalFooter extends StatelessWidget {
                   width: double.infinity,
                   backgroundColor: primaryColor,
                   contentColor: isDestructive
-                      ? colors.onError
-                      : colors.onPrimary,
+                      ? onError
+                      : onPrimary,
                   borderRadius: Ux4gRadius.radius8,
                   padding: const EdgeInsets.symmetric(
                     horizontal: Ux4gSpace.space16,
@@ -671,7 +693,7 @@ class _Ux4gModalFooter extends StatelessWidget {
             Ux4gButton(
               onPressed: onPrimaryClick,
               backgroundColor: primaryColor,
-              contentColor: isDestructive ? colors.onError : colors.onPrimary,
+              contentColor: isDestructive ? onError : onPrimary,
               borderRadius: Ux4gRadius.radius8,
               padding: const EdgeInsets.symmetric(
                 horizontal: Ux4gSpace.space16,

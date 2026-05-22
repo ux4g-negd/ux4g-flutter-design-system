@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../foundation/colors.dart';
 import '../foundation/typography.dart';
-import '../theme/theme.dart';
 import 'buttons.dart';
 
 /// A custom Time Picker component supporting AM/PM 12-hour format.
@@ -72,8 +71,14 @@ class _Ux4gTimePickerState extends State<Ux4gTimePicker> {
 
   @override
   Widget build(BuildContext context) {
-    final colors = Ux4gTheme.colors(context);
-    final typography = Ux4gTheme.typography(context);
+    final materialTheme = Theme.of(context);
+    final ux4gColors = materialTheme.extension<Ux4gColors>();
+    final ux4gTypography = materialTheme.extension<Ux4gTypography>();
+
+    final primary = ux4gColors?.primary ?? materialTheme.colorScheme.primary;
+    final onSurface = ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
+    final surface = ux4gColors?.surface ?? materialTheme.colorScheme.surface;
+
     final isSelected = _selectedTime != null;
 
     return MouseRegion(
@@ -83,10 +88,10 @@ class _Ux4gTimePickerState extends State<Ux4gTimePicker> {
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
           decoration: BoxDecoration(
-            color: colors.surface,
+            color: surface,
             borderRadius: BorderRadius.circular(8),
             border: Border.all(
-              color: isSelected ? colors.primary : colors.onSurface.withValues(alpha: 0.12),
+              color: isSelected ? primary : onSurface.withValues(alpha: 0.12),
             ),
           ),
           child: Row(
@@ -94,15 +99,15 @@ class _Ux4gTimePickerState extends State<Ux4gTimePicker> {
             children: [
               Text(
                 _getFormattedValue(),
-                style: typography.bM_default.copyWith(
-                  color: isSelected ? colors.onSurface : colors.onSurface.withValues(alpha: 0.38),
+                style: (ux4gTypography?.bM_default ?? materialTheme.textTheme.bodyMedium)?.copyWith(
+                  color: isSelected ? onSurface : onSurface.withValues(alpha: 0.38),
                 ),
               ),
               const SizedBox(width: 12),
               Icon(
                 Icons.access_time,
                 size: 20,
-                color: isSelected ? colors.primary : colors.onSurface.withValues(alpha: 0.38),
+                color: isSelected ? primary : onSurface.withValues(alpha: 0.38),
               ),
             ],
           ),
@@ -191,13 +196,18 @@ class _Ux4gTimePickerDialogState extends State<_Ux4gTimePickerDialog> {
 
   @override
   Widget build(BuildContext context) {
-    final colors = Ux4gTheme.colors(context);
-    final typography = Ux4gTheme.typography(context);
+    final materialTheme = Theme.of(context);
+    final ux4gColors = materialTheme.extension<Ux4gColors>();
+    final ux4gTypography = materialTheme.extension<Ux4gTypography>();
+
+    final primary = ux4gColors?.primary ?? materialTheme.colorScheme.primary;
+    final onSurface = ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
+    final surface = ux4gColors?.surface ?? materialTheme.colorScheme.surface;
     
     return Container(
       width: 320,
       decoration: BoxDecoration(
-        color: colors.surface,
+        color: surface,
         borderRadius: BorderRadius.circular(12),
         boxShadow: [
           BoxShadow(
@@ -217,12 +227,12 @@ class _Ux4gTimePickerDialogState extends State<_Ux4gTimePickerDialog> {
               children: [
                 Expanded(
                   child: Center(
-                    child: Text('HH', style: typography.bM_strong.copyWith(color: colors.onSurface.withValues(alpha: 0.38))),
+                    child: Text('HH', style: (ux4gTypography?.bM_strong ?? materialTheme.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold))?.copyWith(color: onSurface.withValues(alpha: 0.38))),
                   ),
                 ),
                 Expanded(
                   child: Center(
-                    child: Text('MM', style: typography.bM_strong.copyWith(color: colors.onSurface.withValues(alpha: 0.38))),
+                    child: Text('MM', style: (ux4gTypography?.bM_strong ?? materialTheme.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold))?.copyWith(color: onSurface.withValues(alpha: 0.38))),
                   ),
                 ),
                 Expanded(
@@ -231,7 +241,7 @@ class _Ux4gTimePickerDialogState extends State<_Ux4gTimePickerDialog> {
               ],
             ),
           ),
-          Divider(height: 1, color: colors.onSurface.withValues(alpha: 0.12)),
+          Divider(height: 1, color: onSurface.withValues(alpha: 0.12)),
           
           // Body
           SizedBox(
@@ -260,8 +270,9 @@ class _Ux4gTimePickerDialogState extends State<_Ux4gTimePickerDialog> {
                             curve: Curves.easeInOut,
                           );
                         },
-                        colors: colors,
-                        typography: typography,
+                        colors: ux4gColors,
+                        typography: ux4gTypography,
+                        materialTheme: materialTheme,
                       );
                     },
                     onSelectedItemChanged: (index) {
@@ -273,7 +284,7 @@ class _Ux4gTimePickerDialogState extends State<_Ux4gTimePickerDialog> {
                   ),
                 ),
                 
-                VerticalDivider(width: 1, thickness: 1, color: colors.onSurface.withValues(alpha: 0.12)),
+                VerticalDivider(width: 1, thickness: 1, color: onSurface.withValues(alpha: 0.12)),
                 
                 // Minutes Column
                 Expanded(
@@ -297,8 +308,9 @@ class _Ux4gTimePickerDialogState extends State<_Ux4gTimePickerDialog> {
                             curve: Curves.easeInOut,
                           );
                         },
-                        colors: colors,
-                        typography: typography,
+                        colors: ux4gColors,
+                        typography: ux4gTypography,
+                        materialTheme: materialTheme,
                       );
                     },
                     onSelectedItemChanged: (index) {
@@ -310,7 +322,7 @@ class _Ux4gTimePickerDialogState extends State<_Ux4gTimePickerDialog> {
                   ),
                 ),
                 
-                VerticalDivider(width: 1, thickness: 1, color: colors.onSurface.withValues(alpha: 0.12)),
+                VerticalDivider(width: 1, thickness: 1, color: onSurface.withValues(alpha: 0.12)),
                 
                 // AM/PM Column
                 Expanded(
@@ -327,8 +339,9 @@ class _Ux4gTimePickerDialogState extends State<_Ux4gTimePickerDialog> {
                             _hasInteracted = true;
                           });
                         },
-                        colors: colors,
-                        typography: typography,
+                        colors: ux4gColors,
+                        typography: ux4gTypography,
+                        materialTheme: materialTheme,
                       ),
                       const SizedBox(height: 16),
                       _buildAmPmButton(
@@ -341,8 +354,9 @@ class _Ux4gTimePickerDialogState extends State<_Ux4gTimePickerDialog> {
                             _hasInteracted = true;
                           });
                         },
-                        colors: colors,
-                        typography: typography,
+                        colors: ux4gColors,
+                        typography: ux4gTypography,
+                        materialTheme: materialTheme,
                       ),
                     ],
                   ),
@@ -351,7 +365,7 @@ class _Ux4gTimePickerDialogState extends State<_Ux4gTimePickerDialog> {
             ),
           ),
           
-          Divider(height: 1, color: colors.onSurface.withValues(alpha: 0.12)),
+          Divider(height: 1, color: onSurface.withValues(alpha: 0.12)),
           
           // Footer
           Padding(
@@ -409,20 +423,24 @@ class _Ux4gTimePickerDialogState extends State<_Ux4gTimePickerDialog> {
     required bool isSelected,
     required bool showHighlight,
     required VoidCallback onTap,
-    required Ux4gColors colors,
-    required Ux4gTypography typography,
+    required Ux4gColors? colors,
+    required Ux4gTypography? typography,
+    required ThemeData materialTheme,
   }) {
+    final primary = colors?.primary ?? materialTheme.colorScheme.primary;
+    final onSurface = colors?.onSurface ?? materialTheme.colorScheme.onSurface;
+
     return GestureDetector(
       onTap: onTap,
       behavior: HitTestBehavior.opaque,
       child: Container(
         width: double.infinity,
         alignment: Alignment.center,
-        color: isSelected && showHighlight ? colors.primary.withValues(alpha: 0.08) : Colors.transparent,
+        color: isSelected && showHighlight ? primary.withValues(alpha: 0.08) : Colors.transparent,
         child: Text(
           text,
-          style: typography.bM_default.copyWith(
-            color: isSelected && showHighlight ? colors.primary : colors.onSurface,
+          style: (typography?.bM_default ?? materialTheme.textTheme.bodyMedium)?.copyWith(
+            color: isSelected && showHighlight ? primary : onSurface,
           ),
         ),
       ),
@@ -433,9 +451,13 @@ class _Ux4gTimePickerDialogState extends State<_Ux4gTimePickerDialog> {
     required String text,
     required bool isSelected,
     required VoidCallback onTap,
-    required Ux4gColors colors,
-    required Ux4gTypography typography,
+    required Ux4gColors? colors,
+    required Ux4gTypography? typography,
+    required ThemeData materialTheme,
   }) {
+    final primary = colors?.primary ?? materialTheme.colorScheme.primary;
+    final onSurface = colors?.onSurface ?? materialTheme.colorScheme.onSurface;
+
     return GestureDetector(
       onTap: onTap,
       child: Container(
@@ -443,13 +465,13 @@ class _Ux4gTimePickerDialogState extends State<_Ux4gTimePickerDialog> {
         height: 36,
         alignment: Alignment.center,
         decoration: BoxDecoration(
-          color: isSelected ? colors.primary.withValues(alpha: 0.15) : Colors.transparent,
+          color: isSelected ? primary.withValues(alpha: 0.15) : Colors.transparent,
           borderRadius: BorderRadius.circular(6),
         ),
         child: Text(
           text,
-          style: typography.bM_default.copyWith(
-            color: isSelected ? colors.primary : colors.onSurface,
+          style: (typography?.bM_default ?? materialTheme.textTheme.bodyMedium)?.copyWith(
+            color: isSelected ? primary : onSurface,
           ),
         ),
       ),

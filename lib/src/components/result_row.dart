@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import '../foundation/colors.dart';
 import '../foundation/dimensions.dart';
-import '../theme/theme.dart';
+import '../foundation/typography.dart';
 import 'buttons.dart';
 import 'tag.dart';
 
@@ -79,8 +80,9 @@ class _Ux4gResultRowState extends State<Ux4gResultRow>
 
   @override
   Widget build(BuildContext context) {
-    final colors = Ux4gTheme.colors(context);
-    final typography = Ux4gTheme.typography(context);
+    final materialTheme = Theme.of(context);
+    final ux4gColors = materialTheme.extension<Ux4gColors>();
+    final ux4gTypography = materialTheme.extension<Ux4gTypography>();
 
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -99,8 +101,8 @@ class _Ux4gResultRowState extends State<Ux4gResultRow>
                     children: [
                       Text(
                         widget.title,
-                        style: typography.hM_strong.copyWith(
-                          color: colors.onBackground,
+                        style: (ux4gTypography?.hM_strong ?? materialTheme.textTheme.headlineMedium?.copyWith(fontWeight: FontWeight.bold) ?? const TextStyle()).copyWith(
+                          color: ux4gColors?.onBackground ?? materialTheme.colorScheme.onSurface,
                         ),
                       ),
                       if (widget.statusTag != null) ...[
@@ -120,7 +122,7 @@ class _Ux4gResultRowState extends State<Ux4gResultRow>
                           size: Ux4gTagSize.m,
                           backgroundColor: Colors.transparent,
                           borderColor: Colors.transparent,
-                          dividerColor: colors.onSurface.withValues(
+                          dividerColor: (ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface).withValues(
                             alpha: 0.15,
                           ),
                         ),
@@ -152,7 +154,7 @@ class _Ux4gResultRowState extends State<Ux4gResultRow>
                       duration: const Duration(milliseconds: 200),
                       child: Icon(
                         Icons.keyboard_arrow_down,
-                        color: colors.onSurface.withValues(alpha: 0.8),
+                        color: (ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface).withValues(alpha: 0.8),
                       ),
                     ),
                   ],
@@ -194,8 +196,8 @@ class _Ux4gResultRowState extends State<Ux4gResultRow>
                                 children: [
                                   Text(
                                     detail.label,
-                                    style: typography.bS_default.copyWith(
-                                      color: colors.onSurface.withValues(
+                                    style: (ux4gTypography?.bS_default ?? materialTheme.textTheme.bodySmall ?? const TextStyle()).copyWith(
+                                      color: (ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface).withValues(
                                         alpha: 0.5,
                                       ),
                                     ),
@@ -210,7 +212,7 @@ class _Ux4gResultRowState extends State<Ux4gResultRow>
                                           size: 16,
                                           color:
                                               detail.valueColor ??
-                                              colors.onBackground,
+                                              (ux4gColors?.onBackground ?? materialTheme.colorScheme.onSurface),
                                         ),
                                         const SizedBox(width: Ux4gSpace.space4),
                                       ],
@@ -219,12 +221,12 @@ class _Ux4gResultRowState extends State<Ux4gResultRow>
                                           detail.value,
                                           style:
                                               (detail.isBold
-                                                      ? typography.bM_strong
-                                                      : typography.bM_default)
+                                                      ? (ux4gTypography?.bM_strong ?? materialTheme.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold) ?? const TextStyle())
+                                                      : (ux4gTypography?.bM_default ?? materialTheme.textTheme.bodyMedium ?? const TextStyle()))
                                                   .copyWith(
                                                     color:
                                                         detail.valueColor ??
-                                                        colors.onBackground,
+                                                        (ux4gColors?.onBackground ?? materialTheme.colorScheme.onSurface),
                                                   ),
                                         ),
                                       ),
@@ -244,7 +246,7 @@ class _Ux4gResultRowState extends State<Ux4gResultRow>
           Divider(
             height: 1,
             thickness: 1,
-            color: colors.onSurface.withValues(alpha: 0.1),
+            color: (ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface).withValues(alpha: 0.1),
           ),
       ],
     );

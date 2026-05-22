@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import '../foundation/colors.dart';
 import '../foundation/typography.dart';
-import '../theme/theme.dart';
 import 'buttons.dart';
 import 'text_area.dart';
 
@@ -103,17 +102,21 @@ class _Ux4gFeedbackFormCsatState extends State<Ux4gFeedbackFormCsat> {
 
   @override
   Widget build(BuildContext context) {
-    final colors = Ux4gTheme.colors(context);
-    final typography = Ux4gTheme.typography(context);
+    final uxColors = Theme.of(context).extension<Ux4gColors>();
+    final uxTypography = Theme.of(context).extension<Ux4gTypography>();
+    final materialTheme = Theme.of(context);
+
+    final surfaceColor = uxColors?.surface ?? materialTheme.colorScheme.surface;
+    final onSurfaceColor = uxColors?.onSurface ?? materialTheme.colorScheme.onSurface;
 
     return Container(
       width: double.infinity,
       constraints: const BoxConstraints(maxWidth: 400),
       padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
-        color: colors.surface,
+        color: surfaceColor,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: colors.onSurface.withValues(alpha: 0.1)),
+        border: Border.all(color: onSurfaceColor.withValues(alpha: 0.1)),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withValues(alpha: 0.05),
@@ -122,15 +125,20 @@ class _Ux4gFeedbackFormCsatState extends State<Ux4gFeedbackFormCsat> {
           ),
         ],
       ),
-      child: _isSubmitted ? _buildSuccessView(colors, typography) : _buildFormView(colors, typography),
+      child: _isSubmitted ? _buildSuccessView(uxColors, uxTypography, materialTheme) : _buildFormView(uxColors, uxTypography, materialTheme),
     );
   }
 
-  Widget _buildFormView(Ux4gColors colors, Ux4gTypography typography) {
-    final selBg = widget.selectedScoreBackgroundColor ?? colors.success.withValues(alpha: 0.12);
-    final selIcon = widget.selectedScoreIconColor ?? colors.success;
-    final unselBg = widget.unselectedScoreBackgroundColor ?? colors.background;
-    final unselIcon = widget.unselectedScoreIconColor ?? colors.onSurface.withValues(alpha: 0.6);
+  Widget _buildFormView(Ux4gColors? uxColors, Ux4gTypography? uxTypography, ThemeData materialTheme) {
+    final successColor = uxColors?.success ?? materialTheme.colorScheme.primary;
+    final backgroundColor = uxColors?.background ?? materialTheme.colorScheme.surface;
+    final onSurfaceColor = uxColors?.onSurface ?? materialTheme.colorScheme.onSurface;
+    final onBackground = uxColors?.onBackground ?? materialTheme.colorScheme.onSurface;
+
+    final selBg = widget.selectedScoreBackgroundColor ?? successColor.withValues(alpha: 0.12);
+    final selIcon = widget.selectedScoreIconColor ?? successColor;
+    final unselBg = widget.unselectedScoreBackgroundColor ?? backgroundColor;
+    final unselIcon = widget.unselectedScoreIconColor ?? onSurfaceColor.withValues(alpha: 0.6);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -138,7 +146,7 @@ class _Ux4gFeedbackFormCsatState extends State<Ux4gFeedbackFormCsat> {
       children: [
         Text(
           widget.title,
-          style: widget.titleStyle ?? typography.hM_strong.copyWith(color: colors.onBackground, fontWeight: FontWeight.w700),
+          style: widget.titleStyle ?? (uxTypography?.hM_strong ?? materialTheme.textTheme.headlineMedium)?.copyWith(color: onBackground, fontWeight: FontWeight.w700),
         ),
         const SizedBox(height: 24),
         
@@ -184,14 +192,14 @@ class _Ux4gFeedbackFormCsatState extends State<Ux4gFeedbackFormCsat> {
               padding: const EdgeInsets.only(left: 16),
               child: Text(
                 widget.badLabel,
-                style: typography.bS_default.copyWith(color: colors.onSurface.withValues(alpha: 0.6)),
+                style: (uxTypography?.bS_default ?? materialTheme.textTheme.bodySmall)?.copyWith(color: onSurfaceColor.withValues(alpha: 0.6)),
               ),
             ),
             Padding(
               padding: const EdgeInsets.only(right: 16),
               child: Text(
                 widget.goodLabel,
-                style: typography.bS_default.copyWith(color: colors.onSurface.withValues(alpha: 0.6)),
+                style: (uxTypography?.bS_default ?? materialTheme.textTheme.bodySmall)?.copyWith(color: onSurfaceColor.withValues(alpha: 0.6)),
               ),
             ),
           ],
@@ -228,11 +236,11 @@ class _Ux4gFeedbackFormCsatState extends State<Ux4gFeedbackFormCsat> {
           TextButton(
             onPressed: widget.onSkip,
             style: TextButton.styleFrom(
-              foregroundColor: colors.onBackground,
+              foregroundColor: onBackground,
             ),
             child: Text(
               widget.skipButtonText,
-              style: typography.bM_strong.copyWith(color: colors.onBackground),
+              style: (uxTypography?.bM_strong ?? materialTheme.textTheme.bodyMedium)?.copyWith(color: onBackground),
             ),
           ),
         ],
@@ -240,7 +248,11 @@ class _Ux4gFeedbackFormCsatState extends State<Ux4gFeedbackFormCsat> {
     );
   }
 
-  Widget _buildSuccessView(Ux4gColors colors, Ux4gTypography typography) {
+  Widget _buildSuccessView(Ux4gColors? uxColors, Ux4gTypography? uxTypography, ThemeData materialTheme) {
+    final successColor = uxColors?.success ?? materialTheme.colorScheme.primary;
+    final onBackground = uxColors?.onBackground ?? materialTheme.colorScheme.onSurface;
+    final onSurfaceColor = uxColors?.onSurface ?? materialTheme.colorScheme.onSurface;
+
     return Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -248,7 +260,7 @@ class _Ux4gFeedbackFormCsatState extends State<Ux4gFeedbackFormCsat> {
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
           decoration: BoxDecoration(
-            color: widget.successBackgroundColor ?? colors.success.withValues(alpha: 0.12),
+            color: widget.successBackgroundColor ?? successColor.withValues(alpha: 0.12),
             borderRadius: BorderRadius.circular(8),
           ),
           child: Column(
@@ -256,20 +268,20 @@ class _Ux4gFeedbackFormCsatState extends State<Ux4gFeedbackFormCsat> {
             children: [
               Icon(
                 widget.successIcon,
-                color: widget.successIconColor ?? colors.success,
+                color: widget.successIconColor ?? successColor,
                 size: 32,
               ),
               const SizedBox(height: 16),
               Text(
                 widget.successTitle,
                 textAlign: TextAlign.center,
-                style: widget.successTitleStyle ?? typography.hL_strong.copyWith(color: colors.onBackground, fontWeight: FontWeight.w700),
+                style: widget.successTitleStyle ?? (uxTypography?.hL_strong ?? materialTheme.textTheme.headlineLarge)?.copyWith(color: onBackground, fontWeight: FontWeight.w700),
               ),
               const SizedBox(height: 8),
               Text(
                 widget.successMessage,
                 textAlign: TextAlign.center,
-                style: widget.successMessageStyle ?? typography.bM_default.copyWith(color: colors.onSurface.withValues(alpha: 0.7)),
+                style: widget.successMessageStyle ?? (uxTypography?.bM_default ?? materialTheme.textTheme.bodyMedium)?.copyWith(color: onSurfaceColor.withValues(alpha: 0.7)),
               ),
             ],
           ),

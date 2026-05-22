@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../foundation/colors.dart';
+import '../foundation/typography.dart';
 import '../foundation/dimensions.dart';
 import '../theme/theme.dart';
 import 'loader.dart';
@@ -71,24 +72,30 @@ class Ux4gButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colors = Ux4gTheme.colors(context);
-    final typography = Ux4gTheme.typography(context);
+    final materialTheme = Theme.of(context);
+    final ux4gColors = materialTheme.extension<Ux4gColors>();
+    final ux4gTypography = materialTheme.extension<Ux4gTypography>();
 
-    final style = _getStyle(colors);
+    final style = _getStyle(ux4gColors, materialTheme);
 
     final effectiveBgColor = backgroundColor ?? style.backgroundColor;
     final effectiveContentColor = contentColor ?? style.contentColor;
+    
+    final onSurface = ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
+    
     final effectiveDisabledBgColor =
         disabledBackgroundColor ??
         (variant == Ux4gButtonVariant.primary ||
                 variant == Ux4gButtonVariant.secondary
-            ? colors.onSurface.withValues(alpha: 0.12)
+            ? onSurface.withValues(alpha: 0.12)
             : Colors.transparent);
     final effectiveDisabledContentColor =
-        disabledContentColor ?? colors.onSurface.withValues(alpha: 0.38);
+        disabledContentColor ?? onSurface.withValues(alpha: 0.38);
     final effectiveBorderColor = borderColor ?? style.borderColor;
     final effectiveBorderWidth =
         borderWidth ?? (variant == Ux4gButtonVariant.outline ? 1.0 : 0.0);
+
+    final textStyle = ux4gTypography?.lM_default ?? materialTheme.textTheme.labelLarge ?? const TextStyle();
 
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 4),
@@ -113,7 +120,7 @@ class Ux4gButton extends StatelessWidget {
                 ? BorderSide(
                     color: enabled
                         ? effectiveBorderColor
-                        : colors.onSurface.withValues(alpha: 0.12),
+                        : onSurface.withValues(alpha: 0.12),
                     width: effectiveBorderWidth,
                   )
                 : BorderSide.none,
@@ -143,7 +150,7 @@ class Ux4gButton extends StatelessWidget {
                 if (text != null || child != null) const SizedBox(width: 8),
               ],
               DefaultTextStyle(
-                style: typography.lM_default.copyWith(
+                style: textStyle.copyWith(
                   color: effectiveContentColor,
                 ),
                 child:
@@ -166,26 +173,33 @@ class Ux4gButton extends StatelessWidget {
     );
   }
 
-  _ButtonStyle _getStyle(Ux4gColors colors) {
+  _ButtonStyle _getStyle(Ux4gColors? ux4gColors, ThemeData materialTheme) {
+    final colorScheme = materialTheme.colorScheme;
+    
+    final primary = ux4gColors?.primary ?? colorScheme.primary;
+    final onPrimary = ux4gColors?.onPrimary ?? colorScheme.onPrimary;
+    final secondary = ux4gColors?.secondary ?? colorScheme.secondary;
+    final onSecondary = ux4gColors?.onSecondary ?? colorScheme.onSecondary;
+
     return switch (variant) {
       Ux4gButtonVariant.primary => _ButtonStyle(
-        backgroundColor: colors.primary,
-        contentColor: colors.onPrimary,
+        backgroundColor: primary,
+        contentColor: onPrimary,
         borderColor: Colors.transparent,
       ),
       Ux4gButtonVariant.secondary => _ButtonStyle(
-        backgroundColor: colors.secondary,
-        contentColor: colors.onSecondary,
+        backgroundColor: secondary,
+        contentColor: onSecondary,
         borderColor: Colors.transparent,
       ),
       Ux4gButtonVariant.outline => _ButtonStyle(
         backgroundColor: Colors.transparent,
-        contentColor: colors.primary,
-        borderColor: colors.primary,
+        contentColor: primary,
+        borderColor: primary,
       ),
       Ux4gButtonVariant.ghost => _ButtonStyle(
         backgroundColor: Colors.transparent,
-        contentColor: colors.primary,
+        contentColor: primary,
         borderColor: Colors.transparent,
       ),
     };
@@ -249,20 +263,26 @@ class Ux4gIconButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colors = Ux4gTheme.colors(context);
+    final materialTheme = Theme.of(context);
+    final ux4gColors = materialTheme.extension<Ux4gColors>();
+
+    final primary = ux4gColors?.primary ?? materialTheme.colorScheme.primary;
+    final onPrimary = ux4gColors?.onPrimary ?? materialTheme.colorScheme.onPrimary;
+    final secondary = ux4gColors?.secondary ?? materialTheme.colorScheme.secondary;
+    final onSecondary = ux4gColors?.onSecondary ?? materialTheme.colorScheme.onSecondary;
 
     final bgColor = switch (variant) {
-      Ux4gButtonVariant.primary => colors.primary,
-      Ux4gButtonVariant.secondary => colors.secondary,
+      Ux4gButtonVariant.primary => primary,
+      Ux4gButtonVariant.secondary => secondary,
       Ux4gButtonVariant.outline => Colors.transparent,
       Ux4gButtonVariant.ghost => Colors.transparent,
     };
 
     final contentColor = switch (variant) {
-      Ux4gButtonVariant.primary => colors.onPrimary,
-      Ux4gButtonVariant.secondary => colors.onSecondary,
-      Ux4gButtonVariant.outline => colors.primary,
-      Ux4gButtonVariant.ghost => colors.primary,
+      Ux4gButtonVariant.primary => onPrimary,
+      Ux4gButtonVariant.secondary => onSecondary,
+      Ux4gButtonVariant.outline => primary,
+      Ux4gButtonVariant.ghost => primary,
     };
 
     return IconButton(
@@ -273,7 +293,7 @@ class Ux4gIconButton extends StatelessWidget {
         foregroundColor: contentColor,
         fixedSize: Size(size, size),
         side: variant == Ux4gButtonVariant.outline
-            ? BorderSide(color: colors.primary)
+            ? BorderSide(color: primary)
             : null,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(Ux4gRadius.radius8),

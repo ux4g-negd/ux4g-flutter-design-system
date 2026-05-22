@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../foundation/colors.dart';
-import '../theme/theme.dart';
+import '../foundation/typography.dart';
 
 enum Ux4gStepperOrientation { horizontal, vertical }
 
@@ -114,29 +114,35 @@ class Ux4gStepper extends StatelessWidget {
   }
 
   Widget _buildStepIcon(BuildContext context, int index, bool isCompleted, bool isActive, bool isPending, bool isError) {
-    final colors = Ux4gTheme.colors(context);
-    final typography = Ux4gTheme.typography(context);
+    final materialTheme = Theme.of(context);
+    final ux4gColors = materialTheme.extension<Ux4gColors>();
+    final ux4gTypography = materialTheme.extension<Ux4gTypography>();
+
+    final primary = ux4gColors?.primary ?? materialTheme.colorScheme.primary;
+    final onPrimary = ux4gColors?.onPrimary ?? materialTheme.colorScheme.onPrimary;
+    final onSurface = ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
+    final error = ux4gColors?.error ?? materialTheme.colorScheme.error;
 
     Color bgColor = Colors.transparent;
-    Color borderColor = colors.onSurface.withValues(alpha: 0.2);
+    Color borderColor = onSurface.withValues(alpha: 0.2);
     Widget content = Text(
       index.toString(),
-      style: typography.lM_default.copyWith(color: colors.onSurface.withValues(alpha: 0.3), fontWeight: FontWeight.bold),
+      style: (ux4gTypography?.lM_default ?? materialTheme.textTheme.labelMedium)?.copyWith(color: onSurface.withValues(alpha: 0.3), fontWeight: FontWeight.bold),
     );
 
     if (isError) {
-      borderColor = colors.error;
-      content = Icon(Icons.error_outline, color: colors.error, size: 20);
+      borderColor = error;
+      content = Icon(Icons.error_outline, color: error, size: 20);
     } else if (isCompleted) {
-      bgColor = colors.primary;
-      borderColor = colors.primary;
-      content = Icon(Icons.check, color: colors.onPrimary, size: 20);
+      bgColor = primary;
+      borderColor = primary;
+      content = Icon(Icons.check, color: onPrimary, size: 20);
     } else if (isActive) {
-      borderColor = colors.primary;
+      borderColor = primary;
       content = Container(
         width: 12,
         height: 12,
-        decoration: BoxDecoration(color: colors.primary, shape: BoxShape.circle),
+        decoration: BoxDecoration(color: primary, shape: BoxShape.circle),
       );
     }
 
@@ -154,7 +160,13 @@ class Ux4gStepper extends StatelessWidget {
   }
 
   Widget _buildLine(BuildContext context, bool isCompleted, {bool isVertical = false}) {
-    final color = isCompleted ? Ux4gTheme.colors(context).primary : Ux4gTheme.colors(context).onSurface.withValues(alpha: 0.2);
+    final materialTheme = Theme.of(context);
+    final ux4gColors = materialTheme.extension<Ux4gColors>();
+
+    final primary = ux4gColors?.primary ?? materialTheme.colorScheme.primary;
+    final onSurface = ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
+
+    final color = isCompleted ? primary : onSurface.withValues(alpha: 0.2);
 
     return CustomPaint(
       painter: _StepperLinePainter(
@@ -167,22 +179,41 @@ class Ux4gStepper extends StatelessWidget {
   }
 
   Widget _buildLabels(BuildContext context, Ux4gStepItem? data, int index, bool isPending, bool isCompleted, bool isActive, bool centered) {
-    final typography = Ux4gTheme.typography(context);
-    final colors = Ux4gTheme.colors(context);
+    final materialTheme = Theme.of(context);
+    final ux4gColors = materialTheme.extension<Ux4gColors>();
+    final ux4gTypography = materialTheme.extension<Ux4gTypography>();
+
+    final onSurface = ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
+    final error = ux4gColors?.error ?? materialTheme.colorScheme.error;
+    final primary = ux4gColors?.primary ?? materialTheme.colorScheme.primary;
+    final success = ux4gColors?.success ?? Colors.green;
+
     final align = centered ? TextAlign.center : TextAlign.start;
 
-    final titleColor = isPending ? colors.onSurface.withValues(alpha: 0.4) : (data?.isError ?? false ? colors.error : colors.onSurface);
+    final titleColor = isPending ? onSurface.withValues(alpha: 0.4) : (data?.isError ?? false ? error : onSurface);
     final statusText = data?.statusLabel ?? (data?.isError == true ? "Error" : (isCompleted ? "Completed" : (isActive ? "In progress" : null)));
-    final statusColor = data?.isError == true ? colors.error : (isCompleted ? colors.success : (isActive ? colors.primary : colors.onSurface.withValues(alpha: 0.4)));
+    final statusColor = data?.isError == true ? error : (isCompleted ? success : (isActive ? primary : onSurface.withValues(alpha: 0.4)));
 
     return Column(
       crossAxisAlignment: centered ? CrossAxisAlignment.center : CrossAxisAlignment.start,
       children: [
-        Text(data?.title ?? "Step $index", style: typography.lL_strong.copyWith(color: titleColor), textAlign: align),
+        Text(
+          data?.title ?? "Step $index",
+          style: (ux4gTypography?.lL_strong ?? materialTheme.textTheme.labelLarge?.copyWith(fontWeight: FontWeight.bold))?.copyWith(color: titleColor),
+          textAlign: align,
+        ),
         if (data?.description != null)
-          Text(data!.description!, style: typography.lM_default.copyWith(color: colors.onSurface.withValues(alpha: 0.4)), textAlign: align),
+          Text(
+            data!.description!,
+            style: (ux4gTypography?.lM_default ?? materialTheme.textTheme.labelMedium)?.copyWith(color: onSurface.withValues(alpha: 0.4)),
+            textAlign: align,
+          ),
         if (statusText != null)
-          Text(statusText, style: typography.lS_strong.copyWith(color: statusColor), textAlign: align),
+          Text(
+            statusText,
+            style: (ux4gTypography?.lS_strong ?? materialTheme.textTheme.labelSmall?.copyWith(fontWeight: FontWeight.bold))?.copyWith(color: statusColor),
+            textAlign: align,
+          ),
       ],
     );
   }

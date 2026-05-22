@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ux4g_flutter_design_system/src/foundation/colors.dart';
+import '../foundation/colors.dart';
 import '../foundation/typography.dart';
 import '../theme/theme.dart';
 import 'buttons.dart';
@@ -103,8 +103,10 @@ class _Ux4gDatePickerState extends State<Ux4gDatePicker> {
 
   @override
   Widget build(BuildContext context) {
-    final colors = Ux4gTheme.colors(context);
-    final typography = Ux4gTheme.typography(context);
+    final materialTheme = Theme.of(context);
+    final ux4gColors = materialTheme.extension<Ux4gColors>();
+    final ux4gTypography = materialTheme.extension<Ux4gTypography>();
+
     final isSelected =
         (widget.mode == Ux4gDatePickerMode.single && _selectedDate != null) ||
         (widget.mode == Ux4gDatePickerMode.range && _selectedRange != null);
@@ -118,12 +120,12 @@ class _Ux4gDatePickerState extends State<Ux4gDatePicker> {
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
           decoration: BoxDecoration(
-            color: colors.surface,
+            color: ux4gColors?.surface ?? materialTheme.colorScheme.surface,
             borderRadius: BorderRadius.circular(8),
             border: Border.all(
               color: isSelected
-                  ? colors.primary
-                  : colors.onSurface.withValues(alpha: 0.38),
+                  ? (ux4gColors?.primary ?? materialTheme.colorScheme.primary)
+                  : (ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface).withValues(alpha: 0.38),
             ),
           ),
           child: Row(
@@ -131,10 +133,10 @@ class _Ux4gDatePickerState extends State<Ux4gDatePicker> {
             children: [
               Text(
                 _getFormattedValue(),
-                style: typography.bM_default.copyWith(
+                style: (ux4gTypography?.bM_default ?? materialTheme.textTheme.bodyMedium ?? const TextStyle()).copyWith(
                   color: isSelected
-                      ? colors.onSurface
-                      : colors.onSurface.withValues(alpha: 0.38),
+                      ? (ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface)
+                      : (ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface).withValues(alpha: 0.38),
                 ),
               ),
               const SizedBox(width: 12),
@@ -142,8 +144,8 @@ class _Ux4gDatePickerState extends State<Ux4gDatePicker> {
                 Icons.calendar_today_outlined,
                 size: 20,
                 color: isSelected
-                    ? colors.primary
-                    : colors.onSurface.withValues(alpha: 0.38),
+                    ? (ux4gColors?.primary ?? materialTheme.colorScheme.primary)
+                    : (ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface).withValues(alpha: 0.38),
               ),
             ],
           ),
@@ -317,13 +319,14 @@ class _Ux4gDatePickerDialogState extends State<_Ux4gDatePickerDialog> {
 
   @override
   Widget build(BuildContext context) {
-    final colors = Ux4gTheme.colors(context);
-    final typography = Ux4gTheme.typography(context);
+    final materialTheme = Theme.of(context);
+    final ux4gColors = materialTheme.extension<Ux4gColors>();
+    final ux4gTypography = materialTheme.extension<Ux4gTypography>();
 
     return Container(
       width: 320,
       decoration: BoxDecoration(
-        color: colors.surface,
+        color: ux4gColors?.surface ?? materialTheme.colorScheme.surface,
         borderRadius: BorderRadius.circular(12),
         boxShadow: [
           BoxShadow(
@@ -364,8 +367,8 @@ class _Ux4gDatePickerDialogState extends State<_Ux4gDatePickerDialog> {
                         _showMonthYearPicker
                             ? '$_yearGridStart-${_yearGridStart + 7}'
                             : '${_getMonthName(_currentDisplayedMonth.month)} ${_currentDisplayedMonth.year}',
-                        style: typography.bM_strong.copyWith(
-                          color: colors.primary,
+                        style: (ux4gTypography?.bM_strong ?? materialTheme.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold) ?? const TextStyle()).copyWith(
+                          color: ux4gColors?.primary ?? materialTheme.colorScheme.primary,
                         ),
                       ),
                       const SizedBox(width: 4),
@@ -373,7 +376,7 @@ class _Ux4gDatePickerDialogState extends State<_Ux4gDatePickerDialog> {
                         _showMonthYearPicker
                             ? Icons.keyboard_arrow_up
                             : Icons.keyboard_arrow_down,
-                        color: colors.primary,
+                        color: ux4gColors?.primary ?? materialTheme.colorScheme.primary,
                         size: 20,
                       ),
                     ],
@@ -392,7 +395,7 @@ class _Ux4gDatePickerDialogState extends State<_Ux4gDatePickerDialog> {
               ],
             ),
           ),
-          Divider(height: 1, color: colors.onSurface.withValues(alpha: 0.12)),
+          Divider(height: 1, color: (ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface).withValues(alpha: 0.12)),
 
           // Body
           Container(
@@ -401,12 +404,12 @@ class _Ux4gDatePickerDialogState extends State<_Ux4gDatePickerDialog> {
             child: AnimatedSwitcher(
               duration: const Duration(milliseconds: 200),
               child: _showMonthYearPicker
-                  ? _buildMonthYearPicker(colors, typography)
-                  : _buildCalendarView(colors, typography),
+                  ? _buildMonthYearPicker(ux4gColors, ux4gTypography, materialTheme)
+                  : _buildCalendarView(ux4gColors, ux4gTypography, materialTheme),
             ),
           ),
 
-          Divider(height: 1, color: colors.onSurface.withValues(alpha: 0.12)),
+          Divider(height: 1, color: (ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface).withValues(alpha: 0.12)),
 
           // Footer
           Padding(
@@ -442,7 +445,7 @@ class _Ux4gDatePickerDialogState extends State<_Ux4gDatePickerDialog> {
     );
   }
 
-  Widget _buildMonthYearPicker(Ux4gColors colors, Ux4gTypography typography) {
+  Widget _buildMonthYearPicker(Ux4gColors? colors, Ux4gTypography? typography, ThemeData materialTheme) {
     return Column(
       key: const ValueKey('MonthYearPicker'),
       children: [
@@ -460,6 +463,7 @@ class _Ux4gDatePickerDialogState extends State<_Ux4gDatePickerDialog> {
           itemBuilder: (context, index) {
             final year = _yearGridStart + index;
             final isSelected = year == _currentDisplayedMonth.year;
+            final resolvedPrimary = colors?.primary ?? materialTheme.colorScheme.primary;
             return GestureDetector(
               onTap: () {
                 setState(() {
@@ -473,14 +477,14 @@ class _Ux4gDatePickerDialogState extends State<_Ux4gDatePickerDialog> {
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
                   color: isSelected
-                      ? colors.primary.withValues(alpha: 0.2)
+                      ? resolvedPrimary.withValues(alpha: 0.2)
                       : Colors.transparent,
                   borderRadius: BorderRadius.circular(4),
                 ),
                 child: Text(
                   year.toString(),
-                  style: typography.bM_default.copyWith(
-                    color: isSelected ? colors.primary : colors.onSurface,
+                  style: (typography?.bM_default ?? materialTheme.textTheme.bodyMedium ?? const TextStyle()).copyWith(
+                    color: isSelected ? resolvedPrimary : (colors?.onSurface ?? materialTheme.colorScheme.onSurface),
                   ),
                 ),
               ),
@@ -488,7 +492,7 @@ class _Ux4gDatePickerDialogState extends State<_Ux4gDatePickerDialog> {
           },
         ),
         const SizedBox(height: 16),
-        Divider(height: 1, color: colors.onSurface.withValues(alpha: 0.12)),
+        Divider(height: 1, color: (colors?.onSurface ?? materialTheme.colorScheme.onSurface).withValues(alpha: 0.12)),
 
         // Month Grid
         GridView.builder(
@@ -503,6 +507,7 @@ class _Ux4gDatePickerDialogState extends State<_Ux4gDatePickerDialog> {
           itemCount: 12,
           itemBuilder: (context, index) {
             final isSelected = (index + 1) == _currentDisplayedMonth.month;
+            final resolvedPrimary = colors?.primary ?? materialTheme.colorScheme.primary;
             return GestureDetector(
               onTap: () {
                 setState(() {
@@ -516,14 +521,14 @@ class _Ux4gDatePickerDialogState extends State<_Ux4gDatePickerDialog> {
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
                   color: isSelected
-                      ? colors.primary.withValues(alpha: 0.2)
+                      ? resolvedPrimary.withValues(alpha: 0.2)
                       : Colors.transparent,
                   borderRadius: BorderRadius.circular(4),
                 ),
                 child: Text(
                   _months[index],
-                  style: typography.bM_default.copyWith(
-                    color: isSelected ? colors.primary : colors.onSurface,
+                  style: (typography?.bM_default ?? materialTheme.textTheme.bodyMedium ?? const TextStyle()).copyWith(
+                    color: isSelected ? resolvedPrimary : (colors?.onSurface ?? materialTheme.colorScheme.onSurface),
                   ),
                 ),
               ),
@@ -534,7 +539,7 @@ class _Ux4gDatePickerDialogState extends State<_Ux4gDatePickerDialog> {
     );
   }
 
-  Widget _buildCalendarView(Ux4gColors colors, Ux4gTypography typography) {
+  Widget _buildCalendarView(Ux4gColors? colors, Ux4gTypography? typography, ThemeData materialTheme) {
     final now = DateTime.now();
     final firstDayOfMonth = DateTime(
       _currentDisplayedMonth.year,
@@ -566,8 +571,8 @@ class _Ux4gDatePickerDialogState extends State<_Ux4gDatePickerDialog> {
                   child: Center(
                     child: Text(
                       d,
-                      style: typography.bS_strong.copyWith(
-                        color: colors.onSurface,
+                      style: (typography?.bS_strong ?? materialTheme.textTheme.bodySmall?.copyWith(fontWeight: FontWeight.bold) ?? const TextStyle()).copyWith(
+                        color: colors?.onSurface ?? materialTheme.colorScheme.onSurface,
                       ),
                     ),
                   ),
@@ -636,6 +641,9 @@ class _Ux4gDatePickerDialogState extends State<_Ux4gDatePickerDialog> {
                 }
               }
 
+              final resolvedPrimary = colors?.primary ?? materialTheme.colorScheme.primary;
+              final resolvedOnSurface = colors?.onSurface ?? materialTheme.colorScheme.onSurface;
+
               final isSolidPurple =
                   isSelectedSingle || isRangeStart || isRangeEnd;
               final isLightPurple = isInRange;
@@ -645,9 +653,9 @@ class _Ux4gDatePickerDialogState extends State<_Ux4gDatePickerDialog> {
                 child: Container(
                   decoration: BoxDecoration(
                     color: isSolidPurple
-                        ? colors.primary
+                        ? resolvedPrimary
                         : (isLightPurple
-                              ? colors.primary.withValues(alpha: 0.1)
+                              ? resolvedPrimary.withValues(alpha: 0.1)
                               : Colors.transparent),
                     borderRadius: isSolidPurple
                         ? BorderRadius.circular(4)
@@ -667,12 +675,12 @@ class _Ux4gDatePickerDialogState extends State<_Ux4gDatePickerDialog> {
                       children: [
                         Text(
                           day.toString(),
-                          style: typography.bM_default.copyWith(
+                          style: (typography?.bM_default ?? materialTheme.textTheme.bodyMedium ?? const TextStyle()).copyWith(
                             color: isSolidPurple
-                                ? colors.onPrimary
+                                ? (colors?.onPrimary ?? materialTheme.colorScheme.onPrimary)
                                 : (isSelectable
-                                      ? colors.onSurface
-                                      : colors.onSurface.withValues(
+                                      ? resolvedOnSurface
+                                      : resolvedOnSurface.withValues(
                                           alpha: 0.38,
                                         )),
                           ),
@@ -683,7 +691,7 @@ class _Ux4gDatePickerDialogState extends State<_Ux4gDatePickerDialog> {
                             width: 4,
                             height: 4,
                             decoration: BoxDecoration(
-                              color: colors.primary,
+                              color: resolvedPrimary,
                               shape: BoxShape.circle,
                             ),
                           ),

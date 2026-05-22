@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import '../theme/theme.dart';
+import '../foundation/colors.dart';
+import '../foundation/typography.dart';
 
 enum Ux4gToggleSize {
   s(32, 18, 14, 2),
@@ -42,14 +43,19 @@ class Ux4gToggle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colors = Ux4gTheme.colors(context);
-    final typography = Ux4gTheme.typography(context);
+    final materialTheme = Theme.of(context);
+    final ux4gColors = materialTheme.extension<Ux4gColors>();
+    final ux4gTypography = materialTheme.extension<Ux4gTypography>();
+
+    final primary = ux4gColors?.primary ?? materialTheme.colorScheme.primary;
+    final onSurface = ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
+    final surface = ux4gColors?.surface ?? materialTheme.colorScheme.surface;
 
     // Color definitions
-    final checkedTrackColor = colors.primary;
-    final uncheckedTrackColor = colors.onSurface.withValues(alpha: 0.3);
-    final disabledCheckedTrackColor = colors.primary.withValues(alpha: 0.4);
-    final disabledUncheckedTrackColor = colors.onSurface.withValues(alpha: 0.2);
+    final checkedTrackColor = primary;
+    final uncheckedTrackColor = onSurface.withValues(alpha: 0.3);
+    final disabledCheckedTrackColor = primary.withValues(alpha: 0.4);
+    final disabledUncheckedTrackColor = onSurface.withValues(alpha: 0.2);
 
     final trackColor = !enabled && checked
         ? disabledCheckedTrackColor
@@ -59,8 +65,7 @@ class Ux4gToggle extends StatelessWidget {
         ? checkedTrackColor
         : uncheckedTrackColor;
 
-    final thumbColor =
-        colors.surface; // Thumb is always surface color in default setup
+    final thumbColor = surface; // Thumb is always surface color in default setup
 
     final endOffset = size.width - size.thumbSize - size.thumbPadding;
     final startOffset = size.thumbPadding;
@@ -112,18 +117,24 @@ class Ux4gToggle extends StatelessWidget {
 
     TextStyle labelStyle;
     TextStyle descStyle;
+    
+    final lMDefault = ux4gTypography?.lM_default ?? materialTheme.textTheme.labelMedium ?? const TextStyle();
+    final lSDefault = ux4gTypography?.lS_default ?? materialTheme.textTheme.labelSmall ?? const TextStyle();
+    final lLDefault = ux4gTypography?.lL_default ?? materialTheme.textTheme.labelLarge ?? const TextStyle();
+    final lXLDefault = ux4gTypography?.lXL_default ?? materialTheme.textTheme.labelLarge?.copyWith(fontSize: 16) ?? const TextStyle();
+
     switch (size) {
       case Ux4gToggleSize.s:
-        labelStyle = typography.lM_default;
-        descStyle = typography.lS_default;
+        labelStyle = lMDefault;
+        descStyle = lSDefault;
         break;
       case Ux4gToggleSize.m:
-        labelStyle = typography.lL_default;
-        descStyle = typography.lM_default;
+        labelStyle = lLDefault;
+        descStyle = lMDefault;
         break;
       case Ux4gToggleSize.l:
-        labelStyle = typography.lXL_default;
-        descStyle = typography.lL_default;
+        labelStyle = lXLDefault;
+        descStyle = lLDefault;
         break;
     }
 
@@ -138,8 +149,8 @@ class Ux4gToggle extends StatelessWidget {
               label!,
               style: labelStyle.copyWith(
                 color: enabled
-                    ? colors.onSurface
-                    : colors.onSurface.withValues(alpha: 0.38),
+                    ? onSurface
+                    : onSurface.withValues(alpha: 0.38),
               ),
             ),
           if (description != null) ...[
@@ -148,8 +159,8 @@ class Ux4gToggle extends StatelessWidget {
               description!,
               style: descStyle.copyWith(
                 color: enabled
-                    ? colors.onSurface.withValues(alpha: 0.7)
-                    : colors.onSurface.withValues(alpha: 0.38),
+                    ? onSurface.withValues(alpha: 0.7)
+                    : onSurface.withValues(alpha: 0.38),
               ),
             ),
           ],

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import '../foundation/colors.dart';
+import '../foundation/typography.dart';
 import '../foundation/dimensions.dart';
 import '../theme/theme.dart';
 import 'input_field.dart';
@@ -45,28 +47,29 @@ class Ux4gChoiceChip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colors = Ux4gTheme.colors(context);
-    final typography = Ux4gTheme.typography(context);
+    final materialTheme = Theme.of(context);
+    final ux4gColors = materialTheme.extension<Ux4gColors>();
+    final ux4gTypography = materialTheme.extension<Ux4gTypography>();
 
     final paddingH = size == Ux4gChoiceChipSize.s ? 12.0 : 16.0;
     final paddingV = size == Ux4gChoiceChipSize.s ? 6.0 : 8.0;
     final textStyle = size == Ux4gChoiceChipSize.s
-        ? typography.lM_default
-        : typography.lL_default;
+        ? (ux4gTypography?.lM_default ?? materialTheme.textTheme.labelMedium ?? const TextStyle())
+        : (ux4gTypography?.lL_default ?? materialTheme.textTheme.labelLarge ?? const TextStyle());
 
     final bgColor = selected
-        ? (selectedBackgroundColor ?? colors.primary)
-        : (unselectedBackgroundColor ?? colors.surface);
+        ? (selectedBackgroundColor ?? (ux4gColors?.primary ?? materialTheme.colorScheme.primary))
+        : (unselectedBackgroundColor ?? (ux4gColors?.surface ?? materialTheme.colorScheme.surface));
 
     final borderColor = selected
-        ? (selectedBorderColor ?? colors.primary)
-        : (unselectedBorderColor ?? colors.onSurface.withValues(alpha: 0.2));
+        ? (selectedBorderColor ?? (ux4gColors?.primary ?? materialTheme.colorScheme.primary))
+        : (unselectedBorderColor ?? (ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface).withValues(alpha: 0.2));
 
     final borderWidth = selected ? selectedBorderWidth : unselectedBorderWidth;
 
     final textColor = selected
-        ? (selectedTextColor ?? colors.onPrimary)
-        : (unselectedTextColor ?? colors.onSurface);
+        ? (selectedTextColor ?? (ux4gColors?.onPrimary ?? materialTheme.colorScheme.onPrimary))
+        : (unselectedTextColor ?? (ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface));
 
     return InkWell(
       onTap: enabled ? onClick : null,
@@ -141,28 +144,29 @@ class Ux4gFilterChip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colors = Ux4gTheme.colors(context);
-    final typography = Ux4gTheme.typography(context);
+    final materialTheme = Theme.of(context);
+    final ux4gColors = materialTheme.extension<Ux4gColors>();
+    final ux4gTypography = materialTheme.extension<Ux4gTypography>();
 
     final height = size == Ux4gFilterChipSize.s ? 28.0 : 32.0;
     final paddingH = size == Ux4gFilterChipSize.s ? 12.0 : 16.0;
     final textStyle = size == Ux4gFilterChipSize.s
-        ? typography.lM_default
-        : typography.lL_default;
+        ? (ux4gTypography?.lM_default ?? materialTheme.textTheme.labelMedium ?? const TextStyle())
+        : (ux4gTypography?.lL_default ?? materialTheme.textTheme.labelLarge ?? const TextStyle());
 
     final bgColor = selected
-        ? (selectedBackgroundColor ?? colors.primary.withValues(alpha: 0.08))
-        : (unselectedBackgroundColor ?? colors.surface);
+        ? (selectedBackgroundColor ?? (ux4gColors?.primary ?? materialTheme.colorScheme.primary).withValues(alpha: 0.08))
+        : (unselectedBackgroundColor ?? (ux4gColors?.surface ?? materialTheme.colorScheme.surface));
 
     final borderColor = selected
-        ? (selectedBorderColor ?? colors.primary)
-        : (unselectedBorderColor ?? colors.onSurface.withValues(alpha: 0.2));
+        ? (selectedBorderColor ?? (ux4gColors?.primary ?? materialTheme.colorScheme.primary))
+        : (unselectedBorderColor ?? (ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface).withValues(alpha: 0.2));
 
     final borderWidth = selected ? selectedBorderWidth : unselectedBorderWidth;
 
     final textColor = selected
-        ? (selectedTextColor ?? colors.primary)
-        : (unselectedTextColor ?? colors.onSurface);
+        ? (selectedTextColor ?? (ux4gColors?.primary ?? materialTheme.colorScheme.primary))
+        : (unselectedTextColor ?? (ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface));
 
     return InkWell(
       onTap: enabled ? onClick : null,
@@ -225,8 +229,9 @@ class Ux4gInputChip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colors = Ux4gTheme.colors(context);
-    final typography = Ux4gTheme.typography(context);
+    final materialTheme = Theme.of(context);
+    final ux4gColors = materialTheme.extension<Ux4gColors>();
+    final ux4gTypography = materialTheme.extension<Ux4gTypography>();
 
     final height = switch (size) {
       Ux4gInputChipSize.xs => 20.0,
@@ -239,16 +244,16 @@ class Ux4gInputChip extends StatelessWidget {
       Ux4gInputChipSize.m => 16.0,
     };
     final textStyle = switch (size) {
-      Ux4gInputChipSize.xs => typography.lS_default,
-      Ux4gInputChipSize.s => typography.lM_default,
-      Ux4gInputChipSize.m => typography.lL_default,
+      Ux4gInputChipSize.xs => ux4gTypography?.lS_default ?? materialTheme.textTheme.labelSmall ?? const TextStyle(),
+      Ux4gInputChipSize.s => ux4gTypography?.lM_default ?? materialTheme.textTheme.labelMedium ?? const TextStyle(),
+      Ux4gInputChipSize.m => ux4gTypography?.lL_default ?? materialTheme.textTheme.labelLarge ?? const TextStyle(),
     };
     final iconSize = size == Ux4gInputChipSize.xs ? 12.0 : 16.0;
 
-    final finalBgColor = backgroundColor ?? colors.surface;
+    final finalBgColor = backgroundColor ?? (ux4gColors?.surface ?? materialTheme.colorScheme.surface);
     final finalBorderColor =
-        borderColor ?? colors.onSurface.withValues(alpha: 0.2);
-    final finalTextColor = textColor ?? colors.onSurface;
+        borderColor ?? (ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface).withValues(alpha: 0.2);
+    final finalTextColor = textColor ?? (ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface);
 
     return Opacity(
       opacity: enabled ? 1.0 : 0.5,
@@ -348,7 +353,9 @@ class Ux4gInputChipField extends StatelessWidget {
   }
 
   Widget _buildDropdownField(BuildContext context) {
-    final colors = Ux4gTheme.colors(context);
+    final materialTheme = Theme.of(context);
+    final ux4gColors = materialTheme.extension<Ux4gColors>();
+    
     return PopupMenuButton<String>(
       onSelected: (val) {
         onAddChip(val);

@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import '../foundation/colors.dart';
+import '../foundation/typography.dart';
 import '../foundation/dimensions.dart';
-import '../theme/theme.dart';
 
 enum Ux4gToastCategory { info, success, warning, error, slot }
 
@@ -97,10 +97,12 @@ class Ux4gToast extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colors = Ux4gTheme.colors(context);
+    final materialTheme = Theme.of(context);
+    final ux4gColors = materialTheme.extension<Ux4gColors>();
+    
     final screenWidth = MediaQuery.of(context).size.width;
     final resolvedLayout = layout ?? (screenWidth < 600 ? Ux4gToastLayout.stacked : Ux4gToastLayout.full);
-    final style = _getToastStyle(category, colors);
+    final style = _getToastStyle(category, ux4gColors, materialTheme);
 
     return Material(
       color: Colors.transparent,
@@ -137,41 +139,48 @@ class Ux4gToast extends StatelessWidget {
     );
   }
 
-  _ToastStyle _getToastStyle(Ux4gToastCategory category, Ux4gColors colors) {
+  _ToastStyle _getToastStyle(Ux4gToastCategory category, Ux4gColors? ux4gColors, ThemeData materialTheme) {
+    final surface = ux4gColors?.surface ?? materialTheme.colorScheme.surface;
+    final info = ux4gColors?.info ?? Colors.blue;
+    final success = ux4gColors?.success ?? Colors.green;
+    final warning = ux4gColors?.warning ?? Colors.orange;
+    final error = ux4gColors?.error ?? materialTheme.colorScheme.error;
+    final primary = ux4gColors?.primary ?? materialTheme.colorScheme.primary;
+
     switch (category) {
       case Ux4gToastCategory.info:
         return _ToastStyle(
-          backgroundColor: Color.lerp(colors.surface, colors.info, 0.12)!,
-          iconColor: colors.info,
-          actionColor: colors.info,
+          backgroundColor: Color.lerp(surface, info, 0.12)!,
+          iconColor: info,
+          actionColor: info,
           icon: Icons.info_outline,
         );
       case Ux4gToastCategory.success:
         return _ToastStyle(
-          backgroundColor: Color.lerp(colors.surface, colors.success, 0.12)!,
-          iconColor: colors.success,
-          actionColor: colors.success,
+          backgroundColor: Color.lerp(surface, success, 0.12)!,
+          iconColor: success,
+          actionColor: success,
           icon: Icons.check_circle_outline,
         );
       case Ux4gToastCategory.warning:
         return _ToastStyle(
-          backgroundColor: Color.lerp(colors.surface, colors.warning, 0.12)!,
-          iconColor: colors.warning,
-          actionColor: colors.warning,
+          backgroundColor: Color.lerp(surface, warning, 0.12)!,
+          iconColor: warning,
+          actionColor: warning,
           icon: Icons.warning_amber_rounded,
         );
       case Ux4gToastCategory.error:
         return _ToastStyle(
-          backgroundColor: Color.lerp(colors.surface, colors.error, 0.12)!,
-          iconColor: colors.error,
-          actionColor: colors.error,
+          backgroundColor: Color.lerp(surface, error, 0.12)!,
+          iconColor: error,
+          actionColor: error,
           icon: Icons.error_outline,
         );
       case Ux4gToastCategory.slot:
         return _ToastStyle(
-          backgroundColor: Color.lerp(colors.surface, colors.primary, 0.12)!,
-          iconColor: colors.primary,
-          actionColor: colors.primary,
+          backgroundColor: Color.lerp(surface, primary, 0.12)!,
+          iconColor: primary,
+          actionColor: primary,
           icon: Icons.settings_outlined,
         );
     }
@@ -199,8 +208,11 @@ class _FullLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colors = Ux4gTheme.colors(context);
-    final typography = Ux4gTheme.typography(context);
+    final materialTheme = Theme.of(context);
+    final ux4gColors = materialTheme.extension<Ux4gColors>();
+    final ux4gTypography = materialTheme.extension<Ux4gTypography>();
+
+    final onSurface = ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
 
     return Row(
       children: [
@@ -211,7 +223,7 @@ class _FullLayout extends StatelessWidget {
             children: [
               Text(
                 title,
-                style: typography.bS_strong.copyWith(color: colors.onSurface),
+                style: (ux4gTypography?.bS_strong ?? materialTheme.textTheme.bodySmall?.copyWith(fontWeight: FontWeight.bold))?.copyWith(color: onSurface),
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
               ),
@@ -220,7 +232,7 @@ class _FullLayout extends StatelessWidget {
                 Expanded(
                   child: Text(
                     subtitle!,
-                    style: typography.bS_default.copyWith(color: colors.onSurface.withValues(alpha: 0.6)),
+                    style: (ux4gTypography?.bS_default ?? materialTheme.textTheme.bodySmall)?.copyWith(color: onSurface.withValues(alpha: 0.6)),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
@@ -236,14 +248,14 @@ class _FullLayout extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: Ux4gSpace.space16),
               child: Text(
                 actionText!,
-                style: typography.lM_strong.copyWith(color: style.actionColor),
+                style: (ux4gTypography?.lM_strong ?? materialTheme.textTheme.labelMedium?.copyWith(fontWeight: FontWeight.bold))?.copyWith(color: style.actionColor),
               ),
             ),
           ),
         if (showCloseButton && onCloseClick != null)
           GestureDetector(
             onTap: onCloseClick,
-            child: Icon(Icons.close, size: 20, color: colors.onSurface),
+            child: Icon(Icons.close, size: 20, color: onSurface),
           ),
       ],
     );
@@ -271,8 +283,11 @@ class _StackedLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colors = Ux4gTheme.colors(context);
-    final typography = Ux4gTheme.typography(context);
+    final materialTheme = Theme.of(context);
+    final ux4gColors = materialTheme.extension<Ux4gColors>();
+    final ux4gTypography = materialTheme.extension<Ux4gTypography>();
+
+    final onSurface = ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
 
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -285,13 +300,13 @@ class _StackedLayout extends StatelessWidget {
             Expanded(
               child: Text(
                 title,
-                style: typography.bS_strong.copyWith(color: colors.onSurface),
+                style: (ux4gTypography?.bS_strong ?? materialTheme.textTheme.bodySmall?.copyWith(fontWeight: FontWeight.bold))?.copyWith(color: onSurface),
               ),
             ),
             if (showCloseButton && onCloseClick != null)
               GestureDetector(
                 onTap: onCloseClick,
-                child: Icon(Icons.close, size: 20, color: colors.onSurface),
+                child: Icon(Icons.close, size: 20, color: onSurface),
               ),
           ],
         ),
@@ -300,7 +315,7 @@ class _StackedLayout extends StatelessWidget {
             padding: const EdgeInsetsDirectional.only(start: 28, top: 2),
             child: Text(
               subtitle!,
-              style: typography.bS_default.copyWith(color: colors.onSurface.withValues(alpha: 0.6)),
+              style: (ux4gTypography?.bS_default ?? materialTheme.textTheme.bodySmall)?.copyWith(color: onSurface.withValues(alpha: 0.6)),
             ),
           ),
         if (actionText != null && onActionClick != null)
@@ -310,7 +325,7 @@ class _StackedLayout extends StatelessWidget {
               padding: const EdgeInsetsDirectional.only(start: 28, top: 6),
               child: Text(
                 actionText!,
-                style: typography.lM_strong.copyWith(color: style.actionColor),
+                style: (ux4gTypography?.lM_strong ?? materialTheme.textTheme.labelMedium?.copyWith(fontWeight: FontWeight.bold))?.copyWith(color: style.actionColor),
               ),
             ),
           ),

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../foundation/colors.dart';
+import '../foundation/typography.dart';
 import '../foundation/dimensions.dart';
 import '../theme/theme.dart';
 
@@ -37,15 +39,16 @@ class Ux4gAccordion extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colors = Ux4gTheme.colors(context);
-    final typography = Ux4gTheme.typography(context);
+    final materialTheme = Theme.of(context);
+    final ux4gColors = materialTheme.extension<Ux4gColors>();
+    final ux4gTypography = materialTheme.extension<Ux4gTypography>();
     
-    final resolvedCollapsedBorderColor = collapsedBorderColor ?? colors.onSurface.withValues(alpha: 0.12);
-    final resolvedExpandedBorderColor = expandedBorderColor ?? colors.primary;
-    final resolvedTitleColor = titleColor ?? colors.onSurface;
-    final resolvedDisabledTitleColor = disabledTitleColor ?? colors.onSurface.withValues(alpha: 0.38);
-    final resolvedIconColor = iconColor ?? colors.onSurface;
-    final resolvedDisabledIconColor = disabledIconColor ?? colors.onSurface.withValues(alpha: 0.38);
+    final resolvedCollapsedBorderColor = collapsedBorderColor ?? (ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface).withValues(alpha: 0.12);
+    final resolvedExpandedBorderColor = expandedBorderColor ?? (ux4gColors?.primary ?? materialTheme.colorScheme.primary);
+    final resolvedTitleColor = titleColor ?? (ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface);
+    final resolvedDisabledTitleColor = disabledTitleColor ?? (ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface).withValues(alpha: 0.38);
+    final resolvedIconColor = iconColor ?? (ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface);
+    final resolvedDisabledIconColor = disabledIconColor ?? (ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface).withValues(alpha: 0.38);
 
     final borderColor = !enabled
         ? Colors.transparent
@@ -57,7 +60,7 @@ class Ux4gAccordion extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Material(
-          color: backgroundColor ?? colors.surface,
+          color: backgroundColor ?? (ux4gColors?.surface ?? materialTheme.colorScheme.surface),
           child: InkWell(
             onTap: enabled ? () => onExpandedChange?.call(!expanded) : null,
             child: Container(
@@ -77,7 +80,7 @@ class Ux4gAccordion extends StatelessWidget {
                   Expanded(
                     child: Text(
                       title,
-                      style: typography.lL_default.copyWith(
+                      style: (ux4gTypography?.lL_default ?? materialTheme.textTheme.labelLarge ?? const TextStyle()).copyWith(
                         color: enabled ? resolvedTitleColor : resolvedDisabledTitleColor,
                       ),
                     ),
@@ -110,7 +113,7 @@ class Ux4gAccordion extends StatelessWidget {
                       left: Ux4gSpace.space12,
                       right: Ux4gSpace.space12,
                     ),
-                    color: contentBackgroundColor ?? colors.surface,
+                    color: contentBackgroundColor ?? (ux4gColors?.surface ?? materialTheme.colorScheme.surface),
                     child: child,
                   )
                 : const SizedBox.shrink(),

@@ -2,8 +2,9 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 
+import '../foundation/colors.dart';
 import '../foundation/dimensions.dart';
-import '../theme/theme.dart';
+import '../foundation/typography.dart';
 
 /// Size variants for [Ux4gHalfCircleProgress].
 enum Ux4gHalfCircleProgressSize { s, m, l, xl }
@@ -114,45 +115,46 @@ class Ux4gHalfCircleProgress extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colors = Ux4gTheme.colors(context);
-    final typography = Ux4gTheme.typography(context);
+    final materialTheme = Theme.of(context);
+    final ux4gColors = materialTheme.extension<Ux4gColors>();
+    final ux4gTypography = materialTheme.extension<Ux4gTypography>();
 
     final w = _resolvedWidth();
     final sw = _resolvedStrokeWidth(w);
     final arcHeight = w / 2 + sw / 2;
 
-    final resolvedProgressColor = progressColor ?? colors.primary;
+    final resolvedProgressColor = progressColor ?? (ux4gColors?.primary ?? materialTheme.colorScheme.primary);
     final resolvedTrackColor =
-        trackColor ?? colors.onSurface.withValues(alpha: 0.16);
+        trackColor ?? (ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface).withValues(alpha: 0.16);
 
     final percent = (value * 100).round();
     final displayValue = valueText ?? '$percent%';
 
     final resolvedValueStyle =
         valueStyle ??
-        typography.bS_strong.copyWith(
+        (ux4gTypography?.bS_strong ?? materialTheme.textTheme.bodySmall?.copyWith(fontWeight: FontWeight.w700) ?? const TextStyle()).copyWith(
           fontSize: _valueFontSize(w),
           fontWeight: FontWeight.w700,
           height: 1.1,
-          color: colors.onSurface,
+          color: ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface,
         );
 
     final resolvedDescriptionStyle =
         descriptionStyle ??
-        typography.bXS_default.copyWith(
+        (ux4gTypography?.bXS_default ?? materialTheme.textTheme.bodySmall?.copyWith(fontSize: 12) ?? const TextStyle()).copyWith(
           fontSize: _descriptionFontSize(w),
           fontWeight: FontWeight.w500,
           height: 1.2,
-          color: colors.onSurface.withValues(alpha: 0.6),
+          color: (ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface).withValues(alpha: 0.6),
         );
 
     final resolvedScaleStyle =
         scaleStyle ??
-        typography.bXS_default.copyWith(
+        (ux4gTypography?.bXS_default ?? materialTheme.textTheme.bodySmall?.copyWith(fontSize: 12) ?? const TextStyle()).copyWith(
           fontSize: _scaleFontSize(w),
           fontWeight: FontWeight.w400,
           height: 1.2,
-          color: colors.onSurface.withValues(alpha: 0.5),
+          color: (ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface).withValues(alpha: 0.5),
         );
 
     // Description fits inside the arc only for larger sizes

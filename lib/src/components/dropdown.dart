@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../foundation/dimensions.dart';
-import '../theme/theme.dart';
+import '../foundation/colors.dart';
+import '../foundation/typography.dart';
 import 'chips.dart';
 
 enum Ux4gDropdownFilterType { contains, startsWith, startsWithPerTerm }
@@ -103,7 +104,7 @@ class _Ux4gActionDropdownState extends State<Ux4gActionDropdown> {
                 child: Material(
                   elevation: 4,
                   borderRadius: BorderRadius.circular(Ux4gRadius.radius8),
-                  color: Ux4gTheme.colors(context).surface,
+                  color: Theme.of(context).extension<Ux4gColors>()?.surface ?? Theme.of(context).colorScheme.surface,
                   child: Container(
                     constraints: const BoxConstraints(maxHeight: 300),
                     child: ListView.builder(
@@ -112,11 +113,12 @@ class _Ux4gActionDropdownState extends State<Ux4gActionDropdown> {
                       itemCount: widget.options.length,
                       itemBuilder: (context, index) {
                         final option = widget.options[index];
+                        final typography = Theme.of(context).extension<Ux4gTypography>();
                         return ListTile(
                           dense: true,
                           title: Text(
                             option.label,
-                            style: Ux4gTheme.typography(context).lL_default,
+                            style: typography?.lL_default ?? Theme.of(context).textTheme.labelLarge,
                           ),
                           trailing: option.showTrailingArrow
                               ? const Icon(Icons.keyboard_arrow_right, size: 20)
@@ -245,7 +247,7 @@ class _Ux4gSelectionDropdownState extends State<Ux4gSelectionDropdown> {
               child: Material(
                 elevation: 8,
                 borderRadius: BorderRadius.circular(Ux4gRadius.radius8),
-                color: Ux4gTheme.colors(context).surface,
+                color: Theme.of(context).extension<Ux4gColors>()?.surface ?? Theme.of(context).colorScheme.surface,
                 clipBehavior: Clip.antiAlias,
                 child: Container(
                   width: size.width,
@@ -315,6 +317,9 @@ class _Ux4gSelectionDropdownState extends State<Ux4gSelectionDropdown> {
             itemBuilder: (context, index) {
               final option = filteredOptions[index];
               final isSelected = widget.selectedOptionIds.contains(option.id);
+              final uxColors = Theme.of(context).extension<Ux4gColors>();
+              final uxTypography = Theme.of(context).extension<Ux4gTypography>();
+              final materialTheme = Theme.of(context);
 
               return InkWell(
                 onTap: () => _handleSelection(option.id),
@@ -333,7 +338,7 @@ class _Ux4gSelectionDropdownState extends State<Ux4gSelectionDropdown> {
                             child: Checkbox(
                               value: isSelected,
                               onChanged: (_) {},
-                              activeColor: Ux4gTheme.colors(context).primary,
+                              activeColor: uxColors?.primary ?? materialTheme.colorScheme.primary,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(4),
                               ),
@@ -348,10 +353,9 @@ class _Ux4gSelectionDropdownState extends State<Ux4gSelectionDropdown> {
                       Expanded(
                         child: Text(
                           option.label,
-                          style: Ux4gTheme.typography(context).lL_default
-                              .copyWith(
+                          style: (uxTypography?.lL_default ?? materialTheme.textTheme.labelLarge)?.copyWith(
                                 color: isSelected
-                                    ? Ux4gTheme.colors(context).primary
+                                    ? (uxColors?.primary ?? materialTheme.colorScheme.primary)
                                     : null,
                                 fontWeight: isSelected ? FontWeight.w600 : null,
                               ),
@@ -360,7 +364,7 @@ class _Ux4gSelectionDropdownState extends State<Ux4gSelectionDropdown> {
                       if (widget.mode == Ux4gDropdownMode.single && isSelected)
                         Icon(
                           Icons.check,
-                          color: Ux4gTheme.colors(context).primary,
+                          color: uxColors?.primary ?? materialTheme.colorScheme.primary,
                           size: 20,
                         ),
                     ],
@@ -391,8 +395,9 @@ class _Ux4gSelectionDropdownState extends State<Ux4gSelectionDropdown> {
 
   @override
   Widget build(BuildContext context) {
-    final colors = Ux4gTheme.colors(context);
-    final typography = Ux4gTheme.typography(context);
+    final uxColors = Theme.of(context).extension<Ux4gColors>();
+    final uxTypography = Theme.of(context).extension<Ux4gTypography>();
+    final materialTheme = Theme.of(context);
 
     final (minHeight, verticalPadding) = switch (widget.size) {
       Ux4gDropdownSize.s => (32.0, 6.0),
@@ -401,21 +406,21 @@ class _Ux4gSelectionDropdownState extends State<Ux4gSelectionDropdown> {
     };
 
     final textStyle = switch (widget.size) {
-      Ux4gDropdownSize.s => typography.lM_default,
-      Ux4gDropdownSize.m => typography.lL_default,
-      Ux4gDropdownSize.l => typography.lXL_default,
+      Ux4gDropdownSize.s => uxTypography?.lM_default ?? materialTheme.textTheme.labelMedium,
+      Ux4gDropdownSize.m => uxTypography?.lL_default ?? materialTheme.textTheme.labelLarge,
+      Ux4gDropdownSize.l => uxTypography?.lXL_default ?? materialTheme.textTheme.labelLarge,
     };
 
     final borderColor = switch (widget.status) {
-      Ux4gDropdownStatus.disabled => colors.onSurface.withValues(alpha: 0.2),
-      Ux4gDropdownStatus.error => colors.error,
+      Ux4gDropdownStatus.disabled => (uxColors?.onSurface ?? materialTheme.colorScheme.onSurface).withValues(alpha: 0.2),
+      Ux4gDropdownStatus.error => uxColors?.error ?? materialTheme.colorScheme.error,
       Ux4gDropdownStatus.defaultStatus =>
-        _isExpanded ? colors.primary : colors.onSurface.withValues(alpha: 0.2),
+        _isExpanded ? (uxColors?.primary ?? materialTheme.colorScheme.primary) : (uxColors?.onSurface ?? materialTheme.colorScheme.onSurface).withValues(alpha: 0.2),
     };
 
     final descriptionColor = widget.status == Ux4gDropdownStatus.error
-        ? colors.error
-        : colors.onSurface.withValues(alpha: 0.7);
+        ? (uxColors?.error ?? materialTheme.colorScheme.error)
+        : (uxColors?.onSurface ?? materialTheme.colorScheme.onSurface).withValues(alpha: 0.7);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -423,10 +428,10 @@ class _Ux4gSelectionDropdownState extends State<Ux4gSelectionDropdown> {
         if (widget.label != null) ...[
           Text(
             widget.label!,
-            style: typography.hS_default.copyWith(
+            style: (uxTypography?.hS_default ?? materialTheme.textTheme.headlineSmall)?.copyWith(
               color: widget.status == Ux4gDropdownStatus.disabled
-                  ? colors.onSurface.withValues(alpha: 0.38)
-                  : colors.onSurface,
+                  ? (uxColors?.onSurface ?? materialTheme.colorScheme.onSurface).withValues(alpha: 0.38)
+                  : (uxColors?.onSurface ?? materialTheme.colorScheme.onSurface),
             ),
           ),
           const SizedBox(height: Ux4gSpace.space4),
@@ -444,8 +449,8 @@ class _Ux4gSelectionDropdownState extends State<Ux4gSelectionDropdown> {
               ),
               decoration: BoxDecoration(
                 color: widget.status == Ux4gDropdownStatus.disabled
-                    ? colors.onSurface.withValues(alpha: 0.04)
-                    : colors.surface,
+                    ? (uxColors?.onSurface ?? materialTheme.colorScheme.onSurface).withValues(alpha: 0.04)
+                    : (uxColors?.surface ?? materialTheme.colorScheme.surface),
                 borderRadius: BorderRadius.circular(Ux4gRadius.radius8),
                 border: Border.all(color: borderColor),
               ),
@@ -455,8 +460,8 @@ class _Ux4gSelectionDropdownState extends State<Ux4gSelectionDropdown> {
                     child: widget.selectedOptionIds.isEmpty
                         ? Text(
                             widget.placeholder,
-                            style: textStyle.copyWith(
-                              color: colors.onSurface.withValues(alpha: 0.38),
+                            style: (textStyle ?? const TextStyle()).copyWith(
+                              color: (uxColors?.onSurface ?? materialTheme.colorScheme.onSurface).withValues(alpha: 0.38),
                             ),
                           )
                         : (widget.mode == Ux4gDropdownMode.single
@@ -491,7 +496,7 @@ class _Ux4gSelectionDropdownState extends State<Ux4gSelectionDropdown> {
                     _isExpanded
                         ? Icons.keyboard_arrow_up
                         : Icons.keyboard_arrow_down,
-                    color: colors.onSurface.withValues(alpha: 0.6),
+                    color: (uxColors?.onSurface ?? materialTheme.colorScheme.onSurface).withValues(alpha: 0.6),
                   ),
                 ],
               ),
@@ -512,7 +517,7 @@ class _Ux4gSelectionDropdownState extends State<Ux4gSelectionDropdown> {
               const SizedBox(width: 4),
               Text(
                 widget.description!,
-                style: typography.lS_default.copyWith(color: descriptionColor),
+                style: (uxTypography?.lS_default ?? materialTheme.textTheme.labelSmall)?.copyWith(color: descriptionColor),
               ),
             ],
           ),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../foundation/colors.dart';
 import '../foundation/dimensions.dart';
-import '../theme/theme.dart';
+import '../foundation/typography.dart';
 
 // ─── Enums ────────────────────────────────────────────────────────────────────
 
@@ -124,16 +124,17 @@ class Ux4gLinearProgress extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colors = Ux4gTheme.colors(context);
-    final typography = Ux4gTheme.typography(context);
+    final materialTheme = Theme.of(context);
+    final ux4gColors = materialTheme.extension<Ux4gColors>();
+    final ux4gTypography = materialTheme.extension<Ux4gTypography>();
 
     final radius = _resolvedRadius();
     final clampedValue = value.clamp(0.0, 1.0);
     final percent = (clampedValue * 100).toStringAsFixed(0);
 
-    final resolvedColor = color ?? colors.primary;
+    final resolvedColor = color ?? (ux4gColors?.primary ?? materialTheme.colorScheme.primary);
     final resolvedTrack =
-        trackColor ?? colors.onSurface.withValues(alpha: 0.12);
+        trackColor ?? (ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface).withValues(alpha: 0.12);
 
     final hasHeader = icon != null || label != null || hint != null ||
         (showPercentage && labelPosition == Ux4gProgressLabelPosition.outside);
@@ -150,9 +151,9 @@ class Ux4gLinearProgress extends StatelessWidget {
               if (icon != null) ...[
                 _IconBubble(
                   icon: icon!,
-                  iconColor: iconColor ?? colors.primary,
+                  iconColor: iconColor ?? (ux4gColors?.primary ?? materialTheme.colorScheme.primary),
                   backgroundColor: iconBackgroundColor ??
-                      colors.primary.withValues(alpha: 0.12),
+                      (ux4gColors?.primary ?? materialTheme.colorScheme.primary).withValues(alpha: 0.12),
                   size: 32,
                 ),
                 const SizedBox(width: Ux4gSpace.space8),
@@ -163,8 +164,8 @@ class Ux4gLinearProgress extends StatelessWidget {
                 Expanded(
                   child: Text(
                     label!,
-                    style: typography.bS_strong
-                        .copyWith(color: colors.onSurface),
+                    style: (ux4gTypography?.bS_strong ?? materialTheme.textTheme.bodySmall?.copyWith(fontWeight: FontWeight.bold) ?? const TextStyle())
+                        .copyWith(color: ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface),
                     overflow: TextOverflow.ellipsis,
                   ),
                 )
@@ -178,8 +179,8 @@ class Ux4gLinearProgress extends StatelessWidget {
                   if (hint != null)
                     Text(
                       hint!,
-                      style: typography.bS_default.copyWith(
-                        color: colors.onSurface.withValues(alpha: 0.5),
+                      style: (ux4gTypography?.bS_default ?? materialTheme.textTheme.bodySmall ?? const TextStyle()).copyWith(
+                        color: (ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface).withValues(alpha: 0.5),
                       ),
                     ),
                   if (showPercentage &&
@@ -189,8 +190,8 @@ class Ux4gLinearProgress extends StatelessWidget {
                       const SizedBox(width: Ux4gSpace.space8),
                     Text(
                       '$percent%',
-                      style: typography.bS_strong
-                          .copyWith(color: colors.onSurface),
+                      style: (ux4gTypography?.bS_strong ?? materialTheme.textTheme.bodySmall?.copyWith(fontWeight: FontWeight.bold) ?? const TextStyle())
+                          .copyWith(color: ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface),
                     ),
                   ],
                 ],
@@ -213,7 +214,7 @@ class Ux4gLinearProgress extends StatelessWidget {
               labelPosition == Ux4gProgressLabelPosition.inside,
           percent: percent,
           insideLabelStyle: insideLabelStyle ??
-              typography.lS_strong.copyWith(
+              (ux4gTypography?.lS_strong ?? materialTheme.textTheme.labelSmall?.copyWith(fontWeight: FontWeight.bold) ?? const TextStyle()).copyWith(
                 color: Colors.white,
                 fontSize: height > 14 ? 11 : (height * 0.7).clamp(8, 11),
               ),
