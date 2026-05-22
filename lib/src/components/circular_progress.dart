@@ -151,15 +151,23 @@ class Ux4gCircularProgress extends StatelessWidget {
     final inlineCenter = _textFitsInside(ringSize);
 
     // The center content widget (inside the ring)
+    final Color contentColor = backgroundColor != null
+        ? (ThemeData.estimateBrightnessForColor(
+                  Color.alphaBlend(backgroundColor!, colors.surface)) ==
+                Brightness.dark
+            ? Colors.white
+            : colors.onSurface)
+        : colors.onSurface;
+
     final centerWidget = center ??
         (inlineCenter
             ? _Ux4gCircularCenter(
                 valueText: centerValueText,
                 description: centerDescription,
                 valueStyle: _centerValueStyle(typography, ringSize)
-                    .copyWith(color: colors.onSurface),
+                    .copyWith(color: contentColor),
                 descriptionStyle: _centerDescriptionStyle(typography, ringSize)
-                    .copyWith(color: colors.onSurface.withValues(alpha: 0.6)),
+                    .copyWith(color: contentColor.withValues(alpha: 0.6)),
               )
             : null);
 
@@ -212,10 +220,10 @@ class Ux4gCircularProgress extends StatelessWidget {
             valueText: centerValueText,
             description: centerDescription,
             valueStyle: _centerValueStyle(typography, ringSize)
-                .copyWith(color: colors.onSurface, fontSize: 11),
+                .copyWith(color: contentColor, fontSize: 11),
             descriptionStyle: _centerDescriptionStyle(typography, ringSize)
                 .copyWith(
-                  color: colors.onSurface.withValues(alpha: 0.6),
+                  color: contentColor.withValues(alpha: 0.6),
                   fontSize: 9,
                 ),
           ),

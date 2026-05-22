@@ -94,6 +94,14 @@ class _ComponentShowcasePageState extends State<ComponentShowcasePage> {
   // File Upload
   List<UploadedFile> _uploadedFiles = [];
 
+  // Aadhaar
+  String _aadhaarValue = '';
+  Ux4gInputFieldStatus _aadhaarStatus = Ux4gInputFieldStatus.defaultStatus;
+
+  // PAN
+  String _panValue = '';
+  Ux4gInputFieldStatus _panStatus = Ux4gInputFieldStatus.defaultStatus;
+
   // OTP
   String _otpDefault = '';
   String _otpError = '';
@@ -697,6 +705,60 @@ class _ComponentShowcasePageState extends State<ComponentShowcasePage> {
                               label: 'Search',
                               placeholder: 'Search...',
                               leadingIcon: Icons.search,
+                            ),
+                            const SizedBox(height: 16),
+                            const Ux4gDivider(),
+                            const SizedBox(height: 16),
+                            Text('Aadhaar Input (Specialized)', style: typography.lS_strong),
+                            const SizedBox(height: 12),
+                            Ux4gAadhaarInputField(
+                              value: _aadhaarValue,
+                              onValueChange: (v) {
+                                setState(() {
+                                  _aadhaarValue = v;
+                                  if (v.replaceAll(' ', '').length == 12) {
+                                    final isValid = Ux4gAadhaarInputField.validateAadhaar(v);
+                                    _aadhaarStatus = isValid
+                                        ? Ux4gInputFieldStatus.success
+                                        : Ux4gInputFieldStatus.error;
+                                  } else {
+                                    _aadhaarStatus = Ux4gInputFieldStatus.defaultStatus;
+                                  }
+                                });
+                              },
+                              status: _aadhaarStatus,
+                              required: true,
+                              caption: _aadhaarStatus == Ux4gInputFieldStatus.error
+                                  ? 'Invalid Aadhaar number (Verhoeff check failed)'
+                                  : (_aadhaarStatus == Ux4gInputFieldStatus.success
+                                      ? 'Valid Aadhaar number'
+                                      : 'Enter your 12-digit Aadhaar number'),
+                            ),
+                            const SizedBox(height: 16),
+                            Text('PAN Input (Specialized)', style: typography.lS_strong),
+                            const SizedBox(height: 12),
+                            Ux4gPanInputField(
+                              value: _panValue,
+                              onValueChange: (v) {
+                                setState(() {
+                                  _panValue = v;
+                                  if (v.length == 10) {
+                                    final isValid = Ux4gPanInputField.validatePan(v);
+                                    _panStatus = isValid
+                                        ? Ux4gInputFieldStatus.success
+                                        : Ux4gInputFieldStatus.error;
+                                  } else {
+                                    _panStatus = Ux4gInputFieldStatus.defaultStatus;
+                                  }
+                                });
+                              },
+                              status: _panStatus,
+                              required: true,
+                              caption: _panStatus == Ux4gInputFieldStatus.error
+                                  ? 'Invalid PAN number (Format: ABCDE1234F)'
+                                  : (_panStatus == Ux4gInputFieldStatus.success
+                                      ? 'Valid PAN number'
+                                      : 'Enter your 10-character PAN number'),
                             ),
                           ],
                         ),
@@ -2071,7 +2133,7 @@ class _ComponentShowcasePageState extends State<ComponentShowcasePage> {
                       // Elevated card
                       Ux4gCard(
                         elevation: 4,
-                        backgroundColor: Ux4gPalette.primary50,
+                        backgroundColor: Color.lerp(colors.surface, colors.primary, 0.08),
                         cornerRadius: Ux4gRadius.radius16,
                         title: 'Elevated Card',
                         body:
@@ -2456,7 +2518,7 @@ class _ComponentShowcasePageState extends State<ComponentShowcasePage> {
                               child: Ux4gAnimatedCircularProgress(
                                 value: _circularProgressValue,
                                 size: Ux4gCircularProgressSize.xxxl,
-                                backgroundColor: Ux4gPalette.gray100,
+                                backgroundColor: colors.onSurface.withValues(alpha: 0.05),
                                 progressGradient: SweepGradient(
                                   transform: GradientRotation(-math.pi / 2),
                                   colors: [
@@ -4325,7 +4387,7 @@ class _ComponentShowcasePageState extends State<ComponentShowcasePage> {
                                     color: Ux4gPalette.white,
                                     enableBackground: true,
                                     containerSize: 100,
-                                    containerColor: const Color(0xFFF5F5F5),
+                                    containerColor: _isDark ? colors.surface : colors.primary,
                                     tooltip: _selectedSocialIcon.name,
                                   ),
                                   const SizedBox(height: 12),
@@ -4606,6 +4668,7 @@ class _ComponentShowcasePageState extends State<ComponentShowcasePage> {
     required Ux4gCircularProgressSize size,
     required bool inlineMeta,
   }) {
+    final colors = Ux4gTheme.colors(context);
     final valueText = '${(_circularProgressValue * 100).round()}%';
 
     return Ux4gCircularProgress(
@@ -4615,7 +4678,7 @@ class _ComponentShowcasePageState extends State<ComponentShowcasePage> {
           (size == Ux4gCircularProgressSize.xl ||
               size == Ux4gCircularProgressSize.xxl ||
               size == Ux4gCircularProgressSize.xxxl)
-          ? Ux4gPalette.gray100
+          ? colors.onSurface.withValues(alpha: 0.05)
           : null,
       progressGradient: SweepGradient(
         transform: GradientRotation(-math.pi / 2),

@@ -301,8 +301,8 @@ class Ux4gSlider extends StatelessWidget {
         alpha: 0.7,
       ),
       Ux4gSliderCaptionVariant.error => colors.error,
-      Ux4gSliderCaptionVariant.warning => Ux4gPalette.orange700,
-      Ux4gSliderCaptionVariant.success => Ux4gPalette.green600,
+      Ux4gSliderCaptionVariant.warning => colors.warning,
+      Ux4gSliderCaptionVariant.success => colors.success,
     };
 
     return Row(

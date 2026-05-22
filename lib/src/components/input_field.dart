@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import '../foundation/colors.dart';
 import '../foundation/dimensions.dart';
 import '../theme/theme.dart';
@@ -38,6 +39,9 @@ class Ux4gInputField extends StatefulWidget {
   final bool readOnly;
   final bool singleLine;
   final int? maxLines;
+  final int? maxLength;
+  final List<TextInputFormatter>? inputFormatters;
+  final TextAlign textAlign;
 
   const Ux4gInputField({
     super.key,
@@ -61,6 +65,9 @@ class Ux4gInputField extends StatefulWidget {
     this.readOnly = false,
     this.singleLine = true,
     this.maxLines,
+    this.maxLength,
+    this.inputFormatters,
+    this.textAlign = TextAlign.start,
   });
 
   @override
@@ -178,6 +185,9 @@ class _Ux4gInputFieldState extends State<Ux4gInputField> {
                   maxLines: widget.singleLine ? 1 : widget.maxLines,
                   keyboardType: _getKeyboardType(),
                   cursorColor: colors.primary,
+                  maxLength: widget.maxLength,
+                  inputFormatters: widget.inputFormatters,
+                  textAlign: widget.textAlign,
                   style: typography.bM_default.copyWith(
                     color: widget.enabled ? colors.onSurface : colors.onSurface.withValues(alpha: 0.4),
                   ),
@@ -189,6 +199,7 @@ class _Ux4gInputFieldState extends State<Ux4gInputField> {
                     border: InputBorder.none,
                     enabledBorder: InputBorder.none,
                     focusedBorder: InputBorder.none,
+                    counterText: "",
                   ),
                 ),
               ),
@@ -263,8 +274,8 @@ class _Ux4gInputFieldState extends State<Ux4gInputField> {
     if (!widget.enabled) return colors.onSurface.withValues(alpha: 0.3);
     return switch (widget.status) {
       Ux4gInputFieldStatus.error => colors.error,
-      Ux4gInputFieldStatus.warning => colors.secondary,
-      Ux4gInputFieldStatus.success => Ux4gPalette.green500,
+      Ux4gInputFieldStatus.warning => colors.warning,
+      Ux4gInputFieldStatus.success => colors.success,
       Ux4gInputFieldStatus.defaultStatus => _isFocused ? colors.primary : colors.onSurface.withValues(alpha: 0.3),
     };
   }
@@ -272,9 +283,9 @@ class _Ux4gInputFieldState extends State<Ux4gInputField> {
   Color _getLabelColor(Ux4gColors colors) {
     return switch (widget.status) {
       Ux4gInputFieldStatus.error => colors.error,
-      Ux4gInputFieldStatus.warning => colors.secondary,
-      Ux4gInputFieldStatus.success => Ux4gPalette.green500,
-      Ux4gInputFieldStatus.defaultStatus => _isFocused ? colors.primary : colors.onSurface,
+      Ux4gInputFieldStatus.warning => colors.warning,
+      Ux4gInputFieldStatus.success => colors.success,
+      Ux4gInputFieldStatus.defaultStatus => colors.onSurface,
     };
   }
 
@@ -282,8 +293,8 @@ class _Ux4gInputFieldState extends State<Ux4gInputField> {
     if (!widget.enabled) return colors.onSurface.withValues(alpha: 0.4);
     return switch (widget.status) {
       Ux4gInputFieldStatus.error => colors.error,
-      Ux4gInputFieldStatus.warning => colors.secondary,
-      Ux4gInputFieldStatus.success => Ux4gPalette.green500,
+      Ux4gInputFieldStatus.warning => colors.warning,
+      Ux4gInputFieldStatus.success => colors.success,
       Ux4gInputFieldStatus.defaultStatus => colors.onSurface.withValues(alpha: 0.6),
     };
   }

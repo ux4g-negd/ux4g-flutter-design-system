@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../foundation/colors.dart';
+import 'package:ux4g_flutter_design_system/src/foundation/colors.dart';
 import '../foundation/typography.dart';
 import '../theme/theme.dart';
 import 'buttons.dart';
@@ -72,7 +72,10 @@ class _Ux4gDatePickerState extends State<Ux4gDatePicker> {
       builder: (context) {
         return Dialog(
           backgroundColor: Colors.transparent,
-          insetPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
+          insetPadding: const EdgeInsets.symmetric(
+            horizontal: 16,
+            vertical: 24,
+          ),
           child: _Ux4gDatePickerDialog(
             mode: widget.mode,
             initialDate: _selectedDate,
@@ -89,7 +92,8 @@ class _Ux4gDatePickerState extends State<Ux4gDatePicker> {
         if (widget.mode == Ux4gDatePickerMode.single && result is DateTime) {
           _selectedDate = result;
           widget.onDateSelected?.call(result);
-        } else if (widget.mode == Ux4gDatePickerMode.range && result is DateTimeRange) {
+        } else if (widget.mode == Ux4gDatePickerMode.range &&
+            result is DateTimeRange) {
           _selectedRange = result;
           widget.onDateRangeSelected?.call(result);
         }
@@ -101,11 +105,14 @@ class _Ux4gDatePickerState extends State<Ux4gDatePicker> {
   Widget build(BuildContext context) {
     final colors = Ux4gTheme.colors(context);
     final typography = Ux4gTheme.typography(context);
-    final isSelected = (widget.mode == Ux4gDatePickerMode.single && _selectedDate != null) ||
+    final isSelected =
+        (widget.mode == Ux4gDatePickerMode.single && _selectedDate != null) ||
         (widget.mode == Ux4gDatePickerMode.range && _selectedRange != null);
 
     return MouseRegion(
-      cursor: widget.enabled ? SystemMouseCursors.click : SystemMouseCursors.forbidden,
+      cursor: widget.enabled
+          ? SystemMouseCursors.click
+          : SystemMouseCursors.forbidden,
       child: GestureDetector(
         onTap: _openPicker,
         child: Container(
@@ -114,7 +121,9 @@ class _Ux4gDatePickerState extends State<Ux4gDatePicker> {
             color: colors.surface,
             borderRadius: BorderRadius.circular(8),
             border: Border.all(
-              color: isSelected ? colors.primary : Ux4gPalette.neutral500,
+              color: isSelected
+                  ? colors.primary
+                  : colors.onSurface.withValues(alpha: 0.38),
             ),
           ),
           child: Row(
@@ -123,14 +132,18 @@ class _Ux4gDatePickerState extends State<Ux4gDatePicker> {
               Text(
                 _getFormattedValue(),
                 style: typography.bM_default.copyWith(
-                  color: isSelected ? colors.onSurface : Ux4gPalette.neutral500,
+                  color: isSelected
+                      ? colors.onSurface
+                      : colors.onSurface.withValues(alpha: 0.38),
                 ),
               ),
               const SizedBox(width: 12),
               Icon(
                 Icons.calendar_today_outlined,
                 size: 20,
-                color: isSelected ? colors.primary : Ux4gPalette.neutral500,
+                color: isSelected
+                    ? colors.primary
+                    : colors.onSurface.withValues(alpha: 0.38),
               ),
             ],
           ),
@@ -164,13 +177,24 @@ class _Ux4gDatePickerDialogState extends State<_Ux4gDatePickerDialog> {
   DateTime? _tempSelectedDate;
   DateTime? _tempRangeStart;
   DateTime? _tempRangeEnd;
-  
+
   bool _showMonthYearPicker = false;
   int _yearGridStart = 2020;
 
   final List<String> _weekdays = ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'];
   final List<String> _months = [
-    'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
+    'Jan',
+    'Feb',
+    'Mar',
+    'Apr',
+    'May',
+    'Jun',
+    'Jul',
+    'Aug',
+    'Sep',
+    'Oct',
+    'Nov',
+    'Dec',
   ];
 
   @override
@@ -185,15 +209,33 @@ class _Ux4gDatePickerDialogState extends State<_Ux4gDatePickerDialog> {
       _tempRangeEnd = widget.initialDateRange?.end;
       _currentDisplayedMonth = widget.initialDateRange?.start ?? now;
     }
-    _currentDisplayedMonth = DateTime(_currentDisplayedMonth.year, _currentDisplayedMonth.month);
-    _yearGridStart = _currentDisplayedMonth.year - (_currentDisplayedMonth.year % 8);
+    _currentDisplayedMonth = DateTime(
+      _currentDisplayedMonth.year,
+      _currentDisplayedMonth.month,
+    );
+    _yearGridStart =
+        _currentDisplayedMonth.year - (_currentDisplayedMonth.year % 8);
   }
 
   bool _isSelectable(DateTime date) {
-    if (widget.minDate != null && date.isBefore(DateTime(widget.minDate!.year, widget.minDate!.month, widget.minDate!.day))) {
+    if (widget.minDate != null &&
+        date.isBefore(
+          DateTime(
+            widget.minDate!.year,
+            widget.minDate!.month,
+            widget.minDate!.day,
+          ),
+        )) {
       return false;
     }
-    if (widget.maxDate != null && date.isAfter(DateTime(widget.maxDate!.year, widget.maxDate!.month, widget.maxDate!.day))) {
+    if (widget.maxDate != null &&
+        date.isAfter(
+          DateTime(
+            widget.maxDate!.year,
+            widget.maxDate!.month,
+            widget.maxDate!.day,
+          ),
+        )) {
       return false;
     }
     return true;
@@ -206,7 +248,10 @@ class _Ux4gDatePickerDialogState extends State<_Ux4gDatePickerDialog> {
       }
     } else {
       if (_tempRangeStart != null && _tempRangeEnd != null) {
-        Navigator.pop(context, DateTimeRange(start: _tempRangeStart!, end: _tempRangeEnd!));
+        Navigator.pop(
+          context,
+          DateTimeRange(start: _tempRangeStart!, end: _tempRangeEnd!),
+        );
       }
     }
   }
@@ -221,7 +266,8 @@ class _Ux4gDatePickerDialogState extends State<_Ux4gDatePickerDialog> {
       if (widget.mode == Ux4gDatePickerMode.single) {
         _tempSelectedDate = date;
       } else {
-        if (_tempRangeStart == null || (_tempRangeStart != null && _tempRangeEnd != null)) {
+        if (_tempRangeStart == null ||
+            (_tempRangeStart != null && _tempRangeEnd != null)) {
           _tempRangeStart = date;
           _tempRangeEnd = null;
         } else {
@@ -253,8 +299,18 @@ class _Ux4gDatePickerDialogState extends State<_Ux4gDatePickerDialog> {
 
   String _getMonthName(int month) {
     const names = [
-      'January', 'February', 'March', 'April', 'May', 'June',
-      'July', 'August', 'September', 'October', 'November', 'December'
+      'January',
+      'February',
+      'March',
+      'April',
+      'May',
+      'June',
+      'July',
+      'August',
+      'September',
+      'October',
+      'November',
+      'December',
     ];
     return names[month - 1];
   }
@@ -263,7 +319,7 @@ class _Ux4gDatePickerDialogState extends State<_Ux4gDatePickerDialog> {
   Widget build(BuildContext context) {
     final colors = Ux4gTheme.colors(context);
     final typography = Ux4gTheme.typography(context);
-    
+
     return Container(
       width: 320,
       decoration: BoxDecoration(
@@ -308,11 +364,15 @@ class _Ux4gDatePickerDialogState extends State<_Ux4gDatePickerDialog> {
                         _showMonthYearPicker
                             ? '$_yearGridStart-${_yearGridStart + 7}'
                             : '${_getMonthName(_currentDisplayedMonth.month)} ${_currentDisplayedMonth.year}',
-                        style: typography.bM_strong.copyWith(color: colors.primary),
+                        style: typography.bM_strong.copyWith(
+                          color: colors.primary,
+                        ),
                       ),
                       const SizedBox(width: 4),
                       Icon(
-                        _showMonthYearPicker ? Icons.keyboard_arrow_up : Icons.keyboard_arrow_down,
+                        _showMonthYearPicker
+                            ? Icons.keyboard_arrow_up
+                            : Icons.keyboard_arrow_down,
                         color: colors.primary,
                         size: 20,
                       ),
@@ -332,8 +392,8 @@ class _Ux4gDatePickerDialogState extends State<_Ux4gDatePickerDialog> {
               ],
             ),
           ),
-          Divider(height: 1, color: Ux4gPalette.neutral500.withValues(alpha: 0.2)),
-          
+          Divider(height: 1, color: colors.onSurface.withValues(alpha: 0.12)),
+
           // Body
           Container(
             padding: const EdgeInsets.all(16),
@@ -345,9 +405,9 @@ class _Ux4gDatePickerDialogState extends State<_Ux4gDatePickerDialog> {
                   : _buildCalendarView(colors, typography),
             ),
           ),
-          
-          Divider(height: 1, color: Ux4gPalette.neutral500.withValues(alpha: 0.2)),
-          
+
+          Divider(height: 1, color: colors.onSurface.withValues(alpha: 0.12)),
+
           // Footer
           Padding(
             padding: const EdgeInsets.all(16),
@@ -403,13 +463,18 @@ class _Ux4gDatePickerDialogState extends State<_Ux4gDatePickerDialog> {
             return GestureDetector(
               onTap: () {
                 setState(() {
-                  _currentDisplayedMonth = DateTime(year, _currentDisplayedMonth.month);
+                  _currentDisplayedMonth = DateTime(
+                    year,
+                    _currentDisplayedMonth.month,
+                  );
                 });
               },
               child: Container(
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
-                  color: isSelected ? colors.primary.withValues(alpha: 0.2) : Colors.transparent,
+                  color: isSelected
+                      ? colors.primary.withValues(alpha: 0.2)
+                      : Colors.transparent,
                   borderRadius: BorderRadius.circular(4),
                 ),
                 child: Text(
@@ -423,8 +488,8 @@ class _Ux4gDatePickerDialogState extends State<_Ux4gDatePickerDialog> {
           },
         ),
         const SizedBox(height: 16),
-        Divider(height: 1, color: Ux4gPalette.neutral500.withValues(alpha: 0.2)),
-        const SizedBox(height: 16),
+        Divider(height: 1, color: colors.onSurface.withValues(alpha: 0.12)),
+
         // Month Grid
         GridView.builder(
           shrinkWrap: true,
@@ -441,13 +506,18 @@ class _Ux4gDatePickerDialogState extends State<_Ux4gDatePickerDialog> {
             return GestureDetector(
               onTap: () {
                 setState(() {
-                  _currentDisplayedMonth = DateTime(_currentDisplayedMonth.year, index + 1);
+                  _currentDisplayedMonth = DateTime(
+                    _currentDisplayedMonth.year,
+                    index + 1,
+                  );
                 });
               },
               child: Container(
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
-                  color: isSelected ? colors.primary.withValues(alpha: 0.2) : Colors.transparent,
+                  color: isSelected
+                      ? colors.primary.withValues(alpha: 0.2)
+                      : Colors.transparent,
                   borderRadius: BorderRadius.circular(4),
                 ),
                 child: Text(
@@ -466,12 +536,20 @@ class _Ux4gDatePickerDialogState extends State<_Ux4gDatePickerDialog> {
 
   Widget _buildCalendarView(Ux4gColors colors, Ux4gTypography typography) {
     final now = DateTime.now();
-    final firstDayOfMonth = DateTime(_currentDisplayedMonth.year, _currentDisplayedMonth.month, 1);
-    final lastDayOfMonth = DateTime(_currentDisplayedMonth.year, _currentDisplayedMonth.month + 1, 0);
-    
+    final firstDayOfMonth = DateTime(
+      _currentDisplayedMonth.year,
+      _currentDisplayedMonth.month,
+      1,
+    );
+    final lastDayOfMonth = DateTime(
+      _currentDisplayedMonth.year,
+      _currentDisplayedMonth.month + 1,
+      0,
+    );
+
     // Calculate leading empty days (1 = Monday, 7 = Sunday)
     int leadingDays = firstDayOfMonth.weekday - 1;
-    
+
     final daysInMonth = lastDayOfMonth.day;
     final totalCells = leadingDays + daysInMonth;
     final rows = (totalCells / 7).ceil();
@@ -482,14 +560,20 @@ class _Ux4gDatePickerDialogState extends State<_Ux4gDatePickerDialog> {
         // Weekdays Header
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: _weekdays.map((d) => Expanded(
-            child: Center(
-              child: Text(
-                d,
-                style: typography.bS_strong.copyWith(color: colors.onSurface),
-              ),
-            ),
-          )).toList(),
+          children: _weekdays
+              .map(
+                (d) => Expanded(
+                  child: Center(
+                    child: Text(
+                      d,
+                      style: typography.bS_strong.copyWith(
+                        color: colors.onSurface,
+                      ),
+                    ),
+                  ),
+                ),
+              )
+              .toList(),
         ),
         const SizedBox(height: 8),
         // Days Grid
@@ -509,45 +593,73 @@ class _Ux4gDatePickerDialogState extends State<_Ux4gDatePickerDialog> {
                 return const SizedBox.shrink();
               }
               final day = index - leadingDays + 1;
-              final date = DateTime(_currentDisplayedMonth.year, _currentDisplayedMonth.month, day);
-              
-              final isToday = date.year == now.year && date.month == now.month && date.day == now.day;
+              final date = DateTime(
+                _currentDisplayedMonth.year,
+                _currentDisplayedMonth.month,
+                day,
+              );
+
+              final isToday =
+                  date.year == now.year &&
+                  date.month == now.month &&
+                  date.day == now.day;
               final isSelectable = _isSelectable(date);
-              
+
               bool isSelectedSingle = false;
               bool isRangeStart = false;
               bool isRangeEnd = false;
               bool isInRange = false;
 
               if (widget.mode == Ux4gDatePickerMode.single) {
-                isSelectedSingle = _tempSelectedDate?.year == date.year &&
+                isSelectedSingle =
+                    _tempSelectedDate?.year == date.year &&
                     _tempSelectedDate?.month == date.month &&
                     _tempSelectedDate?.day == date.day;
               } else {
-                if (_tempRangeStart != null && date.year == _tempRangeStart!.year && date.month == _tempRangeStart!.month && date.day == _tempRangeStart!.day) {
+                if (_tempRangeStart != null &&
+                    date.year == _tempRangeStart!.year &&
+                    date.month == _tempRangeStart!.month &&
+                    date.day == _tempRangeStart!.day) {
                   isRangeStart = true;
                 }
-                if (_tempRangeEnd != null && date.year == _tempRangeEnd!.year && date.month == _tempRangeEnd!.month && date.day == _tempRangeEnd!.day) {
+                if (_tempRangeEnd != null &&
+                    date.year == _tempRangeEnd!.year &&
+                    date.month == _tempRangeEnd!.month &&
+                    date.day == _tempRangeEnd!.day) {
                   isRangeEnd = true;
                 }
-                if (_tempRangeStart != null && _tempRangeEnd != null && date.isAfter(_tempRangeStart!) && date.isBefore(_tempRangeEnd!)) {
+                if (_tempRangeStart != null &&
+                    _tempRangeEnd != null &&
+                    date.isAfter(_tempRangeStart!) &&
+                    date.isBefore(_tempRangeEnd!)) {
                   isInRange = true;
                 }
               }
 
-              final isSolidPurple = isSelectedSingle || isRangeStart || isRangeEnd;
+              final isSolidPurple =
+                  isSelectedSingle || isRangeStart || isRangeEnd;
               final isLightPurple = isInRange;
-              
+
               return GestureDetector(
                 onTap: isSelectable ? () => _handleDaySelect(date) : null,
                 child: Container(
                   decoration: BoxDecoration(
-                    color: isSolidPurple 
-                        ? colors.primary 
-                        : (isLightPurple ? colors.primary.withValues(alpha: 0.1) : Colors.transparent),
-                    borderRadius: isSolidPurple 
-                        ? BorderRadius.circular(4) 
-                        : (isRangeStart ? const BorderRadius.horizontal(left: Radius.circular(4)) : (isRangeEnd ? const BorderRadius.horizontal(right: Radius.circular(4)) : BorderRadius.zero)),
+                    color: isSolidPurple
+                        ? colors.primary
+                        : (isLightPurple
+                              ? colors.primary.withValues(alpha: 0.1)
+                              : Colors.transparent),
+                    borderRadius: isSolidPurple
+                        ? BorderRadius.circular(4)
+                        : (isRangeStart
+                              ? const BorderRadius.horizontal(
+                                  left: Radius.circular(4),
+                                )
+                              : (isRangeEnd
+                                    ? const BorderRadius.horizontal(
+                                        right: Radius.circular(4),
+                                      )
+                                    : BorderRadius.zero)),
                   ),
                   child: Center(
                     child: Column(
@@ -556,9 +668,13 @@ class _Ux4gDatePickerDialogState extends State<_Ux4gDatePickerDialog> {
                         Text(
                           day.toString(),
                           style: typography.bM_default.copyWith(
-                            color: isSolidPurple 
-                                ? colors.onPrimary 
-                                : (isSelectable ? colors.onSurface : Ux4gPalette.neutral500.withValues(alpha: 0.5)),
+                            color: isSolidPurple
+                                ? colors.onPrimary
+                                : (isSelectable
+                                      ? colors.onSurface
+                                      : colors.onSurface.withValues(
+                                          alpha: 0.38,
+                                        )),
                           ),
                         ),
                         if (isToday && !isSolidPurple)

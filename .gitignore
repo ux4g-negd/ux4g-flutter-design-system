@@ -29,3 +29,11 @@ migrate_working_dir/
 .flutter-plugins-dependencies
 /build/
 /coverage/
+
+# Custom ignores
+analysis_report.txt
+example/macos/Flutter/GeneratedPluginRegistrant.swift
+example/windows/flutter/generated_plugin_registrant.cc
+example/windows/flutter/generated_plugin_registrant.h
+example/windows/flutter/generated_plugins.cmake
+

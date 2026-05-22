@@ -17,7 +17,7 @@ void main() {
               centerDescription: 'Description',
               label: 'Label',
               description: 'Caption',
-              footer: const Ux4gTag(label: 'Tag'),
+              footer: const Ux4gTag(text: 'Tag'),
             ),
           ),
         ),

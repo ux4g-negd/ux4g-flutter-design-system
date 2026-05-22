@@ -36,30 +36,31 @@ class Ux4gStatusBanner extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = Ux4gTheme.colors(context);
     final typography = Ux4gTheme.typography(context);
 
     // Determine colors based on variant
     Color backgroundColor;
-    Color textColor = Ux4gPalette.gray900;
-    Color subtitleColor = Ux4gPalette.neutral500;
+    Color textColor = colors.onSurface;
+    Color subtitleColor = colors.onSurface.withValues(alpha: 0.6);
 
     switch (variant) {
       case Ux4gBannerVariant.warningLight:
-        backgroundColor = const Color(0xFFFFF7E6);
+        backgroundColor = Color.lerp(colors.surface, colors.warning, 0.12)!;
         break;
       case Ux4gBannerVariant.warningSolid:
-        backgroundColor = const Color(0xFFF58220);
-        textColor = Colors.white;
-        subtitleColor = Colors.white70;
+        backgroundColor = colors.warning;
+        textColor = colors.onWarning;
+        subtitleColor = colors.onWarning.withValues(alpha: 0.7);
         break;
       case Ux4gBannerVariant.errorLight:
-        backgroundColor = const Color(0xFFFFF1F0);
+        backgroundColor = Color.lerp(colors.surface, colors.error, 0.12)!;
         break;
       case Ux4gBannerVariant.successLight:
-        backgroundColor = const Color(0xFFF6FFED);
+        backgroundColor = Color.lerp(colors.surface, colors.success, 0.12)!;
         break;
       case Ux4gBannerVariant.savingLight:
-        backgroundColor = const Color(0xFFFFFBE6);
+        backgroundColor = Color.lerp(colors.surface, colors.primary, 0.12)!;
         break;
     }
 
@@ -72,7 +73,7 @@ class Ux4gStatusBanner extends StatelessWidget {
         borderRadius: BorderRadius.circular(8),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withValues(alpha: 0.05),
+            color: colors.onBackground.withValues(alpha: 0.05),
             blurRadius: 10,
             offset: const Offset(0, 4),
           ),
@@ -110,7 +111,7 @@ class Ux4gStatusBanner extends StatelessWidget {
                                 color: textColor,
                               ),
                             ),
-                            ?badge,
+                            if (badge != null) badge!,
                           ],
                         ),
                         if (subtitle != null) ...[

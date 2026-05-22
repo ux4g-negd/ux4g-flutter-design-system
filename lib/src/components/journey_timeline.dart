@@ -528,13 +528,14 @@ class _StepIndicator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = Ux4gTheme.colors(context);
     switch (state) {
       case Ux4gJourneyStepState.completed:
         return Container(
           width: size,
           height: size,
           decoration: BoxDecoration(color: activeColor, shape: BoxShape.circle),
-          child: Icon(Icons.check, size: size * 0.6, color: Colors.white),
+          child: Icon(Icons.check, size: size * 0.6, color: colors.surface),
         );
 
       case Ux4gJourneyStepState.current:
@@ -542,7 +543,7 @@ class _StepIndicator extends StatelessWidget {
           width: size,
           height: size,
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: colors.surface,
             shape: BoxShape.circle,
             border: Border.all(color: activeColor, width: 2.5),
           ),
@@ -563,7 +564,7 @@ class _StepIndicator extends StatelessWidget {
           width: size,
           height: size,
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: colors.surface,
             shape: BoxShape.circle,
             border: Border.all(color: inactiveColor, width: 1.5),
           ),
@@ -702,7 +703,7 @@ class _JourneyStepCard extends StatelessWidget {
                     width: 8,
                     height: 8,
                     decoration: BoxDecoration(
-                      color: step.status!.dotColor ?? Ux4gPalette.secondary,
+                      color: step.status!.dotColor ?? colors.warning,
                       shape: BoxShape.circle,
                     ),
                   ),
@@ -712,7 +713,7 @@ class _JourneyStepCard extends StatelessWidget {
                     text: step.status!.badgeText!,
                     bold: true,
                     textColor:
-                        step.status!.badgeTextColor ?? Ux4gPalette.secondary,
+                        step.status!.badgeTextColor ?? colors.warning,
                   ),
               ],
             ),

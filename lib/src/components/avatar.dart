@@ -116,7 +116,7 @@ class Ux4gAvatarGroup extends StatelessWidget {
   final Ux4gAvatarSize size;
   final int? maxLimit;
   final bool collapsed;
-  final Color borderColor;
+  final Color? borderColor;
   final double borderWidth;
   final VoidCallback? onRemainingClick;
 
@@ -126,7 +126,7 @@ class Ux4gAvatarGroup extends StatelessWidget {
     this.size = Ux4gAvatarSize.m,
     this.maxLimit,
     this.collapsed = true,
-    this.borderColor = Colors.white,
+    this.borderColor,
     this.borderWidth = 2,
     this.onRemainingClick,
   });
@@ -135,6 +135,8 @@ class Ux4gAvatarGroup extends StatelessWidget {
   Widget build(BuildContext context) {
     if (items.isEmpty) return const SizedBox.shrink();
 
+    final colors = Ux4gTheme.colors(context);
+    final resolvedBorderColor = borderColor ?? colors.surface;
     final actualLimit = maxLimit ?? items.length;
     final exceedsLimit = items.length > actualLimit;
     final visibleItems = exceedsLimit ? items.take(actualLimit - 1).toList() : items;
@@ -148,7 +150,6 @@ class Ux4gAvatarGroup extends StatelessWidget {
       crossAxisAlignment: WrapCrossAlignment.center,
       children: [
         ...visibleItems.asMap().entries.map((entry) {
-          final index = entry.key;
           final item = entry.value;
           return GestureDetector(
             onTap: item.onClick,
@@ -159,6 +160,7 @@ class Ux4gAvatarGroup extends StatelessWidget {
                 initials: item.initials,
                 icon: item.icon,
               ),
+              resolvedBorderColor,
             ),
           );
         }),
@@ -170,18 +172,19 @@ class Ux4gAvatarGroup extends StatelessWidget {
                 size: size,
                 initials: "+$remainingCount",
               ),
+              resolvedBorderColor,
             ),
           ),
       ],
     );
   }
 
-  Widget _buildGroupAvatar(Widget avatar) {
+  Widget _buildGroupAvatar(Widget avatar, Color resolvedBorderColor) {
     if (!collapsed) return avatar;
     return Container(
       decoration: BoxDecoration(
         shape: BoxShape.circle,
-        border: Border.all(color: borderColor, width: borderWidth),
+        border: Border.all(color: resolvedBorderColor, width: borderWidth),
       ),
       child: avatar,
     );
@@ -269,11 +272,11 @@ class Ux4gProfileAvatar extends StatelessWidget {
       return Container(
         width: size,
         height: size,
-        decoration: const BoxDecoration(
-          color: Colors.white,
+        decoration: BoxDecoration(
+          color: colors.surface,
           shape: BoxShape.circle,
         ),
-        child: Icon(icon, size: size * 0.8, color: Colors.black),
+        child: Icon(icon, size: size * 0.8, color: colors.onSurface),
       );
     }
     return const SizedBox.shrink();
@@ -321,8 +324,8 @@ class Ux4gStatusAvatar extends StatelessWidget {
           child: Container(
             width: indicatorSize,
             height: indicatorSize,
-            decoration: const BoxDecoration(
-              color: Colors.white,
+            decoration: BoxDecoration(
+              color: colors.surface,
               shape: BoxShape.circle,
             ),
             padding: const EdgeInsets.all(2),
@@ -352,12 +355,12 @@ class Ux4gStatusAvatar extends StatelessWidget {
 
   Color _getStatusColor(Ux4gColors colors) {
     return switch (variant) {
-      Ux4gStatusVariant.online => Ux4gPalette.green500,
+      Ux4gStatusVariant.online => colors.success,
       Ux4gStatusVariant.offline => colors.onSurface.withValues(alpha: 0.5),
       Ux4gStatusVariant.busy => colors.error,
-      Ux4gStatusVariant.success => Ux4gPalette.green500,
-      Ux4gStatusVariant.error => Ux4gPalette.red600,
-      Ux4gStatusVariant.warning => Ux4gPalette.orange500,
+      Ux4gStatusVariant.success => colors.success,
+      Ux4gStatusVariant.error => colors.error,
+      Ux4gStatusVariant.warning => colors.warning,
     };
   }
 }

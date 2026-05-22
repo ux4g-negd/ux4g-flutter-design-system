@@ -232,18 +232,18 @@ class Ux4gStatusPipeline extends StatelessWidget {
 
   Color _stepColor(Ux4gPipelineStepState state, Ux4gColors colors) {
     return switch (state) {
-      Ux4gPipelineStepState.completed => completedColor ?? Ux4gPalette.green500,
+      Ux4gPipelineStepState.completed => completedColor ?? colors.success,
       Ux4gPipelineStepState.current => currentColor ?? colors.primary,
       Ux4gPipelineStepState.upcoming =>
         upcomingColor ?? colors.onSurface.withValues(alpha: 0.3),
-      Ux4gPipelineStepState.error => errorColor ?? Ux4gPalette.red,
-      Ux4gPipelineStepState.warning => warningColor ?? Ux4gPalette.secondary,
+      Ux4gPipelineStepState.error => errorColor ?? colors.error,
+      Ux4gPipelineStepState.warning => warningColor ?? colors.warning,
     };
   }
 
   Color _lineColor(Ux4gPipelineStepState fromState, Ux4gColors colors) {
     final isActive = fromState == Ux4gPipelineStepState.completed;
-    if (isActive) return completedLineColor ?? Ux4gPalette.green500;
+    if (isActive) return completedLineColor ?? colors.success;
     return upcomingLineColor ?? colors.onSurface.withValues(alpha: 0.15);
   }
 
@@ -528,6 +528,8 @@ class _StepCircle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = Ux4gTheme.colors(context);
+
     if (customIcon != null) {
       return Container(
         width: size,
@@ -541,9 +543,9 @@ class _StepCircle extends StatelessWidget {
       Ux4gPipelineStepState.completed => _buildFilled(
         Icons.check,
         color,
-        Colors.white,
+        colors.onSuccess,
       ),
-      Ux4gPipelineStepState.current => _buildCurrent(color),
+      Ux4gPipelineStepState.current => _buildCurrent(color, colors.surface),
       Ux4gPipelineStepState.upcoming => _buildUpcoming(color),
       Ux4gPipelineStepState.error => _buildOutlined(color),
       Ux4gPipelineStepState.warning => _buildOutlined(color),
@@ -562,8 +564,8 @@ class _StepCircle extends StatelessWidget {
     );
   }
 
-  /// Current step — thick colored ring with white center.
-  Widget _buildCurrent(Color activeColor) {
+  /// Current step — thick colored ring with surface-colored center.
+  Widget _buildCurrent(Color activeColor, Color surfaceColor) {
     final innerSize = size * 0.55;
     return Container(
       width: size,
@@ -573,8 +575,8 @@ class _StepCircle extends StatelessWidget {
         child: Container(
           width: innerSize,
           height: innerSize,
-          decoration: const BoxDecoration(
-            color: Colors.white,
+          decoration: BoxDecoration(
+            color: surfaceColor,
             shape: BoxShape.circle,
           ),
         ),

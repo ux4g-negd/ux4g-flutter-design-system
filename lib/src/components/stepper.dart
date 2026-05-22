@@ -130,7 +130,7 @@ class Ux4gStepper extends StatelessWidget {
     } else if (isCompleted) {
       bgColor = colors.primary;
       borderColor = colors.primary;
-      content = const Icon(Icons.check, color: Colors.white, size: 20);
+      content = Icon(Icons.check, color: colors.onPrimary, size: 20);
     } else if (isActive) {
       borderColor = colors.primary;
       content = Container(
@@ -173,7 +173,7 @@ class Ux4gStepper extends StatelessWidget {
 
     final titleColor = isPending ? colors.onSurface.withValues(alpha: 0.4) : (data?.isError ?? false ? colors.error : colors.onSurface);
     final statusText = data?.statusLabel ?? (data?.isError == true ? "Error" : (isCompleted ? "Completed" : (isActive ? "In progress" : null)));
-    final statusColor = data?.isError == true ? colors.error : (isCompleted ? Ux4gPalette.green600 : (isActive ? colors.primary : colors.onSurface.withValues(alpha: 0.4)));
+    final statusColor = data?.isError == true ? colors.error : (isCompleted ? colors.success : (isActive ? colors.primary : colors.onSurface.withValues(alpha: 0.4)));
 
     return Column(
       crossAxisAlignment: centered ? CrossAxisAlignment.center : CrossAxisAlignment.start,

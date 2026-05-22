@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../foundation/colors.dart';
 import '../foundation/dimensions.dart';
 import '../theme/theme.dart';
 import 'buttons.dart';
@@ -139,7 +138,7 @@ class Ux4gEmptyState extends StatelessWidget {
         );
 
     // Tonal button: filled light-primary background, primary-coloured text.
-    final buttonBg = Ux4gPalette.primary100;
+    final buttonBg = colors.primary.withValues(alpha: 0.12);
     final buttonFg = colors.primary;
 
     return Padding(

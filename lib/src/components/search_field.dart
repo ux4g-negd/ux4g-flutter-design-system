@@ -338,8 +338,8 @@ class _Ux4gSearchFieldState extends State<Ux4gSearchField> {
     if (_isFocused && widget.variant == Ux4gSearchFieldVariant.autocomplete) return colors.primary;
     return switch (widget.status) {
       Ux4gSearchFieldStatus.error => colors.error,
-      Ux4gSearchFieldStatus.warning => colors.secondary,
-      Ux4gSearchFieldStatus.success => Ux4gPalette.green500,
+      Ux4gSearchFieldStatus.warning => colors.warning,
+      Ux4gSearchFieldStatus.success => colors.success,
       Ux4gSearchFieldStatus.defaultStatus => _isFocused ? colors.primary : colors.onSurface.withValues(alpha: 0.3),
     };
   }
@@ -348,8 +348,8 @@ class _Ux4gSearchFieldState extends State<Ux4gSearchField> {
     if (!widget.enabled) return colors.onSurface.withValues(alpha: 0.4);
     return switch (widget.status) {
       Ux4gSearchFieldStatus.error => colors.error,
-      Ux4gSearchFieldStatus.warning => colors.secondary,
-      Ux4gSearchFieldStatus.success => Ux4gPalette.green500,
+      Ux4gSearchFieldStatus.warning => colors.warning,
+      Ux4gSearchFieldStatus.success => colors.success,
       Ux4gSearchFieldStatus.defaultStatus => _isFocused ? colors.primary : colors.onBackground,
     };
   }
@@ -358,8 +358,8 @@ class _Ux4gSearchFieldState extends State<Ux4gSearchField> {
     if (!widget.enabled) return colors.onSurface.withValues(alpha: 0.4);
     return switch (widget.status) {
       Ux4gSearchFieldStatus.error => colors.error,
-      Ux4gSearchFieldStatus.warning => colors.secondary,
-      Ux4gSearchFieldStatus.success => Ux4gPalette.green500,
+      Ux4gSearchFieldStatus.warning => colors.warning,
+      Ux4gSearchFieldStatus.success => colors.success,
       Ux4gSearchFieldStatus.defaultStatus => colors.onSurface.withValues(alpha: 0.6),
     };
   }

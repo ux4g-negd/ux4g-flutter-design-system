@@ -86,7 +86,7 @@ class _Ux4gTimePickerState extends State<Ux4gTimePicker> {
             color: colors.surface,
             borderRadius: BorderRadius.circular(8),
             border: Border.all(
-              color: isSelected ? colors.primary : Ux4gPalette.neutral500,
+              color: isSelected ? colors.primary : colors.onSurface.withValues(alpha: 0.12),
             ),
           ),
           child: Row(
@@ -95,14 +95,14 @@ class _Ux4gTimePickerState extends State<Ux4gTimePicker> {
               Text(
                 _getFormattedValue(),
                 style: typography.bM_default.copyWith(
-                  color: isSelected ? colors.onSurface : Ux4gPalette.neutral500,
+                  color: isSelected ? colors.onSurface : colors.onSurface.withValues(alpha: 0.38),
                 ),
               ),
               const SizedBox(width: 12),
               Icon(
                 Icons.access_time,
                 size: 20,
-                color: isSelected ? colors.primary : Ux4gPalette.neutral500,
+                color: isSelected ? colors.primary : colors.onSurface.withValues(alpha: 0.38),
               ),
             ],
           ),
@@ -217,12 +217,12 @@ class _Ux4gTimePickerDialogState extends State<_Ux4gTimePickerDialog> {
               children: [
                 Expanded(
                   child: Center(
-                    child: Text('HH', style: typography.bM_strong.copyWith(color: Ux4gPalette.neutral500)),
+                    child: Text('HH', style: typography.bM_strong.copyWith(color: colors.onSurface.withValues(alpha: 0.38))),
                   ),
                 ),
                 Expanded(
                   child: Center(
-                    child: Text('MM', style: typography.bM_strong.copyWith(color: Ux4gPalette.neutral500)),
+                    child: Text('MM', style: typography.bM_strong.copyWith(color: colors.onSurface.withValues(alpha: 0.38))),
                   ),
                 ),
                 Expanded(
@@ -231,7 +231,7 @@ class _Ux4gTimePickerDialogState extends State<_Ux4gTimePickerDialog> {
               ],
             ),
           ),
-          Divider(height: 1, color: Ux4gPalette.neutral500.withValues(alpha: 0.2)),
+          Divider(height: 1, color: colors.onSurface.withValues(alpha: 0.12)),
           
           // Body
           SizedBox(
@@ -273,7 +273,7 @@ class _Ux4gTimePickerDialogState extends State<_Ux4gTimePickerDialog> {
                   ),
                 ),
                 
-                VerticalDivider(width: 1, thickness: 1, color: Ux4gPalette.neutral500.withValues(alpha: 0.2)),
+                VerticalDivider(width: 1, thickness: 1, color: colors.onSurface.withValues(alpha: 0.12)),
                 
                 // Minutes Column
                 Expanded(
@@ -310,7 +310,7 @@ class _Ux4gTimePickerDialogState extends State<_Ux4gTimePickerDialog> {
                   ),
                 ),
                 
-                VerticalDivider(width: 1, thickness: 1, color: Ux4gPalette.neutral500.withValues(alpha: 0.2)),
+                VerticalDivider(width: 1, thickness: 1, color: colors.onSurface.withValues(alpha: 0.12)),
                 
                 // AM/PM Column
                 Expanded(
@@ -351,7 +351,7 @@ class _Ux4gTimePickerDialogState extends State<_Ux4gTimePickerDialog> {
             ),
           ),
           
-          Divider(height: 1, color: Ux4gPalette.neutral500.withValues(alpha: 0.2)),
+          Divider(height: 1, color: colors.onSurface.withValues(alpha: 0.12)),
           
           // Footer
           Padding(

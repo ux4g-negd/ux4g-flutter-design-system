@@ -50,8 +50,8 @@ class Ux4gRadioButton<T> extends StatelessWidget {
     final descriptionColor = switch (descriptionVariant) {
       Ux4gRadioButtonDescriptionVariant.helper => colors.onSurface.withValues(alpha: 0.7),
       Ux4gRadioButtonDescriptionVariant.error => colors.error,
-      Ux4gRadioButtonDescriptionVariant.warning => Ux4gPalette.orange700,
-      Ux4gRadioButtonDescriptionVariant.success => Ux4gPalette.green700,
+      Ux4gRadioButtonDescriptionVariant.warning => colors.warning,
+      Ux4gRadioButtonDescriptionVariant.success => colors.success,
     };
 
     final descriptionIcon = switch (descriptionVariant) {

@@ -152,7 +152,7 @@ class _Ux4gFeedbackFormState extends State<Ux4gFeedbackForm> {
                   widget.ratingIcon,
                   size: 32,
                   color: isSelected 
-                      ? (widget.activeRatingColor ?? const Color(0xFFFFD700)) 
+                      ? (widget.activeRatingColor ?? colors.info) 
                       : (widget.inactiveRatingColor ?? colors.onSurface.withValues(alpha: 0.15)),
                 ),
               ),
@@ -241,7 +241,7 @@ class _Ux4gFeedbackFormState extends State<Ux4gFeedbackForm> {
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
           decoration: BoxDecoration(
-            color: widget.successBackgroundColor ?? const Color(0xFFE8F5E9), // Light green success background
+            color: widget.successBackgroundColor ?? colors.success.withValues(alpha: 0.12), // Light green success background
             borderRadius: BorderRadius.circular(8),
           ),
           child: Column(
@@ -249,7 +249,7 @@ class _Ux4gFeedbackFormState extends State<Ux4gFeedbackForm> {
             children: [
               Icon(
                 widget.successIcon,
-                color: widget.successIconColor ?? const Color(0xFF4CAF50), // Solid green success icon
+                color: widget.successIconColor ?? colors.success, // Solid green success icon
                 size: 32,
               ),
               const SizedBox(height: 16),

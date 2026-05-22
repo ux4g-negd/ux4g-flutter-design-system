@@ -215,8 +215,8 @@ class _Ux4gTextAreaState extends State<Ux4gTextArea> {
     if (!widget.enabled) return colors.onSurface.withValues(alpha: 0.3);
     return switch (widget.status) {
       Ux4gInputFieldStatus.error => colors.error,
-      Ux4gInputFieldStatus.warning => colors.secondary,
-      Ux4gInputFieldStatus.success => Ux4gPalette.green500,
+      Ux4gInputFieldStatus.warning => colors.warning,
+      Ux4gInputFieldStatus.success => colors.success,
       Ux4gInputFieldStatus.defaultStatus => colors.onSurface.withValues(alpha: 0.3),
     };
   }
@@ -225,8 +225,8 @@ class _Ux4gTextAreaState extends State<Ux4gTextArea> {
     if (!widget.enabled) return colors.onSurface.withValues(alpha: 0.4);
     return switch (widget.status) {
       Ux4gInputFieldStatus.error => colors.error,
-      Ux4gInputFieldStatus.warning => colors.secondary,
-      Ux4gInputFieldStatus.success => Ux4gPalette.green500,
+      Ux4gInputFieldStatus.warning => colors.warning,
+      Ux4gInputFieldStatus.success => colors.success,
       Ux4gInputFieldStatus.defaultStatus => colors.onBackground,
     };
   }
@@ -235,8 +235,8 @@ class _Ux4gTextAreaState extends State<Ux4gTextArea> {
     if (!widget.enabled) return colors.onSurface.withValues(alpha: 0.4);
     return switch (widget.status) {
       Ux4gInputFieldStatus.error => colors.error,
-      Ux4gInputFieldStatus.warning => colors.secondary,
-      Ux4gInputFieldStatus.success => Ux4gPalette.green500,
+      Ux4gInputFieldStatus.warning => colors.warning,
+      Ux4gInputFieldStatus.success => colors.success,
       Ux4gInputFieldStatus.defaultStatus => colors.onSurface.withValues(alpha: 0.6),
     };
   }

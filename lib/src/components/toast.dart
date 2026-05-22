@@ -97,9 +97,10 @@ class Ux4gToast extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = Ux4gTheme.colors(context);
     final screenWidth = MediaQuery.of(context).size.width;
     final resolvedLayout = layout ?? (screenWidth < 600 ? Ux4gToastLayout.stacked : Ux4gToastLayout.full);
-    final style = _getToastStyle(category);
+    final style = _getToastStyle(category, colors);
 
     return Material(
       color: Colors.transparent,
@@ -136,41 +137,41 @@ class Ux4gToast extends StatelessWidget {
     );
   }
 
-  _ToastStyle _getToastStyle(Ux4gToastCategory category) {
+  _ToastStyle _getToastStyle(Ux4gToastCategory category, Ux4gColors colors) {
     switch (category) {
       case Ux4gToastCategory.info:
         return _ToastStyle(
-          backgroundColor: Ux4gPalette.cyan50,
-          iconColor: Ux4gPalette.cyan500,
-          actionColor: Ux4gPalette.cyan600,
+          backgroundColor: Color.lerp(colors.surface, colors.info, 0.12)!,
+          iconColor: colors.info,
+          actionColor: colors.info,
           icon: Icons.info_outline,
         );
       case Ux4gToastCategory.success:
         return _ToastStyle(
-          backgroundColor: Ux4gPalette.green50,
-          iconColor: Ux4gPalette.green500,
-          actionColor: Ux4gPalette.green600,
+          backgroundColor: Color.lerp(colors.surface, colors.success, 0.12)!,
+          iconColor: colors.success,
+          actionColor: colors.success,
           icon: Icons.check_circle_outline,
         );
       case Ux4gToastCategory.warning:
         return _ToastStyle(
-          backgroundColor: Ux4gPalette.gold50,
-          iconColor: Ux4gPalette.gold600,
-          actionColor: Ux4gPalette.gold700,
+          backgroundColor: Color.lerp(colors.surface, colors.warning, 0.12)!,
+          iconColor: colors.warning,
+          actionColor: colors.warning,
           icon: Icons.warning_amber_rounded,
         );
       case Ux4gToastCategory.error:
         return _ToastStyle(
-          backgroundColor: Ux4gPalette.red50,
-          iconColor: Ux4gPalette.red,
-          actionColor: Ux4gPalette.red600,
+          backgroundColor: Color.lerp(colors.surface, colors.error, 0.12)!,
+          iconColor: colors.error,
+          actionColor: colors.error,
           icon: Icons.error_outline,
         );
       case Ux4gToastCategory.slot:
         return _ToastStyle(
-          backgroundColor: Ux4gPalette.purple50,
-          iconColor: Ux4gPalette.purple500,
-          actionColor: Ux4gPalette.purple600,
+          backgroundColor: Color.lerp(colors.surface, colors.primary, 0.12)!,
+          iconColor: colors.primary,
+          actionColor: colors.primary,
           icon: Icons.settings_outlined,
         );
     }

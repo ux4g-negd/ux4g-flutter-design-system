@@ -197,6 +197,7 @@ class _Ux4gFileUploadState extends State<Ux4gFileUpload> {
   }
 
   void _showErrorDialog(String title, String message) {
+    final colors = Ux4gTheme.colors(context);
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Column(
@@ -208,7 +209,7 @@ class _Ux4gFileUploadState extends State<Ux4gFileUpload> {
             Text(message),
           ],
         ),
-        backgroundColor: Ux4gPalette.red500,
+        backgroundColor: colors.error,
         duration: const Duration(seconds: 4),
       ),
     );
@@ -293,11 +294,11 @@ class _Ux4gFileUploadState extends State<Ux4gFileUpload> {
                     Expanded(
                       child: ElevatedButton.icon(
                         onPressed: () => _pickFile(fromCamera: true),
-                        icon: const Icon(Icons.camera_alt, color: Colors.white),
-                        label: const Text('Scan', style: TextStyle(color: Colors.white)),
+                        icon: Icon(Icons.camera_alt, color: colors.onPrimary),
+                        label: Text('Scan', style: TextStyle(color: colors.onPrimary)),
                         style: ElevatedButton.styleFrom(
                           backgroundColor: colors.primary,
-                          foregroundColor: Colors.white,
+                          foregroundColor: colors.onPrimary,
                         ),
                       ),
                     ),
@@ -328,7 +329,7 @@ class _Ux4gFileUploadState extends State<Ux4gFileUpload> {
           color: colors.surface,
           border: Border.all(
             color: file.status == UploadStatus.error
-                ? Ux4gPalette.red500.withValues(alpha: 0.2)
+                ? colors.error.withValues(alpha: 0.2)
                 : colors.onSurface.withValues(alpha: 0.08),
           ),
           borderRadius: BorderRadius.circular(8),
@@ -337,7 +338,7 @@ class _Ux4gFileUploadState extends State<Ux4gFileUpload> {
         child: Row(
           children: [
             // File icon
-            _getFileIcon(file.name),
+            _getFileIcon(file.name, colors),
             const SizedBox(width: 12),
 
             // File info
@@ -348,7 +349,7 @@ class _Ux4gFileUploadState extends State<Ux4gFileUpload> {
                   Text(
                     file.name,
                     style: typography.tS_strong.copyWith(
-                      color: _getFileNameColor(file.status),
+                      color: _getFileNameColor(file.status, colors),
                     ),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
@@ -357,7 +358,7 @@ class _Ux4gFileUploadState extends State<Ux4gFileUpload> {
                     Text(
                       file.errorMessage ?? 'Error',
                       style: typography.bM_default.copyWith(
-                        color: Ux4gPalette.red500,
+                        color: colors.error,
                       ),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
@@ -390,10 +391,10 @@ class _Ux4gFileUploadState extends State<Ux4gFileUpload> {
                 width: 24,
                 height: 24,
                 decoration: BoxDecoration(
-                  color: Ux4gPalette.green500,
+                  color: colors.success,
                   shape: BoxShape.circle,
                 ),
-                child: const Icon(Icons.check, color: Colors.white, size: 14),
+                child: Icon(Icons.check, color: colors.onPrimary, size: 14),
               )
             else if (file.status == UploadStatus.error)
               GestureDetector(
@@ -405,19 +406,19 @@ class _Ux4gFileUploadState extends State<Ux4gFileUpload> {
                       width: 24,
                       height: 24,
                       decoration: BoxDecoration(
-                        color: Ux4gPalette.red500.withValues(alpha: 0.1),
+                        color: colors.error.withValues(alpha: 0.1),
                         shape: BoxShape.circle,
                       ),
                       child: Icon(
                         Icons.info_outline,
-                        color: Ux4gPalette.red500,
+                        color: colors.error,
                         size: 14,
                       ),
                     ),
                     Text(
                       'Retry',
                       style: typography.bM_default.copyWith(
-                        color: Ux4gPalette.primary500,
+                        color: colors.primary,
                       ),
                     ),
                   ],
@@ -440,35 +441,35 @@ class _Ux4gFileUploadState extends State<Ux4gFileUpload> {
     );
   }
 
-  Color _getFileNameColor(UploadStatus status) {
+  Color _getFileNameColor(UploadStatus status, Ux4gColors colors) {
     switch (status) {
       case UploadStatus.idle:
       case UploadStatus.uploading:
-        return Ux4gPalette.neutral1000black;
+        return colors.onSurface;
       case UploadStatus.success:
-        return Ux4gPalette.green500;
+        return colors.success;
       case UploadStatus.error:
-        return Ux4gPalette.red500;
+        return colors.error;
     }
   }
 
-  Widget _getFileIcon(String fileName) {
+  Widget _getFileIcon(String fileName, Ux4gColors colors) {
     final extension = fileName.split('.').last.toLowerCase();
     IconData icon;
     Color color;
 
     if (['jpg', 'jpeg', 'png', 'gif', 'bmp'].contains(extension)) {
       icon = Icons.image;
-      color = Ux4gPalette.blue500;
+      color = colors.primary;
     } else if (['pdf'].contains(extension)) {
       icon = Icons.picture_as_pdf;
-      color = Ux4gPalette.red500;
+      color = colors.error;
     } else if (['doc', 'docx'].contains(extension)) {
       icon = Icons.description;
-      color = Ux4gPalette.primary500;
+      color = colors.primary;
     } else {
       icon = Icons.insert_drive_file;
-      color = Ux4gPalette.neutral500;
+      color = colors.onSurface.withValues(alpha: 0.38);
     }
 
     return Container(

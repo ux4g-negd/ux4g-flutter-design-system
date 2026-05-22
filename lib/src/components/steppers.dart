@@ -271,7 +271,7 @@ class _StepIcon extends StatelessWidget {
     if (isError) {
       child = Icon(Ux4gIcons.error, size: 20, color: colors.error);
     } else if (isCompleted) {
-      child = const Icon(Ux4gIcons.check, size: 20, color: Colors.white);
+      child = Icon(Ux4gIcons.check, size: 20, color: colors.onPrimary);
     } else if (isActive) {
       child = Container(
         width: 12,
@@ -347,7 +347,7 @@ class _StepLabels extends StatelessWidget {
         ? colors.onSurface.withValues(alpha: 0.4)
         : colors.onSurface;
     final resolvedDescriptionColor = isError
-        ? Ux4gPalette.red400
+        ? colors.error
         : colors.onSurface.withValues(alpha: 0.4);
     final resolvedStatus =
         statusLabel ??
@@ -361,7 +361,7 @@ class _StepLabels extends StatelessWidget {
     final statusColor = isError
         ? colors.error
         : isCompleted
-        ? Ux4gPalette.green
+        ? colors.success
         : isActive
         ? colors.primary
         : colors.onSurface.withValues(alpha: 0.4);

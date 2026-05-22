@@ -114,8 +114,8 @@ class _Ux4gFeedbackFormNpsState extends State<Ux4gFeedbackFormNps> {
   }
 
   Widget _buildFormView(Ux4gColors colors, Ux4gTypography typography) {
-    final highlightBg = widget.selectedScoreBackgroundColor ?? const Color(0xFFDDF5D3);
-    final highlightText = widget.selectedScoreTextColor ?? const Color(0xFF1B5E20);
+    final highlightBg = widget.selectedScoreBackgroundColor ?? colors.success.withValues(alpha: 0.12);
+    final highlightText = widget.selectedScoreTextColor ?? colors.success;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -230,7 +230,7 @@ class _Ux4gFeedbackFormNpsState extends State<Ux4gFeedbackFormNps> {
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
           decoration: BoxDecoration(
-            color: widget.successBackgroundColor ?? const Color(0xFFE8F5E9),
+            color: widget.successBackgroundColor ?? colors.success.withValues(alpha: 0.12),
             borderRadius: BorderRadius.circular(8),
           ),
           child: Column(
@@ -238,7 +238,7 @@ class _Ux4gFeedbackFormNpsState extends State<Ux4gFeedbackFormNps> {
             children: [
               Icon(
                 widget.successIcon,
-                color: widget.successIconColor ?? const Color(0xFF4CAF50),
+                color: widget.successIconColor ?? colors.success,
                 size: 32,
               ),
               const SizedBox(height: 16),

@@ -39,7 +39,7 @@ enum Ux4gProgressLabelPosition {
 ///   label: 'Upload',
 ///   hint: 'Almost done',
 ///   icon: Icons.cloud_upload_outlined,
-///   gradientColors: [Color(0xFF6A4EFF), Color(0xFF9B59B6)],
+///   gradientColors: [Colors.blue, Colors.purple],
 ///   shape: Ux4gProgressShape.rounded,
 ///   labelPosition: Ux4gProgressLabelPosition.inside,
 ///   showPercentage: true,

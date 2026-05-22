@@ -103,29 +103,29 @@ class Ux4gTag extends StatelessWidget {
         colors.onSurface.withValues(alpha: 0.8),
       ),
       Ux4gTagColor.brand => (
-        Ux4gPalette.primary50,
+        colors.primary.withValues(alpha: 0.12),
         colors.primary,
-        Ux4gPalette.primary700,
+        colors.primary,
       ),
       Ux4gTagColor.success => (
-        Ux4gPalette.green50,
-        Ux4gPalette.green500,
-        Ux4gPalette.green700,
+        colors.success.withValues(alpha: 0.12),
+        colors.success,
+        colors.success,
       ),
       Ux4gTagColor.warning => (
-        Ux4gPalette.orange50,
-        Ux4gPalette.orange500,
-        Ux4gPalette.orange700,
+        colors.warning.withValues(alpha: 0.12),
+        colors.warning,
+        colors.warning,
       ),
       Ux4gTagColor.error => (
-        Ux4gPalette.red50,
+        colors.error.withValues(alpha: 0.12),
         colors.error,
-        Ux4gPalette.red700,
+        colors.error,
       ),
       Ux4gTagColor.info => (
-        Ux4gPalette.blue50,
-        Ux4gPalette.blue500,
-        Ux4gPalette.blue700,
+        colors.info.withValues(alpha: 0.12),
+        colors.info,
+        colors.info,
       ),
     };
 
@@ -138,10 +138,9 @@ class Ux4gTag extends StatelessWidget {
       Ux4gTagStyle.filled => _TagColors(
         backgroundColor: baseNormal,
         contentColor:
-            (colorScheme == Ux4gTagColor.brand ||
-                colorScheme == Ux4gTagColor.error)
-            ? Colors.white
-            : colors.surface,
+            (colorScheme == Ux4gTagColor.neutral)
+            ? colors.surface
+            : colors.onPrimary, // Usually onPrimary works for brand/error/success/warning
         borderColor: Colors.transparent,
       ),
       Ux4gTagStyle.outline => _TagColors(
@@ -254,7 +253,7 @@ class Ux4gUnifiedPillTag extends StatelessWidget {
         ? typography.lS_strong
         : typography.lM_strong;
 
-    final bgColor = backgroundColor ?? Colors.white;
+    final bgColor = backgroundColor ?? colors.surface;
     final border = borderColor ?? colors.onSurface.withValues(alpha: 0.12);
     final divider = dividerColor ?? colors.onSurface.withValues(alpha: 0.15);
     final defaultTextColor = colors.onSurface.withValues(alpha: 0.7);

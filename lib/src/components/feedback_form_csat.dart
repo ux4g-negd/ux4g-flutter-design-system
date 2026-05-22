@@ -127,9 +127,9 @@ class _Ux4gFeedbackFormCsatState extends State<Ux4gFeedbackFormCsat> {
   }
 
   Widget _buildFormView(Ux4gColors colors, Ux4gTypography typography) {
-    final selBg = widget.selectedScoreBackgroundColor ?? const Color(0xFFE8F5E9);
-    final selIcon = widget.selectedScoreIconColor ?? const Color(0xFF4CAF50);
-    final unselBg = widget.unselectedScoreBackgroundColor ?? const Color(0xFFF5F5F5);
+    final selBg = widget.selectedScoreBackgroundColor ?? colors.success.withValues(alpha: 0.12);
+    final selIcon = widget.selectedScoreIconColor ?? colors.success;
+    final unselBg = widget.unselectedScoreBackgroundColor ?? colors.background;
     final unselIcon = widget.unselectedScoreIconColor ?? colors.onSurface.withValues(alpha: 0.6);
 
     return Column(
@@ -248,7 +248,7 @@ class _Ux4gFeedbackFormCsatState extends State<Ux4gFeedbackFormCsat> {
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
           decoration: BoxDecoration(
-            color: widget.successBackgroundColor ?? const Color(0xFFE8F5E9),
+            color: widget.successBackgroundColor ?? colors.success.withValues(alpha: 0.12),
             borderRadius: BorderRadius.circular(8),
           ),
           child: Column(
@@ -256,7 +256,7 @@ class _Ux4gFeedbackFormCsatState extends State<Ux4gFeedbackFormCsat> {
             children: [
               Icon(
                 widget.successIcon,
-                color: widget.successIconColor ?? const Color(0xFF4CAF50),
+                color: widget.successIconColor ?? colors.success,
                 size: 32,
               ),
               const SizedBox(height: 16),

@@ -45,8 +45,8 @@ class Ux4gCheckbox extends StatelessWidget {
         alpha: 0.7,
       ),
       Ux4gCheckboxDescriptionVariant.error => colors.error,
-      Ux4gCheckboxDescriptionVariant.warning => Ux4gPalette.secondary700,
-      Ux4gCheckboxDescriptionVariant.success => Ux4gPalette.green600,
+      Ux4gCheckboxDescriptionVariant.warning => colors.warning,
+      Ux4gCheckboxDescriptionVariant.success => colors.success,
     };
 
     final labelTextStyle = switch (size) {

@@ -117,8 +117,8 @@ class Ux4gOtpBox extends StatelessWidget {
     return switch (status) {
       Ux4gOtpBoxStatus.focused => colors.primary,
       Ux4gOtpBoxStatus.error => colors.error,
-      Ux4gOtpBoxStatus.warning => colors.secondary,
-      Ux4gOtpBoxStatus.success => Ux4gPalette.green500,
+      Ux4gOtpBoxStatus.warning => colors.warning,
+      Ux4gOtpBoxStatus.success => colors.success,
       Ux4gOtpBoxStatus.disabled => colors.onSurface.withValues(alpha: 0.2),
       Ux4gOtpBoxStatus.defaultStatus =>
         colors.onSurface.withValues(alpha: 0.25),
@@ -292,11 +292,11 @@ class Ux4gOtpCaption extends StatelessWidget {
         return Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(Icons.check_circle, size: 14, color: Ux4gPalette.green500),
+            Icon(Icons.check_circle, size: 14, color: colors.success),
             const SizedBox(width: 6),
             _text(
               caption ?? 'Verification successful',
-              typography.bXS_strong.copyWith(color: Ux4gPalette.green500),
+              typography.bXS_strong.copyWith(color: colors.success),
             ),
           ],
         );
@@ -307,11 +307,11 @@ class Ux4gOtpCaption extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Icon(Icons.warning_amber_rounded,
-                size: 14, color: colors.secondary),
+                size: 14, color: colors.warning),
             const SizedBox(width: 6),
             _text(
               caption ?? 'Warning message',
-              typography.bXS_default.copyWith(color: colors.secondary),
+              typography.bXS_default.copyWith(color: colors.warning),
             ),
           ],
         );
