@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-
-import '../foundation/colors.dart';
+ 
 import '../foundation/dimensions.dart';
 import '../theme/theme.dart';
-
+ 
 class Ux4gAccordion extends StatelessWidget {
   final String title;
   final bool expanded;
@@ -11,14 +10,14 @@ class Ux4gAccordion extends StatelessWidget {
   final ValueChanged<bool>? onExpandedChange;
   final Color? backgroundColor;
   final Color? contentBackgroundColor;
-  final Color collapsedBorderColor;
+  final Color? collapsedBorderColor;
   final Color? expandedBorderColor;
-  final Color titleColor;
-  final Color disabledTitleColor;
-  final Color iconColor;
-  final Color disabledIconColor;
+  final Color? titleColor;
+  final Color? disabledTitleColor;
+  final Color? iconColor;
+  final Color? disabledIconColor;
   final Widget child;
-
+ 
   const Ux4gAccordion({
     super.key,
     required this.title,
@@ -28,25 +27,35 @@ class Ux4gAccordion extends StatelessWidget {
     this.onExpandedChange,
     this.backgroundColor,
     this.contentBackgroundColor,
-    this.collapsedBorderColor = Ux4gPalette.gray200,
+    this.collapsedBorderColor,
     this.expandedBorderColor,
-    this.titleColor = Ux4gPalette.gray800,
-    this.disabledTitleColor = Ux4gPalette.neutral500,
-    this.iconColor = Ux4gPalette.gray800,
-    this.disabledIconColor = Ux4gPalette.neutral500,
+    this.titleColor,
+    this.disabledTitleColor,
+    this.iconColor,
+    this.disabledIconColor,
   });
-
+ 
   @override
   Widget build(BuildContext context) {
     final colors = Ux4gTheme.colors(context);
     final typography = Ux4gTheme.typography(context);
+ 
+    final resolvedCollapsedBorderColor =
+        collapsedBorderColor ?? colors.onSurface.withValues(alpha: 0.12);
     final resolvedExpandedBorderColor = expandedBorderColor ?? colors.primary;
+    final resolvedTitleColor = titleColor ?? colors.onSurface;
+    final resolvedDisabledTitleColor =
+        disabledTitleColor ?? colors.onSurface.withValues(alpha: 0.38);
+    final resolvedIconColor = iconColor ?? colors.onSurface;
+    final resolvedDisabledIconColor =
+        disabledIconColor ?? colors.onSurface.withValues(alpha: 0.38);
+ 
     final borderColor = !enabled
         ? Colors.transparent
         : expanded
             ? resolvedExpandedBorderColor
-            : collapsedBorderColor;
-
+            : resolvedCollapsedBorderColor;
+ 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -72,7 +81,10 @@ class Ux4gAccordion extends StatelessWidget {
                     child: Text(
                       title,
                       style: typography.lL_default.copyWith(
-                        color: enabled ? titleColor : disabledTitleColor,
+                        color:
+                            enabled
+                                ? resolvedTitleColor
+                                : resolvedDisabledTitleColor,
                       ),
                     ),
                   ),
@@ -83,7 +95,10 @@ class Ux4gAccordion extends StatelessWidget {
                     child: Icon(
                       Icons.keyboard_arrow_down_outlined,
                       size: Ux4gSpace.space16,
-                      color: enabled ? iconColor : disabledIconColor,
+                      color:
+                          enabled
+                              ? resolvedIconColor
+                              : resolvedDisabledIconColor,
                     ),
                   ),
                 ],
@@ -114,24 +129,24 @@ class Ux4gAccordion extends StatelessWidget {
     );
   }
 }
-
+ 
 class Ux4gAccordionItem {
   final String title;
   final bool enabled;
-
+ 
   const Ux4gAccordionItem({
     required this.title,
     this.enabled = true,
   });
 }
-
+ 
 class Ux4gAccordionGroup extends StatelessWidget {
   final List<Ux4gAccordionItem> items;
   final int? expandedIndex;
   final ValueChanged<int?>? onExpandedIndexChange;
   final double itemSpacing;
   final Widget Function(int index, Ux4gAccordionItem item) contentBuilder;
-
+ 
   const Ux4gAccordionGroup({
     super.key,
     required this.items,
@@ -140,7 +155,7 @@ class Ux4gAccordionGroup extends StatelessWidget {
     this.onExpandedIndexChange,
     this.itemSpacing = Ux4gSpace.space20,
   });
-
+ 
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -165,3 +180,5 @@ class Ux4gAccordionGroup extends StatelessWidget {
     );
   }
 }
+ 
+ 

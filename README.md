@@ -87,6 +87,28 @@ cd example
 flutter run
 ```
 
+## Storybook-Style Documentation
+
+A static documentation page (similar to UX4G Storybook structure) can be generated from component source files.
+
+Generate docs:
+
+```bash
+python tooling/generate_storybook_style_docs.py
+```
+
+Output file:
+
+- `docs/storybook-style-components.html`
+
+The generated page includes:
+
+- Quick Start section
+- Sidebar navigation
+- Component catalog
+- Parameter tables with Required vs Optional badges
+- Source file link for each component
+
 ## Notes
 
 - Components are being aligned with the UX4G Android Compose design system.

@@ -118,7 +118,8 @@ class _Ux4gDatePickerState extends State<Ux4gDatePicker> {
             ),
           ),
           child: Row(
-            mainAxisSize: MainAxisSize.min,
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
                 _getFormattedValue(),
@@ -126,7 +127,6 @@ class _Ux4gDatePickerState extends State<Ux4gDatePicker> {
                   color: isSelected ? colors.onSurface : Ux4gPalette.neutral500,
                 ),
               ),
-              const SizedBox(width: 12),
               Icon(
                 Icons.calendar_today_outlined,
                 size: 20,

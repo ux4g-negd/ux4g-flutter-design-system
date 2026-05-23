@@ -443,10 +443,12 @@ class Ux4gModalContent extends StatelessWidget {
         Padding(
           padding: EdgeInsets.fromLTRB(
             Ux4gSpace.space16,
-            hasImage && headerImageStyle == Ux4gModalHeaderImage.fullBleed
-                ? Ux4gSpace.space16
-                : 0,
             Ux4gSpace.space16,
+            // Reserve space for the close button (right: 16 + width: 32 + gap: 4)
+            showCloseButton &&
+                    headerImageStyle != Ux4gModalHeaderImage.padded
+                ? Ux4gSpace.space16 + 36
+                : Ux4gSpace.space16,
             Ux4gSpace.space16,
           ),
           child: Column(
