@@ -395,6 +395,7 @@ class Ux4gAnimatedLinearProgress extends StatelessWidget {
   final Color? trackColor;
   final bool showPercentage;
   final Ux4gProgressLabelPosition labelPosition;
+  final TextStyle? insideLabelStyle;
   final Duration duration;
   final Curve curve;
 
@@ -414,6 +415,7 @@ class Ux4gAnimatedLinearProgress extends StatelessWidget {
     this.trackColor,
     this.showPercentage = false,
     this.labelPosition = Ux4gProgressLabelPosition.outside,
+    this.insideLabelStyle,
     this.duration = const Duration(milliseconds: 600),
     this.curve = Curves.easeInOut,
   });
@@ -439,6 +441,7 @@ class Ux4gAnimatedLinearProgress extends StatelessWidget {
         trackColor: trackColor,
         showPercentage: showPercentage,
         labelPosition: labelPosition,
+        insideLabelStyle: insideLabelStyle,
       ),
     );
   }

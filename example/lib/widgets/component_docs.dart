@@ -325,84 +325,95 @@ class _PropsPane extends StatelessWidget {
         ),
       ),
       child: SingleChildScrollView(
-        child: Table(
-          border: TableBorder(
-            horizontalInside: BorderSide(color: border, width: 0.5),
-            bottom: BorderSide(color: border, width: 0.5),
-          ),
-          columnWidths: const {
-            0: FlexColumnWidth(1.5),
-            1: FlexColumnWidth(1.5),
-            2: FlexColumnWidth(3),
-            3: FlexColumnWidth(1.2),
-          },
-          children: [
-            TableRow(
-              decoration: BoxDecoration(color: headerBg),
-              children: ['Prop', 'Type', 'Description', 'Default']
-                  .map((h) => Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 14, vertical: 10),
-                        child: Text(h,
-                            style: TextStyle(
-                                fontWeight: FontWeight.w700,
-                                fontSize: 12,
-                                color: textColor)),
-                      ))
-                  .toList(),
-            ),
-            ...props.map((p) => TableRow(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 14, vertical: 10),
-                      child: Row(
-                        children: [
-                          Text(p.name,
+        scrollDirection: Axis.horizontal,
+        child: SingleChildScrollView(
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(minWidth: 600),
+            child: Table(
+              border: TableBorder(
+                horizontalInside: BorderSide(color: border, width: 0.5),
+                bottom: BorderSide(color: border, width: 0.5),
+              ),
+              columnWidths: const {
+                0: FlexColumnWidth(2.5),
+                1: FlexColumnWidth(2.0),
+                2: FlexColumnWidth(4.5),
+                3: FlexColumnWidth(1.5),
+              },
+              children: [
+                TableRow(
+                  decoration: BoxDecoration(color: headerBg),
+                  children: ['Prop', 'Type', 'Description', 'Default']
+                      .map((h) => Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 14, vertical: 10),
+                            child: Text(h,
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: 12,
+                                    color: textColor)),
+                          ))
+                      .toList(),
+                ),
+                ...props.map((p) => TableRow(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 14, vertical: 10),
+                          child: Text.rich(
+                            TextSpan(
+                              children: [
+                                TextSpan(
+                                  text: p.name,
+                                  style: TextStyle(
+                                      fontFamily: 'monospace',
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w600,
+                                      color: monoColor),
+                                ),
+                                if (p.required)
+                                  TextSpan(
+                                    text: ' *',
+                                    style: TextStyle(
+                                        color: requiredColor,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 14, vertical: 10),
+                          child: Text(p.type,
                               style: TextStyle(
                                   fontFamily: 'monospace',
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w600,
-                                  color: monoColor)),
-                          if (p.required) ...[
-                            const SizedBox(width: 4),
-                            Text('*',
-                                style: TextStyle(
-                                    color: requiredColor,
-                                    fontWeight: FontWeight.bold)),
-                          ],
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 14, vertical: 10),
-                      child: Text(p.type,
-                          style: TextStyle(
-                              fontFamily: 'monospace',
-                              fontSize: 11,
-                              color: isDark
-                                  ? const Color(0xFF86EFAC)
-                                  : const Color(0xFF15803D))),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 14, vertical: 10),
-                      child: Text(p.description,
-                          style: TextStyle(fontSize: 12, color: textColor)),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 14, vertical: 10),
-                      child: Text(p.defaultValue,
-                          style: TextStyle(
-                              fontFamily: 'monospace',
-                              fontSize: 11,
-                              color: isDark ? Colors.white38 : Colors.black38)),
-                    ),
-                  ],
-                )),
-          ],
+                                  fontSize: 11,
+                                  color: isDark
+                                      ? const Color(0xFF86EFAC)
+                                      : const Color(0xFF15803D))),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 14, vertical: 10),
+                          child: Text(p.description,
+                              style: TextStyle(fontSize: 12, color: textColor)),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 14, vertical: 10),
+                          child: Text(p.defaultValue,
+                              style: TextStyle(
+                                  fontFamily: 'monospace',
+                                  fontSize: 11,
+                                  color:
+                                      isDark ? Colors.white38 : Colors.black38)),
+                        ),
+                      ],
+                    )),
+              ],
+            ),
+          ),
         ),
       ),
     );

@@ -84,82 +84,7 @@ Scaffold(
         child: _BiometricFlowPreview(mockSuccess: false),
       ),
     ),
-
-    // ── 3. Consent Screen (standalone) ───────────────────────────────────
-    WidgetbookUseCase(
-      name: 'Identity Consent Screen',
-      builder: (context) => ComponentDocs(
-        name: 'IdentityConsentScreen',
-        description:
-            'The first screen shown in the flow. Displays a shield icon, '
-            'privacy notice about Aadhaar matching, and two CTAs: '
-            '"Allow and verify" and "Verify with OTP instead".',
-        code: '''// Standalone usage
-BiometricTheme(
-  data: const BiometricThemeData(),
-  child: IdentityConsentScreen(
-    onAllow: () {
-      // proceed to device checks
-    },
-    onDecline: () {
-      // switch to OTP
-    },
-  ),
-);''',
-        child: SizedBox(
-          width: 360,
-          height: 420,
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(16),
-            child: BiometricTheme(
-              data: const BiometricThemeData(),
-              child: IdentityConsentScreen(
-                onAllow: () {},
-                onDecline: () {},
-              ),
-            ),
-          ),
-        ),
-      ),
-    ),
-
-    // ── 4. Device Check Screen (standalone) ──────────────────────────────
-    WidgetbookUseCase(
-      name: 'Device Check Screen',
-      builder: (context) => ComponentDocs(
-        name: 'DeviceCheckScreen',
-        description:
-            'Runs three async checks (camera, network, lighting) with animated '
-            'status indicators. "Proceed" button activates once all checks pass.',
-        code: '''final controller = BiometricController();
-
-BiometricTheme(
-  data: const BiometricThemeData(),
-  child: DeviceCheckScreen(
-    controller: controller,
-    onProceed: () {
-      // move to camera capture
-    },
-  ),
-);''',
-        child: SizedBox(
-          width: 360,
-          height: 480,
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(16),
-            child: BiometricTheme(
-              data: const BiometricThemeData(),
-              child: DeviceCheckScreen(
-                controller: BiometricController(),
-                onProceed: () {},
-              ),
-            ),
-          ),
-        ),
-      ),
-    ),
-
-    // ── 5. Custom Theme ──────────────────────────────────────────────────
+    // ── 3. Custom Theme ──────────────────────────────────────────────────
     WidgetbookUseCase(
       name: 'Custom Theme',
       builder: (context) => ComponentDocs(
@@ -192,6 +117,97 @@ BiometricTheme(
             ),
             cardRadius: 20,
             buttonRadius: 8,
+          ),
+        ),
+      ),
+    ),
+  ],
+);
+
+final identityConsentScreenComponent = WidgetbookComponent(
+  name: 'IdentityConsentScreen',
+  useCases: [
+    WidgetbookUseCase(
+      name: 'Default',
+      builder: (context) => ComponentDocs(
+        name: 'IdentityConsentScreen',
+        description:
+            'The first screen shown in the flow. Displays a shield icon, '
+            'privacy notice about Aadhaar matching, and two CTAs: '
+            '"Allow and verify" and "Verify with OTP instead".',
+        code: '''// Standalone usage
+BiometricTheme(
+  data: const BiometricThemeData(),
+  child: IdentityConsentScreen(
+    onAllow: () {
+      // proceed to device checks
+    },
+    onDecline: () {
+      // switch to OTP
+    },
+  ),
+);''',
+        props: const [
+          PropRow(name: 'onAllow', type: 'VoidCallback', description: 'Called when user taps "Allow and verify".', required: true),
+          PropRow(name: 'onDecline', type: 'VoidCallback?', description: 'Called when user taps "Decline - Verify with OTP instead".'),
+        ],
+        child: SizedBox(
+          width: 360,
+          height: 420,
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(16),
+            child: BiometricTheme(
+              data: const BiometricThemeData(),
+              child: IdentityConsentScreen(
+                onAllow: () {},
+                onDecline: () {},
+              ),
+            ),
+          ),
+        ),
+      ),
+    ),
+  ],
+);
+
+final deviceCheckScreenComponent = WidgetbookComponent(
+  name: 'DeviceCheckScreen',
+  useCases: [
+    WidgetbookUseCase(
+      name: 'Default',
+      builder: (context) => ComponentDocs(
+        name: 'DeviceCheckScreen',
+        description:
+            'Runs three async checks (camera, network, lighting) with animated '
+            'status indicators. "Proceed" button activates once all checks pass.',
+        code: '''final controller = BiometricController();
+
+BiometricTheme(
+  data: const BiometricThemeData(),
+  child: DeviceCheckScreen(
+    controller: controller,
+    onProceed: () {
+      // move to camera capture
+    },
+  ),
+);''',
+        props: const [
+          PropRow(name: 'controller', type: 'BiometricController', description: 'Manages check state and execution.', required: true),
+          PropRow(name: 'onProceed', type: 'VoidCallback', description: 'Called when user taps the proceed button after checks pass.', required: true),
+          PropRow(name: 'compact', type: 'bool', description: 'Whether to render as a compact card.', defaultValue: 'false'),
+        ],
+        child: SizedBox(
+          width: 360,
+          height: 480,
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(16),
+            child: BiometricTheme(
+              data: const BiometricThemeData(),
+              child: DeviceCheckScreen(
+                controller: BiometricController(),
+                onProceed: () {},
+              ),
+            ),
           ),
         ),
       ),

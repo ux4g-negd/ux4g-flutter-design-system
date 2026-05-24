@@ -22,9 +22,14 @@ Ux4gAvatar(initials: 'AB', size: Ux4gAvatarSize.m);
 // With network image
 Ux4gAvatar(imageUrl: 'https://example.com/photo.jpg', size: Ux4gAvatarSize.l);''',
         props: const [
-          PropRow(name: 'size', type: 'Ux4gAvatarSize', description: 'xs / s / m / l / xl / xxl / xxxl.', defaultValue: 'm'),
-          PropRow(name: 'initials', type: 'String?', description: 'Up to 2-letter initials shown as text fallback.'),
+          PropRow(name: 'size', type: 'Ux4gAvatarSize', description: 'Avatar size (xs to xxxl).', defaultValue: 'm'),
+          PropRow(name: 'shape', type: 'ShapeBorder', description: 'Custom shape for the avatar.', defaultValue: 'CircleBorder()'),
           PropRow(name: 'imageUrl', type: 'String?', description: 'Network URL for the avatar image.'),
+          PropRow(name: 'initials', type: 'String?', description: 'Up to 2-letter initials shown as fallback.'),
+          PropRow(name: 'icon', type: 'IconData?', description: 'Icon to show if no image or initials.', defaultValue: 'Icons.person'),
+          PropRow(name: 'containerColor', type: 'Color?', description: 'Custom background color.'),
+          PropRow(name: 'contentColor', type: 'Color?', description: 'Custom color for initials.'),
+          PropRow(name: 'iconColor', type: 'Color?', description: 'Custom color for the icon.'),
         ],
         child: Ux4gAvatar(
           size: context.knobs.list(
@@ -113,10 +118,12 @@ Ux4gProfileAvatar(
   onVariantClick: () {},
 );''',
         props: const [
-          PropRow(name: 'variant', type: 'dynamic', description: 'Ux4gProfileBadge or Ux4gProfileAction.', required: true),
           PropRow(name: 'size', type: 'Ux4gAvatarSize', description: 'Avatar size.', defaultValue: 'm'),
           PropRow(name: 'imageUrl', type: 'String?', description: 'Network image URL.'),
           PropRow(name: 'initials', type: 'String?', description: 'Fallback initials.'),
+          PropRow(name: 'avatarIcon', type: 'IconData?', description: 'Custom icon for the avatar.'),
+          PropRow(name: 'variant', type: 'dynamic', description: 'Ux4gProfileBadge or Ux4gProfileAction.', required: true),
+          PropRow(name: 'badgeSize', type: 'double?', description: 'Custom size for the badge/action icon.'),
           PropRow(name: 'onVariantClick', type: 'VoidCallback?', description: 'Called when action overlay is tapped.'),
         ],
         child: Row(
@@ -181,10 +188,12 @@ final statusAvatarComponent = WidgetbookComponent(
   size: Ux4gAvatarSize.l,
 );''',
         props: const [
-          PropRow(name: 'variant', type: 'Ux4gStatusVariant', description: 'online / offline / busy / success / error / warning.', required: true),
           PropRow(name: 'size', type: 'Ux4gAvatarSize', description: 'Avatar size.', defaultValue: 'm'),
           PropRow(name: 'imageUrl', type: 'String?', description: 'Network image URL.'),
           PropRow(name: 'initials', type: 'String?', description: 'Fallback initials.'),
+          PropRow(name: 'avatarIcon', type: 'IconData?', description: 'Custom icon for the avatar.'),
+          PropRow(name: 'variant', type: 'Ux4gStatusVariant', description: 'online / offline / busy / success / error / warning.', defaultValue: 'online'),
+          PropRow(name: 'statusSize', type: 'double?', description: 'Custom size for the status dot.'),
         ],
         child: Row(
           mainAxisSize: MainAxisSize.min,
@@ -217,7 +226,12 @@ final avatarGroupComponent = WidgetbookComponent(
 );''',
         props: const [
           PropRow(name: 'items', type: 'List<Ux4gAvatarGroupItem>', description: 'List of avatar data items.', required: true),
-          PropRow(name: 'maxLimit', type: 'int', description: 'Max visible avatars before overflow pill.', defaultValue: '3'),
+          PropRow(name: 'size', type: 'Ux4gAvatarSize', description: 'Size of avatars in the group.', defaultValue: 'm'),
+          PropRow(name: 'maxLimit', type: 'int?', description: 'Max visible avatars before overflow pill.'),
+          PropRow(name: 'collapsed', type: 'bool', description: 'Whether avatars should overlap.', defaultValue: 'true'),
+          PropRow(name: 'borderColor', type: 'Color?', description: 'Custom border color for overlapped avatars.'),
+          PropRow(name: 'borderWidth', type: 'double', description: 'Border width for overlapped avatars.', defaultValue: '2'),
+          PropRow(name: 'onRemainingClick', type: 'VoidCallback?', description: 'Called when overflow pill is tapped.'),
         ],
         child: Ux4gAvatarGroup(
           items: List.generate(

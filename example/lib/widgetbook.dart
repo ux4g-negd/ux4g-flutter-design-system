@@ -1,4 +1,4 @@
-﻿import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:ux4g_flutter_design_system/ux4g_flutter_design_system.dart';
 import 'package:widgetbook/widgetbook.dart';
@@ -11,6 +11,7 @@ import 'stories/data_stories.dart';
 import 'stories/display_stories.dart';
 import 'stories/feedback_stories.dart';
 import 'stories/form_stories.dart';
+import 'stories/identity_stories.dart';
 import 'stories/layout_stories.dart';
 import 'stories/navigation_stories.dart';
 import 'stories/overlay_stories.dart';
@@ -27,7 +28,7 @@ class UX4GWidgetbook extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Widgetbook.material(
-      // â”€â”€ Theme addon wraps every use-case in Ux4gTheme â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+      // ── Theme addon wraps every use-case in Ux4gTheme ──────────────────────
       appBuilder: (context, child) => Ux4gTheme(child: child),
 
       home: const _Ux4gWelcomePage(),
@@ -39,14 +40,17 @@ class UX4GWidgetbook extends StatelessWidget {
           isInitiallyExpanded: false,
           children: [quickGuideComponent],
         ),
-        // â”€â”€ Buttons â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+        // ── Buttons ────────────────────────────────────────────────────────────
         WidgetbookCategory(
           name: 'Buttons',
           isInitiallyExpanded: false,
-          children: [buttonComponent],
+          children: [
+            buttonComponent,
+            iconButtonComponent,
+          ],
         ),
 
-        // â”€â”€ Display â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+        // ── Display ────────────────────────────────────────────────────────────
         WidgetbookCategory(
           name: 'Display',
           isInitiallyExpanded: false,
@@ -58,7 +62,7 @@ class UX4GWidgetbook extends StatelessWidget {
           ],
         ),
 
-        // â”€â”€ Avatar â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+        // ── Avatar ─────────────────────────────────────────────────────────────
         WidgetbookCategory(
           name: 'Avatar',
           isInitiallyExpanded: false,
@@ -70,7 +74,7 @@ class UX4GWidgetbook extends StatelessWidget {
           ],
         ),
 
-        // â”€â”€ Form â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+        // ── Form ───────────────────────────────────────────────────────────────
         WidgetbookCategory(
           name: 'Form',
           isInitiallyExpanded: false,
@@ -88,15 +92,18 @@ class UX4GWidgetbook extends StatelessWidget {
             datePickerComponent,
             timePickerComponent,
             fileUploadComponent,
+            aadhaarInputFieldComponent,
+            panInputFieldComponent,
           ],
         ),
 
-        // â”€â”€ Progress â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+        // ── Progress & Loader ──────────────────────────────────────────────────
         WidgetbookCategory(
           name: 'Progress & Loader',
           isInitiallyExpanded: false,
           children: [
             linearProgressComponent,
+            animatedLinearProgressComponent,
             circularProgressComponent,
             halfCircleProgressComponent,
             loaderComponent,
@@ -105,25 +112,30 @@ class UX4GWidgetbook extends StatelessWidget {
           ],
         ),
 
-        // â”€â”€ Navigation & Feedback â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+        // ── Navigation & Feedback ─────────────────────────────────────────────
         WidgetbookCategory(
           name: 'Navigation & Feedback',
           isInitiallyExpanded: false,
           children: [
             accordionComponent,
+            accordionGroupComponent,
             statusBannerComponent,
             emptyStateComponent,
-            chipsComponent,
+            choiceChipComponent,
+            filterChipComponent,
+            inputChipComponent,
+            inputChipFieldComponent,
             paginationComponent,
           ],
         ),
 
-        // â”€â”€ Data & Complex â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+        // ── Data ──────────────────────────────────────────────────────────────
         WidgetbookCategory(
           name: 'Data',
           isInitiallyExpanded: false,
           children: [
             stepperComponent,
+            capsuleStepperComponent,
             resultRowComponent,
             socialLinkComponent,
             socialLinkGroupComponent,
@@ -135,7 +147,7 @@ class UX4GWidgetbook extends StatelessWidget {
           ],
         ),
 
-        // â”€â”€ Layout â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+        // ── Layout ─────────────────────────────────────────────────────────────
         WidgetbookCategory(
           name: 'Layout',
           isInitiallyExpanded: false,
@@ -144,7 +156,7 @@ class UX4GWidgetbook extends StatelessWidget {
           ],
         ),
 
-        // â”€â”€ Overlay â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+        // ── Overlay ────────────────────────────────────────────────────────────
         WidgetbookCategory(
           name: 'Overlay',
           isInitiallyExpanded: false,
@@ -153,10 +165,11 @@ class UX4GWidgetbook extends StatelessWidget {
             bottomSheetComponent,
             toastComponent,
             tooltipComponent,
+            richTooltipComponent,
           ],
         ),
 
-        // â”€â”€ Feedback Forms â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+        // ── Feedback ──────────────────────────────────────────────────────────
         WidgetbookCategory(
           name: 'Feedback',
           isInitiallyExpanded: false,
@@ -173,6 +186,8 @@ class UX4GWidgetbook extends StatelessWidget {
           isInitiallyExpanded: false,
           children: [
             biometricComponent,
+            identityConsentScreenComponent,
+            deviceCheckScreenComponent,
           ],
         ),
 
@@ -184,12 +199,12 @@ class UX4GWidgetbook extends StatelessWidget {
             WidgetbookFolder(
               name: 'Theme',
               isInitiallyExpanded: false,
-          children: [themeColorComponent],
+              children: [themeColorComponent],
             ),
             WidgetbookFolder(
               name: 'Dimensions',
               isInitiallyExpanded: false,
-          children: [
+              children: [
                 dimensionsSpacingComponent,
                 dimensionsRadiusComponent,
                 dimensionsBorderComponent,
@@ -229,9 +244,6 @@ class UX4GWidgetbook extends StatelessWidget {
     );
   }
 }
-
-// â”€â”€ Custom Welcome Page â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-
 
 // ── Sidebar Logo ──────────────────────────────────────────────────────────
 
@@ -291,6 +303,7 @@ class _SidebarLogo extends StatelessWidget {
     );
   }
 }
+
 class _Ux4gWelcomePage extends StatelessWidget {
   const _Ux4gWelcomePage();
 
@@ -312,7 +325,7 @@ class _Ux4gWelcomePage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                // â”€â”€ Logo â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+                // ── Logo ─────────────────────────────────────────────────────────
                 SvgPicture.asset(
                   'assets/ux4g_logo.svg',
                   height: 52,
@@ -330,7 +343,7 @@ class _Ux4gWelcomePage extends StatelessWidget {
                     border: Border.all(color: _primary.withValues(alpha: 0.25)),
                   ),
                   child: const Text(
-                    'v3.0 beta  Â·  Flutter Component Library',
+                    'v3.0 beta  ·  Flutter Component Library',
                     style: TextStyle(
                       color: _primary,
                       fontSize: 12,
@@ -374,7 +387,7 @@ class _Ux4gWelcomePage extends StatelessWidget {
                   spacing: 10,
                   runSpacing: 10,
                   alignment: WrapAlignment.center,
-                  children: [
+                  children: const [
                     _StatPill('50+ Components'),
                     _StatPill('1K+ Design Tokens'),
                     _StatPill('10 Categories'),
@@ -387,7 +400,7 @@ class _Ux4gWelcomePage extends StatelessWidget {
                 IntrinsicHeight(
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
+                    children: const [
                       Expanded(
                         child: _FeatureCard(
                           icon: Icons.account_tree_outlined,
@@ -430,12 +443,11 @@ class _Ux4gWelcomePage extends StatelessWidget {
                   decoration: BoxDecoration(
                     color: _primary.withValues(alpha: 0.05),
                     borderRadius: BorderRadius.circular(12),
-                    border:
-                        Border.all(color: _primary.withValues(alpha: 0.18)),
+                    border: Border.all(color: _primary.withValues(alpha: 0.18)),
                   ),
                   child: Row(
                     children: [
-                      Icon(Icons.arrow_back_rounded,
+                      const Icon(Icons.arrow_back_rounded,
                           color: _primary, size: 20),
                       const SizedBox(width: 14),
                       const Expanded(
@@ -468,7 +480,7 @@ class _Ux4gWelcomePage extends StatelessWidget {
 
                 // Footer
                 const Text(
-                  'UX4G Design System  Â·  v3.0 beta  Â·  ux4g.gov.in',
+                  'UX4G Design System  ·  v3.0 beta  ·  ux4g.gov.in',
                   style: TextStyle(color: Color(0xFF9CA3AF), fontSize: 12),
                 ),
 
@@ -482,7 +494,7 @@ class _Ux4gWelcomePage extends StatelessWidget {
   }
 }
 
-// â”€â”€ Helpers â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ── Helpers ──────────────────────────────────────────────────────────────
 
 class _StatPill extends StatelessWidget {
   final String label;

@@ -1,0 +1,1065 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>UX4G Flutter Component Documentation</title>
+  <style>
+    :root {
+      --bg: #0e141b;
+      --panel: #141d26;
+      --panel-2: #1a2631;
+      --text: #e7eff7;
+      --muted: #9eb3c7;
+      --accent: #54b7ff;
+      --border: #2a3a4a;
+      --req: #ff6b6b;
+      --opt: #72d28c;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Segoe UI", "Noto Sans", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(1200px 600px at 100% -10%, #1a3857 0, transparent 60%),
+        radial-gradient(900px 500px at -10% 20%, #0f2f45 0, transparent 55%),
+        var(--bg);
+    }
+    .layout { display: grid; grid-template-columns: 320px 1fr; min-height: 100vh; }
+    .sidebar { border-right: 1px solid var(--border); background: rgba(20, 29, 38, 0.9); padding: 20px; position: sticky; top: 0; height: 100vh; overflow: auto; }
+    .brand h1 { margin: 0 0 6px; font-size: 20px; }
+    .brand p { margin: 0; color: var(--muted); font-size: 13px; }
+    .toc { margin-top: 18px; display: grid; gap: 8px; }
+    .toc-link { display: block; padding: 10px; border: 1px solid var(--border); border-radius: 10px; color: inherit; text-decoration: none; background: linear-gradient(180deg, rgba(84,183,255,0.08), rgba(84,183,255,0.01)); }
+    .toc-link:hover { border-color: var(--accent); }
+    .toc-title { display: block; font-size: 13px; font-weight: 600; }
+    .toc-meta { display: block; font-size: 11px; color: var(--muted); margin-top: 2px; }
+    .content { padding: 28px; max-width: 1100px; }
+    .hero { background: linear-gradient(180deg, rgba(84,183,255,0.14), rgba(84,183,255,0.04)); border: 1px solid var(--border); border-radius: 16px; padding: 22px; }
+    .hero h2 { margin-top: 0; font-size: 30px; }
+    .hero p { color: var(--muted); }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px; }
+    .panel { background: var(--panel); border: 1px solid var(--border); border-radius: 12px; padding: 16px; }
+    .panel h3 { margin-top: 0; font-size: 16px; color: var(--accent); }
+    pre { margin: 0; white-space: pre-wrap; font-size: 12px; background: #0f1720; border: 1px solid var(--border); border-radius: 10px; padding: 12px; }
+    code { color: #bce3ff; }
+    .section-title { margin: 30px 0 14px; font-size: 22px; }
+    .component { margin-bottom: 18px; background: var(--panel); border: 1px solid var(--border); border-radius: 14px; padding: 16px; }
+    .component-head { display: flex; gap: 12px; justify-content: space-between; align-items: center; flex-wrap: wrap; }
+    .component-head h3 { margin: 0; font-size: 20px; }
+    .source { font-size: 12px; color: var(--muted); }
+    .source a { color: var(--accent); }
+    .pills { display: flex; gap: 8px; flex-wrap: wrap; }
+    .pill { font-size: 11px; border: 1px solid var(--border); border-radius: 999px; padding: 3px 9px; color: var(--muted); }
+    table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+    th, td { padding: 9px; border-bottom: 1px solid var(--border); font-size: 13px; text-align: left; vertical-align: top; }
+    th { color: var(--accent); font-weight: 600; }
+    .badge { display: inline-block; padding: 3px 8px; border-radius: 999px; font-size: 11px; font-weight: 700; }
+    .badge.req { color: #fff; background: var(--req); }
+    .badge.opt { color: #102016; background: var(--opt); }
+    .empty { color: var(--muted); font-size: 13px; }
+    .footer { margin-top: 32px; color: var(--muted); font-size: 12px; }
+    @media (max-width: 980px) {
+      .layout { grid-template-columns: 1fr; }
+      .sidebar { position: static; height: auto; }
+      .grid-2 { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="layout">
+    <aside class="sidebar">
+      <div class="brand">
+        <h1>UX4G Flutter Docs</h1>
+        <p>Storybook-style component reference</p>
+      </div>
+      <nav class="toc">
+        <a class="toc-link" href="#quick-start"><span class="toc-title">Quick Start</span><span class="toc-meta">Install and use package</span></a>
+        <a class="toc-link" href="#components"><span class="toc-title">Components</span><span class="toc-meta">67 detected</span></a>
+        <a class="toc-link" href="#SlotGrid"><span class="toc-title">SlotGrid</span><span class="toc-meta">0 required / 0 optional</span></a>
+<a class="toc-link" href="#SlotTimePickerSheet"><span class="toc-title">SlotTimePickerSheet</span><span class="toc-meta">0 required / 0 optional</span></a>
+<a class="toc-link" href="#Ux4gAadhaarInputField"><span class="toc-title">Ux4gAadhaarInputField</span><span class="toc-meta">0 required / 0 optional</span></a>
+<a class="toc-link" href="#Ux4gAccordion"><span class="toc-title">Ux4gAccordion</span><span class="toc-meta">0 required / 0 optional</span></a>
+<a class="toc-link" href="#Ux4gAccordionGroup"><span class="toc-title">Ux4gAccordionGroup</span><span class="toc-meta">0 required / 0 optional</span></a>
+<a class="toc-link" href="#Ux4gActionDropdown"><span class="toc-title">Ux4gActionDropdown</span><span class="toc-meta">0 required / 0 optional</span></a>
+<a class="toc-link" href="#Ux4gAnimatedCircularProgress"><span class="toc-title">Ux4gAnimatedCircularProgress</span><span class="toc-meta">0 required / 0 optional</span></a>
+<a class="toc-link" href="#Ux4gAnimatedHalfCircleProgress"><span class="toc-title">Ux4gAnimatedHalfCircleProgress</span><span class="toc-meta">0 required / 0 optional</span></a>
+<a class="toc-link" href="#Ux4gAnimatedLinearProgress"><span class="toc-title">Ux4gAnimatedLinearProgress</span><span class="toc-meta">0 required / 0 optional</span></a>
+<a class="toc-link" href="#Ux4gAppHeader"><span class="toc-title">Ux4gAppHeader</span><span class="toc-meta">0 required / 0 optional</span></a>
+<a class="toc-link" href="#Ux4gAvatar"><span class="toc-title">Ux4gAvatar</span><span class="toc-meta">0 required / 0 optional</span></a>
+<a class="toc-link" href="#Ux4gAvatarGroup"><span class="toc-title">Ux4gAvatarGroup</span><span class="toc-meta">0 required / 0 optional</span></a>
+<a class="toc-link" href="#Ux4gBadge"><span class="toc-title">Ux4gBadge</span><span class="toc-meta">0 required / 0 optional</span></a>
+<a class="toc-link" href="#Ux4gBottomSheet"><span class="toc-title">Ux4gBottomSheet</span><span class="toc-meta">0 required / 0 optional</span></a>
+<a class="toc-link" href="#Ux4gBottomSheetLayout"><span class="toc-title">Ux4gBottomSheetLayout</span><span class="toc-meta">0 required / 0 optional</span></a>
+<a class="toc-link" href="#Ux4gButton"><span class="toc-title">Ux4gButton</span><span class="toc-meta">0 required / 0 optional</span></a>
+<a class="toc-link" href="#Ux4gCapsuleStepper"><span class="toc-title">Ux4gCapsuleStepper</span><span class="toc-meta">0 required / 0 optional</span></a>
+<a class="toc-link" href="#Ux4gCard"><span class="toc-title">Ux4gCard</span><span class="toc-meta">0 required / 0 optional</span></a>
+<a class="toc-link" href="#Ux4gCarousel"><span class="toc-title">Ux4gCarousel</span><span class="toc-meta">0 required / 0 optional</span></a>
+<a class="toc-link" href="#Ux4gCheckbox"><span class="toc-title">Ux4gCheckbox</span><span class="toc-meta">0 required / 0 optional</span></a>
+<a class="toc-link" href="#Ux4gChoiceChip"><span class="toc-title">Ux4gChoiceChip</span><span class="toc-meta">0 required / 0 optional</span></a>
+<a class="toc-link" href="#Ux4gCircularProgress"><span class="toc-title">Ux4gCircularProgress</span><span class="toc-meta">0 required / 0 optional</span></a>
+<a class="toc-link" href="#Ux4gDatePicker"><span class="toc-title">Ux4gDatePicker</span><span class="toc-meta">0 required / 0 optional</span></a>
+<a class="toc-link" href="#Ux4gDivider"><span class="toc-title">Ux4gDivider</span><span class="toc-meta">0 required / 0 optional</span></a>
+<a class="toc-link" href="#Ux4gEmptyState"><span class="toc-title">Ux4gEmptyState</span><span class="toc-meta">0 required / 0 optional</span></a>
+<a class="toc-link" href="#Ux4gFeedbackForm"><span class="toc-title">Ux4gFeedbackForm</span><span class="toc-meta">0 required / 0 optional</span></a>
+<a class="toc-link" href="#Ux4gFeedbackFormCsat"><span class="toc-title">Ux4gFeedbackFormCsat</span><span class="toc-meta">0 required / 0 optional</span></a>
+<a class="toc-link" href="#Ux4gFeedbackFormNps"><span class="toc-title">Ux4gFeedbackFormNps</span><span class="toc-meta">0 required / 0 optional</span></a>
+<a class="toc-link" href="#Ux4gFileUpload"><span class="toc-title">Ux4gFileUpload</span><span class="toc-meta">0 required / 0 optional</span></a>
+<a class="toc-link" href="#Ux4gFilterChip"><span class="toc-title">Ux4gFilterChip</span><span class="toc-meta">0 required / 0 optional</span></a>
+<a class="toc-link" href="#Ux4gHalfCircleProgress"><span class="toc-title">Ux4gHalfCircleProgress</span><span class="toc-meta">0 required / 0 optional</span></a>
+<a class="toc-link" href="#Ux4gIconButton"><span class="toc-title">Ux4gIconButton</span><span class="toc-meta">0 required / 0 optional</span></a>
+<a class="toc-link" href="#Ux4gInputChip"><span class="toc-title">Ux4gInputChip</span><span class="toc-meta">0 required / 0 optional</span></a>
+<a class="toc-link" href="#Ux4gInputChipField"><span class="toc-title">Ux4gInputChipField</span><span class="toc-meta">0 required / 0 optional</span></a>
+<a class="toc-link" href="#Ux4gInputField"><span class="toc-title">Ux4gInputField</span><span class="toc-meta">0 required / 0 optional</span></a>
+<a class="toc-link" href="#Ux4gJourneyTimeline"><span class="toc-title">Ux4gJourneyTimeline</span><span class="toc-meta">0 required / 0 optional</span></a>
+<a class="toc-link" href="#Ux4gLinearProgress"><span class="toc-title">Ux4gLinearProgress</span><span class="toc-meta">0 required / 0 optional</span></a>
+<a class="toc-link" href="#Ux4gLoader"><span class="toc-title">Ux4gLoader</span><span class="toc-meta">0 required / 0 optional</span></a>
+<a class="toc-link" href="#Ux4gModal"><span class="toc-title">Ux4gModal</span><span class="toc-meta">0 required / 0 optional</span></a>
+<a class="toc-link" href="#Ux4gModalContent"><span class="toc-title">Ux4gModalContent</span><span class="toc-meta">0 required / 0 optional</span></a>
+<a class="toc-link" href="#Ux4gOtpBox"><span class="toc-title">Ux4gOtpBox</span><span class="toc-meta">0 required / 0 optional</span></a>
+<a class="toc-link" href="#Ux4gOtpCaption"><span class="toc-title">Ux4gOtpCaption</span><span class="toc-meta">0 required / 0 optional</span></a>
+<a class="toc-link" href="#Ux4gOtpInput"><span class="toc-title">Ux4gOtpInput</span><span class="toc-meta">0 required / 0 optional</span></a>
+<a class="toc-link" href="#Ux4gPaginationIndicator"><span class="toc-title">Ux4gPaginationIndicator</span><span class="toc-meta">0 required / 0 optional</span></a>
+<a class="toc-link" href="#Ux4gPanInputField"><span class="toc-title">Ux4gPanInputField</span><span class="toc-meta">0 required / 0 optional</span></a>
+<a class="toc-link" href="#Ux4gProfileAvatar"><span class="toc-title">Ux4gProfileAvatar</span><span class="toc-meta">0 required / 0 optional</span></a>
+<a class="toc-link" href="#Ux4gRangeSlider"><span class="toc-title">Ux4gRangeSlider</span><span class="toc-meta">0 required / 0 optional</span></a>
+<a class="toc-link" href="#Ux4gResultRow"><span class="toc-title">Ux4gResultRow</span><span class="toc-meta">0 required / 0 optional</span></a>
+<a class="toc-link" href="#Ux4gRichTooltip"><span class="toc-title">Ux4gRichTooltip</span><span class="toc-meta">0 required / 0 optional</span></a>
+<a class="toc-link" href="#Ux4gSearchField"><span class="toc-title">Ux4gSearchField</span><span class="toc-meta">0 required / 0 optional</span></a>
+<a class="toc-link" href="#Ux4gSelectionDropdown"><span class="toc-title">Ux4gSelectionDropdown</span><span class="toc-meta">0 required / 0 optional</span></a>
+<a class="toc-link" href="#Ux4gSlider"><span class="toc-title">Ux4gSlider</span><span class="toc-meta">0 required / 0 optional</span></a>
+<a class="toc-link" href="#Ux4gSocialLink"><span class="toc-title">Ux4gSocialLink</span><span class="toc-meta">0 required / 0 optional</span></a>
+<a class="toc-link" href="#Ux4gSocialLinkGroup"><span class="toc-title">Ux4gSocialLinkGroup</span><span class="toc-meta">0 required / 0 optional</span></a>
+<a class="toc-link" href="#Ux4gSocialLinkList"><span class="toc-title">Ux4gSocialLinkList</span><span class="toc-meta">0 required / 0 optional</span></a>
+<a class="toc-link" href="#Ux4gStatusAvatar"><span class="toc-title">Ux4gStatusAvatar</span><span class="toc-meta">0 required / 0 optional</span></a>
+<a class="toc-link" href="#Ux4gStatusBanner"><span class="toc-title">Ux4gStatusBanner</span><span class="toc-meta">0 required / 0 optional</span></a>
+<a class="toc-link" href="#Ux4gStatusPipeline"><span class="toc-title">Ux4gStatusPipeline</span><span class="toc-meta">0 required / 0 optional</span></a>
+<a class="toc-link" href="#Ux4gStepper"><span class="toc-title">Ux4gStepper</span><span class="toc-meta">0 required / 0 optional</span></a>
+<a class="toc-link" href="#Ux4gTag"><span class="toc-title">Ux4gTag</span><span class="toc-meta">0 required / 0 optional</span></a>
+<a class="toc-link" href="#Ux4gTextArea"><span class="toc-title">Ux4gTextArea</span><span class="toc-meta">0 required / 0 optional</span></a>
+<a class="toc-link" href="#Ux4gTimePicker"><span class="toc-title">Ux4gTimePicker</span><span class="toc-meta">0 required / 0 optional</span></a>
+<a class="toc-link" href="#Ux4gToast"><span class="toc-title">Ux4gToast</span><span class="toc-meta">0 required / 0 optional</span></a>
+<a class="toc-link" href="#Ux4gToastHost"><span class="toc-title">Ux4gToastHost</span><span class="toc-meta">0 required / 0 optional</span></a>
+<a class="toc-link" href="#Ux4gToggle"><span class="toc-title">Ux4gToggle</span><span class="toc-meta">0 required / 0 optional</span></a>
+<a class="toc-link" href="#Ux4gTooltip"><span class="toc-title">Ux4gTooltip</span><span class="toc-meta">0 required / 0 optional</span></a>
+<a class="toc-link" href="#Ux4gUnifiedPillTag"><span class="toc-title">Ux4gUnifiedPillTag</span><span class="toc-meta">0 required / 0 optional</span></a>
+      </nav>
+    </aside>
+    <main class="content">
+      <section class="hero" id="quick-start">
+        <h2>Quick Start Guide</h2>
+        <p>Integrate UX4G Flutter components quickly with the same structure as your UX4G Storybook docs: setup, what is included, and component API details.</p>
+        <div class="grid-2">
+          <article class="panel">
+            <h3>Install via pubspec</h3>
+            <pre><code>dependencies:
+  ux4g_flutter_design_system:
+    path: ../ux4g-flutter-design-system</code></pre>
+          </article>
+          <article class="panel">
+            <h3>Wrap app with theme</h3>
+            <pre><code>MaterialApp(
+  theme: Ux4gTheme.themeData(isDark: false),
+  darkTheme: Ux4gTheme.themeData(isDark: true),
+)</code></pre>
+          </article>
+        </div>
+        <div class="grid-2">
+          <article class="panel">
+            <h3>Example usage</h3>
+            <pre><code>Ux4gButton(
+  onPressed: () {},
+  text: 'Get Started',
+)</code></pre>
+          </article>
+          <article class="panel">
+            <h3>What is included</h3>
+            <ul>
+              <li>Foundations: colors, typography, spacing, icons</li>
+              <li>Components: forms, feedback, navigation, data display</li>
+              <li>Biometric flow and helper utilities</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <h2 class="section-title" id="components">Components</h2>
+      
+<section class="component" id="SlotGrid">
+  <div class="component-head">
+    <h3>SlotGrid</h3>
+    <div class="pills">
+      <span class="pill">Components</span>
+      <span class="pill">0 required</span>
+      <span class="pill">0 optional</span>
+    </div>
+  </div>
+  <p class="source">Source: <a href="../lib/src/components/slot_grid.dart">lib/src/components/slot_grid.dart</a></p>
+  <p class="empty">No named constructor parameters detected automatically.</p>
+</section>
+
+<section class="component" id="SlotTimePickerSheet">
+  <div class="component-head">
+    <h3>SlotTimePickerSheet</h3>
+    <div class="pills">
+      <span class="pill">Feedback</span>
+      <span class="pill">0 required</span>
+      <span class="pill">0 optional</span>
+    </div>
+  </div>
+  <p class="source">Source: <a href="../lib/src/components/slot_grid.dart">lib/src/components/slot_grid.dart</a></p>
+  <p class="empty">No named constructor parameters detected automatically.</p>
+</section>
+
+<section class="component" id="Ux4gAadhaarInputField">
+  <div class="component-head">
+    <h3>Ux4gAadhaarInputField</h3>
+    <div class="pills">
+      <span class="pill">Inputs</span>
+      <span class="pill">0 required</span>
+      <span class="pill">0 optional</span>
+    </div>
+  </div>
+  <p class="source">Source: <a href="../lib/src/components/aadhaar_input_field.dart">lib/src/components/aadhaar_input_field.dart</a></p>
+  <p class="empty">No named constructor parameters detected automatically.</p>
+</section>
+
+<section class="component" id="Ux4gAccordion">
+  <div class="component-head">
+    <h3>Ux4gAccordion</h3>
+    <div class="pills">
+      <span class="pill">Components</span>
+      <span class="pill">0 required</span>
+      <span class="pill">0 optional</span>
+    </div>
+  </div>
+  <p class="source">Source: <a href="../lib/src/components/accordion.dart">lib/src/components/accordion.dart</a></p>
+  <p class="empty">No named constructor parameters detected automatically.</p>
+</section>
+
+<section class="component" id="Ux4gAccordionGroup">
+  <div class="component-head">
+    <h3>Ux4gAccordionGroup</h3>
+    <div class="pills">
+      <span class="pill">Components</span>
+      <span class="pill">0 required</span>
+      <span class="pill">0 optional</span>
+    </div>
+  </div>
+  <p class="source">Source: <a href="../lib/src/components/accordion.dart">lib/src/components/accordion.dart</a></p>
+  <p class="empty">No named constructor parameters detected automatically.</p>
+</section>
+
+<section class="component" id="Ux4gActionDropdown">
+  <div class="component-head">
+    <h3>Ux4gActionDropdown</h3>
+    <div class="pills">
+      <span class="pill">Inputs</span>
+      <span class="pill">0 required</span>
+      <span class="pill">0 optional</span>
+    </div>
+  </div>
+  <p class="source">Source: <a href="../lib/src/components/dropdown.dart">lib/src/components/dropdown.dart</a></p>
+  <p class="empty">No named constructor parameters detected automatically.</p>
+</section>
+
+<section class="component" id="Ux4gAnimatedCircularProgress">
+  <div class="component-head">
+    <h3>Ux4gAnimatedCircularProgress</h3>
+    <div class="pills">
+      <span class="pill">Progress</span>
+      <span class="pill">0 required</span>
+      <span class="pill">0 optional</span>
+    </div>
+  </div>
+  <p class="source">Source: <a href="../lib/src/components/circular_progress.dart">lib/src/components/circular_progress.dart</a></p>
+  <p class="empty">No named constructor parameters detected automatically.</p>
+</section>
+
+<section class="component" id="Ux4gAnimatedHalfCircleProgress">
+  <div class="component-head">
+    <h3>Ux4gAnimatedHalfCircleProgress</h3>
+    <div class="pills">
+      <span class="pill">Progress</span>
+      <span class="pill">0 required</span>
+      <span class="pill">0 optional</span>
+    </div>
+  </div>
+  <p class="source">Source: <a href="../lib/src/components/half_circle_progress.dart">lib/src/components/half_circle_progress.dart</a></p>
+  <p class="empty">No named constructor parameters detected automatically.</p>
+</section>
+
+<section class="component" id="Ux4gAnimatedLinearProgress">
+  <div class="component-head">
+    <h3>Ux4gAnimatedLinearProgress</h3>
+    <div class="pills">
+      <span class="pill">Progress</span>
+      <span class="pill">0 required</span>
+      <span class="pill">0 optional</span>
+    </div>
+  </div>
+  <p class="source">Source: <a href="../lib/src/components/linear_progress.dart">lib/src/components/linear_progress.dart</a></p>
+  <p class="empty">No named constructor parameters detected automatically.</p>
+</section>
+
+<section class="component" id="Ux4gAppHeader">
+  <div class="component-head">
+    <h3>Ux4gAppHeader</h3>
+    <div class="pills">
+      <span class="pill">Navigation</span>
+      <span class="pill">0 required</span>
+      <span class="pill">0 optional</span>
+    </div>
+  </div>
+  <p class="source">Source: <a href="../lib/src/components/app_header.dart">lib/src/components/app_header.dart</a></p>
+  <p class="empty">No named constructor parameters detected automatically.</p>
+</section>
+
+<section class="component" id="Ux4gAvatar">
+  <div class="component-head">
+    <h3>Ux4gAvatar</h3>
+    <div class="pills">
+      <span class="pill">Data Display</span>
+      <span class="pill">0 required</span>
+      <span class="pill">0 optional</span>
+    </div>
+  </div>
+  <p class="source">Source: <a href="../lib/src/components/avatar.dart">lib/src/components/avatar.dart</a></p>
+  <p class="empty">No named constructor parameters detected automatically.</p>
+</section>
+
+<section class="component" id="Ux4gAvatarGroup">
+  <div class="component-head">
+    <h3>Ux4gAvatarGroup</h3>
+    <div class="pills">
+      <span class="pill">Data Display</span>
+      <span class="pill">0 required</span>
+      <span class="pill">0 optional</span>
+    </div>
+  </div>
+  <p class="source">Source: <a href="../lib/src/components/avatar.dart">lib/src/components/avatar.dart</a></p>
+  <p class="empty">No named constructor parameters detected automatically.</p>
+</section>
+
+<section class="component" id="Ux4gBadge">
+  <div class="component-head">
+    <h3>Ux4gBadge</h3>
+    <div class="pills">
+      <span class="pill">Data Display</span>
+      <span class="pill">0 required</span>
+      <span class="pill">0 optional</span>
+    </div>
+  </div>
+  <p class="source">Source: <a href="../lib/src/components/badge.dart">lib/src/components/badge.dart</a></p>
+  <p class="empty">No named constructor parameters detected automatically.</p>
+</section>
+
+<section class="component" id="Ux4gBottomSheet">
+  <div class="component-head">
+    <h3>Ux4gBottomSheet</h3>
+    <div class="pills">
+      <span class="pill">Feedback</span>
+      <span class="pill">0 required</span>
+      <span class="pill">0 optional</span>
+    </div>
+  </div>
+  <p class="source">Source: <a href="../lib/src/components/bottom_sheet.dart">lib/src/components/bottom_sheet.dart</a></p>
+  <p class="empty">No named constructor parameters detected automatically.</p>
+</section>
+
+<section class="component" id="Ux4gBottomSheetLayout">
+  <div class="component-head">
+    <h3>Ux4gBottomSheetLayout</h3>
+    <div class="pills">
+      <span class="pill">Feedback</span>
+      <span class="pill">0 required</span>
+      <span class="pill">0 optional</span>
+    </div>
+  </div>
+  <p class="source">Source: <a href="../lib/src/components/bottom_sheet.dart">lib/src/components/bottom_sheet.dart</a></p>
+  <p class="empty">No named constructor parameters detected automatically.</p>
+</section>
+
+<section class="component" id="Ux4gButton">
+  <div class="component-head">
+    <h3>Ux4gButton</h3>
+    <div class="pills">
+      <span class="pill">Buttons</span>
+      <span class="pill">0 required</span>
+      <span class="pill">0 optional</span>
+    </div>
+  </div>
+  <p class="source">Source: <a href="../lib/src/components/buttons.dart">lib/src/components/buttons.dart</a></p>
+  <p class="empty">No named constructor parameters detected automatically.</p>
+</section>
+
+<section class="component" id="Ux4gCapsuleStepper">
+  <div class="component-head">
+    <h3>Ux4gCapsuleStepper</h3>
+    <div class="pills">
+      <span class="pill">Progress</span>
+      <span class="pill">0 required</span>
+      <span class="pill">0 optional</span>
+    </div>
+  </div>
+  <p class="source">Source: <a href="../lib/src/components/steppers.dart">lib/src/components/steppers.dart</a></p>
+  <p class="empty">No named constructor parameters detected automatically.</p>
+</section>
+
+<section class="component" id="Ux4gCard">
+  <div class="component-head">
+    <h3>Ux4gCard</h3>
+    <div class="pills">
+      <span class="pill">Data Display</span>
+      <span class="pill">0 required</span>
+      <span class="pill">0 optional</span>
+    </div>
+  </div>
+  <p class="source">Source: <a href="../lib/src/components/card.dart">lib/src/components/card.dart</a></p>
+  <p class="empty">No named constructor parameters detected automatically.</p>
+</section>
+
+<section class="component" id="Ux4gCarousel">
+  <div class="component-head">
+    <h3>Ux4gCarousel</h3>
+    <div class="pills">
+      <span class="pill">Navigation</span>
+      <span class="pill">0 required</span>
+      <span class="pill">0 optional</span>
+    </div>
+  </div>
+  <p class="source">Source: <a href="../lib/src/components/carousel.dart">lib/src/components/carousel.dart</a></p>
+  <p class="empty">No named constructor parameters detected automatically.</p>
+</section>
+
+<section class="component" id="Ux4gCheckbox">
+  <div class="component-head">
+    <h3>Ux4gCheckbox</h3>
+    <div class="pills">
+      <span class="pill">Inputs</span>
+      <span class="pill">0 required</span>
+      <span class="pill">0 optional</span>
+    </div>
+  </div>
+  <p class="source">Source: <a href="../lib/src/components/checkbox.dart">lib/src/components/checkbox.dart</a></p>
+  <p class="empty">No named constructor parameters detected automatically.</p>
+</section>
+
+<section class="component" id="Ux4gChoiceChip">
+  <div class="component-head">
+    <h3>Ux4gChoiceChip</h3>
+    <div class="pills">
+      <span class="pill">Data Display</span>
+      <span class="pill">0 required</span>
+      <span class="pill">0 optional</span>
+    </div>
+  </div>
+  <p class="source">Source: <a href="../lib/src/components/chips.dart">lib/src/components/chips.dart</a></p>
+  <p class="empty">No named constructor parameters detected automatically.</p>
+</section>
+
+<section class="component" id="Ux4gCircularProgress">
+  <div class="component-head">
+    <h3>Ux4gCircularProgress</h3>
+    <div class="pills">
+      <span class="pill">Progress</span>
+      <span class="pill">0 required</span>
+      <span class="pill">0 optional</span>
+    </div>
+  </div>
+  <p class="source">Source: <a href="../lib/src/components/circular_progress.dart">lib/src/components/circular_progress.dart</a></p>
+  <p class="empty">No named constructor parameters detected automatically.</p>
+</section>
+
+<section class="component" id="Ux4gDatePicker">
+  <div class="component-head">
+    <h3>Ux4gDatePicker</h3>
+    <div class="pills">
+      <span class="pill">Components</span>
+      <span class="pill">0 required</span>
+      <span class="pill">0 optional</span>
+    </div>
+  </div>
+  <p class="source">Source: <a href="../lib/src/components/date_picker.dart">lib/src/components/date_picker.dart</a></p>
+  <p class="empty">No named constructor parameters detected automatically.</p>
+</section>
+
+<section class="component" id="Ux4gDivider">
+  <div class="component-head">
+    <h3>Ux4gDivider</h3>
+    <div class="pills">
+      <span class="pill">Components</span>
+      <span class="pill">0 required</span>
+      <span class="pill">0 optional</span>
+    </div>
+  </div>
+  <p class="source">Source: <a href="../lib/src/components/divider.dart">lib/src/components/divider.dart</a></p>
+  <p class="empty">No named constructor parameters detected automatically.</p>
+</section>
+
+<section class="component" id="Ux4gEmptyState">
+  <div class="component-head">
+    <h3>Ux4gEmptyState</h3>
+    <div class="pills">
+      <span class="pill">Components</span>
+      <span class="pill">0 required</span>
+      <span class="pill">0 optional</span>
+    </div>
+  </div>
+  <p class="source">Source: <a href="../lib/src/components/empty_state.dart">lib/src/components/empty_state.dart</a></p>
+  <p class="empty">No named constructor parameters detected automatically.</p>
+</section>
+
+<section class="component" id="Ux4gFeedbackForm">
+  <div class="component-head">
+    <h3>Ux4gFeedbackForm</h3>
+    <div class="pills">
+      <span class="pill">Components</span>
+      <span class="pill">0 required</span>
+      <span class="pill">0 optional</span>
+    </div>
+  </div>
+  <p class="source">Source: <a href="../lib/src/components/feedback_form.dart">lib/src/components/feedback_form.dart</a></p>
+  <p class="empty">No named constructor parameters detected automatically.</p>
+</section>
+
+<section class="component" id="Ux4gFeedbackFormCsat">
+  <div class="component-head">
+    <h3>Ux4gFeedbackFormCsat</h3>
+    <div class="pills">
+      <span class="pill">Components</span>
+      <span class="pill">0 required</span>
+      <span class="pill">0 optional</span>
+    </div>
+  </div>
+  <p class="source">Source: <a href="../lib/src/components/feedback_form_csat.dart">lib/src/components/feedback_form_csat.dart</a></p>
+  <p class="empty">No named constructor parameters detected automatically.</p>
+</section>
+
+<section class="component" id="Ux4gFeedbackFormNps">
+  <div class="component-head">
+    <h3>Ux4gFeedbackFormNps</h3>
+    <div class="pills">
+      <span class="pill">Components</span>
+      <span class="pill">0 required</span>
+      <span class="pill">0 optional</span>
+    </div>
+  </div>
+  <p class="source">Source: <a href="../lib/src/components/feedback_form_nps.dart">lib/src/components/feedback_form_nps.dart</a></p>
+  <p class="empty">No named constructor parameters detected automatically.</p>
+</section>
+
+<section class="component" id="Ux4gFileUpload">
+  <div class="component-head">
+    <h3>Ux4gFileUpload</h3>
+    <div class="pills">
+      <span class="pill">Components</span>
+      <span class="pill">0 required</span>
+      <span class="pill">0 optional</span>
+    </div>
+  </div>
+  <p class="source">Source: <a href="../lib/src/components/file_upload.dart">lib/src/components/file_upload.dart</a></p>
+  <p class="empty">No named constructor parameters detected automatically.</p>
+</section>
+
+<section class="component" id="Ux4gFilterChip">
+  <div class="component-head">
+    <h3>Ux4gFilterChip</h3>
+    <div class="pills">
+      <span class="pill">Data Display</span>
+      <span class="pill">0 required</span>
+      <span class="pill">0 optional</span>
+    </div>
+  </div>
+  <p class="source">Source: <a href="../lib/src/components/chips.dart">lib/src/components/chips.dart</a></p>
+  <p class="empty">No named constructor parameters detected automatically.</p>
+</section>
+
+<section class="component" id="Ux4gHalfCircleProgress">
+  <div class="component-head">
+    <h3>Ux4gHalfCircleProgress</h3>
+    <div class="pills">
+      <span class="pill">Progress</span>
+      <span class="pill">0 required</span>
+      <span class="pill">0 optional</span>
+    </div>
+  </div>
+  <p class="source">Source: <a href="../lib/src/components/half_circle_progress.dart">lib/src/components/half_circle_progress.dart</a></p>
+  <p class="empty">No named constructor parameters detected automatically.</p>
+</section>
+
+<section class="component" id="Ux4gIconButton">
+  <div class="component-head">
+    <h3>Ux4gIconButton</h3>
+    <div class="pills">
+      <span class="pill">Buttons</span>
+      <span class="pill">0 required</span>
+      <span class="pill">0 optional</span>
+    </div>
+  </div>
+  <p class="source">Source: <a href="../lib/src/components/buttons.dart">lib/src/components/buttons.dart</a></p>
+  <p class="empty">No named constructor parameters detected automatically.</p>
+</section>
+
+<section class="component" id="Ux4gInputChip">
+  <div class="component-head">
+    <h3>Ux4gInputChip</h3>
+    <div class="pills">
+      <span class="pill">Inputs</span>
+      <span class="pill">0 required</span>
+      <span class="pill">0 optional</span>
+    </div>
+  </div>
+  <p class="source">Source: <a href="../lib/src/components/chips.dart">lib/src/components/chips.dart</a></p>
+  <p class="empty">No named constructor parameters detected automatically.</p>
+</section>
+
+<section class="component" id="Ux4gInputChipField">
+  <div class="component-head">
+    <h3>Ux4gInputChipField</h3>
+    <div class="pills">
+      <span class="pill">Inputs</span>
+      <span class="pill">0 required</span>
+      <span class="pill">0 optional</span>
+    </div>
+  </div>
+  <p class="source">Source: <a href="../lib/src/components/chips.dart">lib/src/components/chips.dart</a></p>
+  <p class="empty">No named constructor parameters detected automatically.</p>
+</section>
+
+<section class="component" id="Ux4gInputField">
+  <div class="component-head">
+    <h3>Ux4gInputField</h3>
+    <div class="pills">
+      <span class="pill">Inputs</span>
+      <span class="pill">0 required</span>
+      <span class="pill">0 optional</span>
+    </div>
+  </div>
+  <p class="source">Source: <a href="../lib/src/components/input_field.dart">lib/src/components/input_field.dart</a></p>
+  <p class="empty">No named constructor parameters detected automatically.</p>
+</section>
+
+<section class="component" id="Ux4gJourneyTimeline">
+  <div class="component-head">
+    <h3>Ux4gJourneyTimeline</h3>
+    <div class="pills">
+      <span class="pill">Data Display</span>
+      <span class="pill">0 required</span>
+      <span class="pill">0 optional</span>
+    </div>
+  </div>
+  <p class="source">Source: <a href="../lib/src/components/journey_timeline.dart">lib/src/components/journey_timeline.dart</a></p>
+  <p class="empty">No named constructor parameters detected automatically.</p>
+</section>
+
+<section class="component" id="Ux4gLinearProgress">
+  <div class="component-head">
+    <h3>Ux4gLinearProgress</h3>
+    <div class="pills">
+      <span class="pill">Progress</span>
+      <span class="pill">0 required</span>
+      <span class="pill">0 optional</span>
+    </div>
+  </div>
+  <p class="source">Source: <a href="../lib/src/components/linear_progress.dart">lib/src/components/linear_progress.dart</a></p>
+  <p class="empty">No named constructor parameters detected automatically.</p>
+</section>
+
+<section class="component" id="Ux4gLoader">
+  <div class="component-head">
+    <h3>Ux4gLoader</h3>
+    <div class="pills">
+      <span class="pill">Components</span>
+      <span class="pill">0 required</span>
+      <span class="pill">0 optional</span>
+    </div>
+  </div>
+  <p class="source">Source: <a href="../lib/src/components/loader.dart">lib/src/components/loader.dart</a></p>
+  <p class="empty">No named constructor parameters detected automatically.</p>
+</section>
+
+<section class="component" id="Ux4gModal">
+  <div class="component-head">
+    <h3>Ux4gModal</h3>
+    <div class="pills">
+      <span class="pill">Feedback</span>
+      <span class="pill">0 required</span>
+      <span class="pill">0 optional</span>
+    </div>
+  </div>
+  <p class="source">Source: <a href="../lib/src/components/modal.dart">lib/src/components/modal.dart</a></p>
+  <p class="empty">No named constructor parameters detected automatically.</p>
+</section>
+
+<section class="component" id="Ux4gModalContent">
+  <div class="component-head">
+    <h3>Ux4gModalContent</h3>
+    <div class="pills">
+      <span class="pill">Feedback</span>
+      <span class="pill">0 required</span>
+      <span class="pill">0 optional</span>
+    </div>
+  </div>
+  <p class="source">Source: <a href="../lib/src/components/modal.dart">lib/src/components/modal.dart</a></p>
+  <p class="empty">No named constructor parameters detected automatically.</p>
+</section>
+
+<section class="component" id="Ux4gOtpBox">
+  <div class="component-head">
+    <h3>Ux4gOtpBox</h3>
+    <div class="pills">
+      <span class="pill">Inputs</span>
+      <span class="pill">0 required</span>
+      <span class="pill">0 optional</span>
+    </div>
+  </div>
+  <p class="source">Source: <a href="../lib/src/components/otp_input.dart">lib/src/components/otp_input.dart</a></p>
+  <p class="empty">No named constructor parameters detected automatically.</p>
+</section>
+
+<section class="component" id="Ux4gOtpCaption">
+  <div class="component-head">
+    <h3>Ux4gOtpCaption</h3>
+    <div class="pills">
+      <span class="pill">Inputs</span>
+      <span class="pill">0 required</span>
+      <span class="pill">0 optional</span>
+    </div>
+  </div>
+  <p class="source">Source: <a href="../lib/src/components/otp_input.dart">lib/src/components/otp_input.dart</a></p>
+  <p class="empty">No named constructor parameters detected automatically.</p>
+</section>
+
+<section class="component" id="Ux4gOtpInput">
+  <div class="component-head">
+    <h3>Ux4gOtpInput</h3>
+    <div class="pills">
+      <span class="pill">Inputs</span>
+      <span class="pill">0 required</span>
+      <span class="pill">0 optional</span>
+    </div>
+  </div>
+  <p class="source">Source: <a href="../lib/src/components/otp_input.dart">lib/src/components/otp_input.dart</a></p>
+  <p class="empty">No named constructor parameters detected automatically.</p>
+</section>
+
+<section class="component" id="Ux4gPaginationIndicator">
+  <div class="component-head">
+    <h3>Ux4gPaginationIndicator</h3>
+    <div class="pills">
+      <span class="pill">Navigation</span>
+      <span class="pill">0 required</span>
+      <span class="pill">0 optional</span>
+    </div>
+  </div>
+  <p class="source">Source: <a href="../lib/src/components/pagination.dart">lib/src/components/pagination.dart</a></p>
+  <p class="empty">No named constructor parameters detected automatically.</p>
+</section>
+
+<section class="component" id="Ux4gPanInputField">
+  <div class="component-head">
+    <h3>Ux4gPanInputField</h3>
+    <div class="pills">
+      <span class="pill">Inputs</span>
+      <span class="pill">0 required</span>
+      <span class="pill">0 optional</span>
+    </div>
+  </div>
+  <p class="source">Source: <a href="../lib/src/components/pan_input_field.dart">lib/src/components/pan_input_field.dart</a></p>
+  <p class="empty">No named constructor parameters detected automatically.</p>
+</section>
+
+<section class="component" id="Ux4gProfileAvatar">
+  <div class="component-head">
+    <h3>Ux4gProfileAvatar</h3>
+    <div class="pills">
+      <span class="pill">Data Display</span>
+      <span class="pill">0 required</span>
+      <span class="pill">0 optional</span>
+    </div>
+  </div>
+  <p class="source">Source: <a href="../lib/src/components/avatar.dart">lib/src/components/avatar.dart</a></p>
+  <p class="empty">No named constructor parameters detected automatically.</p>
+</section>
+
+<section class="component" id="Ux4gRangeSlider">
+  <div class="component-head">
+    <h3>Ux4gRangeSlider</h3>
+    <div class="pills">
+      <span class="pill">Inputs</span>
+      <span class="pill">0 required</span>
+      <span class="pill">0 optional</span>
+    </div>
+  </div>
+  <p class="source">Source: <a href="../lib/src/components/slider.dart">lib/src/components/slider.dart</a></p>
+  <p class="empty">No named constructor parameters detected automatically.</p>
+</section>
+
+<section class="component" id="Ux4gResultRow">
+  <div class="component-head">
+    <h3>Ux4gResultRow</h3>
+    <div class="pills">
+      <span class="pill">Components</span>
+      <span class="pill">0 required</span>
+      <span class="pill">0 optional</span>
+    </div>
+  </div>
+  <p class="source">Source: <a href="../lib/src/components/result_row.dart">lib/src/components/result_row.dart</a></p>
+  <p class="empty">No named constructor parameters detected automatically.</p>
+</section>
+
+<section class="component" id="Ux4gRichTooltip">
+  <div class="component-head">
+    <h3>Ux4gRichTooltip</h3>
+    <div class="pills">
+      <span class="pill">Feedback</span>
+      <span class="pill">0 required</span>
+      <span class="pill">0 optional</span>
+    </div>
+  </div>
+  <p class="source">Source: <a href="../lib/src/components/tooltips.dart">lib/src/components/tooltips.dart</a></p>
+  <p class="empty">No named constructor parameters detected automatically.</p>
+</section>
+
+<section class="component" id="Ux4gSearchField">
+  <div class="component-head">
+    <h3>Ux4gSearchField</h3>
+    <div class="pills">
+      <span class="pill">Inputs</span>
+      <span class="pill">0 required</span>
+      <span class="pill">0 optional</span>
+    </div>
+  </div>
+  <p class="source">Source: <a href="../lib/src/components/search_field.dart">lib/src/components/search_field.dart</a></p>
+  <p class="empty">No named constructor parameters detected automatically.</p>
+</section>
+
+<section class="component" id="Ux4gSelectionDropdown">
+  <div class="component-head">
+    <h3>Ux4gSelectionDropdown</h3>
+    <div class="pills">
+      <span class="pill">Inputs</span>
+      <span class="pill">0 required</span>
+      <span class="pill">0 optional</span>
+    </div>
+  </div>
+  <p class="source">Source: <a href="../lib/src/components/dropdown.dart">lib/src/components/dropdown.dart</a></p>
+  <p class="empty">No named constructor parameters detected automatically.</p>
+</section>
+
+<section class="component" id="Ux4gSlider">
+  <div class="component-head">
+    <h3>Ux4gSlider</h3>
+    <div class="pills">
+      <span class="pill">Inputs</span>
+      <span class="pill">0 required</span>
+      <span class="pill">0 optional</span>
+    </div>
+  </div>
+  <p class="source">Source: <a href="../lib/src/components/slider.dart">lib/src/components/slider.dart</a></p>
+  <p class="empty">No named constructor parameters detected automatically.</p>
+</section>
+
+<section class="component" id="Ux4gSocialLink">
+  <div class="component-head">
+    <h3>Ux4gSocialLink</h3>
+    <div class="pills">
+      <span class="pill">Components</span>
+      <span class="pill">0 required</span>
+      <span class="pill">0 optional</span>
+    </div>
+  </div>
+  <p class="source">Source: <a href="../lib/src/components/social_links.dart">lib/src/components/social_links.dart</a></p>
+  <p class="empty">No named constructor parameters detected automatically.</p>
+</section>
+
+<section class="component" id="Ux4gSocialLinkGroup">
+  <div class="component-head">
+    <h3>Ux4gSocialLinkGroup</h3>
+    <div class="pills">
+      <span class="pill">Components</span>
+      <span class="pill">0 required</span>
+      <span class="pill">0 optional</span>
+    </div>
+  </div>
+  <p class="source">Source: <a href="../lib/src/components/social_links.dart">lib/src/components/social_links.dart</a></p>
+  <p class="empty">No named constructor parameters detected automatically.</p>
+</section>
+
+<section class="component" id="Ux4gSocialLinkList">
+  <div class="component-head">
+    <h3>Ux4gSocialLinkList</h3>
+    <div class="pills">
+      <span class="pill">Components</span>
+      <span class="pill">0 required</span>
+      <span class="pill">0 optional</span>
+    </div>
+  </div>
+  <p class="source">Source: <a href="../lib/src/components/social_links.dart">lib/src/components/social_links.dart</a></p>
+  <p class="empty">No named constructor parameters detected automatically.</p>
+</section>
+
+<section class="component" id="Ux4gStatusAvatar">
+  <div class="component-head">
+    <h3>Ux4gStatusAvatar</h3>
+    <div class="pills">
+      <span class="pill">Data Display</span>
+      <span class="pill">0 required</span>
+      <span class="pill">0 optional</span>
+    </div>
+  </div>
+  <p class="source">Source: <a href="../lib/src/components/avatar.dart">lib/src/components/avatar.dart</a></p>
+  <p class="empty">No named constructor parameters detected automatically.</p>
+</section>
+
+<section class="component" id="Ux4gStatusBanner">
+  <div class="component-head">
+    <h3>Ux4gStatusBanner</h3>
+    <div class="pills">
+      <span class="pill">Feedback</span>
+      <span class="pill">0 required</span>
+      <span class="pill">0 optional</span>
+    </div>
+  </div>
+  <p class="source">Source: <a href="../lib/src/components/status_banner.dart">lib/src/components/status_banner.dart</a></p>
+  <p class="empty">No named constructor parameters detected automatically.</p>
+</section>
+
+<section class="component" id="Ux4gStatusPipeline">
+  <div class="component-head">
+    <h3>Ux4gStatusPipeline</h3>
+    <div class="pills">
+      <span class="pill">Components</span>
+      <span class="pill">0 required</span>
+      <span class="pill">0 optional</span>
+    </div>
+  </div>
+  <p class="source">Source: <a href="../lib/src/components/status_pipeline.dart">lib/src/components/status_pipeline.dart</a></p>
+  <p class="empty">No named constructor parameters detected automatically.</p>
+</section>
+
+<section class="component" id="Ux4gStepper">
+  <div class="component-head">
+    <h3>Ux4gStepper</h3>
+    <div class="pills">
+      <span class="pill">Progress</span>
+      <span class="pill">0 required</span>
+      <span class="pill">0 optional</span>
+    </div>
+  </div>
+  <p class="source">Source: <a href="../lib/src/components/steppers.dart">lib/src/components/steppers.dart</a></p>
+  <p class="empty">No named constructor parameters detected automatically.</p>
+</section>
+
+<section class="component" id="Ux4gTag">
+  <div class="component-head">
+    <h3>Ux4gTag</h3>
+    <div class="pills">
+      <span class="pill">Data Display</span>
+      <span class="pill">0 required</span>
+      <span class="pill">0 optional</span>
+    </div>
+  </div>
+  <p class="source">Source: <a href="../lib/src/components/tag.dart">lib/src/components/tag.dart</a></p>
+  <p class="empty">No named constructor parameters detected automatically.</p>
+</section>
+
+<section class="component" id="Ux4gTextArea">
+  <div class="component-head">
+    <h3>Ux4gTextArea</h3>
+    <div class="pills">
+      <span class="pill">Components</span>
+      <span class="pill">0 required</span>
+      <span class="pill">0 optional</span>
+    </div>
+  </div>
+  <p class="source">Source: <a href="../lib/src/components/text_area.dart">lib/src/components/text_area.dart</a></p>
+  <p class="empty">No named constructor parameters detected automatically.</p>
+</section>
+
+<section class="component" id="Ux4gTimePicker">
+  <div class="component-head">
+    <h3>Ux4gTimePicker</h3>
+    <div class="pills">
+      <span class="pill">Components</span>
+      <span class="pill">0 required</span>
+      <span class="pill">0 optional</span>
+    </div>
+  </div>
+  <p class="source">Source: <a href="../lib/src/components/time_picker.dart">lib/src/components/time_picker.dart</a></p>
+  <p class="empty">No named constructor parameters detected automatically.</p>
+</section>
+
+<section class="component" id="Ux4gToast">
+  <div class="component-head">
+    <h3>Ux4gToast</h3>
+    <div class="pills">
+      <span class="pill">Feedback</span>
+      <span class="pill">0 required</span>
+      <span class="pill">0 optional</span>
+    </div>
+  </div>
+  <p class="source">Source: <a href="../lib/src/components/toast.dart">lib/src/components/toast.dart</a></p>
+  <p class="empty">No named constructor parameters detected automatically.</p>
+</section>
+
+<section class="component" id="Ux4gToastHost">
+  <div class="component-head">
+    <h3>Ux4gToastHost</h3>
+    <div class="pills">
+      <span class="pill">Feedback</span>
+      <span class="pill">0 required</span>
+      <span class="pill">0 optional</span>
+    </div>
+  </div>
+  <p class="source">Source: <a href="../lib/src/components/toast.dart">lib/src/components/toast.dart</a></p>
+  <p class="empty">No named constructor parameters detected automatically.</p>
+</section>
+
+<section class="component" id="Ux4gToggle">
+  <div class="component-head">
+    <h3>Ux4gToggle</h3>
+    <div class="pills">
+      <span class="pill">Inputs</span>
+      <span class="pill">0 required</span>
+      <span class="pill">0 optional</span>
+    </div>
+  </div>
+  <p class="source">Source: <a href="../lib/src/components/toggle.dart">lib/src/components/toggle.dart</a></p>
+  <p class="empty">No named constructor parameters detected automatically.</p>
+</section>
+
+<section class="component" id="Ux4gTooltip">
+  <div class="component-head">
+    <h3>Ux4gTooltip</h3>
+    <div class="pills">
+      <span class="pill">Feedback</span>
+      <span class="pill">0 required</span>
+      <span class="pill">0 optional</span>
+    </div>
+  </div>
+  <p class="source">Source: <a href="../lib/src/components/tooltips.dart">lib/src/components/tooltips.dart</a></p>
+  <p class="empty">No named constructor parameters detected automatically.</p>
+</section>
+
+<section class="component" id="Ux4gUnifiedPillTag">
+  <div class="component-head">
+    <h3>Ux4gUnifiedPillTag</h3>
+    <div class="pills">
+      <span class="pill">Data Display</span>
+      <span class="pill">0 required</span>
+      <span class="pill">0 optional</span>
+    </div>
+  </div>
+  <p class="source">Source: <a href="../lib/src/components/tag.dart">lib/src/components/tag.dart</a></p>
+  <p class="empty">No named constructor parameters detected automatically.</p>
+</section>
+
+
+      <p class="footer">Generated on 2026-05-24 11:56 from source files under lib/src/components.</p>
+    </main>
+  </div>
+</body>
+</html>

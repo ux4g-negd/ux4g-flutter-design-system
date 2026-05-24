@@ -169,8 +169,14 @@ Ux4gCapsuleStepper(
         ),
       ),
     ),
+  ],
+);
+
+final capsuleStepperComponent = WidgetbookComponent(
+  name: 'Ux4gCapsuleStepper',
+  useCases: [
     WidgetbookUseCase(
-      name: 'Capsule stepper',
+      name: 'Default',
       builder: (context) {
         int cap = 1;
         return StatefulBuilder(builder: (ctx, setState) {
@@ -188,6 +194,9 @@ Ux4gCapsuleStepper(
               PropRow(name: 'layout',      type: 'Ux4gCapsuleStepperLayout', description: 'linear / rightAligned / centered / split.', defaultValue: 'linear'),
               PropRow(name: 'onNext',      type: 'VoidCallback',            description: 'Next button callback.'),
               PropRow(name: 'onPrevious',  type: 'VoidCallback',            description: 'Previous button callback.'),
+              PropRow(name: 'labelAlignment', type: 'CrossAxisAlignment', description: 'Alignment for labels.', defaultValue: 'start'),
+              PropRow(name: 'activeColor', type: 'Color?', description: 'Color for active step.'),
+              PropRow(name: 'inactiveColor', type: 'Color?', description: 'Color for inactive steps.'),
             ],
             child: SizedBox(
               width: 380,
@@ -239,9 +248,17 @@ final resultRowComponent = WidgetbookComponent(
           PropRow(name: 'title', type: 'String', description: 'Row heading.', required: true),
           PropRow(name: 'statusTag', type: 'String?', description: 'Tag label.'),
           PropRow(name: 'tagColorScheme', type: 'Ux4gTagColor', description: 'Tag colour.', defaultValue: 'neutral'),
+          PropRow(name: 'metadataSegments', type: 'List<Ux4gPillSegment>?', description: 'Metadata pill segments.'),
           PropRow(name: 'details', type: 'List<Ux4gResultDetail>', description: 'Key-value pairs shown when expanded.', defaultValue: '[]'),
           PropRow(name: 'actionButtonText', type: 'String?', description: 'CTA button label.'),
+          PropRow(name: 'onActionPressed', type: 'VoidCallback?', description: 'Action button callback.'),
+          PropRow(name: 'actionButtonIcon', type: 'IconData?', description: 'Icon for action button.'),
+          PropRow(name: 'actionButtonColor', type: 'Color?', description: 'Color for action button.'),
+          PropRow(name: 'expandedChild', type: 'Widget?', description: 'Custom widget to show when expanded.'),
+          PropRow(name: 'detailsColumns', type: 'int', description: 'Number of columns for details.', defaultValue: '2'),
           PropRow(name: 'initialExpanded', type: 'bool', description: 'Start in expanded state.', defaultValue: 'false'),
+          PropRow(name: 'onToggle', type: 'ValueChanged<bool>?', description: 'Called when expansion state changes.'),
+          PropRow(name: 'showBottomDivider', type: 'bool', description: 'Show divider at bottom.', defaultValue: 'true'),
         ],
         child: SizedBox(
           width: 380,
@@ -288,10 +305,14 @@ Ux4gSocialLink(
 );''',
         props: const [
           PropRow(name: 'icon', type: 'SocialMediaIcon', description: 'Social icon type.', required: true),
-          PropRow(name: 'useColoredIcon', type: 'bool', description: 'Show brand colour.', defaultValue: 'false'),
+          PropRow(name: 'size', type: 'SocialLinkSize', description: 'xs / s / m / l / xl / xxl.', defaultValue: 'm'),
+          PropRow(name: 'color', type: 'Color?', description: 'Custom icon color.'),
+          PropRow(name: 'onPressed', type: 'VoidCallback?', description: 'Tap callback.'),
+          PropRow(name: 'tooltip', type: 'String?', description: 'Tooltip text.'),
+          PropRow(name: 'containerSize', type: 'double?', description: 'Custom background container size.'),
+          PropRow(name: 'containerColor', type: 'Color?', description: 'Custom background color.'),
           PropRow(name: 'enableBackground', type: 'bool', description: 'Wrap in background container.', defaultValue: 'false'),
-          PropRow(name: 'containerSize', type: 'double', description: 'Container size when background enabled.', defaultValue: '40'),
-          PropRow(name: 'onTap', type: 'VoidCallback?', description: 'Tap callback.'),
+          PropRow(name: 'useColoredIcon', type: 'bool', description: 'Show brand colour.', defaultValue: 'false'),
         ],
         child: Wrap(
           spacing: 12,
@@ -340,7 +361,19 @@ final journeyTimelineComponent = WidgetbookComponent(
 );''',
         props: const [
           PropRow(name: 'steps', type: 'List<Ux4gJourneyStep>', description: 'Timeline steps.', required: true),
-          PropRow(name: 'currentStep', type: 'int', description: 'Index of the active step.', required: true),
+          PropRow(name: 'header', type: 'Ux4gJourneyHeader?', description: 'Header above the timeline.'),
+          PropRow(name: 'currentStep', type: 'int?', description: 'Index of the active step.'),
+          PropRow(name: 'orientation', type: 'Ux4gJourneyOrientation', description: 'vertical or horizontal.', defaultValue: 'vertical'),
+          PropRow(name: 'indicatorSize', type: 'double', description: 'Size of circle indicator.', defaultValue: '20'),
+          PropRow(name: 'lineWidth', type: 'double', description: 'Width of connector line.', defaultValue: '3'),
+          PropRow(name: 'indicatorCardSpacing', type: 'double', description: 'Gap between indicator and card.', defaultValue: '12'),
+          PropRow(name: 'stepSpacing', type: 'double', description: 'Gap between steps.', defaultValue: '12'),
+          PropRow(name: 'activeColor', type: 'Color?', description: 'Color for completed/current steps.'),
+          PropRow(name: 'inactiveColor', type: 'Color?', description: 'Color for upcoming steps.'),
+          PropRow(name: 'cardBorderRadius', type: 'double', description: 'Corner radius of step cards.', defaultValue: '8'),
+          PropRow(name: 'cardPadding', type: 'EdgeInsetsGeometry?', description: 'Padding inside cards.'),
+          PropRow(name: 'cardColor', type: 'Color?', description: 'Background color of cards.'),
+          PropRow(name: 'cardBorderColor', type: 'Color?', description: 'Border color of cards.'),
         ],
         child: SizedBox(
           width: 340,

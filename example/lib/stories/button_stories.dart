@@ -37,14 +37,27 @@ Ux4gButton(
   onPressed: () {},
 );''',
         props: const [
-          PropRow(name: 'text', type: 'String', description: 'Label inside the button.', required: true),
-          PropRow(name: 'onPressed', type: 'VoidCallback', description: 'Called when button is tapped.', required: true),
-          PropRow(name: 'variant', type: 'Ux4gButtonVariant', description: 'primary / secondary / outline / ghost.', defaultValue: 'primary'),
-          PropRow(name: 'size', type: 'Ux4gButtonSize', description: 'small / medium / large.', defaultValue: 'medium'),
+          PropRow(name: 'onPressed', type: 'VoidCallback?', description: 'Called when button is tapped.', required: true),
+          PropRow(name: 'text', type: 'String?', description: 'Label inside the button.'),
+          PropRow(name: 'child', type: 'Widget?', description: 'Custom widget instead of text.'),
+          PropRow(name: 'variant', type: 'Ux4gButtonVariant', description: 'Visual variant of the button.', defaultValue: 'primary'),
+          PropRow(name: 'size', type: 'Ux4gButtonSize', description: 'Size of the button.', defaultValue: 'medium'),
           PropRow(name: 'enabled', type: 'bool', description: 'Whether the button is interactive.', defaultValue: 'true'),
           PropRow(name: 'isLoading', type: 'bool', description: 'Shows a spinner and disables interaction.', defaultValue: 'false'),
+          PropRow(name: 'backgroundColor', type: 'Color?', description: 'Custom background color.'),
+          PropRow(name: 'contentColor', type: 'Color?', description: 'Custom text/icon color.'),
+          PropRow(name: 'disabledBackgroundColor', type: 'Color?', description: 'Background color when disabled.'),
+          PropRow(name: 'disabledContentColor', type: 'Color?', description: 'Text/icon color when disabled.'),
+          PropRow(name: 'borderColor', type: 'Color?', description: 'Custom border color.'),
+          PropRow(name: 'borderWidth', type: 'double?', description: 'Custom border width.'),
+          PropRow(name: 'borderRadius', type: 'double?', description: 'Custom border radius.'),
+          PropRow(name: 'padding', type: 'EdgeInsetsGeometry?', description: 'Custom padding.'),
           PropRow(name: 'leadingIcon', type: 'IconData?', description: 'Icon placed before the label.'),
           PropRow(name: 'trailingIcon', type: 'IconData?', description: 'Icon placed after the label.'),
+          PropRow(name: 'iconSize', type: 'double?', description: 'Size of the icons.'),
+          PropRow(name: 'width', type: 'double?', description: 'Custom width.'),
+          PropRow(name: 'height', type: 'double?', description: 'Custom height.'),
+          PropRow(name: 'elevation', type: 'double?', description: 'Button elevation.'),
         ],
         child: Ux4gButton(
           onPressed: () {},
@@ -135,32 +148,6 @@ Ux4gButton(
       ),
     ),
     WidgetbookUseCase(
-      name: 'Ux4gIconButton',
-      builder: (context) => ComponentDocs(
-        name: 'Ux4gIconButton',
-        description: 'A square icon-only button. Same variant/size system as Ux4gButton.',
-        code: '''Ux4gIconButton(icon: Icons.favorite, onPressed: () {});
-Ux4gIconButton(icon: Icons.share,    variant: Ux4gButtonVariant.outline, onPressed: () {});
-Ux4gIconButton(icon: Icons.delete,   variant: Ux4gButtonVariant.ghost,   onPressed: () {});''',
-        props: const [
-          PropRow(name: 'icon', type: 'IconData', description: 'The icon to display.', required: true),
-          PropRow(name: 'onPressed', type: 'VoidCallback', description: 'Called when tapped.', required: true),
-          PropRow(name: 'variant', type: 'Ux4gButtonVariant', description: 'Visual style.', defaultValue: 'primary'),
-          PropRow(name: 'size', type: 'Ux4gButtonSize', description: 'Button size.', defaultValue: 'medium'),
-        ],
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Ux4gIconButton(onPressed: () {}, icon: Icons.favorite),
-            const SizedBox(width: 12),
-            Ux4gIconButton(onPressed: () {}, icon: Icons.share, variant: Ux4gButtonVariant.outline),
-            const SizedBox(width: 12),
-            Ux4gIconButton(onPressed: () {}, icon: Icons.delete, variant: Ux4gButtonVariant.ghost),
-          ],
-        ),
-      ),
-    ),
-    WidgetbookUseCase(
       name: 'States',
       builder: (context) => ComponentDocs(
         name: 'Ux4gButton — States',
@@ -195,6 +182,49 @@ Ux4gIconButton(icon: Icons.delete,   variant: Ux4gButtonVariant.ghost,   onPress
             Ux4gOutlineButton(text: 'Outline Button',     onPressed: () {}),
             const SizedBox(height: 12),
             Ux4gTextButton(  text: 'Text / Ghost Button', onPressed: () {}),
+          ],
+        ),
+      ),
+    ),
+  ],
+);
+
+final iconButtonComponent = WidgetbookComponent(
+  name: 'Ux4gIconButton',
+  useCases: [
+    WidgetbookUseCase(
+      name: 'Default',
+      builder: (context) => ComponentDocs(
+        name: 'Ux4gIconButton',
+        description: 'A square icon-only button. Same variant/size system as Ux4gButton.',
+        code: '''Ux4gIconButton(icon: Icons.favorite, onPressed: () {});
+Ux4gIconButton(icon: Icons.share,    variant: Ux4gButtonVariant.outline, onPressed: () {});
+Ux4gIconButton(icon: Icons.delete,   variant: Ux4gButtonVariant.ghost,   onPressed: () {});''',
+        props: const [
+          PropRow(name: 'icon', type: 'IconData', description: 'The icon to display.', required: true),
+          PropRow(name: 'onPressed', type: 'VoidCallback?', description: 'Called when tapped.', required: true),
+          PropRow(name: 'variant', type: 'Ux4gButtonVariant', description: 'Visual style.', defaultValue: 'primary'),
+          PropRow(name: 'size', type: 'double', description: 'Button size.', defaultValue: '40'),
+          PropRow(name: 'enabled', type: 'bool', description: 'Whether the button is interactive.', defaultValue: 'true'),
+          PropRow(name: 'backgroundColor', type: 'Color?', description: 'Custom background color.'),
+          PropRow(name: 'contentColor', type: 'Color?', description: 'Custom icon color.'),
+          PropRow(name: 'disabledBackgroundColor', type: 'Color?', description: 'Background color when disabled.'),
+          PropRow(name: 'disabledContentColor', type: 'Color?', description: 'Icon color when disabled.'),
+          PropRow(name: 'borderColor', type: 'Color?', description: 'Custom border color.'),
+          PropRow(name: 'borderWidth', type: 'double?', description: 'Custom border width.'),
+          PropRow(name: 'borderRadius', type: 'double?', description: 'Custom border radius.'),
+          PropRow(name: 'padding', type: 'EdgeInsetsGeometry?', description: 'Custom padding.'),
+          PropRow(name: 'isLoading', type: 'bool', description: 'Shows a spinner and disables interaction.', defaultValue: 'false'),
+          PropRow(name: 'tooltip', type: 'String?', description: 'Optional tooltip text.'),
+        ],
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Ux4gIconButton(onPressed: () {}, icon: Icons.favorite),
+            const SizedBox(width: 12),
+            Ux4gIconButton(onPressed: () {}, icon: Icons.share, variant: Ux4gButtonVariant.outline),
+            const SizedBox(width: 12),
+            Ux4gIconButton(onPressed: () {}, icon: Icons.delete, variant: Ux4gButtonVariant.ghost),
           ],
         ),
       ),

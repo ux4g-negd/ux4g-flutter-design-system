@@ -24,17 +24,6 @@ Ux4gAccordion(
   expanded: expanded,
   onExpandedChange: (v) => setState(() => expanded = v),
   child: Text('Content here'),
-);
-
-// Group (only one open at a time)
-Ux4gAccordionGroup(
-  items: [
-    Ux4gAccordionItem(title: 'Item 1'),
-    Ux4gAccordionItem(title: 'Item 2'),
-  ],
-  expandedIndex: 0,
-  onExpandedIndexChange: (i) {},
-  contentBuilder: (index, item) => Text('Content \'),
 );''',
             props: const [
               PropRow(name: 'title', type: 'String', description: 'Header text.', required: true),
@@ -60,53 +49,6 @@ Ux4gAccordionGroup(
                 child: const Padding(
                   padding: EdgeInsets.all(12),
                   child: Text('UX4G is a Flutter design system providing reusable UI components.'),
-                ),
-              ),
-            ),
-          );
-        });
-      },
-    ),
-    WidgetbookUseCase(
-      name: 'Group',
-      builder: (context) {
-        int? expandedIndex = 0;
-        return StatefulBuilder(builder: (ctx, setState) {
-          final items = [
-            const Ux4gAccordionItem(title: 'What is UX4G?'),
-            const Ux4gAccordionItem(title: 'How do I install it?'),
-            const Ux4gAccordionItem(title: 'Is it open source?'),
-          ];
-          final contents = [
-            'UX4G is a Flutter design system providing reusable UI components.',
-            'Add it to pubspec.yaml and run flutter pub get.',
-            'Yes, UX4G is open source under the MIT licence.',
-          ];
-          return ComponentDocs(
-            name: 'Ux4gAccordionGroup',
-            description: 'AccordionGroup ensures only one item is open at a time.',
-            code: 'Ux4gAccordionGroup(\n'
-                '  items: items, expandedIndex: expandedIndex,\n'
-                '  onExpandedIndexChange: (i) => setState(() => expandedIndex = i),\n'
-                '  contentBuilder: (index, item) => Text(contents[index]),\n'
-                '  itemSpacing: 20, // default Ux4gSpace.space20\n'
-                ');',
-            props: const [
-              PropRow(name: 'items', type: 'List<Ux4gAccordionItem>', description: 'List of accordion items (title + enabled).', required: true),
-              PropRow(name: 'contentBuilder', type: 'Widget Function(int, Ux4gAccordionItem)', description: 'Builds content for the item at the given index.', required: true),
-              PropRow(name: 'expandedIndex', type: 'int?', description: 'Index of the currently expanded item. null = all collapsed.'),
-              PropRow(name: 'onExpandedIndexChange', type: 'ValueChanged<int?>?', description: 'Called when an item is toggled. null means collapsed.'),
-              PropRow(name: 'itemSpacing', type: 'double', description: 'Vertical gap between accordion items.', defaultValue: 'Ux4gSpace.space20'),
-            ],
-            child: SizedBox(
-              width: 340,
-              child: Ux4gAccordionGroup(
-                items: items,
-                expandedIndex: expandedIndex,
-                onExpandedIndexChange: (i) => setState(() => expandedIndex = i),
-                contentBuilder: (index, item) => Padding(
-                  padding: const EdgeInsets.all(12),
-                  child: Text(contents[index]),
                 ),
               ),
             ),
@@ -194,6 +136,59 @@ Ux4gAccordion(
   ],
 );
 
+final accordionGroupComponent = WidgetbookComponent(
+  name: 'Ux4gAccordionGroup',
+  useCases: [
+    WidgetbookUseCase(
+      name: 'Default',
+      builder: (context) {
+        int? expandedIndex = 0;
+        return StatefulBuilder(builder: (ctx, setState) {
+          final items = [
+            const Ux4gAccordionItem(title: 'What is UX4G?'),
+            const Ux4gAccordionItem(title: 'How do I install it?'),
+            const Ux4gAccordionItem(title: 'Is it open source?'),
+          ];
+          final contents = [
+            'UX4G is a Flutter design system providing reusable UI components.',
+            'Add it to pubspec.yaml and run flutter pub get.',
+            'Yes, UX4G is open source under the MIT licence.',
+          ];
+          return ComponentDocs(
+            name: 'Ux4gAccordionGroup',
+            description: 'AccordionGroup ensures only one item is open at a time.',
+            code: 'Ux4gAccordionGroup(\n'
+                '  items: items, expandedIndex: expandedIndex,\n'
+                '  onExpandedIndexChange: (i) => setState(() => expandedIndex = i),\n'
+                '  contentBuilder: (index, item) => Text(contents[index]),\n'
+                '  itemSpacing: 20, // default Ux4gSpace.space20\n'
+                ');',
+            props: const [
+              PropRow(name: 'items', type: 'List<Ux4gAccordionItem>', description: 'List of accordion items (title + enabled).', required: true),
+              PropRow(name: 'contentBuilder', type: 'Widget Function(int, Ux4gAccordionItem)', description: 'Builds content for the item at the given index.', required: true),
+              PropRow(name: 'expandedIndex', type: 'int?', description: 'Index of the currently expanded item. null = all collapsed.'),
+              PropRow(name: 'onExpandedIndexChange', type: 'ValueChanged<int?>?', description: 'Called when an item is toggled. null means collapsed.'),
+              PropRow(name: 'itemSpacing', type: 'double', description: 'Vertical gap between accordion items.', defaultValue: 'Ux4gSpace.space20'),
+            ],
+            child: SizedBox(
+              width: 340,
+              child: Ux4gAccordionGroup(
+                items: items,
+                expandedIndex: expandedIndex,
+                onExpandedIndexChange: (i) => setState(() => expandedIndex = i),
+                contentBuilder: (index, item) => Padding(
+                  padding: const EdgeInsets.all(12),
+                  child: Text(contents[index]),
+                ),
+              ),
+            ),
+          );
+        });
+      },
+    ),
+  ],
+);
+
 // ── Status Banner ─────────────────────────────────────────────────────────────
 
 final statusBannerComponent = WidgetbookComponent(
@@ -214,6 +209,10 @@ final statusBannerComponent = WidgetbookComponent(
           PropRow(name: 'variant', type: 'Ux4gBannerVariant', description: 'warningLight / warningSolid / errorLight / successLight / savingLight.', required: true),
           PropRow(name: 'title', type: 'String', description: 'Banner heading.', required: true),
           PropRow(name: 'subtitle', type: 'String?', description: 'Supporting text.'),
+          PropRow(name: 'badge', type: 'Widget?', description: 'Small badge shown next to title.'),
+          PropRow(name: 'leadingIcon', type: 'Widget?', description: 'Custom icon on the left.'),
+          PropRow(name: 'trailingIcon', type: 'Widget?', description: 'Custom icon on the right.'),
+          PropRow(name: 'actions', type: 'List<Widget>?', description: 'Action buttons at the bottom.'),
           PropRow(name: 'onDismiss', type: 'VoidCallback?', description: 'Shows × button when provided.'),
         ],
         child: SizedBox(
@@ -287,11 +286,20 @@ Ux4gEmptyState(
 );''',
         props: const [
           PropRow(name: 'title', type: 'String', description: 'Primary message.', required: true),
+          PropRow(name: 'variant', type: 'Ux4gEmptyStateVariant', description: 'Semantic preset for the empty state.', defaultValue: 'custom'),
           PropRow(name: 'subtitle', type: 'String?', description: 'Secondary message.'),
           PropRow(name: 'description', type: 'String?', description: 'Descriptive text.'),
           PropRow(name: 'icon', type: 'IconData?', description: 'Icon displayed above title.'),
+          PropRow(name: 'iconSize', type: 'double?', description: 'Size of the top icon.', defaultValue: '48'),
+          PropRow(name: 'iconColor', type: 'Color?', description: 'Color of the top icon.'),
+          PropRow(name: 'titleStyle', type: 'TextStyle?', description: 'Custom style for the title.'),
+          PropRow(name: 'bodyStyle', type: 'TextStyle?', description: 'Custom style for subtitle and description.'),
           PropRow(name: 'buttonText', type: 'String?', description: 'CTA button label.'),
           PropRow(name: 'onButtonPressed', type: 'VoidCallback?', description: 'CTA button callback.'),
+          PropRow(name: 'buttonSize', type: 'Ux4gButtonSize', description: 'Size of the CTA button.', defaultValue: 'small'),
+          PropRow(name: 'buttonLeadingIcon', type: 'IconData?', description: 'Icon shown inside the CTA button.'),
+          PropRow(name: 'padding', type: 'EdgeInsetsGeometry?', description: 'Padding around the whole widget.', defaultValue: 'EdgeInsets.all(24)'),
+          PropRow(name: 'bodyHorizontalPadding', type: 'double', description: 'Extra horizontal padding for text.', defaultValue: '24.0'),
         ],
         child: SizedBox(
           width: 320,
@@ -330,11 +338,11 @@ Ux4gEmptyState(
 
 // ── Chips ─────────────────────────────────────────────────────────────────────
 
-final chipsComponent = WidgetbookComponent(
-  name: 'Chips',
+final choiceChipComponent = WidgetbookComponent(
+  name: 'Ux4gChoiceChip',
   useCases: [
     WidgetbookUseCase(
-      name: 'Choice Chip',
+      name: 'Default',
       builder: (context) {
         int selected = 0;
         return StatefulBuilder(builder: (ctx, setState) {
@@ -350,6 +358,18 @@ final chipsComponent = WidgetbookComponent(
               PropRow(name: 'text', type: 'String', description: 'Chip label.', required: true),
               PropRow(name: 'selected', type: 'bool', description: 'Whether this chip is active.', required: true),
               PropRow(name: 'onClick', type: 'VoidCallback', description: 'Called when tapped.', required: true),
+              PropRow(name: 'enabled', type: 'bool', description: 'Interactive state.', defaultValue: 'true'),
+              PropRow(name: 'size', type: 'Ux4gChoiceChipSize', description: 's or m.', defaultValue: 'm'),
+              PropRow(name: 'leadingContent', type: 'Widget?', description: 'Optional icon or widget before text.'),
+              PropRow(name: 'borderRadius', type: 'double', description: 'Corner radius.', defaultValue: 'Ux4gRadius.radius4'),
+              PropRow(name: 'selectedBackgroundColor', type: 'Color?', description: 'Background when selected.'),
+              PropRow(name: 'unselectedBackgroundColor', type: 'Color?', description: 'Background when unselected.'),
+              PropRow(name: 'selectedBorderColor', type: 'Color?', description: 'Border when selected.'),
+              PropRow(name: 'unselectedBorderColor', type: 'Color?', description: 'Border when unselected.'),
+              PropRow(name: 'selectedTextColor', type: 'Color?', description: 'Text when selected.'),
+              PropRow(name: 'unselectedTextColor', type: 'Color?', description: 'Text when unselected.'),
+              PropRow(name: 'selectedBorderWidth', type: 'double', description: 'Border width when selected.', defaultValue: '1'),
+              PropRow(name: 'unselectedBorderWidth', type: 'double', description: 'Border width when unselected.', defaultValue: '1'),
             ],
             child: Wrap(
               spacing: 8,
@@ -367,8 +387,14 @@ final chipsComponent = WidgetbookComponent(
         });
       },
     ),
+  ],
+);
+
+final filterChipComponent = WidgetbookComponent(
+  name: 'Ux4gFilterChip',
+  useCases: [
     WidgetbookUseCase(
-      name: 'Filter Chip',
+      name: 'Default',
       builder: (context) {
         final Set<int> selectedSet = {};
         return StatefulBuilder(builder: (ctx, setState) {
@@ -384,6 +410,18 @@ final chipsComponent = WidgetbookComponent(
               PropRow(name: 'text', type: 'String', description: 'Chip label.', required: true),
               PropRow(name: 'selected', type: 'bool', description: 'Whether this chip is active.', required: true),
               PropRow(name: 'onClick', type: 'VoidCallback', description: 'Called when tapped.', required: true),
+              PropRow(name: 'enabled', type: 'bool', description: 'Interactive state.', defaultValue: 'true'),
+              PropRow(name: 'size', type: 'Ux4gFilterChipSize', description: 's or m.', defaultValue: 'm'),
+              PropRow(name: 'leadingContent', type: 'Widget?', description: 'Optional icon or widget before text.'),
+              PropRow(name: 'borderRadius', type: 'double', description: 'Corner radius.', defaultValue: 'Ux4gRadius.radius4'),
+              PropRow(name: 'selectedBackgroundColor', type: 'Color?', description: 'Background when selected.'),
+              PropRow(name: 'unselectedBackgroundColor', type: 'Color?', description: 'Background when unselected.'),
+              PropRow(name: 'selectedBorderColor', type: 'Color?', description: 'Border when selected.'),
+              PropRow(name: 'unselectedBorderColor', type: 'Color?', description: 'Border when unselected.'),
+              PropRow(name: 'selectedTextColor', type: 'Color?', description: 'Text when selected.'),
+              PropRow(name: 'unselectedTextColor', type: 'Color?', description: 'Text when unselected.'),
+              PropRow(name: 'selectedBorderWidth', type: 'double', description: 'Border width when selected.', defaultValue: '2'),
+              PropRow(name: 'unselectedBorderWidth', type: 'double', description: 'Border width when unselected.', defaultValue: '1'),
             ],
             child: Wrap(
               spacing: 8,
@@ -403,8 +441,14 @@ final chipsComponent = WidgetbookComponent(
         });
       },
     ),
+  ],
+);
+
+final inputChipComponent = WidgetbookComponent(
+  name: 'Ux4gInputChip',
+  useCases: [
     WidgetbookUseCase(
-      name: 'Input Chip',
+      name: 'Default',
       builder: (context) {
         List<String> chips = ['Design', 'Code', 'Review'];
         return StatefulBuilder(builder: (ctx, setState) {
@@ -417,13 +461,75 @@ final chipsComponent = WidgetbookComponent(
 );''',
             props: const [
               PropRow(name: 'text', type: 'String', description: 'Chip label.', required: true),
-              PropRow(name: 'onDismiss', type: 'VoidCallback?', description: 'Called when × is tapped.'),
+              PropRow(name: 'onDismiss', type: 'VoidCallback', description: 'Called when × is tapped.', required: true),
+              PropRow(name: 'enabled', type: 'bool', description: 'Interactive state.', defaultValue: 'true'),
+              PropRow(name: 'size', type: 'Ux4gInputChipSize', description: 'xs, s, or m.', defaultValue: 'm'),
+              PropRow(name: 'leadingContent', type: 'Widget?', description: 'Optional icon or widget before text.'),
+              PropRow(name: 'borderRadius', type: 'double', description: 'Corner radius.', defaultValue: 'Ux4gRadius.radius4'),
+              PropRow(name: 'backgroundColor', type: 'Color?', description: 'Chip background color.'),
+              PropRow(name: 'borderColor', type: 'Color?', description: 'Chip border color.'),
+              PropRow(name: 'textColor', type: 'Color?', description: 'Chip text and icon color.'),
+              PropRow(name: 'borderWidth', type: 'double', description: 'Border width.', defaultValue: '1'),
             ],
             child: Wrap(
               spacing: 8,
               children: chips
                   .map((c) => Ux4gInputChip(text: c, onDismiss: () => setState(() => chips.remove(c))))
                   .toList(),
+            ),
+          );
+        });
+      },
+    ),
+  ],
+);
+
+final inputChipFieldComponent = WidgetbookComponent(
+  name: 'Ux4gInputChipField',
+  useCases: [
+    WidgetbookUseCase(
+      name: 'Interactive',
+      builder: (context) {
+        List<String> labels = ['Design', 'Code'];
+        String currentText = '';
+        return StatefulBuilder(builder: (ctx, setState) {
+          return ComponentDocs(
+            name: 'Ux4gInputChipField',
+            description: 'A text field that allows adding multiple chips/tags.',
+            code: '''Ux4gInputChipField(
+  value: currentText,
+  onValueChange: (v) => setState(() => currentText = v),
+  onAddChip: (v) => setState(() => labels.add(v)),
+  chips: labels.map((l) => Ux4gInputChip(
+    text: l, 
+    onDismiss: () => setState(() => labels.remove(l)),
+  )).toList(),
+  placeholder: 'Add tag...',
+);''',
+            props: const [
+              PropRow(name: 'value', type: 'String', description: 'Current text in the input field.', required: true),
+              PropRow(name: 'onValueChange', type: 'ValueChanged<String>', description: 'Called when input text changes.', required: true),
+              PropRow(name: 'onAddChip', type: 'ValueChanged<String>', description: 'Called when the add button is pressed.', required: true),
+              PropRow(name: 'chips', type: 'List<Widget>', description: 'List of chips to display below the field.', defaultValue: '[]'),
+              PropRow(name: 'placeholder', type: 'String', description: 'Placeholder text.', defaultValue: "'Please select..'"),
+              PropRow(name: 'leadingIcon', type: 'Widget?', description: 'Icon at the start of the field.'),
+              PropRow(name: 'isDropdown', type: 'bool', description: 'Whether to show a dropdown instead of text input.', defaultValue: 'false'),
+              PropRow(name: 'dropdownOptions', type: 'List<String>', description: 'Options if isDropdown is true.', defaultValue: '[]'),
+            ],
+            child: SizedBox(
+              width: 340,
+              child: Ux4gInputChipField(
+                value: currentText,
+                onValueChange: (v) => setState(() => currentText = v),
+                onAddChip: (v) => setState(() => labels.add(v)),
+                chips: labels
+                    .map((l) => Ux4gInputChip(
+                          text: l,
+                          onDismiss: () => setState(() => labels.remove(l)),
+                        ))
+                    .toList(),
+                placeholder: 'Add tag...',
+              ),
             ),
           );
         });
@@ -454,6 +560,13 @@ final paginationComponent = WidgetbookComponent(
               PropRow(name: 'totalPageCount', type: 'int', description: 'Total number of pages.', required: true),
               PropRow(name: 'currentPageIndex', type: 'int', description: 'Zero-based active page index.', required: true),
               PropRow(name: 'onPageChange', type: 'ValueChanged<int>', description: 'Called when dot is tapped.', required: true),
+              PropRow(name: 'showArrows', type: 'bool', description: 'Show prev/next chevron buttons.', defaultValue: 'true'),
+              PropRow(name: 'variant', type: 'Ux4gPaginationVariant', description: 'defaultVariant or capsule.', defaultValue: 'defaultVariant'),
+              PropRow(name: 'size', type: 'Ux4gPaginationSize', description: 'small or medium.', defaultValue: 'small'),
+              PropRow(name: 'enabled', type: 'bool', description: 'Interactive state.', defaultValue: 'true'),
+              PropRow(name: 'activeColor', type: 'Color?', description: 'Color of the active dot.'),
+              PropRow(name: 'inactiveColor', type: 'Color?', description: 'Background of inactive dots.'),
+              PropRow(name: 'inactiveBorderColor', type: 'Color?', description: 'Border of inactive dots.'),
             ],
             child: Ux4gPaginationIndicator(
               totalPageCount: context.knobs.int.input(label: 'Count', initialValue: 5),
