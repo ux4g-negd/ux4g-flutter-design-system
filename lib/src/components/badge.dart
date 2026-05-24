@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import '../foundation/colors.dart';
+import '../foundation/typography.dart';
 import '../theme/theme.dart';
 
 enum Ux4gBadgeLimit {
@@ -108,8 +110,9 @@ class Ux4gBadge extends StatelessWidget {
   }
 
   Widget _buildBadge(BuildContext context) {
-    final colors = Ux4gTheme.colors(context);
-    final typography = Ux4gTheme.typography(context);
+    final materialTheme = Theme.of(context);
+    final ux4gColors = materialTheme.extension<Ux4gColors>();
+    final ux4gTypography = materialTheme.extension<Ux4gTypography>();
 
     if (_type == _Ux4gBadgeInternalType.readyToUse) {
       return Image.asset(
@@ -120,7 +123,7 @@ class Ux4gBadge extends StatelessWidget {
       );
     }
 
-    final resolvedBg = containerColor ?? colors.primary;
+    final resolvedBg = containerColor ?? (ux4gColors?.primary ?? materialTheme.colorScheme.primary);
     final resolvedContent = contentColor ?? Colors.white;
 
     switch (_type) {
@@ -146,7 +149,7 @@ class Ux4gBadge extends StatelessWidget {
           alignment: Alignment.center,
           child: Text(
             displayCount,
-            style: typography.lS_strong.copyWith(
+            style: (ux4gTypography?.lS_strong ?? materialTheme.textTheme.labelSmall?.copyWith(fontWeight: FontWeight.bold) ?? const TextStyle()).copyWith(
               color: resolvedContent,
               fontSize: 10,
               height: 1,
@@ -163,7 +166,7 @@ class Ux4gBadge extends StatelessWidget {
           ),
           child: Text(
             label!,
-            style: typography.lS_strong.copyWith(
+            style: (ux4gTypography?.lS_strong ?? materialTheme.textTheme.labelSmall?.copyWith(fontWeight: FontWeight.bold) ?? const TextStyle()).copyWith(
               color: resolvedContent,
               height: 1,
             ),

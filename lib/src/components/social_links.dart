@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../foundation/colors.dart';
-import '../theme/theme.dart';
 
 enum SocialLinkSize {
   xs(16),
@@ -80,9 +79,11 @@ class Ux4gSocialLink extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colors = Ux4gTheme.colors(context);
-    final finalColor = color ?? colors.onSurface;
-    final finalBackgroundColor = containerColor ?? colors.primary.withValues(alpha: 0.1);
+    final materialTheme = Theme.of(context);
+    final ux4gColors = materialTheme.extension<Ux4gColors>();
+    
+    final finalColor = color ?? (ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface);
+    final finalBackgroundColor = containerColor ?? (ux4gColors?.primary ?? materialTheme.colorScheme.primary).withValues(alpha: 0.1);
 
     final assetPath = icon.getAssetPath(useColor: useColoredIcon);
     final shouldApplyColorFilter = !useColoredIcon || color != null;

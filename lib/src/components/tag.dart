@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../foundation/colors.dart';
+import '../foundation/typography.dart';
 import '../foundation/dimensions.dart';
 import '../theme/theme.dart';
 
@@ -41,19 +42,24 @@ class Ux4gTag extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colors = Ux4gTheme.colors(context);
-    final typography = Ux4gTheme.typography(context);
+    final materialTheme = Theme.of(context);
+    final ux4gColors = materialTheme.extension<Ux4gColors>();
+    final ux4gTypography = materialTheme.extension<Ux4gTypography>();
 
-    final defaultColors = _getTagColors(context, colors);
+    final defaultColors = _getTagColors(ux4gColors, materialTheme.colorScheme);
     final bgColor = customBackgroundColor ?? defaultColors.backgroundColor;
     final contentColor = customContentColor ?? defaultColors.contentColor;
     final borderColor = customBorderColor ?? defaultColors.borderColor;
 
     final height = size == Ux4gTagSize.m ? 20.0 : 24.0;
     final horizontalPadding = size == Ux4gTagSize.m ? 8.0 : 12.0;
+    
+    final lSDefault = ux4gTypography?.lS_default ?? materialTheme.textTheme.labelSmall ?? const TextStyle();
+    final lMDefault = ux4gTypography?.lM_default ?? materialTheme.textTheme.labelMedium ?? const TextStyle();
+    
     final textStyle = size == Ux4gTagSize.m
-        ? typography.lS_default
-        : typography.lM_default;
+        ? lSDefault
+        : lMDefault;
 
     final borderRadius =
         customBorderRadius ??
@@ -95,37 +101,46 @@ class Ux4gTag extends StatelessWidget {
     );
   }
 
-  _TagColors _getTagColors(BuildContext context, Ux4gColors colors) {
-    final (baseLight, baseNormal, baseDark) = switch (colorScheme) {
+  _TagColors _getTagColors(Ux4gColors? ux4gColors, ColorScheme colorScheme) {
+    final onSurface = ux4gColors?.onSurface ?? colorScheme.onSurface;
+    final primary = ux4gColors?.primary ?? colorScheme.primary;
+    final success = ux4gColors?.success ?? colorScheme.primary;
+    final warning = ux4gColors?.warning ?? colorScheme.tertiary;
+    final error = ux4gColors?.error ?? colorScheme.error;
+    final info = ux4gColors?.info ?? colorScheme.secondary;
+    final surface = ux4gColors?.surface ?? colorScheme.surface;
+    final onPrimary = ux4gColors?.onPrimary ?? colorScheme.onPrimary;
+
+    final (baseLight, baseNormal, baseDark) = switch (this.colorScheme) {
       Ux4gTagColor.neutral => (
-        colors.onSurface.withValues(alpha: 0.1),
-        colors.onSurface.withValues(alpha: 0.5),
-        colors.onSurface.withValues(alpha: 0.8),
+        onSurface.withValues(alpha: 0.1),
+        onSurface.withValues(alpha: 0.5),
+        onSurface.withValues(alpha: 0.8),
       ),
       Ux4gTagColor.brand => (
-        Ux4gPalette.primary50,
-        colors.primary,
-        Ux4gPalette.primary700,
+        primary.withValues(alpha: 0.12),
+        primary,
+        primary,
       ),
       Ux4gTagColor.success => (
-        Ux4gPalette.green50,
-        Ux4gPalette.green500,
-        Ux4gPalette.green700,
+        success.withValues(alpha: 0.12),
+        success,
+        success,
       ),
       Ux4gTagColor.warning => (
-        Ux4gPalette.orange50,
-        Ux4gPalette.orange500,
-        Ux4gPalette.orange700,
+        warning.withValues(alpha: 0.12),
+        warning,
+        warning,
       ),
       Ux4gTagColor.error => (
-        Ux4gPalette.red50,
-        colors.error,
-        Ux4gPalette.red700,
+        error.withValues(alpha: 0.12),
+        error,
+        error,
       ),
       Ux4gTagColor.info => (
-        Ux4gPalette.blue50,
-        Ux4gPalette.blue500,
-        Ux4gPalette.blue700,
+        info.withValues(alpha: 0.12),
+        info,
+        info,
       ),
     };
 
@@ -138,10 +153,9 @@ class Ux4gTag extends StatelessWidget {
       Ux4gTagStyle.filled => _TagColors(
         backgroundColor: baseNormal,
         contentColor:
-            (colorScheme == Ux4gTagColor.brand ||
-                colorScheme == Ux4gTagColor.error)
-            ? Colors.white
-            : colors.surface,
+            (this.colorScheme == Ux4gTagColor.neutral)
+            ? surface
+            : onPrimary, // Usually onPrimary works for brand/error/success/warning
         borderColor: Colors.transparent,
       ),
       Ux4gTagStyle.outline => _TagColors(
@@ -242,22 +256,31 @@ class Ux4gUnifiedPillTag extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colors = Ux4gTheme.colors(context);
-    final typography = Ux4gTheme.typography(context);
+    final materialTheme = Theme.of(context);
+    final ux4gColors = materialTheme.extension<Ux4gColors>();
+    final ux4gTypography = materialTheme.extension<Ux4gTypography>();
+
+    final lSDefault = ux4gTypography?.lS_default ?? materialTheme.textTheme.labelSmall ?? const TextStyle();
+    final lMDefault = ux4gTypography?.lM_default ?? materialTheme.textTheme.labelMedium ?? const TextStyle();
+    final lSStrong = ux4gTypography?.lS_strong ?? materialTheme.textTheme.labelSmall?.copyWith(fontWeight: FontWeight.bold) ?? const TextStyle();
+    final lMStrong = ux4gTypography?.lM_strong ?? materialTheme.textTheme.labelMedium?.copyWith(fontWeight: FontWeight.bold) ?? const TextStyle();
 
     final height = size == Ux4gTagSize.m ? 20.0 : 24.0;
     final horizontalPadding = size == Ux4gTagSize.m ? 8.0 : 12.0;
     final textStyleDefault = size == Ux4gTagSize.m
-        ? typography.lS_default
-        : typography.lM_default;
+        ? lSDefault
+        : lMDefault;
     final textStyleBold = size == Ux4gTagSize.m
-        ? typography.lS_strong
-        : typography.lM_strong;
+        ? lSStrong
+        : lMStrong;
 
-    final bgColor = backgroundColor ?? Colors.white;
-    final border = borderColor ?? colors.onSurface.withValues(alpha: 0.12);
-    final divider = dividerColor ?? colors.onSurface.withValues(alpha: 0.15);
-    final defaultTextColor = colors.onSurface.withValues(alpha: 0.7);
+    final onSurface = ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
+    final surface = ux4gColors?.surface ?? materialTheme.colorScheme.surface;
+
+    final bgColor = backgroundColor ?? surface;
+    final border = borderColor ?? onSurface.withValues(alpha: 0.12);
+    final divider = dividerColor ?? onSurface.withValues(alpha: 0.15);
+    final defaultTextColor = onSurface.withValues(alpha: 0.7);
 
     return Container(
       height: height,

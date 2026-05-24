@@ -107,6 +107,12 @@ class Ux4gColors extends ThemeExtension<Ux4gColors> {
   final Color onSurface;
   final Color error;
   final Color onError;
+  final Color success;
+  final Color onSuccess;
+  final Color warning;
+  final Color onWarning;
+  final Color info;
+  final Color onInfo;
 
   const Ux4gColors({
     required this.primary,
@@ -119,6 +125,12 @@ class Ux4gColors extends ThemeExtension<Ux4gColors> {
     required this.onSurface,
     required this.error,
     required this.onError,
+    required this.success,
+    required this.onSuccess,
+    required this.warning,
+    required this.onWarning,
+    required this.info,
+    required this.onInfo,
   });
 
   @override
@@ -133,6 +145,12 @@ class Ux4gColors extends ThemeExtension<Ux4gColors> {
     Color? onSurface,
     Color? error,
     Color? onError,
+    Color? success,
+    Color? onSuccess,
+    Color? warning,
+    Color? onWarning,
+    Color? info,
+    Color? onInfo,
   }) {
     return Ux4gColors(
       primary: primary ?? this.primary,
@@ -145,6 +163,12 @@ class Ux4gColors extends ThemeExtension<Ux4gColors> {
       onSurface: onSurface ?? this.onSurface,
       error: error ?? this.error,
       onError: onError ?? this.onError,
+      success: success ?? this.success,
+      onSuccess: onSuccess ?? this.onSuccess,
+      warning: warning ?? this.warning,
+      onWarning: onWarning ?? this.onWarning,
+      info: info ?? this.info,
+      onInfo: onInfo ?? this.onInfo,
     );
   }
 
@@ -162,6 +186,12 @@ class Ux4gColors extends ThemeExtension<Ux4gColors> {
       onSurface: Color.lerp(onSurface, other.onSurface, t) ?? onSurface,
       error: Color.lerp(error, other.error, t) ?? error,
       onError: Color.lerp(onError, other.onError, t) ?? onError,
+      success: Color.lerp(success, other.success, t) ?? success,
+      onSuccess: Color.lerp(onSuccess, other.onSuccess, t) ?? onSuccess,
+      warning: Color.lerp(warning, other.warning, t) ?? warning,
+      onWarning: Color.lerp(onWarning, other.onWarning, t) ?? onWarning,
+      info: Color.lerp(info, other.info, t) ?? info,
+      onInfo: Color.lerp(onInfo, other.onInfo, t) ?? onInfo,
     );
   }
 }
@@ -177,12 +207,18 @@ final lightUx4gColors = Ux4gColors(
   onSurface: Ux4gPalette.gray900,
   error: Ux4gPalette.red,
   onError: Ux4gPalette.white,
+  success: Ux4gPalette.green,
+  onSuccess: Ux4gPalette.white,
+  warning: Ux4gPalette.secondary,
+  onWarning: Ux4gPalette.gray900,
+  info: Ux4gPalette.blue500,
+  onInfo: Ux4gPalette.white,
 );
 
 final darkUx4gColors = Ux4gColors(
   primary: Ux4gPalette.primary,
   onPrimary: Ux4gPalette.gray900,
-  secondary: Color(0xFF1157CE), 
+  secondary: const Color(0xFF1157CE),
   onSecondary: Ux4gPalette.white,
   background: Ux4gPalette.gray900,
   onBackground: Ux4gPalette.white,
@@ -190,4 +226,10 @@ final darkUx4gColors = Ux4gColors(
   onSurface: Ux4gPalette.white,
   error: Ux4gPalette.red400,
   onError: Ux4gPalette.gray900,
+  success: Ux4gPalette.green400,
+  onSuccess: Ux4gPalette.gray900,
+  warning: Ux4gPalette.secondary400,
+  onWarning: Ux4gPalette.gray900,
+  info: Ux4gPalette.blue500,
+  onInfo: Ux4gPalette.gray900,
 );

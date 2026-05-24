@@ -1,8 +1,8 @@
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
-import 'package:ux4g_flutter_design_system/src/foundation/typography.dart';
-
+import '../foundation/colors.dart';
+import '../foundation/typography.dart';
 import '../foundation/dimensions.dart';
 import '../theme/theme.dart';
 
@@ -90,9 +90,9 @@ class Ux4gCircularProgress extends StatelessWidget {
     return (ringSize * factor).clamp(min, max);
   }
 
-  TextStyle _centerValueStyle(Ux4gTypography typography, double ringSize) {
+  TextStyle _centerValueStyle(Ux4gTypography? typography, ThemeData materialTheme, double ringSize) {
     final fontSize = _scale(ringSize, 0.18, 7, 22);
-    return typography.bS_strong.copyWith(
+    return (typography?.bS_strong ?? materialTheme.textTheme.bodySmall?.copyWith(fontWeight: FontWeight.bold) ?? const TextStyle()).copyWith(
       fontSize: fontSize,
       height: 1.1,
       fontWeight: FontWeight.w700,
@@ -100,29 +100,30 @@ class Ux4gCircularProgress extends StatelessWidget {
   }
 
   TextStyle _centerDescriptionStyle(
-    Ux4gTypography typography,
+    Ux4gTypography? typography,
+    ThemeData materialTheme,
     double ringSize,
   ) {
     final fontSize = _scale(ringSize, 0.1, 6, 12);
-    return typography.bXS_default.copyWith(
+    return (typography?.bXS_default ?? materialTheme.textTheme.bodySmall?.copyWith(fontSize: 10) ?? const TextStyle()).copyWith(
       fontSize: fontSize,
       height: 1.15,
       fontWeight: FontWeight.w600,
     );
   }
 
-  TextStyle _labelStyle(Ux4gTypography typography, double ringSize) {
+  TextStyle _labelStyle(Ux4gTypography? typography, ThemeData materialTheme, double ringSize) {
     final fontSize = _scale(ringSize, 0.16, 10, 16);
-    return typography.tS_strong.copyWith(
+    return (typography?.tS_strong ?? materialTheme.textTheme.titleSmall?.copyWith(fontWeight: FontWeight.bold) ?? const TextStyle()).copyWith(
       fontSize: fontSize,
       height: 1.2,
       fontWeight: FontWeight.w700,
     );
   }
 
-  TextStyle _descriptionStyle(Ux4gTypography typography, double ringSize) {
+  TextStyle _descriptionStyle(Ux4gTypography? typography, ThemeData materialTheme, double ringSize) {
     final fontSize = _scale(ringSize, 0.14, 9, 14);
-    return typography.bS_default.copyWith(
+    return (typography?.bS_default ?? materialTheme.textTheme.bodySmall ?? const TextStyle()).copyWith(
       fontSize: fontSize,
       height: 1.25,
       fontWeight: FontWeight.w600,
@@ -138,28 +139,38 @@ class Ux4gCircularProgress extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colors = Ux4gTheme.colors(context);
-    final typography = Ux4gTheme.typography(context);
+    final materialTheme = Theme.of(context);
+    final ux4gColors = materialTheme.extension<Ux4gColors>();
+    final ux4gTypography = materialTheme.extension<Ux4gTypography>();
+
     final ringSize = _resolvedDiameter();
     final resolvedStrokeWidth = _resolvedStrokeWidth(ringSize);
-    final resolvedProgressColor = progressColor ?? colors.primary;
+    final resolvedProgressColor = progressColor ?? (ux4gColors?.primary ?? materialTheme.colorScheme.primary);
     final resolvedTrackColor =
-        trackColor ?? colors.onSurface.withValues(alpha: 0.16);
+        trackColor ?? (ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface).withValues(alpha: 0.16);
     final resolvedGap = gap.clamp(4.0, 16.0);
 
     // Whether the centerValueText / centerDescription should render inside the ring
     final inlineCenter = _textFitsInside(ringSize);
 
     // The center content widget (inside the ring)
+    final Color contentColor = backgroundColor != null
+        ? (ThemeData.estimateBrightnessForColor(
+                  Color.alphaBlend(backgroundColor!, ux4gColors?.surface ?? materialTheme.colorScheme.surface)) ==
+                Brightness.dark
+            ? Colors.white
+            : (ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface))
+        : (ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface);
+
     final centerWidget = center ??
         (inlineCenter
             ? _Ux4gCircularCenter(
                 valueText: centerValueText,
                 description: centerDescription,
-                valueStyle: _centerValueStyle(typography, ringSize)
-                    .copyWith(color: colors.onSurface),
-                descriptionStyle: _centerDescriptionStyle(typography, ringSize)
-                    .copyWith(color: colors.onSurface.withValues(alpha: 0.6)),
+                valueStyle: _centerValueStyle(ux4gTypography, materialTheme, ringSize)
+                    .copyWith(color: contentColor),
+                descriptionStyle: _centerDescriptionStyle(ux4gTypography, materialTheme, ringSize)
+                    .copyWith(color: contentColor.withValues(alpha: 0.6)),
               )
             : null);
 
@@ -211,11 +222,11 @@ class Ux4gCircularProgress extends StatelessWidget {
           _Ux4gCircularCenter(
             valueText: centerValueText,
             description: centerDescription,
-            valueStyle: _centerValueStyle(typography, ringSize)
-                .copyWith(color: colors.onSurface, fontSize: 11),
-            descriptionStyle: _centerDescriptionStyle(typography, ringSize)
+            valueStyle: _centerValueStyle(ux4gTypography, materialTheme, ringSize)
+                .copyWith(color: contentColor, fontSize: 11),
+            descriptionStyle: _centerDescriptionStyle(ux4gTypography, materialTheme, ringSize)
                 .copyWith(
-                  color: colors.onSurface.withValues(alpha: 0.6),
+                  color: contentColor.withValues(alpha: 0.6),
                   fontSize: 9,
                 ),
           ),
@@ -227,8 +238,8 @@ class Ux4gCircularProgress extends StatelessWidget {
           Text(
             label!,
             textAlign: textAlign,
-            style: (labelStyle ?? _labelStyle(typography, ringSize))
-                .copyWith(color: labelStyle?.color ?? colors.onSurface),
+            style: (labelStyle ?? _labelStyle(ux4gTypography, materialTheme, ringSize))
+                .copyWith(color: labelStyle?.color ?? (ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface)),
           ),
         if (label != null && description != null)
           SizedBox(height: _scale(ringSize, 0.035, 2, 6)),
@@ -236,14 +247,14 @@ class Ux4gCircularProgress extends StatelessWidget {
           Text(
             description!,
             textAlign: textAlign,
-            style: (descriptionStyle ?? _descriptionStyle(typography, ringSize))
+            style: (descriptionStyle ?? _descriptionStyle(ux4gTypography, materialTheme, ringSize))
                 .copyWith(
                     color: descriptionStyle?.color ??
-                        colors.onSurface.withValues(alpha: 0.62)),
+                        (ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface).withValues(alpha: 0.62)),
           ),
         if ((label != null || description != null) && footer != null)
           SizedBox(height: _scale(ringSize, 0.06, 4, 10)),
-        ?footer,
+        if (footer != null) footer!,
       ],
     );
 

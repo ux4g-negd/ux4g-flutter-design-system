@@ -4,7 +4,8 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 
 import '../foundation/dimensions.dart';
-import '../theme/theme.dart';
+import '../foundation/colors.dart';
+import '../foundation/typography.dart';
 
 enum Ux4gTooltipPlacement {
   topStart,
@@ -539,10 +540,18 @@ class _TooltipBubble extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colors = Ux4gTheme.colors(context);
-    final typography = Ux4gTheme.typography(context);
-    final bgColor = backgroundColor ?? colors.onSurface;
-    final fgColor = contentColor ?? colors.surface;
+    final materialTheme = Theme.of(context);
+    final ux4gColors = materialTheme.extension<Ux4gColors>();
+    final ux4gTypography = materialTheme.extension<Ux4gTypography>();
+
+    final onSurface = ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
+    final surface = ux4gColors?.surface ?? materialTheme.colorScheme.surface;
+    
+    final lSDefault = ux4gTypography?.lS_default ?? materialTheme.textTheme.labelSmall ?? const TextStyle();
+    final hXXSStrong = ux4gTypography?.hXXS_strong ?? materialTheme.textTheme.titleSmall?.copyWith(fontWeight: FontWeight.bold) ?? const TextStyle();
+
+    final bgColor = backgroundColor ?? onSurface;
+    final fgColor = contentColor ?? surface;
 
     return CustomPaint(
       painter: _TooltipPainter(
@@ -571,7 +580,7 @@ class _TooltipBubble extends StatelessWidget {
                   Flexible(
                     child: Text(
                       text,
-                      style: (textStyle ?? typography.lS_default).copyWith(
+                      style: (textStyle ?? lSDefault).copyWith(
                         color: fgColor,
                       ),
                     ),
@@ -591,7 +600,7 @@ class _TooltipBubble extends StatelessWidget {
                       Flexible(
                         child: Text(
                           title!,
-                          style: typography.hXXS_strong.copyWith(
+                          style: hXXSStrong.copyWith(
                             color: fgColor,
                           ),
                         ),
@@ -599,7 +608,7 @@ class _TooltipBubble extends StatelessWidget {
                   ],
                 ),
               if (title != null || icon != null) const SizedBox(height: 8),
-              Text(text, style: typography.lS_default.copyWith(color: fgColor)),
+              Text(text, style: lSDefault.copyWith(color: fgColor)),
               if (action != null) ...[
                 const SizedBox(height: 12),
                 Align(alignment: Alignment.centerRight, child: action!),

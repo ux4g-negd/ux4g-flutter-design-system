@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import '../foundation/colors.dart';
 import '../foundation/typography.dart';
-import '../theme/theme.dart';
 import 'buttons.dart';
 
 enum Ux4gBannerVariant {
@@ -36,30 +35,44 @@ class Ux4gStatusBanner extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final typography = Ux4gTheme.typography(context);
+    final materialTheme = Theme.of(context);
+    final ux4gColors = materialTheme.extension<Ux4gColors>();
+    final ux4gTypography = materialTheme.extension<Ux4gTypography>();
+
+    final onSurface = ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
+    final surface = ux4gColors?.surface ?? materialTheme.colorScheme.surface;
+    final warning = ux4gColors?.warning ?? materialTheme.colorScheme.tertiary;
+    final onWarning = ux4gColors?.onWarning ?? materialTheme.colorScheme.onTertiary;
+    final error = ux4gColors?.error ?? materialTheme.colorScheme.error;
+    final success = ux4gColors?.success ?? materialTheme.colorScheme.primary;
+    final primary = ux4gColors?.primary ?? materialTheme.colorScheme.primary;
+    final onBackground = ux4gColors?.onBackground ?? materialTheme.colorScheme.onSurface;
+
+    final bMStrong = ux4gTypography?.bM_strong ?? materialTheme.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold) ?? const TextStyle();
+    final bMDefault = ux4gTypography?.bM_default ?? materialTheme.textTheme.bodyMedium ?? const TextStyle();
 
     // Determine colors based on variant
     Color backgroundColor;
-    Color textColor = Ux4gPalette.gray900;
-    Color subtitleColor = Ux4gPalette.neutral500;
+    Color textColor = onSurface;
+    Color subtitleColor = onSurface.withValues(alpha: 0.6);
 
     switch (variant) {
       case Ux4gBannerVariant.warningLight:
-        backgroundColor = const Color(0xFFFFF7E6);
+        backgroundColor = Color.lerp(surface, warning, 0.12)!;
         break;
       case Ux4gBannerVariant.warningSolid:
-        backgroundColor = const Color(0xFFF58220);
-        textColor = Colors.white;
-        subtitleColor = Colors.white70;
+        backgroundColor = warning;
+        textColor = onWarning;
+        subtitleColor = onWarning.withValues(alpha: 0.7);
         break;
       case Ux4gBannerVariant.errorLight:
-        backgroundColor = const Color(0xFFFFF1F0);
+        backgroundColor = Color.lerp(surface, error, 0.12)!;
         break;
       case Ux4gBannerVariant.successLight:
-        backgroundColor = const Color(0xFFF6FFED);
+        backgroundColor = Color.lerp(surface, success, 0.12)!;
         break;
       case Ux4gBannerVariant.savingLight:
-        backgroundColor = const Color(0xFFFFFBE6);
+        backgroundColor = Color.lerp(surface, primary, 0.12)!;
         break;
     }
 
@@ -72,7 +85,7 @@ class Ux4gStatusBanner extends StatelessWidget {
         borderRadius: BorderRadius.circular(8),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withValues(alpha: 0.05),
+            color: onBackground.withValues(alpha: 0.05),
             blurRadius: 10,
             offset: const Offset(0, 4),
           ),
@@ -106,18 +119,18 @@ class Ux4gStatusBanner extends StatelessWidget {
                           children: [
                             Text(
                               title,
-                              style: typography.bM_strong.copyWith(
+                              style: bMStrong.copyWith(
                                 color: textColor,
                               ),
                             ),
-                            ?badge,
+                            if (badge != null) badge!,
                           ],
                         ),
                         if (subtitle != null) ...[
                           const SizedBox(height: 4),
                           Text(
                             subtitle!,
-                            style: typography.bM_default.copyWith(
+                            style: bMDefault.copyWith(
                               color: subtitleColor,
                             ),
                           ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../foundation/colors.dart';
+import '../foundation/typography.dart';
 import '../foundation/dimensions.dart';
 import '../theme/theme.dart';
 import 'badge.dart';
@@ -75,11 +76,18 @@ class Ux4gCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colors = Ux4gTheme.colors(context);
-    final resolvedBg = backgroundColor ?? colors.surface;
+    final materialTheme = Theme.of(context);
+    final ux4gColors = materialTheme.extension<Ux4gColors>();
+    final resolvedBg = backgroundColor ?? (ux4gColors?.surface ?? materialTheme.colorScheme.surface);
     final hasBorder = borderWidth > 0 && borderColor != Colors.transparent;
+    
+    // Determine the best content color based on background brightness
+    final bgBrightness = ThemeData.estimateBrightnessForColor(resolvedBg);
+    final contentColor = bgBrightness == Brightness.dark 
+        ? Colors.white 
+        : (ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface);
 
-    final content = child ?? _buildRichCard(context);
+    final content = child ?? _buildRichCard(context, contentColor);
 
     return Card(
       color: resolvedBg,
@@ -101,15 +109,15 @@ class Ux4gCard extends StatelessWidget {
     );
   }
 
-  Widget _buildRichCard(BuildContext context) {
+  Widget _buildRichCard(BuildContext context, Color contentColor) {
     if (direction == Ux4gCardDirection.horizontal) {
-      return _buildHorizontalLayout(context);
+      return _buildHorizontalLayout(context, contentColor);
     }
 
-    return _buildVerticalLayout(context);
+    return _buildVerticalLayout(context, contentColor);
   }
 
-  Widget _buildVerticalLayout(BuildContext context) {
+  Widget _buildVerticalLayout(BuildContext context, Color contentColor) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -129,13 +137,14 @@ class Ux4gCard extends StatelessWidget {
             secondaryButtonText: secondaryButtonText,
             onPrimaryClick: onPrimaryClick,
             onSecondaryClick: onSecondaryClick,
+            contentColor: contentColor,
           ),
         ),
       ],
     );
   }
 
-  Widget _buildHorizontalLayout(BuildContext context) {
+  Widget _buildHorizontalLayout(BuildContext context, Color contentColor) {
     return IntrinsicHeight(
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -161,6 +170,7 @@ class Ux4gCard extends StatelessWidget {
                 secondaryButtonText: secondaryButtonText,
                 onPrimaryClick: onPrimaryClick,
                 onSecondaryClick: onSecondaryClick,
+                contentColor: contentColor,
               ),
             ),
           ),
@@ -170,7 +180,8 @@ class Ux4gCard extends StatelessWidget {
   }
 
   Widget _buildMedia(BuildContext context, {required bool isHorizontal}) {
-    final colors = Ux4gTheme.colors(context);
+    final materialTheme = Theme.of(context);
+    final ux4gColors = materialTheme.extension<Ux4gColors>();
 
     final image = SizedBox.expand(
       child: Image.network(
@@ -178,11 +189,11 @@ class Ux4gCard extends StatelessWidget {
         fit: BoxFit.cover,
         errorBuilder: (context, error, stackTrace) {
           return Container(
-            color: colors.onSurface.withValues(alpha: 0.08),
+            color: (ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface).withValues(alpha: 0.08),
             alignment: Alignment.center,
             child: Icon(
               Icons.image_outlined,
-              color: colors.onSurface.withValues(alpha: 0.4),
+              color: (ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface).withValues(alpha: 0.4),
             ),
           );
         },
@@ -199,8 +210,8 @@ class Ux4gCard extends StatelessWidget {
             left: Ux4gSpace.space8,
             child: Ux4gBadge.label(
               mediaLabelText!,
-              containerColor: colors.onSurface,
-              contentColor: Ux4gPalette.white,
+              containerColor: ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface,
+              contentColor: ux4gColors?.surface ?? materialTheme.colorScheme.surface,
             ),
           ),
       ],
@@ -231,6 +242,7 @@ class _CardContentBlock extends StatelessWidget {
   final String secondaryButtonText;
   final VoidCallback? onPrimaryClick;
   final VoidCallback? onSecondaryClick;
+  final Color contentColor;
 
   const _CardContentBlock({
     required this.avatar,
@@ -245,12 +257,13 @@ class _CardContentBlock extends StatelessWidget {
     required this.secondaryButtonText,
     required this.onPrimaryClick,
     required this.onSecondaryClick,
+    required this.contentColor,
   });
 
   @override
   Widget build(BuildContext context) {
-    final colors = Ux4gTheme.colors(context);
-    final typography = Ux4gTheme.typography(context);
+    final materialTheme = Theme.of(context);
+    final ux4gTypography = materialTheme.extension<Ux4gTypography>();
     final hasHeader = avatar != null || title != null || subtitle != null;
 
     return Column(
@@ -273,8 +286,8 @@ class _CardContentBlock extends StatelessWidget {
                     if (title != null)
                       Text(
                         title!,
-                        style: typography.tS_strong.copyWith(
-                          color: colors.onSurface,
+                        style: (ux4gTypography?.tS_strong ?? materialTheme.textTheme.titleSmall?.copyWith(fontWeight: FontWeight.bold) ?? const TextStyle()).copyWith(
+                          color: contentColor,
                         ),
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
@@ -282,8 +295,8 @@ class _CardContentBlock extends StatelessWidget {
                     if (subtitle != null)
                       Text(
                         subtitle!,
-                        style: typography.bS_default.copyWith(
-                          color: colors.onSurface.withValues(alpha: 0.5),
+                        style: (ux4gTypography?.bS_default ?? materialTheme.textTheme.bodySmall ?? const TextStyle()).copyWith(
+                          color: contentColor.withValues(alpha: 0.5),
                         ),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
@@ -295,14 +308,18 @@ class _CardContentBlock extends StatelessWidget {
           ),
         if (statusChips.isNotEmpty) ...[
           const SizedBox(height: Ux4gSpace.space8),
-          _CardChipRow(chips: statusChips, pillStyle: false),
+          _CardChipRow(
+            chips: statusChips,
+            pillStyle: false,
+            contentColor: contentColor,
+          ),
         ],
         if (body != null) ...[
           const SizedBox(height: Ux4gSpace.space12),
           Text(
             body!,
-            style: typography.bM_default.copyWith(
-              color: colors.onSurface.withValues(alpha: 0.7),
+            style: (ux4gTypography?.bM_default ?? materialTheme.textTheme.bodyMedium ?? const TextStyle()).copyWith(
+              color: contentColor.withValues(alpha: 0.7),
             ),
             maxLines: 4,
             overflow: TextOverflow.ellipsis,
@@ -310,7 +327,11 @@ class _CardContentBlock extends StatelessWidget {
         ],
         if (bottomChips.isNotEmpty) ...[
           const SizedBox(height: Ux4gSpace.space12),
-          _CardChipRow(chips: bottomChips, pillStyle: true),
+          _CardChipRow(
+            chips: bottomChips,
+            pillStyle: true,
+            contentColor: contentColor,
+          ),
         ],
         if (footerType != Ux4gCardFooterType.none) ...[
           const SizedBox(height: Ux4gSpace.space20),
@@ -331,13 +352,18 @@ class _CardContentBlock extends StatelessWidget {
 class _CardChipRow extends StatelessWidget {
   final List<String> chips;
   final bool pillStyle;
+  final Color contentColor;
 
-  const _CardChipRow({required this.chips, required this.pillStyle});
+  const _CardChipRow({
+    required this.chips,
+    required this.pillStyle,
+    required this.contentColor,
+  });
 
   @override
   Widget build(BuildContext context) {
-    final colors = Ux4gTheme.colors(context);
-    final typography = Ux4gTheme.typography(context);
+    final materialTheme = Theme.of(context);
+    final ux4gTypography = materialTheme.extension<Ux4gTypography>();
 
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
@@ -359,13 +385,13 @@ class _CardChipRow extends StatelessWidget {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(Ux4gRadius.radius999),
                   border: Border.all(
-                    color: colors.onSurface.withValues(alpha: 0.3),
+                    color: contentColor.withValues(alpha: 0.3),
                   ),
                 ),
                 child: Text(
                   chip,
-                  style: typography.lS_default.copyWith(
-                    color: colors.onSurface.withValues(alpha: 0.7),
+                  style: (ux4gTypography?.lS_default ?? materialTheme.textTheme.labelSmall ?? const TextStyle()).copyWith(
+                    color: contentColor.withValues(alpha: 0.7),
                   ),
                 ),
               ),
@@ -380,15 +406,15 @@ class _CardChipRow extends StatelessWidget {
                 ),
                 child: Text(
                   '│',
-                  style: typography.bS_default.copyWith(
-                    color: colors.onSurface.withValues(alpha: 0.3),
+                  style: (ux4gTypography?.bS_default ?? materialTheme.textTheme.bodySmall ?? const TextStyle()).copyWith(
+                    color: contentColor.withValues(alpha: 0.3),
                   ),
                 ),
               ),
             Text(
               chip,
-              style: typography.lS_default.copyWith(
-                color: colors.onSurface.withValues(alpha: 0.6),
+              style: (ux4gTypography?.lS_default ?? materialTheme.textTheme.labelSmall ?? const TextStyle()).copyWith(
+                color: contentColor.withValues(alpha: 0.6),
               ),
             ),
           ];

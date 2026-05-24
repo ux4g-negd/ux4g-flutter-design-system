@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../foundation/colors.dart';
+import '../foundation/typography.dart';
 import '../foundation/dimensions.dart';
-import '../theme/theme.dart';
 import 'input_field.dart';
 
 enum Ux4gTextAreaSize { small, large }
@@ -106,14 +106,25 @@ class _Ux4gTextAreaState extends State<Ux4gTextArea> {
 
   @override
   Widget build(BuildContext context) {
-    final colors = Ux4gTheme.colors(context);
-    final typography = Ux4gTheme.typography(context);
+    final materialTheme = Theme.of(context);
+    final ux4gColors = materialTheme.extension<Ux4gColors>();
+    final ux4gTypography = materialTheme.extension<Ux4gTypography>();
 
-    final borderColor = _getBorderColor(colors);
-    final bgColor = widget.enabled ? colors.surface : colors.onSurface.withValues(alpha: 0.05);
-    final textColor = widget.enabled ? colors.onBackground : colors.onSurface.withValues(alpha: 0.4);
-    final labelColor = _getLabelColor(colors);
-    final captionColor = _getCaptionColor(colors);
+    final surface = ux4gColors?.surface ?? materialTheme.colorScheme.surface;
+    final onSurface = ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
+    final onBackground = ux4gColors?.onBackground ?? materialTheme.colorScheme.onSurface;
+    final errorColor = ux4gColors?.error ?? materialTheme.colorScheme.error;
+
+    final bM_default = ux4gTypography?.bM_default ?? materialTheme.textTheme.bodyMedium ?? const TextStyle(fontSize: 16);
+    final bM_strong = ux4gTypography?.bM_strong ?? materialTheme.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w700) ?? const TextStyle(fontWeight: FontWeight.w700, fontSize: 16);
+    final bXS_default = ux4gTypography?.bXS_default ?? materialTheme.textTheme.bodySmall ?? const TextStyle(fontSize: 12);
+    final bS_default = ux4gTypography?.bS_default ?? materialTheme.textTheme.bodySmall ?? const TextStyle(fontSize: 14);
+
+    final borderColor = _getBorderColor(materialTheme, ux4gColors);
+    final bgColor = widget.enabled ? surface : onSurface.withValues(alpha: 0.05);
+    final textColor = widget.enabled ? onBackground : onSurface.withValues(alpha: 0.4);
+    final labelColor = _getLabelColor(materialTheme, ux4gColors);
+    final captionColor = _getCaptionColor(materialTheme, ux4gColors);
 
     final contentPadding = widget.size == Ux4gTextAreaSize.large ? 16.0 : 12.0;
 
@@ -123,14 +134,14 @@ class _Ux4gTextAreaState extends State<Ux4gTextArea> {
         if (widget.label != null) ...[
           Row(
             children: [
-              Text(widget.label!, style: typography.bM_strong.copyWith(color: labelColor)),
+              Text(widget.label!, style: bM_strong.copyWith(color: labelColor)),
               if (widget.required) ...[
                 const SizedBox(width: 4),
-                Text("*", style: typography.bM_strong.copyWith(color: colors.error)),
+                Text("*", style: bM_strong.copyWith(color: errorColor)),
               ],
               if (widget.trailingIconLabel != null) ...[
                 const SizedBox(width: 4),
-                Icon(widget.trailingIconLabel, size: 16, color: colors.onSurface.withValues(alpha: 0.5)),
+                Icon(widget.trailingIconLabel, size: 16, color: onSurface.withValues(alpha: 0.5)),
               ],
             ],
           ),
@@ -160,10 +171,10 @@ class _Ux4gTextAreaState extends State<Ux4gTextArea> {
                   readOnly: widget.readOnly,
                   maxLines: null,
                   maxLength: widget.maxLength,
-                  style: typography.bM_default.copyWith(color: textColor),
+                  style: bM_default.copyWith(color: textColor),
                   decoration: InputDecoration(
                     hintText: widget.placeholder,
-                    hintStyle: typography.bM_default.copyWith(color: colors.onSurface.withValues(alpha: 0.4)),
+                    hintStyle: bM_default.copyWith(color: onSurface.withValues(alpha: 0.4)),
                     isDense: true,
                     border: InputBorder.none,
                     contentPadding: EdgeInsets.zero,
@@ -179,13 +190,13 @@ class _Ux4gTextAreaState extends State<Ux4gTextArea> {
                       if (widget.characterCountText != null)
                         Text(
                           widget.characterCountText!,
-                          style: typography.bXS_default.copyWith(color: colors.onSurface.withValues(alpha: 0.5)),
+                          style: bXS_default.copyWith(color: onSurface.withValues(alpha: 0.5)),
                         ),
                       const SizedBox(width: 4),
                       Text(
                         "◢",
-                        style: typography.bS_default.copyWith(
-                          color: colors.onSurface.withValues(alpha: 0.4),
+                        style: bS_default.copyWith(
+                          color: onSurface.withValues(alpha: 0.4),
                         ),
                       ),
                     ],
@@ -203,7 +214,7 @@ class _Ux4gTextAreaState extends State<Ux4gTextArea> {
                 Icon(_getStatusIcon() ?? Icons.info_outline, size: 14, color: captionColor),
                 const SizedBox(width: 6),
               ],
-              Text(widget.caption ?? "", style: typography.bXS_default.copyWith(color: captionColor)),
+              Text(widget.caption ?? "", style: bXS_default.copyWith(color: captionColor)),
             ],
           ),
         ],
@@ -211,33 +222,49 @@ class _Ux4gTextAreaState extends State<Ux4gTextArea> {
     );
   }
 
-  Color _getBorderColor(Ux4gColors colors) {
-    if (!widget.enabled) return colors.onSurface.withValues(alpha: 0.3);
+  Color _getBorderColor(ThemeData materialTheme, Ux4gColors? ux4gColors) {
+    final onSurface = ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
+    final error = ux4gColors?.error ?? materialTheme.colorScheme.error;
+    final warning = ux4gColors?.warning ?? Colors.orange;
+    final success = ux4gColors?.success ?? Colors.green;
+
+    if (!widget.enabled) return onSurface.withValues(alpha: 0.3);
     return switch (widget.status) {
-      Ux4gInputFieldStatus.error => colors.error,
-      Ux4gInputFieldStatus.warning => colors.secondary,
-      Ux4gInputFieldStatus.success => Ux4gPalette.green500,
-      Ux4gInputFieldStatus.defaultStatus => colors.onSurface.withValues(alpha: 0.3),
+      Ux4gInputFieldStatus.error => error,
+      Ux4gInputFieldStatus.warning => warning,
+      Ux4gInputFieldStatus.success => success,
+      Ux4gInputFieldStatus.defaultStatus => onSurface.withValues(alpha: 0.3),
     };
   }
 
-  Color _getLabelColor(Ux4gColors colors) {
-    if (!widget.enabled) return colors.onSurface.withValues(alpha: 0.4);
+  Color _getLabelColor(ThemeData materialTheme, Ux4gColors? ux4gColors) {
+    final onSurface = ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
+    final onBackground = ux4gColors?.onBackground ?? materialTheme.colorScheme.onSurface;
+    final error = ux4gColors?.error ?? materialTheme.colorScheme.error;
+    final warning = ux4gColors?.warning ?? Colors.orange;
+    final success = ux4gColors?.success ?? Colors.green;
+
+    if (!widget.enabled) return onSurface.withValues(alpha: 0.4);
     return switch (widget.status) {
-      Ux4gInputFieldStatus.error => colors.error,
-      Ux4gInputFieldStatus.warning => colors.secondary,
-      Ux4gInputFieldStatus.success => Ux4gPalette.green500,
-      Ux4gInputFieldStatus.defaultStatus => colors.onBackground,
+      Ux4gInputFieldStatus.error => error,
+      Ux4gInputFieldStatus.warning => warning,
+      Ux4gInputFieldStatus.success => success,
+      Ux4gInputFieldStatus.defaultStatus => onBackground,
     };
   }
 
-  Color _getCaptionColor(Ux4gColors colors) {
-    if (!widget.enabled) return colors.onSurface.withValues(alpha: 0.4);
+  Color _getCaptionColor(ThemeData materialTheme, Ux4gColors? ux4gColors) {
+    final onSurface = ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
+    final error = ux4gColors?.error ?? materialTheme.colorScheme.error;
+    final warning = ux4gColors?.warning ?? Colors.orange;
+    final success = ux4gColors?.success ?? Colors.green;
+
+    if (!widget.enabled) return onSurface.withValues(alpha: 0.4);
     return switch (widget.status) {
-      Ux4gInputFieldStatus.error => colors.error,
-      Ux4gInputFieldStatus.warning => colors.secondary,
-      Ux4gInputFieldStatus.success => Ux4gPalette.green500,
-      Ux4gInputFieldStatus.defaultStatus => colors.onSurface.withValues(alpha: 0.6),
+      Ux4gInputFieldStatus.error => error,
+      Ux4gInputFieldStatus.warning => warning,
+      Ux4gInputFieldStatus.success => success,
+      Ux4gInputFieldStatus.defaultStatus => onSurface.withValues(alpha: 0.6),
     };
   }
 

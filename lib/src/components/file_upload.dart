@@ -3,7 +3,6 @@ import 'package:image_picker/image_picker.dart';
 import 'dart:async';
 import '../foundation/colors.dart';
 import '../foundation/typography.dart';
-import '../theme/theme.dart';
 
 class UploadedFile {
   final String id;
@@ -197,6 +196,10 @@ class _Ux4gFileUploadState extends State<Ux4gFileUpload> {
   }
 
   void _showErrorDialog(String title, String message) {
+    final materialTheme = Theme.of(context);
+    final ux4gColors = materialTheme.extension<Ux4gColors>();
+    final error = ux4gColors?.error ?? materialTheme.colorScheme.error;
+
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Column(
@@ -208,7 +211,7 @@ class _Ux4gFileUploadState extends State<Ux4gFileUpload> {
             Text(message),
           ],
         ),
-        backgroundColor: Ux4gPalette.red500,
+        backgroundColor: error,
         duration: const Duration(seconds: 4),
       ),
     );
@@ -216,8 +219,17 @@ class _Ux4gFileUploadState extends State<Ux4gFileUpload> {
 
   @override
   Widget build(BuildContext context) {
-    final colors = Ux4gTheme.colors(context);
-    final typography = Ux4gTheme.typography(context);
+    final materialTheme = Theme.of(context);
+    final ux4gColors = materialTheme.extension<Ux4gColors>();
+    final ux4gTypography = materialTheme.extension<Ux4gTypography>();
+
+    final primary = ux4gColors?.primary ?? materialTheme.colorScheme.primary;
+    final onPrimary = ux4gColors?.onPrimary ?? materialTheme.colorScheme.onPrimary;
+    final onBackground = ux4gColors?.onBackground ?? materialTheme.colorScheme.onSurface;
+    final onSurface = ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
+
+    final lM_strong = ux4gTypography?.lM_strong ?? materialTheme.textTheme.labelLarge?.copyWith(fontWeight: FontWeight.w700) ?? const TextStyle(fontWeight: FontWeight.w700, fontSize: 12);
+    final bS_default = ux4gTypography?.bS_default ?? materialTheme.textTheme.bodySmall ?? const TextStyle(fontSize: 14);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -227,7 +239,7 @@ class _Ux4gFileUploadState extends State<Ux4gFileUpload> {
           width: double.infinity,
           decoration: BoxDecoration(
             border: Border.all(
-              color: colors.primary.withValues(alpha: 0.3),
+              color: primary.withValues(alpha: 0.3),
               width: 2,
               strokeAlign: BorderSide.strokeAlignOutside,
             ),
@@ -243,13 +255,13 @@ class _Ux4gFileUploadState extends State<Ux4gFileUpload> {
                   width: 60,
                   height: 60,
                   decoration: BoxDecoration(
-                    color: colors.primary.withValues(alpha: 0.1),
+                    color: primary.withValues(alpha: 0.1),
                     shape: BoxShape.circle,
                   ),
                   child: Icon(
                     Icons.cloud_upload_outlined,
                     size: 32,
-                    color: colors.primary,
+                    color: primary,
                   ),
                 ),
                 const SizedBox(height: 16),
@@ -257,8 +269,8 @@ class _Ux4gFileUploadState extends State<Ux4gFileUpload> {
                 // Header
                 Text(
                   'Upload Documents',
-                  style: typography.lM_strong.copyWith(
-                    color: colors.onBackground,
+                  style: lM_strong.copyWith(
+                    color: onBackground,
                     fontSize: 24,
                     fontWeight: FontWeight.w700,
                   ),
@@ -269,8 +281,8 @@ class _Ux4gFileUploadState extends State<Ux4gFileUpload> {
                 // Description
                 Text(
                   'File type: PDF JPG PNG Max size: 5 MB',
-                  style: typography.bS_default.copyWith(
-                    color: colors.onSurface.withValues(alpha: 0.6),
+                  style: bS_default.copyWith(
+                    color: onSurface.withValues(alpha: 0.6),
                   ),
                   textAlign: TextAlign.center,
                 ),
@@ -282,10 +294,10 @@ class _Ux4gFileUploadState extends State<Ux4gFileUpload> {
                     Expanded(
                       child: OutlinedButton.icon(
                         onPressed: () => _pickFile(fromCamera: false),
-                        icon: Icon(Icons.cloud_upload_outlined, color: colors.primary),
-                        label: Text('Upload', style: TextStyle(color: colors.primary)),
+                        icon: Icon(Icons.cloud_upload_outlined, color: primary),
+                        label: Text('Upload', style: TextStyle(color: primary)),
                         style: OutlinedButton.styleFrom(
-                          side: BorderSide(color: colors.primary, width: 1.5),
+                          side: BorderSide(color: primary, width: 1.5),
                         ),
                       ),
                     ),
@@ -293,11 +305,11 @@ class _Ux4gFileUploadState extends State<Ux4gFileUpload> {
                     Expanded(
                       child: ElevatedButton.icon(
                         onPressed: () => _pickFile(fromCamera: true),
-                        icon: const Icon(Icons.camera_alt, color: Colors.white),
-                        label: const Text('Scan', style: TextStyle(color: Colors.white)),
+                        icon: Icon(Icons.camera_alt, color: onPrimary),
+                        label: Text('Scan', style: TextStyle(color: onPrimary)),
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: colors.primary,
-                          foregroundColor: Colors.white,
+                          backgroundColor: primary,
+                          foregroundColor: onPrimary,
                         ),
                       ),
                     ),
@@ -314,22 +326,32 @@ class _Ux4gFileUploadState extends State<Ux4gFileUpload> {
         if (_files.isNotEmpty)
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: _files.map((file) => _buildFileItem(file, colors, typography)).toList(),
+            children: _files.map((file) => _buildFileItem(file, materialTheme, ux4gColors, ux4gTypography)).toList(),
           ),
       ],
     );
   }
 
-  Widget _buildFileItem(UploadedFile file, Ux4gColors colors, Ux4gTypography typography) {
+  Widget _buildFileItem(UploadedFile file, ThemeData materialTheme, Ux4gColors? ux4gColors, Ux4gTypography? ux4gTypography) {
+    final surface = ux4gColors?.surface ?? materialTheme.colorScheme.surface;
+    final onSurface = ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
+    final error = ux4gColors?.error ?? materialTheme.colorScheme.error;
+    final primary = ux4gColors?.primary ?? materialTheme.colorScheme.primary;
+    final success = ux4gColors?.success ?? Colors.green;
+    final onPrimary = ux4gColors?.onPrimary ?? materialTheme.colorScheme.onPrimary;
+
+    final tS_strong = ux4gTypography?.tS_strong ?? materialTheme.textTheme.titleSmall?.copyWith(fontWeight: FontWeight.w700) ?? const TextStyle(fontWeight: FontWeight.w700, fontSize: 14);
+    final bM_default = ux4gTypography?.bM_default ?? materialTheme.textTheme.bodyMedium ?? const TextStyle(fontSize: 16);
+
     return Padding(
       padding: const EdgeInsets.only(bottom: 12),
       child: Container(
         decoration: BoxDecoration(
-          color: colors.surface,
+          color: surface,
           border: Border.all(
             color: file.status == UploadStatus.error
-                ? Ux4gPalette.red500.withValues(alpha: 0.2)
-                : colors.onSurface.withValues(alpha: 0.08),
+                ? error.withValues(alpha: 0.2)
+                : onSurface.withValues(alpha: 0.08),
           ),
           borderRadius: BorderRadius.circular(8),
         ),
@@ -337,7 +359,7 @@ class _Ux4gFileUploadState extends State<Ux4gFileUpload> {
         child: Row(
           children: [
             // File icon
-            _getFileIcon(file.name),
+            _getFileIcon(file.name, ux4gColors, materialTheme),
             const SizedBox(width: 12),
 
             // File info
@@ -347,8 +369,8 @@ class _Ux4gFileUploadState extends State<Ux4gFileUpload> {
                 children: [
                   Text(
                     file.name,
-                    style: typography.tS_strong.copyWith(
-                      color: _getFileNameColor(file.status),
+                    style: tS_strong.copyWith(
+                      color: _getFileNameColor(file.status, ux4gColors, materialTheme),
                     ),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
@@ -356,8 +378,8 @@ class _Ux4gFileUploadState extends State<Ux4gFileUpload> {
                   if (file.status == UploadStatus.error)
                     Text(
                       file.errorMessage ?? 'Error',
-                      style: typography.bM_default.copyWith(
-                        color: Ux4gPalette.red500,
+                      style: bM_default.copyWith(
+                        color: error,
                       ),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
@@ -368,8 +390,8 @@ class _Ux4gFileUploadState extends State<Ux4gFileUpload> {
                       child: LinearProgressIndicator(
                         value: file.progress,
                         minHeight: 4,
-                        backgroundColor: colors.onSurface.withValues(alpha: 0.1),
-                        valueColor: AlwaysStoppedAnimation<Color>(colors.primary),
+                        backgroundColor: onSurface.withValues(alpha: 0.1),
+                        valueColor: AlwaysStoppedAnimation<Color>(primary),
                       ),
                     ),
                 ],
@@ -381,8 +403,8 @@ class _Ux4gFileUploadState extends State<Ux4gFileUpload> {
             if (file.status == UploadStatus.uploading)
               Text(
                 '${(file.progress * 100).toStringAsFixed(0)}%',
-                style: typography.tS_strong.copyWith(
-                  color: colors.onSurface.withValues(alpha: 0.5),
+                style: tS_strong.copyWith(
+                  color: onSurface.withValues(alpha: 0.5),
                 ),
               )
             else if (file.status == UploadStatus.success)
@@ -390,10 +412,10 @@ class _Ux4gFileUploadState extends State<Ux4gFileUpload> {
                 width: 24,
                 height: 24,
                 decoration: BoxDecoration(
-                  color: Ux4gPalette.green500,
+                  color: success,
                   shape: BoxShape.circle,
                 ),
-                child: const Icon(Icons.check, color: Colors.white, size: 14),
+                child: Icon(Icons.check, color: onPrimary, size: 14),
               )
             else if (file.status == UploadStatus.error)
               GestureDetector(
@@ -405,19 +427,19 @@ class _Ux4gFileUploadState extends State<Ux4gFileUpload> {
                       width: 24,
                       height: 24,
                       decoration: BoxDecoration(
-                        color: Ux4gPalette.red500.withValues(alpha: 0.1),
+                        color: error.withValues(alpha: 0.1),
                         shape: BoxShape.circle,
                       ),
                       child: Icon(
                         Icons.info_outline,
-                        color: Ux4gPalette.red500,
+                        color: error,
                         size: 14,
                       ),
                     ),
                     Text(
                       'Retry',
-                      style: typography.bM_default.copyWith(
-                        color: Ux4gPalette.primary500,
+                      style: bM_default.copyWith(
+                        color: primary,
                       ),
                     ),
                   ],
@@ -431,7 +453,7 @@ class _Ux4gFileUploadState extends State<Ux4gFileUpload> {
               child: Icon(
                 Icons.close,
                 size: 20,
-                color: colors.onSurface.withValues(alpha: 0.4),
+                color: onSurface.withValues(alpha: 0.4),
               ),
             ),
           ],
@@ -440,35 +462,43 @@ class _Ux4gFileUploadState extends State<Ux4gFileUpload> {
     );
   }
 
-  Color _getFileNameColor(UploadStatus status) {
+  Color _getFileNameColor(UploadStatus status, Ux4gColors? ux4gColors, ThemeData materialTheme) {
+    final onSurface = ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
+    final success = ux4gColors?.success ?? Colors.green;
+    final error = ux4gColors?.error ?? materialTheme.colorScheme.error;
+
     switch (status) {
       case UploadStatus.idle:
       case UploadStatus.uploading:
-        return Ux4gPalette.neutral1000black;
+        return onSurface;
       case UploadStatus.success:
-        return Ux4gPalette.green500;
+        return success;
       case UploadStatus.error:
-        return Ux4gPalette.red500;
+        return error;
     }
   }
 
-  Widget _getFileIcon(String fileName) {
+  Widget _getFileIcon(String fileName, Ux4gColors? ux4gColors, ThemeData materialTheme) {
+    final primary = ux4gColors?.primary ?? materialTheme.colorScheme.primary;
+    final error = ux4gColors?.error ?? materialTheme.colorScheme.error;
+    final onSurface = ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
+
     final extension = fileName.split('.').last.toLowerCase();
     IconData icon;
     Color color;
 
     if (['jpg', 'jpeg', 'png', 'gif', 'bmp'].contains(extension)) {
       icon = Icons.image;
-      color = Ux4gPalette.blue500;
+      color = primary;
     } else if (['pdf'].contains(extension)) {
       icon = Icons.picture_as_pdf;
-      color = Ux4gPalette.red500;
+      color = error;
     } else if (['doc', 'docx'].contains(extension)) {
       icon = Icons.description;
-      color = Ux4gPalette.primary500;
+      color = primary;
     } else {
       icon = Icons.insert_drive_file;
-      color = Ux4gPalette.neutral500;
+      color = onSurface.withValues(alpha: 0.38);
     }
 
     return Container(

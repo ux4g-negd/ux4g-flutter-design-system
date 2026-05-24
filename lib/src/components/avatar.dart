@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../foundation/colors.dart';
+import '../foundation/typography.dart';
 import '../theme/theme.dart';
 
 enum Ux4gAvatarSize {
@@ -42,12 +43,14 @@ class Ux4gAvatar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colors = Ux4gTheme.colors(context);
-    final typography = Ux4gTheme.typography(context);
+    final materialTheme = Theme.of(context);
+    final ux4gColors = materialTheme.extension<Ux4gColors>();
+    final ux4gTypography = materialTheme.extension<Ux4gTypography>();
 
-    final finalContainerColor = containerColor ?? colors.primary.withValues(alpha: 0.1);
-    final finalContentColor = contentColor ?? colors.primary;
-    final finalIconColor = iconColor ?? colors.primary;
+    final resolvedPrimary = ux4gColors?.primary ?? materialTheme.colorScheme.primary;
+    final finalContainerColor = containerColor ?? resolvedPrimary.withValues(alpha: 0.1);
+    final finalContentColor = contentColor ?? resolvedPrimary;
+    final finalIconColor = iconColor ?? resolvedPrimary;
 
     return Container(
       width: size.size,
@@ -58,33 +61,33 @@ class Ux4gAvatar extends StatelessWidget {
       ),
       clipBehavior: Clip.antiAlias,
       child: Center(
-        child: _buildContent(context, typography, finalContentColor, finalIconColor),
+        child: _buildContent(context, ux4gTypography, materialTheme, finalContentColor, finalIconColor),
       ),
     );
   }
 
-  Widget _buildContent(BuildContext context, dynamic typography, Color contentColor, Color iconColor) {
+  Widget _buildContent(BuildContext context, Ux4gTypography? ux4gTypography, ThemeData materialTheme, Color contentColor, Color iconColor) {
     if (imageUrl != null) {
       return Image.network(
         imageUrl!,
         width: size.size,
         height: size.size,
         fit: BoxFit.cover,
-        errorBuilder: (context, error, stackTrace) => _buildFallback(typography, contentColor, iconColor),
+        errorBuilder: (context, error, stackTrace) => _buildFallback(ux4gTypography, materialTheme, contentColor, iconColor),
         loadingBuilder: (context, child, loadingProgress) {
           if (loadingProgress == null) return child;
           return Icon(Icons.person, size: size.iconSize, color: iconColor);
         },
       );
     }
-    return _buildFallback(typography, contentColor, iconColor);
+    return _buildFallback(ux4gTypography, materialTheme, contentColor, iconColor);
   }
 
-  Widget _buildFallback(dynamic typography, Color contentColor, Color iconColor) {
+  Widget _buildFallback(Ux4gTypography? ux4gTypography, ThemeData materialTheme, Color contentColor, Color iconColor) {
     if (initials != null && initials!.isNotEmpty) {
       return Text(
         initials!.substring(0, initials!.length > 2 ? 2 : initials!.length).toUpperCase(),
-        style: typography.bM_default.copyWith(
+        style: (ux4gTypography?.bM_default ?? materialTheme.textTheme.bodyMedium ?? const TextStyle()).copyWith(
           fontSize: size.fontSize,
           fontWeight: FontWeight.w500,
           color: contentColor,
@@ -116,7 +119,7 @@ class Ux4gAvatarGroup extends StatelessWidget {
   final Ux4gAvatarSize size;
   final int? maxLimit;
   final bool collapsed;
-  final Color borderColor;
+  final Color? borderColor;
   final double borderWidth;
   final VoidCallback? onRemainingClick;
 
@@ -126,7 +129,7 @@ class Ux4gAvatarGroup extends StatelessWidget {
     this.size = Ux4gAvatarSize.m,
     this.maxLimit,
     this.collapsed = true,
-    this.borderColor = Colors.white,
+    this.borderColor,
     this.borderWidth = 2,
     this.onRemainingClick,
   });
@@ -135,6 +138,9 @@ class Ux4gAvatarGroup extends StatelessWidget {
   Widget build(BuildContext context) {
     if (items.isEmpty) return const SizedBox.shrink();
 
+    final materialTheme = Theme.of(context);
+    final ux4gColors = materialTheme.extension<Ux4gColors>();
+    final resolvedBorderColor = borderColor ?? (ux4gColors?.surface ?? materialTheme.colorScheme.surface);
     final actualLimit = maxLimit ?? items.length;
     final exceedsLimit = items.length > actualLimit;
     final visibleItems = exceedsLimit ? items.take(actualLimit - 1).toList() : items;
@@ -148,7 +154,6 @@ class Ux4gAvatarGroup extends StatelessWidget {
       crossAxisAlignment: WrapCrossAlignment.center,
       children: [
         ...visibleItems.asMap().entries.map((entry) {
-          final index = entry.key;
           final item = entry.value;
           return GestureDetector(
             onTap: item.onClick,
@@ -159,6 +164,7 @@ class Ux4gAvatarGroup extends StatelessWidget {
                 initials: item.initials,
                 icon: item.icon,
               ),
+              resolvedBorderColor,
             ),
           );
         }),
@@ -170,18 +176,19 @@ class Ux4gAvatarGroup extends StatelessWidget {
                 size: size,
                 initials: "+$remainingCount",
               ),
+              resolvedBorderColor,
             ),
           ),
       ],
     );
   }
 
-  Widget _buildGroupAvatar(Widget avatar) {
+  Widget _buildGroupAvatar(Widget avatar, Color resolvedBorderColor) {
     if (!collapsed) return avatar;
     return Container(
       decoration: BoxDecoration(
         shape: BoxShape.circle,
-        border: Border.all(color: borderColor, width: borderWidth),
+        border: Border.all(color: resolvedBorderColor, width: borderWidth),
       ),
       child: avatar,
     );
@@ -216,7 +223,8 @@ class Ux4gProfileAvatar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colors = Ux4gTheme.colors(context);
+    final materialTheme = Theme.of(context);
+    final ux4gColors = materialTheme.extension<Ux4gColors>();
     final indicatorSize = badgeSize ?? _getIndicatorSize();
 
     return Stack(
@@ -233,7 +241,7 @@ class Ux4gProfileAvatar extends StatelessWidget {
             bottom: 0,
             child: GestureDetector(
               onTap: onVariantClick,
-              child: _buildVariant(colors, indicatorSize),
+              child: _buildVariant(ux4gColors, materialTheme, indicatorSize),
             ),
           ),
       ],
@@ -252,7 +260,7 @@ class Ux4gProfileAvatar extends StatelessWidget {
     };
   }
 
-  Widget _buildVariant(Ux4gColors colors, double size) {
+  Widget _buildVariant(Ux4gColors? ux4gColors, ThemeData materialTheme, double size) {
     if (variant is Ux4gProfileBadge) {
       final icon = switch (variant as Ux4gProfileBadge) {
         Ux4gProfileBadge.verified => Icons.verified,
@@ -269,11 +277,11 @@ class Ux4gProfileAvatar extends StatelessWidget {
       return Container(
         width: size,
         height: size,
-        decoration: const BoxDecoration(
-          color: Colors.white,
+        decoration: BoxDecoration(
+          color: ux4gColors?.surface ?? materialTheme.colorScheme.surface,
           shape: BoxShape.circle,
         ),
-        child: Icon(icon, size: size * 0.8, color: Colors.black),
+        child: Icon(icon, size: size * 0.8, color: ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface),
       );
     }
     return const SizedBox.shrink();
@@ -304,7 +312,8 @@ class Ux4gStatusAvatar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colors = Ux4gTheme.colors(context);
+    final materialTheme = Theme.of(context);
+    final ux4gColors = materialTheme.extension<Ux4gColors>();
     final indicatorSize = statusSize ?? _getStatusIndicatorSize();
 
     return Stack(
@@ -321,14 +330,14 @@ class Ux4gStatusAvatar extends StatelessWidget {
           child: Container(
             width: indicatorSize,
             height: indicatorSize,
-            decoration: const BoxDecoration(
-              color: Colors.white,
+            decoration: BoxDecoration(
+              color: ux4gColors?.surface ?? materialTheme.colorScheme.surface,
               shape: BoxShape.circle,
             ),
             padding: const EdgeInsets.all(2),
             child: Container(
               decoration: BoxDecoration(
-                color: _getStatusColor(colors),
+                color: _getStatusColor(ux4gColors, materialTheme),
                 shape: BoxShape.circle,
               ),
             ),
@@ -350,14 +359,14 @@ class Ux4gStatusAvatar extends StatelessWidget {
     };
   }
 
-  Color _getStatusColor(Ux4gColors colors) {
+  Color _getStatusColor(Ux4gColors? ux4gColors, ThemeData materialTheme) {
     return switch (variant) {
-      Ux4gStatusVariant.online => Ux4gPalette.green500,
-      Ux4gStatusVariant.offline => colors.onSurface.withValues(alpha: 0.5),
-      Ux4gStatusVariant.busy => colors.error,
-      Ux4gStatusVariant.success => Ux4gPalette.green500,
-      Ux4gStatusVariant.error => Ux4gPalette.red600,
-      Ux4gStatusVariant.warning => Ux4gPalette.orange500,
+      Ux4gStatusVariant.online => ux4gColors?.success ?? Colors.green,
+      Ux4gStatusVariant.offline => (ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface).withValues(alpha: 0.5),
+      Ux4gStatusVariant.busy => ux4gColors?.error ?? materialTheme.colorScheme.error,
+      Ux4gStatusVariant.success => ux4gColors?.success ?? Colors.green,
+      Ux4gStatusVariant.error => ux4gColors?.error ?? materialTheme.colorScheme.error,
+      Ux4gStatusVariant.warning => ux4gColors?.warning ?? Colors.orange,
     };
   }
 }
