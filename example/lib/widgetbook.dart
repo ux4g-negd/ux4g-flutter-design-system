@@ -14,6 +14,7 @@ import 'stories/form_stories.dart';
 import 'stories/layout_stories.dart';
 import 'stories/navigation_stories.dart';
 import 'stories/overlay_stories.dart';
+import 'stories/biometric_stories.dart';
 import 'stories/progress_stories.dart';
 
 void main() {
@@ -163,6 +164,15 @@ class UX4GWidgetbook extends StatelessWidget {
             feedbackFormComponent,
             feedbackFormNpsComponent,
             feedbackFormCsatComponent,
+          ],
+        ),
+
+        // ── Biometric ─────────────────────────────────────────────────────────
+        WidgetbookCategory(
+          name: 'Biometric',
+          isInitiallyExpanded: false,
+          children: [
+            biometricComponent,
           ],
         ),
 
