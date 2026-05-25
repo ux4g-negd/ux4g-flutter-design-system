@@ -40,7 +40,7 @@ class UX4GWidgetbook extends StatelessWidget {
           isInitiallyExpanded: false,
           children: [quickGuideComponent],
         ),
-        
+
         // ── Components ────────────────────────────────────────────────────────
         WidgetbookCategory(
           name: 'Components',
@@ -49,13 +49,13 @@ class UX4GWidgetbook extends StatelessWidget {
             // Buttons
             buttonComponent,
             iconButtonComponent,
-            
+
             // Display
             badgeComponent,
             tagComponent,
             cardComponent,
             dividerComponent,
-            
+
             // Avatar
             WidgetbookFolder(
               name: 'Avatar',
@@ -66,7 +66,7 @@ class UX4GWidgetbook extends StatelessWidget {
                 avatarGroupComponent,
               ],
             ),
-            
+
             // Form
             inputFieldComponent,
             textAreaComponent,
@@ -78,17 +78,14 @@ class UX4GWidgetbook extends StatelessWidget {
             radioButtonComponent,
             WidgetbookFolder(
               name: 'Dropdown',
-              children: [
-                actionDropdownComponent,
-                selectionDropdownComponent,
-              ],
+              children: [actionDropdownComponent, selectionDropdownComponent],
             ),
             datePickerComponent,
             timePickerComponent,
             fileUploadComponent,
             aadhaarInputFieldComponent,
             panInputFieldComponent,
-            
+
             // Progress & Loader
             WidgetbookFolder(
               name: 'Linear Progress',
@@ -107,14 +104,11 @@ class UX4GWidgetbook extends StatelessWidget {
               ],
             ),
             loaderComponent,
-            
+
             // Navigation & Feedback
             WidgetbookFolder(
               name: 'Accordion',
-              children: [
-                accordionComponent,
-                accordionGroupComponent,
-              ],
+              children: [accordionComponent, accordionGroupComponent],
             ),
             statusBannerComponent,
             emptyStateComponent,
@@ -128,7 +122,7 @@ class UX4GWidgetbook extends StatelessWidget {
               ],
             ),
             paginationComponent,
-            
+
             // Data
             stepperComponent,
             capsuleStepperComponent,
@@ -136,31 +130,25 @@ class UX4GWidgetbook extends StatelessWidget {
             socialLinkComponent,
             WidgetbookFolder(
               name: 'Social Links',
-              children: [
-                socialLinkGroupComponent,
-                socialLinkListComponent,
-              ],
+              children: [socialLinkGroupComponent, socialLinkListComponent],
             ),
             journeyTimelineComponent,
             statusPipelineComponent,
             carouselComponent,
             slotGridComponent,
-            
+
             // Layout
             appHeaderComponent,
-            
+
             // Overlay
             modalComponent,
             bottomSheetComponent,
             toastComponent,
             WidgetbookFolder(
               name: 'Tooltip',
-              children: [
-                tooltipComponent,
-                richTooltipComponent,
-              ],
+              children: [tooltipComponent, richTooltipComponent],
             ),
-            
+
             // Feedback
             WidgetbookFolder(
               name: 'Feedback Form',
@@ -170,7 +158,7 @@ class UX4GWidgetbook extends StatelessWidget {
                 feedbackFormCsatComponent,
               ],
             ),
-            
+
             // Biometric
             biometricComponent,
           ],
@@ -250,11 +238,7 @@ class _SidebarLogo extends StatelessWidget {
         },
         child: Row(
           children: [
-            SvgPicture.asset(
-              'assets/ux4g_logo.svg',
-              height: 34,
-              width: 34,
-            ),
+            SvgPicture.asset('assets/ux4g_logo.svg', height: 34, width: 34),
             const SizedBox(width: 10),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -298,7 +282,7 @@ class _Ux4gWelcomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final isDark = theme.brightness == Brightness.dark;
-    
+
     // Explicitly define colors based on theme brightness to ensure they flip
     final bg = isDark ? const Color(0xFF121212) : Colors.white;
     final onSurface = isDark ? Colors.white : const Color(0xFF111827);
@@ -316,17 +300,16 @@ class _Ux4gWelcomePage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 // ── Logo ─────────────────────────────────────────────────────────
-                SvgPicture.asset(
-                  'assets/ux4g_logo.svg',
-                  height: 52,
-                ),
+                SvgPicture.asset('assets/ux4g_logo.svg', height: 22),
 
                 const SizedBox(height: 24),
 
                 // Version badge
                 Container(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 12,
+                    vertical: 4,
+                  ),
                   decoration: BoxDecoration(
                     color: _primary.withValues(alpha: 0.08),
                     borderRadius: BorderRadius.circular(100),
@@ -363,11 +346,7 @@ class _Ux4gWelcomePage extends StatelessWidget {
                 Text(
                   'Government-grade UI foundations for trusted public digital experiences.',
                   textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: subtle,
-                    fontSize: 16,
-                    height: 1.6,
-                  ),
+                  style: TextStyle(color: subtle, fontSize: 16, height: 1.6),
                 ),
 
                 const SizedBox(height: 32),
@@ -437,9 +416,11 @@ class _Ux4gWelcomePage extends StatelessWidget {
                   ),
                   child: Row(
                     children: [
-                      Icon(Icons.arrow_back_rounded,
-                          color: isDark ? const Color(0xFFA594FF) : _primary,
-                          size: 20),
+                      Icon(
+                        Icons.arrow_back_rounded,
+                        color: isDark ? const Color(0xFFA594FF) : _primary,
+                        size: 20,
+                      ),
                       const SizedBox(width: 14),
                       Expanded(
                         child: Column(
@@ -458,7 +439,10 @@ class _Ux4gWelcomePage extends StatelessWidget {
                               'Select any component from the left sidebar. '
                               'Use the Preview, Code, and Props tabs to explore.',
                               style: TextStyle(
-                                  color: subtle, fontSize: 13, height: 1.5),
+                                color: subtle,
+                                fontSize: 13,
+                                height: 1.5,
+                              ),
                             ),
                           ],
                         ),
@@ -473,8 +457,9 @@ class _Ux4gWelcomePage extends StatelessWidget {
                 Text(
                   'UX4G Design System  ·  v3.0 beta  ·  ux4g.gov.in',
                   style: TextStyle(
-                      color: isDark ? Colors.white38 : const Color(0xFF9CA3AF),
-                      fontSize: 12),
+                    color: isDark ? Colors.white38 : const Color(0xFF9CA3AF),
+                    fontSize: 12,
+                  ),
                 ),
 
                 const SizedBox(height: 16),
@@ -504,7 +489,8 @@ class _StatPill extends StatelessWidget {
         color: _primary.withValues(alpha: isDark ? 0.15 : 0.07),
         borderRadius: BorderRadius.circular(100),
         border: Border.all(
-            color: _primary.withValues(alpha: isDark ? 0.35 : 0.2)),
+          color: _primary.withValues(alpha: isDark ? 0.35 : 0.2),
+        ),
       ),
       child: Text(
         label,
@@ -563,8 +549,11 @@ class _FeatureCard extends StatelessWidget {
               color: _primary.withValues(alpha: isDark ? 0.2 : 0.1),
               borderRadius: BorderRadius.circular(8),
             ),
-            child: Icon(icon,
-                color: isDark ? const Color(0xFFA594FF) : _primary, size: 20),
+            child: Icon(
+              icon,
+              color: isDark ? const Color(0xFFA594FF) : _primary,
+              size: 20,
+            ),
           ),
           const SizedBox(height: 12),
           Text(
@@ -578,11 +567,7 @@ class _FeatureCard extends StatelessWidget {
           const SizedBox(height: 6),
           Text(
             description,
-            style: TextStyle(
-              color: subtle,
-              fontSize: 13,
-              height: 1.55,
-            ),
+            style: TextStyle(color: subtle, fontSize: 13, height: 1.55),
           ),
         ],
       ),
