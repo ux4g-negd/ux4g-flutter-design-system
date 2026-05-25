@@ -94,6 +94,7 @@ class Ux4gSlider extends StatelessWidget {
             showValueIndicator: showIndicator
                 ? ShowValueIndicator.onDrag
                 : ShowValueIndicator.never,
+            valueIndicatorShape: const PaddleSliderValueIndicatorShape(),
             valueIndicatorColor: ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface,
             valueIndicatorTextStyle: (ux4gTypography?.lS_strong ?? materialTheme.textTheme.labelSmall?.copyWith(fontWeight: FontWeight.bold) ?? const TextStyle()).copyWith(
               color: ux4gColors?.surface ?? materialTheme.colorScheme.surface,
@@ -105,7 +106,7 @@ class Ux4gSlider extends StatelessWidget {
             max: max,
             divisions: steps != null && steps! > 0 ? steps! + 1 : null,
             onChanged: enabled ? onValueChange : null,
-            label: value.toInt().toString(),
+            label: _formatValue(value),
           ),
         ),
         if (showMarksAndValues && steps != null && steps! > 0)
@@ -337,6 +338,7 @@ class Ux4gRangeSlider extends StatelessWidget {
   final String? startValueText;
   final String? endValueText;
   final bool showMarksAndValues;
+  final bool showIndicator;
   final bool showInputFields;
   final bool showValueLabels;
 
@@ -354,6 +356,7 @@ class Ux4gRangeSlider extends StatelessWidget {
     this.startValueText,
     this.endValueText,
     this.showMarksAndValues = false,
+    this.showIndicator = false,
     this.showInputFields = false,
     this.showValueLabels = false,
   });
@@ -396,6 +399,15 @@ class Ux4gRangeSlider extends StatelessWidget {
             inactiveTrackColor: inactiveColor,
             thumbColor: ux4gColors?.onPrimary ?? materialTheme.colorScheme.onPrimary,
             overlayColor: activeColor.withValues(alpha: 0.12),
+            showValueIndicator: showIndicator
+                ? ShowValueIndicator.onDrag
+                : ShowValueIndicator.never,
+            valueIndicatorShape: const PaddleSliderValueIndicatorShape(),
+            rangeValueIndicatorShape: const PaddleRangeSliderValueIndicatorShape(),
+            valueIndicatorColor: ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface,
+            valueIndicatorTextStyle: (ux4gTypography?.lS_strong ?? materialTheme.textTheme.labelSmall?.copyWith(fontWeight: FontWeight.bold) ?? const TextStyle()).copyWith(
+              color: ux4gColors?.surface ?? materialTheme.colorScheme.surface,
+            ),
           ),
           child: RangeSlider(
             values: values,
@@ -404,8 +416,8 @@ class Ux4gRangeSlider extends StatelessWidget {
             divisions: steps != null && steps! > 0 ? steps! + 1 : null,
             onChanged: enabled ? onValueChange : null,
             labels: RangeLabels(
-              values.start.toInt().toString(),
-              values.end.toInt().toString(),
+              _formatValue(values.start),
+              _formatValue(values.end),
             ),
           ),
         ),

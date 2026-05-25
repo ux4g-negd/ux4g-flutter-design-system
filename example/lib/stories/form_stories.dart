@@ -246,7 +246,7 @@ final textAreaComponent = WidgetbookComponent(
   name: 'Ux4gTextArea',
   useCases: [
     WidgetbookUseCase(
-      name: 'Default',
+      name: 'Interactive',
       builder: (context) {
         String value = '';
         return StatefulBuilder(builder: (ctx, setState) {
@@ -283,11 +283,114 @@ final textAreaComponent = WidgetbookComponent(
                 onValueChange: (v) => setState(() => value = v),
                 label: context.knobs.string(label: 'Label', initialValue: 'Description'),
                 placeholder: context.knobs.string(label: 'Placeholder', initialValue: 'Write something...'),
+                size: context.knobs.list(label: 'Size', options: Ux4gTextAreaSize.values, initialOption: Ux4gTextAreaSize.large),
+                minHeight: context.knobs.list(label: 'Min Height', options: Ux4gTextAreaMinHeight.values, initialOption: Ux4gTextAreaMinHeight.medium),
+                status: context.knobs.list(label: 'Status', options: Ux4gInputFieldStatus.values, initialOption: Ux4gInputFieldStatus.defaultStatus),
+                required: context.knobs.boolean(label: 'Required', initialValue: false),
+                enabled: context.knobs.boolean(label: 'Enabled', initialValue: true),
+                readOnly: context.knobs.boolean(label: 'Read Only', initialValue: false),
+                maxLength: context.knobs.int.input(label: 'Max Length', initialValue: 200),
+                caption: context.knobs.string(label: 'Caption', initialValue: ''),
               ),
             ),
           );
         });
       },
+    ),
+    WidgetbookUseCase(
+      name: 'Sizes & Heights',
+      builder: (context) => ComponentDocs(
+        name: 'Ux4gTextArea — Sizes',
+        description: 'Small and Large sizes with different minimum heights.',
+        code: 'Ux4gTextArea(size: Ux4gTextAreaSize.small, minHeight: Ux4gTextAreaMinHeight.small, ...);\n'
+            'Ux4gTextArea(size: Ux4gTextAreaSize.large, minHeight: Ux4gTextAreaMinHeight.large, ...);',
+        child: SizedBox(
+          width: 320,
+          child: Column(
+            children: [
+              Ux4gTextArea(
+                value: '', onValueChange: (_) {},
+                label: 'Small size (80px min-height)',
+                size: Ux4gTextAreaSize.small,
+                minHeight: Ux4gTextAreaMinHeight.small,
+                placeholder: 'Small area...',
+              ),
+              const SizedBox(height: 24),
+              Ux4gTextArea(
+                value: '', onValueChange: (_) {},
+                label: 'Large size (160px min-height)',
+                size: Ux4gTextAreaSize.large,
+                minHeight: Ux4gTextAreaMinHeight.large,
+                placeholder: 'Large area...',
+              ),
+            ],
+          ),
+        ),
+      ),
+    ),
+    WidgetbookUseCase(
+      name: 'Statuses',
+      builder: (context) => ComponentDocs(
+        name: 'Ux4gTextArea — Statuses',
+        description: 'Visual feedback for different validation states.',
+        code: 'Ux4gTextArea(status: Ux4gInputFieldStatus.error, caption: "Required field", ...);',
+        child: SizedBox(
+          width: 320,
+          child: Column(
+            children: [
+              Ux4gTextArea(
+                value: 'Valid input', onValueChange: (_) {},
+                label: 'Success Status',
+                status: Ux4gInputFieldStatus.success,
+                caption: 'Information saved successfully',
+              ),
+              const SizedBox(height: 24),
+              Ux4gTextArea(
+                value: 'Incomplete data', onValueChange: (_) {},
+                label: 'Warning Status',
+                status: Ux4gInputFieldStatus.warning,
+                caption: 'Please double check this entry',
+              ),
+              const SizedBox(height: 24),
+              Ux4gTextArea(
+                value: '', onValueChange: (_) {},
+                label: 'Error Status',
+                status: Ux4gInputFieldStatus.error,
+                caption: 'This field is required',
+                required: true,
+              ),
+            ],
+          ),
+        ),
+      ),
+    ),
+    WidgetbookUseCase(
+      name: 'Metadata',
+      builder: (context) => ComponentDocs(
+        name: 'Ux4gTextArea — Metadata',
+        description: 'Showing character counts and helper icons.',
+        code: 'Ux4gTextArea(characterCountText: "0 / 100", trailingIconLabel: Icons.help_outline, ...);',
+        child: SizedBox(
+          width: 320,
+          child: Column(
+            children: [
+              Ux4gTextArea(
+                value: 'Example text', onValueChange: (_) {},
+                label: 'With Character Count',
+                characterCountText: '12 / 500',
+                maxLength: 500,
+              ),
+              const SizedBox(height: 24),
+              Ux4gTextArea(
+                value: '', onValueChange: (_) {},
+                label: 'With Info Icon',
+                trailingIconLabel: Icons.help_outline,
+                placeholder: 'Tap the icon for help',
+              ),
+            ],
+          ),
+        ),
+      ),
     ),
   ],
 );

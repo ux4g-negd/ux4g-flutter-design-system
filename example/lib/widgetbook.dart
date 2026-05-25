@@ -28,8 +28,8 @@ class UX4GWidgetbook extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Widgetbook.material(
-      // ── Theme addon wraps every use-case in Ux4gTheme ──────────────────────
-      appBuilder: (context, child) => Ux4gTheme(child: child),
+      // ── No wrapper needed here as MaterialThemeAddon handles the theme ─────
+      appBuilder: (context, child) => child,
 
       home: const _Ux4gWelcomePage(),
       header: const _SidebarLogo(),
@@ -40,45 +40,34 @@ class UX4GWidgetbook extends StatelessWidget {
           isInitiallyExpanded: false,
           children: [quickGuideComponent],
         ),
-        // ── Buttons ────────────────────────────────────────────────────────────
+        
+        // ── Components ────────────────────────────────────────────────────────
         WidgetbookCategory(
-          name: 'Buttons',
-          isInitiallyExpanded: false,
+          name: 'Components',
+          isInitiallyExpanded: true,
           children: [
+            // Buttons
             buttonComponent,
             iconButtonComponent,
-          ],
-        ),
-
-        // ── Display ────────────────────────────────────────────────────────────
-        WidgetbookCategory(
-          name: 'Display',
-          isInitiallyExpanded: false,
-          children: [
+            
+            // Display
             badgeComponent,
             tagComponent,
             cardComponent,
             dividerComponent,
-          ],
-        ),
-
-        // ── Avatar ─────────────────────────────────────────────────────────────
-        WidgetbookCategory(
-          name: 'Avatar',
-          isInitiallyExpanded: false,
-          children: [
-            avatarComponent,
-            profileAvatarComponent,
-            statusAvatarComponent,
-            avatarGroupComponent,
-          ],
-        ),
-
-        // ── Form ───────────────────────────────────────────────────────────────
-        WidgetbookCategory(
-          name: 'Form',
-          isInitiallyExpanded: false,
-          children: [
+            
+            // Avatar
+            WidgetbookFolder(
+              name: 'Avatar',
+              children: [
+                avatarComponent,
+                profileAvatarComponent,
+                statusAvatarComponent,
+                avatarGroupComponent,
+              ],
+            ),
+            
+            // Form
             inputFieldComponent,
             textAreaComponent,
             searchFieldComponent,
@@ -87,107 +76,103 @@ class UX4GWidgetbook extends StatelessWidget {
             sliderComponent,
             otpInputComponent,
             radioButtonComponent,
-            actionDropdownComponent,
-            selectionDropdownComponent,
+            WidgetbookFolder(
+              name: 'Dropdown',
+              children: [
+                actionDropdownComponent,
+                selectionDropdownComponent,
+              ],
+            ),
             datePickerComponent,
             timePickerComponent,
             fileUploadComponent,
             aadhaarInputFieldComponent,
             panInputFieldComponent,
-          ],
-        ),
-
-        // ── Progress & Loader ──────────────────────────────────────────────────
-        WidgetbookCategory(
-          name: 'Progress & Loader',
-          isInitiallyExpanded: false,
-          children: [
-            linearProgressComponent,
-            animatedLinearProgressComponent,
-            circularProgressComponent,
-            halfCircleProgressComponent,
+            
+            // Progress & Loader
+            WidgetbookFolder(
+              name: 'Linear Progress',
+              children: [
+                linearProgressComponent,
+                animatedLinearProgressComponent,
+              ],
+            ),
+            WidgetbookFolder(
+              name: 'Circular Progress',
+              children: [
+                circularProgressComponent,
+                animatedCircularProgressComponent,
+                halfCircleProgressComponent,
+                animatedHalfCircleProgressComponent,
+              ],
+            ),
             loaderComponent,
-            animatedCircularProgressComponent,
-            animatedHalfCircleProgressComponent,
-          ],
-        ),
-
-        // ── Navigation & Feedback ─────────────────────────────────────────────
-        WidgetbookCategory(
-          name: 'Navigation & Feedback',
-          isInitiallyExpanded: false,
-          children: [
-            accordionComponent,
-            accordionGroupComponent,
+            
+            // Navigation & Feedback
+            WidgetbookFolder(
+              name: 'Accordion',
+              children: [
+                accordionComponent,
+                accordionGroupComponent,
+              ],
+            ),
             statusBannerComponent,
             emptyStateComponent,
-            choiceChipComponent,
-            filterChipComponent,
-            inputChipComponent,
-            inputChipFieldComponent,
+            WidgetbookFolder(
+              name: 'Chips',
+              children: [
+                choiceChipComponent,
+                filterChipComponent,
+                inputChipComponent,
+                inputChipFieldComponent,
+              ],
+            ),
             paginationComponent,
-          ],
-        ),
-
-        // ── Data ──────────────────────────────────────────────────────────────
-        WidgetbookCategory(
-          name: 'Data',
-          isInitiallyExpanded: false,
-          children: [
+            
+            // Data
             stepperComponent,
             capsuleStepperComponent,
             resultRowComponent,
             socialLinkComponent,
-            socialLinkGroupComponent,
-            socialLinkListComponent,
+            WidgetbookFolder(
+              name: 'Social Links',
+              children: [
+                socialLinkGroupComponent,
+                socialLinkListComponent,
+              ],
+            ),
             journeyTimelineComponent,
             statusPipelineComponent,
             carouselComponent,
             slotGridComponent,
-          ],
-        ),
-
-        // ── Layout ─────────────────────────────────────────────────────────────
-        WidgetbookCategory(
-          name: 'Layout',
-          isInitiallyExpanded: false,
-          children: [
+            
+            // Layout
             appHeaderComponent,
-          ],
-        ),
-
-        // ── Overlay ────────────────────────────────────────────────────────────
-        WidgetbookCategory(
-          name: 'Overlay',
-          isInitiallyExpanded: false,
-          children: [
+            
+            // Overlay
             modalComponent,
             bottomSheetComponent,
             toastComponent,
-            tooltipComponent,
-            richTooltipComponent,
-          ],
-        ),
-
-        // ── Feedback ──────────────────────────────────────────────────────────
-        WidgetbookCategory(
-          name: 'Feedback',
-          isInitiallyExpanded: false,
-          children: [
-            feedbackFormComponent,
-            feedbackFormNpsComponent,
-            feedbackFormCsatComponent,
-          ],
-        ),
-
-        // ── Biometric ─────────────────────────────────────────────────────────
-        WidgetbookCategory(
-          name: 'Biometric',
-          isInitiallyExpanded: false,
-          children: [
+            WidgetbookFolder(
+              name: 'Tooltip',
+              children: [
+                tooltipComponent,
+                richTooltipComponent,
+              ],
+            ),
+            
+            // Feedback
+            WidgetbookFolder(
+              name: 'Feedback Form',
+              children: [
+                feedbackFormComponent,
+                feedbackFormNpsComponent,
+                feedbackFormCsatComponent,
+              ],
+            ),
+            
+            // Biometric
             biometricComponent,
-            identityConsentScreenComponent,
-            deviceCheckScreenComponent,
           ],
         ),
 
@@ -311,11 +296,16 @@ class _Ux4gWelcomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const onSurface = Color(0xFF111827);
-    const subtle = Color(0xFF6B7280);
+    final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
+    
+    // Explicitly define colors based on theme brightness to ensure they flip
+    final bg = isDark ? const Color(0xFF121212) : Colors.white;
+    final onSurface = isDark ? Colors.white : const Color(0xFF111827);
+    final subtle = isDark ? const Color(0xFF9CA3AF) : const Color(0xFF6B7280);
 
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: bg,
       body: Center(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(32),
@@ -342,10 +332,10 @@ class _Ux4gWelcomePage extends StatelessWidget {
                     borderRadius: BorderRadius.circular(100),
                     border: Border.all(color: _primary.withValues(alpha: 0.25)),
                   ),
-                  child: const Text(
+                  child: Text(
                     'v3.0 beta  ·  Flutter Component Library',
                     style: TextStyle(
-                      color: _primary,
+                      color: isDark ? const Color(0xFFA594FF) : _primary,
                       fontSize: 12,
                       fontWeight: FontWeight.w600,
                       letterSpacing: 0.3,
@@ -356,7 +346,7 @@ class _Ux4gWelcomePage extends StatelessWidget {
                 const SizedBox(height: 20),
 
                 // Headline
-                const Text(
+                Text(
                   'UX4G Design System',
                   textAlign: TextAlign.center,
                   style: TextStyle(
@@ -370,7 +360,7 @@ class _Ux4gWelcomePage extends StatelessWidget {
 
                 const SizedBox(height: 12),
 
-                const Text(
+                Text(
                   'Government-grade UI foundations for trusted public digital experiences.',
                   textAlign: TextAlign.center,
                   style: TextStyle(
@@ -441,16 +431,17 @@ class _Ux4gWelcomePage extends StatelessWidget {
                   width: double.infinity,
                   padding: const EdgeInsets.all(20),
                   decoration: BoxDecoration(
-                    color: _primary.withValues(alpha: 0.05),
+                    color: _primary.withValues(alpha: isDark ? 0.12 : 0.05),
                     borderRadius: BorderRadius.circular(12),
                     border: Border.all(color: _primary.withValues(alpha: 0.18)),
                   ),
                   child: Row(
                     children: [
-                      const Icon(Icons.arrow_back_rounded,
-                          color: _primary, size: 20),
+                      Icon(Icons.arrow_back_rounded,
+                          color: isDark ? const Color(0xFFA594FF) : _primary,
+                          size: 20),
                       const SizedBox(width: 14),
-                      const Expanded(
+                      Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -462,7 +453,7 @@ class _Ux4gWelcomePage extends StatelessWidget {
                                 fontSize: 14,
                               ),
                             ),
-                            SizedBox(height: 4),
+                            const SizedBox(height: 4),
                             Text(
                               'Select any component from the left sidebar. '
                               'Use the Preview, Code, and Props tabs to explore.',
@@ -479,9 +470,11 @@ class _Ux4gWelcomePage extends StatelessWidget {
                 const SizedBox(height: 32),
 
                 // Footer
-                const Text(
+                Text(
                   'UX4G Design System  ·  v3.0 beta  ·  ux4g.gov.in',
-                  style: TextStyle(color: Color(0xFF9CA3AF), fontSize: 12),
+                  style: TextStyle(
+                      color: isDark ? Colors.white38 : const Color(0xFF9CA3AF),
+                      fontSize: 12),
                 ),
 
                 const SizedBox(height: 16),
@@ -504,17 +497,19 @@ class _StatPill extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 7),
       decoration: BoxDecoration(
-        color: _primary.withValues(alpha: 0.07),
+        color: _primary.withValues(alpha: isDark ? 0.15 : 0.07),
         borderRadius: BorderRadius.circular(100),
-        border: Border.all(color: _primary.withValues(alpha: 0.2)),
+        border: Border.all(
+            color: _primary.withValues(alpha: isDark ? 0.35 : 0.2)),
       ),
       child: Text(
         label,
-        style: const TextStyle(
-          color: _primary,
+        style: TextStyle(
+          color: isDark ? const Color(0xFFA594FF) : _primary,
           fontSize: 13,
           fontWeight: FontWeight.w500,
         ),
@@ -537,19 +532,27 @@ class _FeatureCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final bg = isDark ? const Color(0xFF1E1E2E) : Colors.white;
+    final onSurface = isDark ? Colors.white : const Color(0xFF111827);
+    final subtle = isDark ? const Color(0xFF9CA3AF) : const Color(0xFF6B7280);
+    final border = isDark ? Colors.white12 : const Color(0xFFE5E7EB);
+
     return Container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: bg,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: const Color(0xFFE5E7EB)),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withValues(alpha: 0.04),
-            blurRadius: 8,
-            offset: const Offset(0, 2),
-          ),
-        ],
+        border: Border.all(color: border),
+        boxShadow: isDark
+            ? []
+            : [
+                BoxShadow(
+                  color: Colors.black.withValues(alpha: 0.04),
+                  blurRadius: 8,
+                  offset: const Offset(0, 2),
+                ),
+              ],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -557,16 +560,17 @@ class _FeatureCard extends StatelessWidget {
           Container(
             padding: const EdgeInsets.all(10),
             decoration: BoxDecoration(
-              color: _primary.withValues(alpha: 0.1),
+              color: _primary.withValues(alpha: isDark ? 0.2 : 0.1),
               borderRadius: BorderRadius.circular(8),
             ),
-            child: Icon(icon, color: _primary, size: 20),
+            child: Icon(icon,
+                color: isDark ? const Color(0xFFA594FF) : _primary, size: 20),
           ),
           const SizedBox(height: 12),
           Text(
             title,
-            style: const TextStyle(
-              color: Color(0xFF111827),
+            style: TextStyle(
+              color: onSurface,
               fontWeight: FontWeight.w600,
               fontSize: 14,
             ),
@@ -574,8 +578,8 @@ class _FeatureCard extends StatelessWidget {
           const SizedBox(height: 6),
           Text(
             description,
-            style: const TextStyle(
-              color: Color(0xFF6B7280),
+            style: TextStyle(
+              color: subtle,
               fontSize: 13,
               height: 1.55,
             ),

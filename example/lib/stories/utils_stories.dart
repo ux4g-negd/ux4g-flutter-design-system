@@ -712,6 +712,9 @@ class _DocPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const primary = Color(0xFF6A4EFF);
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final titleColor = isDark ? Colors.white : const Color(0xFF111827);
+
     return SingleChildScrollView(
       padding: const EdgeInsets.all(32),
       child: ConstrainedBox(
@@ -721,26 +724,26 @@ class _DocPage extends StatelessWidget {
           children: [
             Text(
               title,
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 26,
                 fontWeight: FontWeight.w800,
-                color: Color(0xFF111827),
+                color: titleColor,
                 letterSpacing: -0.5,
               ),
             ),
             const SizedBox(height: 8),
             Container(
-                height: 3,
-                width: 40,
-                decoration: BoxDecoration(
-                  color: primary,
-                  borderRadius: BorderRadius.circular(2),
-                ),
+              height: 3,
+              width: 40,
+              decoration: BoxDecoration(
+                color: primary,
+                borderRadius: BorderRadius.circular(2),
               ),
+            ),
             const SizedBox(height: 28),
-            ...sections.map((s) => _buildSection(s)),
+            ...sections.map((s) => _buildSection(context, s)),
             ...codeBlocks.map((c) => _buildCodeBlock(context, c)),
-            ...trailingSections.map((s) => _buildSection(s)),
+            ...trailingSections.map((s) => _buildSection(context, s)),
             ...trailingCodeBlocks.map((c) => _buildCodeBlock(context, c)),
           ],
         ),
@@ -748,7 +751,11 @@ class _DocPage extends StatelessWidget {
     );
   }
 
-  Widget _buildSection(_DocSection s) {
+  Widget _buildSection(BuildContext context, _DocSection s) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final headColor = isDark ? Colors.white : const Color(0xFF111827);
+    final bodyColor = isDark ? const Color(0xFF9CA3AF) : const Color(0xFF4B5563);
+
     return Padding(
       padding: const EdgeInsets.only(bottom: 24),
       child: Column(
@@ -756,18 +763,18 @@ class _DocPage extends StatelessWidget {
         children: [
           Text(
             s.heading,
-            style: const TextStyle(
+            style: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.w700,
-              color: Color(0xFF111827),
+              color: headColor,
             ),
           ),
           const SizedBox(height: 8),
           Text(
             s.body,
-            style: const TextStyle(
+            style: TextStyle(
               fontSize: 14,
-              color: Color(0xFF4B5563),
+              color: bodyColor,
               height: 1.65,
             ),
           ),
@@ -777,41 +784,58 @@ class _DocPage extends StatelessWidget {
   }
 
   Widget _buildCodeBlock(BuildContext context, _CodeBlock c) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final labelColor = isDark ? const Color(0xFF9CA3AF) : const Color(0xFF6B7280);
+    
+    // Theme-aware code block colors
+    final codeBg = isDark ? const Color(0xFF1E1E2E) : const Color(0xFFF3F4F6);
+    final codeText = isDark ? const Color(0xFFCDD6F4) : const Color(0xFF374151);
+    final border = isDark ? Colors.transparent : const Color(0xFFE5E7EB);
+
     return Padding(
       padding: const EdgeInsets.only(bottom: 24),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            c.label,
-            style: const TextStyle(
-              fontSize: 12,
-              fontWeight: FontWeight.w600,
-              color: Color(0xFF6B7280),
-              letterSpacing: 0.3,
+          if (c.label.isNotEmpty)
+            Padding(
+              padding: const EdgeInsets.only(bottom: 6),
+              child: Text(
+                c.label,
+                style: TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.w600,
+                  color: labelColor,
+                  letterSpacing: 0.3,
+                ),
+              ),
             ),
-          ),
-          const SizedBox(height: 6),
           Container(
             width: double.infinity,
-            padding: const EdgeInsets.all(16),
+            constraints: const BoxConstraints(minHeight: 52), // Room for button
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
             decoration: BoxDecoration(
-              color: const Color(0xFF1E1E2E),
+              color: codeBg,
               borderRadius: BorderRadius.circular(8),
+              border: Border.all(color: border),
             ),
             child: Stack(
+              clipBehavior: Clip.none, // Allow button to breathe if needed
               children: [
-                Text(
-                  c.code,
-                  style: const TextStyle(
-                    fontFamily: 'monospace',
-                    fontSize: 13,
-                    color: Color(0xFFCDD6F4),
-                    height: 1.6,
+                Padding(
+                  padding: const EdgeInsets.only(right: 60), // Space for button
+                  child: Text(
+                    c.code,
+                    style: TextStyle(
+                      fontFamily: 'monospace',
+                      fontSize: 13,
+                      color: codeText,
+                      height: 1.6,
+                    ),
                   ),
                 ),
                 Positioned(
-                  top: 0,
+                  top: -2, // Slight offset for better alignment
                   right: 0,
                   child: _CopyButton(text: c.code),
                 ),
@@ -837,6 +861,16 @@ class _CopyButtonState extends State<_CopyButton> {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    
+    // Theme-aware button colors for high visibility
+    final bg = isDark 
+        ? Colors.white.withValues(alpha: 0.1) 
+        : const Color(0xFFE5E7EB);
+    final textColor = isDark 
+        ? ( _copied ? const Color(0xFFA6E3A1) : const Color(0xFF89DCEB) )
+        : ( _copied ? const Color(0xFF059669) : const Color(0xFF2563EB) );
+
     return GestureDetector(
       onTap: () async {
         await Clipboard.setData(ClipboardData(text: widget.text));
@@ -845,18 +879,31 @@ class _CopyButtonState extends State<_CopyButton> {
         if (mounted) setState(() => _copied = false);
       },
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
         decoration: BoxDecoration(
-          color: Colors.white.withValues(alpha: 0.1),
-          borderRadius: BorderRadius.circular(4),
-        ),
-        child: Text(
-          _copied ? 'Copied!' : 'Copy',
-          style: TextStyle(
-            fontSize: 11,
-            color: _copied ? const Color(0xFFA6E3A1) : const Color(0xFF89DCEB),
-            fontWeight: FontWeight.w500,
+          color: bg,
+          borderRadius: BorderRadius.circular(6),
+          border: Border.all(
+            color: isDark ? Colors.white10 : Colors.black.withValues(alpha: 0.05),
           ),
+        ),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            if (_copied)
+              Padding(
+                padding: const EdgeInsets.only(right: 4),
+                child: Icon(Icons.check, size: 12, color: textColor),
+              ),
+            Text(
+              _copied ? 'Copied!' : 'Copy',
+              style: TextStyle(
+                fontSize: 11,
+                color: textColor,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+          ],
         ),
       ),
     );
@@ -962,6 +1009,9 @@ class _PaletteView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final labelColor = isDark ? Colors.white : const Color(0xFF111827);
+
     return Padding(
       padding: const EdgeInsets.all(24),
       child: Column(
@@ -969,10 +1019,10 @@ class _PaletteView extends StatelessWidget {
         children: [
           Text(
             label,
-            style: const TextStyle(
+            style: TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.w700,
-              color: Color(0xFF111827),
+              color: labelColor,
             ),
           ),
           const SizedBox(height: 12),
@@ -1000,14 +1050,14 @@ class _SwatchTileState extends State<_SwatchTile> {
   bool _copied = false;
 
   String _toHex(Color c) {
-    final r = c.r.toInt();
-    final g = c.g.toInt();
-    final b = c.b.toInt();
+    final r = (c.r * 255).toInt();
+    final g = (c.g * 255).toInt();
+    final b = (c.b * 255).toInt();
     return '#${r.toRadixString(16).padLeft(2, '0')}${g.toRadixString(16).padLeft(2, '0')}${b.toRadixString(16).padLeft(2, '0')}'.toUpperCase();
   }
 
   bool _isDark(Color c) =>
-      (c.r * 0.299 + c.g * 0.587 + c.b * 0.114) < 128;
+      (c.r * 0.299 + c.g * 0.587 + c.b * 0.114) < 0.5;
 
   @override
   Widget build(BuildContext context) {
@@ -1015,6 +1065,7 @@ class _SwatchTileState extends State<_SwatchTile> {
     final fg = _isDark(widget.swatch.color) ? Colors.white : Colors.black;
     final w = widget.compact ? 80.0 : 100.0;
     final h = widget.compact ? 64.0 : 80.0;
+    final isDarkTheme = Theme.of(context).brightness == Brightness.dark;
 
     return GestureDetector(
       onTap: () async {
@@ -1031,14 +1082,16 @@ class _SwatchTileState extends State<_SwatchTile> {
             borderRadius: BorderRadius.circular(8),
             border: widget.swatch.main
                 ? Border.all(color: const Color(0xFF6A4EFF), width: 2)
-                : Border.all(color: const Color(0xFFE5E7EB)),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withValues(alpha: 0.06),
-                blurRadius: 4,
-                offset: const Offset(0, 1),
-              ),
-            ],
+                : Border.all(color: isDarkTheme ? Colors.white12 : const Color(0xFFE5E7EB)),
+            boxShadow: isDarkTheme
+                ? []
+                : [
+                    BoxShadow(
+                      color: Colors.black.withValues(alpha: 0.06),
+                      blurRadius: 4,
+                      offset: const Offset(0, 1),
+                    ),
+                  ],
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -1058,27 +1111,27 @@ class _SwatchTileState extends State<_SwatchTile> {
               Container(
                 padding: const EdgeInsets.symmetric(
                     horizontal: 6, vertical: 6),
-                decoration: const BoxDecoration(
-                  color: Colors.white,
+                decoration: BoxDecoration(
+                  color: isDarkTheme ? const Color(0xFF1E1E2E) : Colors.white,
                   borderRadius:
-                      BorderRadius.vertical(bottom: Radius.circular(7)),
+                      const BorderRadius.vertical(bottom: Radius.circular(7)),
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                       widget.swatch.label,
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: 11,
                         fontWeight: FontWeight.w600,
-                        color: Color(0xFF111827),
+                        color: isDarkTheme ? Colors.white : const Color(0xFF111827),
                       ),
                     ),
                     Text(
                       hex,
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: 10,
-                        color: Color(0xFF6B7280),
+                        color: isDarkTheme ? Colors.white38 : const Color(0xFF6B7280),
                       ),
                     ),
                   ],
@@ -1101,15 +1154,16 @@ class _SectionHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
           title,
-          style: const TextStyle(
+          style: TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.w700,
-            color: Color(0xFF111827),
+            color: isDark ? Colors.white : const Color(0xFF111827),
           ),
         ),
         const SizedBox(height: 4),
@@ -1140,6 +1194,7 @@ class _SpacingRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     return Padding(
       padding: const EdgeInsets.only(bottom: 10),
       child: Row(
@@ -1148,10 +1203,10 @@ class _SpacingRow extends StatelessWidget {
             width: 160,
             child: Text(
               'Ux4gSpace.$token',
-              style: const TextStyle(
+              style: TextStyle(
                 fontFamily: 'monospace',
                 fontSize: 12,
-                color: Color(0xFF374151),
+                color: isDark ? Colors.white70 : const Color(0xFF374151),
               ),
             ),
           ),
@@ -1166,9 +1221,9 @@ class _SpacingRow extends StatelessWidget {
           const SizedBox(width: 10),
           Text(
             '${value.toStringAsFixed(0)}px',
-            style: const TextStyle(
+            style: TextStyle(
               fontSize: 12,
-              color: Color(0xFF6B7280),
+              color: isDark ? Colors.white38 : const Color(0xFF6B7280),
               fontWeight: FontWeight.w500,
             ),
           ),
@@ -1186,6 +1241,7 @@ class _RadiusCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final r = value.clamp(0, 40).toDouble();
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     return Column(
       children: [
         Container(
@@ -1201,15 +1257,17 @@ class _RadiusCard extends StatelessWidget {
         const SizedBox(height: 6),
         Text(
           token,
-          style: const TextStyle(
+          style: TextStyle(
             fontFamily: 'monospace',
             fontSize: 11,
-            color: Color(0xFF374151),
+            color: isDark ? Colors.white70 : const Color(0xFF374151),
           ),
         ),
         Text(
           '${value.toStringAsFixed(0)}px',
-          style: const TextStyle(fontSize: 11, color: Color(0xFF6B7280)),
+          style: TextStyle(
+              fontSize: 11,
+              color: isDark ? Colors.white38 : const Color(0xFF6B7280)),
         ),
       ],
     );
@@ -1223,6 +1281,7 @@ class _BorderWidthRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     return Padding(
       padding: const EdgeInsets.only(bottom: 16),
       child: Row(
@@ -1232,10 +1291,10 @@ class _BorderWidthRow extends StatelessWidget {
             width: 180,
             child: Text(
               'Ux4gBorderWidth.$token',
-              style: const TextStyle(
+              style: TextStyle(
                 fontFamily: 'monospace',
                 fontSize: 12,
-                color: Color(0xFF374151),
+                color: isDark ? Colors.white70 : const Color(0xFF374151),
               ),
             ),
           ),
@@ -1247,9 +1306,9 @@ class _BorderWidthRow extends StatelessWidget {
           const SizedBox(width: 12),
           Text(
             value == 0 ? 'none' : '${value.toStringAsFixed(0)}px',
-            style: const TextStyle(
+            style: TextStyle(
               fontSize: 12,
-              color: Color(0xFF6B7280),
+              color: isDark ? Colors.white38 : const Color(0xFF6B7280),
               fontWeight: FontWeight.w500,
             ),
           ),

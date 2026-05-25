@@ -40,9 +40,26 @@ class _ComponentDocsState extends State<ComponentDocs>
   void initState() {
     super.initState();
     _tab = TabController(
-      length: widget.code != null ? (widget.props.isNotEmpty ? 3 : 2) : 1,
+      length: _getTabCount(),
       vsync: this,
     );
+  }
+
+  @override
+  void didUpdateWidget(covariant ComponentDocs oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    final newCount = _getTabCount();
+    if (_tab.length != newCount) {
+      _tab.dispose();
+      _tab = TabController(length: newCount, vsync: this);
+    }
+  }
+
+  int _getTabCount() {
+    int count = 1; // Preview always exists
+    if (widget.code != null) count++;
+    if (widget.props.isNotEmpty) count++;
+    return count;
   }
 
   @override
