@@ -115,10 +115,10 @@ class _Ux4gTextAreaState extends State<Ux4gTextArea> {
     final onBackground = ux4gColors?.onBackground ?? materialTheme.colorScheme.onSurface;
     final errorColor = ux4gColors?.error ?? materialTheme.colorScheme.error;
 
-    final bM_default = ux4gTypography?.bM_default ?? materialTheme.textTheme.bodyMedium ?? const TextStyle(fontSize: 16);
-    final bM_strong = ux4gTypography?.bM_strong ?? materialTheme.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w700) ?? const TextStyle(fontWeight: FontWeight.w700, fontSize: 16);
-    final bXS_default = ux4gTypography?.bXS_default ?? materialTheme.textTheme.bodySmall ?? const TextStyle(fontSize: 12);
-    final bS_default = ux4gTypography?.bS_default ?? materialTheme.textTheme.bodySmall ?? const TextStyle(fontSize: 14);
+    final bmDefault = ux4gTypography?.bM_default ?? materialTheme.textTheme.bodyMedium ?? const TextStyle(fontSize: 16);
+    final bmStrong = ux4gTypography?.bM_strong ?? materialTheme.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w700) ?? const TextStyle(fontWeight: FontWeight.w700, fontSize: 16);
+    final bxsDefault = ux4gTypography?.bXS_default ?? materialTheme.textTheme.bodySmall ?? const TextStyle(fontSize: 12);
+    final bsDefault = ux4gTypography?.bS_default ?? materialTheme.textTheme.bodySmall ?? const TextStyle(fontSize: 14);
 
     final borderColor = _getBorderColor(materialTheme, ux4gColors);
     final bgColor = widget.enabled ? surface : onSurface.withValues(alpha: 0.05);
@@ -134,10 +134,10 @@ class _Ux4gTextAreaState extends State<Ux4gTextArea> {
         if (widget.label != null) ...[
           Row(
             children: [
-              Text(widget.label!, style: bM_strong.copyWith(color: labelColor)),
+              Text(widget.label!, style: bmStrong.copyWith(color: labelColor)),
               if (widget.required) ...[
                 const SizedBox(width: 4),
-                Text("*", style: bM_strong.copyWith(color: errorColor)),
+                Text("*", style: bmStrong.copyWith(color: errorColor)),
               ],
               if (widget.trailingIconLabel != null) ...[
                 const SizedBox(width: 4),
@@ -171,10 +171,10 @@ class _Ux4gTextAreaState extends State<Ux4gTextArea> {
                   readOnly: widget.readOnly,
                   maxLines: null,
                   maxLength: widget.maxLength,
-                  style: bM_default.copyWith(color: textColor),
+                  style: bmDefault.copyWith(color: textColor),
                   decoration: InputDecoration(
                     hintText: widget.placeholder,
-                    hintStyle: bM_default.copyWith(color: onSurface.withValues(alpha: 0.4)),
+                    hintStyle: bmDefault.copyWith(color: onSurface.withValues(alpha: 0.4)),
                     isDense: true,
                     border: InputBorder.none,
                     contentPadding: EdgeInsets.zero,
@@ -190,12 +190,12 @@ class _Ux4gTextAreaState extends State<Ux4gTextArea> {
                       if (widget.characterCountText != null)
                         Text(
                           widget.characterCountText!,
-                          style: bXS_default.copyWith(color: onSurface.withValues(alpha: 0.5)),
+                          style: bxsDefault.copyWith(color: onSurface.withValues(alpha: 0.5)),
                         ),
                       const SizedBox(width: 4),
                       Text(
                         "◢",
-                        style: bS_default.copyWith(
+                        style: bsDefault.copyWith(
                           color: onSurface.withValues(alpha: 0.4),
                         ),
                       ),
@@ -214,7 +214,7 @@ class _Ux4gTextAreaState extends State<Ux4gTextArea> {
                 Icon(_getStatusIcon() ?? Icons.info_outline, size: 14, color: captionColor),
                 const SizedBox(width: 6),
               ],
-              Text(widget.caption ?? "", style: bXS_default.copyWith(color: captionColor)),
+              Text(widget.caption ?? "", style: bxsDefault.copyWith(color: captionColor)),
             ],
           ),
         ],

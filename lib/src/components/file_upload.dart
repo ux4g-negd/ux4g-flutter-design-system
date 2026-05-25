@@ -228,8 +228,8 @@ class _Ux4gFileUploadState extends State<Ux4gFileUpload> {
     final onBackground = ux4gColors?.onBackground ?? materialTheme.colorScheme.onSurface;
     final onSurface = ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
 
-    final lM_strong = ux4gTypography?.lM_strong ?? materialTheme.textTheme.labelLarge?.copyWith(fontWeight: FontWeight.w700) ?? const TextStyle(fontWeight: FontWeight.w700, fontSize: 12);
-    final bS_default = ux4gTypography?.bS_default ?? materialTheme.textTheme.bodySmall ?? const TextStyle(fontSize: 14);
+    final lmStrong = ux4gTypography?.lM_strong ?? materialTheme.textTheme.labelLarge?.copyWith(fontWeight: FontWeight.w700) ?? const TextStyle(fontWeight: FontWeight.w700, fontSize: 12);
+    final bsDefault = ux4gTypography?.bS_default ?? materialTheme.textTheme.bodySmall ?? const TextStyle(fontSize: 14);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -269,7 +269,7 @@ class _Ux4gFileUploadState extends State<Ux4gFileUpload> {
                 // Header
                 Text(
                   'Upload Documents',
-                  style: lM_strong.copyWith(
+                  style: lmStrong.copyWith(
                     color: onBackground,
                     fontSize: 24,
                     fontWeight: FontWeight.w700,
@@ -281,7 +281,7 @@ class _Ux4gFileUploadState extends State<Ux4gFileUpload> {
                 // Description
                 Text(
                   'File type: PDF JPG PNG Max size: 5 MB',
-                  style: bS_default.copyWith(
+                  style: bsDefault.copyWith(
                     color: onSurface.withValues(alpha: 0.6),
                   ),
                   textAlign: TextAlign.center,
@@ -340,8 +340,8 @@ class _Ux4gFileUploadState extends State<Ux4gFileUpload> {
     final success = ux4gColors?.success ?? Colors.green;
     final onPrimary = ux4gColors?.onPrimary ?? materialTheme.colorScheme.onPrimary;
 
-    final tS_strong = ux4gTypography?.tS_strong ?? materialTheme.textTheme.titleSmall?.copyWith(fontWeight: FontWeight.w700) ?? const TextStyle(fontWeight: FontWeight.w700, fontSize: 14);
-    final bM_default = ux4gTypography?.bM_default ?? materialTheme.textTheme.bodyMedium ?? const TextStyle(fontSize: 16);
+    final tsStrong = ux4gTypography?.tS_strong ?? materialTheme.textTheme.titleSmall?.copyWith(fontWeight: FontWeight.w700) ?? const TextStyle(fontWeight: FontWeight.w700, fontSize: 14);
+    final bmDefault = ux4gTypography?.bM_default ?? materialTheme.textTheme.bodyMedium ?? const TextStyle(fontSize: 16);
 
     return Padding(
       padding: const EdgeInsets.only(bottom: 12),
@@ -369,7 +369,7 @@ class _Ux4gFileUploadState extends State<Ux4gFileUpload> {
                 children: [
                   Text(
                     file.name,
-                    style: tS_strong.copyWith(
+                    style: tsStrong.copyWith(
                       color: _getFileNameColor(file.status, ux4gColors, materialTheme),
                     ),
                     maxLines: 1,
@@ -378,7 +378,7 @@ class _Ux4gFileUploadState extends State<Ux4gFileUpload> {
                   if (file.status == UploadStatus.error)
                     Text(
                       file.errorMessage ?? 'Error',
-                      style: bM_default.copyWith(
+                      style: bmDefault.copyWith(
                         color: error,
                       ),
                       maxLines: 1,
@@ -403,7 +403,7 @@ class _Ux4gFileUploadState extends State<Ux4gFileUpload> {
             if (file.status == UploadStatus.uploading)
               Text(
                 '${(file.progress * 100).toStringAsFixed(0)}%',
-                style: tS_strong.copyWith(
+                style: tsStrong.copyWith(
                   color: onSurface.withValues(alpha: 0.5),
                 ),
               )
@@ -438,7 +438,7 @@ class _Ux4gFileUploadState extends State<Ux4gFileUpload> {
                     ),
                     Text(
                       'Retry',
-                      style: bM_default.copyWith(
+                      style: bmDefault.copyWith(
                         color: primary,
                       ),
                     ),

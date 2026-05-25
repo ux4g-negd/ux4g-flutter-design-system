@@ -43,6 +43,7 @@
 /// ```dart
 /// SvgPicture.asset(Ux4gIcons.customIconPath)
 /// ```
+library;
 
 class Ux4gCustomIcons {
   /// Path to custom SVG icons

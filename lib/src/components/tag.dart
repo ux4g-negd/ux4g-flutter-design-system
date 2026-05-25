@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import '../foundation/colors.dart';
 import '../foundation/typography.dart';
 import '../foundation/dimensions.dart';
-import '../theme/theme.dart';
 
 enum Ux4gTagSize { m, l }
 

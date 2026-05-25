@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import '../foundation/colors.dart';
 import '../foundation/typography.dart';
 import '../foundation/dimensions.dart';
-import '../theme/theme.dart';
 import 'buttons.dart';
 import 'card.dart';
 import 'divider.dart';

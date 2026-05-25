@@ -1,3 +1,13 @@
+## 0.2.0
+
+* Updated components and foundations to align with UX4G Android Compose.
+* Added specialized input fields: `AadhaarInputField`, `PanInputField`, `OtpInput`.
+* Added new UI components: `Accordion`, `Carousel`, `JourneyTimeline`, `StatusPipeline`, `SlotGrid`.
+* Added feedback forms: `CSAT`, `NPS`, and general feedback.
+* Added Biometric components.
+* Improved `Modal`, `BottomSheet`, and `DatePicker` components.
+* Updated documentation and README for better installation guidance.
+
 ## 0.0.1
 
 * Initial Flutter package setup for the UX4G design system.

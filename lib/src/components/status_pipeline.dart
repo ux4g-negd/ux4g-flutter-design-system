@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import '../foundation/colors.dart';
 import '../foundation/dimensions.dart';
 import '../foundation/typography.dart';
-import '../theme/theme.dart';
 
 // ─── Enums ──────────────────────────────────────────────────────────────────
 

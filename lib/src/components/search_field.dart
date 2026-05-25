@@ -164,7 +164,7 @@ class _Ux4gSearchFieldState extends State<Ux4gSearchField> {
     final ux4gTypography = materialTheme.extension<Ux4gTypography>();
 
     final onSurface = ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
-    final bM_default = ux4gTypography?.bM_default ?? materialTheme.textTheme.bodyMedium ?? const TextStyle(fontSize: 16);
+    final bmDefault = ux4gTypography?.bM_default ?? materialTheme.textTheme.bodyMedium ?? const TextStyle(fontSize: 16);
 
     return Container(
       constraints: const BoxConstraints(maxHeight: 300),
@@ -173,7 +173,7 @@ class _Ux4gSearchFieldState extends State<Ux4gSearchField> {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text("Searching for '${widget.value}'", style: bM_default.copyWith(color: onSurface)),
+          Text("Searching for '${widget.value}'", style: bmDefault.copyWith(color: onSurface)),
           const SizedBox(height: 16),
           if (widget.isLoading)
             const Center(
@@ -188,7 +188,7 @@ class _Ux4gSearchFieldState extends State<Ux4gSearchField> {
                 padding: const EdgeInsets.all(16.0),
                 child: Text(
                   "No results found",
-                  style: bM_default.copyWith(color: onSurface.withValues(alpha: 0.5)),
+                  style: bmDefault.copyWith(color: onSurface.withValues(alpha: 0.5)),
                 ),
               ),
             )
@@ -210,7 +210,7 @@ class _Ux4gSearchFieldState extends State<Ux4gSearchField> {
                       padding: const EdgeInsets.symmetric(vertical: 12),
                       child: Text(
                         option,
-                        style: bM_default.copyWith(color: onSurface.withValues(alpha: 0.8)),
+                        style: bmDefault.copyWith(color: onSurface.withValues(alpha: 0.8)),
                       ),
                     ),
                   );
@@ -233,9 +233,9 @@ class _Ux4gSearchFieldState extends State<Ux4gSearchField> {
     final primary = ux4gColors?.primary ?? materialTheme.colorScheme.primary;
     final onPrimary = ux4gColors?.onPrimary ?? materialTheme.colorScheme.onPrimary;
 
-    final bM_default = ux4gTypography?.bM_default ?? materialTheme.textTheme.bodyMedium ?? const TextStyle(fontSize: 16);
-    final bM_strong = ux4gTypography?.bM_strong ?? materialTheme.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w700) ?? const TextStyle(fontWeight: FontWeight.w700, fontSize: 16);
-    final bXS_default = ux4gTypography?.bXS_default ?? materialTheme.textTheme.bodySmall ?? const TextStyle(fontSize: 12);
+    final bmDefault = ux4gTypography?.bM_default ?? materialTheme.textTheme.bodyMedium ?? const TextStyle(fontSize: 16);
+    final bmStrong = ux4gTypography?.bM_strong ?? materialTheme.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w700) ?? const TextStyle(fontWeight: FontWeight.w700, fontSize: 16);
+    final bxsDefault = ux4gTypography?.bXS_default ?? materialTheme.textTheme.bodySmall ?? const TextStyle(fontSize: 12);
 
     final isSubmitVariant = widget.variant == Ux4gSearchFieldVariant.searchWithSubmit;
     final inputShape = isSubmitVariant
@@ -251,7 +251,7 @@ class _Ux4gSearchFieldState extends State<Ux4gSearchField> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         if (widget.label != null) ...[
-          Text(widget.label!, style: bM_strong.copyWith(color: _getLabelColor(materialTheme, ux4gColors))),
+          Text(widget.label!, style: bmStrong.copyWith(color: _getLabelColor(materialTheme, ux4gColors))),
           const SizedBox(height: 8),
         ],
         Row(
@@ -280,10 +280,10 @@ class _Ux4gSearchFieldState extends State<Ux4gSearchField> {
                           onSubmitted: widget.onSubmitClick,
                           enabled: widget.enabled,
                           readOnly: widget.readOnly,
-                          style: bM_default.copyWith(color: widget.enabled ? onSurface : onSurface.withValues(alpha: 0.4)),
+                          style: bmDefault.copyWith(color: widget.enabled ? onSurface : onSurface.withValues(alpha: 0.4)),
                           decoration: InputDecoration(
                             hintText: widget.placeholder,
-                            hintStyle: bM_default.copyWith(color: onSurface.withValues(alpha: 0.4)),
+                            hintStyle: bmDefault.copyWith(color: onSurface.withValues(alpha: 0.4)),
                             isDense: true,
                             border: InputBorder.none,
                             contentPadding: EdgeInsets.zero,
@@ -343,7 +343,7 @@ class _Ux4gSearchFieldState extends State<Ux4gSearchField> {
             children: [
               Icon(_getStatusIcon() ?? Icons.info_outline, size: 14, color: _getCaptionColor(materialTheme, ux4gColors)),
               const SizedBox(width: 6),
-              Text(widget.caption ?? "", style: bXS_default.copyWith(color: _getCaptionColor(materialTheme, ux4gColors))),
+              Text(widget.caption ?? "", style: bxsDefault.copyWith(color: _getCaptionColor(materialTheme, ux4gColors))),
             ],
           ),
         ],

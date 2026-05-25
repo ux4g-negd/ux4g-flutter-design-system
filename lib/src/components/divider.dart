@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../foundation/colors.dart';
-import '../theme/theme.dart';
 
 enum Ux4gDividerOrientation {
   horizontal,

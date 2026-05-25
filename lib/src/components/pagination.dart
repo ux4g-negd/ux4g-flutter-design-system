@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../foundation/colors.dart';
-import '../foundation/typography.dart';
 
 enum Ux4gPaginationVariant { defaultVariant, capsule }
 

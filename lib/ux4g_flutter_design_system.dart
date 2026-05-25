@@ -1,4 +1,4 @@
-library ux4g_flutter_design_system;
+library;
 
 export 'src/foundation/colors.dart';
 export 'src/foundation/typography.dart';

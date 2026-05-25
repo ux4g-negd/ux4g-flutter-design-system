@@ -134,8 +134,8 @@ class _Ux4gFeedbackFormState extends State<Ux4gFeedbackForm> {
     final onBackground = ux4gColors?.onBackground ?? materialTheme.colorScheme.onSurface;
     final primary = ux4gColors?.primary ?? materialTheme.colorScheme.primary;
 
-    final hL_strong = ux4gTypography?.hL_strong ?? materialTheme.textTheme.headlineLarge?.copyWith(fontWeight: FontWeight.w700) ?? const TextStyle(fontWeight: FontWeight.w700, fontSize: 28);
-    final bM_strong = ux4gTypography?.bM_strong ?? materialTheme.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w700) ?? const TextStyle(fontWeight: FontWeight.w700, fontSize: 16);
+    final hlStrong = ux4gTypography?.hL_strong ?? materialTheme.textTheme.headlineLarge?.copyWith(fontWeight: FontWeight.w700) ?? const TextStyle(fontWeight: FontWeight.w700, fontSize: 28);
+    final bmStrong = ux4gTypography?.bM_strong ?? materialTheme.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w700) ?? const TextStyle(fontWeight: FontWeight.w700, fontSize: 16);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -143,7 +143,7 @@ class _Ux4gFeedbackFormState extends State<Ux4gFeedbackForm> {
       children: [
         Text(
           widget.title,
-          style: widget.titleStyle ?? hL_strong.copyWith(color: onBackground, fontWeight: FontWeight.w700),
+          style: widget.titleStyle ?? hlStrong.copyWith(color: onBackground, fontWeight: FontWeight.w700),
         ),
         const SizedBox(height: 16),
         
@@ -177,7 +177,7 @@ class _Ux4gFeedbackFormState extends State<Ux4gFeedbackForm> {
         // Improvement Section
         Text(
           widget.improvementTitle,
-          style: widget.improvementTitleStyle ?? bM_strong.copyWith(color: onBackground),
+          style: widget.improvementTitleStyle ?? bmStrong.copyWith(color: onBackground),
         ),
         const SizedBox(height: 12),
         Wrap(
@@ -237,7 +237,7 @@ class _Ux4gFeedbackFormState extends State<Ux4gFeedbackForm> {
               ),
               child: Text(
                 widget.skipButtonText,
-                style: bM_strong.copyWith(color: onBackground),
+                style: bmStrong.copyWith(color: onBackground),
               ),
             ),
           ),
@@ -251,8 +251,8 @@ class _Ux4gFeedbackFormState extends State<Ux4gFeedbackForm> {
     final onBackground = ux4gColors?.onBackground ?? materialTheme.colorScheme.onSurface;
     final onSurface = ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
 
-    final hL_strong = ux4gTypography?.hL_strong ?? materialTheme.textTheme.headlineLarge?.copyWith(fontWeight: FontWeight.w700) ?? const TextStyle(fontWeight: FontWeight.w700, fontSize: 28);
-    final bM_default = ux4gTypography?.bM_default ?? materialTheme.textTheme.bodyMedium ?? const TextStyle(fontSize: 16);
+    final hlStrong = ux4gTypography?.hL_strong ?? materialTheme.textTheme.headlineLarge?.copyWith(fontWeight: FontWeight.w700) ?? const TextStyle(fontWeight: FontWeight.w700, fontSize: 28);
+    final bmDefault = ux4gTypography?.bM_default ?? materialTheme.textTheme.bodyMedium ?? const TextStyle(fontSize: 16);
 
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -276,13 +276,13 @@ class _Ux4gFeedbackFormState extends State<Ux4gFeedbackForm> {
               Text(
                 widget.successTitle,
                 textAlign: TextAlign.center,
-                style: widget.successTitleStyle ?? hL_strong.copyWith(color: onBackground, fontWeight: FontWeight.w700),
+                style: widget.successTitleStyle ?? hlStrong.copyWith(color: onBackground, fontWeight: FontWeight.w700),
               ),
               const SizedBox(height: 8),
               Text(
                 widget.successMessage,
                 textAlign: TextAlign.center,
-                style: widget.successMessageStyle ?? bM_default.copyWith(color: onSurface.withValues(alpha: 0.7)),
+                style: widget.successMessageStyle ?? bmDefault.copyWith(color: onSurface.withValues(alpha: 0.7)),
               ),
             ],
           ),

@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import '../foundation/colors.dart';
 import '../foundation/typography.dart';
 import '../foundation/dimensions.dart';
-import '../theme/theme.dart';
 import 'avatar.dart';
 
 /// Visual variant for [Ux4gAppHeader].
@@ -331,7 +330,7 @@ class _HeaderIconButton extends StatelessWidget {
     required this.color,
     this.onPressed,
     this.tooltip,
-    this.size = 24,
+    this.size = 24.0,
   });
 
   @override

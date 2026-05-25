@@ -10,22 +10,33 @@ Flutter package for the UX4G design system, with reusable foundations and UI com
 - navigation and progress: pagination, steppers
 - data display: card, badge, tag, chips, avatar, divider
 
-## Installation
+## Use this package as a library
 
-Add the package to `pubspec.yaml`:
+### Depend on it
+
+Run this command:
+
+With Flutter:
+
+```shell
+ $ flutter pub add ux4g_flutter_design_system
+```
+
+This will add a line like this to your package's pubspec.yaml (and run an implicit `flutter pub get`):
 
 ```yaml
 dependencies:
-  ux4g_flutter_design_system:
-    git:
-      url: https://github.com/ux4g-negd/ux4g-flutter-design-system.git
-      ref: main
+  ux4g_flutter_design_system: ^0.1.0
 ```
 
-Then run:
+Alternatively, your editor might support `flutter pub get`. Check the docs for your editor to learn more.
 
-```bash
-flutter pub get
+### Import it
+
+Now in your Dart code, you can use:
+
+```dart
+import 'package:ux4g_flutter_design_system/ux4g_flutter_design_system.dart';
 ```
 
 ## Basic usage

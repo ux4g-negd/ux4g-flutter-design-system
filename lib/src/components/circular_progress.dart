@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import '../foundation/colors.dart';
 import '../foundation/typography.dart';
 import '../foundation/dimensions.dart';
-import '../theme/theme.dart';
 
 enum Ux4gCircularProgressSize { xs, s, m, l, xl, xxl, xxxl }
 
@@ -254,7 +253,7 @@ class Ux4gCircularProgress extends StatelessWidget {
           ),
         if ((label != null || description != null) && footer != null)
           SizedBox(height: _scale(ringSize, 0.06, 4, 10)),
-        if (footer != null) footer!,
+        ?footer,
       ],
     );
 

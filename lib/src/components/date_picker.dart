@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import '../foundation/colors.dart';
 import '../foundation/typography.dart';
-import '../theme/theme.dart';
 import 'buttons.dart';
 
 /// Defines the mode for the date picker.

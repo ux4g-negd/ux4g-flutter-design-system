@@ -184,8 +184,9 @@ class Ux4gSlider extends StatelessWidget {
                   value: _formatValue(value),
                   onValueChange: (v) {
                     final val = double.tryParse(v);
-                    if (val != null && onValueChange != null)
+                    if (val != null && onValueChange != null) {
                       onValueChange!(val.clamp(min, max));
+                    }
                   },
                   size: Ux4gInputFieldSize.small,
                   postfixText: "%",

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import '../foundation/colors.dart';
 import '../foundation/typography.dart';
-import 'buttons.dart';
 
 enum Ux4gBannerVariant {
   warningLight,
@@ -123,7 +122,7 @@ class Ux4gStatusBanner extends StatelessWidget {
                                 color: textColor,
                               ),
                             ),
-                            if (badge != null) badge!,
+                            ?badge,
                           ],
                         ),
                         if (subtitle != null) ...[

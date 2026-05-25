@@ -116,9 +116,9 @@ class _Ux4gInputFieldState extends State<Ux4gInputField> {
     final onSurface = ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
     final error = ux4gColors?.error ?? materialTheme.colorScheme.error;
 
-    final bS_strong = ux4gTypography?.bS_strong ?? materialTheme.textTheme.bodySmall?.copyWith(fontWeight: FontWeight.w700) ?? const TextStyle(fontWeight: FontWeight.w700, fontSize: 14);
-    final bM_default = ux4gTypography?.bM_default ?? materialTheme.textTheme.bodyMedium ?? const TextStyle(fontSize: 16);
-    final bXS_default = ux4gTypography?.bXS_default ?? materialTheme.textTheme.bodySmall ?? const TextStyle(fontSize: 12);
+    final bsStrong = ux4gTypography?.bS_strong ?? materialTheme.textTheme.bodySmall?.copyWith(fontWeight: FontWeight.w700) ?? const TextStyle(fontWeight: FontWeight.w700, fontSize: 14);
+    final bmDefault = ux4gTypography?.bM_default ?? materialTheme.textTheme.bodyMedium ?? const TextStyle(fontSize: 16);
+    final bxsDefault = ux4gTypography?.bXS_default ?? materialTheme.textTheme.bodySmall ?? const TextStyle(fontSize: 12);
 
     final borderColor = _getBorderColor(materialTheme, ux4gColors);
     final bgColor = widget.enabled ? surface : onSurface.withValues(alpha: 0.05);
@@ -132,13 +132,13 @@ class _Ux4gInputFieldState extends State<Ux4gInputField> {
             children: [
               Text(
                 widget.label!,
-                style: bS_strong.copyWith(
+                style: bsStrong.copyWith(
                   color: widget.enabled ? _getLabelColor(materialTheme, ux4gColors) : onSurface.withValues(alpha: 0.4),
                 ),
               ),
               if (widget.required) ...[
                 const SizedBox(width: 4),
-                Text("*", style: bS_strong.copyWith(color: error)),
+                Text("*", style: bsStrong.copyWith(color: error)),
               ],
               if (widget.trailingIconLabel != null) ...[
                 const SizedBox(width: 4),
@@ -178,7 +178,7 @@ class _Ux4gInputFieldState extends State<Ux4gInputField> {
               if (widget.prefixText != null) ...[
                 Text(
                   widget.prefixText!,
-                  style: bM_default.copyWith(color: onSurface.withValues(alpha: 0.5)),
+                  style: bmDefault.copyWith(color: onSurface.withValues(alpha: 0.5)),
                 ),
                 const SizedBox(width: 4),
               ],
@@ -198,12 +198,12 @@ class _Ux4gInputFieldState extends State<Ux4gInputField> {
                   maxLength: widget.maxLength,
                   inputFormatters: widget.inputFormatters,
                   textAlign: widget.textAlign,
-                  style: bM_default.copyWith(
+                  style: bmDefault.copyWith(
                     color: widget.enabled ? onSurface : onSurface.withValues(alpha: 0.4),
                   ),
                   decoration: InputDecoration(
                     hintText: widget.placeholder,
-                    hintStyle: bM_default.copyWith(color: onSurface.withValues(alpha: 0.4)),
+                    hintStyle: bmDefault.copyWith(color: onSurface.withValues(alpha: 0.4)),
                     isDense: true,
                     contentPadding: EdgeInsets.zero,
                     border: InputBorder.none,
@@ -219,7 +219,7 @@ class _Ux4gInputFieldState extends State<Ux4gInputField> {
                 const SizedBox(width: 4),
                 Text(
                   widget.postfixText!,
-                  style: bM_default.copyWith(color: onSurface.withValues(alpha: 0.5)),
+                  style: bmDefault.copyWith(color: onSurface.withValues(alpha: 0.5)),
                 ),
               ],
 
@@ -270,7 +270,7 @@ class _Ux4gInputFieldState extends State<Ux4gInputField> {
               Expanded(
                 child: Text(
                   widget.caption ?? "",
-                  style: bXS_default.copyWith(color: _getStatusColor(materialTheme, ux4gColors)),
+                  style: bxsDefault.copyWith(color: _getStatusColor(materialTheme, ux4gColors)),
                 ),
               ),
             ],

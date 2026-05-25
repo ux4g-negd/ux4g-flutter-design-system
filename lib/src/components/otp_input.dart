@@ -77,8 +77,8 @@ class Ux4gOtpBox extends StatelessWidget {
     final primary = ux4gColors?.primary ?? materialTheme.colorScheme.primary;
     final onSurface = ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
 
-    final hS_strong = ux4gTypography?.hS_strong ?? materialTheme.textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.w700) ?? const TextStyle(fontWeight: FontWeight.w700, fontSize: 20);
-    final bM_default = ux4gTypography?.bM_default ?? materialTheme.textTheme.bodyMedium ?? const TextStyle(fontSize: 16);
+    final hsStrong = ux4gTypography?.hS_strong ?? materialTheme.textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.w700) ?? const TextStyle(fontWeight: FontWeight.w700, fontSize: 20);
+    final bmDefault = ux4gTypography?.bM_default ?? materialTheme.textTheme.bodyMedium ?? const TextStyle(fontSize: 16);
 
     final borderColor = _borderColor(materialTheme, ux4gColors);
     final bgColor = _bgColor(materialTheme, ux4gColors);
@@ -99,7 +99,7 @@ class Ux4gOtpBox extends StatelessWidget {
       child: value.isNotEmpty
           ? Text(
               obscure ? '•' : value,
-              style: hS_strong.copyWith(
+              style: hsStrong.copyWith(
                 color: status == Ux4gOtpBoxStatus.disabled
                     ? onSurface.withValues(alpha: 0.35)
                     : onSurface,
@@ -109,7 +109,7 @@ class Ux4gOtpBox extends StatelessWidget {
               ? _Cursor(color: primary)
               : Text(
                   '—',
-                  style: bM_default.copyWith(
+                  style: bmDefault.copyWith(
                     color: onSurface.withValues(alpha: 0.3),
                   ),
                 ),
@@ -225,8 +225,8 @@ class Ux4gOtpCaption extends StatelessWidget {
     final success = ux4gColors?.success ?? Colors.green;
     final warning = ux4gColors?.warning ?? Colors.orange;
 
-    final bXS_default = ux4gTypography?.bXS_default ?? materialTheme.textTheme.bodySmall ?? const TextStyle(fontSize: 12);
-    final bXS_strong = ux4gTypography?.bXS_strong ?? materialTheme.textTheme.bodySmall?.copyWith(fontWeight: FontWeight.w700) ?? const TextStyle(fontWeight: FontWeight.w700, fontSize: 12);
+    final bxsDefault = ux4gTypography?.bXS_default ?? materialTheme.textTheme.bodySmall ?? const TextStyle(fontSize: 12);
+    final bxsStrong = ux4gTypography?.bXS_strong ?? materialTheme.textTheme.bodySmall?.copyWith(fontWeight: FontWeight.w700) ?? const TextStyle(fontWeight: FontWeight.w700, fontSize: 12);
 
     switch (variant) {
       // "Didn't receive OTP?  Resend in 00:17"
@@ -234,12 +234,12 @@ class Ux4gOtpCaption extends StatelessWidget {
         return _inline(
           leading: _text(
             leadingText ?? "Didn't receive OTP?",
-            bXS_default.copyWith(
+            bxsDefault.copyWith(
                 color: onSurface.withValues(alpha: 0.6)),
           ),
           trailing: _text(
             trailingText ?? '',
-            bXS_default.copyWith(
+            bxsDefault.copyWith(
                 color: onSurface.withValues(alpha: 0.6)),
           ),
         );
@@ -249,14 +249,14 @@ class Ux4gOtpCaption extends StatelessWidget {
         return _inline(
           leading: _text(
             leadingText ?? "Didn't receive OTP?",
-            bXS_default.copyWith(
+            bxsDefault.copyWith(
                 color: onSurface.withValues(alpha: 0.6)),
           ),
           trailing: GestureDetector(
             onTap: onTrailingTap,
             child: _text(
               trailingText ?? 'Resend OTP',
-              bXS_strong.copyWith(color: primary),
+              bxsStrong.copyWith(color: primary),
             ),
           ),
         );
@@ -271,13 +271,13 @@ class Ux4gOtpCaption extends StatelessWidget {
               const SizedBox(width: 4),
               _text(
                 leadingText ?? '',
-                bXS_strong.copyWith(color: error),
+                bxsStrong.copyWith(color: error),
               ),
             ],
           ),
           trailing: _text(
             trailingText ?? '',
-            bXS_default.copyWith(
+            bxsDefault.copyWith(
                 color: onSurface.withValues(alpha: 0.6)),
           ),
         );
@@ -293,7 +293,7 @@ class Ux4gOtpCaption extends StatelessWidget {
               const SizedBox(width: 4),
               _text(
                 leadingText ?? '',
-                bXS_default.copyWith(
+                bxsDefault.copyWith(
                     color: onSurface.withValues(alpha: 0.6)),
               ),
             ],
@@ -302,7 +302,7 @@ class Ux4gOtpCaption extends StatelessWidget {
             onTap: onTrailingTap,
             child: _text(
               trailingText ?? 'Resend OTP',
-              bXS_default.copyWith(
+              bxsDefault.copyWith(
                   color: onSurface.withValues(alpha: 0.6)),
             ),
           ),
@@ -317,7 +317,7 @@ class Ux4gOtpCaption extends StatelessWidget {
             const SizedBox(width: 6),
             _text(
               caption ?? 'Verification successful',
-              bXS_strong.copyWith(color: success),
+              bxsStrong.copyWith(color: success),
             ),
           ],
         );
@@ -332,7 +332,7 @@ class Ux4gOtpCaption extends StatelessWidget {
             const SizedBox(width: 6),
             _text(
               caption ?? 'Warning message',
-              bXS_default.copyWith(color: warning),
+              bxsDefault.copyWith(color: warning),
             ),
           ],
         );
@@ -341,7 +341,7 @@ class Ux4gOtpCaption extends StatelessWidget {
       case Ux4gOtpCaptionVariant.plain:
         return _text(
           caption ?? '',
-          bXS_default.copyWith(
+          bxsDefault.copyWith(
               color: onSurface.withValues(alpha: 0.6)),
         );
     }
@@ -645,8 +645,8 @@ class _Ux4gOtpInputState extends State<Ux4gOtpInput> {
     final onSurface = ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
     final error = ux4gColors?.error ?? materialTheme.colorScheme.error;
 
-    final bS_strong = ux4gTypography?.bS_strong ?? materialTheme.textTheme.bodySmall?.copyWith(fontWeight: FontWeight.w700) ?? const TextStyle(fontWeight: FontWeight.w700, fontSize: 14);
-    final bM_default = ux4gTypography?.bM_default ?? materialTheme.textTheme.bodyMedium ?? const TextStyle(fontSize: 16);
+    final bsStrong = ux4gTypography?.bS_strong ?? materialTheme.textTheme.bodySmall?.copyWith(fontWeight: FontWeight.w700) ?? const TextStyle(fontWeight: FontWeight.w700, fontSize: 14);
+    final bmDefault = ux4gTypography?.bM_default ?? materialTheme.textTheme.bodyMedium ?? const TextStyle(fontSize: 16);
 
     // Resolve effective caption variant
     Ux4gOtpCaptionVariant? effectiveVariant = widget.captionVariant;
@@ -676,7 +676,7 @@ class _Ux4gOtpInputState extends State<Ux4gOtpInput> {
             children: [
               Text(
                 widget.label!,
-                style: bS_strong.copyWith(
+                style: bsStrong.copyWith(
                   color: widget.enabled
                       ? onSurface
                       : onSurface.withValues(alpha: 0.4),
@@ -684,7 +684,7 @@ class _Ux4gOtpInputState extends State<Ux4gOtpInput> {
               ),
               if (widget.required)
                 Text('*',
-                    style: bS_strong
+                    style: bsStrong
                         .copyWith(color: error)),
               if (widget.labelTrailingIcon != null)
                 Icon(widget.labelTrailingIcon,
@@ -711,7 +711,7 @@ class _Ux4gOtpInputState extends State<Ux4gOtpInput> {
                       child: widget.showSeparator
                           ? Text(
                               '–',
-                              style: bM_default.copyWith(
+                              style: bmDefault.copyWith(
                                 color: onSurface.withValues(alpha: 0.35),
                               ),
                             )

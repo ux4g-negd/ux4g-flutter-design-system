@@ -124,9 +124,9 @@ class _Ux4gFeedbackFormNpsState extends State<Ux4gFeedbackFormNps> {
     final onSurface = ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
     final onBackground = ux4gColors?.onBackground ?? materialTheme.colorScheme.onSurface;
 
-    final hM_strong = ux4gTypography?.hM_strong ?? materialTheme.textTheme.headlineMedium?.copyWith(fontWeight: FontWeight.w700) ?? const TextStyle(fontWeight: FontWeight.w700, fontSize: 24);
-    final bM_strong = ux4gTypography?.bM_strong ?? materialTheme.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w700) ?? const TextStyle(fontWeight: FontWeight.w700, fontSize: 16);
-    final bXS_default = ux4gTypography?.bXS_default ?? materialTheme.textTheme.bodySmall ?? const TextStyle(fontSize: 12);
+    final hmStrong = ux4gTypography?.hM_strong ?? materialTheme.textTheme.headlineMedium?.copyWith(fontWeight: FontWeight.w700) ?? const TextStyle(fontWeight: FontWeight.w700, fontSize: 24);
+    final bmStrong = ux4gTypography?.bM_strong ?? materialTheme.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w700) ?? const TextStyle(fontWeight: FontWeight.w700, fontSize: 16);
+    final bxsDefault = ux4gTypography?.bXS_default ?? materialTheme.textTheme.bodySmall ?? const TextStyle(fontSize: 12);
 
     final highlightBg = widget.selectedScoreBackgroundColor ?? success.withValues(alpha: 0.12);
     final highlightText = widget.selectedScoreTextColor ?? success;
@@ -138,7 +138,7 @@ class _Ux4gFeedbackFormNpsState extends State<Ux4gFeedbackFormNps> {
         Text(
           widget.title,
           textAlign: TextAlign.center,
-          style: widget.titleStyle ?? hM_strong.copyWith(color: onBackground, fontWeight: FontWeight.w700),
+          style: widget.titleStyle ?? hmStrong.copyWith(color: onBackground, fontWeight: FontWeight.w700),
         ),
         const SizedBox(height: 24),
         
@@ -168,7 +168,7 @@ class _Ux4gFeedbackFormNpsState extends State<Ux4gFeedbackFormNps> {
                 ),
                 child: Text(
                   '$index',
-                  style: bM_strong.copyWith(
+                  style: bmStrong.copyWith(
                     color: isHighlighted ? highlightText : onBackground,
                   ),
                 ),
@@ -184,11 +184,11 @@ class _Ux4gFeedbackFormNpsState extends State<Ux4gFeedbackFormNps> {
           children: [
             Text(
               widget.unlikelyLabel,
-              style: bXS_default.copyWith(color: onSurface.withValues(alpha: 0.6)),
+              style: bxsDefault.copyWith(color: onSurface.withValues(alpha: 0.6)),
             ),
             Text(
               widget.likelyLabel,
-              style: bXS_default.copyWith(color: onSurface.withValues(alpha: 0.6)),
+              style: bxsDefault.copyWith(color: onSurface.withValues(alpha: 0.6)),
             ),
           ],
         ),
@@ -228,7 +228,7 @@ class _Ux4gFeedbackFormNpsState extends State<Ux4gFeedbackFormNps> {
             ),
             child: Text(
               widget.skipButtonText,
-              style: bM_strong.copyWith(color: onBackground),
+              style: bmStrong.copyWith(color: onBackground),
             ),
           ),
         ],
@@ -241,8 +241,8 @@ class _Ux4gFeedbackFormNpsState extends State<Ux4gFeedbackFormNps> {
     final onBackground = ux4gColors?.onBackground ?? materialTheme.colorScheme.onSurface;
     final onSurface = ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
 
-    final hL_strong = ux4gTypography?.hL_strong ?? materialTheme.textTheme.headlineLarge?.copyWith(fontWeight: FontWeight.w700) ?? const TextStyle(fontWeight: FontWeight.w700, fontSize: 28);
-    final bM_default = ux4gTypography?.bM_default ?? materialTheme.textTheme.bodyMedium ?? const TextStyle(fontSize: 16);
+    final hlStrong = ux4gTypography?.hL_strong ?? materialTheme.textTheme.headlineLarge?.copyWith(fontWeight: FontWeight.w700) ?? const TextStyle(fontWeight: FontWeight.w700, fontSize: 28);
+    final bmDefault = ux4gTypography?.bM_default ?? materialTheme.textTheme.bodyMedium ?? const TextStyle(fontSize: 16);
 
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -266,13 +266,13 @@ class _Ux4gFeedbackFormNpsState extends State<Ux4gFeedbackFormNps> {
               Text(
                 widget.successTitle,
                 textAlign: TextAlign.center,
-                style: widget.successTitleStyle ?? hL_strong.copyWith(color: onBackground, fontWeight: FontWeight.w700),
+                style: widget.successTitleStyle ?? hlStrong.copyWith(color: onBackground, fontWeight: FontWeight.w700),
               ),
               const SizedBox(height: 8),
               Text(
                 widget.successMessage,
                 textAlign: TextAlign.center,
-                style: widget.successMessageStyle ?? bM_default.copyWith(color: onSurface.withValues(alpha: 0.7)),
+                style: widget.successMessageStyle ?? bmDefault.copyWith(color: onSurface.withValues(alpha: 0.7)),
               ),
             ],
           ),
