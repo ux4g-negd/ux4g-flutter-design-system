@@ -17,17 +17,12 @@ final signInDefaultComponent = WidgetbookComponent(
     WidgetbookUseCase(
       name: 'Default',
       builder: (context) {
-        return StatefulBuilder(
-          builder: (context, setState) {
-            String username = '';
-            String password = '';
-
-            return ComponentDocs(
-              name: 'Sign in to your account',
-              description:
-                  'A government-grade sign-in pattern with username/password '
-                  'authentication and Aadhaar options. Mobile-sized layout (360px).',
-              code: '''// Mobile-sized sign-in screen (360 x 760)
+        return ComponentDocs(
+          name: 'Sign in to your account',
+          description:
+              'A government-grade sign-in pattern with username/password '
+              'authentication and Aadhaar options. Mobile-sized layout (360px).',
+          code: '''// Mobile-sized sign-in screen (360 x 760)
 Container(
   width: 360,
   decoration: BoxDecoration(color: Colors.white),
@@ -64,6 +59,11 @@ Container(
               onValueChange: (v) => setState(() => username = v),
               label: 'Username',
               placeholder: 'Enter your username',
+              placeholderStyle: TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.w400,
+                color: Color(0xFF9CA3AF),
+              ),
             ),
             SizedBox(height: 16),
 
@@ -72,6 +72,11 @@ Container(
               onValueChange: (v) => setState(() => password = v),
               label: 'Password',
               placeholder: '...........',
+              placeholderStyle: TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.w400,
+                color: Color(0xFF9CA3AF),
+              ),
               type: Ux4gInputFieldType.password,
             ),
             SizedBox(height: 16),
@@ -140,15 +145,8 @@ Container(
     ],
   ),
 )''',
-              center: true,
-              child: _SignInMobileMockup(
-                username: username,
-                onUsernameChange: (v) => setState(() => username = v),
-                password: password,
-                onPasswordChange: (v) => setState(() => password = v),
-              ),
-            );
-          },
+          center: true,
+          child: const _SignInMobileMockup(),
         );
       },
     ),
@@ -157,19 +155,18 @@ Container(
 
 /// ─────────────────────────────────────────────────────────────────────
 /// Mobile-sized mockup (360 x 760) — matches the reference design exactly.
+/// Stateful so users can actually type into the inputs.
 /// ─────────────────────────────────────────────────────────────────────
-class _SignInMobileMockup extends StatelessWidget {
-  const _SignInMobileMockup({
-    required this.username,
-    required this.onUsernameChange,
-    required this.password,
-    required this.onPasswordChange,
-  });
+class _SignInMobileMockup extends StatefulWidget {
+  const _SignInMobileMockup();
 
-  final String username;
-  final ValueChanged<String> onUsernameChange;
-  final String password;
-  final ValueChanged<String> onPasswordChange;
+  @override
+  State<_SignInMobileMockup> createState() => _SignInMobileMockupState();
+}
+
+class _SignInMobileMockupState extends State<_SignInMobileMockup> {
+  String _username = '';
+  String _password = '';
 
   // ── Colors from the reference design ──
   static const _bg = Color(0xFFFAFAFA);
@@ -177,6 +174,14 @@ class _SignInMobileMockup extends StatelessWidget {
   static const _titleColor = Color(0xFF111827);
   static const _subtleText = Color(0xFF6B7280);
   static const _mutedText = Color(0xFF9CA3AF);
+
+  // Placeholder style matching the reference design (14px regular, gray).
+  static const _placeholderStyle = TextStyle(
+    fontSize: 14,
+    fontWeight: FontWeight.w400,
+    color: Color(0xFF9CA3AF),
+    height: 1.3,
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -227,101 +232,160 @@ class _SignInMobileMockup extends StatelessWidget {
                   const Text(
                     'Sign in to your account',
                     style: TextStyle(
-                      fontSize: 22,
+                      fontSize: 24,
                       fontWeight: FontWeight.w800,
                       color: _titleColor,
                       height: 1.2,
+                      letterSpacing: -0.3,
                     ),
                   ),
-                  const SizedBox(height: 4),
+                  const SizedBox(height: 6),
                   const Text(
                     'Access your government services securely',
-                    style: TextStyle(fontSize: 13, color: _subtleText),
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: _subtleText,
+                      height: 1.3,
+                    ),
                   ),
                   const SizedBox(height: 24),
 
                   // ── Username ──
                   Ux4gInputField(
-                    value: username,
-                    onValueChange: onUsernameChange,
+                    value: _username,
+                    onValueChange: (v) => setState(() => _username = v),
                     label: 'Username',
                     placeholder: 'Enter your username',
+                    placeholderStyle: _placeholderStyle,
                   ),
                   const SizedBox(height: 16),
 
                   // ── Password ──
                   Ux4gInputField(
-                    value: password,
-                    onValueChange: onPasswordChange,
+                    value: _password,
+                    onValueChange: (v) => setState(() => _password = v),
                     label: 'Password',
                     placeholder: '...........',
+                    placeholderStyle: _placeholderStyle,
                     type: Ux4gInputFieldType.password,
                   ),
                   const SizedBox(height: 16),
 
-                  // ── Status Banner ──
-                  Ux4gStatusBanner(
-                    variant: Ux4gBannerVariant.errorLight,
-                    title: 'Username not found.',
-                    subtitle: 'Take action',
-                    leadingIcon: const Icon(
-                      Icons.error_outline,
-                      color: Colors.red,
-                      size: 20,
+                  // ── Status Banner (inline custom container to match
+                  // the reference design exactly; the shipped
+                  // Ux4gStatusBanner has a hardcoded 16px outer margin
+                  // that breaks alignment with the inputs above) ──
+                  Container(
+                    width: double.infinity,
+                    padding: const EdgeInsets.fromLTRB(12, 12, 10, 12),
+                    decoration: BoxDecoration(
+                      color: const Color(0xFFFEF2F2),
+                      borderRadius: BorderRadius.circular(8),
+                      border: Border.all(color: const Color(0xFFFECACA)),
                     ),
-                    trailingIcon: Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 8,
-                        vertical: 2,
-                      ),
-                      decoration: BoxDecoration(
-                        color: Colors.red.withValues(alpha: 0.08),
-                        borderRadius: BorderRadius.circular(4),
-                      ),
-                      child: const Text(
-                        'Attempt 1 of 5',
-                        style: TextStyle(
-                          fontSize: 12,
-                          color: Colors.red,
-                          fontWeight: FontWeight.w500,
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Padding(
+                          padding: EdgeInsets.only(top: 1),
+                          child: Icon(
+                            Icons.error_outline,
+                            color: Color(0xFFDC2626),
+                            size: 20,
+                          ),
                         ),
-                      ),
+                        const SizedBox(width: 10),
+                        const Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text(
+                                'Username not found.',
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w400,
+                                  color: Color(0xFF991B1B),
+                                  height: 1.3,
+                                ),
+                              ),
+                              SizedBox(height: 4),
+                              Text(
+                                'Take action',
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w700,
+                                  color: Color(0xFF991B1B),
+                                  height: 1.3,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        const SizedBox(width: 8),
+                        Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 10,
+                            vertical: 5,
+                          ),
+                          decoration: BoxDecoration(
+                            color: const Color(0xFFFEE2E2),
+                            borderRadius: BorderRadius.circular(6),
+                          ),
+                          child: const Text(
+                            'Attempt 1 of 5',
+                            style: TextStyle(
+                              fontSize: 12,
+                              color: Color(0xFF991B1B),
+                              fontWeight: FontWeight.w500,
+                              height: 1.2,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                  const SizedBox(height: 16),
+                  const SizedBox(height: 20),
 
                   // ── Send OTP ──
                   Ux4gButton(
                     text: 'Send OTP',
                     onPressed: () {},
+                    size: Ux4gButtonSize.large,
                     width: double.infinity,
                   ),
-                  const SizedBox(height: 12),
+                  const SizedBox(height: 16),
 
                   // ── OR divider ──
                   Row(
                     children: const [
-                      Expanded(child: Divider(color: _border)),
+                      Expanded(child: Divider(color: _border, thickness: 1)),
                       Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 12),
+                        padding: EdgeInsets.symmetric(horizontal: 16),
                         child: Text(
                           'OR',
-                          style: TextStyle(fontSize: 12, color: _mutedText),
+                          style: TextStyle(
+                            fontSize: 12,
+                            color: _mutedText,
+                            fontWeight: FontWeight.w500,
+                            letterSpacing: 0.5,
+                          ),
                         ),
                       ),
-                      Expanded(child: Divider(color: _border)),
+                      Expanded(child: Divider(color: _border, thickness: 1)),
                     ],
                   ),
-                  const SizedBox(height: 12),
+                  const SizedBox(height: 16),
 
                   // ── Sign in with Aadhaar ──
                   Ux4gButton(
                     text: 'Sign in with Aadhaar',
                     onPressed: () {},
                     variant: Ux4gButtonVariant.outline,
+                    size: Ux4gButtonSize.large,
                     width: double.infinity,
                   ),
-                  const SizedBox(height: 24),
+                  const SizedBox(height: 28),
 
                   // ── Register link ──
                   Center(
