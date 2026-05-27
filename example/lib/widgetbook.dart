@@ -17,6 +17,7 @@ import 'stories/navigation_stories.dart';
 import 'stories/overlay_stories.dart';
 import 'stories/biometric_stories.dart';
 import 'stories/progress_stories.dart';
+import 'stories/pattern_stories.dart';
 
 void main() {
   runApp(const UX4GWidgetbook());
@@ -181,6 +182,27 @@ class UX4GWidgetbook extends StatelessWidget {
                 dimensionsSpacingComponent,
                 dimensionsRadiusComponent,
                 dimensionsBorderComponent,
+              ],
+            ),
+          ],
+        ),
+
+        // ── Patterns ───────────────────────────────────────────────────────
+        WidgetbookCategory(
+          name: 'Patterns',
+          isInitiallyExpanded: true,
+          children: [
+            WidgetbookFolder(
+              name: 'Identity and Access',
+              children: [
+                WidgetbookFolder(
+                  name: 'SignIn',
+                  children: [
+                    signInDefaultComponent,
+                    // Add more SignIn variants here
+                    // e.g. signInOtpComponent, signInBiometricComponent
+                  ],
+                ),
               ],
             ),
           ],

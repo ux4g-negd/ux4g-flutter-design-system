@@ -198,7 +198,7 @@ final statusBannerComponent = WidgetbookComponent(
       name: 'All variants',
       builder: (context) => ComponentDocs(
         name: 'Ux4gStatusBanner',
-        description: 'Notification banners with semantic colour variants: warning, error, success, and saving.',
+        description: 'Notification banners with semantic colour variants including light and solid options.',
         code: '''Ux4gStatusBanner(
   variant: Ux4gBannerVariant.successLight,
   title: 'Operation successful',
@@ -206,9 +206,11 @@ final statusBannerComponent = WidgetbookComponent(
   onDismiss: () {},
 );''',
         props: const [
-          PropRow(name: 'variant', type: 'Ux4gBannerVariant', description: 'warningLight / warningSolid / errorLight / successLight / savingLight.', required: true),
+          PropRow(name: 'variant', type: 'Ux4gBannerVariant', description: 'warningLight / warningSolid / errorLight / successLight / savingLight / infoLight / neutralLight / primaryLight.', required: true),
           PropRow(name: 'title', type: 'String', description: 'Banner heading.', required: true),
           PropRow(name: 'subtitle', type: 'String?', description: 'Supporting text.'),
+          PropRow(name: 'titleStyle', type: 'TextStyle?', description: 'Custom style for title.'),
+          PropRow(name: 'subtitleStyle', type: 'TextStyle?', description: 'Custom style for subtitle.'),
           PropRow(name: 'badge', type: 'Widget?', description: 'Small badge shown next to title.'),
           PropRow(name: 'leadingIcon', type: 'Widget?', description: 'Custom icon on the left.'),
           PropRow(name: 'trailingIcon', type: 'Widget?', description: 'Custom icon on the right.'),
@@ -225,6 +227,48 @@ final statusBannerComponent = WidgetbookComponent(
                       child: Ux4gStatusBanner(variant: v, title: v.name, subtitle: 'Supporting subtitle text'),
                     ))
                 .toList(),
+          ),
+        ),
+      ),
+    ),
+    WidgetbookUseCase(
+      name: 'Custom styling',
+      builder: (context) => ComponentDocs(
+        name: 'Ux4gStatusBanner — Custom Styling',
+        description: 'You can override the title and subtitle styles, including size, weight, and color.',
+        code: '''Ux4gStatusBanner(
+  variant: Ux4gBannerVariant.infoLight,
+  title: 'Custom Title',
+  titleStyle: TextStyle(fontSize: 18, fontWeight: FontWeight.w900, color: Colors.blue.shade900),
+  subtitle: 'Custom subtitle styling example.',
+  subtitleStyle: TextStyle(fontSize: 12, fontStyle: FontStyle.italic, color: Colors.black54),
+);''',
+        child: SizedBox(
+          width: 380,
+          child: Ux4gStatusBanner(
+            variant: Ux4gBannerVariant.infoLight,
+            title: 'Custom Styled Banner',
+            titleStyle: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.w900,
+              color: Colors.blue.shade900,
+              letterSpacing: 1.1,
+            ),
+            subtitle: 'This subtitle has custom styling applied directly.',
+            subtitleStyle: const TextStyle(
+              fontSize: 12,
+              fontStyle: FontStyle.italic,
+              color: Colors.black54,
+            ),
+            leadingIcon: const Icon(Icons.info_outline, color: Colors.blue),
+            trailingIcon: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+              decoration: BoxDecoration(
+                color: Colors.blue.withValues(alpha: 0.1),
+                borderRadius: BorderRadius.circular(4),
+              ),
+              child: const Text('New', style: TextStyle(fontSize: 12, color: Colors.blue)),
+            ),
           ),
         ),
       ),

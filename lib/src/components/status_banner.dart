@@ -9,6 +9,9 @@ enum Ux4gBannerVariant {
   errorLight,
   successLight,
   savingLight,
+  infoLight,
+  neutralLight,
+  primaryLight,
 }
 
 class Ux4gStatusBanner extends StatelessWidget {
@@ -17,6 +20,8 @@ class Ux4gStatusBanner extends StatelessWidget {
   final Widget? trailingIcon;
   final String title;
   final String? subtitle;
+  final TextStyle? titleStyle;
+  final TextStyle? subtitleStyle;
   final Widget? badge;
   final List<Widget>? actions;
   final VoidCallback? onDismiss;
@@ -26,6 +31,8 @@ class Ux4gStatusBanner extends StatelessWidget {
     required this.variant,
     required this.title,
     this.subtitle,
+    this.titleStyle,
+    this.subtitleStyle,
     this.badge,
     this.leadingIcon,
     this.trailingIcon,
@@ -46,6 +53,7 @@ class Ux4gStatusBanner extends StatelessWidget {
     final error = ux4gColors?.error ?? materialTheme.colorScheme.error;
     final success = ux4gColors?.success ?? materialTheme.colorScheme.primary;
     final primary = ux4gColors?.primary ?? materialTheme.colorScheme.primary;
+    final info = ux4gColors?.info ?? materialTheme.colorScheme.secondary;
     final onBackground = ux4gColors?.onBackground ?? materialTheme.colorScheme.onSurface;
 
     final bMStrong = ux4gTypography?.bM_strong ?? materialTheme.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold) ?? const TextStyle();
@@ -53,26 +61,41 @@ class Ux4gStatusBanner extends StatelessWidget {
 
     // Determine colors based on variant
     Color backgroundColor;
+    Color borderColor;
     Color textColor = onSurface;
     Color subtitleColor = onSurface.withValues(alpha: 0.6);
 
     switch (variant) {
       case Ux4gBannerVariant.warningLight:
         backgroundColor = Color.lerp(surface, warning, 0.12)!;
+        borderColor = warning.withValues(alpha: 0.3);
         break;
       case Ux4gBannerVariant.warningSolid:
         backgroundColor = warning;
+        borderColor = warning;
         textColor = onWarning;
         subtitleColor = onWarning.withValues(alpha: 0.7);
         break;
       case Ux4gBannerVariant.errorLight:
         backgroundColor = Color.lerp(surface, error, 0.12)!;
+        borderColor = error.withValues(alpha: 0.3);
         break;
       case Ux4gBannerVariant.successLight:
         backgroundColor = Color.lerp(surface, success, 0.12)!;
+        borderColor = success.withValues(alpha: 0.3);
         break;
       case Ux4gBannerVariant.savingLight:
+      case Ux4gBannerVariant.primaryLight:
         backgroundColor = Color.lerp(surface, primary, 0.12)!;
+        borderColor = primary.withValues(alpha: 0.3);
+        break;
+      case Ux4gBannerVariant.infoLight:
+        backgroundColor = Color.lerp(surface, info, 0.12)!;
+        borderColor = info.withValues(alpha: 0.3);
+        break;
+      case Ux4gBannerVariant.neutralLight:
+        backgroundColor = onSurface.withValues(alpha: 0.05);
+        borderColor = onSurface.withValues(alpha: 0.15);
         break;
     }
 
@@ -83,6 +106,7 @@ class Ux4gStatusBanner extends StatelessWidget {
       decoration: BoxDecoration(
         color: backgroundColor,
         borderRadius: BorderRadius.circular(8),
+        border: Border.all(color: borderColor),
         boxShadow: [
           BoxShadow(
             color: onBackground.withValues(alpha: 0.05),
@@ -119,8 +143,8 @@ class Ux4gStatusBanner extends StatelessWidget {
                           children: [
                             Text(
                               title,
-                              style: bMStrong.copyWith(
-                                color: textColor,
+                              style: (titleStyle ?? bMStrong).copyWith(
+                                color: titleStyle?.color ?? textColor,
                               ),
                             ),
                             if (badge != null) badge!,
@@ -130,8 +154,8 @@ class Ux4gStatusBanner extends StatelessWidget {
                           const SizedBox(height: 4),
                           Text(
                             subtitle!,
-                            style: bMDefault.copyWith(
-                              color: subtitleColor,
+                            style: (subtitleStyle ?? bMDefault).copyWith(
+                              color: subtitleStyle?.color ?? subtitleColor,
                             ),
                           ),
                         ],
@@ -183,6 +207,8 @@ class Ux4gBannerManager {
     required Ux4gBannerVariant variant,
     required String title,
     String? subtitle,
+    TextStyle? titleStyle,
+    TextStyle? subtitleStyle,
     Widget? badge,
     Widget? leadingIcon,
     Widget? trailingIcon,
@@ -223,6 +249,8 @@ class Ux4gBannerManager {
                 variant: variant,
                 title: title,
                 subtitle: subtitle,
+                titleStyle: titleStyle,
+                subtitleStyle: subtitleStyle,
                 badge: badge,
                 leadingIcon: leadingIcon,
                 trailingIcon: trailingIcon,
