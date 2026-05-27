@@ -14,7 +14,7 @@ const _digitalIndiaLogoPath = 'assets/digital_india_logo.png';
 // ── Shared design tokens used across all SignIn patterns ───────────────
 const _bg = Color(0xFFFAFAFA);
 const _border = Color(0xFFE5E7EB);
-const _titleColor = Color(0xFF111827);
+const _titleColor = Ux4gPalette.gray900;
 const _subtleText = Color(0xFF6B7280);
 const _mutedText = Color(0xFF9CA3AF);
 
@@ -762,18 +762,18 @@ class _SignInMobileMockupState extends State<_SignInMobileMockup> {
                     titleStyle: const TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w400,
-                      color: Color(0xFF991B1B),
+                      color: Ux4gPalette.red800,
                       height: 1.3,
                     ),
                     subtitleStyle: const TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w700,
-                      color: Color(0xFF991B1B),
+                      color: Ux4gPalette.red800,
                       height: 1.3,
                     ),
                     leadingIcon: const Icon(
                       Icons.error_outline,
-                      color: Color(0xFFDC2626),
+                      color: Ux4gPalette.red600,
                       size: 20,
                     ),
                     trailingIcon: Container(
@@ -782,14 +782,14 @@ class _SignInMobileMockupState extends State<_SignInMobileMockup> {
                         vertical: 5,
                       ),
                       decoration: BoxDecoration(
-                        color: const Color(0xFFFEE2E2),
+                        color: Ux4gPalette.red100,
                         borderRadius: BorderRadius.circular(6),
                       ),
                       child: const Text(
                         'Attempt 1 of 5',
                         style: TextStyle(
                           fontSize: 12,
-                          color: Color(0xFF991B1B),
+                          color: Ux4gPalette.red800,
                           fontWeight: FontWeight.w500,
                           height: 1.2,
                         ),
@@ -1125,9 +1125,9 @@ class _SignedInSuccessMobileMockupState
     extends State<_SignedInSuccessMobileMockup> {
   // Brand greens — independent of theme so the success messaging always
   // reads as "success" regardless of how the host app is themed.
-  static const _successDark = Color(0xFF065F46);
-  static const _successMid = Color(0xFF059669);
-  static const _successLight = Color(0xFFD1FAE5);
+  static const _successDark = Ux4gPalette.green700;
+  static const _successMid = Ux4gPalette.green;
+  static const _successLight = Ux4gPalette.green100;
 
   Timer? _countdownTimer;
   int _secondsLeft = 3;
@@ -1308,23 +1308,23 @@ Container(
               padding: EdgeInsets.fromLTRB(12, 12, 10, 12),
               titleStyle: TextStyle(
                 fontSize: 14, fontWeight: FontWeight.w400,
-                color: Color(0xFF991B1B),
+                color: Ux4gPalette.red800,
               ),
               subtitleStyle: TextStyle(
                 fontSize: 14, fontWeight: FontWeight.w700,
-                color: Color(0xFF991B1B),
+                color: Ux4gPalette.red800,
               ),
               leadingIcon: Icon(Icons.error_outline,
-                color: Color(0xFFDC2626), size: 20),
+                color: Ux4gPalette.red600, size: 20),
               trailingIcon: Container(
                 padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                 decoration: BoxDecoration(
-                  color: Color(0xFFFEE2E2),
+                  color: Ux4gPalette.red100,
                   borderRadius: BorderRadius.circular(6),
                 ),
                 child: Text('Attempt 1 of 5',
                   style: TextStyle(fontSize: 12,
-                    color: Color(0xFF991B1B),
+                    color: Ux4gPalette.red800,
                     fontWeight: FontWeight.w500)),
               ),
             ),
@@ -1549,11 +1549,11 @@ Column(
           // Success badge — concentric circles + check icon.
           Container(
             width: 64, height: 64,
-            decoration: BoxDecoration(color: Color(0xFFD1FAE5), shape: BoxShape.circle),
+            decoration: BoxDecoration(color: Ux4gPalette.green100, shape: BoxShape.circle),
             alignment: Alignment.center,
             child: Container(
               width: 36, height: 36,
-              decoration: BoxDecoration(color: Color(0xFF059669), shape: BoxShape.circle),
+              decoration: BoxDecoration(color: Ux4gPalette.green, shape: BoxShape.circle),
               child: Icon(Icons.check, color: Colors.white, size: 22),
             ),
           ),
@@ -1562,7 +1562,7 @@ Column(
           Text('Signed in successfully!',
             style: TextStyle(
               fontSize: 24, fontWeight: FontWeight.w800,
-              color: Color(0xFF065F46),
+              color: Ux4gPalette.green700,
             )),
           SizedBox(height: 8),
           Text('You are being redirected to your service',
@@ -1662,18 +1662,18 @@ class _SignInWithMobileMockupState extends State<_SignInWithMobileMockup> {
                     titleStyle: const TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w400,
-                      color: Color(0xFF991B1B),
+                      color: Ux4gPalette.red800,
                       height: 1.3,
                     ),
                     subtitleStyle: const TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w700,
-                      color: Color(0xFF991B1B),
+                      color: Ux4gPalette.red800,
                       height: 1.3,
                     ),
                     leadingIcon: const Icon(
                       Icons.error_outline,
-                      color: Color(0xFFDC2626),
+                      color: Ux4gPalette.red600,
                       size: 20,
                     ),
                     trailingIcon: Container(
@@ -1682,14 +1682,14 @@ class _SignInWithMobileMockupState extends State<_SignInWithMobileMockup> {
                         vertical: 5,
                       ),
                       decoration: BoxDecoration(
-                        color: const Color(0xFFFEE2E2),
+                        color: Ux4gPalette.red100,
                         borderRadius: BorderRadius.circular(6),
                       ),
                       child: const Text(
                         'Attempt 1 of 5',
                         style: TextStyle(
                           fontSize: 12,
-                          color: Color(0xFF991B1B),
+                          color: Ux4gPalette.red800,
                           fontWeight: FontWeight.w500,
                           height: 1.2,
                         ),
@@ -1794,23 +1794,23 @@ Column(
             padding: EdgeInsets.fromLTRB(12, 12, 10, 12),
             titleStyle: TextStyle(
               fontSize: 14, fontWeight: FontWeight.w400,
-              color: Color(0xFF991B1B),
+              color: Ux4gPalette.red800,
             ),
             subtitleStyle: TextStyle(
               fontSize: 14, fontWeight: FontWeight.w700,
-              color: Color(0xFF991B1B),
+              color: Ux4gPalette.red800,
             ),
             leadingIcon: Icon(Icons.error_outline,
-              color: Color(0xFFDC2626), size: 20),
+              color: Ux4gPalette.red600, size: 20),
             trailingIcon: Container(
               padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
               decoration: BoxDecoration(
-                color: Color(0xFFFEE2E2),
+                color: Ux4gPalette.red100,
                 borderRadius: BorderRadius.circular(6),
               ),
               child: Text('Attempt 1 of 5',
                 style: TextStyle(fontSize: 12,
-                  color: Color(0xFF991B1B),
+                  color: Ux4gPalette.red800,
                   fontWeight: FontWeight.w500)),
             ),
           ),
@@ -1963,18 +1963,18 @@ class _SignInCardMockupState extends State<_SignInCardMockup> {
                               titleStyle: const TextStyle(
                                 fontSize: 14,
                                 fontWeight: FontWeight.w400,
-                                color: Color(0xFF991B1B),
+                                color: Ux4gPalette.red800,
                                 height: 1.3,
                               ),
                               subtitleStyle: const TextStyle(
                                 fontSize: 14,
                                 fontWeight: FontWeight.w700,
-                                color: Color(0xFF991B1B),
+                                color: Ux4gPalette.red800,
                                 height: 1.3,
                               ),
                               leadingIcon: const Icon(
                                 Icons.error_outline,
-                                color: Color(0xFFDC2626),
+                                color: Ux4gPalette.red600,
                                 size: 20,
                               ),
                               trailingIcon: Container(
@@ -1983,14 +1983,14 @@ class _SignInCardMockupState extends State<_SignInCardMockup> {
                                   vertical: 5,
                                 ),
                                 decoration: BoxDecoration(
-                                  color: const Color(0xFFFEE2E2),
+                                  color: Ux4gPalette.red100,
                                   borderRadius: BorderRadius.circular(6),
                                 ),
                                 child: const Text(
                                   'Attempt 1 of 5',
                                   style: TextStyle(
                                     fontSize: 12,
-                                    color: Color(0xFF991B1B),
+                                    color: Ux4gPalette.red800,
                                     fontWeight: FontWeight.w500,
                                     height: 1.2,
                                   ),
@@ -2129,16 +2129,16 @@ Column(
                         margin: EdgeInsets.zero,
                         padding: EdgeInsets.fromLTRB(12, 12, 10, 12),
                         leadingIcon: Icon(Icons.error_outline,
-                          color: Color(0xFFDC2626), size: 20),
+                          color: Ux4gPalette.red600, size: 20),
                         trailingIcon: Container(
                           padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                           decoration: BoxDecoration(
-                            color: Color(0xFFFEE2E2),
+                            color: Ux4gPalette.red100,
                             borderRadius: BorderRadius.circular(6),
                           ),
                           child: Text('Attempt 1 of 5',
                             style: TextStyle(fontSize: 12,
-                              color: Color(0xFF991B1B),
+                              color: Ux4gPalette.red800,
                               fontWeight: FontWeight.w500)),
                         ),
                       ),
@@ -2301,18 +2301,18 @@ class _SignInWithMobileCardMockupState
                               titleStyle: const TextStyle(
                                 fontSize: 14,
                                 fontWeight: FontWeight.w400,
-                                color: Color(0xFF991B1B),
+                                color: Ux4gPalette.red800,
                                 height: 1.3,
                               ),
                               subtitleStyle: const TextStyle(
                                 fontSize: 14,
                                 fontWeight: FontWeight.w700,
-                                color: Color(0xFF991B1B),
+                                color: Ux4gPalette.red800,
                                 height: 1.3,
                               ),
                               leadingIcon: const Icon(
                                 Icons.error_outline,
-                                color: Color(0xFFDC2626),
+                                color: Ux4gPalette.red600,
                                 size: 20,
                               ),
                               trailingIcon: Container(
@@ -2321,14 +2321,14 @@ class _SignInWithMobileCardMockupState
                                   vertical: 5,
                                 ),
                                 decoration: BoxDecoration(
-                                  color: const Color(0xFFFEE2E2),
+                                  color: Ux4gPalette.red100,
                                   borderRadius: BorderRadius.circular(6),
                                 ),
                                 child: const Text(
                                   'Attempt 1 of 5',
                                   style: TextStyle(
                                     fontSize: 12,
-                                    color: Color(0xFF991B1B),
+                                    color: Ux4gPalette.red800,
                                     fontWeight: FontWeight.w500,
                                     height: 1.2,
                                   ),
@@ -2462,16 +2462,16 @@ Column(
                         margin: EdgeInsets.zero,
                         padding: EdgeInsets.fromLTRB(12, 12, 10, 12),
                         leadingIcon: Icon(Icons.error_outline,
-                          color: Color(0xFFDC2626), size: 20),
+                          color: Ux4gPalette.red600, size: 20),
                         trailingIcon: Container(
                           padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                           decoration: BoxDecoration(
-                            color: Color(0xFFFEE2E2),
+                            color: Ux4gPalette.red100,
                             borderRadius: BorderRadius.circular(6),
                           ),
                           child: Text('Attempt 1 of 5',
                             style: TextStyle(fontSize: 12,
-                              color: Color(0xFF991B1B),
+                              color: Ux4gPalette.red800,
                               fontWeight: FontWeight.w500)),
                         ),
                       ),
@@ -3100,9 +3100,9 @@ class _SignedInSuccessCardMockup extends StatefulWidget {
 class _SignedInSuccessCardMockupState
     extends State<_SignedInSuccessCardMockup> {
   // Brand greens shared with the flat success variant.
-  static const _successMid = Color(0xFF059669);
-  static const _successLight = Color(0xFFD1FAE5);
-  static const _successDark = Color(0xFF065F46);
+  static const _successMid = Ux4gPalette.green;
+  static const _successLight = Ux4gPalette.green100;
+  static const _successDark = Ux4gPalette.green700;
 
   static const _cardBg = Color(0xFFE9E5FF);
 
@@ -3291,14 +3291,14 @@ Column(
                     Container(
                       width: 64, height: 64,
                       decoration: BoxDecoration(
-                        color: Color(0xFFD1FAE5),
+                        color: Ux4gPalette.green100,
                         shape: BoxShape.circle,
                       ),
                       alignment: Alignment.center,
                       child: Container(
                         width: 36, height: 36,
                         decoration: BoxDecoration(
-                          color: Color(0xFF059669),
+                          color: Ux4gPalette.green,
                           shape: BoxShape.circle,
                         ),
                         child: Icon(Icons.check, color: Colors.white, size: 22),
@@ -3309,7 +3309,7 @@ Column(
                     Text('Signed in successfully!',
                       style: TextStyle(
                         fontSize: 24, fontWeight: FontWeight.w800,
-                        color: Color(0xFF065F46),
+                        color: Ux4gPalette.green700,
                       )),
                     SizedBox(height: 8),
                     Text('You are being redirected to your service',
@@ -4257,18 +4257,18 @@ class _VerifyMobileAttemptWarningMockupState
                     titleStyle: const TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w400,
-                      color: Color(0xFF9A3412),
+                      color: Ux4gPalette.secondary800,
                       height: 1.3,
                     ),
                     subtitleStyle: const TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w700,
-                      color: Color(0xFF9A3412),
+                      color: Ux4gPalette.secondary800,
                       height: 1.3,
                     ),
                     leadingIcon: const Icon(
                       Icons.error_outline,
-                      color: Color(0xFFEA580C),
+                      color: Ux4gPalette.secondary600,
                       size: 20,
                     ),
                     trailingIcon: Container(
@@ -4277,14 +4277,14 @@ class _VerifyMobileAttemptWarningMockupState
                         vertical: 5,
                       ),
                       decoration: BoxDecoration(
-                        color: const Color(0xFFFED7AA),
+                        color: Ux4gPalette.secondary100,
                         borderRadius: BorderRadius.circular(6),
                       ),
                       child: const Text(
                         'Attempt 1 of 3',
                         style: TextStyle(
                           fontSize: 12,
-                          color: Color(0xFF9A3412),
+                          color: Ux4gPalette.secondary800,
                           fontWeight: FontWeight.w500,
                           height: 1.2,
                         ),
@@ -4364,23 +4364,23 @@ Column(
             padding: EdgeInsets.fromLTRB(12, 12, 10, 12),
             titleStyle: TextStyle(
               fontSize: 14, fontWeight: FontWeight.w400,
-              color: Color(0xFF9A3412),
+              color: Ux4gPalette.secondary800,
             ),
             subtitleStyle: TextStyle(
               fontSize: 14, fontWeight: FontWeight.w700,
-              color: Color(0xFF9A3412),
+              color: Ux4gPalette.secondary800,
             ),
             leadingIcon: Icon(Icons.error_outline,
-              color: Color(0xFFEA580C), size: 20),
+              color: Ux4gPalette.secondary600, size: 20),
             trailingIcon: Container(
               padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
               decoration: BoxDecoration(
-                color: Color(0xFFFED7AA),
+                color: Ux4gPalette.secondary100,
                 borderRadius: BorderRadius.circular(6),
               ),
               child: Text('Attempt 1 of 3',
                 style: TextStyle(fontSize: 12,
-                  color: Color(0xFF9A3412),
+                  color: Ux4gPalette.secondary800,
                   fontWeight: FontWeight.w500)),
             ),
           ),
@@ -4491,18 +4491,18 @@ class _VerifyMobileAttemptWarningCardMockupState
                             titleStyle: const TextStyle(
                               fontSize: 14,
                               fontWeight: FontWeight.w400,
-                              color: Color(0xFF9A3412),
+                              color: Ux4gPalette.secondary800,
                               height: 1.3,
                             ),
                             subtitleStyle: const TextStyle(
                               fontSize: 14,
                               fontWeight: FontWeight.w700,
-                              color: Color(0xFF9A3412),
+                              color: Ux4gPalette.secondary800,
                               height: 1.3,
                             ),
                             leadingIcon: const Icon(
                               Icons.error_outline,
-                              color: Color(0xFFEA580C),
+                              color: Ux4gPalette.secondary600,
                               size: 20,
                             ),
                             trailingIcon: Container(
@@ -4511,14 +4511,14 @@ class _VerifyMobileAttemptWarningCardMockupState
                                 vertical: 5,
                               ),
                               decoration: BoxDecoration(
-                                color: const Color(0xFFFED7AA),
+                                color: Ux4gPalette.secondary100,
                                 borderRadius: BorderRadius.circular(6),
                               ),
                               child: const Text(
                                 'Attempt 1 of 3',
                                 style: TextStyle(
                                   fontSize: 12,
-                                  color: Color(0xFF9A3412),
+                                  color: Ux4gPalette.secondary800,
                                   fontWeight: FontWeight.w500,
                                   height: 1.2,
                                 ),
@@ -4622,23 +4622,23 @@ Column(
                       padding: EdgeInsets.fromLTRB(12, 12, 10, 12),
                       titleStyle: TextStyle(
                         fontSize: 14, fontWeight: FontWeight.w400,
-                        color: Color(0xFF9A3412),
+                        color: Ux4gPalette.secondary800,
                       ),
                       subtitleStyle: TextStyle(
                         fontSize: 14, fontWeight: FontWeight.w700,
-                        color: Color(0xFF9A3412),
+                        color: Ux4gPalette.secondary800,
                       ),
                       leadingIcon: Icon(Icons.error_outline,
-                        color: Color(0xFFEA580C), size: 20),
+                        color: Ux4gPalette.secondary600, size: 20),
                       trailingIcon: Container(
                         padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                         decoration: BoxDecoration(
-                          color: Color(0xFFFED7AA),
+                          color: Ux4gPalette.secondary100,
                           borderRadius: BorderRadius.circular(6),
                         ),
                         child: Text('Attempt 1 of 3',
                           style: TextStyle(fontSize: 12,
-                            color: Color(0xFF9A3412),
+                            color: Ux4gPalette.secondary800,
                             fontWeight: FontWeight.w500)),
                       ),
                     ),
@@ -4749,18 +4749,18 @@ class _VerifyMobileLastAttemptMockupState
                     titleStyle: const TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w400,
-                      color: Color(0xFF991B1B),
+                      color: Ux4gPalette.red800,
                       height: 1.3,
                     ),
                     subtitleStyle: const TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w700,
-                      color: Color(0xFF991B1B),
+                      color: Ux4gPalette.red800,
                       height: 1.3,
                     ),
                     leadingIcon: const Icon(
                       Icons.error_outline,
-                      color: Color(0xFFDC2626),
+                      color: Ux4gPalette.red600,
                       size: 20,
                     ),
                     trailingIcon: Container(
@@ -4769,14 +4769,14 @@ class _VerifyMobileLastAttemptMockupState
                         vertical: 5,
                       ),
                       decoration: BoxDecoration(
-                        color: const Color(0xFFFEE2E2),
+                        color: Ux4gPalette.red100,
                         borderRadius: BorderRadius.circular(6),
                       ),
                       child: const Text(
                         'Attempt 2 of 3',
                         style: TextStyle(
                           fontSize: 12,
-                          color: Color(0xFF991B1B),
+                          color: Ux4gPalette.red800,
                           fontWeight: FontWeight.w500,
                           height: 1.2,
                         ),
@@ -4856,23 +4856,23 @@ Column(
             padding: EdgeInsets.fromLTRB(12, 12, 10, 12),
             titleStyle: TextStyle(
               fontSize: 14, fontWeight: FontWeight.w400,
-              color: Color(0xFF991B1B),
+              color: Ux4gPalette.red800,
             ),
             subtitleStyle: TextStyle(
               fontSize: 14, fontWeight: FontWeight.w700,
-              color: Color(0xFF991B1B),
+              color: Ux4gPalette.red800,
             ),
             leadingIcon: Icon(Icons.error_outline,
-              color: Color(0xFFDC2626), size: 20),
+              color: Ux4gPalette.red600, size: 20),
             trailingIcon: Container(
               padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
               decoration: BoxDecoration(
-                color: Color(0xFFFEE2E2),
+                color: Ux4gPalette.red100,
                 borderRadius: BorderRadius.circular(6),
               ),
               child: Text('Attempt 2 of 3',
                 style: TextStyle(fontSize: 12,
-                  color: Color(0xFF991B1B),
+                  color: Ux4gPalette.red800,
                   fontWeight: FontWeight.w500)),
             ),
           ),
@@ -4981,18 +4981,18 @@ class _VerifyMobileLastAttemptCardMockupState
                             titleStyle: const TextStyle(
                               fontSize: 14,
                               fontWeight: FontWeight.w400,
-                              color: Color(0xFF991B1B),
+                              color: Ux4gPalette.red800,
                               height: 1.3,
                             ),
                             subtitleStyle: const TextStyle(
                               fontSize: 14,
                               fontWeight: FontWeight.w700,
-                              color: Color(0xFF991B1B),
+                              color: Ux4gPalette.red800,
                               height: 1.3,
                             ),
                             leadingIcon: const Icon(
                               Icons.error_outline,
-                              color: Color(0xFFDC2626),
+                              color: Ux4gPalette.red600,
                               size: 20,
                             ),
                             trailingIcon: Container(
@@ -5001,14 +5001,14 @@ class _VerifyMobileLastAttemptCardMockupState
                                 vertical: 5,
                               ),
                               decoration: BoxDecoration(
-                                color: const Color(0xFFFEE2E2),
+                                color: Ux4gPalette.red100,
                                 borderRadius: BorderRadius.circular(6),
                               ),
                               child: const Text(
                                 'Attempt 2 of 3',
                                 style: TextStyle(
                                   fontSize: 12,
-                                  color: Color(0xFF991B1B),
+                                  color: Ux4gPalette.red800,
                                   fontWeight: FontWeight.w500,
                                   height: 1.2,
                                 ),
@@ -5112,23 +5112,23 @@ Column(
                       padding: EdgeInsets.fromLTRB(12, 12, 10, 12),
                       titleStyle: TextStyle(
                         fontSize: 14, fontWeight: FontWeight.w400,
-                        color: Color(0xFF991B1B),
+                        color: Ux4gPalette.red800,
                       ),
                       subtitleStyle: TextStyle(
                         fontSize: 14, fontWeight: FontWeight.w700,
-                        color: Color(0xFF991B1B),
+                        color: Ux4gPalette.red800,
                       ),
                       leadingIcon: Icon(Icons.error_outline,
-                        color: Color(0xFFDC2626), size: 20),
+                        color: Ux4gPalette.red600, size: 20),
                       trailingIcon: Container(
                         padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                         decoration: BoxDecoration(
-                          color: Color(0xFFFEE2E2),
+                          color: Ux4gPalette.red100,
                           borderRadius: BorderRadius.circular(6),
                         ),
                         child: Text('Attempt 2 of 3',
                           style: TextStyle(fontSize: 12,
-                            color: Color(0xFF991B1B),
+                            color: Ux4gPalette.red800,
                             fontWeight: FontWeight.w500)),
                       ),
                     ),
@@ -5180,8 +5180,8 @@ class _VerifyAccountLockedMockup extends StatefulWidget {
 class _VerifyAccountLockedMockupState
     extends State<_VerifyAccountLockedMockup> {
   // Lock-state palette.
-  static const _lockBadgeBg = Color(0xFFFEE2E2);
-  static const _lockIconColor = Color(0xFFDC2626);
+  static const _lockBadgeBg = Ux4gPalette.red100;
+  static const _lockIconColor = Ux4gPalette.red600;
 
   @override
   Widget build(BuildContext context) {
@@ -5261,12 +5261,12 @@ class _VerifyAccountLockedMockupState
                     titleStyle: const TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w400,
-                      color: Color(0xFF991B1B),
+                      color: Ux4gPalette.red800,
                       height: 1.35,
                     ),
                     leadingIcon: const Icon(
                       Icons.error_outline,
-                      color: Color(0xFFDC2626),
+                      color: Ux4gPalette.red600,
                       size: 20,
                     ),
                   ),
@@ -5341,11 +5341,11 @@ Column(
           Center(child: Container(
             width: 64, height: 64,
             decoration: BoxDecoration(
-              color: Color(0xFFFEE2E2),
+              color: Ux4gPalette.red100,
               shape: BoxShape.circle,
             ),
             alignment: Alignment.center,
-            child: Icon(Icons.lock, color: Color(0xFFDC2626), size: 28),
+            child: Icon(Icons.lock, color: Ux4gPalette.red600, size: 28),
           )),
           SizedBox(height: 16),
 
@@ -5376,10 +5376,10 @@ Column(
             padding: EdgeInsets.fromLTRB(12, 12, 12, 12),
             titleStyle: TextStyle(
               fontSize: 14, fontWeight: FontWeight.w400,
-              color: Color(0xFF991B1B),
+              color: Ux4gPalette.red800,
             ),
             leadingIcon: Icon(Icons.error_outline,
-              color: Color(0xFFDC2626), size: 20),
+              color: Ux4gPalette.red600, size: 20),
           ),
           SizedBox(height: 20),
 
@@ -5416,8 +5416,8 @@ class _VerifyAccountLockedCardMockup extends StatefulWidget {
 class _VerifyAccountLockedCardMockupState
     extends State<_VerifyAccountLockedCardMockup> {
   static const _cardBg = Color(0xFFE9E5FF);
-  static const _lockBadgeBg = Color(0xFFFEE2E2);
-  static const _lockIconColor = Color(0xFFDC2626);
+  static const _lockBadgeBg = Ux4gPalette.red100;
+  static const _lockIconColor = Ux4gPalette.red600;
 
   @override
   Widget build(BuildContext context) {
@@ -5508,12 +5508,12 @@ class _VerifyAccountLockedCardMockupState
                             titleStyle: const TextStyle(
                               fontSize: 14,
                               fontWeight: FontWeight.w400,
-                              color: Color(0xFF991B1B),
+                              color: Ux4gPalette.red800,
                               height: 1.35,
                             ),
                             leadingIcon: const Icon(
                               Icons.error_outline,
-                              color: Color(0xFFDC2626),
+                              color: Ux4gPalette.red600,
                               size: 20,
                             ),
                           ),
@@ -5604,8 +5604,8 @@ class _OtpVerifiedSuccessMockup extends StatelessWidget {
 
   // Brand greens — independent of theme so the success messaging
   // always reads as "success" regardless of how the host app is themed.
-  static const _successMid = Color(0xFF059669);
-  static const _successLight = Color(0xFFD1FAE5);
+  static const _successMid = Ux4gPalette.green;
+  static const _successLight = Ux4gPalette.green100;
 
   @override
   Widget build(BuildContext context) {
@@ -5713,14 +5713,14 @@ Column(
           Container(
             width: 64, height: 64,
             decoration: BoxDecoration(
-              color: Color(0xFFD1FAE5),
+              color: Ux4gPalette.green100,
               shape: BoxShape.circle,
             ),
             alignment: Alignment.center,
             child: Container(
               width: 36, height: 36,
               decoration: BoxDecoration(
-                color: Color(0xFF059669),
+                color: Ux4gPalette.green,
                 shape: BoxShape.circle,
               ),
               child: Icon(Icons.check, color: Colors.white, size: 22),
@@ -5761,8 +5761,8 @@ class _OtpVerifiedSuccessCardMockup extends StatelessWidget {
   const _OtpVerifiedSuccessCardMockup();
 
   static const _cardBg = Color(0xFFE9E5FF);
-  static const _successMid = Color(0xFF059669);
-  static const _successLight = Color(0xFFD1FAE5);
+  static const _successMid = Ux4gPalette.green;
+  static const _successLight = Ux4gPalette.green100;
 
   @override
   Widget build(BuildContext context) {
