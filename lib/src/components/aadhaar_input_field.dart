@@ -20,6 +20,19 @@ class Ux4gAadhaarInputField extends StatelessWidget {
   final bool enabled;
   final bool readOnly;
 
+  /// Optional override for the placeholder text style. Forwarded to the
+  /// underlying [Ux4gInputField].
+  final TextStyle? placeholderStyle;
+
+  /// Optional override for the input value text style.
+  final TextStyle? style;
+
+  /// Optional override for the label text style.
+  final TextStyle? labelStyle;
+
+  /// Optional override for the caption / helper text style.
+  final TextStyle? captionStyle;
+
   const Ux4gAadhaarInputField({
     super.key,
     required this.value,
@@ -35,6 +48,10 @@ class Ux4gAadhaarInputField extends StatelessWidget {
     this.onTrailingIconPressed,
     this.enabled = true,
     this.readOnly = false,
+    this.placeholderStyle,
+    this.style,
+    this.labelStyle,
+    this.captionStyle,
   });
 
   @override
@@ -55,6 +72,10 @@ class Ux4gAadhaarInputField extends StatelessWidget {
       enabled: enabled,
       readOnly: readOnly,
       maxLength: 14, // 12 digits + 2 spaces
+      style: style,
+      labelStyle: labelStyle,
+      placeholderStyle: placeholderStyle,
+      captionStyle: captionStyle,
       inputFormatters: [
         FilteringTextInputFormatter.digitsOnly,
         _AadhaarNumberFormatter(),
@@ -67,8 +88,9 @@ class Ux4gAadhaarInputField extends StatelessWidget {
     // Remove spaces
     final cleanAadhaar = aadhaar.replaceAll(' ', '');
     if (cleanAadhaar.length != 12) return false;
-    if (RegExp(r'^[01]').hasMatch(cleanAadhaar)) return false; // Aadhaar doesn't start with 0 or 1
-    
+    if (RegExp(r'^[01]').hasMatch(cleanAadhaar))
+      return false; // Aadhaar doesn't start with 0 or 1
+
     return _VerhoeffAlgorithm.validate(cleanAadhaar);
   }
 }

@@ -199,8 +199,10 @@ class UX4GWidgetbook extends StatelessWidget {
                   name: 'SignIn',
                   children: [
                     signInDefaultComponent,
-                    // Add more SignIn variants here
-                    // e.g. signInOtpComponent, signInBiometricComponent
+                    signInWithMobileComponent,
+                    signInEnterOtpComponent,
+                    signInAadhaarComponent,
+                    signInSuccessComponent,
                   ],
                 ),
               ],

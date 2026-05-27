@@ -26,6 +26,15 @@ class Ux4gStatusBanner extends StatelessWidget {
   final List<Widget>? actions;
   final VoidCallback? onDismiss;
 
+  /// Outer margin around the banner. Defaults to
+  /// `EdgeInsets.symmetric(horizontal: 16, vertical: 8)` to preserve
+  /// existing layouts. Set to [EdgeInsets.zero] when the banner sits
+  /// inside a parent that already provides its own padding.
+  final EdgeInsetsGeometry margin;
+
+  /// Inner padding inside the banner card.
+  final EdgeInsetsGeometry padding;
+
   const Ux4gStatusBanner({
     super.key,
     required this.variant,
@@ -38,6 +47,8 @@ class Ux4gStatusBanner extends StatelessWidget {
     this.trailingIcon,
     this.actions,
     this.onDismiss,
+    this.margin = const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+    this.padding = const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
   });
 
   @override
@@ -46,18 +57,29 @@ class Ux4gStatusBanner extends StatelessWidget {
     final ux4gColors = materialTheme.extension<Ux4gColors>();
     final ux4gTypography = materialTheme.extension<Ux4gTypography>();
 
-    final onSurface = ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
+    final onSurface =
+        ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
     final surface = ux4gColors?.surface ?? materialTheme.colorScheme.surface;
     final warning = ux4gColors?.warning ?? materialTheme.colorScheme.tertiary;
-    final onWarning = ux4gColors?.onWarning ?? materialTheme.colorScheme.onTertiary;
+    final onWarning =
+        ux4gColors?.onWarning ?? materialTheme.colorScheme.onTertiary;
     final error = ux4gColors?.error ?? materialTheme.colorScheme.error;
     final success = ux4gColors?.success ?? materialTheme.colorScheme.primary;
     final primary = ux4gColors?.primary ?? materialTheme.colorScheme.primary;
     final info = ux4gColors?.info ?? materialTheme.colorScheme.secondary;
-    final onBackground = ux4gColors?.onBackground ?? materialTheme.colorScheme.onSurface;
+    final onBackground =
+        ux4gColors?.onBackground ?? materialTheme.colorScheme.onSurface;
 
-    final bMStrong = ux4gTypography?.bM_strong ?? materialTheme.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold) ?? const TextStyle();
-    final bMDefault = ux4gTypography?.bM_default ?? materialTheme.textTheme.bodyMedium ?? const TextStyle();
+    final bMStrong =
+        ux4gTypography?.bM_strong ??
+        materialTheme.textTheme.bodyMedium?.copyWith(
+          fontWeight: FontWeight.bold,
+        ) ??
+        const TextStyle();
+    final bMDefault =
+        ux4gTypography?.bM_default ??
+        materialTheme.textTheme.bodyMedium ??
+        const TextStyle();
 
     // Determine colors based on variant
     Color backgroundColor;
@@ -101,8 +123,8 @@ class Ux4gStatusBanner extends StatelessWidget {
 
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      padding: padding,
+      margin: margin,
       decoration: BoxDecoration(
         color: backgroundColor,
         borderRadius: BorderRadius.circular(8),
