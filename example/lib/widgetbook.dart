@@ -46,7 +46,7 @@ class UX4GWidgetbook extends StatelessWidget {
         // ── Components ────────────────────────────────────────────────────────
         WidgetbookCategory(
           name: 'Components',
-          isInitiallyExpanded: true,
+          isInitiallyExpanded: false,
           children: [
             // Buttons
             buttonComponent,
@@ -61,6 +61,7 @@ class UX4GWidgetbook extends StatelessWidget {
             // Avatar
             WidgetbookFolder(
               name: 'Avatar',
+              isInitiallyExpanded: false,
               children: [
                 avatarComponent,
                 profileAvatarComponent,
@@ -80,6 +81,7 @@ class UX4GWidgetbook extends StatelessWidget {
             radioButtonComponent,
             WidgetbookFolder(
               name: 'Dropdown',
+              isInitiallyExpanded: false,
               children: [actionDropdownComponent, selectionDropdownComponent],
             ),
             datePickerComponent,
@@ -91,6 +93,7 @@ class UX4GWidgetbook extends StatelessWidget {
             // Progress & Loader
             WidgetbookFolder(
               name: 'Linear Progress',
+              isInitiallyExpanded: false,
               children: [
                 linearProgressComponent,
                 animatedLinearProgressComponent,
@@ -98,6 +101,7 @@ class UX4GWidgetbook extends StatelessWidget {
             ),
             WidgetbookFolder(
               name: 'Circular Progress',
+              isInitiallyExpanded: false,
               children: [
                 circularProgressComponent,
                 animatedCircularProgressComponent,
@@ -110,12 +114,14 @@ class UX4GWidgetbook extends StatelessWidget {
             // Navigation & Feedback
             WidgetbookFolder(
               name: 'Accordion',
+              isInitiallyExpanded: false,
               children: [accordionComponent, accordionGroupComponent],
             ),
             statusBannerComponent,
             emptyStateComponent,
             WidgetbookFolder(
               name: 'Chips',
+              isInitiallyExpanded: false,
               children: [
                 choiceChipComponent,
                 filterChipComponent,
@@ -132,6 +138,7 @@ class UX4GWidgetbook extends StatelessWidget {
             socialLinkComponent,
             WidgetbookFolder(
               name: 'Social Links',
+              isInitiallyExpanded: false,
               children: [socialLinkGroupComponent, socialLinkListComponent],
             ),
             journeyTimelineComponent,
@@ -148,12 +155,14 @@ class UX4GWidgetbook extends StatelessWidget {
             toastComponent,
             WidgetbookFolder(
               name: 'Tooltip',
+              isInitiallyExpanded: false,
               children: [tooltipComponent, richTooltipComponent],
             ),
 
             // Feedback
             WidgetbookFolder(
               name: 'Feedback Form',
+              isInitiallyExpanded: false,
               children: [
                 feedbackFormComponent,
                 feedbackFormNpsComponent,
@@ -191,13 +200,15 @@ class UX4GWidgetbook extends StatelessWidget {
         // ── Patterns ───────────────────────────────────────────────────────
         WidgetbookCategory(
           name: 'Patterns',
-          isInitiallyExpanded: true,
+          isInitiallyExpanded: false,
           children: [
             WidgetbookFolder(
               name: 'Identity and Access',
+              isInitiallyExpanded: false,
               children: [
                 WidgetbookFolder(
                   name: 'SignIn',
+                  isInitiallyExpanded: false,
                   children: [
                     signInDefaultComponent,
                     signInWithMobileComponent,
@@ -208,6 +219,7 @@ class UX4GWidgetbook extends StatelessWidget {
                 ),
                 WidgetbookFolder(
                   name: 'OTP Verification',
+                  isInitiallyExpanded: false,
                   children: [
                     otpVerifyMobileComponent,
                     otpVerifyVoiceComponent,
@@ -219,10 +231,12 @@ class UX4GWidgetbook extends StatelessWidget {
                 ),
                 WidgetbookFolder(
                   name: 'Session Time-out Dialog',
+                  isInitiallyExpanded: false,
                   children: [sessionExpiringDialogComponent],
                 ),
                 WidgetbookFolder(
                   name: 'Auth errors & lockout',
+                  isInitiallyExpanded: false,
                   children: [
                     authIncorrectOtpComponent,
                     authOtpAttemptWarningComponent,
@@ -234,6 +248,7 @@ class UX4GWidgetbook extends StatelessWidget {
                 ),
                 WidgetbookFolder(
                   name: 'Aadhaar Authentication Gate',
+                  isInitiallyExpanded: false,
                   children: [
                     aadhaarVerifyMethodComponent,
                     aadhaarOtpEnterComponent,
@@ -246,6 +261,7 @@ class UX4GWidgetbook extends StatelessWidget {
                 ),
                 WidgetbookFolder(
                   name: 'SignUp',
+                  isInitiallyExpanded: false,
                   children: [
                     signUpStep1Component,
                     signUpStep2Component,
@@ -258,9 +274,11 @@ class UX4GWidgetbook extends StatelessWidget {
             ),
             WidgetbookFolder(
               name: 'Consent and Declaration',
+              isInitiallyExpanded: false,
               children: [
                 WidgetbookFolder(
                   name: 'Consent Capture',
+                  isInitiallyExpanded: false,
                   children: [
                     consentCaptureComponent,
                     consentCaptureWithWarningComponent,
@@ -269,6 +287,7 @@ class UX4GWidgetbook extends StatelessWidget {
                 ),
                 WidgetbookFolder(
                   name: 'Data Sharing Consent',
+                  isInitiallyExpanded: false,
                   children: [
                     dataSharingConsentComponent,
                   ],
