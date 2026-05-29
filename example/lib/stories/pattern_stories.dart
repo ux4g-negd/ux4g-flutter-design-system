@@ -14,7 +14,7 @@ const _digitalIndiaLogoPath = 'assets/digital_india_logo.png';
 // ── Shared design tokens used across all SignIn patterns ───────────────
 const _bg = Color(0xFFFAFAFA);
 const _border = Color(0xFFE5E7EB);
-const _titleColor = Color(0xFF111827);
+const _titleColor = Ux4gPalette.gray900;
 const _subtleText = Color(0xFF6B7280);
 const _mutedText = Color(0xFF9CA3AF);
 
@@ -259,6 +259,293 @@ final signInSuccessComponent = WidgetbookComponent(
 );
 
 // ───────────────────────────────────────────────────────────────────────
+// OTP Verification — sibling folder of SignIn
+// ───────────────────────────────────────────────────────────────────────
+
+final otpVerifyMobileComponent = WidgetbookComponent(
+  name: 'Verify your mobile number',
+  useCases: [
+    WidgetbookUseCase(
+      name: 'Default',
+      builder: (context) {
+        final variant = context.knobs.list(
+          label: 'Variant',
+          options: const ['Default', 'Card style'],
+          initialOption: 'Default',
+          description:
+              'Switch between the standard flat OTP verification layout '
+              'and the card-style layout on a soft-purple background.',
+        );
+
+        final code = switch (variant) {
+          'Card style' => _verifyMobileOtpCardCode,
+          _ => _verifyMobileOtpCode,
+        };
+
+        final Widget child = switch (variant) {
+          'Card style' => const _VerifyMobileOtpCardMockup(),
+          _ => const _VerifyMobileOtpMockup(),
+        };
+
+        return ComponentDocs(
+          name: 'Verify your mobile number',
+          description:
+              'Mobile-number OTP verification screen with 6 single-digit '
+              'input boxes, a built-in 60-second resend countdown, a verify '
+              'action, and a "Change mobile number" link. Use the [Variant] '
+              'knob on the right to toggle between the flat layout and the '
+              'card-style layout. Mobile-sized layout (360px).',
+          code: code,
+          center: true,
+          child: child,
+        );
+      },
+    ),
+  ],
+);
+
+// ─────────────────────────────────────────────────────────────────────
+// OTP verified — success state shown right after a correct OTP, before
+// the auto-redirect kicks in. Filled OTP boxes are tinted green via
+// the design-system's success status, and a built-in
+// "Verification successful" caption appears below.
+// ─────────────────────────────────────────────────────────────────────
+final otpVerifiedSuccessComponent = WidgetbookComponent(
+  name: 'OTP verified — success',
+  useCases: [
+    WidgetbookUseCase(
+      name: 'Default',
+      builder: (context) {
+        final variant = context.knobs.list(
+          label: 'Variant',
+          options: const ['Default', 'Card style'],
+          initialOption: 'Default',
+          description:
+              'Switch between the standard flat layout and the card-style '
+              'layout on a soft-purple background.',
+        );
+
+        final code = switch (variant) {
+          'Card style' => _otpVerifiedSuccessCardCode,
+          _ => _otpVerifiedSuccessCode,
+        };
+
+        final Widget child = switch (variant) {
+          'Card style' => const _OtpVerifiedSuccessCardMockup(),
+          _ => const _OtpVerifiedSuccessMockup(),
+        };
+
+        return ComponentDocs(
+          name: 'OTP verified — success',
+          description:
+              'Success confirmation shown immediately after a correct '
+              'OTP — green check badge, filled OTP field tinted green '
+              'via [Ux4gOtpInputStatus.success], and a built-in '
+              '"Verification successful" caption. '
+              'Use the [Variant] knob on the right to toggle between '
+              'the flat layout and the card-style layout. '
+              'Mobile-sized layout (360px).',
+          code: code,
+          center: true,
+          child: child,
+        );
+      },
+    ),
+  ],
+);
+
+// ─────────────────────────────────────────────────────────────────────
+// Verify mobile with account locked — terminal state after too many
+// failed attempts. Shows a lock badge, disabled OTP boxes with a
+// live "Locked for mm:ss" caption, an inline error banner, and a
+// support phone number.
+// ─────────────────────────────────────────────────────────────────────
+final otpVerifyAccountLockedComponent = WidgetbookComponent(
+  name: 'Verify mobile — account locked',
+  useCases: [
+    WidgetbookUseCase(
+      name: 'Default',
+      builder: (context) {
+        final variant = context.knobs.list(
+          label: 'Variant',
+          options: const ['Default', 'Card style'],
+          initialOption: 'Default',
+          description:
+              'Switch between the standard flat layout and the card-style '
+              'layout on a soft-purple background.',
+        );
+
+        final code = switch (variant) {
+          'Card style' => _verifyAccountLockedCardCode,
+          _ => _verifyAccountLockedCode,
+        };
+
+        final Widget child = switch (variant) {
+          'Card style' => const _VerifyAccountLockedCardMockup(),
+          _ => const _VerifyAccountLockedMockup(),
+        };
+
+        return ComponentDocs(
+          name: 'Verify mobile — account locked',
+          description:
+              'Terminal lockout state shown after the user exhausts all '
+              'OTP attempts. Includes a disabled OTP field, a live '
+              '"Locked for mm:ss" caption from the design-system OTP '
+              'component, an error banner, and a support phone link. '
+              'Use the [Variant] knob on the right to toggle between the '
+              'flat layout and the card-style layout. '
+              'Mobile-sized layout (360px).',
+          code: code,
+          center: true,
+          child: child,
+        );
+      },
+    ),
+  ],
+);
+
+// ─────────────────────────────────────────────────────────────────────
+// Verify mobile with last-attempt warning — like the attempt-warning
+// pattern but escalated to error styling for the *final* attempt.
+// ─────────────────────────────────────────────────────────────────────
+final otpVerifyLastAttemptComponent = WidgetbookComponent(
+  name: 'Verify mobile with last-attempt warning',
+  useCases: [
+    WidgetbookUseCase(
+      name: 'Default',
+      builder: (context) {
+        final variant = context.knobs.list(
+          label: 'Variant',
+          options: const ['Default', 'Card style'],
+          initialOption: 'Default',
+          description:
+              'Switch between the standard flat layout and the card-style '
+              'layout on a soft-purple background.',
+        );
+
+        final code = switch (variant) {
+          'Card style' => _verifyLastAttemptCardCode,
+          _ => _verifyLastAttemptCode,
+        };
+
+        final Widget child = switch (variant) {
+          'Card style' => const _VerifyMobileLastAttemptCardMockup(),
+          _ => const _VerifyMobileLastAttemptMockup(),
+        };
+
+        return ComponentDocs(
+          name: 'Verify mobile with last-attempt warning',
+          description:
+              'Mobile-number OTP verification on the *final* attempt — '
+              'shows an error-styled banner warning the user that one '
+              'more wrong entry will lock the account for 30 minutes. '
+              'Use the [Variant] knob on the right to toggle between the '
+              'flat layout and the card-style layout. '
+              'Mobile-sized layout (360px).',
+          code: code,
+          center: true,
+          child: child,
+        );
+      },
+    ),
+  ],
+);
+
+// ─────────────────────────────────────────────────────────────────────
+// Verify mobile with attempt warning — adds an inline warning banner
+// counting down failed attempts before a 30-minute lockout.
+// ─────────────────────────────────────────────────────────────────────
+final otpVerifyAttemptWarningComponent = WidgetbookComponent(
+  name: 'Verify mobile with attempt warning',
+  useCases: [
+    WidgetbookUseCase(
+      name: 'Default',
+      builder: (context) {
+        final variant = context.knobs.list(
+          label: 'Variant',
+          options: const ['Default', 'Card style'],
+          initialOption: 'Default',
+          description:
+              'Switch between the standard flat layout and the card-style '
+              'layout on a soft-purple background.',
+        );
+
+        final code = switch (variant) {
+          'Card style' => _verifyAttemptWarningCardCode,
+          _ => _verifyAttemptWarningCode,
+        };
+
+        final Widget child = switch (variant) {
+          'Card style' => const _VerifyMobileAttemptWarningCardMockup(),
+          _ => const _VerifyMobileAttemptWarningMockup(),
+        };
+
+        return ComponentDocs(
+          name: 'Verify mobile with attempt warning',
+          description:
+              'Mobile-number OTP verification screen showing a warning '
+              'banner after a wrong OTP. Counts down remaining attempts '
+              'before a 30-minute lockout. Use the [Variant] knob on the '
+              'right to toggle between the flat layout and the card-style '
+              'layout. Mobile-sized layout (360px).',
+          code: code,
+          center: true,
+          child: child,
+        );
+      },
+    ),
+  ],
+);
+
+// ─────────────────────────────────────────────────────────────────────
+// Verify mobile with voice-call fallback — adds a Back button at top,
+// shows the resend timer in its expired state (active "Resend OTP"
+// link), and a secondary outlined "Get OTP via voice call" CTA.
+// ─────────────────────────────────────────────────────────────────────
+final otpVerifyVoiceComponent = WidgetbookComponent(
+  name: 'Verify mobile with voice fallback',
+  useCases: [
+    WidgetbookUseCase(
+      name: 'Default',
+      builder: (context) {
+        final variant = context.knobs.list(
+          label: 'Variant',
+          options: const ['Default', 'Card style'],
+          initialOption: 'Default',
+          description:
+              'Switch between the standard flat layout and the card-style '
+              'layout on a soft-purple background.',
+        );
+
+        final code = switch (variant) {
+          'Card style' => _verifyVoiceFallbackCardCode,
+          _ => _verifyVoiceFallbackCode,
+        };
+
+        final Widget child = switch (variant) {
+          'Card style' => const _VerifyMobileVoiceCardMockup(),
+          _ => const _VerifyMobileVoiceMockup(),
+        };
+
+        return ComponentDocs(
+          name: 'Verify mobile with voice fallback',
+          description:
+              'Mobile-number OTP verification with a back action at the '
+              'top, an active "Resend OTP" link (timer expired), and a '
+              'secondary "Get OTP via voice call" CTA for users who '
+              'never received the SMS. Use the [Variant] knob on the right '
+              'to toggle between the flat layout and the card-style layout. '
+              'Mobile-sized layout (360px).',
+          code: code,
+          center: true,
+          child: child,
+        );
+      },
+    ),
+  ],
+);
+
+// ───────────────────────────────────────────────────────────────────────
 // Shared helpers
 // ───────────────────────────────────────────────────────────────────────
 
@@ -475,18 +762,18 @@ class _SignInMobileMockupState extends State<_SignInMobileMockup> {
                     titleStyle: const TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w400,
-                      color: Color(0xFF991B1B),
+                      color: Ux4gPalette.red800,
                       height: 1.3,
                     ),
                     subtitleStyle: const TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w700,
-                      color: Color(0xFF991B1B),
+                      color: Ux4gPalette.red800,
                       height: 1.3,
                     ),
                     leadingIcon: const Icon(
                       Icons.error_outline,
-                      color: Color(0xFFDC2626),
+                      color: Ux4gPalette.red600,
                       size: 20,
                     ),
                     trailingIcon: Container(
@@ -495,14 +782,14 @@ class _SignInMobileMockupState extends State<_SignInMobileMockup> {
                         vertical: 5,
                       ),
                       decoration: BoxDecoration(
-                        color: const Color(0xFFFEE2E2),
+                        color: Ux4gPalette.red100,
                         borderRadius: BorderRadius.circular(6),
                       ),
                       child: const Text(
                         'Attempt 1 of 5',
                         style: TextStyle(
                           fontSize: 12,
-                          color: Color(0xFF991B1B),
+                          color: Ux4gPalette.red800,
                           fontWeight: FontWeight.w500,
                           height: 1.2,
                         ),
@@ -838,9 +1125,9 @@ class _SignedInSuccessMobileMockupState
     extends State<_SignedInSuccessMobileMockup> {
   // Brand greens — independent of theme so the success messaging always
   // reads as "success" regardless of how the host app is themed.
-  static const _successDark = Color(0xFF065F46);
-  static const _successMid = Color(0xFF059669);
-  static const _successLight = Color(0xFFD1FAE5);
+  static const _successDark = Ux4gPalette.green700;
+  static const _successMid = Ux4gPalette.green;
+  static const _successLight = Ux4gPalette.green100;
 
   Timer? _countdownTimer;
   int _secondsLeft = 3;
@@ -1021,23 +1308,23 @@ Container(
               padding: EdgeInsets.fromLTRB(12, 12, 10, 12),
               titleStyle: TextStyle(
                 fontSize: 14, fontWeight: FontWeight.w400,
-                color: Color(0xFF991B1B),
+                color: Ux4gPalette.red800,
               ),
               subtitleStyle: TextStyle(
                 fontSize: 14, fontWeight: FontWeight.w700,
-                color: Color(0xFF991B1B),
+                color: Ux4gPalette.red800,
               ),
               leadingIcon: Icon(Icons.error_outline,
-                color: Color(0xFFDC2626), size: 20),
+                color: Ux4gPalette.red600, size: 20),
               trailingIcon: Container(
                 padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                 decoration: BoxDecoration(
-                  color: Color(0xFFFEE2E2),
+                  color: Ux4gPalette.red100,
                   borderRadius: BorderRadius.circular(6),
                 ),
                 child: Text('Attempt 1 of 5',
                   style: TextStyle(fontSize: 12,
-                    color: Color(0xFF991B1B),
+                    color: Ux4gPalette.red800,
                     fontWeight: FontWeight.w500)),
               ),
             ),
@@ -1262,11 +1549,11 @@ Column(
           // Success badge — concentric circles + check icon.
           Container(
             width: 64, height: 64,
-            decoration: BoxDecoration(color: Color(0xFFD1FAE5), shape: BoxShape.circle),
+            decoration: BoxDecoration(color: Ux4gPalette.green100, shape: BoxShape.circle),
             alignment: Alignment.center,
             child: Container(
               width: 36, height: 36,
-              decoration: BoxDecoration(color: Color(0xFF059669), shape: BoxShape.circle),
+              decoration: BoxDecoration(color: Ux4gPalette.green, shape: BoxShape.circle),
               child: Icon(Icons.check, color: Colors.white, size: 22),
             ),
           ),
@@ -1275,7 +1562,7 @@ Column(
           Text('Signed in successfully!',
             style: TextStyle(
               fontSize: 24, fontWeight: FontWeight.w800,
-              color: Color(0xFF065F46),
+              color: Ux4gPalette.green700,
             )),
           SizedBox(height: 8),
           Text('You are being redirected to your service',
@@ -1375,18 +1662,18 @@ class _SignInWithMobileMockupState extends State<_SignInWithMobileMockup> {
                     titleStyle: const TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w400,
-                      color: Color(0xFF991B1B),
+                      color: Ux4gPalette.red800,
                       height: 1.3,
                     ),
                     subtitleStyle: const TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w700,
-                      color: Color(0xFF991B1B),
+                      color: Ux4gPalette.red800,
                       height: 1.3,
                     ),
                     leadingIcon: const Icon(
                       Icons.error_outline,
-                      color: Color(0xFFDC2626),
+                      color: Ux4gPalette.red600,
                       size: 20,
                     ),
                     trailingIcon: Container(
@@ -1395,14 +1682,14 @@ class _SignInWithMobileMockupState extends State<_SignInWithMobileMockup> {
                         vertical: 5,
                       ),
                       decoration: BoxDecoration(
-                        color: const Color(0xFFFEE2E2),
+                        color: Ux4gPalette.red100,
                         borderRadius: BorderRadius.circular(6),
                       ),
                       child: const Text(
                         'Attempt 1 of 5',
                         style: TextStyle(
                           fontSize: 12,
-                          color: Color(0xFF991B1B),
+                          color: Ux4gPalette.red800,
                           fontWeight: FontWeight.w500,
                           height: 1.2,
                         ),
@@ -1507,23 +1794,23 @@ Column(
             padding: EdgeInsets.fromLTRB(12, 12, 10, 12),
             titleStyle: TextStyle(
               fontSize: 14, fontWeight: FontWeight.w400,
-              color: Color(0xFF991B1B),
+              color: Ux4gPalette.red800,
             ),
             subtitleStyle: TextStyle(
               fontSize: 14, fontWeight: FontWeight.w700,
-              color: Color(0xFF991B1B),
+              color: Ux4gPalette.red800,
             ),
             leadingIcon: Icon(Icons.error_outline,
-              color: Color(0xFFDC2626), size: 20),
+              color: Ux4gPalette.red600, size: 20),
             trailingIcon: Container(
               padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
               decoration: BoxDecoration(
-                color: Color(0xFFFEE2E2),
+                color: Ux4gPalette.red100,
                 borderRadius: BorderRadius.circular(6),
               ),
               child: Text('Attempt 1 of 5',
                 style: TextStyle(fontSize: 12,
-                  color: Color(0xFF991B1B),
+                  color: Ux4gPalette.red800,
                   fontWeight: FontWeight.w500)),
             ),
           ),
@@ -1676,18 +1963,18 @@ class _SignInCardMockupState extends State<_SignInCardMockup> {
                               titleStyle: const TextStyle(
                                 fontSize: 14,
                                 fontWeight: FontWeight.w400,
-                                color: Color(0xFF991B1B),
+                                color: Ux4gPalette.red800,
                                 height: 1.3,
                               ),
                               subtitleStyle: const TextStyle(
                                 fontSize: 14,
                                 fontWeight: FontWeight.w700,
-                                color: Color(0xFF991B1B),
+                                color: Ux4gPalette.red800,
                                 height: 1.3,
                               ),
                               leadingIcon: const Icon(
                                 Icons.error_outline,
-                                color: Color(0xFFDC2626),
+                                color: Ux4gPalette.red600,
                                 size: 20,
                               ),
                               trailingIcon: Container(
@@ -1696,14 +1983,14 @@ class _SignInCardMockupState extends State<_SignInCardMockup> {
                                   vertical: 5,
                                 ),
                                 decoration: BoxDecoration(
-                                  color: const Color(0xFFFEE2E2),
+                                  color: Ux4gPalette.red100,
                                   borderRadius: BorderRadius.circular(6),
                                 ),
                                 child: const Text(
                                   'Attempt 1 of 5',
                                   style: TextStyle(
                                     fontSize: 12,
-                                    color: Color(0xFF991B1B),
+                                    color: Ux4gPalette.red800,
                                     fontWeight: FontWeight.w500,
                                     height: 1.2,
                                   ),
@@ -1842,16 +2129,16 @@ Column(
                         margin: EdgeInsets.zero,
                         padding: EdgeInsets.fromLTRB(12, 12, 10, 12),
                         leadingIcon: Icon(Icons.error_outline,
-                          color: Color(0xFFDC2626), size: 20),
+                          color: Ux4gPalette.red600, size: 20),
                         trailingIcon: Container(
                           padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                           decoration: BoxDecoration(
-                            color: Color(0xFFFEE2E2),
+                            color: Ux4gPalette.red100,
                             borderRadius: BorderRadius.circular(6),
                           ),
                           child: Text('Attempt 1 of 5',
                             style: TextStyle(fontSize: 12,
-                              color: Color(0xFF991B1B),
+                              color: Ux4gPalette.red800,
                               fontWeight: FontWeight.w500)),
                         ),
                       ),
@@ -2014,18 +2301,18 @@ class _SignInWithMobileCardMockupState
                               titleStyle: const TextStyle(
                                 fontSize: 14,
                                 fontWeight: FontWeight.w400,
-                                color: Color(0xFF991B1B),
+                                color: Ux4gPalette.red800,
                                 height: 1.3,
                               ),
                               subtitleStyle: const TextStyle(
                                 fontSize: 14,
                                 fontWeight: FontWeight.w700,
-                                color: Color(0xFF991B1B),
+                                color: Ux4gPalette.red800,
                                 height: 1.3,
                               ),
                               leadingIcon: const Icon(
                                 Icons.error_outline,
-                                color: Color(0xFFDC2626),
+                                color: Ux4gPalette.red600,
                                 size: 20,
                               ),
                               trailingIcon: Container(
@@ -2034,14 +2321,14 @@ class _SignInWithMobileCardMockupState
                                   vertical: 5,
                                 ),
                                 decoration: BoxDecoration(
-                                  color: const Color(0xFFFEE2E2),
+                                  color: Ux4gPalette.red100,
                                   borderRadius: BorderRadius.circular(6),
                                 ),
                                 child: const Text(
                                   'Attempt 1 of 5',
                                   style: TextStyle(
                                     fontSize: 12,
-                                    color: Color(0xFF991B1B),
+                                    color: Ux4gPalette.red800,
                                     fontWeight: FontWeight.w500,
                                     height: 1.2,
                                   ),
@@ -2175,16 +2462,16 @@ Column(
                         margin: EdgeInsets.zero,
                         padding: EdgeInsets.fromLTRB(12, 12, 10, 12),
                         leadingIcon: Icon(Icons.error_outline,
-                          color: Color(0xFFDC2626), size: 20),
+                          color: Ux4gPalette.red600, size: 20),
                         trailingIcon: Container(
                           padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                           decoration: BoxDecoration(
-                            color: Color(0xFFFEE2E2),
+                            color: Ux4gPalette.red100,
                             borderRadius: BorderRadius.circular(6),
                           ),
                           child: Text('Attempt 1 of 5',
                             style: TextStyle(fontSize: 12,
-                              color: Color(0xFF991B1B),
+                              color: Ux4gPalette.red800,
                               fontWeight: FontWeight.w500)),
                         ),
                       ),
@@ -2813,9 +3100,9 @@ class _SignedInSuccessCardMockup extends StatefulWidget {
 class _SignedInSuccessCardMockupState
     extends State<_SignedInSuccessCardMockup> {
   // Brand greens shared with the flat success variant.
-  static const _successMid = Color(0xFF059669);
-  static const _successLight = Color(0xFFD1FAE5);
-  static const _successDark = Color(0xFF065F46);
+  static const _successMid = Ux4gPalette.green;
+  static const _successLight = Ux4gPalette.green100;
+  static const _successDark = Ux4gPalette.green700;
 
   static const _cardBg = Color(0xFFE9E5FF);
 
@@ -3004,14 +3291,14 @@ Column(
                     Container(
                       width: 64, height: 64,
                       decoration: BoxDecoration(
-                        color: Color(0xFFD1FAE5),
+                        color: Ux4gPalette.green100,
                         shape: BoxShape.circle,
                       ),
                       alignment: Alignment.center,
                       child: Container(
                         width: 36, height: 36,
                         decoration: BoxDecoration(
-                          color: Color(0xFF059669),
+                          color: Ux4gPalette.green,
                           shape: BoxShape.circle,
                         ),
                         child: Icon(Icons.check, color: Colors.white, size: 22),
@@ -3022,7 +3309,7 @@ Column(
                     Text('Signed in successfully!',
                       style: TextStyle(
                         fontSize: 24, fontWeight: FontWeight.w800,
-                        color: Color(0xFF065F46),
+                        color: Ux4gPalette.green700,
                       )),
                     SizedBox(height: 8),
                     Text('You are being redirected to your service',
@@ -3066,6 +3353,2548 @@ Column(
                 ],
               ),
             ),
+          ],
+        ),
+      ),
+    ),
+  ],
+)''';
+
+// ───────────────────────────────────────────────────────────────────────
+// Verify your mobile number — mobile mockup (OTP Verification folder)
+// ───────────────────────────────────────────────────────────────────────
+class _VerifyMobileOtpMockup extends StatefulWidget {
+  const _VerifyMobileOtpMockup();
+
+  @override
+  State<_VerifyMobileOtpMockup> createState() => _VerifyMobileOtpMockupState();
+}
+
+class _VerifyMobileOtpMockupState extends State<_VerifyMobileOtpMockup> {
+  String _otp = '';
+
+  // Bumped every time the user taps "Resend OTP" — used as a [ValueKey]
+  // for the OTP input so it remounts and restarts its built-in countdown.
+  int _resendNonce = 0;
+
+  @override
+  Widget build(BuildContext context) {
+    return _PhoneFrame(
+      child: Column(
+        children: [
+          const _BrandHeader(),
+          Expanded(
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.fromLTRB(20, 56, 20, 0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // ── Title (wraps to 2 lines as per the reference) ──
+                  const Text(
+                    'Verify your mobile\nnumber',
+                    style: TextStyle(
+                      fontSize: 26,
+                      fontWeight: FontWeight.w800,
+                      color: _titleColor,
+                      height: 1.2,
+                      letterSpacing: -0.3,
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  const Text(
+                    'OTP sent to +91 98765 XXXXX',
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: _subtleText,
+                      height: 1.3,
+                    ),
+                  ),
+                  const SizedBox(height: 24),
+
+                  // 6 OTP boxes via the design-system component.
+                  // Same resend-timer mechanics as the Enter OTP pattern.
+                  Ux4gOtpInput(
+                    key: ValueKey('verify_mobile_otp_$_resendNonce'),
+                    length: 6,
+                    value: _otp,
+                    onChanged: (v) => setState(() => _otp = v),
+                    boxSize: 44,
+                    gap: 8,
+                    showSeparator: false,
+                    captionVariant: Ux4gOtpCaptionVariant.resendTimer,
+                    captionLeadingText: "Didn't receive OTP?",
+                    captionTrailingText: 'Resend OTP',
+                    autoCountdownSeconds: 60,
+                    onCaptionTrailingTap: () {
+                      setState(() {
+                        _otp = '';
+                        _resendNonce++;
+                      });
+                    },
+                  ),
+                  const SizedBox(height: 24),
+
+                  Ux4gButton(
+                    text: 'Verify OTP',
+                    onPressed: () {},
+                    size: Ux4gButtonSize.large,
+                    width: double.infinity,
+                  ),
+                  const SizedBox(height: 8),
+
+                  // "Change mobile number" — ghost-style link button.
+                  Center(
+                    child: Ux4gButton(
+                      text: 'Change mobile number',
+                      onPressed: () {},
+                      variant: Ux4gButtonVariant.ghost,
+                      size: Ux4gButtonSize.small,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          const _BrandFooter(),
+        ],
+      ),
+    );
+  }
+}
+
+const _verifyMobileOtpCode =
+    r'''// Mobile-sized verify-mobile OTP screen (360 x 760)
+Column(
+  children: [
+    Ux4gAppHeader(
+      variant: Ux4gAppHeaderVariant.light,
+      leadingWidgets: [
+        SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
+        Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
+        SvgPicture.asset('assets/Union.svg', height: 32),
+      ],
+    ),
+    Divider(height: 1, color: Color(0xFFE5E7EB)),
+
+    Padding(
+      padding: EdgeInsets.fromLTRB(20, 56, 20, 0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text('Verify your mobile\nnumber',
+            style: TextStyle(fontSize: 26, fontWeight: FontWeight.w800)),
+          SizedBox(height: 8),
+          Text('OTP sent to +91 98765 XXXXX',
+            style: TextStyle(fontSize: 14, color: Color(0xFF6B7280))),
+          SizedBox(height: 24),
+
+          // 6 OTP boxes via the design-system component.
+          Ux4gOtpInput(
+            key: ValueKey('verify_mobile_otp_$resendNonce'),
+            length: 6,
+            value: otp,
+            onChanged: (v) => setState(() => otp = v),
+            boxSize: 44,
+            gap: 8,
+            showSeparator: false,
+            captionVariant: Ux4gOtpCaptionVariant.resendTimer,
+            captionLeadingText: "Didn't receive OTP?",
+            captionTrailingText: 'Resend OTP',
+            autoCountdownSeconds: 60,
+            onCaptionTrailingTap: () {
+              setState(() {
+                otp = '';
+                resendNonce++;
+              });
+            },
+          ),
+          SizedBox(height: 24),
+
+          Ux4gButton(
+            text: 'Verify OTP',
+            onPressed: () {},
+            size: Ux4gButtonSize.large,
+            width: double.infinity,
+          ),
+          SizedBox(height: 8),
+
+          // "Change mobile number" — ghost-style link button.
+          Center(child: Ux4gButton(
+            text: 'Change mobile number',
+            onPressed: () {},
+            variant: Ux4gButtonVariant.ghost,
+            size: Ux4gButtonSize.small,
+          )),
+        ],
+      ),
+    ),
+  ],
+)''';
+
+// ───────────────────────────────────────────────────────────────────────
+// Verify your mobile number — Card-style variant
+// (toggled via the [Variant] knob on otpVerifyMobileComponent)
+// ───────────────────────────────────────────────────────────────────────
+class _VerifyMobileOtpCardMockup extends StatefulWidget {
+  const _VerifyMobileOtpCardMockup();
+
+  @override
+  State<_VerifyMobileOtpCardMockup> createState() =>
+      _VerifyMobileOtpCardMockupState();
+}
+
+class _VerifyMobileOtpCardMockupState
+    extends State<_VerifyMobileOtpCardMockup> {
+  String _otp = '';
+  int _resendNonce = 0;
+
+  static const _cardBg = Color(0xFFE9E5FF);
+
+  @override
+  Widget build(BuildContext context) {
+    return _PhoneFrame(
+      child: Column(
+        children: [
+          const _BrandHeader(),
+          Expanded(
+            child: Container(
+              width: double.infinity,
+              color: _cardBg,
+              child: Column(
+                children: [
+                  // Soft-purple gap above the card — image shows the
+                  // card sitting in the upper-middle of the body, not
+                  // flush at the top.
+                  const SizedBox(height: 56),
+
+                  // White card with the OTP form.
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: Container(
+                      padding: const EdgeInsets.fromLTRB(20, 24, 20, 24),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(16),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withValues(alpha: 0.04),
+                            blurRadius: 16,
+                            offset: const Offset(0, 4),
+                          ),
+                        ],
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text(
+                            'Verify your mobile\nnumber',
+                            style: TextStyle(
+                              fontSize: 26,
+                              fontWeight: FontWeight.w800,
+                              color: _titleColor,
+                              height: 1.2,
+                              letterSpacing: -0.3,
+                            ),
+                          ),
+                          const SizedBox(height: 8),
+                          const Text(
+                            'OTP sent to +91 98765 XXXXX',
+                            style: TextStyle(
+                              fontSize: 14,
+                              color: _subtleText,
+                              height: 1.3,
+                            ),
+                          ),
+                          const SizedBox(height: 20),
+
+                          Ux4gOtpInput(
+                            key: ValueKey(
+                              'verify_mobile_otp_card_$_resendNonce',
+                            ),
+                            length: 6,
+                            value: _otp,
+                            onChanged: (v) => setState(() => _otp = v),
+                            boxSize: 44,
+                            gap: 8,
+                            showSeparator: false,
+                            captionVariant: Ux4gOtpCaptionVariant.resendTimer,
+                            captionLeadingText: "Didn't receive OTP?",
+                            captionTrailingText: 'Resend OTP',
+                            autoCountdownSeconds: 60,
+                            onCaptionTrailingTap: () {
+                              setState(() {
+                                _otp = '';
+                                _resendNonce++;
+                              });
+                            },
+                          ),
+                          const SizedBox(height: 24),
+
+                          Ux4gButton(
+                            text: 'Verify OTP',
+                            onPressed: () {},
+                            size: Ux4gButtonSize.large,
+                            width: double.infinity,
+                          ),
+                          const SizedBox(height: 4),
+
+                          Center(
+                            child: Ux4gButton(
+                              text: 'Change mobile number',
+                              onPressed: () {},
+                              variant: Ux4gButtonVariant.ghost,
+                              size: Ux4gButtonSize.small,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+
+                  const Spacer(),
+                  const _BrandFooter(),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+const _verifyMobileOtpCardCode =
+    r'''// Mobile-sized card-style verify-mobile OTP screen (360 x 760)
+Column(
+  children: [
+    Ux4gAppHeader(
+      variant: Ux4gAppHeaderVariant.light,
+      leadingWidgets: [
+        SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
+        Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
+        SvgPicture.asset('assets/Union.svg', height: 32),
+      ],
+    ),
+    Divider(height: 1, color: Color(0xFFE5E7EB)),
+
+    Expanded(
+      child: Container(
+        width: double.infinity,
+        color: Color(0xFFE9E5FF),
+        child: Column(
+          children: [
+            SizedBox(height: 56),
+
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16),
+              child: Container(
+                padding: EdgeInsets.fromLTRB(20, 24, 20, 24),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(16),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withValues(alpha: 0.04),
+                      blurRadius: 16,
+                      offset: Offset(0, 4),
+                    ),
+                  ],
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('Verify your mobile\nnumber',
+                      style: TextStyle(fontSize: 26, fontWeight: FontWeight.w800)),
+                    SizedBox(height: 8),
+                    Text('OTP sent to +91 98765 XXXXX',
+                      style: TextStyle(fontSize: 14, color: Color(0xFF6B7280))),
+                    SizedBox(height: 20),
+
+                    Ux4gOtpInput(
+                      key: ValueKey('verify_mobile_otp_$resendNonce'),
+                      length: 6,
+                      value: otp,
+                      onChanged: (v) => setState(() => otp = v),
+                      boxSize: 44,
+                      gap: 8,
+                      showSeparator: false,
+                      captionVariant: Ux4gOtpCaptionVariant.resendTimer,
+                      captionLeadingText: "Didn't receive OTP?",
+                      captionTrailingText: 'Resend OTP',
+                      autoCountdownSeconds: 60,
+                      onCaptionTrailingTap: () {
+                        setState(() {
+                          otp = '';
+                          resendNonce++;
+                        });
+                      },
+                    ),
+                    SizedBox(height: 24),
+
+                    Ux4gButton(
+                      text: 'Verify OTP',
+                      onPressed: () {},
+                      size: Ux4gButtonSize.large,
+                      width: double.infinity,
+                    ),
+                    SizedBox(height: 4),
+
+                    Center(child: Ux4gButton(
+                      text: 'Change mobile number',
+                      onPressed: () {},
+                      variant: Ux4gButtonVariant.ghost,
+                      size: Ux4gButtonSize.small,
+                    )),
+                  ],
+                ),
+              ),
+            ),
+
+            Spacer(),
+
+            Padding(
+              padding: EdgeInsets.only(bottom: 20, top: 8),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text('Powered by -',
+                    style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+                  SizedBox(height: 6),
+                  Image.asset('assets/digital_india_logo.png', height: 22),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    ),
+  ],
+)''';
+
+// ───────────────────────────────────────────────────────────────────────
+// Verify mobile with voice fallback — mobile mockup
+// ───────────────────────────────────────────────────────────────────────
+class _VerifyMobileVoiceMockup extends StatefulWidget {
+  const _VerifyMobileVoiceMockup();
+
+  @override
+  State<_VerifyMobileVoiceMockup> createState() =>
+      _VerifyMobileVoiceMockupState();
+}
+
+class _VerifyMobileVoiceMockupState extends State<_VerifyMobileVoiceMockup> {
+  String _otp = '';
+
+  @override
+  Widget build(BuildContext context) {
+    return _PhoneFrame(
+      child: Column(
+        children: [
+          const _BrandHeader(),
+          Expanded(
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.fromLTRB(20, 32, 20, 0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const _BackButton(),
+                  const SizedBox(height: 24),
+
+                  // ── 2-line title ──
+                  const Text(
+                    'Verify your mobile\nnumber',
+                    style: TextStyle(
+                      fontSize: 26,
+                      fontWeight: FontWeight.w800,
+                      color: _titleColor,
+                      height: 1.2,
+                      letterSpacing: -0.3,
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  const Text(
+                    'OTP sent to +91 98765 XXXXX',
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: _subtleText,
+                      height: 1.3,
+                    ),
+                  ),
+                  const SizedBox(height: 24),
+
+                  // 6 OTP boxes — caption is in [resendAction] mode so
+                  // "Resend OTP" appears as a tap-able link (the timer
+                  // has already expired in this state).
+                  Ux4gOtpInput(
+                    length: 6,
+                    value: _otp,
+                    onChanged: (v) => setState(() => _otp = v),
+                    boxSize: 44,
+                    gap: 8,
+                    showSeparator: false,
+                    captionVariant: Ux4gOtpCaptionVariant.resendAction,
+                    captionLeadingText: "Didn't receive OTP?",
+                    captionTrailingText: 'Resend OTP',
+                    onCaptionTrailingTap: () {
+                      setState(() {
+                        _otp = '';
+                      });
+                    },
+                  ),
+                  const SizedBox(height: 24),
+
+                  Ux4gButton(
+                    text: 'Verify OTP',
+                    onPressed: () {},
+                    size: Ux4gButtonSize.large,
+                    width: double.infinity,
+                  ),
+                  const SizedBox(height: 12),
+
+                  // Secondary action — voice-call fallback for users
+                  // who couldn't receive the SMS.
+                  Ux4gButton(
+                    text: 'Get OTP via voice call',
+                    onPressed: () {},
+                    variant: Ux4gButtonVariant.outline,
+                    size: Ux4gButtonSize.large,
+                    leadingIcon: Icons.phone_outlined,
+                    iconSize: 18,
+                    width: double.infinity,
+                  ),
+                ],
+              ),
+            ),
+          ),
+          const _BrandFooter(),
+        ],
+      ),
+    );
+  }
+}
+
+const _verifyVoiceFallbackCode =
+    r'''// Mobile-sized verify-mobile screen with voice-call fallback (360 x 760)
+Column(
+  children: [
+    Ux4gAppHeader(
+      variant: Ux4gAppHeaderVariant.light,
+      leadingWidgets: [
+        SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
+        Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
+        SvgPicture.asset('assets/Union.svg', height: 32),
+      ],
+    ),
+    Divider(height: 1, color: Color(0xFFE5E7EB)),
+
+    Padding(
+      padding: EdgeInsets.fromLTRB(20, 32, 20, 0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Ux4gButton(
+            text: 'Back',
+            onPressed: () {},
+            variant: Ux4gButtonVariant.ghost,
+            size: Ux4gButtonSize.small,
+            leadingIcon: Icons.arrow_back,
+          ),
+          SizedBox(height: 24),
+
+          Text('Verify your mobile\nnumber',
+            style: TextStyle(fontSize: 26, fontWeight: FontWeight.w800)),
+          SizedBox(height: 8),
+          Text('OTP sent to +91 98765 XXXXX',
+            style: TextStyle(fontSize: 14, color: Color(0xFF6B7280))),
+          SizedBox(height: 24),
+
+          // 6 OTP boxes with the resend caption in its expired
+          // (action) state so "Resend OTP" is immediately tap-able.
+          Ux4gOtpInput(
+            length: 6,
+            value: otp,
+            onChanged: (v) => setState(() => otp = v),
+            boxSize: 44,
+            gap: 8,
+            showSeparator: false,
+            captionVariant: Ux4gOtpCaptionVariant.resendAction,
+            captionLeadingText: "Didn't receive OTP?",
+            captionTrailingText: 'Resend OTP',
+            onCaptionTrailingTap: () => setState(() => otp = ''),
+          ),
+          SizedBox(height: 24),
+
+          Ux4gButton(
+            text: 'Verify OTP',
+            onPressed: () {},
+            size: Ux4gButtonSize.large,
+            width: double.infinity,
+          ),
+          SizedBox(height: 12),
+
+          // Voice-call fallback CTA.
+          Ux4gButton(
+            text: 'Get OTP via voice call',
+            onPressed: () {},
+            variant: Ux4gButtonVariant.outline,
+            size: Ux4gButtonSize.large,
+            leadingIcon: Icons.phone_outlined,
+            width: double.infinity,
+          ),
+        ],
+      ),
+    ),
+  ],
+)''';
+
+// ───────────────────────────────────────────────────────────────────────
+// Verify mobile with voice fallback — Card-style variant
+// (toggled via the [Variant] knob on otpVerifyVoiceComponent)
+// ───────────────────────────────────────────────────────────────────────
+class _VerifyMobileVoiceCardMockup extends StatefulWidget {
+  const _VerifyMobileVoiceCardMockup();
+
+  @override
+  State<_VerifyMobileVoiceCardMockup> createState() =>
+      _VerifyMobileVoiceCardMockupState();
+}
+
+class _VerifyMobileVoiceCardMockupState
+    extends State<_VerifyMobileVoiceCardMockup> {
+  String _otp = '';
+
+  static const _cardBg = Color(0xFFE9E5FF);
+
+  @override
+  Widget build(BuildContext context) {
+    return _PhoneFrame(
+      child: Column(
+        children: [
+          const _BrandHeader(),
+          Expanded(
+            child: Container(
+              width: double.infinity,
+              color: _cardBg,
+              child: Column(
+                children: [
+                  // White card hugs the top of the soft-purple area.
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(16, 24, 16, 0),
+                    child: Container(
+                      padding: const EdgeInsets.fromLTRB(20, 16, 20, 24),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(16),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withValues(alpha: 0.04),
+                            blurRadius: 16,
+                            offset: const Offset(0, 4),
+                          ),
+                        ],
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const _BackButton(),
+                          const SizedBox(height: 16),
+
+                          const Text(
+                            'Verify your mobile\nnumber',
+                            style: TextStyle(
+                              fontSize: 26,
+                              fontWeight: FontWeight.w800,
+                              color: _titleColor,
+                              height: 1.2,
+                              letterSpacing: -0.3,
+                            ),
+                          ),
+                          const SizedBox(height: 8),
+                          const Text(
+                            'OTP sent to +91 98765 XXXXX',
+                            style: TextStyle(
+                              fontSize: 14,
+                              color: _subtleText,
+                              height: 1.3,
+                            ),
+                          ),
+                          const SizedBox(height: 20),
+
+                          // Caption already in expired/action state so
+                          // "Resend OTP" is immediately tap-able.
+                          Ux4gOtpInput(
+                            length: 6,
+                            value: _otp,
+                            onChanged: (v) => setState(() => _otp = v),
+                            boxSize: 44,
+                            gap: 8,
+                            showSeparator: false,
+                            captionVariant: Ux4gOtpCaptionVariant.resendAction,
+                            captionLeadingText: "Didn't receive OTP?",
+                            captionTrailingText: 'Resend OTP',
+                            onCaptionTrailingTap: () {
+                              setState(() => _otp = '');
+                            },
+                          ),
+                          const SizedBox(height: 24),
+
+                          Ux4gButton(
+                            text: 'Verify OTP',
+                            onPressed: () {},
+                            size: Ux4gButtonSize.large,
+                            width: double.infinity,
+                          ),
+                          const SizedBox(height: 12),
+
+                          Ux4gButton(
+                            text: 'Get OTP via voice call',
+                            onPressed: () {},
+                            variant: Ux4gButtonVariant.outline,
+                            size: Ux4gButtonSize.large,
+                            leadingIcon: Icons.phone_outlined,
+                            iconSize: 18,
+                            width: double.infinity,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+
+                  const Spacer(),
+                  const _BrandFooter(),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+const _verifyVoiceFallbackCardCode =
+    r'''// Mobile-sized card-style verify-mobile screen with voice-call fallback (360 x 760)
+Column(
+  children: [
+    Ux4gAppHeader(
+      variant: Ux4gAppHeaderVariant.light,
+      leadingWidgets: [
+        SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
+        Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
+        SvgPicture.asset('assets/Union.svg', height: 32),
+      ],
+    ),
+    Divider(height: 1, color: Color(0xFFE5E7EB)),
+
+    Expanded(
+      child: Container(
+        width: double.infinity,
+        color: Color(0xFFE9E5FF),
+        child: Column(
+          children: [
+            Padding(
+              padding: EdgeInsets.fromLTRB(16, 24, 16, 0),
+              child: Container(
+                padding: EdgeInsets.fromLTRB(20, 16, 20, 24),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(16),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withValues(alpha: 0.04),
+                      blurRadius: 16,
+                      offset: Offset(0, 4),
+                    ),
+                  ],
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Ux4gButton(
+                      text: 'Back',
+                      onPressed: () {},
+                      variant: Ux4gButtonVariant.ghost,
+                      size: Ux4gButtonSize.small,
+                      leadingIcon: Icons.arrow_back,
+                    ),
+                    SizedBox(height: 16),
+
+                    Text('Verify your mobile\nnumber',
+                      style: TextStyle(fontSize: 26, fontWeight: FontWeight.w800)),
+                    SizedBox(height: 8),
+                    Text('OTP sent to +91 98765 XXXXX',
+                      style: TextStyle(fontSize: 14, color: Color(0xFF6B7280))),
+                    SizedBox(height: 20),
+
+                    Ux4gOtpInput(
+                      length: 6,
+                      value: otp,
+                      onChanged: (v) => setState(() => otp = v),
+                      boxSize: 44,
+                      gap: 8,
+                      showSeparator: false,
+                      captionVariant: Ux4gOtpCaptionVariant.resendAction,
+                      captionLeadingText: "Didn't receive OTP?",
+                      captionTrailingText: 'Resend OTP',
+                      onCaptionTrailingTap: () => setState(() => otp = ''),
+                    ),
+                    SizedBox(height: 24),
+
+                    Ux4gButton(
+                      text: 'Verify OTP',
+                      onPressed: () {},
+                      size: Ux4gButtonSize.large,
+                      width: double.infinity,
+                    ),
+                    SizedBox(height: 12),
+
+                    Ux4gButton(
+                      text: 'Get OTP via voice call',
+                      onPressed: () {},
+                      variant: Ux4gButtonVariant.outline,
+                      size: Ux4gButtonSize.large,
+                      leadingIcon: Icons.phone_outlined,
+                      width: double.infinity,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+
+            Spacer(),
+
+            Padding(
+              padding: EdgeInsets.only(bottom: 20, top: 8),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text('Powered by -',
+                    style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+                  SizedBox(height: 6),
+                  Image.asset('assets/digital_india_logo.png', height: 22),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    ),
+  ],
+)''';
+
+// ───────────────────────────────────────────────────────────────────────
+// Verify mobile with attempt warning — mobile mockup
+// ───────────────────────────────────────────────────────────────────────
+class _VerifyMobileAttemptWarningMockup extends StatefulWidget {
+  const _VerifyMobileAttemptWarningMockup();
+
+  @override
+  State<_VerifyMobileAttemptWarningMockup> createState() =>
+      _VerifyMobileAttemptWarningMockupState();
+}
+
+class _VerifyMobileAttemptWarningMockupState
+    extends State<_VerifyMobileAttemptWarningMockup> {
+  String _otp = '';
+
+  @override
+  Widget build(BuildContext context) {
+    return _PhoneFrame(
+      child: Column(
+        children: [
+          const _BrandHeader(),
+          Expanded(
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.fromLTRB(20, 32, 20, 0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const _BackButton(),
+                  const SizedBox(height: 24),
+
+                  const Text(
+                    'Verify your mobile\nnumber',
+                    style: TextStyle(
+                      fontSize: 26,
+                      fontWeight: FontWeight.w800,
+                      color: _titleColor,
+                      height: 1.2,
+                      letterSpacing: -0.3,
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  const Text(
+                    'OTP sent to +91 98765 XXXXX',
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: _subtleText,
+                      height: 1.3,
+                    ),
+                  ),
+                  const SizedBox(height: 24),
+
+                  // 6 OTP boxes — caption suppressed since the warning
+                  // banner below carries the resend message.
+                  Ux4gOtpInput(
+                    length: 6,
+                    value: _otp,
+                    onChanged: (v) => setState(() => _otp = v),
+                    boxSize: 44,
+                    gap: 8,
+                    showSeparator: false,
+                  ),
+                  const SizedBox(height: 16),
+
+                  // Warning banner — uses the design-system component
+                  // with warningLight variant and an Attempt pill on
+                  // the trailing side.
+                  Ux4gStatusBanner(
+                    variant: Ux4gBannerVariant.warningLight,
+                    title: 'Incorrect OTP',
+                    subtitle: '1 more incorrect entry\nbefore 30-min lockout',
+                    margin: EdgeInsets.zero,
+                    padding: const EdgeInsets.fromLTRB(12, 12, 10, 12),
+                    titleStyle: const TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400,
+                      color: Ux4gPalette.secondary800,
+                      height: 1.3,
+                    ),
+                    subtitleStyle: const TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w700,
+                      color: Ux4gPalette.secondary800,
+                      height: 1.3,
+                    ),
+                    leadingIcon: const Icon(
+                      Icons.error_outline,
+                      color: Ux4gPalette.secondary600,
+                      size: 20,
+                    ),
+                    trailingIcon: Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 10,
+                        vertical: 5,
+                      ),
+                      decoration: BoxDecoration(
+                        color: Ux4gPalette.secondary100,
+                        borderRadius: BorderRadius.circular(6),
+                      ),
+                      child: const Text(
+                        'Attempt 1 of 3',
+                        style: TextStyle(
+                          fontSize: 12,
+                          color: Ux4gPalette.secondary800,
+                          fontWeight: FontWeight.w500,
+                          height: 1.2,
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+
+                  Ux4gButton(
+                    text: 'Verify OTP',
+                    onPressed: () {},
+                    size: Ux4gButtonSize.large,
+                    width: double.infinity,
+                  ),
+                ],
+              ),
+            ),
+          ),
+          const _BrandFooter(),
+        ],
+      ),
+    );
+  }
+}
+
+const _verifyAttemptWarningCode =
+    r'''// Mobile-sized verify-mobile screen with attempt-warning banner (360 x 760)
+Column(
+  children: [
+    Ux4gAppHeader(
+      variant: Ux4gAppHeaderVariant.light,
+      leadingWidgets: [
+        SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
+        Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
+        SvgPicture.asset('assets/Union.svg', height: 32),
+      ],
+    ),
+    Divider(height: 1, color: Color(0xFFE5E7EB)),
+
+    Padding(
+      padding: EdgeInsets.fromLTRB(20, 32, 20, 0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Ux4gButton(
+            text: 'Back',
+            onPressed: () {},
+            variant: Ux4gButtonVariant.ghost,
+            size: Ux4gButtonSize.small,
+            leadingIcon: Icons.arrow_back,
+          ),
+          SizedBox(height: 24),
+
+          Text('Verify your mobile\nnumber',
+            style: TextStyle(fontSize: 26, fontWeight: FontWeight.w800)),
+          SizedBox(height: 8),
+          Text('OTP sent to +91 98765 XXXXX',
+            style: TextStyle(fontSize: 14, color: Color(0xFF6B7280))),
+          SizedBox(height: 24),
+
+          Ux4gOtpInput(
+            length: 6,
+            value: otp,
+            onChanged: (v) => setState(() => otp = v),
+            boxSize: 44,
+            gap: 8,
+            showSeparator: false,
+          ),
+          SizedBox(height: 16),
+
+          // Warning banner — design-system Ux4gStatusBanner.
+          Ux4gStatusBanner(
+            variant: Ux4gBannerVariant.warningLight,
+            title: 'Incorrect OTP',
+            subtitle: '1 more incorrect entry\nbefore 30-min lockout',
+            margin: EdgeInsets.zero,
+            padding: EdgeInsets.fromLTRB(12, 12, 10, 12),
+            titleStyle: TextStyle(
+              fontSize: 14, fontWeight: FontWeight.w400,
+              color: Ux4gPalette.secondary800,
+            ),
+            subtitleStyle: TextStyle(
+              fontSize: 14, fontWeight: FontWeight.w700,
+              color: Ux4gPalette.secondary800,
+            ),
+            leadingIcon: Icon(Icons.error_outline,
+              color: Ux4gPalette.secondary600, size: 20),
+            trailingIcon: Container(
+              padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+              decoration: BoxDecoration(
+                color: Ux4gPalette.secondary100,
+                borderRadius: BorderRadius.circular(6),
+              ),
+              child: Text('Attempt 1 of 3',
+                style: TextStyle(fontSize: 12,
+                  color: Ux4gPalette.secondary800,
+                  fontWeight: FontWeight.w500)),
+            ),
+          ),
+          SizedBox(height: 20),
+
+          Ux4gButton(
+            text: 'Verify OTP',
+            onPressed: () {},
+            size: Ux4gButtonSize.large,
+            width: double.infinity,
+          ),
+        ],
+      ),
+    ),
+  ],
+)''';
+
+// ───────────────────────────────────────────────────────────────────────
+// Verify mobile with attempt warning — Card-style variant
+// (toggled via the [Variant] knob on otpVerifyAttemptWarningComponent)
+// ───────────────────────────────────────────────────────────────────────
+class _VerifyMobileAttemptWarningCardMockup extends StatefulWidget {
+  const _VerifyMobileAttemptWarningCardMockup();
+
+  @override
+  State<_VerifyMobileAttemptWarningCardMockup> createState() =>
+      _VerifyMobileAttemptWarningCardMockupState();
+}
+
+class _VerifyMobileAttemptWarningCardMockupState
+    extends State<_VerifyMobileAttemptWarningCardMockup> {
+  String _otp = '';
+
+  static const _cardBg = Color(0xFFE9E5FF);
+
+  @override
+  Widget build(BuildContext context) {
+    return _PhoneFrame(
+      child: Column(
+        children: [
+          const _BrandHeader(),
+          Expanded(
+            child: Container(
+              width: double.infinity,
+              color: _cardBg,
+              child: Column(
+                children: [
+                  // White card hugs the top of the soft-purple area.
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(16, 24, 16, 0),
+                    child: Container(
+                      padding: const EdgeInsets.fromLTRB(20, 16, 20, 24),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(16),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withValues(alpha: 0.04),
+                            blurRadius: 16,
+                            offset: const Offset(0, 4),
+                          ),
+                        ],
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const _BackButton(),
+                          const SizedBox(height: 16),
+
+                          const Text(
+                            'Verify your mobile\nnumber',
+                            style: TextStyle(
+                              fontSize: 26,
+                              fontWeight: FontWeight.w800,
+                              color: _titleColor,
+                              height: 1.2,
+                              letterSpacing: -0.3,
+                            ),
+                          ),
+                          const SizedBox(height: 8),
+                          const Text(
+                            'OTP sent to +91 98765 XXXXX',
+                            style: TextStyle(
+                              fontSize: 14,
+                              color: _subtleText,
+                              height: 1.3,
+                            ),
+                          ),
+                          const SizedBox(height: 20),
+
+                          Ux4gOtpInput(
+                            length: 6,
+                            value: _otp,
+                            onChanged: (v) => setState(() => _otp = v),
+                            boxSize: 44,
+                            gap: 8,
+                            showSeparator: false,
+                          ),
+                          const SizedBox(height: 16),
+
+                          Ux4gStatusBanner(
+                            variant: Ux4gBannerVariant.warningLight,
+                            title: 'Incorrect OTP',
+                            subtitle:
+                                '1 more incorrect entry\nbefore 30-min lockout',
+                            margin: EdgeInsets.zero,
+                            padding: const EdgeInsets.fromLTRB(12, 12, 10, 12),
+                            titleStyle: const TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w400,
+                              color: Ux4gPalette.secondary800,
+                              height: 1.3,
+                            ),
+                            subtitleStyle: const TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w700,
+                              color: Ux4gPalette.secondary800,
+                              height: 1.3,
+                            ),
+                            leadingIcon: const Icon(
+                              Icons.error_outline,
+                              color: Ux4gPalette.secondary600,
+                              size: 20,
+                            ),
+                            trailingIcon: Container(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 10,
+                                vertical: 5,
+                              ),
+                              decoration: BoxDecoration(
+                                color: Ux4gPalette.secondary100,
+                                borderRadius: BorderRadius.circular(6),
+                              ),
+                              child: const Text(
+                                'Attempt 1 of 3',
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  color: Ux4gPalette.secondary800,
+                                  fontWeight: FontWeight.w500,
+                                  height: 1.2,
+                                ),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 20),
+
+                          Ux4gButton(
+                            text: 'Verify OTP',
+                            onPressed: () {},
+                            size: Ux4gButtonSize.large,
+                            width: double.infinity,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+
+                  const Spacer(),
+                  const _BrandFooter(),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+const _verifyAttemptWarningCardCode =
+    r'''// Mobile-sized card-style verify-mobile screen with attempt-warning (360 x 760)
+Column(
+  children: [
+    Ux4gAppHeader(
+      variant: Ux4gAppHeaderVariant.light,
+      leadingWidgets: [
+        SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
+        Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
+        SvgPicture.asset('assets/Union.svg', height: 32),
+      ],
+    ),
+    Divider(height: 1, color: Color(0xFFE5E7EB)),
+
+    Expanded(
+      child: Container(
+        width: double.infinity,
+        color: Color(0xFFE9E5FF),
+        child: Column(
+          children: [
+            Padding(
+              padding: EdgeInsets.fromLTRB(16, 24, 16, 0),
+              child: Container(
+                padding: EdgeInsets.fromLTRB(20, 16, 20, 24),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(16),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withValues(alpha: 0.04),
+                      blurRadius: 16,
+                      offset: Offset(0, 4),
+                    ),
+                  ],
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Ux4gButton(
+                      text: 'Back',
+                      onPressed: () {},
+                      variant: Ux4gButtonVariant.ghost,
+                      size: Ux4gButtonSize.small,
+                      leadingIcon: Icons.arrow_back,
+                    ),
+                    SizedBox(height: 16),
+
+                    Text('Verify your mobile\nnumber',
+                      style: TextStyle(fontSize: 26, fontWeight: FontWeight.w800)),
+                    SizedBox(height: 8),
+                    Text('OTP sent to +91 98765 XXXXX',
+                      style: TextStyle(fontSize: 14, color: Color(0xFF6B7280))),
+                    SizedBox(height: 20),
+
+                    Ux4gOtpInput(
+                      length: 6,
+                      value: otp,
+                      onChanged: (v) => setState(() => otp = v),
+                      boxSize: 44,
+                      gap: 8,
+                      showSeparator: false,
+                    ),
+                    SizedBox(height: 16),
+
+                    Ux4gStatusBanner(
+                      variant: Ux4gBannerVariant.warningLight,
+                      title: 'Incorrect OTP',
+                      subtitle: '1 more incorrect entry\nbefore 30-min lockout',
+                      margin: EdgeInsets.zero,
+                      padding: EdgeInsets.fromLTRB(12, 12, 10, 12),
+                      titleStyle: TextStyle(
+                        fontSize: 14, fontWeight: FontWeight.w400,
+                        color: Ux4gPalette.secondary800,
+                      ),
+                      subtitleStyle: TextStyle(
+                        fontSize: 14, fontWeight: FontWeight.w700,
+                        color: Ux4gPalette.secondary800,
+                      ),
+                      leadingIcon: Icon(Icons.error_outline,
+                        color: Ux4gPalette.secondary600, size: 20),
+                      trailingIcon: Container(
+                        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                        decoration: BoxDecoration(
+                          color: Ux4gPalette.secondary100,
+                          borderRadius: BorderRadius.circular(6),
+                        ),
+                        child: Text('Attempt 1 of 3',
+                          style: TextStyle(fontSize: 12,
+                            color: Ux4gPalette.secondary800,
+                            fontWeight: FontWeight.w500)),
+                      ),
+                    ),
+                    SizedBox(height: 20),
+
+                    Ux4gButton(
+                      text: 'Verify OTP',
+                      onPressed: () {},
+                      size: Ux4gButtonSize.large,
+                      width: double.infinity,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+
+            Spacer(),
+
+            Padding(
+              padding: EdgeInsets.only(bottom: 20, top: 8),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text('Powered by -',
+                    style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+                  SizedBox(height: 6),
+                  Image.asset('assets/digital_india_logo.png', height: 22),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    ),
+  ],
+)''';
+
+// ───────────────────────────────────────────────────────────────────────
+// Verify mobile with last-attempt warning — mobile mockup
+// ───────────────────────────────────────────────────────────────────────
+class _VerifyMobileLastAttemptMockup extends StatefulWidget {
+  const _VerifyMobileLastAttemptMockup();
+
+  @override
+  State<_VerifyMobileLastAttemptMockup> createState() =>
+      _VerifyMobileLastAttemptMockupState();
+}
+
+class _VerifyMobileLastAttemptMockupState
+    extends State<_VerifyMobileLastAttemptMockup> {
+  String _otp = '';
+
+  @override
+  Widget build(BuildContext context) {
+    return _PhoneFrame(
+      child: Column(
+        children: [
+          const _BrandHeader(),
+          Expanded(
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.fromLTRB(20, 32, 20, 0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const _BackButton(),
+                  const SizedBox(height: 24),
+
+                  const Text(
+                    'Verify your mobile\nnumber',
+                    style: TextStyle(
+                      fontSize: 26,
+                      fontWeight: FontWeight.w800,
+                      color: _titleColor,
+                      height: 1.2,
+                      letterSpacing: -0.3,
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  const Text(
+                    'OTP sent to +91 98765 XXXXX',
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: _subtleText,
+                      height: 1.3,
+                    ),
+                  ),
+                  const SizedBox(height: 24),
+
+                  Ux4gOtpInput(
+                    length: 6,
+                    value: _otp,
+                    onChanged: (v) => setState(() => _otp = v),
+                    boxSize: 44,
+                    gap: 8,
+                    showSeparator: false,
+                  ),
+                  const SizedBox(height: 16),
+
+                  // Error-styled banner — escalated from warning since
+                  // this is the final attempt before lockout.
+                  Ux4gStatusBanner(
+                    variant: Ux4gBannerVariant.errorLight,
+                    title: 'Incorrect OTP',
+                    subtitle:
+                        'This is your last attempt\nbefore a 30-min lockout',
+                    margin: EdgeInsets.zero,
+                    padding: const EdgeInsets.fromLTRB(12, 12, 10, 12),
+                    titleStyle: const TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400,
+                      color: Ux4gPalette.red800,
+                      height: 1.3,
+                    ),
+                    subtitleStyle: const TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w700,
+                      color: Ux4gPalette.red800,
+                      height: 1.3,
+                    ),
+                    leadingIcon: const Icon(
+                      Icons.error_outline,
+                      color: Ux4gPalette.red600,
+                      size: 20,
+                    ),
+                    trailingIcon: Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 10,
+                        vertical: 5,
+                      ),
+                      decoration: BoxDecoration(
+                        color: Ux4gPalette.red100,
+                        borderRadius: BorderRadius.circular(6),
+                      ),
+                      child: const Text(
+                        'Attempt 2 of 3',
+                        style: TextStyle(
+                          fontSize: 12,
+                          color: Ux4gPalette.red800,
+                          fontWeight: FontWeight.w500,
+                          height: 1.2,
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+
+                  Ux4gButton(
+                    text: 'Verify OTP',
+                    onPressed: () {},
+                    size: Ux4gButtonSize.large,
+                    width: double.infinity,
+                  ),
+                ],
+              ),
+            ),
+          ),
+          const _BrandFooter(),
+        ],
+      ),
+    );
+  }
+}
+
+const _verifyLastAttemptCode =
+    r'''// Mobile-sized verify-mobile screen on the FINAL attempt (360 x 760)
+Column(
+  children: [
+    Ux4gAppHeader(
+      variant: Ux4gAppHeaderVariant.light,
+      leadingWidgets: [
+        SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
+        Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
+        SvgPicture.asset('assets/Union.svg', height: 32),
+      ],
+    ),
+    Divider(height: 1, color: Color(0xFFE5E7EB)),
+
+    Padding(
+      padding: EdgeInsets.fromLTRB(20, 32, 20, 0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Ux4gButton(
+            text: 'Back',
+            onPressed: () {},
+            variant: Ux4gButtonVariant.ghost,
+            size: Ux4gButtonSize.small,
+            leadingIcon: Icons.arrow_back,
+          ),
+          SizedBox(height: 24),
+
+          Text('Verify your mobile\nnumber',
+            style: TextStyle(fontSize: 26, fontWeight: FontWeight.w800)),
+          SizedBox(height: 8),
+          Text('OTP sent to +91 98765 XXXXX',
+            style: TextStyle(fontSize: 14, color: Color(0xFF6B7280))),
+          SizedBox(height: 24),
+
+          Ux4gOtpInput(
+            length: 6,
+            value: otp,
+            onChanged: (v) => setState(() => otp = v),
+            boxSize: 44,
+            gap: 8,
+            showSeparator: false,
+          ),
+          SizedBox(height: 16),
+
+          // Error-styled banner — final attempt before lockout.
+          Ux4gStatusBanner(
+            variant: Ux4gBannerVariant.errorLight,
+            title: 'Incorrect OTP',
+            subtitle: 'This is your last attempt\nbefore a 30-min lockout',
+            margin: EdgeInsets.zero,
+            padding: EdgeInsets.fromLTRB(12, 12, 10, 12),
+            titleStyle: TextStyle(
+              fontSize: 14, fontWeight: FontWeight.w400,
+              color: Ux4gPalette.red800,
+            ),
+            subtitleStyle: TextStyle(
+              fontSize: 14, fontWeight: FontWeight.w700,
+              color: Ux4gPalette.red800,
+            ),
+            leadingIcon: Icon(Icons.error_outline,
+              color: Ux4gPalette.red600, size: 20),
+            trailingIcon: Container(
+              padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+              decoration: BoxDecoration(
+                color: Ux4gPalette.red100,
+                borderRadius: BorderRadius.circular(6),
+              ),
+              child: Text('Attempt 2 of 3',
+                style: TextStyle(fontSize: 12,
+                  color: Ux4gPalette.red800,
+                  fontWeight: FontWeight.w500)),
+            ),
+          ),
+          SizedBox(height: 20),
+
+          Ux4gButton(
+            text: 'Verify OTP',
+            onPressed: () {},
+            size: Ux4gButtonSize.large,
+            width: double.infinity,
+          ),
+        ],
+      ),
+    ),
+  ],
+)''';
+
+// ───────────────────────────────────────────────────────────────────────
+// Verify mobile with last-attempt warning — Card-style variant
+// ───────────────────────────────────────────────────────────────────────
+class _VerifyMobileLastAttemptCardMockup extends StatefulWidget {
+  const _VerifyMobileLastAttemptCardMockup();
+
+  @override
+  State<_VerifyMobileLastAttemptCardMockup> createState() =>
+      _VerifyMobileLastAttemptCardMockupState();
+}
+
+class _VerifyMobileLastAttemptCardMockupState
+    extends State<_VerifyMobileLastAttemptCardMockup> {
+  String _otp = '';
+
+  static const _cardBg = Color(0xFFE9E5FF);
+
+  @override
+  Widget build(BuildContext context) {
+    return _PhoneFrame(
+      child: Column(
+        children: [
+          const _BrandHeader(),
+          Expanded(
+            child: Container(
+              width: double.infinity,
+              color: _cardBg,
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(16, 24, 16, 0),
+                    child: Container(
+                      padding: const EdgeInsets.fromLTRB(20, 16, 20, 24),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(16),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withValues(alpha: 0.04),
+                            blurRadius: 16,
+                            offset: const Offset(0, 4),
+                          ),
+                        ],
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const _BackButton(),
+                          const SizedBox(height: 16),
+
+                          const Text(
+                            'Verify your mobile\nnumber',
+                            style: TextStyle(
+                              fontSize: 26,
+                              fontWeight: FontWeight.w800,
+                              color: _titleColor,
+                              height: 1.2,
+                              letterSpacing: -0.3,
+                            ),
+                          ),
+                          const SizedBox(height: 8),
+                          const Text(
+                            'OTP sent to +91 98765 XXXXX',
+                            style: TextStyle(
+                              fontSize: 14,
+                              color: _subtleText,
+                              height: 1.3,
+                            ),
+                          ),
+                          const SizedBox(height: 20),
+
+                          Ux4gOtpInput(
+                            length: 6,
+                            value: _otp,
+                            onChanged: (v) => setState(() => _otp = v),
+                            boxSize: 44,
+                            gap: 8,
+                            showSeparator: false,
+                          ),
+                          const SizedBox(height: 16),
+
+                          Ux4gStatusBanner(
+                            variant: Ux4gBannerVariant.errorLight,
+                            title: 'Incorrect OTP',
+                            subtitle:
+                                'This is your last attempt\nbefore a 30-min lockout',
+                            margin: EdgeInsets.zero,
+                            padding: const EdgeInsets.fromLTRB(12, 12, 10, 12),
+                            titleStyle: const TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w400,
+                              color: Ux4gPalette.red800,
+                              height: 1.3,
+                            ),
+                            subtitleStyle: const TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w700,
+                              color: Ux4gPalette.red800,
+                              height: 1.3,
+                            ),
+                            leadingIcon: const Icon(
+                              Icons.error_outline,
+                              color: Ux4gPalette.red600,
+                              size: 20,
+                            ),
+                            trailingIcon: Container(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 10,
+                                vertical: 5,
+                              ),
+                              decoration: BoxDecoration(
+                                color: Ux4gPalette.red100,
+                                borderRadius: BorderRadius.circular(6),
+                              ),
+                              child: const Text(
+                                'Attempt 2 of 3',
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  color: Ux4gPalette.red800,
+                                  fontWeight: FontWeight.w500,
+                                  height: 1.2,
+                                ),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 20),
+
+                          Ux4gButton(
+                            text: 'Verify OTP',
+                            onPressed: () {},
+                            size: Ux4gButtonSize.large,
+                            width: double.infinity,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+
+                  const Spacer(),
+                  const _BrandFooter(),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+const _verifyLastAttemptCardCode =
+    r'''// Mobile-sized card-style verify-mobile screen on the FINAL attempt (360 x 760)
+Column(
+  children: [
+    Ux4gAppHeader(
+      variant: Ux4gAppHeaderVariant.light,
+      leadingWidgets: [
+        SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
+        Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
+        SvgPicture.asset('assets/Union.svg', height: 32),
+      ],
+    ),
+    Divider(height: 1, color: Color(0xFFE5E7EB)),
+
+    Expanded(
+      child: Container(
+        width: double.infinity,
+        color: Color(0xFFE9E5FF),
+        child: Column(
+          children: [
+            Padding(
+              padding: EdgeInsets.fromLTRB(16, 24, 16, 0),
+              child: Container(
+                padding: EdgeInsets.fromLTRB(20, 16, 20, 24),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(16),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withValues(alpha: 0.04),
+                      blurRadius: 16,
+                      offset: Offset(0, 4),
+                    ),
+                  ],
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Ux4gButton(
+                      text: 'Back',
+                      onPressed: () {},
+                      variant: Ux4gButtonVariant.ghost,
+                      size: Ux4gButtonSize.small,
+                      leadingIcon: Icons.arrow_back,
+                    ),
+                    SizedBox(height: 16),
+
+                    Text('Verify your mobile\nnumber',
+                      style: TextStyle(fontSize: 26, fontWeight: FontWeight.w800)),
+                    SizedBox(height: 8),
+                    Text('OTP sent to +91 98765 XXXXX',
+                      style: TextStyle(fontSize: 14, color: Color(0xFF6B7280))),
+                    SizedBox(height: 20),
+
+                    Ux4gOtpInput(
+                      length: 6,
+                      value: otp,
+                      onChanged: (v) => setState(() => otp = v),
+                      boxSize: 44,
+                      gap: 8,
+                      showSeparator: false,
+                    ),
+                    SizedBox(height: 16),
+
+                    Ux4gStatusBanner(
+                      variant: Ux4gBannerVariant.errorLight,
+                      title: 'Incorrect OTP',
+                      subtitle: 'This is your last attempt\nbefore a 30-min lockout',
+                      margin: EdgeInsets.zero,
+                      padding: EdgeInsets.fromLTRB(12, 12, 10, 12),
+                      titleStyle: TextStyle(
+                        fontSize: 14, fontWeight: FontWeight.w400,
+                        color: Ux4gPalette.red800,
+                      ),
+                      subtitleStyle: TextStyle(
+                        fontSize: 14, fontWeight: FontWeight.w700,
+                        color: Ux4gPalette.red800,
+                      ),
+                      leadingIcon: Icon(Icons.error_outline,
+                        color: Ux4gPalette.red600, size: 20),
+                      trailingIcon: Container(
+                        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                        decoration: BoxDecoration(
+                          color: Ux4gPalette.red100,
+                          borderRadius: BorderRadius.circular(6),
+                        ),
+                        child: Text('Attempt 2 of 3',
+                          style: TextStyle(fontSize: 12,
+                            color: Ux4gPalette.red800,
+                            fontWeight: FontWeight.w500)),
+                      ),
+                    ),
+                    SizedBox(height: 20),
+
+                    Ux4gButton(
+                      text: 'Verify OTP',
+                      onPressed: () {},
+                      size: Ux4gButtonSize.large,
+                      width: double.infinity,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+
+            Spacer(),
+
+            Padding(
+              padding: EdgeInsets.only(bottom: 20, top: 8),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text('Powered by -',
+                    style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+                  SizedBox(height: 6),
+                  Image.asset('assets/digital_india_logo.png', height: 22),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    ),
+  ],
+)''';
+
+// ───────────────────────────────────────────────────────────────────────
+// Verify mobile — account locked (mobile mockup)
+// ───────────────────────────────────────────────────────────────────────
+class _VerifyAccountLockedMockup extends StatefulWidget {
+  const _VerifyAccountLockedMockup();
+
+  @override
+  State<_VerifyAccountLockedMockup> createState() =>
+      _VerifyAccountLockedMockupState();
+}
+
+class _VerifyAccountLockedMockupState
+    extends State<_VerifyAccountLockedMockup> {
+  // Lock-state palette.
+  static const _lockBadgeBg = Ux4gPalette.red100;
+  static const _lockIconColor = Ux4gPalette.red600;
+
+  @override
+  Widget build(BuildContext context) {
+    return _PhoneFrame(
+      child: Column(
+        children: [
+          const _BrandHeader(),
+          Expanded(
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.fromLTRB(20, 24, 20, 0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const _BackButton(),
+                  const SizedBox(height: 24),
+
+                  // ── Lock badge ──
+                  Center(
+                    child: Container(
+                      width: 64,
+                      height: 64,
+                      decoration: const BoxDecoration(
+                        color: _lockBadgeBg,
+                        shape: BoxShape.circle,
+                      ),
+                      alignment: Alignment.center,
+                      child: const Icon(
+                        Icons.lock,
+                        color: _lockIconColor,
+                        size: 28,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+
+                  const Center(
+                    child: Text(
+                      'Too many incorrect\nattempts',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 22,
+                        fontWeight: FontWeight.w800,
+                        color: _titleColor,
+                        height: 1.2,
+                        letterSpacing: -0.3,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 24),
+
+                  // 6 disabled OTP boxes with the [locked] caption — the
+                  // design-system component renders "🔒 Locked for mm:ss"
+                  // on the leading side and "Resend OTP" on the trailing
+                  // side automatically.
+                  Ux4gOtpInput(
+                    length: 6,
+                    value: '',
+                    onChanged: (_) {},
+                    enabled: false,
+                    boxSize: 44,
+                    gap: 8,
+                    showSeparator: false,
+                    captionVariant: Ux4gOtpCaptionVariant.locked,
+                    captionLeadingText: 'Locked for 28:43',
+                    captionTrailingText: 'Resend OTP',
+                  ),
+                  const SizedBox(height: 12),
+
+                  // ── Error banner ──
+                  Ux4gStatusBanner(
+                    variant: Ux4gBannerVariant.errorLight,
+                    title:
+                        'Account locked. Please wait for the\n'
+                        'countdown to complete',
+                    margin: EdgeInsets.zero,
+                    padding: const EdgeInsets.fromLTRB(12, 12, 12, 12),
+                    titleStyle: const TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400,
+                      color: Ux4gPalette.red800,
+                      height: 1.35,
+                    ),
+                    leadingIcon: const Icon(
+                      Icons.error_outline,
+                      color: Ux4gPalette.red600,
+                      size: 20,
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+
+                  // ── Support link ──
+                  Center(
+                    child: Wrap(
+                      crossAxisAlignment: WrapCrossAlignment.center,
+                      children: [
+                        const Text(
+                          'Need help?  ',
+                          style: TextStyle(
+                            fontSize: 14,
+                            color: _subtleText,
+                            height: 1.3,
+                          ),
+                        ),
+                        Ux4gButton(
+                          text: 'Call 1800-XXX-XXXX',
+                          onPressed: () {},
+                          variant: Ux4gButtonVariant.ghost,
+                          size: Ux4gButtonSize.small,
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 4,
+                            vertical: 0,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          const _BrandFooter(),
+        ],
+      ),
+    );
+  }
+}
+
+const _verifyAccountLockedCode =
+    r'''// Mobile-sized account-locked screen (360 x 760)
+Column(
+  children: [
+    Ux4gAppHeader(
+      variant: Ux4gAppHeaderVariant.light,
+      leadingWidgets: [
+        SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
+        Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
+        SvgPicture.asset('assets/Union.svg', height: 32),
+      ],
+    ),
+    Divider(height: 1, color: Color(0xFFE5E7EB)),
+
+    Padding(
+      padding: EdgeInsets.fromLTRB(20, 24, 20, 0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Ux4gButton(
+            text: 'Back',
+            onPressed: () {},
+            variant: Ux4gButtonVariant.ghost,
+            size: Ux4gButtonSize.small,
+            leadingIcon: Icons.arrow_back,
+          ),
+          SizedBox(height: 24),
+
+          // Red lock badge.
+          Center(child: Container(
+            width: 64, height: 64,
+            decoration: BoxDecoration(
+              color: Ux4gPalette.red100,
+              shape: BoxShape.circle,
+            ),
+            alignment: Alignment.center,
+            child: Icon(Icons.lock, color: Ux4gPalette.red600, size: 28),
+          )),
+          SizedBox(height: 16),
+
+          Center(child: Text('Too many incorrect\nattempts',
+            textAlign: TextAlign.center,
+            style: TextStyle(fontSize: 22, fontWeight: FontWeight.w800))),
+          SizedBox(height: 24),
+
+          // Disabled OTP field with built-in "Locked for mm:ss" caption.
+          Ux4gOtpInput(
+            length: 6,
+            value: '',
+            onChanged: (_) {},
+            enabled: false,
+            boxSize: 44,
+            gap: 8,
+            showSeparator: false,
+            captionVariant: Ux4gOtpCaptionVariant.locked,
+            captionLeadingText: 'Locked for 28:43',
+            captionTrailingText: 'Resend OTP',
+          ),
+          SizedBox(height: 12),
+
+          Ux4gStatusBanner(
+            variant: Ux4gBannerVariant.errorLight,
+            title: 'Account locked. Please wait for the\\ncountdown to complete',
+            margin: EdgeInsets.zero,
+            padding: EdgeInsets.fromLTRB(12, 12, 12, 12),
+            titleStyle: TextStyle(
+              fontSize: 14, fontWeight: FontWeight.w400,
+              color: Ux4gPalette.red800,
+            ),
+            leadingIcon: Icon(Icons.error_outline,
+              color: Ux4gPalette.red600, size: 20),
+          ),
+          SizedBox(height: 20),
+
+          Center(child: Wrap(
+            crossAxisAlignment: WrapCrossAlignment.center,
+            children: [
+              Text('Need help?  ',
+                style: TextStyle(fontSize: 14, color: Color(0xFF6B7280))),
+              Ux4gButton(
+                text: 'Call 1800-XXX-XXXX',
+                onPressed: () {},
+                variant: Ux4gButtonVariant.ghost,
+                size: Ux4gButtonSize.small,
+              ),
+            ],
+          )),
+        ],
+      ),
+    ),
+  ],
+)''';
+
+// ───────────────────────────────────────────────────────────────────────
+// Verify mobile — account locked (Card-style variant)
+// ───────────────────────────────────────────────────────────────────────
+class _VerifyAccountLockedCardMockup extends StatefulWidget {
+  const _VerifyAccountLockedCardMockup();
+
+  @override
+  State<_VerifyAccountLockedCardMockup> createState() =>
+      _VerifyAccountLockedCardMockupState();
+}
+
+class _VerifyAccountLockedCardMockupState
+    extends State<_VerifyAccountLockedCardMockup> {
+  static const _cardBg = Color(0xFFE9E5FF);
+  static const _lockBadgeBg = Ux4gPalette.red100;
+  static const _lockIconColor = Ux4gPalette.red600;
+
+  @override
+  Widget build(BuildContext context) {
+    return _PhoneFrame(
+      child: Column(
+        children: [
+          const _BrandHeader(),
+          Expanded(
+            child: Container(
+              width: double.infinity,
+              color: _cardBg,
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(16, 24, 16, 0),
+                    child: Container(
+                      padding: const EdgeInsets.fromLTRB(20, 16, 20, 24),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(16),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withValues(alpha: 0.04),
+                            blurRadius: 16,
+                            offset: const Offset(0, 4),
+                          ),
+                        ],
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const _BackButton(),
+                          const SizedBox(height: 16),
+
+                          Center(
+                            child: Container(
+                              width: 64,
+                              height: 64,
+                              decoration: const BoxDecoration(
+                                color: _lockBadgeBg,
+                                shape: BoxShape.circle,
+                              ),
+                              alignment: Alignment.center,
+                              child: const Icon(
+                                Icons.lock,
+                                color: _lockIconColor,
+                                size: 28,
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 12),
+
+                          const Center(
+                            child: Text(
+                              'Too many incorrect\nattempts',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontSize: 22,
+                                fontWeight: FontWeight.w800,
+                                color: _titleColor,
+                                height: 1.2,
+                                letterSpacing: -0.3,
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 20),
+
+                          Ux4gOtpInput(
+                            length: 6,
+                            value: '',
+                            onChanged: (_) {},
+                            enabled: false,
+                            boxSize: 44,
+                            gap: 8,
+                            showSeparator: false,
+                            captionVariant: Ux4gOtpCaptionVariant.locked,
+                            captionLeadingText: 'Locked for 28:43',
+                            captionTrailingText: 'Resend OTP',
+                          ),
+                          const SizedBox(height: 12),
+
+                          Ux4gStatusBanner(
+                            variant: Ux4gBannerVariant.errorLight,
+                            title:
+                                'Account locked. Please wait for the\ncountdown to complete',
+                            margin: EdgeInsets.zero,
+                            padding: const EdgeInsets.fromLTRB(12, 12, 12, 12),
+                            titleStyle: const TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w400,
+                              color: Ux4gPalette.red800,
+                              height: 1.35,
+                            ),
+                            leadingIcon: const Icon(
+                              Icons.error_outline,
+                              color: Ux4gPalette.red600,
+                              size: 20,
+                            ),
+                          ),
+                          const SizedBox(height: 20),
+
+                          Center(
+                            child: Wrap(
+                              crossAxisAlignment: WrapCrossAlignment.center,
+                              children: [
+                                const Text(
+                                  'Need help?  ',
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    color: _subtleText,
+                                    height: 1.3,
+                                  ),
+                                ),
+                                Ux4gButton(
+                                  text: 'Call 1800-XXX-XXXX',
+                                  onPressed: () {},
+                                  variant: Ux4gButtonVariant.ghost,
+                                  size: Ux4gButtonSize.small,
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 4,
+                                    vertical: 0,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+
+                  const Spacer(),
+                  const _BrandFooter(),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+const _verifyAccountLockedCardCode =
+    r'''// Mobile-sized card-style account-locked screen (360 x 760)
+// Same content as the flat variant, wrapped in a soft-purple section
+// with a white rounded card hugging the top.
+Column(
+  children: [
+    Ux4gAppHeader(/* ... */),
+    Divider(height: 1, color: Color(0xFFE5E7EB)),
+    Expanded(
+      child: Container(
+        width: double.infinity,
+        color: Color(0xFFE9E5FF),
+        child: Column(
+          children: [
+            Padding(
+              padding: EdgeInsets.fromLTRB(16, 24, 16, 0),
+              child: Container(
+                padding: EdgeInsets.fromLTRB(20, 16, 20, 24),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(16),
+                  boxShadow: [/* subtle shadow */],
+                ),
+                child: Column(/* same content as flat variant */),
+              ),
+            ),
+            Spacer(),
+            // "Powered by - Digital India" footer pinned at the bottom.
+          ],
+        ),
+      ),
+    ),
+  ],
+)''';
+
+// ───────────────────────────────────────────────────────────────────────
+// OTP verified — success (mobile mockup)
+// ───────────────────────────────────────────────────────────────────────
+class _OtpVerifiedSuccessMockup extends StatelessWidget {
+  const _OtpVerifiedSuccessMockup();
+
+  // Brand greens — independent of theme so the success messaging
+  // always reads as "success" regardless of how the host app is themed.
+  static const _successMid = Ux4gPalette.green;
+  static const _successLight = Ux4gPalette.green100;
+
+  @override
+  Widget build(BuildContext context) {
+    return _PhoneFrame(
+      child: Column(
+        children: [
+          const _BrandHeader(),
+          Expanded(
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.fromLTRB(20, 64, 20, 0),
+              child: Column(
+                children: [
+                  // Success badge — same concentric-circles as the
+                  // "Signed in success" pattern.
+                  Container(
+                    width: 64,
+                    height: 64,
+                    decoration: const BoxDecoration(
+                      color: _successLight,
+                      shape: BoxShape.circle,
+                    ),
+                    alignment: Alignment.center,
+                    child: Container(
+                      width: 36,
+                      height: 36,
+                      decoration: const BoxDecoration(
+                        color: _successMid,
+                        shape: BoxShape.circle,
+                      ),
+                      child: const Icon(
+                        Icons.check,
+                        color: Colors.white,
+                        size: 22,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+
+                  const Text(
+                    'Verified!',
+                    style: TextStyle(
+                      fontSize: 22,
+                      fontWeight: FontWeight.w800,
+                      color: _titleColor,
+                      height: 1.2,
+                      letterSpacing: -0.3,
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  const Text(
+                    'Redirecting you to your dashboard...',
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: _subtleText,
+                      height: 1.3,
+                    ),
+                  ),
+                  const SizedBox(height: 24),
+
+                  // 6 OTP boxes filled with the entered code, tinted
+                  // green via the design-system's success status.
+                  // The built-in "Verification successful" caption
+                  // ships with the [success] caption variant.
+                  Ux4gOtpInput(
+                    length: 6,
+                    value: '555555',
+                    onChanged: (_) {},
+                    status: Ux4gOtpInputStatus.success,
+                    captionVariant: Ux4gOtpCaptionVariant.success,
+                    captionText: 'Verification successful',
+                    boxSize: 44,
+                    gap: 8,
+                    showSeparator: false,
+                  ),
+                ],
+              ),
+            ),
+          ),
+          const _BrandFooter(),
+        ],
+      ),
+    );
+  }
+}
+
+const _otpVerifiedSuccessCode =
+    r'''// Mobile-sized OTP verified-success screen (360 x 760)
+Column(
+  children: [
+    Ux4gAppHeader(
+      variant: Ux4gAppHeaderVariant.light,
+      leadingWidgets: [
+        SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
+        Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
+        SvgPicture.asset('assets/Union.svg', height: 32),
+      ],
+    ),
+    Divider(height: 1, color: Color(0xFFE5E7EB)),
+
+    Padding(
+      padding: EdgeInsets.fromLTRB(20, 64, 20, 0),
+      child: Column(
+        children: [
+          // Success badge — concentric circles + check.
+          Container(
+            width: 64, height: 64,
+            decoration: BoxDecoration(
+              color: Ux4gPalette.green100,
+              shape: BoxShape.circle,
+            ),
+            alignment: Alignment.center,
+            child: Container(
+              width: 36, height: 36,
+              decoration: BoxDecoration(
+                color: Ux4gPalette.green,
+                shape: BoxShape.circle,
+              ),
+              child: Icon(Icons.check, color: Colors.white, size: 22),
+            ),
+          ),
+          SizedBox(height: 20),
+
+          Text('Verified!',
+            style: TextStyle(fontSize: 22, fontWeight: FontWeight.w800)),
+          SizedBox(height: 8),
+          Text('Redirecting you to your dashboard...',
+            style: TextStyle(fontSize: 14, color: Color(0xFF6B7280))),
+          SizedBox(height: 24),
+
+          // OTP field tinted green via the design-system's success
+          // status, with built-in "Verification successful" caption.
+          Ux4gOtpInput(
+            length: 6,
+            value: '555555',
+            onChanged: (_) {},
+            status: Ux4gOtpInputStatus.success,
+            captionVariant: Ux4gOtpCaptionVariant.success,
+            captionText: 'Verification successful',
+            boxSize: 44,
+            gap: 8,
+            showSeparator: false,
+          ),
+        ],
+      ),
+    ),
+  ],
+)''';
+
+// ───────────────────────────────────────────────────────────────────────
+// OTP verified — success (Card-style variant)
+// ───────────────────────────────────────────────────────────────────────
+class _OtpVerifiedSuccessCardMockup extends StatelessWidget {
+  const _OtpVerifiedSuccessCardMockup();
+
+  static const _cardBg = Color(0xFFE9E5FF);
+  static const _successMid = Ux4gPalette.green;
+  static const _successLight = Ux4gPalette.green100;
+
+  @override
+  Widget build(BuildContext context) {
+    return _PhoneFrame(
+      child: Column(
+        children: [
+          const _BrandHeader(),
+          Expanded(
+            child: Container(
+              width: double.infinity,
+              color: _cardBg,
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(16, 32, 16, 0),
+                    child: Container(
+                      padding: const EdgeInsets.fromLTRB(20, 28, 20, 28),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(16),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withValues(alpha: 0.04),
+                            blurRadius: 16,
+                            offset: const Offset(0, 4),
+                          ),
+                        ],
+                      ),
+                      child: Column(
+                        children: [
+                          Container(
+                            width: 64,
+                            height: 64,
+                            decoration: const BoxDecoration(
+                              color: _successLight,
+                              shape: BoxShape.circle,
+                            ),
+                            alignment: Alignment.center,
+                            child: Container(
+                              width: 36,
+                              height: 36,
+                              decoration: const BoxDecoration(
+                                color: _successMid,
+                                shape: BoxShape.circle,
+                              ),
+                              child: const Icon(
+                                Icons.check,
+                                color: Colors.white,
+                                size: 22,
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 20),
+
+                          const Text(
+                            'Verified!',
+                            style: TextStyle(
+                              fontSize: 22,
+                              fontWeight: FontWeight.w800,
+                              color: _titleColor,
+                              height: 1.2,
+                              letterSpacing: -0.3,
+                            ),
+                          ),
+                          const SizedBox(height: 8),
+                          const Text(
+                            'Redirecting you to your dashboard...',
+                            style: TextStyle(
+                              fontSize: 14,
+                              color: _subtleText,
+                              height: 1.3,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                          const SizedBox(height: 24),
+
+                          Ux4gOtpInput(
+                            length: 6,
+                            value: '555555',
+                            onChanged: (_) {},
+                            status: Ux4gOtpInputStatus.success,
+                            captionVariant: Ux4gOtpCaptionVariant.success,
+                            captionText: 'Verification successful',
+                            boxSize: 44,
+                            gap: 8,
+                            showSeparator: false,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+
+                  const Spacer(),
+                  const _BrandFooter(),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+const _otpVerifiedSuccessCardCode =
+    r'''// Mobile-sized card-style OTP verified-success screen (360 x 760)
+// Same content as the flat variant, wrapped in a soft-purple section
+// with a white rounded card hugging the top.
+Column(
+  children: [
+    Ux4gAppHeader(/* ... */),
+    Divider(height: 1, color: Color(0xFFE5E7EB)),
+    Expanded(
+      child: Container(
+        width: double.infinity,
+        color: Color(0xFFE9E5FF),
+        child: Column(
+          children: [
+            Padding(
+              padding: EdgeInsets.fromLTRB(16, 32, 16, 0),
+              child: Container(
+                padding: EdgeInsets.fromLTRB(20, 28, 20, 28),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(16),
+                  boxShadow: [/* subtle shadow */],
+                ),
+                child: Column(/* same content as flat variant */),
+              ),
+            ),
+            Spacer(),
+            // "Powered by - Digital India" footer pinned at the bottom.
           ],
         ),
       ),

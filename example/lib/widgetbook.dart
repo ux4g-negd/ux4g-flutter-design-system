@@ -206,6 +206,17 @@ class UX4GWidgetbook extends StatelessWidget {
                   ],
                 ),
                 WidgetbookFolder(
+                  name: 'OTP Verification',
+                  children: [
+                    otpVerifyMobileComponent,
+                    otpVerifyVoiceComponent,
+                    otpVerifyAttemptWarningComponent,
+                    otpVerifyLastAttemptComponent,
+                    otpVerifyAccountLockedComponent,
+                    otpVerifiedSuccessComponent,
+                  ],
+                ),
+                WidgetbookFolder(
                   name: 'SignUp',
                   children: [
                     signUpStep1Component,
