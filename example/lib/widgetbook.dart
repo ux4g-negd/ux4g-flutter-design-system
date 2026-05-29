@@ -291,6 +291,7 @@ class UX4GWidgetbook extends StatelessWidget {
                   children: [
                     dataSharingConsentComponent,
                     dataSharingConsentManagementComponent,
+                    withdrawConsentDialogComponent,
                   ],
                 ),
               ],
