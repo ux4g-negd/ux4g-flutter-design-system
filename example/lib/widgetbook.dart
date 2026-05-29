@@ -45,7 +45,7 @@ class UX4GWidgetbook extends StatelessWidget {
         // ── Components ────────────────────────────────────────────────────────
         WidgetbookCategory(
           name: 'Components',
-          isInitiallyExpanded: false,
+          isInitiallyExpanded: true,
           children: [
             // Buttons
             buttonComponent,
@@ -190,7 +190,7 @@ class UX4GWidgetbook extends StatelessWidget {
         // ── Patterns ───────────────────────────────────────────────────────
         WidgetbookCategory(
           name: 'Patterns',
-          isInitiallyExpanded: false,
+          isInitiallyExpanded: true,
           children: [
             WidgetbookFolder(
               name: 'Identity and Access',
@@ -241,6 +241,16 @@ class UX4GWidgetbook extends StatelessWidget {
                     aadhaarVerificationFailedComponent,
                     aadhaarAccountLockedComponent,
                     operatorAssistedAuthComponent,
+                  ],
+                ),
+                WidgetbookFolder(
+                  name: 'SignUp',
+                  children: [
+                    signUpStep1Component,
+                    signUpStep2Component,
+                    signUpStep3Component,
+                    signUpStep4Component,
+                    signUpStep5Component,
                   ],
                 ),
               ],
