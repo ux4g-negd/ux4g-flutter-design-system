@@ -4154,19 +4154,19 @@ class _ManageDataSharingConsentsMobileMockupState extends State<_ManageDataShari
                   const SizedBox(height: 20),
 
                   // Sharing cards
-                  _buildManagementCard(
+                  _buildDataSharingManagementCard(
                     title: 'Bank of India',
                     shared: 'Aadhaar, Name',
                     status: 'Required',
                   ),
                   const SizedBox(height: 12),
-                  _buildManagementCard(
+                  _buildDataSharingManagementCard(
                     title: 'Payment Corp',
                     shared: 'Transaction ID',
                     status: 'Required',
                   ),
                   const SizedBox(height: 12),
-                  _buildManagementCard(
+                  _buildDataSharingManagementCard(
                     title: 'SMS Gateway',
                     shared: 'Mobile Number',
                     isOptional: true,
@@ -4304,19 +4304,19 @@ class _ManageDataSharingConsentsCardMockupState extends State<_ManageDataSharing
                             const SizedBox(height: 20),
 
                             // Sharing cards
-                            _buildManagementCard(
+                            _buildDataSharingManagementCard(
                               title: 'Bank of India',
                               shared: 'Aadhaar, Name',
                               status: 'Required',
                             ),
                             const SizedBox(height: 12),
-                            _buildManagementCard(
+                            _buildDataSharingManagementCard(
                               title: 'Payment Corp',
                               shared: 'Transaction ID',
                               status: 'Required',
                             ),
                             const SizedBox(height: 12),
-                            _buildManagementCard(
+                            _buildDataSharingManagementCard(
                               title: 'SMS Gateway',
                               shared: 'Mobile Number',
                               isOptional: true,
@@ -4383,7 +4383,7 @@ class _ManageDataSharingConsentsCardMockupState extends State<_ManageDataSharing
 }
 
 /// Helper method used by mockups to build individual management cards.
-Widget _buildManagementCard({
+Widget _buildDataSharingManagementCard({
   required String title,
   required String shared,
   String? status,
