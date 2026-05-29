@@ -182,29 +182,31 @@ Widget _buildDataCard({
             ),
             const Ux4gTag(
               text: 'Required',
-              colorScheme: Ux4gTagColor.error,
-              style: Ux4gTagStyle.tonal,
+              customBackgroundColor: Color(0xFFFFF0F0),
+              customContentColor: Color(0xFF8A1A16),
               shape: Ux4gTagShape.rectangular,
               size: Ux4gTagSize.m,
             ),
           ],
         ),
-        const SizedBox(height: 8),
+        const SizedBox(height: 6),
         Text(
           'Purpose · $purpose',
           style: const TextStyle(
             fontSize: 13,
             color: _subtleText,
             fontWeight: FontWeight.w400,
+            height: 1.25,
           ),
         ),
-        const SizedBox(height: 4),
+        const SizedBox(height: 2),
         Text(
           'Retention · $retention',
           style: const TextStyle(
             fontSize: 13,
             color: _subtleText,
             fontWeight: FontWeight.w400,
+            height: 1.25,
           ),
         ),
       ],
@@ -224,8 +226,8 @@ class _ConsentCaptureMobileMockup extends StatefulWidget {
 }
 
 class _ConsentCaptureMobileMockupState extends State<_ConsentCaptureMobileMockup> {
-  bool? _isInfoConsentGiven = true;
-  bool? _isEmailUpdatesConsentGiven = false;
+  bool _isInfoConsentGiven = true;
+  bool _isEmailUpdatesConsentGiven = false;
 
   @override
   Widget build(BuildContext context) {
@@ -309,14 +311,14 @@ class _ConsentCaptureMobileMockupState extends State<_ConsentCaptureMobileMockup
                   // Checkboxes
                   Ux4gCheckbox(
                     value: _isInfoConsentGiven,
-                    onChanged: (val) => setState(() => _isInfoConsentGiven = val),
+                    onChanged: (val) => setState(() => _isInfoConsentGiven = val ?? false),
                     label: 'I consent to sharing the required information listed above',
                     isRequired: true,
                   ),
                   const SizedBox(height: 8),
                   Ux4gCheckbox(
                     value: _isEmailUpdatesConsentGiven,
-                    onChanged: (val) => setState(() => _isEmailUpdatesConsentGiven = val),
+                    onChanged: (val) => setState(() => _isEmailUpdatesConsentGiven = val ?? false),
                     label: 'I also consent to receiving email updates regarding my application',
                     isRequired: false,
                   ),
@@ -361,8 +363,8 @@ class _ConsentCaptureCardMockup extends StatefulWidget {
 }
 
 class _ConsentCaptureCardMockupState extends State<_ConsentCaptureCardMockup> {
-  bool? _isInfoConsentGiven = true;
-  bool? _isEmailUpdatesConsentGiven = false;
+  bool _isInfoConsentGiven = true;
+  bool _isEmailUpdatesConsentGiven = false;
 
   @override
   Widget build(BuildContext context) {
@@ -464,14 +466,14 @@ class _ConsentCaptureCardMockupState extends State<_ConsentCaptureCardMockup> {
                             // Checkboxes
                             Ux4gCheckbox(
                               value: _isInfoConsentGiven,
-                              onChanged: (val) => setState(() => _isInfoConsentGiven = val),
+                              onChanged: (val) => setState(() => _isInfoConsentGiven = val ?? false),
                               label: 'I consent to sharing the required information listed above',
                               isRequired: true,
                             ),
                             const SizedBox(height: 8),
                             Ux4gCheckbox(
                               value: _isEmailUpdatesConsentGiven,
-                              onChanged: (val) => setState(() => _isEmailUpdatesConsentGiven = val),
+                              onChanged: (val) => setState(() => _isEmailUpdatesConsentGiven = val ?? false),
                               label: 'I also consent to receiving email updates regarding my application',
                               isRequired: false,
                             ),
@@ -545,15 +547,16 @@ Column(
               Text('Aadhaar Number', style: boldTitleStyle),
               Ux4gTag(
                 text: 'Required',
-                colorScheme: Ux4gTagColor.error,
-                style: Ux4gTagStyle.tonal,
+                customBackgroundColor: Color(0xFFFFF0F0),
+                customContentColor: Color(0xFF8A1A16),
                 shape: Ux4gTagShape.rectangular,
               ),
             ],
           ),
-          SizedBox(height: 8),
-          Text('Purpose · Identity verification'),
-          Text('Retention · 7 years'),
+          SizedBox(height: 6),
+          Text('Purpose · Identity verification', style: TextStyle(height: 1.25)),
+          SizedBox(height: 2),
+          Text('Retention · 7 years', style: TextStyle(height: 1.25)),
         ],
       ),
     ),
@@ -566,13 +569,13 @@ Column(
     // Checkboxes
     Ux4gCheckbox(
       value: _isInfoConsentGiven,
-      onChanged: (val) => setState(() => _isInfoConsentGiven = val),
+      onChanged: (val) => setState(() => _isInfoConsentGiven = val ?? false),
       label: 'I consent to sharing the required information listed above',
       isRequired: true,
     ),
     Ux4gCheckbox(
       value: _isEmailUpdatesConsentGiven,
-      onChanged: (val) => setState(() => _isEmailUpdatesConsentGiven = val),
+      onChanged: (val) => setState(() => _isEmailUpdatesConsentGiven = val ?? false),
       label: 'I also consent to receiving email updates regarding my application',
       isRequired: false,
     ),
