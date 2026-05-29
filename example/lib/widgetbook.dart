@@ -18,6 +18,7 @@ import 'stories/overlay_stories.dart';
 import 'stories/biometric_stories.dart';
 import 'stories/progress_stories.dart';
 import 'stories/pattern_stories.dart';
+import 'stories/consent_stories.dart';
 
 void main() {
   runApp(const UX4GWidgetbook());
@@ -251,6 +252,17 @@ class UX4GWidgetbook extends StatelessWidget {
                     signUpStep3Component,
                     signUpStep4Component,
                     signUpStep5Component,
+                  ],
+                ),
+              ],
+            ),
+            WidgetbookFolder(
+              name: 'Consent and Declaration',
+              children: [
+                WidgetbookFolder(
+                  name: 'Consent Capture',
+                  children: [
+                    consentCaptureComponent,
                   ],
                 ),
               ],
