@@ -290,6 +290,7 @@ class UX4GWidgetbook extends StatelessWidget {
                   isInitiallyExpanded: false,
                   children: [
                     dataSharingConsentComponent,
+                    dataSharingConsentManagementComponent,
                   ],
                 ),
               ],

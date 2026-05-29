@@ -4058,5 +4058,946 @@ Column(
         ),
       ),
     ),
+)''';
+
+// ───────────────────────────────────────────────────────────────────────
+// Manage Data Sharing Consents pattern
+// ───────────────────────────────────────────────────────────────────────
+
+final dataSharingConsentManagementComponent = WidgetbookComponent(
+  name: 'Manage Data Sharing Consents',
+  useCases: [
+    WidgetbookUseCase(
+      name: 'Default',
+      builder: (context) {
+        final variant = context.knobs.list(
+          label: 'Variant',
+          options: const ['Default', 'Card style'],
+          initialOption: 'Default',
+          description: 'Switch between the standard flat layout and the card-style layout for managing consents.',
+        );
+
+        final code = variant == 'Card style' ? _manageDataSharingConsentsCardCode : _manageDataSharingConsentsCode;
+        final child = variant == 'Card style' ? const _ManageDataSharingConsentsCardMockup() : const _ManageDataSharingConsentsMobileMockup();
+
+        return ComponentDocs(
+          name: 'Manage Data Sharing Consents',
+          description: 'Pattern for managing and withdrawing data sharing consents under the DPDP Act 2023.',
+          code: code,
+          center: true,
+          child: child,
+        );
+      },
+    ),
+  ],
+);
+
+// ───────────────────────────────────────────────────────────────────────
+// Mockups for Manage Data Sharing Consents
+// ───────────────────────────────────────────────────────────────────────
+
+class _ManageDataSharingConsentsMobileMockup extends StatefulWidget {
+  const _ManageDataSharingConsentsMobileMockup();
+
+  @override
+  State<_ManageDataSharingConsentsMobileMockup> createState() => _ManageDataSharingConsentsMobileMockupState();
+}
+
+class _ManageDataSharingConsentsMobileMockupState extends State<_ManageDataSharingConsentsMobileMockup> {
+  bool _isSmsGatewayWithdrawn = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return _PhoneFrame(
+      child: Column(
+        children: [
+          const _ConsentHeader(),
+          Expanded(
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.fromLTRB(20, 24, 20, 0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // Headline
+                  const Text(
+                    'Manage Your Data Sharing Consents',
+                    style: TextStyle(
+                      fontSize: 22,
+                      fontWeight: FontWeight.w800,
+                      color: _titleColor,
+                      height: 1.2,
+                      letterSpacing: -0.3,
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+
+                  // Scheme Info
+                  const Text(
+                    'Scheme: PM Kisan',
+                    style: TextStyle(
+                      fontSize: 13,
+                      fontWeight: FontWeight.w700,
+                      color: Color(0xFF6A4EFF),
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+
+                  // Description
+                  const Text(
+                    'You can review and withdraw optional consents below.',
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: _subtleText,
+                      height: 1.45,
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+
+                  // Sharing cards
+                  _buildManagementCard(
+                    title: 'Bank of India',
+                    shared: 'Aadhaar, Name',
+                    status: 'Required',
+                  ),
+                  const SizedBox(height: 12),
+                  _buildManagementCard(
+                    title: 'Payment Corp',
+                    shared: 'Transaction ID',
+                    status: 'Required',
+                  ),
+                  const SizedBox(height: 12),
+                  _buildManagementCard(
+                    title: 'SMS Gateway',
+                    shared: 'Mobile Number',
+                    isOptional: true,
+                    isWithdrawn: _isSmsGatewayWithdrawn,
+                    onWithdrawToggle: () {
+                      setState(() {
+                        _isSmsGatewayWithdrawn = !_isSmsGatewayWithdrawn;
+                      });
+                    },
+                  ),
+                  const SizedBox(height: 20),
+
+                  // Warning banner
+                  Ux4gStatusBanner(
+                    variant: Ux4gBannerVariant.warningLight,
+                    title: 'Required consents cannot be withdrawn as they are necessary for the scheme to function.',
+                    leadingIcon: const Icon(
+                      Icons.error,
+                      color: Color(0xFFD97706),
+                      size: 22,
+                    ),
+                    titleStyle: const TextStyle(
+                      fontSize: 13,
+                      fontWeight: FontWeight.w500,
+                      color: Color(0xFFB45309),
+                    ),
+                    margin: EdgeInsets.zero,
+                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                  ),
+                  const SizedBox(height: 20),
+
+                  const Divider(height: 1, color: _border),
+                  const SizedBox(height: 16),
+
+                  // Actions
+                  Ux4gButton(
+                    text: 'Confirm changes',
+                    onPressed: _isSmsGatewayWithdrawn ? () {} : null,
+                    size: Ux4gButtonSize.large,
+                    width: double.infinity,
+                  ),
+                  const SizedBox(height: 4),
+                  Ux4gButton(
+                    text: 'Cancel',
+                    onPressed: () {},
+                    variant: Ux4gButtonVariant.ghost,
+                    size: Ux4gButtonSize.large,
+                    width: double.infinity,
+                  ),
+                  const SizedBox(height: 16),
+                ],
+              ),
+            ),
+          ),
+          const _ConsentFooter(),
+        ],
+      ),
+    );
+  }
+}
+
+class _ManageDataSharingConsentsCardMockup extends StatefulWidget {
+  const _ManageDataSharingConsentsCardMockup();
+
+  @override
+  State<_ManageDataSharingConsentsCardMockup> createState() => _ManageDataSharingConsentsCardMockupState();
+}
+
+class _ManageDataSharingConsentsCardMockupState extends State<_ManageDataSharingConsentsCardMockup> {
+  bool _isSmsGatewayWithdrawn = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return _PhoneFrame(
+      child: Column(
+        children: [
+          const _ConsentHeader(),
+          Expanded(
+            child: Container(
+              color: const Color(0xFFE9E5FF),
+              child: Column(
+                children: [
+                  Expanded(
+                    child: SingleChildScrollView(
+                      padding: const EdgeInsets.all(16),
+                      child: Container(
+                        padding: const EdgeInsets.all(20),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(16),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withValues(alpha: 0.04),
+                              blurRadius: 16,
+                              offset: const Offset(0, 4),
+                            ),
+                          ],
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            // Headline
+                            const Text(
+                              'Manage Your Data Sharing Consents',
+                              style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.w800,
+                                color: _titleColor,
+                                height: 1.2,
+                                letterSpacing: -0.3,
+                              ),
+                            ),
+                            const SizedBox(height: 8),
+
+                            // Scheme Info
+                            const Text(
+                              'Scheme: PM Kisan',
+                              style: TextStyle(
+                                fontSize: 13,
+                                fontWeight: FontWeight.w700,
+                                color: Color(0xFF6A4EFF),
+                              ),
+                            ),
+                            const SizedBox(height: 8),
+
+                            // Description
+                            const Text(
+                              'You can review and withdraw optional consents below.',
+                              style: TextStyle(
+                                fontSize: 13,
+                                color: _subtleText,
+                                height: 1.45,
+                              ),
+                            ),
+                            const SizedBox(height: 20),
+
+                            // Sharing cards
+                            _buildManagementCard(
+                              title: 'Bank of India',
+                              shared: 'Aadhaar, Name',
+                              status: 'Required',
+                            ),
+                            const SizedBox(height: 12),
+                            _buildManagementCard(
+                              title: 'Payment Corp',
+                              shared: 'Transaction ID',
+                              status: 'Required',
+                            ),
+                            const SizedBox(height: 12),
+                            _buildManagementCard(
+                              title: 'SMS Gateway',
+                              shared: 'Mobile Number',
+                              isOptional: true,
+                              isWithdrawn: _isSmsGatewayWithdrawn,
+                              onWithdrawToggle: () {
+                                setState(() {
+                                  _isSmsGatewayWithdrawn = !_isSmsGatewayWithdrawn;
+                                });
+                              },
+                            ),
+                            const SizedBox(height: 20),
+
+                            // Warning banner
+                            Ux4gStatusBanner(
+                              variant: Ux4gBannerVariant.warningLight,
+                              title: 'Required consents cannot be withdrawn as they are necessary for the scheme to function.',
+                              leadingIcon: const Icon(
+                                Icons.error,
+                                color: Color(0xFFD97706),
+                                size: 22,
+                              ),
+                              titleStyle: const TextStyle(
+                                fontSize: 13,
+                                fontWeight: FontWeight.w500,
+                                color: Color(0xFFB45309),
+                              ),
+                              margin: EdgeInsets.zero,
+                              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                            ),
+                            const SizedBox(height: 20),
+
+                            const Divider(height: 1, color: _border),
+                            const SizedBox(height: 16),
+
+                            // Actions
+                            Ux4gButton(
+                              text: 'Confirm changes',
+                              onPressed: _isSmsGatewayWithdrawn ? () {} : null,
+                              size: Ux4gButtonSize.large,
+                              width: double.infinity,
+                            ),
+                            const SizedBox(height: 4),
+                            Ux4gButton(
+                              text: 'Cancel',
+                              onPressed: () {},
+                              variant: Ux4gButtonVariant.ghost,
+                              size: Ux4gButtonSize.large,
+                              width: double.infinity,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  const _ConsentFooter(),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+/// Helper method used by mockups to build individual management cards.
+Widget _buildManagementCard({
+  required String title,
+  required String shared,
+  String? status,
+  bool isOptional = false,
+  bool isWithdrawn = false,
+  VoidCallback? onWithdrawToggle,
+}) {
+  return Container(
+    width: double.infinity,
+    padding: const EdgeInsets.all(16),
+    decoration: BoxDecoration(
+      color: Colors.white,
+      borderRadius: BorderRadius.circular(12),
+      border: Border.all(color: _border),
+    ),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              title,
+              style: const TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w700,
+                color: _titleColor,
+              ),
+            ),
+            Ux4gTag(
+              text: isWithdrawn ? 'Withdrawn' : 'Active',
+              customBackgroundColor: isWithdrawn ? const Color(0xFFF3F4F6) : const Color(0xFFE6F4EA),
+              customContentColor: isWithdrawn ? const Color(0xFF4B5563) : const Color(0xFF137333),
+              shape: Ux4gTagShape.circular,
+              size: Ux4gTagSize.m,
+            ),
+          ],
+        ),
+        const SizedBox(height: 6),
+        Text(
+          'Data shared · $shared',
+          style: const TextStyle(
+            fontSize: 13,
+            color: _subtleText,
+            fontWeight: FontWeight.w400,
+            height: 1.25,
+          ),
+        ),
+        if (status != null) ...[
+          const SizedBox(height: 2),
+          Text(
+            'Status · $status',
+            style: const TextStyle(
+              fontSize: 13,
+              color: _subtleText,
+              fontWeight: FontWeight.w400,
+              height: 1.25,
+            ),
+          ),
+        ],
+        if (isOptional) ...[
+          const SizedBox(height: 8),
+          GestureDetector(
+            onTap: onWithdrawToggle,
+            child: Text(
+              isWithdrawn ? 'Undo' : 'Withdraw',
+              style: const TextStyle(
+                fontSize: 14,
+                color: Color(0xFF6A4EFF),
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          ),
+        ],
+      ],
+    ),
+  );
+}
+
+// ───────────────────────────────────────────────────────────────────────
+// Source Code Snippets for Manage Data Sharing Consents
+// ───────────────────────────────────────────────────────────────────────
+
+const _manageDataSharingConsentsCode = r'''// Manage Data Sharing Consents – Flat Layout
+Column(
+  children: [
+    // Header
+    Ux4gAppHeader(
+      variant: Ux4gAppHeaderVariant.light,
+      title: '',
+      leadingWidgets: [
+        SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
+        Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
+        SvgPicture.asset('assets/Union.svg', height: 32),
+      ],
+      actions: [
+        Ux4gAppHeaderAction(
+          customWidget: Container(
+            width: 36,
+            height: 36,
+            decoration: BoxDecoration(
+              border: Border.all(color: Color(0xFFE5E7EB)),
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: Center(
+              child: Icon(Icons.menu, color: Color(0xFF6A4EFF), size: 20),
+            ),
+          ),
+        ),
+      ],
+      horizontalPadding: 16,
+      leadingSpacing: 12,
+    ),
+    Divider(height: 1, thickness: 1, color: Color(0xFFE5E7EB)),
+
+    Expanded(
+      child: SingleChildScrollView(
+        padding: EdgeInsets.fromLTRB(20, 24, 20, 0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Headline
+            Text(
+              'Manage Your Data Sharing Consents',
+              style: TextStyle(
+                fontSize: 22,
+                fontWeight: FontWeight.w800,
+                color: Color(0xFF111827),
+                height: 1.2,
+                letterSpacing: -0.3,
+              ),
+            ),
+            SizedBox(height: 8),
+
+            // Scheme Info
+            Text(
+              'Scheme: PM Kisan',
+              style: TextStyle(
+                fontSize: 13,
+                fontWeight: FontWeight.w700,
+                color: Color(0xFF6A4EFF),
+              ),
+            ),
+            SizedBox(height: 8),
+
+            // Description
+            Text(
+              'You can review and withdraw optional consents below.',
+              style: TextStyle(
+                fontSize: 14,
+                color: Color(0xFF6B7280),
+                height: 1.45,
+              ),
+            ),
+            SizedBox(height: 20),
+
+            // 1. Bank of India Card
+            Container(
+              width: double.infinity,
+              padding: EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(12),
+                border: Border.all(color: Color(0xFFE5E7EB)),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Bank of India',
+                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: Color(0xFF111827)),
+                      ),
+                      Ux4gTag(
+                        text: 'Active',
+                        customBackgroundColor: Color(0xFFE6F4EA),
+                        customContentColor: Color(0xFF137333),
+                        shape: Ux4gTagShape.circular,
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 6),
+                  Text('Data shared · Aadhaar, Name', style: TextStyle(color: Color(0xFF6B7280), height: 1.25)),
+                  SizedBox(height: 2),
+                  Text('Status · Required', style: TextStyle(color: Color(0xFF6B7280), height: 1.25)),
+                ],
+              ),
+            ),
+            SizedBox(height: 12),
+
+            // 2. Payment Corp Card
+            Container(
+              width: double.infinity,
+              padding: EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(12),
+                border: Border.all(color: Color(0xFFE5E7EB)),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Payment Corp',
+                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: Color(0xFF111827)),
+                      ),
+                      Ux4gTag(
+                        text: 'Active',
+                        customBackgroundColor: Color(0xFFE6F4EA),
+                        customContentColor: Color(0xFF137333),
+                        shape: Ux4gTagShape.circular,
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 6),
+                  Text('Data shared · Transaction ID', style: TextStyle(color: Color(0xFF6B7280), height: 1.25)),
+                  SizedBox(height: 2),
+                  Text('Status · Required', style: TextStyle(color: Color(0xFF6B7280), height: 1.25)),
+                ],
+              ),
+            ),
+            SizedBox(height: 12),
+
+            // 3. SMS Gateway Card (Optional)
+            Container(
+              width: double.infinity,
+              padding: EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(12),
+                border: Border.all(color: Color(0xFFE5E7EB)),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'SMS Gateway',
+                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: Color(0xFF111827)),
+                      ),
+                      Ux4gTag(
+                        text: _isSmsGatewayWithdrawn ? 'Withdrawn' : 'Active',
+                        customBackgroundColor: _isSmsGatewayWithdrawn ? Color(0xFFF3F4F6) : Color(0xFFE6F4EA),
+                        customContentColor: _isSmsGatewayWithdrawn ? Color(0xFF4B5563) : Color(0xFF137333),
+                        shape: Ux4gTagShape.circular,
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 6),
+                  Text('Data shared · Mobile Number', style: TextStyle(color: Color(0xFF6B7280), height: 1.25)),
+                  SizedBox(height: 8),
+                  GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        _isSmsGatewayWithdrawn = !_isSmsGatewayWithdrawn;
+                      });
+                    },
+                    child: Text(
+                      _isSmsGatewayWithdrawn ? 'Undo' : 'Withdraw',
+                      style: TextStyle(fontSize: 14, color: Color(0xFF6A4EFF), fontWeight: FontWeight.w600),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(height: 20),
+
+            // Warning banner
+            Ux4gStatusBanner(
+              variant: Ux4gBannerVariant.warningLight,
+              title: 'Required consents cannot be withdrawn as they are necessary for the scheme to function.',
+              leadingIcon: Icon(
+                Icons.error,
+                color: Color(0xFFD97706),
+                size: 22,
+              ),
+              titleStyle: TextStyle(
+                fontSize: 13,
+                fontWeight: FontWeight.w500,
+                color: Color(0xFFB45309),
+              ),
+              margin: EdgeInsets.zero,
+              padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+            ),
+            SizedBox(height: 20),
+
+            Divider(height: 1, color: Color(0xFFE5E7EB)),
+            SizedBox(height: 16),
+
+            // Actions
+            Ux4gButton(
+              text: 'Confirm changes',
+              onPressed: _isSmsGatewayWithdrawn ? () {} : null,
+              size: Ux4gButtonSize.large,
+              width: double.infinity,
+            ),
+            SizedBox(height: 4),
+            Ux4gButton(
+              text: 'Cancel',
+              onPressed: () {},
+              variant: Ux4gButtonVariant.ghost,
+              size: Ux4gButtonSize.large,
+              width: double.infinity,
+            ),
+            SizedBox(height: 16),
+          ],
+        ),
+      ),
+    ),
+
+    // Footer
+    Padding(
+      padding: EdgeInsets.only(bottom: 20, top: 8),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(
+            'Powered by -',
+            style: TextStyle(
+              fontSize: 11,
+              color: Color(0xFF9CA3AF),
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+          SizedBox(height: 6),
+          Image.asset('assets/digital_india_logo.png', height: 22),
+        ],
+      ),
+    ),
   ],
 )''';
+
+const _manageDataSharingConsentsCardCode = r'''// Manage Data Sharing Consents – Card Style Layout
+Column(
+  children: [
+    // Header
+    Ux4gAppHeader(
+      variant: Ux4gAppHeaderVariant.light,
+      title: '',
+      leadingWidgets: [
+        SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
+        Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
+        SvgPicture.asset('assets/Union.svg', height: 32),
+      ],
+      actions: [
+        Ux4gAppHeaderAction(
+          customWidget: Container(
+            width: 36,
+            height: 36,
+            decoration: BoxDecoration(
+              border: Border.all(color: Color(0xFFE5E7EB)),
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: Center(
+              child: Icon(Icons.menu, color: Color(0xFF6A4EFF), size: 20),
+            ),
+          ),
+        ),
+      ],
+      horizontalPadding: 16,
+      leadingSpacing: 12,
+    ),
+    Divider(height: 1, thickness: 1, color: Color(0xFFE5E7EB)),
+
+    Expanded(
+      child: Container(
+        color: Color(0xFFE9E5FF), // Soft purple/blue bg
+        child: Column(
+          children: [
+            Expanded(
+              child: SingleChildScrollView(
+                padding: EdgeInsets.all(16),
+                child: Container(
+                  padding: EdgeInsets.all(20),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(16),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withValues(alpha: 0.04),
+                        blurRadius: 16,
+                        offset: Offset(0, 4),
+                      ),
+                    ],
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      // Headline
+                      Text(
+                        'Manage Your Data Sharing Consents',
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w800,
+                          color: Color(0xFF111827),
+                          height: 1.2,
+                          letterSpacing: -0.3,
+                        ),
+                      ),
+                      SizedBox(height: 8),
+
+                      // Scheme Info
+                      Text(
+                        'Scheme: PM Kisan',
+                        style: TextStyle(
+                          fontSize: 13,
+                          fontWeight: FontWeight.w700,
+                          color: Color(0xFF6A4EFF),
+                        ),
+                      ),
+                      SizedBox(height: 8),
+
+                      // Description
+                      Text(
+                        'You can review and withdraw optional consents below.',
+                        style: TextStyle(
+                          fontSize: 13,
+                          color: Color(0xFF6B7280),
+                          height: 1.45,
+                        ),
+                      ),
+                      SizedBox(height: 20),
+
+                      // 1. Bank of India Card
+                      Container(
+                        width: double.infinity,
+                        padding: EdgeInsets.all(16),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(12),
+                          border: Border.all(color: Color(0xFFE5E7EB)),
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  'Bank of India',
+                                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: Color(0xFF111827)),
+                                ),
+                                Ux4gTag(
+                                  text: 'Active',
+                                  customBackgroundColor: Color(0xFFE6F4EA),
+                                  customContentColor: Color(0xFF137333),
+                                  shape: Ux4gTagShape.circular,
+                                ),
+                              ],
+                            ),
+                            SizedBox(height: 6),
+                            Text('Data shared · Aadhaar, Name', style: TextStyle(color: Color(0xFF6B7280), height: 1.25)),
+                            SizedBox(height: 2),
+                            Text('Status · Required', style: TextStyle(color: Color(0xFF6B7280), height: 1.25)),
+                          ],
+                        ),
+                      ),
+                      SizedBox(height: 12),
+
+                      // 2. Payment Corp Card
+                      Container(
+                        width: double.infinity,
+                        padding: EdgeInsets.all(16),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(12),
+                          border: Border.all(color: Color(0xFFE5E7EB)),
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  'Payment Corp',
+                                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: Color(0xFF111827)),
+                                ),
+                                Ux4gTag(
+                                  text: 'Active',
+                                  customBackgroundColor: Color(0xFFE6F4EA),
+                                  customContentColor: Color(0xFF137333),
+                                  shape: Ux4gTagShape.circular,
+                                ),
+                              ],
+                            ),
+                            SizedBox(height: 6),
+                            Text('Data shared · Transaction ID', style: TextStyle(color: Color(0xFF6B7280), height: 1.25)),
+                            SizedBox(height: 2),
+                            Text('Status · Required', style: TextStyle(color: Color(0xFF6B7280), height: 1.25)),
+                          ],
+                        ),
+                      ),
+                      SizedBox(height: 12),
+
+                      // 3. SMS Gateway Card (Optional)
+                      Container(
+                        width: double.infinity,
+                        padding: EdgeInsets.all(16),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(12),
+                          border: Border.all(color: Color(0xFFE5E7EB)),
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  'SMS Gateway',
+                                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: Color(0xFF111827)),
+                                ),
+                                Ux4gTag(
+                                  text: _isSmsGatewayWithdrawn ? 'Withdrawn' : 'Active',
+                                  customBackgroundColor: _isSmsGatewayWithdrawn ? Color(0xFFF3F4F6) : Color(0xFFE6F4EA),
+                                  customContentColor: _isSmsGatewayWithdrawn ? Color(0xFF4B5563) : Color(0xFF137333),
+                                  shape: Ux4gTagShape.circular,
+                                ),
+                              ],
+                            ),
+                            SizedBox(height: 6),
+                            Text('Data shared · Mobile Number', style: TextStyle(color: Color(0xFF6B7280), height: 1.25)),
+                            SizedBox(height: 8),
+                            GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  _isSmsGatewayWithdrawn = !_isSmsGatewayWithdrawn;
+                                });
+                              },
+                              child: Text(
+                                _isSmsGatewayWithdrawn ? 'Undo' : 'Withdraw',
+                                style: TextStyle(fontSize: 14, color: Color(0xFF6A4EFF), fontWeight: FontWeight.w600),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(height: 20),
+
+                      // Warning banner
+                      Ux4gStatusBanner(
+                        variant: Ux4gBannerVariant.warningLight,
+                        title: 'Required consents cannot be withdrawn as they are necessary for the scheme to function.',
+                        leadingIcon: Icon(
+                          Icons.error,
+                          color: Color(0xFFD97706),
+                          size: 22,
+                        ),
+                        titleStyle: TextStyle(
+                          fontSize: 13,
+                          fontWeight: FontWeight.w500,
+                          color: Color(0xFFB45309),
+                        ),
+                        margin: EdgeInsets.zero,
+                        padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                      ),
+                      SizedBox(height: 20),
+
+                      Divider(height: 1, color: Color(0xFFE5E7EB)),
+                      SizedBox(height: 16),
+
+                      // Actions
+                      Ux4gButton(
+                        text: 'Confirm changes',
+                        onPressed: _isSmsGatewayWithdrawn ? () {} : null,
+                        size: Ux4gButtonSize.large,
+                        width: double.infinity,
+                      ),
+                      SizedBox(height: 4),
+                      Ux4gButton(
+                        text: 'Cancel',
+                        onPressed: () {},
+                        variant: Ux4gButtonVariant.ghost,
+                        size: Ux4gButtonSize.large,
+                        width: double.infinity,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+
+            // Footer
+            Padding(
+              padding: EdgeInsets.only(bottom: 20, top: 8),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    'Powered by -',
+                    style: TextStyle(
+                      fontSize: 11,
+                      color: Color(0xFF9CA3AF),
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                  SizedBox(height: 6),
+                  Image.asset('assets/digital_india_logo.png', height: 22),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    ),
+  ],
+)''';
+
