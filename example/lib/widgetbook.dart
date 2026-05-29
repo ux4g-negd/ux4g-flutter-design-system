@@ -263,6 +263,7 @@ class UX4GWidgetbook extends StatelessWidget {
                   name: 'Consent Capture',
                   children: [
                     consentCaptureComponent,
+                    consentCaptureWithWarningComponent,
                   ],
                 ),
               ],
