@@ -3072,3 +3072,1111 @@ Column(
     ),
   ],
 )''';
+
+// ═══════════════════════════════════════════════════════════════════════════
+// SIGN UP PATTERN
+// 5 steps mirroring the SignIn card / default style.
+// Each component has a [Variant] knob: Default (flat) ↔ Card style (purple-bg).
+// ═══════════════════════════════════════════════════════════════════════════
+
+/// "Already have an account? Sign in" link — mirror of [_RegisterLink].
+class _SignInLink extends StatelessWidget {
+  const _SignInLink({this.fontSize = 15});
+  final double fontSize;
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: TextButton(
+        onPressed: () {},
+        style: TextButton.styleFrom(
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+        ),
+        child: Text(
+          'Already have an account? Sign in',
+          style: TextStyle(
+            color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.75),
+            fontWeight: FontWeight.w700,
+            fontSize: fontSize,
+            letterSpacing: -0.1,
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+/// Inline error banner reusing the same [Ux4gStatusBanner] as SignIn.
+Widget _signUpErrorBanner({
+  String title = 'Your status message goes here',
+  String subtitle = 'Take action',
+  String badge = 'Attempt 1 of 5',
+}) {
+  return Ux4gStatusBanner(
+    variant: Ux4gBannerVariant.errorLight,
+    title: title,
+    subtitle: subtitle,
+    margin: EdgeInsets.zero,
+    padding: const EdgeInsets.fromLTRB(12, 12, 10, 12),
+    titleStyle: const TextStyle(
+      fontSize: 14, fontWeight: FontWeight.w400,
+      color: Color(0xFF991B1B), height: 1.3,
+    ),
+    subtitleStyle: const TextStyle(
+      fontSize: 14, fontWeight: FontWeight.w700,
+      color: Color(0xFF991B1B), height: 1.3,
+    ),
+    leadingIcon: const Icon(Icons.error_outline, color: Color(0xFFDC2626), size: 20),
+    trailingIcon: Container(
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+      decoration: BoxDecoration(
+        color: const Color(0xFFFEE2E2),
+        borderRadius: BorderRadius.circular(6),
+      ),
+      child: Text(
+        badge,
+        style: const TextStyle(
+          fontSize: 12, color: Color(0xFF991B1B),
+          fontWeight: FontWeight.w500, height: 1.2,
+        ),
+      ),
+    ),
+  );
+}
+
+/// Card-container decoration shared by all 5 SignUp card-style steps.
+BoxDecoration _suCardDeco() => BoxDecoration(
+  color: Colors.white,
+  borderRadius: BorderRadius.circular(16),
+  boxShadow: [
+    BoxShadow(
+      color: Colors.black.withValues(alpha: 0.04),
+      blurRadius: 16,
+      offset: const Offset(0, 4),
+    ),
+  ],
+);
+
+const _suCardBg = Color(0xFFE9E5FF);
+
+// ───────────────────────────────────────────────────────────────────────
+// STEP 1 — Create your account
+// ───────────────────────────────────────────────────────────────────────
+
+final signUpStep1Component = WidgetbookComponent(
+  name: 'Create your account',
+  useCases: [
+    WidgetbookUseCase(
+      name: 'Default',
+      builder: (context) {
+        final variant = context.knobs.list(
+          label: 'Variant',
+          options: const ['Default', 'Card style'],
+          initialOption: 'Default',
+          description: 'Switch between the flat phone layout and the card-style layout.',
+        );
+        return ComponentDocs(
+          name: 'Create your account',
+          description: 'First step of the sign-up flow. User enters their +91 mobile number '
+              'and taps Send OTP. An error banner appears on invalid input.',
+          code: variant == 'Card style' ? _signUpStep1CardCode : _signUpStep1Code,
+          center: true,
+          child: variant == 'Card style'
+              ? const _SignUpStep1CardMockup()
+              : const _SignUpStep1Mockup(),
+        );
+      },
+    ),
+  ],
+);
+
+class _SignUpStep1Mockup extends StatefulWidget {
+  const _SignUpStep1Mockup();
+  @override
+  State<_SignUpStep1Mockup> createState() => _SignUpStep1MockupState();
+}
+
+class _SignUpStep1MockupState extends State<_SignUpStep1Mockup> {
+  String _mobile = '';
+
+  @override
+  Widget build(BuildContext context) {
+    return _PhoneFrame(
+      child: Column(
+        children: [
+          const _BrandHeader(),
+          Expanded(
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.fromLTRB(20, 24, 20, 0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text('Create your account',
+                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.w800,
+                        color: _titleColor, height: 1.2, letterSpacing: -0.3)),
+                  const SizedBox(height: 6),
+                  const Text('Enter your mobile number to get started',
+                    style: TextStyle(fontSize: 14, color: _subtleText, height: 1.3)),
+                  const SizedBox(height: 24),
+                  Ux4gInputField(
+                    value: _mobile,
+                    onValueChange: (v) => setState(() => _mobile = v),
+                    label: 'Mobile Number',
+                    placeholder: 'Enter mobile number',
+                    placeholderStyle: _placeholderStyle,
+                    prefixText: '+91',
+                    type: Ux4gInputFieldType.number,
+                    maxLength: 10,
+                  ),
+                  const SizedBox(height: 16),
+                  _signUpErrorBanner(),
+                  const SizedBox(height: 20),
+                  Ux4gButton(text: 'Send OTP', onPressed: () {},
+                      size: Ux4gButtonSize.large, width: double.infinity),
+                  const SizedBox(height: 20),
+                  const _SignInLink(),
+                ],
+              ),
+            ),
+          ),
+          const _BrandFooter(),
+        ],
+      ),
+    );
+  }
+}
+
+class _SignUpStep1CardMockup extends StatefulWidget {
+  const _SignUpStep1CardMockup();
+  @override
+  State<_SignUpStep1CardMockup> createState() => _SignUpStep1CardMockupState();
+}
+
+class _SignUpStep1CardMockupState extends State<_SignUpStep1CardMockup> {
+  String _mobile = '';
+
+  @override
+  Widget build(BuildContext context) {
+    return _PhoneFrame(
+      child: Column(
+        children: [
+          const _BrandHeader(),
+          Expanded(
+            child: Container(
+              color: _suCardBg,
+              child: Column(
+                children: [
+                  Expanded(
+                    child: SingleChildScrollView(
+                      padding: const EdgeInsets.fromLTRB(16, 20, 16, 16),
+                      child: Container(
+                        padding: const EdgeInsets.fromLTRB(20, 24, 20, 24),
+                        decoration: _suCardDeco(),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Text('Create your account',
+                              style: TextStyle(fontSize: 22, fontWeight: FontWeight.w800,
+                                  color: _titleColor, height: 1.2, letterSpacing: -0.3)),
+                            const SizedBox(height: 6),
+                            const Text('Enter your mobile number to get started',
+                              style: TextStyle(fontSize: 13, color: _subtleText, height: 1.3)),
+                            const SizedBox(height: 20),
+                            Ux4gInputField(
+                              value: _mobile,
+                              onValueChange: (v) => setState(() => _mobile = v),
+                              label: 'Mobile Number',
+                              placeholder: 'Enter mobile number',
+                              placeholderStyle: _placeholderStyle,
+                              prefixText: '+91',
+                              type: Ux4gInputFieldType.number,
+                              maxLength: 10,
+                            ),
+                            const SizedBox(height: 12),
+                            _signUpErrorBanner(),
+                            const SizedBox(height: 16),
+                            Ux4gButton(text: 'Send OTP', onPressed: () {},
+                                size: Ux4gButtonSize.large, width: double.infinity),
+                            const SizedBox(height: 16),
+                            const _SignInLink(fontSize: 14),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  const _BrandFooter(),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+const _signUpStep1Code = r'''// Step 1 – Create your account
+Ux4gInputField(
+  label: 'Mobile Number',
+  placeholder: 'Enter mobile number',
+  prefixText: '+91',
+),
+SizedBox(height: 16),
+Ux4gStatusBanner(
+  variant: Ux4gBannerVariant.errorLight,
+  title: 'Your status message goes here',
+  subtitle: 'Take action',
+  margin: EdgeInsets.zero,
+  trailingIcon: Text('Attempt 1 of 5', ...),
+),
+SizedBox(height: 20),
+Ux4gButton(text: 'Send OTP', size: Ux4gButtonSize.large,
+  width: double.infinity, onPressed: () {})''';
+
+const _signUpStep1CardCode = r'''// Step 1 – Create your account (card style)
+Container(
+  color: Color(0xFFE9E5FF),
+  child: Column(
+    children: [
+      Expanded(
+        child: Container(
+          padding: EdgeInsets.fromLTRB(20, 24, 20, 24),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(16),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text('Create your account', ...),
+              Ux4gInputField(label: 'Mobile Number', prefixText: '+91'),
+              Ux4gStatusBanner(variant: Ux4gBannerVariant.errorLight, ...),
+              Ux4gButton(text: 'Send OTP', ...),
+              // Already have an account? Sign in
+            ],
+          ),
+        ),
+      ),
+      _BrandFooter(),
+    ],
+  ),
+)''';
+
+// ───────────────────────────────────────────────────────────────────────
+// STEP 2 — Verify your mobile
+// ───────────────────────────────────────────────────────────────────────
+
+final signUpStep2Component = WidgetbookComponent(
+  name: 'Verify your mobile',
+  useCases: [
+    WidgetbookUseCase(
+      name: 'Default',
+      builder: (context) {
+        final variant = context.knobs.list(
+          label: 'Variant',
+          options: const ['Default', 'Card style'],
+          initialOption: 'Default',
+          description: 'Switch between the flat phone layout and the card-style layout.',
+        );
+        return ComponentDocs(
+          name: 'Verify your mobile',
+          description: 'OTP verification screen with 6 single-digit boxes, a built-in '
+              '60-second resend countdown, and a Verify OTP action.',
+          code: variant == 'Card style' ? _signUpStep2CardCode : _signUpStep2Code,
+          center: true,
+          child: variant == 'Card style'
+              ? const _SignUpStep2CardMockup()
+              : const _SignUpStep2Mockup(),
+        );
+      },
+    ),
+  ],
+);
+
+class _SignUpStep2Mockup extends StatefulWidget {
+  const _SignUpStep2Mockup();
+  @override
+  State<_SignUpStep2Mockup> createState() => _SignUpStep2MockupState();
+}
+
+class _SignUpStep2MockupState extends State<_SignUpStep2Mockup> {
+  String _otp = '';
+  int _resendNonce = 0;
+
+  @override
+  Widget build(BuildContext context) {
+    return _PhoneFrame(
+      child: Column(
+        children: [
+          const _BrandHeader(),
+          Expanded(
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.fromLTRB(20, 24, 20, 0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text('Verify your mobile',
+                    style: TextStyle(fontSize: 26, fontWeight: FontWeight.w800,
+                        color: _titleColor, height: 1.2, letterSpacing: -0.3)),
+                  const SizedBox(height: 6),
+                  const Text('Enter the 6-digit OTP sent to +91 98765 XXXXX',
+                    style: TextStyle(fontSize: 14, color: _subtleText, height: 1.4)),
+                  const SizedBox(height: 28),
+                  Ux4gOtpInput(
+                    key: ValueKey('su2_$_resendNonce'),
+                    length: 6,
+                    value: _otp,
+                    onChanged: (v) => setState(() => _otp = v),
+                    boxSize: 44,
+                    gap: 8,
+                    showSeparator: true,
+                    captionVariant: Ux4gOtpCaptionVariant.resendTimer,
+                    captionLeadingText: "Didn't receive OTP?",
+                    captionTrailingText: 'Resend OTP',
+                    autoCountdownSeconds: 60,
+                    onCaptionTrailingTap: () =>
+                        setState(() { _otp = ''; _resendNonce++; }),
+                  ),
+                  const SizedBox(height: 28),
+                  Ux4gButton(text: 'Verify OTP', onPressed: () {},
+                      size: Ux4gButtonSize.large, width: double.infinity),
+                ],
+              ),
+            ),
+          ),
+          const _BrandFooter(),
+        ],
+      ),
+    );
+  }
+}
+
+class _SignUpStep2CardMockup extends StatefulWidget {
+  const _SignUpStep2CardMockup();
+  @override
+  State<_SignUpStep2CardMockup> createState() => _SignUpStep2CardMockupState();
+}
+
+class _SignUpStep2CardMockupState extends State<_SignUpStep2CardMockup> {
+  String _otp = '';
+  int _resendNonce = 0;
+
+  @override
+  Widget build(BuildContext context) {
+    return _PhoneFrame(
+      child: Column(
+        children: [
+          const _BrandHeader(),
+          Expanded(
+            child: Container(
+              color: _suCardBg,
+              child: Column(
+                children: [
+                  Expanded(
+                    child: SingleChildScrollView(
+                      padding: const EdgeInsets.fromLTRB(16, 20, 16, 16),
+                      child: Container(
+                        padding: const EdgeInsets.fromLTRB(20, 24, 20, 24),
+                        decoration: _suCardDeco(),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Text('Verify your mobile',
+                              style: TextStyle(fontSize: 22, fontWeight: FontWeight.w800,
+                                  color: _titleColor, height: 1.2, letterSpacing: -0.3)),
+                            const SizedBox(height: 6),
+                            const Text('Enter the 6-digit OTP sent to +91 98765 XXXXX',
+                              style: TextStyle(fontSize: 13, color: _subtleText, height: 1.4)),
+                            const SizedBox(height: 24),
+                            Ux4gOtpInput(
+                              key: ValueKey('su2c_$_resendNonce'),
+                              length: 6,
+                              value: _otp,
+                              onChanged: (v) => setState(() => _otp = v),
+                              boxSize: 44,
+                              gap: 8,
+                              showSeparator: true,
+                              captionVariant: Ux4gOtpCaptionVariant.resendTimer,
+                              captionLeadingText: "Didn't receive OTP?",
+                              captionTrailingText: 'Resend OTP',
+                              autoCountdownSeconds: 60,
+                              onCaptionTrailingTap: () =>
+                                  setState(() { _otp = ''; _resendNonce++; }),
+                            ),
+                            const SizedBox(height: 24),
+                            Ux4gButton(text: 'Verify OTP', onPressed: () {},
+                                size: Ux4gButtonSize.large, width: double.infinity),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  const _BrandFooter(),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+const _signUpStep2Code = r'''// Step 2 – Verify your mobile
+Ux4gOtpInput(
+  length: 6,
+  showSeparator: true,
+  captionVariant: Ux4gOtpCaptionVariant.resendTimer,
+  captionLeadingText: "Didn\'t receive OTP?",
+  autoCountdownSeconds: 60,
+  onCaptionTrailingTap: () { setState(() { _otp = ''; }); },
+),
+SizedBox(height: 28),
+Ux4gButton(text: 'Verify OTP', size: Ux4gButtonSize.large,
+  width: double.infinity, onPressed: () {})''';
+
+const _signUpStep2CardCode = r'''// Step 2 – Verify your mobile (card style)
+Container(
+  color: Color(0xFFE9E5FF),
+  child: Column(
+    children: [
+      Expanded(
+        child: Container(
+          padding: EdgeInsets.fromLTRB(20, 24, 20, 24),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(16),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text('Verify your mobile', ...),
+              Ux4gOtpInput(length: 6, showSeparator: true, ...),
+              Ux4gButton(text: 'Verify OTP', ...),
+            ],
+          ),
+        ),
+      ),
+      _BrandFooter(),
+    ],
+  ),
+)''';
+
+// ───────────────────────────────────────────────────────────────────────
+// STEP 3 — Complete your profile
+// ───────────────────────────────────────────────────────────────────────
+
+final signUpStep3Component = WidgetbookComponent(
+  name: 'Complete your profile',
+  useCases: [
+    WidgetbookUseCase(
+      name: 'Default',
+      builder: (context) {
+        final variant = context.knobs.list(
+          label: 'Variant',
+          options: const ['Default', 'Card style'],
+          initialOption: 'Default',
+          description: 'Switch between the flat phone layout and the card-style layout.',
+        );
+        return ComponentDocs(
+          name: 'Complete your profile',
+          description: 'Profile completion screen. Collects full name, email, mobile, '
+              'and category before continuing to password setup.',
+          code: variant == 'Card style' ? _signUpStep3CardCode : _signUpStep3Code,
+          center: true,
+          child: variant == 'Card style'
+              ? const _SignUpStep3CardMockup()
+              : const _SignUpStep3Mockup(),
+        );
+      },
+    ),
+  ],
+);
+
+class _SignUpStep3Mockup extends StatefulWidget {
+  const _SignUpStep3Mockup();
+  @override
+  State<_SignUpStep3Mockup> createState() => _SignUpStep3MockupState();
+}
+
+class _SignUpStep3MockupState extends State<_SignUpStep3Mockup> {
+  String _fullName = '', _email = '', _mobile = '';
+  List<String> _category = [];
+
+  static const _cats = [
+    Ux4gDropdownOption(id: 'citizen', label: 'Citizen'),
+    Ux4gDropdownOption(id: 'business', label: 'Business'),
+    Ux4gDropdownOption(id: 'govt', label: 'Government Employee'),
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return _PhoneFrame(
+      child: Column(
+        children: [
+          const _BrandHeader(),
+          Expanded(
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.fromLTRB(20, 24, 20, 0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Ux4gInputField(value: _fullName,
+                    onValueChange: (v) => setState(() => _fullName = v),
+                    label: 'Full name', placeholder: 'Enter your full name',
+                    placeholderStyle: _placeholderStyle),
+                  const SizedBox(height: 16),
+                  Ux4gInputField(value: _email,
+                    onValueChange: (v) => setState(() => _email = v),
+                    label: 'Email Address', placeholder: 'example@mail.com',
+                    placeholderStyle: _placeholderStyle,
+                    type: Ux4gInputFieldType.email),
+                  const SizedBox(height: 16),
+                  Ux4gInputField(value: _mobile,
+                    onValueChange: (v) => setState(() => _mobile = v),
+                    label: 'Mobile Number', placeholder: 'Enter mobile number',
+                    placeholderStyle: _placeholderStyle, prefixText: '+91',
+                    type: Ux4gInputFieldType.number, maxLength: 10),
+                  const SizedBox(height: 16),
+                  const Text('Category',
+                    style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700, color: _titleColor)),
+                  const SizedBox(height: 4),
+                  Ux4gSelectionDropdown(
+                    options: _cats,
+                    selectedOptionIds: _category,
+                    onSelectionChange: (ids) => setState(() => _category = ids),
+                    placeholder: 'Please select..',
+                    mode: Ux4gDropdownMode.single,
+                  ),
+                  const SizedBox(height: 28),
+                  Ux4gButton(text: 'Continue', onPressed: () {},
+                      size: Ux4gButtonSize.large, width: double.infinity),
+                ],
+              ),
+            ),
+          ),
+          const _BrandFooter(),
+        ],
+      ),
+    );
+  }
+}
+
+class _SignUpStep3CardMockup extends StatefulWidget {
+  const _SignUpStep3CardMockup();
+  @override
+  State<_SignUpStep3CardMockup> createState() => _SignUpStep3CardMockupState();
+}
+
+class _SignUpStep3CardMockupState extends State<_SignUpStep3CardMockup> {
+  String _fullName = '', _email = '', _mobile = '';
+  List<String> _category = [];
+
+  static const _cats = [
+    Ux4gDropdownOption(id: 'citizen', label: 'Citizen'),
+    Ux4gDropdownOption(id: 'business', label: 'Business'),
+    Ux4gDropdownOption(id: 'govt', label: 'Government Employee'),
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return _PhoneFrame(
+      child: Column(
+        children: [
+          const _BrandHeader(),
+          Expanded(
+            child: Container(
+              color: _suCardBg,
+              child: Column(
+                children: [
+                  Expanded(
+                    child: SingleChildScrollView(
+                      padding: const EdgeInsets.fromLTRB(16, 20, 16, 16),
+                      child: Container(
+                        padding: const EdgeInsets.fromLTRB(20, 24, 20, 24),
+                        decoration: _suCardDeco(),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Ux4gInputField(value: _fullName,
+                              onValueChange: (v) => setState(() => _fullName = v),
+                              label: 'Full name', placeholder: 'Enter your full name',
+                              placeholderStyle: _placeholderStyle),
+                            const SizedBox(height: 14),
+                            Ux4gInputField(value: _email,
+                              onValueChange: (v) => setState(() => _email = v),
+                              label: 'Email Address', placeholder: 'example@mail.com',
+                              placeholderStyle: _placeholderStyle,
+                              type: Ux4gInputFieldType.email),
+                            const SizedBox(height: 14),
+                            Ux4gInputField(value: _mobile,
+                              onValueChange: (v) => setState(() => _mobile = v),
+                              label: 'Mobile Number', placeholder: 'Enter mobile number',
+                              placeholderStyle: _placeholderStyle, prefixText: '+91',
+                              type: Ux4gInputFieldType.number, maxLength: 10),
+                            const SizedBox(height: 14),
+                            const Text('Category',
+                              style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700, color: _titleColor)),
+                            const SizedBox(height: 4),
+                            Ux4gSelectionDropdown(
+                              options: _cats,
+                              selectedOptionIds: _category,
+                              onSelectionChange: (ids) => setState(() => _category = ids),
+                              placeholder: 'Please select..',
+                              mode: Ux4gDropdownMode.single,
+                            ),
+                            const SizedBox(height: 24),
+                            Ux4gButton(text: 'Continue', onPressed: () {},
+                                size: Ux4gButtonSize.large, width: double.infinity),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  const _BrandFooter(),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+const _signUpStep3Code = r'''// Step 3 – Complete your profile
+Ux4gInputField(label: 'Full name', placeholder: 'Enter your full name'),
+SizedBox(height: 16),
+Ux4gInputField(label: 'Email Address', placeholder: 'example@mail.com'),
+SizedBox(height: 16),
+Ux4gInputField(label: 'Mobile Number', prefixText: '+91'),
+SizedBox(height: 16),
+Ux4gSelectionDropdown(
+  label: 'Category',
+  options: [...],
+  placeholder: 'Please select..',
+  mode: Ux4gDropdownMode.single,
+),
+SizedBox(height: 28),
+Ux4gButton(text: 'Continue', size: Ux4gButtonSize.large,
+  width: double.infinity, onPressed: () {})''';
+
+const _signUpStep3CardCode = r'''// Step 3 – Complete your profile (card style)
+Container(
+  color: Color(0xFFE9E5FF),
+  child: Container(
+    padding: EdgeInsets.all(20),
+    decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(16)),
+    child: Column(
+      children: [
+        Ux4gInputField(label: 'Full name', ...),
+        Ux4gInputField(label: 'Email Address', ...),
+        Ux4gInputField(label: 'Mobile Number', prefixText: '+91'),
+        Ux4gSelectionDropdown(label: 'Category', ...),
+        Ux4gButton(text: 'Continue', ...),
+      ],
+    ),
+  ),
+)''';
+
+// ───────────────────────────────────────────────────────────────────────
+// STEP 4 — Password setup
+// ───────────────────────────────────────────────────────────────────────
+
+final signUpStep4Component = WidgetbookComponent(
+  name: 'Password setup',
+  useCases: [
+    WidgetbookUseCase(
+      name: 'Default',
+      builder: (context) {
+        final variant = context.knobs.list(
+          label: 'Variant',
+          options: const ['Default', 'Card style'],
+          initialOption: 'Default',
+          description: 'Switch between the flat phone layout and the card-style layout.',
+        );
+        return ComponentDocs(
+          name: 'Password setup',
+          description: 'Password creation screen. User sets and confirms their account '
+              'password before the account is created.',
+          code: variant == 'Card style' ? _signUpStep4CardCode : _signUpStep4Code,
+          center: true,
+          child: variant == 'Card style'
+              ? const _SignUpStep4CardMockup()
+              : const _SignUpStep4Mockup(),
+        );
+      },
+    ),
+  ],
+);
+
+class _SignUpStep4Mockup extends StatefulWidget {
+  const _SignUpStep4Mockup();
+  @override
+  State<_SignUpStep4Mockup> createState() => _SignUpStep4MockupState();
+}
+
+class _SignUpStep4MockupState extends State<_SignUpStep4Mockup> {
+  String _password = '', _confirm = '';
+
+  @override
+  Widget build(BuildContext context) {
+    return _PhoneFrame(
+      child: Column(
+        children: [
+          const _BrandHeader(),
+          Expanded(
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.fromLTRB(20, 24, 20, 0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text('Password setup',
+                    style: TextStyle(fontSize: 26, fontWeight: FontWeight.w800,
+                        color: _titleColor, height: 1.2, letterSpacing: -0.3)),
+                  const SizedBox(height: 24),
+                  Ux4gInputField(value: _password,
+                    onValueChange: (v) => setState(() => _password = v),
+                    label: 'Password', placeholder: '...........',
+                    placeholderStyle: _placeholderStyle,
+                    type: Ux4gInputFieldType.password),
+                  const SizedBox(height: 16),
+                  Ux4gInputField(value: _confirm,
+                    onValueChange: (v) => setState(() => _confirm = v),
+                    label: 'Confirm password', placeholder: '...........',
+                    placeholderStyle: _placeholderStyle,
+                    type: Ux4gInputFieldType.password),
+                  const SizedBox(height: 28),
+                  Ux4gButton(text: 'Create account', onPressed: () {},
+                      size: Ux4gButtonSize.large, width: double.infinity),
+                ],
+              ),
+            ),
+          ),
+          const _BrandFooter(),
+        ],
+      ),
+    );
+  }
+}
+
+class _SignUpStep4CardMockup extends StatefulWidget {
+  const _SignUpStep4CardMockup();
+  @override
+  State<_SignUpStep4CardMockup> createState() => _SignUpStep4CardMockupState();
+}
+
+class _SignUpStep4CardMockupState extends State<_SignUpStep4CardMockup> {
+  String _password = '', _confirm = '';
+
+  @override
+  Widget build(BuildContext context) {
+    return _PhoneFrame(
+      child: Column(
+        children: [
+          const _BrandHeader(),
+          Expanded(
+            child: Container(
+              color: _suCardBg,
+              child: Column(
+                children: [
+                  Expanded(
+                    child: SingleChildScrollView(
+                      padding: const EdgeInsets.fromLTRB(16, 20, 16, 16),
+                      child: Container(
+                        padding: const EdgeInsets.fromLTRB(20, 24, 20, 24),
+                        decoration: _suCardDeco(),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Text('Password setup',
+                              style: TextStyle(fontSize: 22, fontWeight: FontWeight.w800,
+                                  color: _titleColor, height: 1.2, letterSpacing: -0.3)),
+                            const SizedBox(height: 20),
+                            Ux4gInputField(value: _password,
+                              onValueChange: (v) => setState(() => _password = v),
+                              label: 'Password', placeholder: '...........',
+                              placeholderStyle: _placeholderStyle,
+                              type: Ux4gInputFieldType.password),
+                            const SizedBox(height: 16),
+                            Ux4gInputField(value: _confirm,
+                              onValueChange: (v) => setState(() => _confirm = v),
+                              label: 'Confirm password', placeholder: '...........',
+                              placeholderStyle: _placeholderStyle,
+                              type: Ux4gInputFieldType.password),
+                            const SizedBox(height: 24),
+                            Ux4gButton(text: 'Create account', onPressed: () {},
+                                size: Ux4gButtonSize.large, width: double.infinity),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  const _BrandFooter(),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+const _signUpStep4Code = r'''// Step 4 – Password setup
+Ux4gInputField(
+  label: 'Password',
+  placeholder: '...........',
+  type: Ux4gInputFieldType.password,
+),
+SizedBox(height: 16),
+Ux4gInputField(
+  label: 'Confirm password',
+  placeholder: '...........',
+  type: Ux4gInputFieldType.password,
+),
+SizedBox(height: 28),
+Ux4gButton(text: 'Create account', size: Ux4gButtonSize.large,
+  width: double.infinity, onPressed: () {})''';
+
+const _signUpStep4CardCode = r'''// Step 4 – Password setup (card style)
+Container(
+  color: Color(0xFFE9E5FF),
+  child: Container(
+    padding: EdgeInsets.all(20),
+    decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(16)),
+    child: Column(
+      children: [
+        Ux4gInputField(label: 'Password', type: Ux4gInputFieldType.password),
+        Ux4gInputField(label: 'Confirm password', type: Ux4gInputFieldType.password),
+        Ux4gButton(text: 'Create account', ...),
+      ],
+    ),
+  ),
+)''';
+
+// ───────────────────────────────────────────────────────────────────────
+// STEP 5 — Account Created
+// ───────────────────────────────────────────────────────────────────────
+
+final signUpStep5Component = WidgetbookComponent(
+  name: 'Account Created',
+  useCases: [
+    WidgetbookUseCase(
+      name: 'Default',
+      builder: (context) {
+        final variant = context.knobs.list(
+          label: 'Variant',
+          options: const ['Default', 'Card style'],
+          initialOption: 'Default',
+          description: 'Switch between the flat phone layout and the card-style layout.',
+        );
+        return ComponentDocs(
+          name: 'Account Created',
+          description: 'Success screen after registration. Offers a recommended action to '
+              'link Aadhaar or skip to browse services.',
+          code: variant == 'Card style' ? _signUpStep5CardCode : _signUpStep5Code,
+          center: true,
+          child: variant == 'Card style'
+              ? const _SignUpStep5CardMockup()
+              : const _SignUpStep5Mockup(),
+        );
+      },
+    ),
+  ],
+);
+
+class _SignUpStep5Mockup extends StatelessWidget {
+  const _SignUpStep5Mockup();
+
+  @override
+  Widget build(BuildContext context) {
+    return _PhoneFrame(
+      child: Column(
+        children: [
+          const _BrandHeader(),
+          Expanded(
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.fromLTRB(20, 40, 20, 0),
+              child: Column(
+                children: [
+                  Container(
+                    width: 72, height: 72,
+                    decoration: BoxDecoration(
+                      color: const Color(0xFFDCFCE7),
+                      shape: BoxShape.circle,
+                      border: Border.all(color: const Color(0xFF86EFAC), width: 2),
+                    ),
+                    child: const Icon(Icons.check_rounded,
+                        color: Color(0xFF16A34A), size: 40),
+                  ),
+                  const SizedBox(height: 24),
+                  const Text('Account Created!',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 26, fontWeight: FontWeight.w800,
+                        color: _titleColor, height: 1.2, letterSpacing: -0.3)),
+                  const SizedBox(height: 8),
+                  const Text('Welcome, Ramesh Kumar',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 15, color: _subtleText, height: 1.3)),
+                  const SizedBox(height: 32),
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                    decoration: BoxDecoration(
+                      color: const Color(0xFFFEF3C7),
+                      borderRadius: BorderRadius.circular(6),
+                      border: Border.all(color: const Color(0xFFFDE68A)),
+                    ),
+                    child: const Text('RECOMMENDED',
+                      style: TextStyle(fontSize: 11, fontWeight: FontWeight.w700,
+                          color: Color(0xFF92400E), letterSpacing: 0.8)),
+                  ),
+                  const SizedBox(height: 12),
+                  Ux4gButton(text: 'Link Aadhaar Now', onPressed: () {},
+                      size: Ux4gButtonSize.large, width: double.infinity),
+                  const SizedBox(height: 12),
+                  Ux4gButton(text: 'Skip and Browse Services', onPressed: () {},
+                      variant: Ux4gButtonVariant.outline,
+                      size: Ux4gButtonSize.large, width: double.infinity),
+                  const SizedBox(height: 16),
+                  const Text('You can link Aadhaar later from your profile',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 13, color: _subtleText, height: 1.4)),
+                ],
+              ),
+            ),
+          ),
+          const _BrandFooter(),
+        ],
+      ),
+    );
+  }
+}
+
+class _SignUpStep5CardMockup extends StatelessWidget {
+  const _SignUpStep5CardMockup();
+
+  @override
+  Widget build(BuildContext context) {
+    return _PhoneFrame(
+      child: Column(
+        children: [
+          const _BrandHeader(),
+          Expanded(
+            child: Container(
+              color: _suCardBg,
+              child: Column(
+                children: [
+                  Expanded(
+                    child: SingleChildScrollView(
+                      padding: const EdgeInsets.fromLTRB(16, 20, 16, 16),
+                      child: Container(
+                        padding: const EdgeInsets.fromLTRB(20, 32, 20, 24),
+                        decoration: _suCardDeco(),
+                        child: Column(
+                          children: [
+                            Container(
+                              width: 72, height: 72,
+                              decoration: BoxDecoration(
+                                color: const Color(0xFFDCFCE7),
+                                shape: BoxShape.circle,
+                                border: Border.all(color: const Color(0xFF86EFAC), width: 2),
+                              ),
+                              child: const Icon(Icons.check_rounded,
+                                  color: Color(0xFF16A34A), size: 40),
+                            ),
+                            const SizedBox(height: 20),
+                            const Text('Account Created!',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(fontSize: 22, fontWeight: FontWeight.w800,
+                                  color: _titleColor, height: 1.2, letterSpacing: -0.3)),
+                            const SizedBox(height: 6),
+                            const Text('Welcome, Ramesh Kumar',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(fontSize: 13, color: _subtleText, height: 1.3)),
+                            const SizedBox(height: 28),
+                            Container(
+                              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                              decoration: BoxDecoration(
+                                color: const Color(0xFFFEF3C7),
+                                borderRadius: BorderRadius.circular(6),
+                                border: Border.all(color: const Color(0xFFFDE68A)),
+                              ),
+                              child: const Text('RECOMMENDED',
+                                style: TextStyle(fontSize: 11, fontWeight: FontWeight.w700,
+                                    color: Color(0xFF92400E), letterSpacing: 0.8)),
+                            ),
+                            const SizedBox(height: 12),
+                            Ux4gButton(text: 'Link Aadhaar Now', onPressed: () {},
+                                size: Ux4gButtonSize.large, width: double.infinity),
+                            const SizedBox(height: 12),
+                            Ux4gButton(text: 'Skip and Browse Services', onPressed: () {},
+                                variant: Ux4gButtonVariant.outline,
+                                size: Ux4gButtonSize.large, width: double.infinity),
+                            const SizedBox(height: 12),
+                            const Text('You can link Aadhaar later from your profile',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(fontSize: 12, color: _subtleText, height: 1.4)),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  const _BrandFooter(),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+const _signUpStep5Code = r'''// Step 5 – Account Created
+Column(
+  children: [
+    Container(
+      width: 72, height: 72,
+      decoration: BoxDecoration(
+        color: Color(0xFFDCFCE7), shape: BoxShape.circle,
+        border: Border.all(color: Color(0xFF86EFAC), width: 2),
+      ),
+      child: Icon(Icons.check_rounded, color: Color(0xFF16A34A), size: 40),
+    ),
+    SizedBox(height: 24),
+    Text('Account Created!', ...),
+    Text('Welcome, Ramesh Kumar', ...),
+    SizedBox(height: 32),
+    Container(child: Text('RECOMMENDED', ...)),
+    SizedBox(height: 12),
+    Ux4gButton(text: 'Link Aadhaar Now', size: Ux4gButtonSize.large,
+      width: double.infinity, onPressed: () {}),
+    SizedBox(height: 12),
+    Ux4gButton(text: 'Skip and Browse Services',
+      variant: Ux4gButtonVariant.outline,
+      size: Ux4gButtonSize.large, width: double.infinity, onPressed: () {}),
+    SizedBox(height: 16),
+    Text('You can link Aadhaar later from your profile', ...),
+  ],
+)''';
+
+const _signUpStep5CardCode = r'''// Step 5 – Account Created (card style)
+Container(
+  color: Color(0xFFE9E5FF),
+  child: Column(
+    children: [
+      Expanded(
+        child: Container(
+          padding: EdgeInsets.fromLTRB(20, 32, 20, 24),
+          decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(16)),
+          child: Column(children: [
+            // green check icon, title, subtitle,
+            // RECOMMENDED badge, Link Aadhaar button, Skip button, note
+          ]),
+        ),
+      ),
+      _BrandFooter(),
+    ],
+  ),
+)''';

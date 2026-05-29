@@ -205,6 +205,16 @@ class UX4GWidgetbook extends StatelessWidget {
                     signInSuccessComponent,
                   ],
                 ),
+                WidgetbookFolder(
+                  name: 'SignUp',
+                  children: [
+                    signUpStep1Component,
+                    signUpStep2Component,
+                    signUpStep3Component,
+                    signUpStep4Component,
+                    signUpStep5Component,
+                  ],
+                ),
               ],
             ),
           ],
