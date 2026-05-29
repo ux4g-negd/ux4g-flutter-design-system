@@ -3048,28 +3048,27 @@ class _DataSharingConsentMobileMockup extends StatelessWidget {
                   const SizedBox(height: 12),
 
                   // Title & Badge Row
-                  const Center(
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Text(
-                          'Data Sharing Consent',
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.w700,
-                            color: _titleColor,
-                          ),
+                  const Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        'Data Sharing Consent',
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w700,
+                          color: _titleColor,
                         ),
-                        SizedBox(height: 8),
-                        Ux4gTag(
-                          text: 'DPDP Act 2023',
-                          customBackgroundColor: Color(0xFFE9E5FF),
-                          customContentColor: Color(0xFF6A4EFF),
-                          shape: Ux4gTagShape.rectangular,
-                          size: Ux4gTagSize.m,
-                        ),
-                      ],
-                    ),
+                      ),
+                      SizedBox(height: 8),
+                      Ux4gTag(
+                        text: 'DPDP Act 2023',
+                        customBackgroundColor: Color(0xFFE9E5FF),
+                        customContentColor: Color(0xFF6A4EFF),
+                        shape: Ux4gTagShape.rectangular,
+                        size: Ux4gTagSize.m,
+                      ),
+                    ],
                   ),
                   const SizedBox(height: 12),
 
@@ -3244,28 +3243,27 @@ class _DataSharingConsentCardMockup extends StatelessWidget {
                             const SizedBox(height: 12),
 
                             // Title & Badge Row
-                            const Center(
-                              child: Column(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  Text(
-                                    'Data Sharing Consent',
-                                    style: TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.w700,
-                                      color: _titleColor,
-                                    ),
+                            const Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Text(
+                                  'Data Sharing Consent',
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w700,
+                                    color: _titleColor,
                                   ),
-                                  SizedBox(height: 8),
-                                  Ux4gTag(
-                                    text: 'DPDP Act 2023',
-                                    customBackgroundColor: Color(0xFFE9E5FF),
-                                    customContentColor: Color(0xFF6A4EFF),
-                                    shape: Ux4gTagShape.rectangular,
-                                    size: Ux4gTagSize.m,
-                                  ),
-                                ],
-                              ),
+                                ),
+                                SizedBox(height: 8),
+                                Ux4gTag(
+                                  text: 'DPDP Act 2023',
+                                  customBackgroundColor: Color(0xFFE9E5FF),
+                                  customContentColor: Color(0xFF6A4EFF),
+                                  shape: Ux4gTagShape.rectangular,
+                                  size: Ux4gTagSize.m,
+                                ),
+                              ],
                             ),
                             const SizedBox(height: 12),
 
@@ -3521,27 +3519,26 @@ Column(
             SizedBox(height: 12),
 
             // Title & Badge Row
-            Center(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(
-                    'Data Sharing Consent',
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w700,
-                      color: Color(0xFF111827),
-                    ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  'Data Sharing Consent',
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w700,
+                    color: Color(0xFF111827),
                   ),
-                  SizedBox(height: 8),
-                  Ux4gTag(
-                    text: 'DPDP Act 2023',
-                    customBackgroundColor: Color(0xFFE9E5FF),
-                    customContentColor: Color(0xFF6A4EFF),
-                    shape: Ux4gTagShape.rectangular,
-                  ),
-                ],
-              ),
+                ),
+                SizedBox(height: 8),
+                Ux4gTag(
+                  text: 'DPDP Act 2023',
+                  customBackgroundColor: Color(0xFFE9E5FF),
+                  customContentColor: Color(0xFF6A4EFF),
+                  shape: Ux4gTagShape.rectangular,
+                ),
+              ],
             ),
             SizedBox(height: 12),
 
@@ -3833,27 +3830,26 @@ Column(
                       SizedBox(height: 12),
 
                       // Title & Badge Row
-                      Center(
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Text(
-                              'Data Sharing Consent',
-                              style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.w700,
-                                color: Color(0xFF111827),
-                              ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            'Data Sharing Consent',
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.w700,
+                              color: Color(0xFF111827),
                             ),
-                            SizedBox(height: 8),
-                            Ux4gTag(
-                              text: 'DPDP Act 2023',
-                              customBackgroundColor: Color(0xFFE9E5FF),
-                              customContentColor: Color(0xFF6A4EFF),
-                              shape: Ux4gTagShape.rectangular,
-                            ),
-                          ],
-                        ),
+                          ),
+                          SizedBox(height: 8),
+                          Ux4gTag(
+                            text: 'DPDP Act 2023',
+                            customBackgroundColor: Color(0xFFE9E5FF),
+                            customContentColor: Color(0xFF6A4EFF),
+                            shape: Ux4gTagShape.rectangular,
+                          ),
+                        ],
                       ),
                       SizedBox(height: 12),
 

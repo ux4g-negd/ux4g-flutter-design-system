@@ -268,7 +268,7 @@ class UX4GWidgetbook extends StatelessWidget {
                   ],
                 ),
                 WidgetbookFolder(
-                  name: 'DATA SHARING CONSENT',
+                  name: 'Data Sharing Consent',
                   children: [
                     dataSharingConsentComponent,
                   ],
