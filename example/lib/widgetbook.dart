@@ -45,7 +45,7 @@ class UX4GWidgetbook extends StatelessWidget {
         // ── Components ────────────────────────────────────────────────────────
         WidgetbookCategory(
           name: 'Components',
-          isInitiallyExpanded: true,
+          isInitiallyExpanded: false,
           children: [
             // Buttons
             buttonComponent,
@@ -190,7 +190,7 @@ class UX4GWidgetbook extends StatelessWidget {
         // ── Patterns ───────────────────────────────────────────────────────
         WidgetbookCategory(
           name: 'Patterns',
-          isInitiallyExpanded: true,
+          isInitiallyExpanded: false,
           children: [
             WidgetbookFolder(
               name: 'Identity and Access',
@@ -214,6 +214,33 @@ class UX4GWidgetbook extends StatelessWidget {
                     otpVerifyLastAttemptComponent,
                     otpVerifyAccountLockedComponent,
                     otpVerifiedSuccessComponent,
+                  ],
+                ),
+                WidgetbookFolder(
+                  name: 'Session Time-out Dialog',
+                  children: [sessionExpiringDialogComponent],
+                ),
+                WidgetbookFolder(
+                  name: 'Auth errors & lockout',
+                  children: [
+                    authIncorrectOtpComponent,
+                    authOtpAttemptWarningComponent,
+                    authOtpLastAttemptComponent,
+                    authOtpAccountLockedComponent,
+                    authOtpRetryUnlockedComponent,
+                    authOtpSuspiciousActivityComponent,
+                  ],
+                ),
+                WidgetbookFolder(
+                  name: 'Aadhaar Authentication Gate',
+                  children: [
+                    aadhaarVerifyMethodComponent,
+                    aadhaarOtpEnterComponent,
+                    aadhaarFaceAuthPermissionComponent,
+                    aadhaarVerifiedSuccessComponent,
+                    aadhaarVerificationFailedComponent,
+                    aadhaarAccountLockedComponent,
+                    operatorAssistedAuthComponent,
                   ],
                 ),
               ],

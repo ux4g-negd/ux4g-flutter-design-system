@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import '../foundation/colors.dart';
 import '../foundation/typography.dart';
-import '../theme/theme.dart';
 
 enum Ux4gCheckboxSize {
   small(16),
@@ -94,26 +93,26 @@ class Ux4gCheckbox extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     if (label != null)
-                      Row(
-                        children: [
-                          Text(
-                            label!,
-                            style: labelTextStyle.copyWith(
-                              color: enabled
-                                  ? (ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface)
-                                  : (ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface).withValues(alpha: 0.38),
-                            ),
-                          ),
-                          if (isRequired) ...[
-                            const SizedBox(width: 4),
-                            Text(
-                              "*",
+                      Text.rich(
+                        TextSpan(
+                          children: [
+                            TextSpan(
+                              text: label!,
                               style: labelTextStyle.copyWith(
-                                color: ux4gColors?.error ?? materialTheme.colorScheme.error,
+                                color: enabled
+                                    ? (ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface)
+                                    : (ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface).withValues(alpha: 0.38),
                               ),
                             ),
+                            if (isRequired)
+                              TextSpan(
+                                text: " *",
+                                style: labelTextStyle.copyWith(
+                                  color: ux4gColors?.error ?? materialTheme.colorScheme.error,
+                                ),
+                              ),
                           ],
-                        ],
+                        ),
                       ),
                     if (description != null) ...[
                       const SizedBox(height: 4),
