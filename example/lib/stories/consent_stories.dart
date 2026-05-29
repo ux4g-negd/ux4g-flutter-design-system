@@ -2957,6 +2957,1110 @@ Column(
           ],
         ),
       ),
+  ],
+)''';
+
+// ───────────────────────────────────────────────────────────────────────
+// Data Sharing Consent pattern
+// ───────────────────────────────────────────────────────────────────────
+
+final dataSharingConsentComponent = WidgetbookComponent(
+  name: 'Data Sharing Consent',
+  useCases: [
+    WidgetbookUseCase(
+      name: 'Default',
+      builder: (context) {
+        final variant = context.knobs.list(
+          label: 'Variant',
+          options: const ['Default', 'Card style'],
+          initialOption: 'Default',
+          description: 'Switch between the standard flat layout and the card-style layout for data sharing consent.',
+        );
+
+        final code = variant == 'Card style' ? _dataSharingConsentCardCode : _dataSharingConsentCode;
+        final child = variant == 'Card style' ? const _DataSharingConsentCardMockup() : const _DataSharingConsentMobileMockup();
+
+        return ComponentDocs(
+          name: 'Data Sharing Consent',
+          description: 'Pattern for displaying data sharing consent details under the DPDP Act 2023, listing third-party sharing details, warning banners, and Manage/Cancel actions.',
+          code: code,
+          center: true,
+          child: child,
+        );
+      },
+    ),
+  ],
+);
+
+// ───────────────────────────────────────────────────────────────────────
+// Mockups for Data Sharing Consent
+// ───────────────────────────────────────────────────────────────────────
+
+class _DataSharingConsentMobileMockup extends StatelessWidget {
+  const _DataSharingConsentMobileMockup();
+
+  @override
+  Widget build(BuildContext context) {
+    return _PhoneFrame(
+      child: Column(
+        children: [
+          const _ConsentHeader(),
+          Expanded(
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.fromLTRB(20, 24, 20, 0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // Shield icon indicator
+                  Center(
+                    child: Container(
+                      width: 56,
+                      height: 56,
+                      decoration: const BoxDecoration(
+                        color: Color(0xFFEEF2F6),
+                        shape: BoxShape.circle,
+                      ),
+                      child: Center(
+                        child: Icon(
+                          Icons.shield_outlined,
+                          color: Theme.of(context).colorScheme.primary,
+                          size: 28,
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+
+                  // Headline
+                  const Center(
+                    child: Text(
+                      'Your Data, Your Control',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.w800,
+                        color: _titleColor,
+                        height: 1.2,
+                        letterSpacing: -0.3,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 12),
+
+                  // Title & Badge Row
+                  const Center(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          'Data Sharing Consent',
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.w700,
+                            color: _titleColor,
+                          ),
+                        ),
+                        SizedBox(height: 8),
+                        Ux4gTag(
+                          text: 'DPDP Act 2023',
+                          customBackgroundColor: Color(0xFFE9E5FF),
+                          customContentColor: Color(0xFF6A4EFF),
+                          shape: Ux4gTagShape.rectangular,
+                          size: Ux4gTagSize.m,
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 12),
+
+                  // Scheme Info
+                  const Text(
+                    'Scheme: PM Kisan',
+                    style: TextStyle(
+                      fontSize: 13,
+                      fontWeight: FontWeight.w700,
+                      color: Color(0xFF6A4EFF),
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+
+                  // Description
+                  const Text(
+                    'To enable Direct Benefit Transfer for PM Kisan, the Agriculture Department will share your details with the following third parties.',
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: _subtleText,
+                      height: 1.4,
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+
+                  // Sharing cards
+                  _buildSharingCard(
+                    title: 'Bank of India',
+                    shared: 'Aadhaar, Name',
+                    purpose: 'Account matching',
+                    duration: '1 year',
+                    isRequired: true,
+                  ),
+                  const SizedBox(height: 12),
+                  _buildSharingCard(
+                    title: 'Payment Corp',
+                    shared: 'Transaction ID',
+                    purpose: 'Payment processing',
+                    duration: '90 days',
+                    isRequired: true,
+                  ),
+                  const SizedBox(height: 12),
+                  _buildSharingCard(
+                    title: 'SMS Gateway',
+                    shared: 'Mobile Number',
+                    purpose: 'Status alerts',
+                    duration: 'Scheme duration',
+                    isRequired: false,
+                  ),
+                  const SizedBox(height: 20),
+
+                  // Warning banner
+                  Ux4gStatusBanner(
+                    variant: Ux4gBannerVariant.warningLight,
+                    title: 'Required consents cannot be withdrawn as they are necessary for the scheme to function.',
+                    leadingIcon: const Icon(
+                      Icons.error,
+                      color: Color(0xFFD97706),
+                      size: 22,
+                    ),
+                    titleStyle: const TextStyle(
+                      fontSize: 13,
+                      fontWeight: FontWeight.w500,
+                      color: Color(0xFFB45309),
+                    ),
+                    margin: EdgeInsets.zero,
+                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                  ),
+                  const SizedBox(height: 24),
+
+                  const Divider(height: 1, color: _border),
+                  const SizedBox(height: 20),
+
+                  // Actions
+                  Ux4gButton(
+                    text: 'Manage',
+                    onPressed: () {},
+                    variant: Ux4gButtonVariant.outline,
+                    leadingIcon: Icons.edit_outlined,
+                    size: Ux4gButtonSize.large,
+                    width: double.infinity,
+                  ),
+                  const SizedBox(height: 4),
+                  Ux4gButton(
+                    text: 'Cancel',
+                    onPressed: () {},
+                    variant: Ux4gButtonVariant.outline,
+                    contentColor: const Color(0xFF374151),
+                    borderColor: const Color(0xFFD1D5DB),
+                    size: Ux4gButtonSize.large,
+                    width: double.infinity,
+                  ),
+                  const SizedBox(height: 16),
+                ],
+              ),
+            ),
+          ),
+          const _ConsentFooter(),
+        ],
+      ),
+    );
+  }
+}
+
+class _DataSharingConsentCardMockup extends StatelessWidget {
+  const _DataSharingConsentCardMockup();
+
+  @override
+  Widget build(BuildContext context) {
+    return _PhoneFrame(
+      child: Column(
+        children: [
+          const _ConsentHeader(),
+          Expanded(
+            child: Container(
+              color: const Color(0xFFE9E5FF),
+              child: Column(
+                children: [
+                  Expanded(
+                    child: SingleChildScrollView(
+                      padding: const EdgeInsets.all(16),
+                      child: Container(
+                        padding: const EdgeInsets.all(20),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(16),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withValues(alpha: 0.04),
+                              blurRadius: 16,
+                              offset: const Offset(0, 4),
+                            ),
+                          ],
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            // Shield icon indicator
+                            Center(
+                              child: Container(
+                                width: 56,
+                                height: 56,
+                                decoration: const BoxDecoration(
+                                  color: Color(0xFFEEF2F6),
+                                  shape: BoxShape.circle,
+                                ),
+                                child: Center(
+                                  child: Icon(
+                                    Icons.shield_outlined,
+                                    color: Theme.of(context).colorScheme.primary,
+                                    size: 28,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            const SizedBox(height: 16),
+
+                            // Headline
+                            const Center(
+                              child: Text(
+                                'Your Data, Your Control',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  fontSize: 22,
+                                  fontWeight: FontWeight.w800,
+                                  color: _titleColor,
+                                  height: 1.2,
+                                  letterSpacing: -0.3,
+                                ),
+                              ),
+                            ),
+                            const SizedBox(height: 12),
+
+                            // Title & Badge Row
+                            const Center(
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Text(
+                                    'Data Sharing Consent',
+                                    style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w700,
+                                      color: _titleColor,
+                                    ),
+                                  ),
+                                  SizedBox(height: 8),
+                                  Ux4gTag(
+                                    text: 'DPDP Act 2023',
+                                    customBackgroundColor: Color(0xFFE9E5FF),
+                                    customContentColor: Color(0xFF6A4EFF),
+                                    shape: Ux4gTagShape.rectangular,
+                                    size: Ux4gTagSize.m,
+                                  ),
+                                ],
+                              ),
+                            ),
+                            const SizedBox(height: 12),
+
+                            // Scheme Info
+                            const Text(
+                              'Scheme: PM Kisan',
+                              style: TextStyle(
+                                  fontSize: 13,
+                                  fontWeight: FontWeight.w700,
+                                  color: Color(0xFF6A4EFF),
+                                ),
+                            ),
+                            const SizedBox(height: 8),
+
+                            // Description
+                            const Text(
+                              'To enable Direct Benefit Transfer for PM Kisan, the Agriculture Department will share your details with the following third parties.',
+                              style: TextStyle(
+                                fontSize: 13,
+                                color: _subtleText,
+                                height: 1.45,
+                              ),
+                            ),
+                            const SizedBox(height: 20),
+
+                            // Sharing cards
+                            _buildSharingCard(
+                              title: 'Bank of India',
+                              shared: 'Aadhaar, Name',
+                              purpose: 'Account matching',
+                              duration: '1 year',
+                              isRequired: true,
+                            ),
+                            const SizedBox(height: 12),
+                            _buildSharingCard(
+                              title: 'Payment Corp',
+                              shared: 'Transaction ID',
+                              purpose: 'Payment processing',
+                              duration: '90 days',
+                              isRequired: true,
+                            ),
+                            const SizedBox(height: 12),
+                            _buildSharingCard(
+                              title: 'SMS Gateway',
+                              shared: 'Mobile Number',
+                              purpose: 'Status alerts',
+                              duration: 'Scheme duration',
+                              isRequired: false,
+                            ),
+                            const SizedBox(height: 20),
+
+                            // Warning banner
+                            Ux4gStatusBanner(
+                              variant: Ux4gBannerVariant.warningLight,
+                              title: 'Required consents cannot be withdrawn as they are necessary for the scheme to function.',
+                              leadingIcon: const Icon(
+                                Icons.error,
+                                color: Color(0xFFD97706),
+                                size: 22,
+                              ),
+                              titleStyle: const TextStyle(
+                                fontSize: 13,
+                                fontWeight: FontWeight.w500,
+                                color: Color(0xFFB45309),
+                              ),
+                              margin: EdgeInsets.zero,
+                              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                            ),
+                            const SizedBox(height: 20),
+
+                            const Divider(height: 1, color: _border),
+                            const SizedBox(height: 16),
+
+                            // Actions
+                            Ux4gButton(
+                              text: 'Manage',
+                              onPressed: () {},
+                              variant: Ux4gButtonVariant.outline,
+                              leadingIcon: Icons.edit_outlined,
+                              size: Ux4gButtonSize.large,
+                              width: double.infinity,
+                            ),
+                            const SizedBox(height: 4),
+                            Ux4gButton(
+                              text: 'Cancel',
+                              onPressed: () {},
+                              variant: Ux4gButtonVariant.outline,
+                              contentColor: const Color(0xFF374151),
+                              borderColor: const Color(0xFFD1D5DB),
+                              size: Ux4gButtonSize.large,
+                              width: double.infinity,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  const _ConsentFooter(),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+/// Helper method used by mockups to build individual sharing cards.
+Widget _buildSharingCard({
+  required String title,
+  required String shared,
+  required String purpose,
+  required String duration,
+  required bool isRequired,
+}) {
+  return Container(
+    width: double.infinity,
+    padding: const EdgeInsets.all(16),
+    decoration: BoxDecoration(
+      color: Colors.white,
+      borderRadius: BorderRadius.circular(12),
+      border: Border.all(color: _border),
+    ),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              title,
+              style: const TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w700,
+                color: _titleColor,
+              ),
+            ),
+            Ux4gTag(
+              text: isRequired ? 'Required' : 'Optional',
+              customBackgroundColor: isRequired ? const Color(0xFFFFF0F0) : const Color(0xFFF3F4F6),
+              customContentColor: isRequired ? const Color(0xFF8A1A16) : const Color(0xFF4B5563),
+              shape: Ux4gTagShape.rectangular,
+              size: Ux4gTagSize.m,
+            ),
+          ],
+        ),
+        const SizedBox(height: 6),
+        Text(
+          'Data shared · $shared',
+          style: const TextStyle(
+            fontSize: 13,
+            color: _subtleText,
+            fontWeight: FontWeight.w400,
+            height: 1.25,
+          ),
+        ),
+        const SizedBox(height: 2),
+        Text(
+          'Purpose · $purpose',
+          style: const TextStyle(
+            fontSize: 13,
+            color: _subtleText,
+            fontWeight: FontWeight.w400,
+            height: 1.25,
+          ),
+        ),
+        const SizedBox(height: 2),
+        Text(
+          'Duration · $duration',
+          style: const TextStyle(
+            fontSize: 13,
+            color: _subtleText,
+            fontWeight: FontWeight.w400,
+            height: 1.25,
+          ),
+        ),
+      ],
+    ),
+  );
+}
+
+// ───────────────────────────────────────────────────────────────────────
+// Source Code Snippets for Data Sharing Consent
+// ───────────────────────────────────────────────────────────────────────
+
+const _dataSharingConsentCode = r'''// Data Sharing Consent – Flat Layout
+Column(
+  children: [
+    // Header
+    Ux4gAppHeader(
+      variant: Ux4gAppHeaderVariant.light,
+      title: '',
+      leadingWidgets: [
+        SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
+        Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
+        SvgPicture.asset('assets/Union.svg', height: 32),
+      ],
+      actions: [
+        Ux4gAppHeaderAction(
+          customWidget: Container(
+            width: 36,
+            height: 36,
+            decoration: BoxDecoration(
+              border: Border.all(color: Color(0xFFE5E7EB)),
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: Center(
+              child: Icon(Icons.menu, color: Color(0xFF6A4EFF), size: 20),
+            ),
+          ),
+        ),
+      ],
+      horizontalPadding: 16,
+      leadingSpacing: 12,
+    ),
+    Divider(height: 1, thickness: 1, color: Color(0xFFE5E7EB)),
+
+    Expanded(
+      child: SingleChildScrollView(
+        padding: EdgeInsets.fromLTRB(20, 24, 20, 0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Shield icon indicator
+            Center(
+              child: Container(
+                width: 56,
+                height: 56,
+                decoration: BoxDecoration(
+                  color: Color(0xFFEEF2F6),
+                  shape: BoxShape.circle,
+                ),
+                child: Icon(Icons.shield_outlined, color: Color(0xFF6A4EFF), size: 28),
+              ),
+            ),
+            SizedBox(height: 16),
+
+            // Headline
+            Center(
+              child: Text(
+                'Your Data, Your Control',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.w800,
+                  color: Color(0xFF111827),
+                  height: 1.2,
+                  letterSpacing: -0.3,
+                ),
+              ),
+            ),
+            SizedBox(height: 12),
+
+            // Title & Badge Row
+            Center(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    'Data Sharing Consent',
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w700,
+                      color: Color(0xFF111827),
+                    ),
+                  ),
+                  SizedBox(height: 8),
+                  Ux4gTag(
+                    text: 'DPDP Act 2023',
+                    customBackgroundColor: Color(0xFFE9E5FF),
+                    customContentColor: Color(0xFF6A4EFF),
+                    shape: Ux4gTagShape.rectangular,
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(height: 12),
+
+            // Scheme Info
+            Text(
+              'Scheme: PM Kisan',
+              style: TextStyle(
+                fontSize: 13,
+                fontWeight: FontWeight.w700,
+                color: Color(0xFF6A4EFF),
+              ),
+            ),
+            SizedBox(height: 8),
+
+            // Description
+            Text(
+              'To enable Direct Benefit Transfer for PM Kisan, the Agriculture Department will share your details with the following third parties.',
+              style: TextStyle(fontSize: 14, color: Color(0xFF6B7280), height: 1.4),
+            ),
+            SizedBox(height: 20),
+
+            // 1. Bank of India Card
+            Container(
+              width: double.infinity,
+              padding: EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(12),
+                border: Border.all(color: Color(0xFFE5E7EB)),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Bank of India',
+                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: Color(0xFF111827)),
+                      ),
+                      Ux4gTag(
+                        text: 'Required',
+                        customBackgroundColor: Color(0xFFFFF0F0),
+                        customContentColor: Color(0xFF8A1A16),
+                        shape: Ux4gTagShape.rectangular,
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 6),
+                  Text('Data shared · Aadhaar, Name', style: TextStyle(color: Color(0xFF6B7280), height: 1.25)),
+                  SizedBox(height: 2),
+                  Text('Purpose · Account matching', style: TextStyle(color: Color(0xFF6B7280), height: 1.25)),
+                  SizedBox(height: 2),
+                  Text('Duration · 1 year', style: TextStyle(color: Color(0xFF6B7280), height: 1.25)),
+                ],
+              ),
+            ),
+            SizedBox(height: 12),
+
+            // 2. Payment Corp Card
+            Container(
+              width: double.infinity,
+              padding: EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(12),
+                border: Border.all(color: Color(0xFFE5E7EB)),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Payment Corp',
+                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: Color(0xFF111827)),
+                      ),
+                      Ux4gTag(
+                        text: 'Required',
+                        customBackgroundColor: Color(0xFFFFF0F0),
+                        customContentColor: Color(0xFF8A1A16),
+                        shape: Ux4gTagShape.rectangular,
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 6),
+                  Text('Data shared · Transaction ID', style: TextStyle(color: Color(0xFF6B7280), height: 1.25)),
+                  SizedBox(height: 2),
+                  Text('Purpose · Payment processing', style: TextStyle(color: Color(0xFF6B7280), height: 1.25)),
+                  SizedBox(height: 2),
+                  Text('Duration · 90 days', style: TextStyle(color: Color(0xFF6B7280), height: 1.25)),
+                ],
+              ),
+            ),
+            SizedBox(height: 12),
+
+            // 3. SMS Gateway Card
+            Container(
+              width: double.infinity,
+              padding: EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(12),
+                border: Border.all(color: Color(0xFFE5E7EB)),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'SMS Gateway',
+                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: Color(0xFF111827)),
+                      ),
+                      Ux4gTag(
+                        text: 'Optional',
+                        customBackgroundColor: Color(0xFFF3F4F6),
+                        customContentColor: Color(0xFF4B5563),
+                        shape: Ux4gTagShape.rectangular,
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 6),
+                  Text('Data shared · Mobile Number', style: TextStyle(color: Color(0xFF6B7280), height: 1.25)),
+                  SizedBox(height: 2),
+                  Text('Purpose · Status alerts', style: TextStyle(color: Color(0xFF6B7280), height: 1.25)),
+                  SizedBox(height: 2),
+                  Text('Duration · Scheme duration', style: TextStyle(color: Color(0xFF6B7280), height: 1.25)),
+                ],
+              ),
+            ),
+            SizedBox(height: 20),
+
+            // Warning banner
+            Ux4gStatusBanner(
+              variant: Ux4gBannerVariant.warningLight,
+              title: 'Required consents cannot be withdrawn as they are necessary for the scheme to function.',
+              leadingIcon: Icon(
+                Icons.error,
+                color: Color(0xFFD97706),
+                size: 22,
+              ),
+              titleStyle: TextStyle(
+                fontSize: 13,
+                fontWeight: FontWeight.w500,
+                color: Color(0xFFB45309),
+              ),
+              margin: EdgeInsets.zero,
+              padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+            ),
+            SizedBox(height: 24),
+
+            Divider(height: 1, color: Color(0xFFE5E7EB)),
+            SizedBox(height: 20),
+
+            // Actions
+            Ux4gButton(
+              text: 'Manage',
+              onPressed: () {},
+              variant: Ux4gButtonVariant.outline,
+              leadingIcon: Icons.edit_outlined,
+              size: Ux4gButtonSize.large,
+              width: double.infinity,
+            ),
+            SizedBox(height: 4),
+            Ux4gButton(
+              text: 'Cancel',
+              onPressed: () {},
+              variant: Ux4gButtonVariant.outline,
+              contentColor: Color(0xFF374151),
+              borderColor: Color(0xFFD1D5DB),
+              size: Ux4gButtonSize.large,
+              width: double.infinity,
+            ),
+            SizedBox(height: 16),
+          ],
+        ),
+      ),
+    ),
+
+    // Footer
+    Padding(
+      padding: EdgeInsets.only(bottom: 20, top: 8),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(
+            'Powered by -',
+            style: TextStyle(
+              fontSize: 11,
+              color: Color(0xFF9CA3AF),
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+          SizedBox(height: 6),
+          Image.asset('assets/digital_india_logo.png', height: 22),
+        ],
+      ),
+    ),
+  ],
+)''';
+
+const _dataSharingConsentCardCode = r'''// Data Sharing Consent – Card Style Layout
+Column(
+  children: [
+    // Header
+    Ux4gAppHeader(
+      variant: Ux4gAppHeaderVariant.light,
+      title: '',
+      leadingWidgets: [
+        SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
+        Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
+        SvgPicture.asset('assets/Union.svg', height: 32),
+      ],
+      actions: [
+        Ux4gAppHeaderAction(
+          customWidget: Container(
+            width: 36,
+            height: 36,
+            decoration: BoxDecoration(
+              border: Border.all(color: Color(0xFFE5E7EB)),
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: Center(
+              child: Icon(Icons.menu, color: Color(0xFF6A4EFF), size: 20),
+            ),
+          ),
+        ),
+      ],
+      horizontalPadding: 16,
+      leadingSpacing: 12,
+    ),
+    Divider(height: 1, thickness: 1, color: Color(0xFFE5E7EB)),
+
+    Expanded(
+      child: Container(
+        color: Color(0xFFE9E5FF), // Soft purple/blue card style bg
+        child: Column(
+          children: [
+            Expanded(
+              child: SingleChildScrollView(
+                padding: EdgeInsets.all(16),
+                child: Container(
+                  padding: EdgeInsets.all(20),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(16),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withValues(alpha: 0.04),
+                        blurRadius: 16,
+                        offset: Offset(0, 4),
+                      ),
+                    ],
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      // Shield icon indicator
+                      Center(
+                        child: Container(
+                          width: 56,
+                          height: 56,
+                          decoration: BoxDecoration(
+                            color: Color(0xFFEEF2F6),
+                            shape: BoxShape.circle,
+                          ),
+                          child: Icon(Icons.shield_outlined, color: Color(0xFF6A4EFF), size: 28),
+                        ),
+                      ),
+                      SizedBox(height: 16),
+
+                      // Headline
+                      Center(
+                        child: Text(
+                          'Your Data, Your Control',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 22,
+                            fontWeight: FontWeight.w800,
+                            color: Color(0xFF111827),
+                            height: 1.2,
+                            letterSpacing: -0.3,
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: 12),
+
+                      // Title & Badge Row
+                      Center(
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text(
+                              'Data Sharing Consent',
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.w700,
+                                color: Color(0xFF111827),
+                              ),
+                            ),
+                            SizedBox(height: 8),
+                            Ux4gTag(
+                              text: 'DPDP Act 2023',
+                              customBackgroundColor: Color(0xFFE9E5FF),
+                              customContentColor: Color(0xFF6A4EFF),
+                              shape: Ux4gTagShape.rectangular,
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(height: 12),
+
+                      // Scheme Info
+                      Text(
+                        'Scheme: PM Kisan',
+                        style: TextStyle(
+                          fontSize: 13,
+                          fontWeight: FontWeight.w700,
+                          color: Color(0xFF6A4EFF),
+                        ),
+                      ),
+                      SizedBox(height: 8),
+
+                      // Description
+                      Text(
+                        'To enable Direct Benefit Transfer for PM Kisan, the Agriculture Department will share your details with the following third parties.',
+                        style: TextStyle(
+                          fontSize: 13,
+                          color: Color(0xFF6B7280),
+                          height: 1.45,
+                        ),
+                      ),
+                      SizedBox(height: 20),
+
+                      // 1. Bank of India Card
+                      Container(
+                        width: double.infinity,
+                        padding: EdgeInsets.all(16),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(12),
+                          border: Border.all(color: Color(0xFFE5E7EB)),
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  'Bank of India',
+                                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: Color(0xFF111827)),
+                                ),
+                                Ux4gTag(
+                                  text: 'Required',
+                                  customBackgroundColor: Color(0xFFFFF0F0),
+                                  customContentColor: Color(0xFF8A1A16),
+                                  shape: Ux4gTagShape.rectangular,
+                                ),
+                              ],
+                            ),
+                            SizedBox(height: 6),
+                            Text('Data shared · Aadhaar, Name', style: TextStyle(color: Color(0xFF6B7280), height: 1.25)),
+                            SizedBox(height: 2),
+                            Text('Purpose · Account matching', style: TextStyle(color: Color(0xFF6B7280), height: 1.25)),
+                            SizedBox(height: 2),
+                            Text('Duration · 1 year', style: TextStyle(color: Color(0xFF6B7280), height: 1.25)),
+                          ],
+                        ),
+                      ),
+                      SizedBox(height: 12),
+
+                      // 2. Payment Corp Card
+                      Container(
+                        width: double.infinity,
+                        padding: EdgeInsets.all(16),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(12),
+                          border: Border.all(color: Color(0xFFE5E7EB)),
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  'Payment Corp',
+                                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: Color(0xFF111827)),
+                                ),
+                                Ux4gTag(
+                                  text: 'Required',
+                                  customBackgroundColor: Color(0xFFFFF0F0),
+                                  customContentColor: Color(0xFF8A1A16),
+                                  shape: Ux4gTagShape.rectangular,
+                                ),
+                              ],
+                            ),
+                            SizedBox(height: 6),
+                            Text('Data shared · Transaction ID', style: TextStyle(color: Color(0xFF6B7280), height: 1.25)),
+                            SizedBox(height: 2),
+                            Text('Purpose · Payment processing', style: TextStyle(color: Color(0xFF6B7280), height: 1.25)),
+                            SizedBox(height: 2),
+                            Text('Duration · 90 days', style: TextStyle(color: Color(0xFF6B7280), height: 1.25)),
+                          ],
+                        ),
+                      ),
+                      SizedBox(height: 12),
+
+                      // 3. SMS Gateway Card
+                      Container(
+                        width: double.infinity,
+                        padding: EdgeInsets.all(16),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(12),
+                          border: Border.all(color: Color(0xFFE5E7EB)),
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  'SMS Gateway',
+                                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: Color(0xFF111827)),
+                                ),
+                                Ux4gTag(
+                                  text: 'Optional',
+                                  customBackgroundColor: Color(0xFFF3F4F6),
+                                  customContentColor: Color(0xFF4B5563),
+                                  shape: Ux4gTagShape.rectangular,
+                                ),
+                              ],
+                            ),
+                            SizedBox(height: 6),
+                            Text('Data shared · Mobile Number', style: TextStyle(color: Color(0xFF6B7280), height: 1.25)),
+                            SizedBox(height: 2),
+                            Text('Purpose · Status alerts', style: TextStyle(color: Color(0xFF6B7280), height: 1.25)),
+                            SizedBox(height: 2),
+                            Text('Duration · Scheme duration', style: TextStyle(color: Color(0xFF6B7280), height: 1.25)),
+                          ],
+                        ),
+                      ),
+                      SizedBox(height: 20),
+
+                      // Warning banner
+                      Ux4gStatusBanner(
+                        variant: Ux4gBannerVariant.warningLight,
+                        title: 'Required consents cannot be withdrawn as they are necessary for the scheme to function.',
+                        leadingIcon: Icon(
+                          Icons.error,
+                          color: Color(0xFFD97706),
+                          size: 22,
+                        ),
+                        titleStyle: TextStyle(
+                          fontSize: 13,
+                          fontWeight: FontWeight.w500,
+                          color: Color(0xFFB45309),
+                        ),
+                        margin: EdgeInsets.zero,
+                        padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                      ),
+                      SizedBox(height: 20),
+
+                      Divider(height: 1, color: Color(0xFFE5E7EB)),
+                      SizedBox(height: 16),
+
+                      // Actions
+                      Ux4gButton(
+                        text: 'Manage',
+                        onPressed: () {},
+                        variant: Ux4gButtonVariant.outline,
+                        leadingIcon: Icons.edit_outlined,
+                        size: Ux4gButtonSize.large,
+                        width: double.infinity,
+                      ),
+                      SizedBox(height: 4),
+                      Ux4gButton(
+                        text: 'Cancel',
+                        onPressed: () {},
+                        variant: Ux4gButtonVariant.outline,
+                        contentColor: Color(0xFF374151),
+                        borderColor: Color(0xFFD1D5DB),
+                        size: Ux4gButtonSize.large,
+                        width: double.infinity,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            // Footer
+            Padding(
+              padding: EdgeInsets.only(bottom: 20, top: 8),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    'Powered by -',
+                    style: TextStyle(
+                      fontSize: 11,
+                      color: Color(0xFF9CA3AF),
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                  SizedBox(height: 6),
+                  Image.asset('assets/digital_india_logo.png', height: 22),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
     ),
   ],
 )''';
