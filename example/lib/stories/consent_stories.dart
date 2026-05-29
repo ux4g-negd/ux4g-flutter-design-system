@@ -5082,69 +5082,42 @@ class _WithdrawConsentDialogMockup extends StatelessWidget {
               ),
             ),
           ),
-          // Dimmed dialog backdrop
+          // Dimmed dialog backdrop using the design system's modal component
           Positioned.fill(
             child: Container(
               color: Colors.black.withValues(alpha: 0.4),
               alignment: Alignment.center,
               padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: Container(
-                width: 320,
-                padding: const EdgeInsets.all(24),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(16),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withValues(alpha: 0.1),
-                      blurRadius: 20,
-                      offset: const Offset(0, 8),
-                    ),
-                  ],
-                ),
-                child: Column(
+              child: Ux4gModalContent(
+                onDismiss: () {},
+                backgroundColor: Colors.white,
+                cornerRadius: 16,
+                alignment: Ux4gModalAlignment.centered,
+                leadingItem: Ux4gModalLeadingItem.avatar,
+                avatarIcon: Icons.warning_amber_rounded,
+                avatarSize: Ux4gAvatarSize.xl,
+                avatarContainerColor: const Color(0xFFFEF3C7),
+                avatarContentColor: const Color(0xFFD97706),
+                showHeader: true,
+                headerTitle: 'Withdraw Consent?',
+                showCloseButton: false,
+                showDividers: false,
+                showSubtitle: false,
+                showFooter: false,
+                showBody: true,
+                bodyContent: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    // Centered warning icon in a soft orange circle
-                    Container(
-                      width: 56,
-                      height: 56,
-                      decoration: const BoxDecoration(
-                        color: Color(0xFFFEF3C7), // soft amber/orange
-                        shape: BoxShape.circle,
-                      ),
-                      child: const Center(
-                        child: Icon(
-                          Icons.warning_amber_rounded,
-                          color: Color(0xFFD97706), // dark amber
-                          size: 32,
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 20),
-                    // Centered title
-                    const Text(
-                      'Withdraw Consent?',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.w700,
-                        color: Color(0xFF111827),
-                      ),
-                    ),
-                    const SizedBox(height: 12),
-                    // Centered description
                     const Text(
                       'Withdrawing consent for SMS Gateway will stop sending status alerts to your mobile number. This will not affect your PM Kisan bank transfers.',
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontSize: 14,
-                        color: Color(0xFF374151),
+                        color: Color(0xFF4B5563),
                         height: 1.5,
                       ),
                     ),
                     const SizedBox(height: 24),
-                    // Primary action button: Withdraw Consent
                     Ux4gButton(
                       text: 'Withdraw Consent',
                       onPressed: () {},
@@ -5152,7 +5125,6 @@ class _WithdrawConsentDialogMockup extends StatelessWidget {
                       width: double.infinity,
                     ),
                     const SizedBox(height: 8),
-                    // Cancel button
                     Ux4gButton(
                       text: 'Cancel',
                       onPressed: () {},
@@ -5161,7 +5133,6 @@ class _WithdrawConsentDialogMockup extends StatelessWidget {
                       width: double.infinity,
                     ),
                     const SizedBox(height: 16),
-                    // Footer disclaimer
                     const Text(
                       'You can re-enable this consent at any time.',
                       textAlign: TextAlign.center,
@@ -5182,112 +5153,67 @@ class _WithdrawConsentDialogMockup extends StatelessWidget {
 }
 
 const _withdrawConsentDialogCode = r'''// Withdraw Consent Dialog Pattern
-// Show dialog on button click
-showDialog(
-  context: context,
-  builder: (BuildContext context) {
-    return Dialog(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16),
-      ),
-      elevation: 0,
-      backgroundColor: Colors.transparent,
-      child: Container(
-        width: 320,
-        padding: const EdgeInsets.all(24),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(16),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withValues(alpha: 0.1),
-              blurRadius: 20,
-              offset: const Offset(0, 8),
-            ),
-          ],
+// Show custom design-system dialog using Ux4gModal
+Ux4gModal.show(
+  context,
+  modal: Ux4gModal(
+    onDismiss: () => Navigator.of(context).pop(),
+    backgroundColor: Colors.white,
+    cornerRadius: 16,
+    alignment: Ux4gModalAlignment.centered,
+    leadingItem: Ux4gModalLeadingItem.avatar,
+    avatarIcon: Icons.warning_amber_rounded,
+    avatarSize: Ux4gAvatarSize.xl,
+    avatarContainerColor: const Color(0xFFFEF3C7),
+    avatarContentColor: const Color(0xFFD97706),
+    headerTitle: 'Withdraw Consent?',
+    showCloseButton: false,
+    showDividers: false,
+    showSubtitle: false,
+    showFooter: false,
+    bodyContent: Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        const Text(
+          'Withdrawing consent for SMS Gateway will stop sending status alerts to your mobile number. This will not affect your PM Kisan bank transfers.',
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            fontSize: 14,
+            color: Color(0xFF4B5563),
+            height: 1.5,
+          ),
         ),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            // Centered warning icon inside amber circle
-            Container(
-              width: 56,
-              height: 56,
-              decoration: const BoxDecoration(
-                color: Color(0xFFFEF3C7),
-                shape: BoxShape.circle,
-              ),
-              child: const Center(
-                child: Icon(
-                  Icons.warning_amber_rounded,
-                  color: Color(0xFFD97706),
-                  size: 32,
-                ),
-              ),
-            ),
-            const SizedBox(height: 20),
-            
-            // Title
-            const Text(
-              'Withdraw Consent?',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.w700,
-                color: Color(0xFF111827),
-              ),
-            ),
-            const SizedBox(height: 12),
-            
-            // Description
-            const Text(
-              'Withdrawing consent for SMS Gateway will stop sending status alerts to your mobile number. This will not affect your PM Kisan bank transfers.',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 14,
-                color: Color(0xFF374151),
-                height: 1.5,
-              ),
-            ),
-            const SizedBox(height: 24),
-            
-            // Primary Button: Withdraw Consent
-            Ux4gButton(
-              text: 'Withdraw Consent',
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              size: Ux4gButtonSize.large,
-              width: double.infinity,
-            ),
-            const SizedBox(height: 8),
-            
-            // Cancel Button
-            Ux4gButton(
-              text: 'Cancel',
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              variant: Ux4gButtonVariant.ghost,
-              size: Ux4gButtonSize.large,
-              width: double.infinity,
-            ),
-            const SizedBox(height: 16),
-            
-            // Footer text
-            const Text(
-              'You can re-enable this consent at any time.',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 12,
-                color: Color(0xFF6B7280),
-              ),
-            ),
-          ],
+        const SizedBox(height: 24),
+        Ux4gButton(
+          text: 'Withdraw Consent',
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          size: Ux4gButtonSize.large,
+          width: double.infinity,
         ),
-      ),
-    );
-  },
+        const SizedBox(height: 8),
+        Ux4gButton(
+          text: 'Cancel',
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          variant: Ux4gButtonVariant.ghost,
+          size: Ux4gButtonSize.large,
+          width: double.infinity,
+        ),
+        const SizedBox(height: 16),
+        const Text(
+          'You can re-enable this consent at any time.',
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            fontSize: 12,
+            color: Color(0xFF6B7280),
+          ),
+        ),
+      ],
+    ),
+  ),
 );''';
 
 
