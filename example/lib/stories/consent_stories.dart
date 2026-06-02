@@ -1,4 +1,5 @@
 
+import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:ux4g_flutter_design_system/ux4g_flutter_design_system.dart';
@@ -5285,7 +5286,7 @@ Ux4gModal.show(
       ),
     ),
   ),
-);'''
+);''';
 
 // ───────────────────────────────────────────────────────────────────────
 // Consent History pattern
@@ -5297,403 +5298,29 @@ final consentHistoryComponent = WidgetbookComponent(
     WidgetbookUseCase(
       name: 'Default',
       builder: (context) {
+        final variant = context.knobs.list(
+          label: 'Variant',
+          options: const ['Default', 'Card style'],
+          initialOption: 'Default',
+          description: 'Switch between the standard flat layout and the card-style layout on a soft-purple background.',
+        );
+
+        final code = variant == 'Card style' ? _consentHistoryCardCode : _consentHistoryCode;
+        final child = variant == 'Card style' ? const _ConsentHistoryCardMockup() : const _ConsentHistoryMockup();
+
         return ComponentDocs(
           name: 'Consent History',
-          description: 'A screen pattern displaying all data sharing consents history with scheme filter chips.',
-          code: _consentHistoryCode,
+          description: 'A screen pattern displaying all data sharing consents history with scheme filter chips. '
+              'Use the [Variant] knob on the right to toggle layouts.',
+          code: code,
           center: true,
-          child: const _ConsentHistoryMockup(),
+          child: child,
         );
       },
     ),
   ],
 );
 
-class _ConsentHistoryMockup extends StatefulWidget {
-  const _ConsentHistoryMockup();
-
-  @override
-  State<_ConsentHistoryMockup> createState() => _ConsentHistoryMockupState();
-}
-
-class _ConsentHistoryMockupState extends State<_ConsentHistoryMockup> {
-  final Set<String> _selectedFilters = {'PM-Kisan', 'PMAY'};
-
-  void _toggleFilter(String filter) {
-    setState(() {
-      if (filter == 'All') {
-        _selectedFilters.clear();
-        _selectedFilters.add('All');
-      } else {
-        _selectedFilters.remove('All');
-        if (_selectedFilters.contains(filter)) {
-          _selectedFilters.remove(filter);
-        } else {
-          _selectedFilters.add(filter);
-        }
-        if (_selectedFilters.isEmpty) {
-          _selectedFilters.add('All');
-        }
-      }
-    });
-  }
-
-  bool _isChipSelected(String filter) {
-    if (filter == 'All') {
-      return _selectedFilters.contains('All') || _selectedFilters.isEmpty;
-    }
-    return _selectedFilters.contains(filter);
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final allConsents = [
-      _ConsentHistoryItem(
-        title: 'Bank of India',
-        scheme: 'PM Kisan',
-        filterKey: 'PM-Kisan',
-        dataShared: 'Aadhaar, Name',
-        givenDate: '12 Jan 2024',
-        status: 'Active',
-        statusColor: const Color(0xFFE6F4EA),
-        textColor: const Color(0xFF137333),
-      ),
-      _ConsentHistoryItem(
-        title: 'Payment Corp',
-        scheme: 'PM Kisan',
-        filterKey: 'PM-Kisan',
-        dataShared: 'Transaction ID',
-        givenDate: '12 Jan 2024',
-        status: 'Active',
-        statusColor: const Color(0xFFE6F4EA),
-        textColor: const Color(0xFF137333),
-      ),
-      _ConsentHistoryItem(
-        title: 'SMS Gateway',
-        scheme: 'PM Kisan',
-        filterKey: 'PM-Kisan',
-        dataShared: 'Mobile Number',
-        givenDate: '15 Jan 2024',
-        status: 'Withdrawn',
-        statusColor: const Color(0xFFFCE8E6),
-        textColor: const Color(0xFFC5221F),
-      ),
-      _ConsentHistoryItem(
-        title: 'Housing Board',
-        scheme: 'PMAY',
-        filterKey: 'PMAY',
-        dataShared: 'Address, Income',
-        givenDate: '03 Mar 2023',
-        status: 'Expired',
-        statusColor: const Color(0xFFF1F3F4),
-        textColor: const Color(0xFF3C4043),
-      ),
-    ];
-
-    final displayedConsents = allConsents.where((item) {
-      if (_selectedFilters.contains('All')) return true;
-      return _selectedFilters.contains(item.filterKey);
-    }).toList();
-
-    return _PhoneFrame(
-      child: Column(
-        children: [
-          Ux4gAppHeader(
-            variant: Ux4gAppHeaderVariant.light,
-            title: '',
-            leadingWidgets: [
-              SvgPicture.asset(_nationalEmblemPath, height: 32),
-              Container(width: 1, height: 28, color: const Color(0xFFD1D5DB)),
-              SvgPicture.asset(_unionLogoPath, height: 32),
-            ],
-            actions: [
-              Ux4gAppHeaderAction(
-                customWidget: Container(
-                  width: 36,
-                  height: 36,
-                  decoration: BoxDecoration(
-                    border: Border.all(color: const Color(0xFFE5E7EB)),
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  child: const Center(
-                    child: Icon(Icons.menu, color: Color(0xFF6A4EFF), size: 20),
-                  ),
-                ),
-              ),
-            ],
-            horizontalPadding: 16,
-            leadingSpacing: 12,
-          ),
-          const Divider(height: 1, color: Color(0xFFE5E7EB)),
-          Expanded(
-            child: SingleChildScrollView(
-              padding: const EdgeInsets.symmetric(vertical: 20),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Text(
-                          'Consent History',
-                          style: TextStyle(
-                            fontSize: 22,
-                            fontWeight: FontWeight.w800,
-                            color: Color(0xFF111827),
-                            letterSpacing: -0.3,
-                          ),
-                        ),
-                        const SizedBox(height: 8),
-                        const Text(
-                          'A complete audit trail of all your data sharing consents for government schemes.',
-                          style: TextStyle(
-                            fontSize: 14,
-                            color: Color(0xFF6B7280),
-                            height: 1.4,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(height: 20),
-                  SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: Row(
-                      children: [
-                        _buildFilterChip('All'),
-                        const SizedBox(width: 8),
-                        _buildFilterChip('PM-Kisan'),
-                        const SizedBox(width: 8),
-                        _buildFilterChip('PM-MKSSY'),
-                        const SizedBox(width: 8),
-                        _buildFilterChip('PMAY'),
-                        const SizedBox(width: 8),
-                        _buildFilterChip('PM-Ajay'),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(height: 20),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: displayedConsents.isEmpty
-                        ? const Center(
-                            child: Padding(
-                              padding: EdgeInsets.symmetric(vertical: 40),
-                              child: Text(
-                                'No consents found for the selected filters.',
-                                style: TextStyle(color: Color(0xFF6B7280)),
-                              ),
-                            ),
-                          )
-                        : Column(
-                            children: displayedConsents.map((item) {
-                              return Padding(
-                                padding: const EdgeInsets.only(bottom: 16),
-                                child: Container(
-                                  width: double.infinity,
-                                  padding: const EdgeInsets.all(16),
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.circular(8),
-                                    border: Border.all(color: const Color(0xFFE5E7EB)),
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Colors.black.withValues(alpha: 0.02),
-                                        blurRadius: 4,
-                                        offset: const Offset(0, 2),
-                                      ),
-                                    ],
-                                  ),
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text(
-                                            item.title,
-                                            style: const TextStyle(
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.w700,
-                                              color: Color(0xFF111827),
-                                            ),
-                                          ),
-                                          Ux4gTag(
-                                            text: item.status,
-                                            customBackgroundColor: item.statusColor,
-                                            customContentColor: item.textColor,
-                                            shape: Ux4gTagShape.circular,
-                                          ),
-                                        ],
-                                      ),
-                                      const SizedBox(height: 10),
-                                      _buildCardRow('Scheme', item.scheme),
-                                      const SizedBox(height: 4),
-                                      _buildCardRow('Data', item.dataShared),
-                                      const SizedBox(height: 4),
-                                      _buildCardRow('Given', item.givenDate),
-                                      const SizedBox(height: 12),
-                                      GestureDetector(
-                                        onTap: () {},
-                                        child: const Text(
-                                          'View',
-                                          style: TextStyle(
-                                            fontSize: 14,
-                                            color: Color(0xFF6A4EFF),
-                                            fontWeight: FontWeight.w600,
-                                            decoration: TextDecoration.underline,
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              );
-                            }).toList(),
-                          ),
-                  ),
-                  Center(
-                    child: Column(
-                      children: [
-                        Text(
-                          'Showing ${displayedConsents.length} of ${allConsents.length} consents',
-                          style: const TextStyle(
-                            fontSize: 13,
-                            color: Color(0xFF6B7280),
-                          ),
-                        ),
-                        const SizedBox(height: 8),
-                        GestureDetector(
-                          onTap: () {},
-                          child: const Text(
-                            'Download Consent History (PDF)',
-                            style: TextStyle(
-                              fontSize: 14,
-                              color: Color(0xFF6A4EFF),
-                              fontWeight: FontWeight.w700,
-                            ),
-                          ),
-                        ),
-                        const SizedBox(height: 24),
-                        GestureDetector(
-                          onTap: () {},
-                          child: const Text(
-                            'Back',
-                            style: TextStyle(
-                              fontSize: 16,
-                              color: Color(0xFF6A4EFF),
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(bottom: 20, top: 8),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                const Text(
-                  'Powered by -',
-                  style: TextStyle(
-                    fontSize: 11,
-                    color: Color(0xFF9CA3AF),
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-                const SizedBox(height: 6),
-                Image.asset(_digitalIndiaLogoPath, height: 22),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildFilterChip(String label) {
-    final isSelected = _isChipSelected(label);
-    return Ux4gChoiceChip(
-      text: label,
-      selected: isSelected,
-      borderRadius: 8.0,
-      onClick: () => _toggleFilter(label),
-      selectedBackgroundColor: const Color(0xFFE9E5FF),
-      selectedBorderColor: const Color(0xFF6A4EFF),
-      selectedTextColor: const Color(0xFF6A4EFF),
-      unselectedBackgroundColor: Colors.white,
-      unselectedBorderColor: const Color(0xFFE5E7EB),
-      unselectedTextColor: const Color(0xFF4B5563),
-    );
-  }
-
-  Widget _buildCardRow(String label, String value) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        SizedBox(
-          width: 60,
-          child: Text(
-            label,
-            style: const TextStyle(
-              fontSize: 13.5,
-              color: Color(0xFF6B7280),
-              fontWeight: FontWeight.w500,
-            ),
-          ),
-        ),
-        const Text(
-          '· ',
-          style: TextStyle(
-            fontSize: 13.5,
-            color: Color(0xFF6B7280),
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        Expanded(
-          child: Text(
-            value,
-            style: const TextStyle(
-              fontSize: 13.5,
-              color: Color(0xFF111827),
-              fontWeight: FontWeight.w500,
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-class _ConsentHistoryItem {
-  final String title;
-  final String scheme;
-  final String filterKey;
-  final String dataShared;
-  final String givenDate;
-  final String status;
-  final Color statusColor;
-  final Color textColor;
-
-  const _ConsentHistoryItem({
-    required this.title,
-    required this.scheme,
-    required this.filterKey,
-    required this.dataShared,
-    required this.givenDate,
-    required this.status,
-    required this.statusColor,
-    required this.textColor,
-  });
-}
 
 const _consentHistoryCode = r'''// Consent History Screen Pattern
 Column(
@@ -6454,6 +6081,1024 @@ Column(
       ),
     ),
   ],
-)''';;
+)''';
 
+class _ConsentHistoryMockup extends StatefulWidget {
+  const _ConsentHistoryMockup();
 
+  @override
+  State<_ConsentHistoryMockup> createState() => _ConsentHistoryMockupState();
+}
+
+class _ConsentHistoryMockupState extends State<_ConsentHistoryMockup> {
+  final Set<String> _selectedFilters = {'PM-Kisan', 'PMAY'};
+
+  void _toggleFilter(String filter) {
+    setState(() {
+      if (filter == 'All') {
+        _selectedFilters.clear();
+        _selectedFilters.add('All');
+      } else {
+        _selectedFilters.remove('All');
+        if (_selectedFilters.contains(filter)) {
+          _selectedFilters.remove(filter);
+        } else {
+          _selectedFilters.add(filter);
+        }
+        if (_selectedFilters.isEmpty) {
+          _selectedFilters.add('All');
+        }
+      }
+    });
+  }
+
+  bool _isChipSelected(String filter) {
+    if (filter == 'All') {
+      return _selectedFilters.contains('All') || _selectedFilters.isEmpty;
+    }
+    return _selectedFilters.contains(filter);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final allConsents = [
+      _ConsentHistoryItem(
+        title: 'Bank of India',
+        scheme: 'PM Kisan',
+        filterKey: 'PM-Kisan',
+        dataShared: 'Aadhaar, Name',
+        givenDate: '12 Jan 2024',
+        status: 'Active',
+        statusColor: const Color(0xFFE6F4EA),
+        textColor: const Color(0xFF137333),
+      ),
+      _ConsentHistoryItem(
+        title: 'Payment Corp',
+        scheme: 'PM Kisan',
+        filterKey: 'PM-Kisan',
+        dataShared: 'Transaction ID',
+        givenDate: '12 Jan 2024',
+        status: 'Active',
+        statusColor: const Color(0xFFE6F4EA),
+        textColor: const Color(0xFF137333),
+      ),
+      _ConsentHistoryItem(
+        title: 'SMS Gateway',
+        scheme: 'PM Kisan',
+        filterKey: 'PM-Kisan',
+        dataShared: 'Mobile Number',
+        givenDate: '15 Jan 2024',
+        status: 'Withdrawn',
+        statusColor: const Color(0xFFFCE8E6),
+        textColor: const Color(0xFFC5221F),
+      ),
+      _ConsentHistoryItem(
+        title: 'Housing Board',
+        scheme: 'PMAY',
+        filterKey: 'PMAY',
+        dataShared: 'Address, Income',
+        givenDate: '03 Mar 2023',
+        status: 'Expired',
+        statusColor: const Color(0xFFF1F3F4),
+        textColor: const Color(0xFF3C4043),
+      ),
+    ];
+
+    final displayedConsents = allConsents.where((item) {
+      if (_selectedFilters.contains('All')) return true;
+      return _selectedFilters.contains(item.filterKey);
+    }).toList();
+
+    return _PhoneFrame(
+      child: Column(
+        children: [
+          const _ConsentHeader(),
+          Expanded(
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.symmetric(vertical: 20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text(
+                          'Consent History',
+                          style: TextStyle(
+                            fontSize: 22,
+                            fontWeight: FontWeight.w800,
+                            color: Color(0xFF111827),
+                            letterSpacing: -0.3,
+                          ),
+                        ),
+                        const SizedBox(height: 8),
+                        const Text(
+                          'A complete audit trail of all your data sharing consents for government schemes.',
+                          style: TextStyle(
+                            fontSize: 14,
+                            color: Color(0xFF6B7280),
+                            height: 1.4,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  ScrollConfiguration(
+                    behavior: ScrollConfiguration.of(context).copyWith(
+                      dragDevices: {
+                        PointerDeviceKind.mouse,
+                        PointerDeviceKind.touch,
+                        PointerDeviceKind.stylus,
+                      },
+                    ),
+                    child: SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: Row(
+                        children: [
+                          _buildFilterChip('All'),
+                          const SizedBox(width: 8),
+                          _buildFilterChip('PM-Kisan'),
+                          const SizedBox(width: 8),
+                          _buildFilterChip('PM-MKSSY'),
+                          const SizedBox(width: 8),
+                          _buildFilterChip('PMAY'),
+                          const SizedBox(width: 8),
+                          _buildFilterChip('PM-Ajay'),
+                        ],
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    child: displayedConsents.isEmpty
+                        ? const Center(
+                            child: Padding(
+                              padding: EdgeInsets.symmetric(vertical: 40),
+                              child: Text(
+                                'No consents found for the selected filters.',
+                                style: TextStyle(color: Color(0xFF6B7280)),
+                              ),
+                            ),
+                          )
+                        : Column(
+                            children: displayedConsents.map((item) {
+                              return Padding(
+                                padding: const EdgeInsets.only(bottom: 16),
+                                child: Container(
+                                  width: double.infinity,
+                                  padding: const EdgeInsets.all(16),
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(8),
+                                    border: Border.all(color: const Color(0xFFE5E7EB)),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.black.withValues(alpha: 0.02),
+                                        blurRadius: 4,
+                                        offset: const Offset(0, 2),
+                                      ),
+                                    ],
+                                  ),
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Row(
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text(
+                                            item.title,
+                                            style: const TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w700,
+                                              color: Color(0xFF111827),
+                                            ),
+                                          ),
+                                          Ux4gTag(
+                                            text: item.status,
+                                            customBackgroundColor: item.statusColor,
+                                            customContentColor: item.textColor,
+                                            shape: Ux4gTagShape.circular,
+                                          ),
+                                        ],
+                                      ),
+                                      const SizedBox(height: 10),
+                                      _buildCardRow('Scheme', item.scheme),
+                                      const SizedBox(height: 4),
+                                      _buildCardRow('Data', item.dataShared),
+                                      const SizedBox(height: 4),
+                                      _buildCardRow('Given', item.givenDate),
+                                      const SizedBox(height: 12),
+                                      GestureDetector(
+                                        onTap: () {},
+                                        child: const Text(
+                                          'View',
+                                          style: TextStyle(
+                                            fontSize: 14,
+                                            color: Color(0xFF6A4EFF),
+                                            fontWeight: FontWeight.w600,
+                                            decoration: TextDecoration.underline,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              );
+                            }).toList(),
+                          ),
+                  ),
+                  Center(
+                    child: Column(
+                      children: [
+                        Text(
+                          'Showing ${displayedConsents.length} of ${allConsents.length} consents',
+                          style: const TextStyle(
+                            fontSize: 13,
+                            color: Color(0xFF6B7280),
+                          ),
+                        ),
+                        const SizedBox(height: 8),
+                        GestureDetector(
+                          onTap: () {},
+                          child: const Text(
+                            'Download Consent History (PDF)',
+                            style: TextStyle(
+                              fontSize: 14,
+                              color: Color(0xFF6A4EFF),
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 24),
+                        GestureDetector(
+                          onTap: () {},
+                          child: const Text(
+                            'Back',
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: Color(0xFF6A4EFF),
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(bottom: 20, top: 8),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const Text(
+                  'Powered by -',
+                  style: TextStyle(
+                    fontSize: 11,
+                    color: Color(0xFF9CA3AF),
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                const SizedBox(height: 6),
+                Image.asset(_digitalIndiaLogoPath, height: 22),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildFilterChip(String label) {
+    final isSelected = _isChipSelected(label);
+    return Ux4gChoiceChip(
+      text: label,
+      selected: isSelected,
+      borderRadius: 8.0,
+      onClick: () => _toggleFilter(label),
+      selectedBackgroundColor: const Color(0xFFE9E5FF),
+      selectedBorderColor: const Color(0xFF6A4EFF),
+      selectedTextColor: const Color(0xFF6A4EFF),
+      unselectedBackgroundColor: Colors.white,
+      unselectedBorderColor: const Color(0xFFE5E7EB),
+      unselectedTextColor: const Color(0xFF4B5563),
+    );
+  }
+
+  Widget _buildCardRow(String label, String value) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        SizedBox(
+          width: 60,
+          child: Text(
+            label,
+            style: const TextStyle(
+              fontSize: 13.5,
+              color: Color(0xFF6B7280),
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+        ),
+        const Text(
+          '· ',
+          style: TextStyle(
+            fontSize: 13.5,
+            color: Color(0xFF6B7280),
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        Expanded(
+          child: Text(
+            value,
+            style: const TextStyle(
+              fontSize: 13.5,
+              color: Color(0xFF111827),
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _ConsentHistoryCardMockup extends StatefulWidget {
+  const _ConsentHistoryCardMockup();
+
+  @override
+  State<_ConsentHistoryCardMockup> createState() => _ConsentHistoryCardMockupState();
+}
+
+class _ConsentHistoryCardMockupState extends State<_ConsentHistoryCardMockup> {
+  final Set<String> _selectedFilters = {'PM-Kisan', 'PMAY'};
+
+  void _toggleFilter(String filter) {
+    setState(() {
+      if (filter == 'All') {
+        _selectedFilters.clear();
+        _selectedFilters.add('All');
+      } else {
+        _selectedFilters.remove('All');
+        if (_selectedFilters.contains(filter)) {
+          _selectedFilters.remove(filter);
+        } else {
+          _selectedFilters.add(filter);
+        }
+        if (_selectedFilters.isEmpty) {
+          _selectedFilters.add('All');
+        }
+      }
+    });
+  }
+
+  bool _isChipSelected(String filter) {
+    if (filter == 'All') {
+      return _selectedFilters.contains('All') || _selectedFilters.isEmpty;
+    }
+    return _selectedFilters.contains(filter);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final allConsents = [
+      _ConsentHistoryItem(
+        title: 'Bank of India',
+        scheme: 'PM Kisan',
+        filterKey: 'PM-Kisan',
+        dataShared: 'Aadhaar, Name',
+        givenDate: '12 Jan 2024',
+        status: 'Active',
+        statusColor: const Color(0xFFE6F4EA),
+        textColor: const Color(0xFF137333),
+      ),
+      _ConsentHistoryItem(
+        title: 'Payment Corp',
+        scheme: 'PM Kisan',
+        filterKey: 'PM-Kisan',
+        dataShared: 'Transaction ID',
+        givenDate: '12 Jan 2024',
+        status: 'Active',
+        statusColor: const Color(0xFFE6F4EA),
+        textColor: const Color(0xFF137333),
+      ),
+      _ConsentHistoryItem(
+        title: 'SMS Gateway',
+        scheme: 'PM Kisan',
+        filterKey: 'PM-Kisan',
+        dataShared: 'Mobile Number',
+        givenDate: '15 Jan 2024',
+        status: 'Withdrawn',
+        statusColor: const Color(0xFFFCE8E6),
+        textColor: const Color(0xFFC5221F),
+      ),
+      _ConsentHistoryItem(
+        title: 'Housing Board',
+        scheme: 'PMAY',
+        filterKey: 'PMAY',
+        dataShared: 'Address, Income',
+        givenDate: '03 Mar 2023',
+        status: 'Expired',
+        statusColor: const Color(0xFFF1F3F4),
+        textColor: const Color(0xFF3C4043),
+      ),
+    ];
+
+    final displayedConsents = allConsents.where((item) {
+      if (_selectedFilters.contains('All')) return true;
+      return _selectedFilters.contains(item.filterKey);
+    }).toList();
+
+    return _PhoneFrame(
+      child: Column(
+        children: [
+          const _ConsentHeader(),
+          Expanded(
+            child: Container(
+              color: const Color(0xFFE9E5FF),
+              child: Column(
+                children: [
+                  Expanded(
+                    child: SingleChildScrollView(
+                      padding: const EdgeInsets.all(16),
+                      child: Container(
+                        padding: const EdgeInsets.all(16),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(16),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withValues(alpha: 0.04),
+                              blurRadius: 16,
+                              offset: const Offset(0, 4),
+                            ),
+                          ],
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Text(
+                              'Consent History',
+                              style: TextStyle(
+                                fontSize: 22,
+                                fontWeight: FontWeight.w800,
+                                color: Color(0xFF111827),
+                                letterSpacing: -0.3,
+                              ),
+                            ),
+                            const SizedBox(height: 8),
+                            const Text(
+                              'A complete audit trail of all your data sharing consents for government schemes.',
+                              style: TextStyle(
+                                fontSize: 13,
+                                color: Color(0xFF6B7280),
+                                height: 1.45,
+                              ),
+                            ),
+                            const SizedBox(height: 20),
+                            ScrollConfiguration(
+                              behavior: ScrollConfiguration.of(context).copyWith(
+                                dragDevices: {
+                                  PointerDeviceKind.mouse,
+                                  PointerDeviceKind.touch,
+                                  PointerDeviceKind.stylus,
+                                },
+                              ),
+                              child: SingleChildScrollView(
+                                scrollDirection: Axis.horizontal,
+                                child: Row(
+                                  children: [
+                                    _buildFilterChip('All'),
+                                    const SizedBox(width: 8),
+                                    _buildFilterChip('PM-Kisan'),
+                                    const SizedBox(width: 8),
+                                    _buildFilterChip('PM-MKSSY'),
+                                    const SizedBox(width: 8),
+                                    _buildFilterChip('PMAY'),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            const SizedBox(height: 20),
+                            if (displayedConsents.isEmpty)
+                              const Center(
+                                child: Padding(
+                                  padding: EdgeInsets.symmetric(vertical: 40),
+                                  child: Text(
+                                    'No consents found.',
+                                    style: TextStyle(color: Color(0xFF6B7280)),
+                                  ),
+                                ),
+                              )
+                            else
+                              Column(
+                                children: displayedConsents.map((item) {
+                                  return Padding(
+                                    padding: const EdgeInsets.only(bottom: 12),
+                                    child: Container(
+                                      width: double.infinity,
+                                      padding: const EdgeInsets.all(12),
+                                      decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius: BorderRadius.circular(8),
+                                        border: Border.all(color: const Color(0xFFE5E7EB)),
+                                      ),
+                                      child: Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          Row(
+                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Text(
+                                                item.title,
+                                                style: const TextStyle(
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.w700,
+                                                  color: Color(0xFF111827),
+                                                ),
+                                              ),
+                                              Ux4gTag(
+                                                text: item.status,
+                                                customBackgroundColor: item.statusColor,
+                                                customContentColor: item.textColor,
+                                                shape: Ux4gTagShape.circular,
+                                              ),
+                                            ],
+                                          ),
+                                          const SizedBox(height: 8),
+                                          _buildCardRow('Scheme', item.scheme),
+                                          const SizedBox(height: 4),
+                                          _buildCardRow('Data', item.dataShared),
+                                          const SizedBox(height: 4),
+                                          _buildCardRow('Given', item.givenDate),
+                                          const SizedBox(height: 8),
+                                          GestureDetector(
+                                            onTap: () {},
+                                            child: const Text(
+                                              'View',
+                                              style: TextStyle(
+                                                fontSize: 13,
+                                                color: Color(0xFF6A4EFF),
+                                                fontWeight: FontWeight.w600,
+                                                decoration: TextDecoration.underline,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  );
+                                }).toList(),
+                              ),
+                            const SizedBox(height: 12),
+                            Center(
+                              child: Column(
+                                children: [
+                                  Text(
+                                    'Showing ${displayedConsents.length} of ${allConsents.length} consents',
+                                    style: const TextStyle(
+                                      fontSize: 12,
+                                      color: Color(0xFF6B7280),
+                                    ),
+                                  ),
+                                  const SizedBox(height: 8),
+                                  GestureDetector(
+                                    onTap: () {},
+                                    child: const Text(
+                                      'Download Consent History (PDF)',
+                                      style: TextStyle(
+                                        fontSize: 13,
+                                        color: Color(0xFF6A4EFF),
+                                        fontWeight: FontWeight.w700,
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(height: 24),
+                                  Ux4gButton(
+                                    text: 'Back',
+                                    onPressed: () {},
+                                    variant: Ux4gButtonVariant.ghost,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 20, top: 8),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        const Text(
+                          'Powered by -',
+                          style: TextStyle(
+                            fontSize: 11,
+                            color: Color(0xFF9CA3AF),
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        const SizedBox(height: 6),
+                        Image.asset(_digitalIndiaLogoPath, height: 22),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildFilterChip(String label) {
+    final isSelected = _isChipSelected(label);
+    return Ux4gChoiceChip(
+      text: label,
+      selected: isSelected,
+      borderRadius: 8.0,
+      onClick: () => _toggleFilter(label),
+      selectedBackgroundColor: const Color(0xFFE9E5FF),
+      selectedBorderColor: const Color(0xFF6A4EFF),
+      selectedTextColor: const Color(0xFF6A4EFF),
+      unselectedBackgroundColor: Colors.white,
+      unselectedBorderColor: const Color(0xFFE5E7EB),
+      unselectedTextColor: const Color(0xFF4B5563),
+    );
+  }
+
+  Widget _buildCardRow(String label, String value) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        SizedBox(
+          width: 50,
+          child: Text(
+            label,
+            style: const TextStyle(
+              fontSize: 12.5,
+              color: Color(0xFF6B7280),
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+        ),
+        const Text(
+          '· ',
+          style: TextStyle(
+            fontSize: 12.5,
+            color: Color(0xFF6B7280),
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        Expanded(
+          child: Text(
+            value,
+            style: const TextStyle(
+              fontSize: 12.5,
+              color: Color(0xFF111827),
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _ConsentHistoryItem {
+  final String title;
+  final String scheme;
+  final String filterKey;
+  final String dataShared;
+  final String givenDate;
+  final String status;
+  final Color statusColor;
+  final Color textColor;
+
+  const _ConsentHistoryItem({
+    required this.title,
+    required this.scheme,
+    required this.filterKey,
+    required this.dataShared,
+    required this.givenDate,
+    required this.status,
+    required this.statusColor,
+    required this.textColor,
+  });
+}
+
+const _consentHistoryCardCode = r'''// Consent History – Card Style Layout
+Column(
+  children: [
+    // Header
+    Ux4gAppHeader(
+      variant: Ux4gAppHeaderVariant.light,
+      title: '',
+      leadingWidgets: [
+        SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
+        Container(width: 1, height: 28, color: const Color(0xFFD1D5DB)),
+        SvgPicture.asset('assets/Union.svg', height: 32),
+      ],
+      actions: [
+        Ux4gAppHeaderAction(
+          customWidget: Container(
+            width: 36,
+            height: 36,
+            decoration: BoxDecoration(
+              border: Border.all(color: const Color(0xFFE5E7EB)),
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: const Center(
+              child: Icon(Icons.menu, color: Color(0xFF6A4EFF), size: 20),
+            ),
+          ),
+        ),
+      ],
+      horizontalPadding: 16,
+      leadingSpacing: 12,
+    ),
+    const Divider(height: 1, color: Color(0xFFE5E7EB)),
+
+    Expanded(
+      child: Container(
+        color: const Color(0xFFE9E5FF), // Soft purple background
+        child: Column(
+          children: [
+            Expanded(
+              child: SingleChildScrollView(
+                padding: const EdgeInsets.all(16),
+                child: Container(
+                  padding: const EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(16),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withValues(alpha: 0.04),
+                        blurRadius: 16,
+                        offset: const Offset(0, 4),
+                      ),
+                    ],
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        'Consent History',
+                        style: TextStyle(
+                          fontSize: 22,
+                          fontWeight: FontWeight.w800,
+                          color: Color(0xFF111827),
+                          letterSpacing: -0.3,
+                        ),
+                      ),
+                      const SizedBox(height: 8),
+                      const Text(
+                        'A complete audit trail of all your data sharing consents for government schemes.',
+                        style: TextStyle(
+                          fontSize: 13,
+                          color: Color(0xFF6B7280),
+                          height: 1.45,
+                        ),
+                      ),
+                      const SizedBox(height: 20),
+
+                      // Horizontal Scrollable Choice Chips
+                      SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Row(
+                          children: [
+                            Ux4gChoiceChip(
+                              text: 'All',
+                              selected: false,
+                              borderRadius: 8.0,
+                              onClick: () {},
+                              unselectedBackgroundColor: Colors.white,
+                              unselectedBorderColor: const Color(0xFFE5E7EB),
+                            ),
+                            const SizedBox(width: 8),
+                            Ux4gChoiceChip(
+                              text: 'PM-Kisan',
+                              selected: true,
+                              borderRadius: 8.0,
+                              onClick: () {},
+                              selectedBackgroundColor: const Color(0xFFE9E5FF),
+                              selectedBorderColor: const Color(0xFF6A4EFF),
+                              selectedTextColor: const Color(0xFF6A4EFF),
+                            ),
+                            const SizedBox(width: 8),
+                            Ux4gChoiceChip(
+                              text: 'PM-MKSSY',
+                              selected: false,
+                              borderRadius: 8.0,
+                              onClick: () {},
+                              unselectedBackgroundColor: Colors.white,
+                              unselectedBorderColor: const Color(0xFFE5E7EB),
+                            ),
+                            const SizedBox(width: 8),
+                            Ux4gChoiceChip(
+                              text: 'PMAY',
+                              selected: true,
+                              borderRadius: 8.0,
+                              onClick: () {},
+                              selectedBackgroundColor: const Color(0xFFE9E5FF),
+                              selectedBorderColor: const Color(0xFF6A4EFF),
+                              selectedTextColor: const Color(0xFF6A4EFF),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(height: 20),
+
+                      // Card 1: Bank of India
+                      Container(
+                        width: double.infinity,
+                        padding: const EdgeInsets.all(12),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(8),
+                          border: Border.all(color: const Color(0xFFE5E7EB)),
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                const Text(
+                                  'Bank of India',
+                                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.w700, color: Color(0xFF111827)),
+                                ),
+                                Ux4gTag(
+                                  text: 'Active',
+                                  customBackgroundColor: const Color(0xFFE6F4EA),
+                                  customContentColor: const Color(0xFF137333),
+                                  shape: Ux4gTagShape.circular,
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 8),
+                            const _ConsentRow(label: 'Scheme', value: 'PM Kisan'),
+                            const SizedBox(height: 4),
+                            const _ConsentRow(label: 'Data', value: 'Aadhaar, Name'),
+                            const SizedBox(height: 4),
+                            const _ConsentRow(label: 'Given', value: '12 Jan 2024'),
+                            const SizedBox(height: 8),
+                            const Text(
+                              'View',
+                              style: TextStyle(
+                                fontSize: 13,
+                                color: Color(0xFF6A4EFF),
+                                fontWeight: FontWeight.w600,
+                                decoration: TextDecoration.underline,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(height: 12),
+
+                      // Card 2: Payment Corp
+                      Container(
+                        width: double.infinity,
+                        padding: const EdgeInsets.all(12),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(8),
+                          border: Border.all(color: const Color(0xFFE5E7EB)),
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                const Text(
+                                  'Payment Corp',
+                                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.w700, color: Color(0xFF111827)),
+                                ),
+                                Ux4gTag(
+                                  text: 'Active',
+                                  customBackgroundColor: const Color(0xFFE6F4EA),
+                                  customContentColor: const Color(0xFF137333),
+                                  shape: Ux4gTagShape.circular,
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 8),
+                            const _ConsentRow(label: 'Scheme', value: 'PM Kisan'),
+                            const SizedBox(height: 4),
+                            const _ConsentRow(label: 'Data', value: 'Transaction ID'),
+                            const SizedBox(height: 4),
+                            const _ConsentRow(label: 'Given', value: '12 Jan 2024'),
+                            const SizedBox(height: 8),
+                            const Text(
+                              'View',
+                              style: TextStyle(
+                                fontSize: 13,
+                                color: Color(0xFF6A4EFF),
+                                fontWeight: FontWeight.w600,
+                                decoration: TextDecoration.underline,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(height: 20),
+
+                      // Footer Actions
+                      Center(
+                        child: Column(
+                          children: [
+                            const Text(
+                              'Showing 4 of 4 consents',
+                              style: TextStyle(fontSize: 12, color: Color(0xFF6B7280)),
+                            ),
+                            const SizedBox(height: 8),
+                            const Text(
+                              'Download Consent History (PDF)',
+                              style: TextStyle(
+                                fontSize: 13,
+                                color: Color(0xFF6A4EFF),
+                                fontWeight: FontWeight.w700,
+                              ),
+                            ),
+                            const SizedBox(height: 24),
+                            Ux4gButton(
+                              text: 'Back',
+                              onPressed: () {},
+                              variant: Ux4gButtonVariant.ghost,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            // Powered by
+            Padding(
+              padding: const EdgeInsets.only(bottom: 20, top: 8),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const Text(
+                    'Powered by -',
+                    style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF), fontWeight: FontWeight.w500),
+                  ),
+                  const SizedBox(height: 6),
+                  Image.asset('assets/digital_india_logo.png', height: 22),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    ),
+  ],
+)
+
+// Helper widget for Consent History code strings
+class _ConsentRow extends StatelessWidget {
+  final String label;
+  final String value;
+
+  const _ConsentRow({required this.label, required this.value});
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        SizedBox(
+          width: 50,
+          child: Text(
+            label,
+            style: const TextStyle(fontSize: 12.5, color: Color(0xFF6B7280), fontWeight: FontWeight.w500),
+          ),
+        ),
+        const Text(
+          '· ',
+          style: TextStyle(fontSize: 12.5, color: Color(0xFF6B7280), fontWeight: FontWeight.bold),
+        ),
+        Expanded(
+          child: Text(
+            value,
+            style: const TextStyle(fontSize: 12.5, color: Color(0xFF111827), fontWeight: FontWeight.w500),
+          ),
+        ),
+      ],
+    );
+  }
+}''';

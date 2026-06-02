@@ -18,6 +18,7 @@ class ComponentDocs extends StatefulWidget {
     this.code,
     this.props = const [],
     this.center = true,
+    this.mobileMockup = false,
   });
 
   final String name;
@@ -26,6 +27,7 @@ class ComponentDocs extends StatefulWidget {
   final String? code;
   final List<PropRow> props;
   final bool center;
+  final bool mobileMockup;
 
   @override
   State<ComponentDocs> createState() => _ComponentDocsState();
@@ -243,6 +245,7 @@ class _ComponentDocsState extends State<ComponentDocs>
                           child: widget.child,
                           center: widget.center,
                           isDark: isDark,
+                          mobileMockup: widget.mobileMockup,
                         ),
 
                         // ── Code ────────────────────────────────────────
@@ -279,10 +282,12 @@ class _PreviewPane extends StatelessWidget {
     required this.child,
     required this.center,
     required this.isDark,
+    required this.mobileMockup,
   });
   final Widget child;
   final bool center;
   final bool isDark;
+  final bool mobileMockup;
 
   @override
   Widget build(BuildContext context) {
@@ -296,7 +301,15 @@ class _PreviewPane extends StatelessWidget {
       ),
       child: SingleChildScrollView(
         padding: const EdgeInsets.all(24),
-        child: center ? Center(child: child) : child,
+        child: center
+            ? Center(
+                child: mobileMockup
+                    ? SizedBox(width: 360, height: 760, child: child)
+                    : child,
+              )
+            : (mobileMockup
+                ? SizedBox(width: 360, height: 760, child: child)
+                : child),
       ),
     );
   }

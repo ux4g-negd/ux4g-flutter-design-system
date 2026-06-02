@@ -19,6 +19,19 @@ import 'stories/biometric_stories.dart';
 import 'stories/progress_stories.dart';
 import 'stories/pattern_stories.dart';
 import 'stories/consent_stories.dart';
+import 'stories/declaration_before_submission/declaration_stories.dart';
+import 'stories/application_and_submission/eligibility_check_wizard/eligibility_check_wizard_stories.dart';
+import 'stories/application_and_submission/journey_progress_indicator/journey_progress_indicator_stories.dart';
+import 'stories/application_and_submission/journey_progress_indicator/resume_journey_stories.dart';
+import 'stories/application_and_submission/journey_progress_indicator/validation_error_stories.dart';
+import 'stories/application_and_submission/government_form_with_validation/government_form_stories.dart';
+import 'stories/application_and_submission/government_form_with_validation/government_form_errors_stories.dart';
+import 'stories/application_and_submission/government_form_with_validation/government_form_multiple_errors_stories.dart';
+import 'stories/application_and_submission/application_sent_stories.dart';
+import 'stories/application_and_submission/document_scan_upload_stories.dart';
+import 'stories/application_and_submission/document_upload_progress_stories.dart';
+import 'stories/application_and_submission/document_upload_review_stories.dart';
+import 'stories/application_and_submission/document_upload_success_stories.dart';
 
 void main() {
   runApp(const UX4GWidgetbook());
@@ -200,7 +213,7 @@ class UX4GWidgetbook extends StatelessWidget {
         // ── Patterns ───────────────────────────────────────────────────────
         WidgetbookCategory(
           name: 'Patterns',
-          isInitiallyExpanded: false,
+          isInitiallyExpanded: true,
           children: [
             WidgetbookFolder(
               name: 'Identity and Access',
@@ -293,6 +306,61 @@ class UX4GWidgetbook extends StatelessWidget {
                     dataSharingConsentManagementComponent,
                     withdrawConsentDialogComponent,
                     consentHistoryComponent,
+                  ],
+                ),
+                WidgetbookFolder(
+                  name: 'Declaration Before Submission',
+                  isInitiallyExpanded: true,
+                  children: [
+                    declarationBeforeSubmissionComponent,
+                    declarationWithDigitalSignComponent,
+                  ],
+                ),
+              ],
+            ),
+            WidgetbookFolder(
+              name: 'Application and Submission',
+              isInitiallyExpanded: true,
+              children: [
+                    WidgetbookFolder(
+                      name: 'Document scan & upload',
+                      isInitiallyExpanded: true,
+                      children: [
+                        documentScanUploadComponent,
+                        documentUploadProgressComponent,
+                        documentUploadReviewComponent,
+                        documentUploadSuccessComponent,
+                      ],
+                    ),
+                WidgetbookFolder(
+                  name: 'Eligibility Check Wizard',
+                  isInitiallyExpanded: false,
+                  children: [
+                    eligibilityCheckWizardComponent,
+                    eligibilityQuestionStepComponent,
+                    eligibilityFinalQuestionStepComponent,
+                    eligibilitySuccessStepComponent,
+                    eligibilityFailureStepComponent,
+                    eligibilityWarningStepComponent,
+                  ],
+                ),
+                WidgetbookFolder(
+                  name: 'Journey Progress Indicator',
+                  isInitiallyExpanded: false,
+                  children: [
+                    journeyProgressIndicatorComponent,
+                    resumeJourneyComponent,
+                    validationErrorComponent,
+                  ],
+                ),
+                WidgetbookFolder(
+                  name: 'Government form with validation',
+                  isInitiallyExpanded: false,
+                  children: [
+                    governmentFormWithValidationComponent,
+                    governmentFormWithErrorsComponent,
+                    governmentFormWithMultipleErrorsComponent,
+                    applicationSentComponent,
                   ],
                 ),
               ],
@@ -397,7 +465,6 @@ class _Ux4gWelcomePage extends StatelessWidget {
     final theme = Theme.of(context);
     final isDark = theme.brightness == Brightness.dark;
 
-    // Explicitly define colors based on theme brightness to ensure they flip
     final bg = isDark ? const Color(0xFF121212) : Colors.white;
     final onSurface = isDark ? Colors.white : const Color(0xFF111827);
     final subtle = isDark ? const Color(0xFF9CA3AF) : const Color(0xFF6B7280);
@@ -413,21 +480,14 @@ class _Ux4gWelcomePage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                // ── Logo ─────────────────────────────────────────────────────────
                 SvgPicture.asset('assets/ux4g_logo.svg', height: 22),
-
                 const SizedBox(height: 24),
-
-                // Version badge
                 Container(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 12,
-                    vertical: 4,
-                  ),
+                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
                   decoration: BoxDecoration(
-                    color: _primary.withValues(alpha: 0.08),
+                    color: _primary.withOpacity(0.08),
                     borderRadius: BorderRadius.circular(100),
-                    border: Border.all(color: _primary.withValues(alpha: 0.25)),
+                    border: Border.all(color: _primary.withOpacity(0.25)),
                   ),
                   child: Text(
                     'v3.0 beta  ·  Flutter Component Library',
@@ -439,33 +499,19 @@ class _Ux4gWelcomePage extends StatelessWidget {
                     ),
                   ),
                 ),
-
                 const SizedBox(height: 20),
-
-                // Headline
                 Text(
                   'UX4G Design System',
                   textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: onSurface,
-                    fontSize: 40,
-                    fontWeight: FontWeight.w800,
-                    height: 1.15,
-                    letterSpacing: -0.8,
-                  ),
+                  style: TextStyle(color: onSurface, fontSize: 40, fontWeight: FontWeight.w800, height: 1.15, letterSpacing: -0.8),
                 ),
-
                 const SizedBox(height: 12),
-
                 Text(
                   'Government-grade UI foundations for trusted public digital experiences.',
                   textAlign: TextAlign.center,
                   style: TextStyle(color: subtle, fontSize: 16, height: 1.6),
                 ),
-
                 const SizedBox(height: 32),
-
-                // Stats row
                 Wrap(
                   spacing: 10,
                   runSpacing: 10,
@@ -476,10 +522,7 @@ class _Ux4gWelcomePage extends StatelessWidget {
                     _StatPill('10 Categories'),
                   ],
                 ),
-
                 const SizedBox(height: 48),
-
-                // Feature cards
                 IntrinsicHeight(
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -488,9 +531,7 @@ class _Ux4gWelcomePage extends StatelessWidget {
                         child: _FeatureCard(
                           icon: Icons.account_tree_outlined,
                           title: 'Scalable Architecture',
-                          description:
-                              'A structured system of foundations, patterns, and components '
-                              'that scales across products and service teams.',
+                          description: 'A structured system of foundations, patterns, and components that scales across products.',
                         ),
                       ),
                       const SizedBox(width: 16),
@@ -498,9 +539,7 @@ class _Ux4gWelcomePage extends StatelessWidget {
                         child: _FeatureCard(
                           icon: Icons.palette_outlined,
                           title: 'Token-Driven Design',
-                          description:
-                              'Color, typography, spacing, and elevation governed through '
-                              'reusable tokens that keep every experience aligned.',
+                          description: 'Color, typography, and spacing governed through reusable tokens for alignment.',
                         ),
                       ),
                       const SizedBox(width: 16),
@@ -508,74 +547,40 @@ class _Ux4gWelcomePage extends StatelessWidget {
                         child: _FeatureCard(
                           icon: Icons.code_rounded,
                           title: 'Developer Friendly',
-                          description:
-                              'Production-ready components with code snippets, live knobs, '
-                              'and Props documentation in every story.',
+                          description: 'Production-ready components with code snippets and live knobs for every story.',
                         ),
                       ),
                     ],
                   ),
                 ),
-
                 const SizedBox(height: 40),
-
-                // Getting started
                 Container(
                   width: double.infinity,
                   padding: const EdgeInsets.all(20),
                   decoration: BoxDecoration(
-                    color: _primary.withValues(alpha: isDark ? 0.12 : 0.05),
+                    color: _primary.withOpacity(isDark ? 0.12 : 0.05),
                     borderRadius: BorderRadius.circular(12),
-                    border: Border.all(color: _primary.withValues(alpha: 0.18)),
+                    border: Border.all(color: _primary.withOpacity(0.18)),
                   ),
                   child: Row(
                     children: [
-                      Icon(
-                        Icons.arrow_back_rounded,
-                        color: isDark ? const Color(0xFFA594FF) : _primary,
-                        size: 20,
-                      ),
+                      Icon(Icons.arrow_back_rounded, color: isDark ? const Color(0xFFA594FF) : _primary, size: 20),
                       const SizedBox(width: 14),
                       Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
-                              'Getting Started',
-                              style: TextStyle(
-                                color: onSurface,
-                                fontWeight: FontWeight.w700,
-                                fontSize: 14,
-                              ),
-                            ),
+                            Text('Getting Started', style: TextStyle(color: onSurface, fontWeight: FontWeight.w700, fontSize: 14)),
                             const SizedBox(height: 4),
-                            Text(
-                              'Select any component from the left sidebar. '
-                              'Use the Preview, Code, and Props tabs to explore.',
-                              style: TextStyle(
-                                color: subtle,
-                                fontSize: 13,
-                                height: 1.5,
-                              ),
-                            ),
+                            Text('Select any component from the left sidebar. Use the Preview and Code tabs to explore.', style: TextStyle(color: subtle, fontSize: 13, height: 1.5)),
                           ],
                         ),
                       ),
                     ],
                   ),
                 ),
-
                 const SizedBox(height: 32),
-
-                // Footer
-                Text(
-                  'UX4G Design System  ·  v3.0 beta  ·  ux4g.gov.in',
-                  style: TextStyle(
-                    color: isDark ? Colors.white38 : const Color(0xFF9CA3AF),
-                    fontSize: 12,
-                  ),
-                ),
-
+                Text('UX4G Design System  ·  v3.0 beta  ·  ux4g.gov.in', style: TextStyle(color: isDark ? Colors.white38 : const Color(0xFF9CA3AF), fontSize: 12)),
                 const SizedBox(height: 16),
               ],
             ),
@@ -586,34 +591,21 @@ class _Ux4gWelcomePage extends StatelessWidget {
   }
 }
 
-// ── Helpers ──────────────────────────────────────────────────────────────
-
 class _StatPill extends StatelessWidget {
   final String label;
   const _StatPill(this.label);
-
   static const _primary = Color(0xFF6A4EFF);
-
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 7),
       decoration: BoxDecoration(
-        color: _primary.withValues(alpha: isDark ? 0.15 : 0.07),
+        color: _primary.withOpacity(isDark ? 0.15 : 0.07),
         borderRadius: BorderRadius.circular(100),
-        border: Border.all(
-          color: _primary.withValues(alpha: isDark ? 0.35 : 0.2),
-        ),
+        border: Border.all(color: _primary.withOpacity(isDark ? 0.35 : 0.2)),
       ),
-      child: Text(
-        label,
-        style: TextStyle(
-          color: isDark ? const Color(0xFFA594FF) : _primary,
-          fontSize: 13,
-          fontWeight: FontWeight.w500,
-        ),
-      ),
+      child: Text(label, style: TextStyle(color: isDark ? const Color(0xFFA594FF) : _primary, fontSize: 13, fontWeight: FontWeight.w500)),
     );
   }
 }
@@ -621,68 +613,31 @@ class _StatPill extends StatelessWidget {
 class _FeatureCard extends StatelessWidget {
   final IconData icon;
   final String title, description;
-
-  const _FeatureCard({
-    required this.icon,
-    required this.title,
-    required this.description,
-  });
-
+  const _FeatureCard({required this.icon, required this.title, required this.description});
   static const _primary = Color(0xFF6A4EFF);
-
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
-    final bg = isDark ? const Color(0xFF1E1E2E) : Colors.white;
-    final onSurface = isDark ? Colors.white : const Color(0xFF111827);
-    final subtle = isDark ? const Color(0xFF9CA3AF) : const Color(0xFF6B7280);
-    final border = isDark ? Colors.white12 : const Color(0xFFE5E7EB);
-
     return Container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        color: bg,
+        color: isDark ? const Color(0xFF1E1E2E) : Colors.white,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: border),
-        boxShadow: isDark
-            ? []
-            : [
-                BoxShadow(
-                  color: Colors.black.withValues(alpha: 0.04),
-                  blurRadius: 8,
-                  offset: const Offset(0, 2),
-                ),
-              ],
+        border: Border.all(color: isDark ? Colors.white12 : const Color(0xFFE5E7EB)),
+        boxShadow: isDark ? [] : [BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 8, offset: const Offset(0, 2))],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
             padding: const EdgeInsets.all(10),
-            decoration: BoxDecoration(
-              color: _primary.withValues(alpha: isDark ? 0.2 : 0.1),
-              borderRadius: BorderRadius.circular(8),
-            ),
-            child: Icon(
-              icon,
-              color: isDark ? const Color(0xFFA594FF) : _primary,
-              size: 20,
-            ),
+            decoration: BoxDecoration(color: _primary.withOpacity(isDark ? 0.2 : 0.1), borderRadius: BorderRadius.circular(8)),
+            child: Icon(icon, color: isDark ? const Color(0xFFA594FF) : _primary, size: 20),
           ),
           const SizedBox(height: 12),
-          Text(
-            title,
-            style: TextStyle(
-              color: onSurface,
-              fontWeight: FontWeight.w600,
-              fontSize: 14,
-            ),
-          ),
+          Text(title, style: TextStyle(color: isDark ? Colors.white : const Color(0xFF111827), fontWeight: FontWeight.w600, fontSize: 14)),
           const SizedBox(height: 6),
-          Text(
-            description,
-            style: TextStyle(color: subtle, fontSize: 13, height: 1.55),
-          ),
+          Text(description, style: TextStyle(color: isDark ? const Color(0xFF9CA3AF) : const Color(0xFF6B7280), fontSize: 13, height: 1.55)),
         ],
       ),
     );

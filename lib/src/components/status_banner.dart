@@ -25,6 +25,10 @@ class Ux4gStatusBanner extends StatelessWidget {
   final Widget? badge;
   final List<Widget>? actions;
   final VoidCallback? onDismiss;
+  final Color? backgroundColor;
+  final Color? borderColor;
+  final WrapAlignment actionsAlignment;
+  final double? width;
 
   /// Outer margin around the banner. Defaults to
   /// `EdgeInsets.symmetric(horizontal: 16, vertical: 8)` to preserve
@@ -47,6 +51,10 @@ class Ux4gStatusBanner extends StatelessWidget {
     this.trailingIcon,
     this.actions,
     this.onDismiss,
+    this.backgroundColor,
+    this.borderColor,
+    this.actionsAlignment = WrapAlignment.start,
+    this.width,
     this.margin = const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
     this.padding = const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
   });
@@ -82,53 +90,57 @@ class Ux4gStatusBanner extends StatelessWidget {
         const TextStyle();
 
     // Determine colors based on variant
-    Color backgroundColor;
-    Color borderColor;
+    Color resolvedBackgroundColor;
+    Color resolvedBorderColor;
     Color textColor = onSurface;
     Color subtitleColor = onSurface.withValues(alpha: 0.6);
 
     switch (variant) {
       case Ux4gBannerVariant.warningLight:
-        backgroundColor = Color.lerp(surface, warning, 0.12)!;
-        borderColor = warning.withValues(alpha: 0.3);
+        resolvedBackgroundColor = Color.lerp(surface, warning, 0.12)!;
+        resolvedBorderColor = warning.withValues(alpha: 0.3);
         break;
       case Ux4gBannerVariant.warningSolid:
-        backgroundColor = warning;
-        borderColor = warning;
+        resolvedBackgroundColor = warning;
+        resolvedBorderColor = warning;
         textColor = onWarning;
         subtitleColor = onWarning.withValues(alpha: 0.7);
         break;
       case Ux4gBannerVariant.errorLight:
-        backgroundColor = Color.lerp(surface, error, 0.12)!;
-        borderColor = error.withValues(alpha: 0.3);
+        resolvedBackgroundColor = Color.lerp(surface, error, 0.12)!;
+        resolvedBorderColor = error.withValues(alpha: 0.3);
         break;
       case Ux4gBannerVariant.successLight:
-        backgroundColor = Color.lerp(surface, success, 0.12)!;
-        borderColor = success.withValues(alpha: 0.3);
+        resolvedBackgroundColor = Color.lerp(surface, success, 0.12)!;
+        resolvedBorderColor = success.withValues(alpha: 0.3);
         break;
       case Ux4gBannerVariant.savingLight:
       case Ux4gBannerVariant.primaryLight:
-        backgroundColor = Color.lerp(surface, primary, 0.12)!;
-        borderColor = primary.withValues(alpha: 0.3);
+        resolvedBackgroundColor = Color.lerp(surface, primary, 0.12)!;
+        resolvedBorderColor = primary.withValues(alpha: 0.3);
         break;
       case Ux4gBannerVariant.infoLight:
-        backgroundColor = Color.lerp(surface, info, 0.12)!;
-        borderColor = info.withValues(alpha: 0.3);
+        resolvedBackgroundColor = Color.lerp(surface, info, 0.12)!;
+        resolvedBorderColor = info.withValues(alpha: 0.3);
         break;
       case Ux4gBannerVariant.neutralLight:
-        backgroundColor = onSurface.withValues(alpha: 0.05);
-        borderColor = onSurface.withValues(alpha: 0.15);
+        resolvedBackgroundColor = onSurface.withValues(alpha: 0.05);
+        resolvedBorderColor = onSurface.withValues(alpha: 0.15);
         break;
     }
 
+    // Apply overrides
+    resolvedBackgroundColor = backgroundColor ?? resolvedBackgroundColor;
+    resolvedBorderColor = borderColor ?? resolvedBorderColor;
+
     return Container(
-      width: double.infinity,
+      width: width ?? double.infinity,
       padding: padding,
       margin: margin,
       decoration: BoxDecoration(
-        color: backgroundColor,
+        color: resolvedBackgroundColor,
         borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: borderColor),
+        border: Border.all(color: resolvedBorderColor),
         boxShadow: [
           BoxShadow(
             color: onBackground.withValues(alpha: 0.05),
@@ -203,9 +215,9 @@ class Ux4gStatusBanner extends StatelessWidget {
                 ],
               ),
               if (isMobile && actions != null && actions!.isNotEmpty) ...[
-                const SizedBox(height: 16),
+                const SizedBox(height: 4),
                 Wrap(
-                  alignment: WrapAlignment.end,
+                  alignment: actionsAlignment,
                   spacing: 12,
                   runSpacing: 12,
                   children: actions!,
