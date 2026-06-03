@@ -44,6 +44,7 @@ Ux4gCapsuleStepper(
               PropRow(name: 'steps', type: 'List<Ux4gStepItem>', description: 'Step data items.', required: true),
               PropRow(name: 'orientation', type: 'StepperOrientation', description: 'horizontal or vertical.', defaultValue: 'horizontal'),
               PropRow(name: 'lineStyle', type: 'StepperLineStyle', description: 'solid or dashed.', defaultValue: 'solid'),
+              PropRow(name: 'stepSize', type: 'double?', description: 'Custom size for the step indicator circle.'),
             ],
             child: Column(
               mainAxisSize: MainAxisSize.min,

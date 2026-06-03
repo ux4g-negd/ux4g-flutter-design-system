@@ -164,6 +164,26 @@ Ux4gInputField(
                   description: 'Text alignment.',
                   defaultValue: 'start',
                 ),
+                PropRow(
+                  name: 'style',
+                  type: 'TextStyle?',
+                  description: 'Custom text style for the input value.',
+                ),
+                PropRow(
+                  name: 'placeholderStyle',
+                  type: 'TextStyle?',
+                  description: 'Custom text style for placeholder text.',
+                ),
+                PropRow(
+                  name: 'labelStyle',
+                  type: 'TextStyle?',
+                  description: 'Custom text style for the label.',
+                ),
+                PropRow(
+                  name: 'captionStyle',
+                  type: 'TextStyle?',
+                  description: 'Custom text style for the caption.',
+                ),
               ],
               child: SizedBox(
                 width: 320,
@@ -1969,6 +1989,16 @@ final selectionDropdownComponent = WidgetbookComponent(
                   type: 'Ux4gDropdownFilterType',
                   description: 'Search matching logic.',
                   defaultValue: 'contains',
+                ),
+                PropRow(
+                  name: 'labelTextStyle',
+                  type: 'TextStyle?',
+                  description: 'Custom text style for the dropdown label.',
+                ),
+                PropRow(
+                  name: 'valueTextStyle',
+                  type: 'TextStyle?',
+                  description: 'Custom text style for the selected value.',
                 ),
               ],
               child: SizedBox(
