@@ -119,12 +119,8 @@ class _Ux4gResultRowState extends State<Ux4gResultRow>
                         const SizedBox(height: Ux4gSpace.space8),
                         Ux4gUnifiedPillTag(
                           segments: widget.metadataSegments!,
-                          size: Ux4gTagSize.m,
-                          backgroundColor: Colors.transparent,
-                          borderColor: Colors.transparent,
-                          dividerColor: (ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface).withValues(
-                            alpha: 0.15,
-                          ),
+                          size: Ux4gTagSize.l,
+                          borderColor: const Color(0xFFD1D5DB),
                         ),
                       ],
                     ],

@@ -238,6 +238,9 @@ class Ux4gUnifiedPillTag extends StatelessWidget {
   /// Border color (defaults to subtle onSurface).
   final Color? borderColor;
 
+  /// Border width (defaults to 1.0).
+  final double borderWidth;
+
   /// Divider color between segments.
   final Color? dividerColor;
 
@@ -250,6 +253,7 @@ class Ux4gUnifiedPillTag extends StatelessWidget {
     this.size = Ux4gTagSize.l,
     this.backgroundColor,
     this.borderColor,
+    this.borderWidth = 1.0,
     this.dividerColor,
     this.customBorderRadius,
   });
@@ -283,12 +287,11 @@ class Ux4gUnifiedPillTag extends StatelessWidget {
     final defaultTextColor = onSurface.withValues(alpha: 0.7);
 
     return Container(
-      height: height,
-      padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
+      padding: EdgeInsets.symmetric(horizontal: horizontalPadding, vertical: size == Ux4gTagSize.m ? 4.0 : 6.0),
       decoration: BoxDecoration(
         color: bgColor,
-        borderRadius: customBorderRadius ?? BorderRadius.circular(999),
-        border: Border.all(color: border),
+        borderRadius: customBorderRadius ?? BorderRadius.circular(8),
+        border: Border.all(color: border, width: borderWidth),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,

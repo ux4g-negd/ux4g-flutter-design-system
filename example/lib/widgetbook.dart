@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:ux4g_flutter_design_system/ux4g_flutter_design_system.dart';
 import 'package:widgetbook/widgetbook.dart';
@@ -41,6 +41,15 @@ import 'stories/application_and_submission/save_and_resume/discard_draft_dialog_
 import 'stories/application_and_submission/submission_acknowledgement/application_submitted_stories.dart';
 import 'stories/application_and_submission/submission_acknowledgement/application_queued_stories.dart';
 import 'stories/application_and_submission/submission_acknowledgement/could_not_submit_stories.dart';
+import 'stories/dashboard_and_my_application/my_applications/my_applications_stories.dart';
+import 'stories/dashboard_and_my_application/my_applications/no_applications_stories.dart';
+import 'stories/dashboard_and_my_application/my_applications/search_applications_stories.dart';
+import 'stories/dashboard_and_my_application/my_applications/bulk_actions_stories.dart';
+import 'stories/dashboard_and_my_application/pending_tasks/pending_tasks_stories.dart';
+import 'stories/dashboard_and_my_application/pending_tasks/no_pending_tasks_stories.dart';
+import 'stories/dashboard_and_my_application/citizen_profile_and_preferences/citizen_profile_stories.dart';
+import 'stories/dashboard_and_my_application/citizen_profile_and_preferences/edit_profile_stories.dart';
+import 'stories/dashboard_and_my_application/citizen_profile_and_preferences/delete_account_dialog_stories.dart';
 
 void main() {
   runApp(const UX4GWidgetbook());
@@ -319,7 +328,7 @@ class UX4GWidgetbook extends StatelessWidget {
                 ),
                 WidgetbookFolder(
                   name: 'Declaration Before Submission',
-                  isInitiallyExpanded: true,
+                  isInitiallyExpanded: false,
                   children: [
                     declarationBeforeSubmissionComponent,
                     declarationWithDigitalSignComponent,
@@ -329,11 +338,11 @@ class UX4GWidgetbook extends StatelessWidget {
             ),
             WidgetbookFolder(
               name: 'Application and Submission',
-              isInitiallyExpanded: true,
+              isInitiallyExpanded: false,
               children: [
                 WidgetbookFolder(
                   name: 'Save and Resume',
-                  isInitiallyExpanded: true,
+                  isInitiallyExpanded: false,
                   children: [
                     saveAndResumeComponent,
                     continueApplicationComponent,
@@ -345,7 +354,7 @@ class UX4GWidgetbook extends StatelessWidget {
                 ),
                 WidgetbookFolder(
                   name: 'Submission Acknowledgement',
-                  isInitiallyExpanded: true,
+                  isInitiallyExpanded: false,
                   children: [
                     applicationSubmittedComponent,
                     applicationQueuedComponent,
@@ -354,7 +363,7 @@ class UX4GWidgetbook extends StatelessWidget {
                 ),
                 WidgetbookFolder(
                   name: 'Document scan & upload',
-                      isInitiallyExpanded: true,
+                      isInitiallyExpanded: false,
                       children: [
                         documentScanUploadComponent,
                         documentUploadProgressComponent,
@@ -391,6 +400,39 @@ class UX4GWidgetbook extends StatelessWidget {
                     governmentFormWithErrorsComponent,
                     governmentFormWithMultipleErrorsComponent,
                     applicationSentComponent,
+                  ],
+                ),
+              ],
+            ),
+            WidgetbookFolder(
+              name: 'Dashboard and My Application',
+              isInitiallyExpanded: true,
+              children: [
+                WidgetbookFolder(
+                  name: 'My Applications',
+                  isInitiallyExpanded: false,
+                  children: [
+                    myApplicationsComponent,
+                    noApplicationsComponent,
+                    searchApplicationsComponent,
+                    bulkActionsComponent,
+                  ],
+                ),
+                WidgetbookFolder(
+                  name: 'Pending Tasks',
+                  isInitiallyExpanded: false,
+                  children: [
+                    pendingTasksComponent,
+                    noPendingTasksComponent,
+                  ],
+                ),
+                WidgetbookFolder(
+                  name: 'Citizen Profile and Preferences',
+                  isInitiallyExpanded: true,
+                  children: [
+                    citizenProfileComponent,
+                    editProfileComponent,
+                    deleteAccountDialogComponent,
                   ],
                 ),
               ],

@@ -163,6 +163,8 @@ class Ux4gSelectionDropdown extends StatefulWidget {
   final Ux4gDropdownStatus status;
   final bool searchEnabled;
   final Ux4gDropdownFilterType filterType;
+  final TextStyle? labelTextStyle;
+  final TextStyle? valueTextStyle;
 
   const Ux4gSelectionDropdown({
     super.key,
@@ -177,6 +179,8 @@ class Ux4gSelectionDropdown extends StatefulWidget {
     this.status = Ux4gDropdownStatus.defaultStatus,
     this.searchEnabled = false,
     this.filterType = Ux4gDropdownFilterType.contains,
+    this.labelTextStyle,
+    this.valueTextStyle,
   });
 
   @override
@@ -428,7 +432,7 @@ class _Ux4gSelectionDropdownState extends State<Ux4gSelectionDropdown> {
         if (widget.label != null) ...[
           Text(
             widget.label!,
-            style: (uxTypography?.hS_default ?? materialTheme.textTheme.headlineSmall)?.copyWith(
+            style: widget.labelTextStyle ?? (uxTypography?.hS_default ?? materialTheme.textTheme.headlineSmall)?.copyWith(
               color: widget.status == Ux4gDropdownStatus.disabled
                   ? (uxColors?.onSurface ?? materialTheme.colorScheme.onSurface).withValues(alpha: 0.38)
                   : (uxColors?.onSurface ?? materialTheme.colorScheme.onSurface),
@@ -473,7 +477,7 @@ class _Ux4gSelectionDropdownState extends State<Ux4gSelectionDropdown> {
                                             widget.selectedOptionIds.first,
                                       )
                                       .label,
-                                  style: textStyle,
+                                  style: widget.valueTextStyle ?? textStyle,
                                 )
                               : Wrap(
                                   spacing: 4,
