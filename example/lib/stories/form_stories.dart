@@ -2360,7 +2360,20 @@ final fileUploadComponent = WidgetbookComponent(
   useCases: [
     WidgetbookUseCase(
       name: 'Default',
-      builder: (context) => ComponentDocs(
+      builder: (context) {
+        final borderStyle = context.knobs.object.dropdown<Ux4gFileUploadBorderStyle>(
+          label: 'Border Style',
+          options: Ux4gFileUploadBorderStyle.values,
+          initialOption: Ux4gFileUploadBorderStyle.solid,
+        );
+
+        final variant = context.knobs.object.dropdown<Ux4gFileUploadVariant>(
+          label: 'Variant',
+          options: Ux4gFileUploadVariant.values,
+          initialOption: Ux4gFileUploadVariant.standard,
+        );
+
+        return ComponentDocs(
         name: 'Ux4gFileUpload',
         description:
             'A file drop zone that allows users to select or drag-and-drop files. '
@@ -2368,6 +2381,7 @@ final fileUploadComponent = WidgetbookComponent(
         code: '''Ux4gFileUpload(
   maxFiles: 5,
   maxFileSize: 5 * 1024 * 1024,  // 5 MB
+  borderStyle: Ux4gFileUploadBorderStyle.dashed,
   onFilesChanged: (files) {
     // files is List<UploadedFile>
   },
@@ -2388,6 +2402,36 @@ final fileUploadComponent = WidgetbookComponent(
             description: 'Max file size in bytes.',
           ),
           PropRow(
+            name: 'borderStyle',
+            type: 'Ux4gFileUploadBorderStyle',
+            description: 'Border style for the upload area. Options: solid, dashed. Default: solid.',
+          ),
+          PropRow(
+            name: 'variant',
+            type: 'Ux4gFileUploadVariant',
+            description: 'Upload area layout variant. Options: standard (two buttons), dropzone (single upload button with "Or" divider). Default: standard.',
+          ),
+          PropRow(
+            name: 'buttonBorderRadius',
+            type: 'double',
+            description: 'Border radius for upload buttons. Default: 8.',
+          ),
+          PropRow(
+            name: 'buttonColor',
+            type: 'Color?',
+            description: 'Custom color for upload buttons (icon, text, and filled background).',
+          ),
+          PropRow(
+            name: 'buttonBorderColor',
+            type: 'Color?',
+            description: 'Custom border color for outlined upload buttons.',
+          ),
+          PropRow(
+            name: 'buttonStyle',
+            type: 'ButtonStyle?',
+            description: 'Fully custom ButtonStyle for the upload button. Overrides other button params when provided.',
+          ),
+          PropRow(
             name: 'onFilesChanged',
             type: 'ValueChanged<List<UploadedFile>>?',
             description: 'Called whenever the file list changes.',
@@ -2404,11 +2448,14 @@ final fileUploadComponent = WidgetbookComponent(
           child: Ux4gFileUpload(
             maxFiles: 5,
             maxFileSize: 5 * 1024 * 1024,
+            borderStyle: borderStyle,
+            variant: variant,
             onFilesChanged: (_) {},
             onUpload: (file) async => true,
           ),
         ),
-      ),
+      );
+      },
     ),
   ],
 );

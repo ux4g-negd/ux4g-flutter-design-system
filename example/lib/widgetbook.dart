@@ -50,6 +50,24 @@ import 'stories/dashboard_and_my_application/pending_tasks/no_pending_tasks_stor
 import 'stories/dashboard_and_my_application/citizen_profile_and_preferences/citizen_profile_stories.dart';
 import 'stories/dashboard_and_my_application/citizen_profile_and_preferences/edit_profile_stories.dart';
 import 'stories/dashboard_and_my_application/citizen_profile_and_preferences/delete_account_dialog_stories.dart';
+import 'stories/search_and_discovery/search_and_browse/search_and_browse_stories.dart';
+import 'stories/search_and_discovery/search_and_browse/search_with_results_stories.dart';
+import 'stories/search_and_discovery/search_and_browse/search_results_list_stories.dart';
+import 'stories/search_and_discovery/search_and_browse/no_results_stories.dart';
+import 'stories/search_and_discovery/global_service_discovery/global_service_discovery_stories.dart';
+import 'stories/search_and_discovery/global_service_discovery/category_service_list_stories.dart';
+import 'stories/search_and_discovery/global_service_discovery/service_detail_stories.dart';
+import 'stories/search_and_discovery/consultation_slot_booking/select_advocate_stories.dart';
+import 'stories/search_and_discovery/consultation_slot_booking/select_appointment_time_stories.dart';
+import 'stories/search_and_discovery/consultation_slot_booking/confirm_appointment_stories.dart';
+import 'stories/search_and_discovery/consultation_slot_booking/confirm_appointment_v2_stories.dart';
+import 'stories/search_and_discovery/consultation_slot_booking/appointment_confirmed_stories.dart';
+import 'stories/feedback_and_communication/inline_feedback_and_status_communication/inline_feedback_stories.dart';
+import 'stories/feedback_and_communication/inline_feedback_and_status_communication/inline_feedback_error_stories.dart';
+import 'stories/feedback_and_communication/inline_feedback_and_status_communication/inline_feedback_hint_stories.dart';
+import 'stories/feedback_and_communication/inline_feedback_and_status_communication/inline_feedback_guidance_stories.dart';
+import 'stories/feedback_and_communication/inline_feedback_and_status_communication/inline_feedback_verification_stories.dart';
+import 'stories/feedback_and_communication/inline_feedback_and_status_communication/inline_feedback_note_stories.dart';
 
 void main() {
   runApp(const UX4GWidgetbook());
@@ -406,7 +424,7 @@ class UX4GWidgetbook extends StatelessWidget {
             ),
             WidgetbookFolder(
               name: 'Dashboard and My Application',
-              isInitiallyExpanded: true,
+              isInitiallyExpanded: false,
               children: [
                 WidgetbookFolder(
                   name: 'My Applications',
@@ -428,11 +446,65 @@ class UX4GWidgetbook extends StatelessWidget {
                 ),
                 WidgetbookFolder(
                   name: 'Citizen Profile and Preferences',
-                  isInitiallyExpanded: true,
+                  isInitiallyExpanded: false,
                   children: [
                     citizenProfileComponent,
                     editProfileComponent,
                     deleteAccountDialogComponent,
+                  ],
+                ),
+              ],
+            ),
+            WidgetbookFolder(
+              name: 'Search and Discovery',
+              isInitiallyExpanded: false,
+              children: [
+                WidgetbookFolder(
+                  name: 'Search and Browse',
+                  isInitiallyExpanded: false,
+                  children: [
+                    searchAndBrowseComponent,
+                    searchWithResultsComponent,
+                    searchResultsListComponent,
+                    noResultsComponent,
+                  ],
+                ),
+                WidgetbookFolder(
+                  name: 'Global Service Discovery',
+                  isInitiallyExpanded: false,
+                  children: [
+                    globalServiceDiscoveryComponent,
+                    categoryServiceListComponent,
+                    serviceDetailComponent,
+                  ],
+                ),
+                WidgetbookFolder(
+                  name: 'Consultation Slot Booking',
+                  isInitiallyExpanded: false,
+                  children: [
+                    selectAdvocateComponent,
+                    selectAppointmentTimeComponent,
+                    confirmAppointmentComponent,
+                    confirmAppointmentV2Component,
+                    appointmentConfirmedComponent,
+                  ],
+                ),
+              ],
+            ),
+            WidgetbookFolder(
+              name: 'Feedback and Communication',
+              isInitiallyExpanded: true,
+              children: [
+                WidgetbookFolder(
+                  name: 'Inline Feedback and Status Communication',
+                  isInitiallyExpanded: true,
+                  children: [
+                    inlineFeedbackComponent,
+                    inlineFeedbackErrorComponent,
+                    inlineFeedbackHintComponent,
+                    inlineFeedbackGuidanceComponent,
+                    inlineFeedbackVerificationComponent,
+                    inlineFeedbackNoteComponent,
                   ],
                 ),
               ],

@@ -21,6 +21,14 @@ enum Ux4gJourneyStepState {
 
 // ─── Step Card Content ──────────────────────────────────────────────────────
 
+/// Position of the status badge in the step card.
+enum Ux4gJourneyBadgePosition {
+  /// Badge renders at the bottom of the card (default, original behavior).
+  bottom,
+  /// Badge renders at the top-right corner next to the date.
+  topRight,
+}
+
 /// Optional status indicator shown inside a step card.
 class Ux4gJourneyStepStatus {
   /// Status text (e.g., "2 days remaining").
@@ -38,12 +46,16 @@ class Ux4gJourneyStepStatus {
   /// Badge text color.
   final Color? badgeTextColor;
 
+  /// Position of the badge in the card. Default: bottom (original behavior).
+  final Ux4gJourneyBadgePosition badgePosition;
+
   const Ux4gJourneyStepStatus({
     required this.text,
     this.dotColor,
     this.badgeText,
     this.badgeColor,
     this.badgeTextColor,
+    this.badgePosition = Ux4gJourneyBadgePosition.bottom,
   });
 }
 
@@ -646,8 +658,8 @@ class _JourneyStepCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
-          // Date + Tag row
-          if (step.date != null || step.tag != null)
+          // Date + Tag/Status badge row
+          if (step.date != null || step.tag != null || (step.status != null && step.status!.badgeText != null && step.status!.badgePosition == Ux4gJourneyBadgePosition.topRight))
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -660,7 +672,26 @@ class _JourneyStepCard extends StatelessWidget {
                       ),
                     ),
                   ),
-                if (step.tag != null)
+                if (step.status != null && step.status!.badgeText != null && step.status!.badgePosition == Ux4gJourneyBadgePosition.topRight)
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: Ux4gSpace.space8,
+                      vertical: Ux4gSpace.space2,
+                    ),
+                    decoration: BoxDecoration(
+                      color: step.status!.badgeColor ?? onSurface.withValues(alpha: 0.06),
+                      borderRadius: BorderRadius.circular(Ux4gRadius.radius4),
+                    ),
+                    child: Text(
+                      step.status!.badgeText!,
+                      style: (ux4gTypography?.bXS_default ?? materialTheme.textTheme.bodySmall?.copyWith(fontSize: 12))?.copyWith(
+                        color: step.status!.badgeTextColor ?? onSurface.withValues(alpha: 0.6),
+                        fontSize: 11,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  )
+                else if (step.tag != null)
                   Container(
                     padding: const EdgeInsets.symmetric(
                       horizontal: Ux4gSpace.space8,
@@ -684,7 +715,7 @@ class _JourneyStepCard extends StatelessWidget {
             ),
 
           // Title
-          if (step.date != null || step.tag != null)
+          if (step.date != null || step.tag != null || (step.status != null && step.status!.badgeText != null && step.status!.badgePosition == Ux4gJourneyBadgePosition.topRight))
             const SizedBox(height: Ux4gSpace.space6),
           Text(
             step.title,
@@ -717,8 +748,8 @@ class _JourneyStepCard extends StatelessWidget {
             ),
           ],
 
-          // Status indicator
-          if (step.status != null) ...[
+          // Status indicator at bottom (original behavior, only when badgePosition is bottom)
+          if (step.status != null && step.status!.badgePosition == Ux4gJourneyBadgePosition.bottom) ...[
             const SizedBox(height: Ux4gSpace.space8),
             Ux4gUnifiedPillTag(
               size: Ux4gTagSize.l,
