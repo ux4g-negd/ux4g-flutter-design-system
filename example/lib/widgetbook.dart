@@ -79,6 +79,7 @@ import 'stories/feedback_and_communication/contact_and_support/find_service_cent
 import 'stories/feedback_and_communication/language_switcher/language_switcher_stories.dart';
 import 'stories/feedback_and_communication/language_switcher/inline_language_toggle_stories.dart';
 import 'stories/feedback_and_communication/language_switcher/translation_unavailable_stories.dart';
+import 'stories/feedback_and_communication/language_switcher/all_scheduled_languages_stories.dart';
 
 void main() {
   runApp(const UX4GWidgetbook());
@@ -546,6 +547,7 @@ class UX4GWidgetbook extends StatelessWidget {
                     languageSwitcherComponent,
                     inlineLanguageToggleComponent,
                     translationUnavailableComponent,
+                    allScheduledLanguagesComponent,
                   ],
                 ),
               ],
