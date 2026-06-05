@@ -274,17 +274,24 @@ class LanguageSwitcherCardScreen extends StatelessWidget {
 // Mockup Widget
 // ───────────────────────────────────────────────────────────────────────
 
-class _LanguageSwitcherMockup extends StatelessWidget {
+class _LanguageSwitcherMockup extends StatefulWidget {
   final bool isCard;
 
   const _LanguageSwitcherMockup({this.isCard = false});
+
+  @override
+  State<_LanguageSwitcherMockup> createState() => _LanguageSwitcherMockupState();
+}
+
+class _LanguageSwitcherMockupState extends State<_LanguageSwitcherMockup> {
+  List<String> _selectedIds = ['en'];
 
   @override
   Widget build(BuildContext context) {
     return Theme(
       data: Ux4gTheme.themeData(isDark: false),
       child: Scaffold(
-        backgroundColor: isCard ? const Color(0xFFF2EFFF) : Colors.white,
+        backgroundColor: widget.isCard ? const Color(0xFFF2EFFF) : Colors.white,
         body: SafeArea(
           child: Column(
             children: [
@@ -332,7 +339,7 @@ class _LanguageSwitcherMockup extends StatelessWidget {
               Expanded(
                 child: SingleChildScrollView(
                   padding: const EdgeInsets.all(16),
-                  child: isCard
+                  child: widget.isCard
                       ? Ux4gCard(
                           backgroundColor: Colors.white,
                           cornerRadius: 16,
@@ -395,8 +402,8 @@ class _LanguageSwitcherMockup extends StatelessWidget {
             Ux4gDropdownOption(id: 'ta', label: 'Tamil (தமிழ்)'),
             Ux4gDropdownOption(id: 'te', label: 'Telugu (తెలుగు)'),
           ],
-          selectedOptionIds: const ['en'],
-          onSelectionChange: (_) {},
+          selectedOptionIds: _selectedIds,
+          onSelectionChange: (ids) => setState(() => _selectedIds = ids),
           size: Ux4gDropdownSize.m,
           leadingIcon: Icons.language,
           valueTextStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
