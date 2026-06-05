@@ -165,6 +165,7 @@ class Ux4gSelectionDropdown extends StatefulWidget {
   final Ux4gDropdownFilterType filterType;
   final TextStyle? labelTextStyle;
   final TextStyle? valueTextStyle;
+  final IconData? leadingIcon;
 
   const Ux4gSelectionDropdown({
     super.key,
@@ -181,6 +182,7 @@ class Ux4gSelectionDropdown extends StatefulWidget {
     this.filterType = Ux4gDropdownFilterType.contains,
     this.labelTextStyle,
     this.valueTextStyle,
+    this.leadingIcon,
   });
 
   @override
@@ -460,6 +462,10 @@ class _Ux4gSelectionDropdownState extends State<Ux4gSelectionDropdown> {
               ),
               child: Row(
                 children: [
+                  if (widget.leadingIcon != null) ...[
+                    Icon(widget.leadingIcon, size: 20, color: (uxColors?.onSurface ?? materialTheme.colorScheme.onSurface).withValues(alpha: 0.6)),
+                    const SizedBox(width: 8),
+                  ],
                   Expanded(
                     child: widget.selectedOptionIds.isEmpty
                         ? Text(

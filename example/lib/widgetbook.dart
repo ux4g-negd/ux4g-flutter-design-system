@@ -68,6 +68,17 @@ import 'stories/feedback_and_communication/inline_feedback_and_status_communicat
 import 'stories/feedback_and_communication/inline_feedback_and_status_communication/inline_feedback_guidance_stories.dart';
 import 'stories/feedback_and_communication/inline_feedback_and_status_communication/inline_feedback_verification_stories.dart';
 import 'stories/feedback_and_communication/inline_feedback_and_status_communication/inline_feedback_note_stories.dart';
+import 'stories/feedback_and_communication/service_completion_and_feedback/service_completion_stories.dart';
+import 'stories/feedback_and_communication/service_completion_and_feedback/feedback_rating_stories.dart';
+import 'stories/feedback_and_communication/contact_and_support/help_centre_stories.dart';
+import 'stories/feedback_and_communication/contact_and_support/faq_detail_stories.dart';
+import 'stories/feedback_and_communication/contact_and_support/contact_support_stories.dart';
+import 'stories/feedback_and_communication/contact_and_support/live_chat_support_stories.dart';
+import 'stories/feedback_and_communication/contact_and_support/file_complaint_stories.dart';
+import 'stories/feedback_and_communication/contact_and_support/find_service_centre_stories.dart';
+import 'stories/feedback_and_communication/language_switcher/language_switcher_stories.dart';
+import 'stories/feedback_and_communication/language_switcher/inline_language_toggle_stories.dart';
+import 'stories/feedback_and_communication/language_switcher/translation_unavailable_stories.dart';
 
 void main() {
   runApp(const UX4GWidgetbook());
@@ -176,6 +187,7 @@ class UX4GWidgetbook extends StatelessWidget {
                 filterChipComponent,
                 inputChipComponent,
                 inputChipFieldComponent,
+                chipGroupComponent,
               ],
             ),
             paginationComponent,
@@ -497,7 +509,7 @@ class UX4GWidgetbook extends StatelessWidget {
               children: [
                 WidgetbookFolder(
                   name: 'Inline Feedback and Status Communication',
-                  isInitiallyExpanded: true,
+                  isInitiallyExpanded: false,
                   children: [
                     inlineFeedbackComponent,
                     inlineFeedbackErrorComponent,
@@ -505,6 +517,35 @@ class UX4GWidgetbook extends StatelessWidget {
                     inlineFeedbackGuidanceComponent,
                     inlineFeedbackVerificationComponent,
                     inlineFeedbackNoteComponent,
+                  ],
+                ),
+                WidgetbookFolder(
+                  name: 'Service Completion and Feedback',
+                  isInitiallyExpanded: false,
+                  children: [
+                    serviceCompletionComponent,
+                    feedbackRatingComponent,
+                  ],
+                ),
+                WidgetbookFolder(
+                  name: 'Contact and Support',
+                  isInitiallyExpanded: false,
+                  children: [
+                    helpCentreComponent,
+                    faqDetailComponent,
+                    contactSupportComponent,
+                    liveChatSupportComponent,
+                    fileComplaintComponent,
+                    findServiceCentreComponent,
+                  ],
+                ),
+                WidgetbookFolder(
+                  name: 'Language Switcher',
+                  isInitiallyExpanded: true,
+                  children: [
+                    languageSwitcherComponent,
+                    inlineLanguageToggleComponent,
+                    translationUnavailableComponent,
                   ],
                 ),
               ],

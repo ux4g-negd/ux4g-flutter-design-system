@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/gestures.dart';
+import 'dart:ui' show PointerDeviceKind;
 import '../foundation/colors.dart';
 import '../foundation/typography.dart';
 import '../foundation/dimensions.dart';
@@ -361,7 +363,7 @@ class Ux4gInputChipField extends StatelessWidget {
   Widget _buildDropdownField(BuildContext context) {
     final materialTheme = Theme.of(context);
     final ux4gColors = materialTheme.extension<Ux4gColors>();
-    
+
     return PopupMenuButton<String>(
       onSelected: (val) {
         onAddChip(val);
@@ -379,5 +381,71 @@ class Ux4gInputChipField extends StatelessWidget {
         trailingIcon: Icons.arrow_drop_down,
       ),
     );
+  }
+}
+
+// --- Chip Group ---
+
+enum Ux4gChipGroupArrangement { horizontal, wrap }
+
+class Ux4gChipGroup extends StatelessWidget {
+  final List<Widget> chips;
+  final Ux4gChipGroupArrangement arrangement;
+  final double spacing;
+  final double runSpacing;
+
+  const Ux4gChipGroup({
+    super.key,
+    required this.chips,
+    this.arrangement = Ux4gChipGroupArrangement.horizontal,
+    this.spacing = 8.0,
+    this.runSpacing = 8.0,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    switch (arrangement) {
+      case Ux4gChipGroupArrangement.horizontal:
+        return LayoutBuilder(
+          builder: (context, constraints) {
+            return ConstrainedBox(
+              constraints: BoxConstraints(maxWidth: constraints.maxWidth),
+              child: ScrollConfiguration(
+                behavior: ScrollConfiguration.of(context).copyWith(
+                  dragDevices: {
+                    PointerDeviceKind.touch,
+                    PointerDeviceKind.mouse,
+                    PointerDeviceKind.trackpad,
+                  },
+                ),
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  dragStartBehavior: DragStartBehavior.down,
+                  physics: const AlwaysScrollableScrollPhysics(
+                    parent: BouncingScrollPhysics(),
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: chips
+                        .map(
+                          (chip) => Padding(
+                            padding: EdgeInsets.only(right: spacing),
+                            child: chip,
+                          ),
+                        )
+                        .toList(),
+                  ),
+                ),
+              ),
+            );
+          },
+        );
+      case Ux4gChipGroupArrangement.wrap:
+        return Wrap(
+          spacing: spacing,
+          runSpacing: runSpacing,
+          children: chips,
+        );
+    }
   }
 }

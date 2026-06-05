@@ -105,21 +105,12 @@ class _CategoryServiceListScreenState extends State<CategoryServiceListScreen> {
                     ),
                   ),
                   // Filter chips
-                  SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    physics: const AlwaysScrollableScrollPhysics(),
+                  Ux4gChipGroup(
+                    labels: const ['All · 48', 'Hospitals · 12', 'Certificates · 18', 'Insurance'],
+                    selectedIndex: _selectedChip,
+                    onChanged: (i) => setState(() => _selectedChip = i),
+                    layout: Ux4gChipGroupLayout.scroll,
                     padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                    child: Row(
-                      children: [
-                        Ux4gChoiceChip(text: 'All · 48', selected: _selectedChip == 0, onClick: () => setState(() => _selectedChip = 0)),
-                        const SizedBox(width: 8),
-                        Ux4gChoiceChip(text: 'Hospitals · 12', selected: _selectedChip == 1, onClick: () => setState(() => _selectedChip = 1)),
-                        const SizedBox(width: 8),
-                        Ux4gChoiceChip(text: 'Certificates · 18', selected: _selectedChip == 2, onClick: () => setState(() => _selectedChip = 2)),
-                        const SizedBox(width: 8),
-                        Ux4gChoiceChip(text: 'Insurance', selected: _selectedChip == 3, onClick: () => setState(() => _selectedChip = 3)),
-                      ],
-                    ),
                   ),
                   // Service list
                   Expanded(
@@ -303,21 +294,14 @@ class _CategoryServiceListMockupState extends State<_CategoryServiceListMockup> 
               ),
 
               // Filter chips
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                physics: const AlwaysScrollableScrollPhysics(),
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                child: Row(
-                  children: [
-                    Ux4gChoiceChip(text: 'All · 48', selected: _selectedChip == 0, onClick: () => setState(() => _selectedChip = 0)),
-                    const SizedBox(width: 8),
-                    Ux4gChoiceChip(text: 'Hospitals · 12', selected: _selectedChip == 1, onClick: () => setState(() => _selectedChip = 1)),
-                    const SizedBox(width: 8),
-                    Ux4gChoiceChip(text: 'Certificates · 18', selected: _selectedChip == 2, onClick: () => setState(() => _selectedChip = 2)),
-                    const SizedBox(width: 8),
-                    Ux4gChoiceChip(text: 'Insurance', selected: _selectedChip == 3, onClick: () => setState(() => _selectedChip = 3)),
-                  ],
-                ),
+              Ux4gChipGroup(
+                arrangement: Ux4gChipGroupArrangement.horizontal,
+                chips: [
+                  Ux4gChoiceChip(text: 'All · 48', selected: _selectedChip == 0, onClick: () => setState(() => _selectedChip = 0)),
+                  Ux4gChoiceChip(text: 'Hospitals · 12', selected: _selectedChip == 1, onClick: () => setState(() => _selectedChip = 1)),
+                  Ux4gChoiceChip(text: 'Certificates · 18', selected: _selectedChip == 2, onClick: () => setState(() => _selectedChip = 2)),
+                  Ux4gChoiceChip(text: 'Insurance', selected: _selectedChip == 3, onClick: () => setState(() => _selectedChip = 3)),
+                ],
               ),
 
               // Service list

@@ -582,6 +582,124 @@ final inputChipFieldComponent = WidgetbookComponent(
   ],
 );
 
+// ── Chip Group ───────────────────────────────────────────────────────────────
+
+final chipGroupComponent = WidgetbookComponent(
+  name: 'Ux4gChipGroup',
+  useCases: [
+    WidgetbookUseCase(
+      name: 'Horizontal',
+      builder: (context) {
+        int selected = 0;
+        return StatefulBuilder(builder: (ctx, setState) {
+          return ComponentDocs(
+            name: 'Ux4gChipGroup',
+            description:
+                'A group container for choice chips with horizontal scroll or wrap layout. '
+                'Pass any list of chip widgets and control arrangement.',
+            code: '''Ux4gChipGroup(
+  arrangement: Ux4gChipGroupArrangement.horizontal,
+  chips: [
+    Ux4gChoiceChip(
+      text: 'All · 48',
+      selected: selected == 0,
+      onClick: () => setState(() => selected = 0),
+    ),
+    Ux4gChoiceChip(
+      text: 'Hospitals · 12',
+      selected: selected == 1,
+      onClick: () => setState(() => selected = 1),
+    ),
+    Ux4gChoiceChip(
+      text: 'Certificates · 18',
+      selected: selected == 2,
+      onClick: () => setState(() => selected = 2),
+    ),
+  ],
+);''',
+            props: const [
+              PropRow(
+                name: 'chips',
+                type: 'List<Widget>',
+                description: 'List of chip widgets to display.',
+                required: true,
+              ),
+              PropRow(
+                name: 'arrangement',
+                type: 'Ux4gChipGroupArrangement',
+                description: 'horizontal (scrollable) or wrap (multi-line).',
+                defaultValue: 'horizontal',
+              ),
+              PropRow(
+                name: 'spacing',
+                type: 'double',
+                description: 'Horizontal gap between chips.',
+                defaultValue: '8.0',
+              ),
+              PropRow(
+                name: 'runSpacing',
+                type: 'double',
+                description: 'Vertical gap between rows (wrap mode only).',
+                defaultValue: '8.0',
+              ),
+            ],
+            child: SizedBox(
+              width: 320,
+              child: Ux4gChipGroup(
+                arrangement: Ux4gChipGroupArrangement.horizontal,
+                chips: [
+                  Ux4gChoiceChip(text: 'All · 48', selected: selected == 0, onClick: () => setState(() => selected = 0)),
+                  Ux4gChoiceChip(text: 'Hospitals · 12', selected: selected == 1, onClick: () => setState(() => selected = 1)),
+                  Ux4gChoiceChip(text: 'Certificates · 18', selected: selected == 2, onClick: () => setState(() => selected = 2)),
+                  Ux4gChoiceChip(text: 'Insurance', selected: selected == 3, onClick: () => setState(() => selected = 3)),
+                ],
+              ),
+            ),
+          );
+        });
+      },
+    ),
+    WidgetbookUseCase(
+      name: 'Wrap',
+      builder: (context) {
+        int selected = 0;
+        return StatefulBuilder(builder: (ctx, setState) {
+          return ComponentDocs(
+            name: 'Ux4gChipGroup (Wrap)',
+            description: 'Wrap layout for chip group — chips flow to next line when space runs out.',
+            code: '''Ux4gChipGroup(
+  arrangement: Ux4gChipGroupArrangement.wrap,
+  spacing: 8,
+  runSpacing: 8,
+  chips: [
+    Ux4gChoiceChip(text: 'English', selected: true, onClick: () {}),
+    Ux4gChoiceChip(text: 'हिन्दी', selected: false, onClick: () {}),
+    Ux4gChoiceChip(text: 'தமிழ்', selected: false, onClick: () {}),
+    Ux4gChoiceChip(text: 'తెలుగు', selected: false, onClick: () {}),
+  ],
+);''',
+            props: const [],
+            child: SizedBox(
+              width: 260,
+              child: Ux4gChipGroup(
+                arrangement: Ux4gChipGroupArrangement.wrap,
+                spacing: 8,
+                runSpacing: 8,
+                chips: [
+                  Ux4gChoiceChip(text: 'English', selected: selected == 0, onClick: () => setState(() => selected = 0)),
+                  Ux4gChoiceChip(text: 'हिन्दी', selected: selected == 1, onClick: () => setState(() => selected = 1)),
+                  Ux4gChoiceChip(text: 'தமிழ்', selected: selected == 2, onClick: () => setState(() => selected = 2)),
+                  Ux4gChoiceChip(text: 'తెలుగు', selected: selected == 3, onClick: () => setState(() => selected = 3)),
+                ],
+              ),
+            ),
+          );
+        });
+      },
+    ),
+  ],
+);
+
 // ── Pagination ────────────────────────────────────────────────────────────────
 
 final paginationComponent = WidgetbookComponent(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:widgetbook/widgetbook.dart';
 import 'package:ux4g_flutter_design_system/ux4g_flutter_design_system.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -76,6 +77,7 @@ class _PhoneFrame extends StatelessWidget {
 // ───────────────────────────────────────────────────────────────────────
 
 const _saveAndResumeDefaultCode = r"""import 'package:flutter/material.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:ux4g_flutter_design_system/ux4g_flutter_design_system.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -116,9 +118,9 @@ class SaveAndResumeScreen extends StatelessWidget {
                     Container(
                       padding: const EdgeInsets.all(20),
                       decoration: BoxDecoration(
-                        color: const Color(0xFFFFFBEB),
+                        color: const Color(0xFFFFF7E6),
                         borderRadius: BorderRadius.circular(12),
-                        border: Border.all(color: const Color(0xFFFEF3C7)),
+                        border: Border.all(color: Colors.transparent),
                       ),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -127,7 +129,7 @@ class SaveAndResumeScreen extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               const Expanded(
-                                child: Text('Income Certificate Application', style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700, color: Color(0xFF111827))),
+                                child: Text('Income Certificate Application', style: TextStyle(fontSize: 15, fontWeight: FontWeight.w700, color: Color(0xFF111827))),
                               ),
                               const Icon(Icons.keyboard_arrow_down, color: Color(0xFF111827)),
                             ],
@@ -135,8 +137,8 @@ class SaveAndResumeScreen extends StatelessWidget {
                           const SizedBox(height: 8),
                           Container(
                             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                            decoration: BoxDecoration(color: const Color(0xFFFFEDD5), borderRadius: BorderRadius.circular(4)),
-                            child: const Text('Step 3 of 5 Document Upload', style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: Color(0xFF9A3412))),
+                            decoration: BoxDecoration(color: const Color(0xFFFFE7BF), borderRadius: BorderRadius.circular(4)),
+                            child: const Text('Step 3 of 5 Document Upload', style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: Color(0xFFAD4E00))),
                           ),
                           const SizedBox(height: 12),
                           const Text('Last saved: 10 Apr 2026', style: TextStyle(fontSize: 14, color: Color(0xFF4B5563))),
@@ -146,9 +148,17 @@ class SaveAndResumeScreen extends StatelessWidget {
                     const SizedBox(height: 32),
 
                     // Placeholders
-                    Container(height: 140, decoration: BoxDecoration(color: const Color(0xFFE5E7EB), borderRadius: BorderRadius.circular(12))),
+                    Shimmer.fromColors(
+                      baseColor: const Color(0xFFE5E7EB),
+                      highlightColor: const Color(0xFFF9FAFB),
+                      child: Container(height: 140, decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(12))),
+                    ),
                     const SizedBox(height: 16),
-                    Container(height: 140, decoration: BoxDecoration(color: const Color(0xFFE5E7EB), borderRadius: BorderRadius.circular(12))),
+                    Shimmer.fromColors(
+                      baseColor: const Color(0xFFE5E7EB),
+                      highlightColor: const Color(0xFFF9FAFB),
+                      child: Container(height: 140, decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(12))),
+                    ),
                   ],
                 ),
               ),
@@ -187,6 +197,7 @@ class SaveAndResumeScreen extends StatelessWidget {
 """;
 
 const _saveAndResumeCardCode = r"""import 'package:flutter/material.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:ux4g_flutter_design_system/ux4g_flutter_design_system.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -244,7 +255,7 @@ class SaveAndResumeCardScreen extends StatelessWidget {
                           Container(
                             padding: const EdgeInsets.all(16),
                             decoration: BoxDecoration(
-                              color: const Color(0xFFFFFBEB),
+                              color: const Color(0xFFFFF7E6),
                               borderRadius: BorderRadius.circular(12),
                             ),
                             child: Column(
@@ -254,7 +265,7 @@ class SaveAndResumeCardScreen extends StatelessWidget {
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
                                     const Expanded(
-                                      child: Text('Income Certificate Application', style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700, color: Color(0xFF111827))),
+                                      child: Text('Income Certificate Application', style: TextStyle(fontSize: 15, fontWeight: FontWeight.w700, color: Color(0xFF111827))),
                                     ),
                                     const Icon(Icons.keyboard_arrow_down, color: Color(0xFF111827)),
                                   ],
@@ -262,8 +273,8 @@ class SaveAndResumeCardScreen extends StatelessWidget {
                                 const SizedBox(height: 8),
                                 Container(
                                   padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
-                                  decoration: BoxDecoration(color: const Color(0xFFFFEDD5), borderRadius: BorderRadius.circular(4)),
-                                  child: const Text('Step 3 of 5 Document Upload', style: TextStyle(fontSize: 11, fontWeight: FontWeight.w700, color: Color(0xFF9A3412))),
+                                  decoration: BoxDecoration(color: const Color(0xFFFFE7BF), borderRadius: BorderRadius.circular(4)),
+                                  child: const Text('Step 3 of 5 Document Upload', style: TextStyle(fontSize: 11, fontWeight: FontWeight.w700, color: Color(0xFFAD4E00))),
                                 ),
                                 const SizedBox(height: 8),
                                 const Text('Last saved: 10 Apr 2026', style: TextStyle(fontSize: 14, color: Color(0xFF4B5563))),
@@ -272,9 +283,17 @@ class SaveAndResumeCardScreen extends StatelessWidget {
                           ),
                           const SizedBox(height: 32),
                           // Placeholders
-                          Container(height: 140, decoration: BoxDecoration(color: const Color(0xFFF3F4F6), borderRadius: BorderRadius.circular(12))),
+                          Shimmer.fromColors(
+                      baseColor: const Color(0xFFE5E7EB),
+                      highlightColor: const Color(0xFFF9FAFB),
+                      child: Container(height: 140, decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(12))),
+                    ),
                           const SizedBox(height: 16),
-                          Container(height: 140, decoration: BoxDecoration(color: const Color(0xFFF3F4F6), borderRadius: BorderRadius.circular(12))),
+                          Shimmer.fromColors(
+                      baseColor: const Color(0xFFE5E7EB),
+                      highlightColor: const Color(0xFFF9FAFB),
+                      child: Container(height: 140, decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(12))),
+                    ),
                         ],
                       ),
                     ),
@@ -351,9 +370,9 @@ class _SaveAndResumeMockup extends StatelessWidget {
                       Container(
                         padding: const EdgeInsets.all(20),
                         decoration: BoxDecoration(
-                          color: const Color(0xFFFFFBEB),
+                          color: const Color(0xFFFFF7E6),
                           borderRadius: BorderRadius.circular(12),
-                          border: Border.all(color: const Color(0xFFFEF3C7)),
+                          border: Border.all(color: Colors.transparent),
                         ),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -362,7 +381,7 @@ class _SaveAndResumeMockup extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 const Expanded(
-                                  child: Text('Income Certificate Application', style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700, color: _titleColor)),
+                                  child: Text('Income Certificate Application', style: TextStyle(fontSize: 15, fontWeight: FontWeight.w700, color: _titleColor)),
                                 ),
                                 const Icon(Icons.keyboard_arrow_down, color: _titleColor),
                               ],
@@ -370,8 +389,8 @@ class _SaveAndResumeMockup extends StatelessWidget {
                             const SizedBox(height: 8),
                             Container(
                               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                              decoration: BoxDecoration(color: const Color(0xFFFFEDD5), borderRadius: BorderRadius.circular(4)),
-                              child: const Text('Step 3 of 5 Document Upload', style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: Color(0xFF9A3412))),
+                              decoration: BoxDecoration(color: const Color(0xFFFFE7BF), borderRadius: BorderRadius.circular(4)),
+                              child: const Text('Step 3 of 5 Document Upload', style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: Color(0xFFAD4E00))),
                             ),
                             const SizedBox(height: 12),
                             const Text('Last saved: 10 Apr 2026', style: TextStyle(fontSize: 14, color: _subtleText)),
@@ -379,9 +398,17 @@ class _SaveAndResumeMockup extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(height: 32),
-                      Container(height: 140, decoration: BoxDecoration(color: const Color(0xFFE5E7EB), borderRadius: BorderRadius.circular(12))),
+                      Shimmer.fromColors(
+                      baseColor: const Color(0xFFE5E7EB),
+                      highlightColor: const Color(0xFFF9FAFB),
+                      child: Container(height: 140, decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(12))),
+                    ),
                       const SizedBox(height: 16),
-                      Container(height: 140, decoration: BoxDecoration(color: const Color(0xFFE5E7EB), borderRadius: BorderRadius.circular(12))),
+                      Shimmer.fromColors(
+                      baseColor: const Color(0xFFE5E7EB),
+                      highlightColor: const Color(0xFFF9FAFB),
+                      child: Container(height: 140, decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(12))),
+                    ),
                     ],
                   ),
                 ),
@@ -467,7 +494,7 @@ class _SaveAndResumeCardMockup extends StatelessWidget {
                             Container(
                               padding: const EdgeInsets.all(16),
                               decoration: BoxDecoration(
-                                color: const Color(0xFFFFFBEB),
+                                color: const Color(0xFFFFF7E6),
                                 borderRadius: BorderRadius.circular(12),
                               ),
                               child: Column(
@@ -477,7 +504,7 @@ class _SaveAndResumeCardMockup extends StatelessWidget {
                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: [
                                       const Expanded(
-                                        child: Text('Income Certificate Application', style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700, color: _titleColor)),
+                                        child: Text('Income Certificate Application', style: TextStyle(fontSize: 15, fontWeight: FontWeight.w700, color: _titleColor)),
                                       ),
                                       const Icon(Icons.keyboard_arrow_down, color: _titleColor),
                                     ],
@@ -485,8 +512,8 @@ class _SaveAndResumeCardMockup extends StatelessWidget {
                                   const SizedBox(height: 8),
                                   Container(
                                     padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
-                                    decoration: BoxDecoration(color: const Color(0xFFFFEDD5), borderRadius: BorderRadius.circular(4)),
-                                    child: const Text('Step 3 of 5 Document Upload', style: TextStyle(fontSize: 11, fontWeight: FontWeight.w700, color: Color(0xFF9A3412))),
+                                    decoration: BoxDecoration(color: const Color(0xFFFFE7BF), borderRadius: BorderRadius.circular(4)),
+                                    child: const Text('Step 3 of 5 Document Upload', style: TextStyle(fontSize: 11, fontWeight: FontWeight.w700, color: Color(0xFFAD4E00))),
                                   ),
                                   const SizedBox(height: 8),
                                   const Text('Last saved: 10 Apr 2026', style: TextStyle(fontSize: 14, color: _subtleText)),
@@ -494,9 +521,17 @@ class _SaveAndResumeCardMockup extends StatelessWidget {
                               ),
                             ),
                             const SizedBox(height: 32),
-                            Container(height: 140, decoration: BoxDecoration(color: const Color(0xFFF3F4F6), borderRadius: BorderRadius.circular(12))),
+                            Shimmer.fromColors(
+                      baseColor: const Color(0xFFE5E7EB),
+                      highlightColor: const Color(0xFFF9FAFB),
+                      child: Container(height: 140, decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(12))),
+                    ),
                             const SizedBox(height: 16),
-                            Container(height: 140, decoration: BoxDecoration(color: const Color(0xFFF3F4F6), borderRadius: BorderRadius.circular(12))),
+                            Shimmer.fromColors(
+                      baseColor: const Color(0xFFE5E7EB),
+                      highlightColor: const Color(0xFFF9FAFB),
+                      child: Container(height: 140, decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(12))),
+                    ),
                           ],
                         ),
                       ),

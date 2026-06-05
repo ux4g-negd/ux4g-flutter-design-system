@@ -2000,6 +2000,11 @@ final selectionDropdownComponent = WidgetbookComponent(
                   type: 'TextStyle?',
                   description: 'Custom text style for the selected value.',
                 ),
+                PropRow(
+                  name: 'leadingIcon',
+                  type: 'IconData?',
+                  description: 'Optional icon shown at the start of the trigger button.',
+                ),
               ],
               child: SizedBox(
                 width: 300,

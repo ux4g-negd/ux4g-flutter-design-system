@@ -283,7 +283,7 @@ class _Ux4gSearchFieldState extends State<Ux4gSearchField> {
                           style: bM_default.copyWith(color: widget.enabled ? onSurface : onSurface.withValues(alpha: 0.4)),
                           decoration: InputDecoration(
                             hintText: widget.placeholder,
-                            hintStyle: bM_default.copyWith(color: onSurface.withValues(alpha: 0.4)),
+                            hintStyle: bM_default.copyWith(color: onSurface.withValues(alpha: 0.4), fontWeight: FontWeight.w400),
                             isDense: true,
                             border: InputBorder.none,
                             contentPadding: EdgeInsets.zero,

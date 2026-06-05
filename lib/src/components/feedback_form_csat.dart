@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import '../foundation/colors.dart';
 import '../foundation/typography.dart';
 import 'buttons.dart';
@@ -10,7 +11,7 @@ class Ux4gFeedbackFormCsat extends StatefulWidget {
   final int maxLength;
   final VoidCallback? onSkip;
   final VoidCallback? onCloseSuccess;
-  
+
   // Customization
   final String title;
   final String badLabel;
@@ -20,7 +21,15 @@ class Ux4gFeedbackFormCsat extends StatefulWidget {
   final String skipButtonText;
   final String successTitle;
   final String successMessage;
+
+  /// SVG asset paths for each face (index 0 = saddest, 4 = happiest).
+  final List<String> ratingFaceAssets;
+
+  /// Fallback: use IconData icons if SVG assets are not available.
   final List<IconData> ratingIcons;
+
+  /// Whether to use SVG face assets instead of IconData icons.
+  final bool useSvgFaces;
 
   // Typography Config
   final TextStyle? titleStyle;
@@ -31,10 +40,18 @@ class Ux4gFeedbackFormCsat extends StatefulWidget {
   final IconData successIcon;
   final Color? successIconColor;
   final Color? successBackgroundColor;
-  final Color? selectedScoreBackgroundColor;
-  final Color? selectedScoreIconColor;
-  final Color? unselectedScoreBackgroundColor;
-  final Color? unselectedScoreIconColor;
+
+  /// Per-face selected background colors (index 0-4).
+  final List<Color> selectedBackgroundColors;
+
+  /// Per-face selected icon/SVG colors (index 0-4).
+  final List<Color> selectedIconColors;
+
+  /// Unselected face background color.
+  final Color unselectedBackgroundColor;
+
+  /// Unselected face icon/SVG color.
+  final Color unselectedIconColor;
 
   const Ux4gFeedbackFormCsat({
     super.key,
@@ -51,6 +68,13 @@ class Ux4gFeedbackFormCsat extends StatefulWidget {
     this.skipButtonText = 'Skip',
     this.successTitle = 'Feedback submitted',
     this.successMessage = 'Thank you for your feedback. This helps improve government services.',
+    this.ratingFaceAssets = const [
+      'assets/icons/ic_face_0.svg',
+      'assets/icons/ic_face_1.svg',
+      'assets/icons/ic_face_2.svg',
+      'assets/icons/ic_face_3.svg',
+      'assets/icons/ic_face_4.svg',
+    ],
     this.ratingIcons = const [
       Icons.sentiment_very_dissatisfied,
       Icons.sentiment_dissatisfied,
@@ -58,16 +82,29 @@ class Ux4gFeedbackFormCsat extends StatefulWidget {
       Icons.sentiment_satisfied,
       Icons.sentiment_very_satisfied,
     ],
+    this.useSvgFaces = true,
     this.titleStyle,
     this.successTitleStyle,
     this.successMessageStyle,
     this.successIcon = Icons.thumb_up,
     this.successIconColor,
     this.successBackgroundColor,
-    this.selectedScoreBackgroundColor,
-    this.selectedScoreIconColor,
-    this.unselectedScoreBackgroundColor,
-    this.unselectedScoreIconColor,
+    this.selectedBackgroundColors = const [
+      Color(0xFFFFECEE), // face_0
+      Color(0xFFFFF8F8), // face_1
+      Color(0xFFFFF7E6), // face_2
+      Color(0xFFF2FCEF), // face_3
+      Color(0xFFDDF8D8), // face_4
+    ],
+    this.selectedIconColors = const [
+      Color(0xFFDB372D), // face_0
+      Color(0xFFDB372D), // face_1
+      Color(0xFFFA8C16), // face_2
+      Color(0xFF128937), // face_3
+      Color(0xFF128937), // face_4
+    ],
+    this.unselectedBackgroundColor = const Color(0xFFF5F5F5),
+    this.unselectedIconColor = const Color(0xFF737373),
   });
 
   @override
@@ -130,15 +167,8 @@ class _Ux4gFeedbackFormCsatState extends State<Ux4gFeedbackFormCsat> {
   }
 
   Widget _buildFormView(Ux4gColors? uxColors, Ux4gTypography? uxTypography, ThemeData materialTheme) {
-    final successColor = uxColors?.success ?? materialTheme.colorScheme.primary;
-    final backgroundColor = uxColors?.background ?? materialTheme.colorScheme.surface;
     final onSurfaceColor = uxColors?.onSurface ?? materialTheme.colorScheme.onSurface;
     final onBackground = uxColors?.onBackground ?? materialTheme.colorScheme.onSurface;
-
-    final selBg = widget.selectedScoreBackgroundColor ?? successColor.withValues(alpha: 0.12);
-    final selIcon = widget.selectedScoreIconColor ?? successColor;
-    final unselBg = widget.unselectedScoreBackgroundColor ?? backgroundColor;
-    final unselIcon = widget.unselectedScoreIconColor ?? onSurfaceColor.withValues(alpha: 0.6);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -149,16 +179,23 @@ class _Ux4gFeedbackFormCsatState extends State<Ux4gFeedbackFormCsat> {
           style: widget.titleStyle ?? (uxTypography?.hM_strong ?? materialTheme.textTheme.headlineMedium)?.copyWith(color: onBackground, fontWeight: FontWeight.w700),
         ),
         const SizedBox(height: 24),
-        
+
         // Face Rating Scale
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: List.generate(5, (index) {
             final isSelected = _selectedScore == index;
-            final iconData = index < widget.ratingIcons.length 
-                ? widget.ratingIcons[index] 
-                : Icons.sentiment_neutral;
-                
+            final bgColor = isSelected
+                ? (index < widget.selectedBackgroundColors.length
+                    ? widget.selectedBackgroundColors[index]
+                    : widget.unselectedBackgroundColor)
+                : widget.unselectedBackgroundColor;
+            final iconColor = isSelected
+                ? (index < widget.selectedIconColors.length
+                    ? widget.selectedIconColors[index]
+                    : widget.unselectedIconColor)
+                : widget.unselectedIconColor;
+
             return GestureDetector(
               onTap: () {
                 setState(() {
@@ -170,20 +207,30 @@ class _Ux4gFeedbackFormCsatState extends State<Ux4gFeedbackFormCsat> {
                 height: 48,
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
-                  color: isSelected ? selBg : unselBg,
+                  color: bgColor,
                   borderRadius: BorderRadius.circular(8),
                 ),
-                child: Icon(
-                  iconData,
-                  size: 32,
-                  color: isSelected ? selIcon : unselIcon,
-                ),
+                child: widget.useSvgFaces && index < widget.ratingFaceAssets.length
+                    ? SvgPicture.asset(
+                        widget.ratingFaceAssets[index],
+                        package: 'ux4g_flutter_design_system',
+                        width: 32,
+                        height: 32,
+                        colorFilter: ColorFilter.mode(iconColor, BlendMode.srcIn),
+                      )
+                    : Icon(
+                        index < widget.ratingIcons.length
+                            ? widget.ratingIcons[index]
+                            : Icons.sentiment_neutral,
+                        size: 32,
+                        color: iconColor,
+                      ),
               ),
             );
           }),
         ),
         const SizedBox(height: 12),
-        
+
         // Scale Labels
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -204,7 +251,7 @@ class _Ux4gFeedbackFormCsatState extends State<Ux4gFeedbackFormCsat> {
             ),
           ],
         ),
-        
+
         // Conditional Text Area
         if (_selectedScore != null) ...[
           const SizedBox(height: 24),
@@ -223,7 +270,7 @@ class _Ux4gFeedbackFormCsatState extends State<Ux4gFeedbackFormCsat> {
         ],
 
         const SizedBox(height: 24),
-        
+
         // Buttons
         Ux4gButton(
           text: widget.submitButtonText,
