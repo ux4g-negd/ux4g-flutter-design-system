@@ -262,7 +262,7 @@ class UX4GWidgetbook extends StatelessWidget {
         // ── Patterns ───────────────────────────────────────────────────────
         WidgetbookCategory(
           name: 'Patterns',
-          isInitiallyExpanded: true,
+          isInitiallyExpanded: false,
           children: [
             WidgetbookFolder(
               name: 'Identity and Access',
@@ -506,7 +506,7 @@ class UX4GWidgetbook extends StatelessWidget {
             ),
             WidgetbookFolder(
               name: 'Feedback and Communication',
-              isInitiallyExpanded: true,
+              isInitiallyExpanded: false,
               children: [
                 WidgetbookFolder(
                   name: 'Inline Feedback and Status Communication',
@@ -542,7 +542,7 @@ class UX4GWidgetbook extends StatelessWidget {
                 ),
                 WidgetbookFolder(
                   name: 'Language Switcher',
-                  isInitiallyExpanded: true,
+                  isInitiallyExpanded: false,
                   children: [
                     languageSwitcherComponent,
                     inlineLanguageToggleComponent,
