@@ -26,7 +26,7 @@ This will add a line like this to your package's pubspec.yaml (and run an implic
 
 ```yaml
 dependencies:
-  ux4g_flutter_design_system: ^0.3.0
+  ux4g_flutter_design_system: ^0.3.1
 ```
 
 Alternatively, your editor might support `flutter pub get`. Check the docs for your editor to learn more.

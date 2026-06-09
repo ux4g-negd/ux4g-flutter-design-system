@@ -1,3 +1,7 @@
+## 0.3.1
+
+* Updated README for installation instructions.
+
 ## 0.3.0
 
 * Updated components and patterns to align with the latest design requirements.
