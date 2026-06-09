@@ -28,10 +28,12 @@ final inlineFeedbackGuidanceComponent = WidgetbookComponent(
           name: 'Inline Feedback Guidance ($variant)',
           description: isCard
               ? 'Conditional guidance with file upload area inside a card container. '
-                'Shows context-sensitive info based on selected field value.'
+                    'Shows context-sensitive info based on selected field value.'
               : 'Conditional guidance with file upload area. '
-                'Shows context-sensitive info based on selected field value.',
-          code: isCard ? _inlineFeedbackGuidanceCardCode : _inlineFeedbackGuidanceCode,
+                    'Shows context-sensitive info based on selected field value.',
+          code: isCard
+              ? _inlineFeedbackGuidanceCardCode
+              : _inlineFeedbackGuidanceCode,
           center: true,
           child: _InlineFeedbackGuidanceMockup(isCard: isCard),
         );
@@ -169,7 +171,8 @@ class InlineFeedbackGuidanceScreen extends StatelessWidget {
 // Source Code String — Guidance Card Style
 // ───────────────────────────────────────────────────────────────────────
 
-const _inlineFeedbackGuidanceCardCode = r"""import 'package:flutter/material.dart';
+const _inlineFeedbackGuidanceCardCode =
+    r"""import 'package:flutter/material.dart';
 import 'package:ux4g_flutter_design_system/ux4g_flutter_design_system.dart';
 
 /// Card Style variant — the form content sits inside a light purple card.
@@ -313,13 +316,25 @@ class _InlineFeedbackGuidanceMockup extends StatelessWidget {
               // App Header with logos
               Container(
                 width: double.infinity,
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 10,
+                ),
                 color: Colors.white,
                 child: Row(
                   children: [
-                    SvgPicture.asset('assets/national_amblam_logo.svg', height: 40),
+                    SvgPicture.asset(
+                      'assets/national_amblam_logo.svg',
+                      height: 40,
+                    ),
                     const SizedBox(width: 8),
-                    SizedBox(height: 32, child: Ux4gDivider(orientation: Ux4gDividerOrientation.vertical, color: const Color(0xFFD1D5DB))),
+                    SizedBox(
+                      height: 32,
+                      child: Ux4gDivider(
+                        orientation: Ux4gDividerOrientation.vertical,
+                        color: const Color(0xFFD1D5DB),
+                      ),
+                    ),
                     const SizedBox(width: 8),
                     SvgPicture.asset('assets/Union.svg', height: 32),
                   ],
@@ -376,7 +391,11 @@ class _InlineFeedbackGuidanceMockup extends StatelessWidget {
         // Title
         const Text(
           'Conditional Guidance',
-          style: TextStyle(fontSize: 20, fontWeight: FontWeight.w900, color: _titleColor),
+          style: TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.w900,
+            color: _titleColor,
+          ),
         ),
         const SizedBox(height: 10),
 
@@ -438,7 +457,11 @@ class _InlineFeedbackGuidanceMockup extends StatelessWidget {
               children: const [
                 Text(
                   'Additional Document Required',
-                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700, color: _warningOrange),
+                  style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w700,
+                    color: _warningOrange,
+                  ),
                 ),
                 SizedBox(height: 4),
                 Text(

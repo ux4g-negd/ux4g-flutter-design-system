@@ -205,10 +205,12 @@ class _CategoryServiceListMockup extends StatefulWidget {
   const _CategoryServiceListMockup();
 
   @override
-  State<_CategoryServiceListMockup> createState() => _CategoryServiceListMockupState();
+  State<_CategoryServiceListMockup> createState() =>
+      _CategoryServiceListMockupState();
 }
 
-class _CategoryServiceListMockupState extends State<_CategoryServiceListMockup> {
+class _CategoryServiceListMockupState
+    extends State<_CategoryServiceListMockup> {
   int _selectedChip = 0;
 
   @override
@@ -223,7 +225,10 @@ class _CategoryServiceListMockupState extends State<_CategoryServiceListMockup> 
               // App Header - filled purple
               Container(
                 width: double.infinity,
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 10,
+                ),
                 color: _primaryColor,
                 child: const Row(
                   children: [
@@ -231,7 +236,11 @@ class _CategoryServiceListMockupState extends State<_CategoryServiceListMockup> 
                     SizedBox(width: 12),
                     Text(
                       'National Services Portal',
-                      style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: Colors.white),
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.white,
+                      ),
                     ),
                   ],
                 ),
@@ -240,17 +249,39 @@ class _CategoryServiceListMockupState extends State<_CategoryServiceListMockup> 
               // Breadcrumb
               Container(
                 width: double.infinity,
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 10,
+                ),
                 color: Colors.white,
                 child: const Row(
                   children: [
                     Icon(Icons.home_outlined, size: 14, color: _subtleText),
                     SizedBox(width: 4),
-                    Text('Home', style: TextStyle(fontSize: 12, color: _subtleText)),
-                    Text('  ›  ', style: TextStyle(fontSize: 12, color: _subtleText)),
-                    Text('Services', style: TextStyle(fontSize: 12, color: _subtleText)),
-                    Text('  ›  ', style: TextStyle(fontSize: 12, color: _subtleText)),
-                    Text('Health', style: TextStyle(fontSize: 12, color: _primaryColor, fontWeight: FontWeight.w600)),
+                    Text(
+                      'Home',
+                      style: TextStyle(fontSize: 12, color: _subtleText),
+                    ),
+                    Text(
+                      '  ›  ',
+                      style: TextStyle(fontSize: 12, color: _subtleText),
+                    ),
+                    Text(
+                      'Services',
+                      style: TextStyle(fontSize: 12, color: _subtleText),
+                    ),
+                    Text(
+                      '  ›  ',
+                      style: TextStyle(fontSize: 12, color: _subtleText),
+                    ),
+                    Text(
+                      'Health',
+                      style: TextStyle(
+                        fontSize: 12,
+                        color: _primaryColor,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -264,7 +295,11 @@ class _CategoryServiceListMockupState extends State<_CategoryServiceListMockup> 
                   children: const [
                     Text(
                       'Health services',
-                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.w800, color: _titleColor),
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w800,
+                        color: _titleColor,
+                      ),
                     ),
                     SizedBox(height: 4),
                     Text(
@@ -277,10 +312,20 @@ class _CategoryServiceListMockupState extends State<_CategoryServiceListMockup> 
 
               // Results count + Filters button
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 4,
+                ),
                 child: Row(
                   children: [
-                    const Text('48 services', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: _titleColor)),
+                    const Text(
+                      '48 services',
+                      style: TextStyle(
+                        fontSize: 13,
+                        fontWeight: FontWeight.w600,
+                        color: _titleColor,
+                      ),
+                    ),
                     const Spacer(),
                     Ux4gButton(
                       text: 'Filters',
@@ -297,10 +342,26 @@ class _CategoryServiceListMockupState extends State<_CategoryServiceListMockup> 
               Ux4gChipGroup(
                 arrangement: Ux4gChipGroupArrangement.horizontal,
                 chips: [
-                  Ux4gChoiceChip(text: 'All · 48', selected: _selectedChip == 0, onClick: () => setState(() => _selectedChip = 0)),
-                  Ux4gChoiceChip(text: 'Hospitals · 12', selected: _selectedChip == 1, onClick: () => setState(() => _selectedChip = 1)),
-                  Ux4gChoiceChip(text: 'Certificates · 18', selected: _selectedChip == 2, onClick: () => setState(() => _selectedChip = 2)),
-                  Ux4gChoiceChip(text: 'Insurance', selected: _selectedChip == 3, onClick: () => setState(() => _selectedChip = 3)),
+                  Ux4gChoiceChip(
+                    text: 'All · 48',
+                    selected: _selectedChip == 0,
+                    onClick: () => setState(() => _selectedChip = 0),
+                  ),
+                  Ux4gChoiceChip(
+                    text: 'Hospitals · 12',
+                    selected: _selectedChip == 1,
+                    onClick: () => setState(() => _selectedChip = 1),
+                  ),
+                  Ux4gChoiceChip(
+                    text: 'Certificates · 18',
+                    selected: _selectedChip == 2,
+                    onClick: () => setState(() => _selectedChip = 2),
+                  ),
+                  Ux4gChoiceChip(
+                    text: 'Insurance',
+                    selected: _selectedChip == 3,
+                    onClick: () => setState(() => _selectedChip = 3),
+                  ),
                 ],
               ),
 
@@ -309,14 +370,54 @@ class _CategoryServiceListMockupState extends State<_CategoryServiceListMockup> 
                 child: ListView(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   children: [
-                    _buildServiceRow('Ayushman Bharat Health Card', 'Free', '7 days', false),
-                    _buildServiceRow('Hospital Empanelment', 'Free', '30 days', false),
-                    _buildServiceRow('Birth Certificate', 'Free', '20 mins', false),
-                    _buildServiceRow('Disability Certificate (UDID)', 'Free', '15 days', false),
-                    _buildServiceRow('Health Insurance Claim', 'Free', '10 days', false),
-                    _buildServiceRow('Vaccination Certificate', 'Free', 'Instant', false),
-                    _buildServiceRow('Medical Reimbursement', '₹ 500', '21 days', true),
-                    _buildServiceRow('Janani Suraksha Yojana', 'Free', 'On delivery', false),
+                    _buildServiceRow(
+                      'Ayushman Bharat Health Card',
+                      'Free',
+                      '7 days',
+                      false,
+                    ),
+                    _buildServiceRow(
+                      'Hospital Empanelment',
+                      'Free',
+                      '30 days',
+                      false,
+                    ),
+                    _buildServiceRow(
+                      'Birth Certificate',
+                      'Free',
+                      '20 mins',
+                      false,
+                    ),
+                    _buildServiceRow(
+                      'Disability Certificate (UDID)',
+                      'Free',
+                      '15 days',
+                      false,
+                    ),
+                    _buildServiceRow(
+                      'Health Insurance Claim',
+                      'Free',
+                      '10 days',
+                      false,
+                    ),
+                    _buildServiceRow(
+                      'Vaccination Certificate',
+                      'Free',
+                      'Instant',
+                      false,
+                    ),
+                    _buildServiceRow(
+                      'Medical Reimbursement',
+                      '₹ 500',
+                      '21 days',
+                      true,
+                    ),
+                    _buildServiceRow(
+                      'Janani Suraksha Yojana',
+                      'Free',
+                      'On delivery',
+                      false,
+                    ),
                   ],
                 ),
               ),
@@ -327,19 +428,30 @@ class _CategoryServiceListMockupState extends State<_CategoryServiceListMockup> 
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Icon(Icons.chevron_left, size: 20, color: _subtleText),
+                    const Icon(
+                      Icons.chevron_left,
+                      size: 20,
+                      color: _subtleText,
+                    ),
                     const SizedBox(width: 8),
-                    ...List.generate(8, (i) => Container(
-                      width: i == 0 ? 10 : 8,
-                      height: i == 0 ? 10 : 8,
-                      margin: const EdgeInsets.symmetric(horizontal: 3),
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: i == 0 ? _primaryColor : _borderColor,
+                    ...List.generate(
+                      8,
+                      (i) => Container(
+                        width: i == 0 ? 10 : 8,
+                        height: i == 0 ? 10 : 8,
+                        margin: const EdgeInsets.symmetric(horizontal: 3),
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: i == 0 ? _primaryColor : _borderColor,
+                        ),
                       ),
-                    )),
+                    ),
                     const SizedBox(width: 8),
-                    const Icon(Icons.chevron_right, size: 20, color: _subtleText),
+                    const Icon(
+                      Icons.chevron_right,
+                      size: 20,
+                      color: _subtleText,
+                    ),
                   ],
                 ),
               ),
@@ -363,13 +475,23 @@ class _CategoryServiceListMockupState extends State<_CategoryServiceListMockup> 
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(title, style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: _titleColor)),
+                Text(
+                  title,
+                  style: const TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w600,
+                    color: _titleColor,
+                  ),
+                ),
                 const SizedBox(height: 6),
                 Row(
                   children: [
                     // "Free" / "Paid" small bordered badge
                     Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 8,
+                        vertical: 3,
+                      ),
                       decoration: BoxDecoration(
                         color: const Color(0xFFE5E5E5),
                         borderRadius: BorderRadius.circular(4),
@@ -377,14 +499,21 @@ class _CategoryServiceListMockupState extends State<_CategoryServiceListMockup> 
                       ),
                       child: Text(
                         isPaid ? 'Paid' : 'Free',
-                        style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w500, color: _titleColor),
+                        style: const TextStyle(
+                          fontSize: 11,
+                          fontWeight: FontWeight.w500,
+                          color: _titleColor,
+                        ),
                       ),
                     ),
                     const SizedBox(width: 10),
                     // Clock icon + time as plain text
                     const Icon(Icons.access_time, size: 13, color: _subtleText),
                     const SizedBox(width: 4),
-                    Text(time, style: const TextStyle(fontSize: 12, color: _subtleText)),
+                    Text(
+                      time,
+                      style: const TextStyle(fontSize: 12, color: _subtleText),
+                    ),
                   ],
                 ),
               ],

@@ -150,7 +150,10 @@ class Ux4gAppHeader extends StatelessWidget implements PreferredSizeWidget {
     this.elevation = 0,
   });
 
-  Color _resolveBackgroundColor(Ux4gColors? ux4gColors, ThemeData materialTheme) {
+  Color _resolveBackgroundColor(
+    Ux4gColors? ux4gColors,
+    ThemeData materialTheme,
+  ) {
     if (backgroundColor != null) return backgroundColor!;
     switch (variant) {
       case Ux4gAppHeaderVariant.light:
@@ -161,7 +164,10 @@ class Ux4gAppHeader extends StatelessWidget implements PreferredSizeWidget {
     }
   }
 
-  Color _resolveForegroundColor(Ux4gColors? ux4gColors, ThemeData materialTheme) {
+  Color _resolveForegroundColor(
+    Ux4gColors? ux4gColors,
+    ThemeData materialTheme,
+  ) {
     if (foregroundColor != null) return foregroundColor!;
     switch (variant) {
       case Ux4gAppHeaderVariant.light:
@@ -186,11 +192,12 @@ class Ux4gAppHeader extends StatelessWidget implements PreferredSizeWidget {
 
     final resolvedTitleStyle =
         titleStyle ??
-        (ux4gTypography?.tS_strong ?? materialTheme.textTheme.titleSmall?.copyWith(fontWeight: FontWeight.bold) ?? const TextStyle()).copyWith(
-          color: fg,
-          fontSize: 16,
-          fontWeight: FontWeight.w600,
-        );
+        (ux4gTypography?.tS_strong ??
+                materialTheme.textTheme.titleSmall?.copyWith(
+                  fontWeight: FontWeight.bold,
+                ) ??
+                const TextStyle())
+            .copyWith(color: fg, fontSize: 16, fontWeight: FontWeight.w600);
 
     // Build leading section
     Widget? leadingSection;
@@ -257,7 +264,10 @@ class Ux4gAppHeader extends StatelessWidget implements PreferredSizeWidget {
     final bottomBorder = variant == Ux4gAppHeaderVariant.outlined
         ? Border(
             bottom: BorderSide(
-              color: borderColor ?? (ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface).withValues(alpha: 0.12),
+              color:
+                  borderColor ??
+                  (ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface)
+                      .withValues(alpha: 0.12),
               width: 1,
             ),
           )

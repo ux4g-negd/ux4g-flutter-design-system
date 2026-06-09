@@ -115,10 +115,12 @@ class _GlobalServiceDiscoveryMockup extends StatefulWidget {
   const _GlobalServiceDiscoveryMockup();
 
   @override
-  State<_GlobalServiceDiscoveryMockup> createState() => _GlobalServiceDiscoveryMockupState();
+  State<_GlobalServiceDiscoveryMockup> createState() =>
+      _GlobalServiceDiscoveryMockupState();
 }
 
-class _GlobalServiceDiscoveryMockupState extends State<_GlobalServiceDiscoveryMockup> {
+class _GlobalServiceDiscoveryMockupState
+    extends State<_GlobalServiceDiscoveryMockup> {
   String _searchValue = '';
 
   @override
@@ -133,7 +135,10 @@ class _GlobalServiceDiscoveryMockupState extends State<_GlobalServiceDiscoveryMo
               // App Header - filled purple
               Container(
                 width: double.infinity,
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 10,
+                ),
                 color: _primaryColor,
                 child: const Row(
                   children: [
@@ -141,7 +146,11 @@ class _GlobalServiceDiscoveryMockupState extends State<_GlobalServiceDiscoveryMo
                     SizedBox(width: 12),
                     Text(
                       'National Services Portal',
-                      style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: Colors.white),
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.white,
+                      ),
                     ),
                   ],
                 ),
@@ -157,22 +166,31 @@ class _GlobalServiceDiscoveryMockupState extends State<_GlobalServiceDiscoveryMo
                       Container(
                         width: double.infinity,
                         padding: const EdgeInsets.all(16),
-                        color: const Color(0xFFF2EFFF),                        child: Column(
+                        color: const Color(0xFFF2EFFF),
+                        child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             const Text(
                               'Find any government service',
-                              style: TextStyle(fontSize: 18, fontWeight: FontWeight.w800, color: _titleColor),
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.w800,
+                                color: _titleColor,
+                              ),
                             ),
                             const SizedBox(height: 4),
                             const Text(
                               'Search 3,000+ services & schemes',
-                              style: TextStyle(fontSize: 13, color: _subtleText),
+                              style: TextStyle(
+                                fontSize: 13,
+                                color: _subtleText,
+                              ),
                             ),
                             const SizedBox(height: 16),
                             Ux4gSearchField(
                               value: _searchValue,
-                              onValueChange: (v) => setState(() => _searchValue = v),
+                              onValueChange: (v) =>
+                                  setState(() => _searchValue = v),
                               variant: Ux4gSearchFieldVariant.searchWithSubmit,
                               placeholder: 'Search services...',
                               showVoiceIcon: true,
@@ -191,7 +209,11 @@ class _GlobalServiceDiscoveryMockupState extends State<_GlobalServiceDiscoveryMo
                           children: [
                             const Text(
                               'Browse by category',
-                              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: _titleColor),
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w700,
+                                color: _titleColor,
+                              ),
                             ),
                             const SizedBox(height: 12),
                             _buildCategoryGrid(),
@@ -213,14 +235,33 @@ class _GlobalServiceDiscoveryMockupState extends State<_GlobalServiceDiscoveryMo
                           children: [
                             const Text(
                               'Popular services',
-                              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: _titleColor),
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w700,
+                                color: _titleColor,
+                              ),
                             ),
                             const SizedBox(height: 12),
-                            _buildServiceCard('Income Certificate', 'Revenue Department', 'Free', '20 mins'),
+                            _buildServiceCard(
+                              'Income Certificate',
+                              'Revenue Department',
+                              'Free',
+                              '20 mins',
+                            ),
                             const SizedBox(height: 12),
-                            _buildServiceCard('Caste Certificate', 'Social Welfare Dept', 'Free', '15 mins'),
+                            _buildServiceCard(
+                              'Caste Certificate',
+                              'Social Welfare Dept',
+                              'Free',
+                              '15 mins',
+                            ),
                             const SizedBox(height: 12),
-                            _buildServiceCard('Driving Licence', 'Transport Department', '₹200', '30 days'),
+                            _buildServiceCard(
+                              'Driving Licence',
+                              'Transport Department',
+                              '₹200',
+                              '30 days',
+                            ),
                           ],
                         ),
                       ),
@@ -233,14 +274,33 @@ class _GlobalServiceDiscoveryMockupState extends State<_GlobalServiceDiscoveryMo
                           children: [
                             const Text(
                               'Recommended for Ramesh Kumar',
-                              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: _titleColor),
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w700,
+                                color: _titleColor,
+                              ),
                             ),
                             const SizedBox(height: 12),
-                            _buildRecommendedCard('PM Kisan Samman Nidhi', 'Agriculture Department', 'Free', '₹6,000/yr'),
+                            _buildRecommendedCard(
+                              'PM Kisan Samman Nidhi',
+                              'Agriculture Department',
+                              'Free',
+                              '₹6,000/yr',
+                            ),
                             const SizedBox(height: 12),
-                            _buildRecommendedCard('Ayushman Bharat (PM-JAY)', 'Health & Family Welfare', 'Free', '₹5L cover'),
+                            _buildRecommendedCard(
+                              'Ayushman Bharat (PM-JAY)',
+                              'Health & Family Welfare',
+                              'Free',
+                              '₹5L cover',
+                            ),
                             const SizedBox(height: 12),
-                            _buildRecommendedCard('National Pension Scheme', 'Finance Ministry', 'Free', 'Tax benefit'),
+                            _buildRecommendedCard(
+                              'National Pension Scheme',
+                              'Finance Ministry',
+                              'Free',
+                              'Tax benefit',
+                            ),
                           ],
                         ),
                       ),
@@ -310,9 +370,19 @@ class _GlobalServiceDiscoveryMockupState extends State<_GlobalServiceDiscoveryMo
                 child: Icon(icon, size: 20, color: _primaryColor),
               ),
               const SizedBox(height: 10),
-              Text(label, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: _titleColor)),
+              Text(
+                label,
+                style: const TextStyle(
+                  fontSize: 13,
+                  fontWeight: FontWeight.w600,
+                  color: _titleColor,
+                ),
+              ),
               const SizedBox(height: 2),
-              Text(count, style: const TextStyle(fontSize: 11, color: _subtleText)),
+              Text(
+                count,
+                style: const TextStyle(fontSize: 11, color: _subtleText),
+              ),
             ],
           ),
         );
@@ -334,12 +404,21 @@ class _GlobalServiceDiscoveryMockupState extends State<_GlobalServiceDiscoveryMo
         children: [
           Text(
             'FEATURED SCHEME',
-            style: TextStyle(fontSize: 10, fontWeight: FontWeight.w700, color: _primaryColor, letterSpacing: 1),
+            style: TextStyle(
+              fontSize: 10,
+              fontWeight: FontWeight.w700,
+              color: _primaryColor,
+              letterSpacing: 1,
+            ),
           ),
           const SizedBox(height: 8),
           const Text(
             'PM Awas Yojana (Urban)',
-            style: TextStyle(fontSize: 15, fontWeight: FontWeight.w700, color: _titleColor),
+            style: TextStyle(
+              fontSize: 15,
+              fontWeight: FontWeight.w700,
+              color: _titleColor,
+            ),
           ),
           const SizedBox(height: 4),
           const Text(
@@ -373,14 +452,31 @@ class _GlobalServiceDiscoveryMockupState extends State<_GlobalServiceDiscoveryMo
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(title, style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: _titleColor)),
+          Text(
+            title,
+            style: const TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.w600,
+              color: _titleColor,
+            ),
+          ),
           const SizedBox(height: 2),
           Text(dept, style: const TextStyle(fontSize: 12, color: _subtleText)),
           const SizedBox(height: 8),
           Row(
             children: [
-              Text(fee, style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: _greenColor)),
-              Text('  ·  $time', style: const TextStyle(fontSize: 12, color: _subtleText)),
+              Text(
+                fee,
+                style: const TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.w600,
+                  color: _greenColor,
+                ),
+              ),
+              Text(
+                '  ·  $time',
+                style: const TextStyle(fontSize: 12, color: _subtleText),
+              ),
             ],
           ),
           const SizedBox(height: 10),
@@ -395,7 +491,12 @@ class _GlobalServiceDiscoveryMockupState extends State<_GlobalServiceDiscoveryMo
     );
   }
 
-  Widget _buildRecommendedCard(String title, String dept, String fee, String benefit) {
+  Widget _buildRecommendedCard(
+    String title,
+    String dept,
+    String fee,
+    String benefit,
+  ) {
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.all(14),
@@ -407,14 +508,31 @@ class _GlobalServiceDiscoveryMockupState extends State<_GlobalServiceDiscoveryMo
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(title, style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: _titleColor)),
+          Text(
+            title,
+            style: const TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.w600,
+              color: _titleColor,
+            ),
+          ),
           const SizedBox(height: 2),
           Text(dept, style: const TextStyle(fontSize: 12, color: _subtleText)),
           const SizedBox(height: 8),
           Row(
             children: [
-              Text(fee, style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: _greenColor)),
-              Text('  ·  $benefit', style: const TextStyle(fontSize: 12, color: _subtleText)),
+              Text(
+                fee,
+                style: const TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.w600,
+                  color: _greenColor,
+                ),
+              ),
+              Text(
+                '  ·  $benefit',
+                style: const TextStyle(fontSize: 12, color: _subtleText),
+              ),
             ],
           ),
           const SizedBox(height: 10),
@@ -442,7 +560,11 @@ class _GlobalServiceDiscoveryMockupState extends State<_GlobalServiceDiscoveryMo
         children: [
           const Text(
             "Not sure what you're eligible for?",
-            style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700, color: _titleColor),
+            style: TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.w700,
+              color: _titleColor,
+            ),
           ),
           const SizedBox(height: 4),
           const Text(

@@ -224,7 +224,8 @@ class _SearchResultsListMockup extends StatefulWidget {
   const _SearchResultsListMockup();
 
   @override
-  State<_SearchResultsListMockup> createState() => _SearchResultsListMockupState();
+  State<_SearchResultsListMockup> createState() =>
+      _SearchResultsListMockupState();
 }
 
 class _SearchResultsListMockupState extends State<_SearchResultsListMockup> {
@@ -251,7 +252,10 @@ class _SearchResultsListMockupState extends State<_SearchResultsListMockup> {
               // App Header - filled purple
               Container(
                 width: double.infinity,
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 10,
+                ),
                 color: _primaryColor,
                 child: const Row(
                   children: [
@@ -259,7 +263,11 @@ class _SearchResultsListMockupState extends State<_SearchResultsListMockup> {
                     SizedBox(width: 12),
                     Text(
                       'National Services Portal',
-                      style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: Colors.white),
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.white,
+                      ),
                     ),
                   ],
                 ),
@@ -269,12 +277,19 @@ class _SearchResultsListMockupState extends State<_SearchResultsListMockup> {
 
               // Search bar area
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 10,
+                ),
                 color: Colors.white,
                 child: Builder(
                   builder: (context) {
                     final filtered = _options
-                        .where((e) => e.toLowerCase().contains(_searchValue.toLowerCase()))
+                        .where(
+                          (e) => e.toLowerCase().contains(
+                            _searchValue.toLowerCase(),
+                          ),
+                        )
                         .toList();
                     return Ux4gSearchField(
                       value: _searchValue,
@@ -293,10 +308,20 @@ class _SearchResultsListMockupState extends State<_SearchResultsListMockup> {
 
               // Results count + Filters
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 8,
+                ),
                 child: Row(
                   children: [
-                    const Text('48 results', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: _titleColor)),
+                    const Text(
+                      '48 results',
+                      style: TextStyle(
+                        fontSize: 13,
+                        fontWeight: FontWeight.w600,
+                        color: _titleColor,
+                      ),
+                    ),
                     const Spacer(),
                     Ux4gButton(
                       text: 'Filters',
@@ -316,17 +341,41 @@ class _SearchResultsListMockupState extends State<_SearchResultsListMockup> {
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: Row(
                   children: [
-                    Ux4gChoiceChip(text: 'All · 48', selected: _selectedChip == 0, onClick: () => setState(() => _selectedChip = 0)),
+                    Ux4gChoiceChip(
+                      text: 'All · 48',
+                      selected: _selectedChip == 0,
+                      onClick: () => setState(() => _selectedChip = 0),
+                    ),
                     const SizedBox(width: 8),
-                    Ux4gChoiceChip(text: 'Certificates · 22', selected: _selectedChip == 1, onClick: () => setState(() => _selectedChip = 1)),
+                    Ux4gChoiceChip(
+                      text: 'Certificates · 22',
+                      selected: _selectedChip == 1,
+                      onClick: () => setState(() => _selectedChip = 1),
+                    ),
                     const SizedBox(width: 8),
-                    Ux4gChoiceChip(text: 'Schemes · 14', selected: _selectedChip == 2, onClick: () => setState(() => _selectedChip = 2)),
+                    Ux4gChoiceChip(
+                      text: 'Schemes · 14',
+                      selected: _selectedChip == 2,
+                      onClick: () => setState(() => _selectedChip = 2),
+                    ),
                     const SizedBox(width: 8),
-                    Ux4gChoiceChip(text: 'Services · 12', selected: _selectedChip == 3, onClick: () => setState(() => _selectedChip = 3)),
+                    Ux4gChoiceChip(
+                      text: 'Services · 12',
+                      selected: _selectedChip == 3,
+                      onClick: () => setState(() => _selectedChip = 3),
+                    ),
                     const SizedBox(width: 8),
-                    Ux4gChoiceChip(text: 'Documents · 8', selected: false, onClick: () {}),
+                    Ux4gChoiceChip(
+                      text: 'Documents · 8',
+                      selected: false,
+                      onClick: () {},
+                    ),
                     const SizedBox(width: 8),
-                    Ux4gChoiceChip(text: 'Applications · 5', selected: false, onClick: () {}),
+                    Ux4gChoiceChip(
+                      text: 'Applications · 5',
+                      selected: false,
+                      onClick: () {},
+                    ),
                   ],
                 ),
               ),
@@ -337,11 +386,36 @@ class _SearchResultsListMockupState extends State<_SearchResultsListMockup> {
                 child: ListView(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   children: [
-                    _buildResultCard('Income Certificate', 'Free', '20 mins', false),
-                    _buildResultCard('Income Tax Return (ITR) Filing', 'Free', '30 mins', false),
-                    _buildResultCard('Low Income Group (LIG)\nCertificate', 'Free', '7 days', false),
-                    _buildResultCard('Income & Asset Certificate', '₹ 50+', '15 days', true),
-                    _buildResultCard('EWS Certificate', 'Free', '10 days', false),
+                    _buildResultCard(
+                      'Income Certificate',
+                      'Free',
+                      '20 mins',
+                      false,
+                    ),
+                    _buildResultCard(
+                      'Income Tax Return (ITR) Filing',
+                      'Free',
+                      '30 mins',
+                      false,
+                    ),
+                    _buildResultCard(
+                      'Low Income Group (LIG)\nCertificate',
+                      'Free',
+                      '7 days',
+                      false,
+                    ),
+                    _buildResultCard(
+                      'Income & Asset Certificate',
+                      '₹ 50+',
+                      '15 days',
+                      true,
+                    ),
+                    _buildResultCard(
+                      'EWS Certificate',
+                      'Free',
+                      '10 days',
+                      false,
+                    ),
                   ],
                 ),
               ),
@@ -352,19 +426,30 @@ class _SearchResultsListMockupState extends State<_SearchResultsListMockup> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Icon(Icons.chevron_left, size: 20, color: _subtleText),
+                    const Icon(
+                      Icons.chevron_left,
+                      size: 20,
+                      color: _subtleText,
+                    ),
                     const SizedBox(width: 8),
-                    ...List.generate(8, (i) => Container(
-                      width: i == 0 ? 10 : 8,
-                      height: i == 0 ? 10 : 8,
-                      margin: const EdgeInsets.symmetric(horizontal: 3),
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: i == 0 ? _primaryColor : _borderColor,
+                    ...List.generate(
+                      8,
+                      (i) => Container(
+                        width: i == 0 ? 10 : 8,
+                        height: i == 0 ? 10 : 8,
+                        margin: const EdgeInsets.symmetric(horizontal: 3),
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: i == 0 ? _primaryColor : _borderColor,
+                        ),
                       ),
-                    )),
+                    ),
                     const SizedBox(width: 8),
-                    const Icon(Icons.chevron_right, size: 20, color: _subtleText),
+                    const Icon(
+                      Icons.chevron_right,
+                      size: 20,
+                      color: _subtleText,
+                    ),
                   ],
                 ),
               ),
@@ -374,7 +459,6 @@ class _SearchResultsListMockupState extends State<_SearchResultsListMockup> {
       ),
     );
   }
-
 
   Widget _buildResultCard(String title, String fee, String time, bool isPaid) {
     return Container(
@@ -392,12 +476,22 @@ class _SearchResultsListMockupState extends State<_SearchResultsListMockup> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(title, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: _titleColor)),
+                Text(
+                  title,
+                  style: const TextStyle(
+                    fontSize: 13,
+                    fontWeight: FontWeight.w600,
+                    color: _titleColor,
+                  ),
+                ),
                 const SizedBox(height: 6),
                 Row(
                   children: [
                     Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 6,
+                        vertical: 2,
+                      ),
                       decoration: BoxDecoration(
                         color: const Color(0xFFE5E5E5),
                         borderRadius: BorderRadius.circular(4),
@@ -413,12 +507,21 @@ class _SearchResultsListMockupState extends State<_SearchResultsListMockup> {
                     ),
                     if (isPaid) ...[
                       const SizedBox(width: 4),
-                      Text(fee, style: const TextStyle(fontSize: 11, color: _subtleText)),
+                      Text(
+                        fee,
+                        style: const TextStyle(
+                          fontSize: 11,
+                          color: _subtleText,
+                        ),
+                      ),
                     ],
                     const SizedBox(width: 6),
                     const Icon(Icons.access_time, size: 12, color: _subtleText),
                     const SizedBox(width: 3),
-                    Text(time, style: const TextStyle(fontSize: 11, color: _subtleText)),
+                    Text(
+                      time,
+                      style: const TextStyle(fontSize: 11, color: _subtleText),
+                    ),
                   ],
                 ),
               ],

@@ -34,7 +34,7 @@ final helpCentreComponent = WidgetbookComponent(
           name: 'Help Centre ($variant)',
           description: isCard
               ? 'Help centre with search and category browsing inside a card '
-                'container with light purple background.'
+                    'container with light purple background.'
               : 'Help centre with search and category browsing on a white background.',
           code: isCard ? _helpCentreCardCode : _helpCentreDefaultCode,
           center: true,
@@ -322,7 +322,10 @@ class _HelpCentreMockup extends StatelessWidget {
                 variant: Ux4gAppHeaderVariant.light,
                 title: '',
                 leadingWidgets: [
-                  SvgPicture.asset('assets/national_amblam_logo.svg', height: 40),
+                  SvgPicture.asset(
+                    'assets/national_amblam_logo.svg',
+                    height: 40,
+                  ),
                   const SizedBox(width: 8),
                   SizedBox(
                     height: 32,
@@ -339,19 +342,41 @@ class _HelpCentreMockup extends StatelessWidget {
               // Gov bar
               Container(
                 width: double.infinity,
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 6,
+                ),
                 color: const Color(0xFF1E3A8A),
                 child: Row(
                   children: [
-                    Image.asset('assets/india_flag.png', height: 14, width: 22,
-                        errorBuilder: (_, __, ___) => const Text('🇮🇳', style: TextStyle(fontSize: 14))),
+                    Image.asset(
+                      'assets/india_flag.png',
+                      height: 14,
+                      width: 22,
+                      errorBuilder: (_, __, ___) =>
+                          const Text('🇮🇳', style: TextStyle(fontSize: 14)),
+                    ),
                     const SizedBox(width: 8),
-                    const Text('Government of India',
-                        style: TextStyle(color: Colors.white, fontSize: 12, fontWeight: FontWeight.w500)),
+                    const Text(
+                      'Government of India',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 12,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
                     const SizedBox(width: 4),
-                    const Icon(Icons.open_in_new, size: 11, color: Colors.white),
+                    const Icon(
+                      Icons.open_in_new,
+                      size: 11,
+                      color: Colors.white,
+                    ),
                     const Spacer(),
-                    const Icon(Icons.accessibility_new, size: 16, color: Colors.white),
+                    const Icon(
+                      Icons.accessibility_new,
+                      size: 16,
+                      color: Colors.white,
+                    ),
                   ],
                 ),
               ),
@@ -379,12 +404,22 @@ class _HelpCentreMockup extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text('Powered by -',
-                        style: TextStyle(fontSize: 11, color: Color(0xFF6B7280))),
+                    const Text(
+                      'Powered by -',
+                      style: TextStyle(fontSize: 11, color: Color(0xFF6B7280)),
+                    ),
                     const SizedBox(width: 4),
-                    Image.asset('assets/digital_india_logo.png', height: 20,
-                        errorBuilder: (_, __, ___) => const Text('Digital India',
-                            style: TextStyle(fontSize: 10, color: Color(0xFF432CBB)))),
+                    Image.asset(
+                      'assets/digital_india_logo.png',
+                      height: 20,
+                      errorBuilder: (_, __, ___) => const Text(
+                        'Digital India',
+                        style: TextStyle(
+                          fontSize: 10,
+                          color: Color(0xFF432CBB),
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -401,7 +436,11 @@ class _HelpCentreMockup extends StatelessWidget {
       children: [
         const Text(
           'Help Centre',
-          style: TextStyle(fontSize: 22, fontWeight: FontWeight.w800, color: _titleColor),
+          style: TextStyle(
+            fontSize: 22,
+            fontWeight: FontWeight.w800,
+            color: _titleColor,
+          ),
         ),
         const SizedBox(height: 8),
         const Text(
@@ -424,25 +463,38 @@ class _HelpCentreMockup extends StatelessWidget {
 
         const Text(
           'Browse by category',
-          style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: _titleColor),
+          style: TextStyle(
+            fontSize: 14,
+            fontWeight: FontWeight.w600,
+            color: _titleColor,
+          ),
         ),
         const SizedBox(height: 12),
 
         // Category list
-        ..._categories.map((category) => Column(
-              children: [
-                ListTile(
-                  contentPadding: EdgeInsets.zero,
-                  title: Text(
-                    category,
-                    style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w500, color: _titleColor),
+        ..._categories.map(
+          (category) => Column(
+            children: [
+              ListTile(
+                contentPadding: EdgeInsets.zero,
+                title: Text(
+                  category,
+                  style: const TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.w500,
+                    color: _titleColor,
                   ),
-                  trailing: const Icon(Icons.chevron_right, color: Color(0xFF9CA3AF)),
-                  onTap: () {},
                 ),
-                const Ux4gDivider(color: _dividerColor),
-              ],
-            )),
+                trailing: const Icon(
+                  Icons.chevron_right,
+                  color: Color(0xFF9CA3AF),
+                ),
+                onTap: () {},
+              ),
+              const Ux4gDivider(color: _dividerColor),
+            ],
+          ),
+        ),
       ],
     );
   }

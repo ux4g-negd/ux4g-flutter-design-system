@@ -40,19 +40,81 @@ Scaffold(
   ),
 );''',
         props: const [
-          PropRow(name: 'onSuccess', type: 'void Function(BiometricVerificationResult)?', description: 'Called when face verification succeeds. Result contains maskedName, maskedPhone, confidenceScore.'),
-          PropRow(name: 'onFailure', type: 'void Function(VerificationFailureReason, String?)?', description: 'Called on unrecoverable failure. Reasons: livenessFailed, faceNotMatched, networkError, etc.'),
-          PropRow(name: 'onDismiss', type: 'VoidCallback?', description: 'Called when user closes the flow.'),
-          PropRow(name: 'onAlternateVerify', type: 'VoidCallback?', description: 'Called when user taps "Verify with OTP instead".'),
-          PropRow(name: 'onVerify', type: 'Future<BiometricVerificationResult> Function(Uint8List)?', description: 'Custom API callback. Pass null to use mock service.'),
-          PropRow(name: 'enableBlinkCheck', type: 'bool', description: 'Require blink detection for liveness.', defaultValue: 'true'),
-          PropRow(name: 'enableLightingCheck', type: 'bool', description: 'Check ambient lighting before capture.', defaultValue: 'true'),
-          PropRow(name: 'enableLiveness', type: 'bool', description: 'Require liveness (blink + head movement).', defaultValue: 'true'),
-          PropRow(name: 'maxAttempts', type: 'int', description: 'Max verification attempts before lockout.', defaultValue: '2'),
-          PropRow(name: 'lockoutDuration', type: 'Duration', description: 'Duration of lockout after max attempts.', defaultValue: 'Duration(minutes: 30)'),
-          PropRow(name: 'mockSuccess', type: 'bool', description: 'Mock service returns success. For testing only.', defaultValue: 'true'),
-          PropRow(name: 'verificationTimeout', type: 'Duration', description: 'Timeout for the entire verification process.', defaultValue: 'Duration(seconds: 30)'),
-          PropRow(name: 'theme', type: 'BiometricThemeData?', description: 'Custom colors, typography, radii. Falls back to default purple theme.'),
+          PropRow(
+            name: 'onSuccess',
+            type: 'void Function(BiometricVerificationResult)?',
+            description:
+                'Called when face verification succeeds. Result contains maskedName, maskedPhone, confidenceScore.',
+          ),
+          PropRow(
+            name: 'onFailure',
+            type: 'void Function(VerificationFailureReason, String?)?',
+            description:
+                'Called on unrecoverable failure. Reasons: livenessFailed, faceNotMatched, networkError, etc.',
+          ),
+          PropRow(
+            name: 'onDismiss',
+            type: 'VoidCallback?',
+            description: 'Called when user closes the flow.',
+          ),
+          PropRow(
+            name: 'onAlternateVerify',
+            type: 'VoidCallback?',
+            description: 'Called when user taps "Verify with OTP instead".',
+          ),
+          PropRow(
+            name: 'onVerify',
+            type: 'Future<BiometricVerificationResult> Function(Uint8List)?',
+            description: 'Custom API callback. Pass null to use mock service.',
+          ),
+          PropRow(
+            name: 'enableBlinkCheck',
+            type: 'bool',
+            description: 'Require blink detection for liveness.',
+            defaultValue: 'true',
+          ),
+          PropRow(
+            name: 'enableLightingCheck',
+            type: 'bool',
+            description: 'Check ambient lighting before capture.',
+            defaultValue: 'true',
+          ),
+          PropRow(
+            name: 'enableLiveness',
+            type: 'bool',
+            description: 'Require liveness (blink + head movement).',
+            defaultValue: 'true',
+          ),
+          PropRow(
+            name: 'maxAttempts',
+            type: 'int',
+            description: 'Max verification attempts before lockout.',
+            defaultValue: '2',
+          ),
+          PropRow(
+            name: 'lockoutDuration',
+            type: 'Duration',
+            description: 'Duration of lockout after max attempts.',
+            defaultValue: 'Duration(minutes: 30)',
+          ),
+          PropRow(
+            name: 'mockSuccess',
+            type: 'bool',
+            description: 'Mock service returns success. For testing only.',
+            defaultValue: 'true',
+          ),
+          PropRow(
+            name: 'verificationTimeout',
+            type: 'Duration',
+            description: 'Timeout for the entire verification process.',
+            defaultValue: 'Duration(seconds: 30)',
+          ),
+          PropRow(
+            name: 'theme',
+            type: 'BiometricThemeData?',
+            description:
+                'Custom colors, typography, radii. Falls back to default purple theme.',
+          ),
         ],
         center: false,
         child: _BiometricFlowPreview(mockSuccess: true),
@@ -148,8 +210,18 @@ BiometricTheme(
   ),
 );''',
         props: const [
-          PropRow(name: 'onAllow', type: 'VoidCallback', description: 'Called when user taps "Allow and verify".', required: true),
-          PropRow(name: 'onDecline', type: 'VoidCallback?', description: 'Called when user taps "Decline - Verify with OTP instead".'),
+          PropRow(
+            name: 'onAllow',
+            type: 'VoidCallback',
+            description: 'Called when user taps "Allow and verify".',
+            required: true,
+          ),
+          PropRow(
+            name: 'onDecline',
+            type: 'VoidCallback?',
+            description:
+                'Called when user taps "Decline - Verify with OTP instead".',
+          ),
         ],
         child: SizedBox(
           width: 360,
@@ -158,10 +230,7 @@ BiometricTheme(
             borderRadius: BorderRadius.circular(16),
             child: BiometricTheme(
               data: const BiometricThemeData(),
-              child: IdentityConsentScreen(
-                onAllow: () {},
-                onDecline: () {},
-              ),
+              child: IdentityConsentScreen(onAllow: () {}, onDecline: () {}),
             ),
           ),
         ),
@@ -192,9 +261,25 @@ BiometricTheme(
   ),
 );''',
         props: const [
-          PropRow(name: 'controller', type: 'BiometricController', description: 'Manages check state and execution.', required: true),
-          PropRow(name: 'onProceed', type: 'VoidCallback', description: 'Called when user taps the proceed button after checks pass.', required: true),
-          PropRow(name: 'compact', type: 'bool', description: 'Whether to render as a compact card.', defaultValue: 'false'),
+          PropRow(
+            name: 'controller',
+            type: 'BiometricController',
+            description: 'Manages check state and execution.',
+            required: true,
+          ),
+          PropRow(
+            name: 'onProceed',
+            type: 'VoidCallback',
+            description:
+                'Called when user taps the proceed button after checks pass.',
+            required: true,
+          ),
+          PropRow(
+            name: 'compact',
+            type: 'bool',
+            description: 'Whether to render as a compact card.',
+            defaultValue: 'false',
+          ),
         ],
         child: SizedBox(
           width: 360,
@@ -220,10 +305,7 @@ BiometricTheme(
 // ─────────────────────────────────────────────────────────────────────────────
 
 class _BiometricFlowPreview extends StatefulWidget {
-  const _BiometricFlowPreview({
-    required this.mockSuccess,
-    this.theme,
-  });
+  const _BiometricFlowPreview({required this.mockSuccess, this.theme});
 
   final bool mockSuccess;
   final BiometricThemeData? theme;
@@ -355,14 +437,13 @@ class _LaunchCard extends StatelessWidget {
           if (resultMessage != null) ...[
             const SizedBox(height: 16),
             Container(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
               decoration: BoxDecoration(
                 color: resultMessage!.startsWith('✓')
                     ? const Color(0xFFDCFCE7)
                     : resultMessage!.startsWith('→')
-                        ? const Color(0xFFE0F2FE)
-                        : const Color(0xFFFFE4E6),
+                    ? const Color(0xFFE0F2FE)
+                    : const Color(0xFFFFE4E6),
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Text(
@@ -373,8 +454,8 @@ class _LaunchCard extends StatelessWidget {
                   color: resultMessage!.startsWith('✓')
                       ? const Color(0xFF166534)
                       : resultMessage!.startsWith('→')
-                          ? const Color(0xFF075985)
-                          : const Color(0xFF991B1B),
+                      ? const Color(0xFF075985)
+                      : const Color(0xFF991B1B),
                 ),
                 textAlign: TextAlign.center,
               ),

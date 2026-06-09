@@ -355,19 +355,37 @@ class _MyApplicationsMockupState extends State<_MyApplicationsMockup> {
                       SvgPicture.asset(
                         _nationalEmblemLogoPath,
                         height: 36,
-                        errorBuilder: (c, e, s) => const Icon(Icons.account_balance, size: 28, color: Colors.grey),
+                        errorBuilder: (c, e, s) => const Icon(
+                          Icons.account_balance,
+                          size: 28,
+                          color: Colors.grey,
+                        ),
                       ),
                       const SizedBox(width: 8),
                       SvgPicture.asset(
                         _unionLogoPath,
                         height: 28,
-                        errorBuilder: (c, e, s) => const Icon(Icons.blur_on, size: 28, color: Colors.blue),
+                        errorBuilder: (c, e, s) => const Icon(
+                          Icons.blur_on,
+                          size: 28,
+                          color: Colors.blue,
+                        ),
                       ),
                       const SizedBox(width: 8),
-                      const Text('Government of India', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: _titleColor)),
+                      const Text(
+                        'Government of India',
+                        style: TextStyle(
+                          fontSize: 13,
+                          fontWeight: FontWeight.w600,
+                          color: _titleColor,
+                        ),
+                      ),
                     ],
                     actions: [
-                      Ux4gAppHeaderAction(icon: Icons.notifications_outlined, onPressed: () {}),
+                      Ux4gAppHeaderAction(
+                        icon: Icons.notifications_outlined,
+                        onPressed: () {},
+                      ),
                     ],
                     showAvatar: true,
                     avatarInitials: 'R',
@@ -385,9 +403,19 @@ class _MyApplicationsMockupState extends State<_MyApplicationsMockup> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     // Greeting
-                    const Text('Good morning, Ramesh', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w800, color: _titleColor)),
+                    const Text(
+                      'Good morning, Ramesh',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w800,
+                        color: _titleColor,
+                      ),
+                    ),
                     const SizedBox(height: 4),
-                    const Text('An overview of your applications', style: TextStyle(fontSize: 13, color: _subtleText)),
+                    const Text(
+                      'An overview of your applications',
+                      style: TextStyle(fontSize: 13, color: _subtleText),
+                    ),
                     const SizedBox(height: 20),
 
                     // Stats grid
@@ -395,7 +423,14 @@ class _MyApplicationsMockupState extends State<_MyApplicationsMockup> {
                     const SizedBox(height: 24),
 
                     // Your applications
-                    const Text('Your applications', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: _titleColor)),
+                    const Text(
+                      'Your applications',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w700,
+                        color: _titleColor,
+                      ),
+                    ),
                     const SizedBox(height: 16),
 
                     // Tab filters
@@ -468,7 +503,11 @@ class _MyApplicationsMockupState extends State<_MyApplicationsMockup> {
       ),
       child: Text(
         count,
-        style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: Colors.white),
+        style: const TextStyle(
+          fontSize: 11,
+          fontWeight: FontWeight.w600,
+          color: Colors.white,
+        ),
       ),
     );
   }
@@ -478,17 +517,30 @@ class _MyApplicationsMockupState extends State<_MyApplicationsMockup> {
       children: [
         Row(
           children: [
-            Expanded(child: _StatCard(value: '2', label: 'Active')),
+            Expanded(
+              child: _StatCard(value: '2', label: 'Active'),
+            ),
             const SizedBox(width: 12),
-            Expanded(child: _StatCard(value: '1', label: 'Needs attention', dot: true, dotColor: _errorColor)),
+            Expanded(
+              child: _StatCard(
+                value: '1',
+                label: 'Needs attention',
+                dot: true,
+                dotColor: _errorColor,
+              ),
+            ),
           ],
         ),
         const SizedBox(height: 12),
         Row(
           children: [
-            Expanded(child: _StatCard(value: '5', label: 'Completed')),
+            Expanded(
+              child: _StatCard(value: '5', label: 'Completed'),
+            ),
             const SizedBox(width: 12),
-            Expanded(child: _StatCard(value: '8', label: 'Total')),
+            Expanded(
+              child: _StatCard(value: '8', label: 'Total'),
+            ),
           ],
         ),
       ],
@@ -517,12 +569,18 @@ class _MyApplicationsMockupState extends State<_MyApplicationsMockup> {
           trailingContent: Container(
             padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 2),
             decoration: BoxDecoration(
-              color: isSelected ? Colors.white.withOpacity(0.25) : _primaryColor,
+              color: isSelected
+                  ? Colors.white.withOpacity(0.25)
+                  : _primaryColor,
               borderRadius: BorderRadius.circular(10),
             ),
             child: Text(
               tabs[index]['count']!,
-              style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: Colors.white),
+              style: TextStyle(
+                fontSize: 11,
+                fontWeight: FontWeight.w600,
+                color: Colors.white,
+              ),
             ),
           ),
         );
@@ -558,7 +616,14 @@ class _MyApplicationsMockupState extends State<_MyApplicationsMockup> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(title, style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w700, color: _titleColor)),
+                Text(
+                  title,
+                  style: const TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.w700,
+                    color: _titleColor,
+                  ),
+                ),
                 Row(
                   children: [
                     Ux4gButton(
@@ -568,7 +633,11 @@ class _MyApplicationsMockupState extends State<_MyApplicationsMockup> {
                       size: Ux4gButtonSize.small,
                     ),
                     const SizedBox(width: 8),
-                    const Icon(Icons.keyboard_arrow_down, size: 20, color: _subtleText),
+                    const Icon(
+                      Icons.keyboard_arrow_down,
+                      size: 20,
+                      color: _subtleText,
+                    ),
                   ],
                 ),
               ],
@@ -581,7 +650,14 @@ class _MyApplicationsMockupState extends State<_MyApplicationsMockup> {
                 Ux4gPillSegment(
                   text: statusText,
                   textColor: const Color(0xFF1F2937),
-                  leading: Container(width: 8, height: 8, decoration: BoxDecoration(color: statusColor, shape: BoxShape.circle)),
+                  leading: Container(
+                    width: 8,
+                    height: 8,
+                    decoration: BoxDecoration(
+                      color: statusColor,
+                      shape: BoxShape.circle,
+                    ),
+                  ),
                 ),
                 Ux4gPillSegment(
                   text: badgeText,
@@ -593,16 +669,29 @@ class _MyApplicationsMockupState extends State<_MyApplicationsMockup> {
             const SizedBox(height: 16),
 
             // Details grid
-            _detailRow('Reference Number', referenceNumber, 'Last Updated Date', lastUpdated),
+            _detailRow(
+              'Reference Number',
+              referenceNumber,
+              'Last Updated Date',
+              lastUpdated,
+            ),
             const SizedBox(height: 12),
-            _detailRow('Submitted Date', submittedDate, 'Assigned Officer', assignedOfficer),
+            _detailRow(
+              'Submitted Date',
+              submittedDate,
+              'Assigned Officer',
+              assignedOfficer,
+            ),
             const SizedBox(height: 12),
             _detailRow('Department', department, 'Documents', documents),
 
             // Escalation or Action
             if (escalation != null) ...[
               const SizedBox(height: 16),
-              Text('Escalation', style: TextStyle(fontSize: 11, color: _orangeColor)),
+              Text(
+                'Escalation',
+                style: TextStyle(fontSize: 11, color: _orangeColor),
+              ),
               const SizedBox(height: 4),
               Ux4gButton(
                 text: 'Register grievance',
@@ -616,7 +705,10 @@ class _MyApplicationsMockupState extends State<_MyApplicationsMockup> {
 
             if (actionText != null) ...[
               const SizedBox(height: 16),
-              Text('Action needed', style: TextStyle(fontSize: 11, color: _orangeColor)),
+              Text(
+                'Action needed',
+                style: TextStyle(fontSize: 11, color: _orangeColor),
+              ),
               const SizedBox(height: 4),
               Ux4gButton(
                 text: actionText,
@@ -633,7 +725,12 @@ class _MyApplicationsMockupState extends State<_MyApplicationsMockup> {
     );
   }
 
-  Widget _detailRow(String label1, String value1, String label2, String value2) {
+  Widget _detailRow(
+    String label1,
+    String value1,
+    String label2,
+    String value2,
+  ) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -641,9 +738,19 @@ class _MyApplicationsMockupState extends State<_MyApplicationsMockup> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(label1, style: const TextStyle(fontSize: 11, color: _subtleText)),
+              Text(
+                label1,
+                style: const TextStyle(fontSize: 11, color: _subtleText),
+              ),
               const SizedBox(height: 2),
-              Text(value1, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w500, color: _titleColor)),
+              Text(
+                value1,
+                style: const TextStyle(
+                  fontSize: 13,
+                  fontWeight: FontWeight.w500,
+                  color: _titleColor,
+                ),
+              ),
             ],
           ),
         ),
@@ -651,9 +758,19 @@ class _MyApplicationsMockupState extends State<_MyApplicationsMockup> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(label2, style: const TextStyle(fontSize: 11, color: _subtleText)),
+              Text(
+                label2,
+                style: const TextStyle(fontSize: 11, color: _subtleText),
+              ),
               const SizedBox(height: 2),
-              Text(value2, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w500, color: _titleColor)),
+              Text(
+                value2,
+                style: const TextStyle(
+                  fontSize: 13,
+                  fontWeight: FontWeight.w500,
+                  color: _titleColor,
+                ),
+              ),
             ],
           ),
         ),
@@ -679,7 +796,14 @@ class _MyApplicationsMockupState extends State<_MyApplicationsMockup> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(title, style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w700, color: _titleColor)),
+                Text(
+                  title,
+                  style: const TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.w700,
+                    color: _titleColor,
+                  ),
+                ),
                 Row(
                   children: [
                     Ux4gButton(
@@ -689,7 +813,11 @@ class _MyApplicationsMockupState extends State<_MyApplicationsMockup> {
                       size: Ux4gButtonSize.small,
                     ),
                     const SizedBox(width: 8),
-                    const Icon(Icons.keyboard_arrow_down, size: 20, color: _subtleText),
+                    const Icon(
+                      Icons.keyboard_arrow_down,
+                      size: 20,
+                      color: _subtleText,
+                    ),
                   ],
                 ),
               ],
@@ -700,12 +828,16 @@ class _MyApplicationsMockupState extends State<_MyApplicationsMockup> {
                 Ux4gPillSegment(
                   text: statusText,
                   textColor: const Color(0xFF1F2937),
-                  leading: Container(width: 8, height: 8, decoration: BoxDecoration(color: statusColor, shape: BoxShape.circle)),
+                  leading: Container(
+                    width: 8,
+                    height: 8,
+                    decoration: BoxDecoration(
+                      color: statusColor,
+                      shape: BoxShape.circle,
+                    ),
+                  ),
                 ),
-                Ux4gPillSegment(
-                  text: badgeText,
-                  textColor: Color(0xFF1F2937),
-                ),
+                Ux4gPillSegment(text: badgeText, textColor: Color(0xFF1F2937)),
               ],
               borderColor: const Color(0xFFD1D5DB),
             ),
@@ -729,7 +861,14 @@ class _MyApplicationsMockupState extends State<_MyApplicationsMockup> {
           children: [
             Row(
               children: [
-                Text(title, style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w700, color: _titleColor)),
+                Text(
+                  title,
+                  style: const TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.w700,
+                    color: _titleColor,
+                  ),
+                ),
                 const SizedBox(width: 8),
                 const Icon(Icons.check_circle, size: 18, color: _greenColor),
               ],
@@ -745,7 +884,11 @@ class _MyApplicationsMockupState extends State<_MyApplicationsMockup> {
                   leadingIcon: Icons.file_download_outlined,
                 ),
                 const SizedBox(width: 8),
-                const Icon(Icons.keyboard_arrow_down, size: 20, color: _subtleText),
+                const Icon(
+                  Icons.keyboard_arrow_down,
+                  size: 20,
+                  color: _subtleText,
+                ),
               ],
             ),
           ],
@@ -785,10 +928,24 @@ class _StatCard extends StatelessWidget {
         children: [
           Row(
             children: [
-              Text(value, style: const TextStyle(fontSize: 22, fontWeight: FontWeight.w800, color: _titleColor)),
+              Text(
+                value,
+                style: const TextStyle(
+                  fontSize: 22,
+                  fontWeight: FontWeight.w800,
+                  color: _titleColor,
+                ),
+              ),
               if (dot) ...[
                 const SizedBox(width: 6),
-                Container(width: 8, height: 8, decoration: BoxDecoration(shape: BoxShape.circle, color: dotColor ?? _errorColor)),
+                Container(
+                  width: 8,
+                  height: 8,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: dotColor ?? _errorColor,
+                  ),
+                ),
               ],
             ],
           ),

@@ -127,20 +127,29 @@ class Ux4gEmptyState extends StatelessWidget {
     final materialTheme = Theme.of(context);
 
     final effectiveIcon = icon ?? _variantIcons[variant]!;
-    final effectiveIconColor = iconColor ?? uxColors?.primary ?? materialTheme.colorScheme.primary;
+    final effectiveIconColor =
+        iconColor ?? uxColors?.primary ?? materialTheme.colorScheme.primary;
     final effectiveIconSize = iconSize ?? 48.0;
 
     final effectiveTitleStyle =
         titleStyle ??
-        (uxTypography?.hXXS_strong ?? materialTheme.textTheme.headlineSmall)?.copyWith(color: uxColors?.onBackground ?? materialTheme.colorScheme.onSurface);
+        (uxTypography?.hXXS_strong ?? materialTheme.textTheme.headlineSmall)
+            ?.copyWith(
+              color:
+                  uxColors?.onBackground ?? materialTheme.colorScheme.onSurface,
+            );
     final effectiveBodyStyle =
         bodyStyle ??
-        (uxTypography?.bS_default ?? materialTheme.textTheme.bodyMedium)?.copyWith(
-          color: (uxColors?.onSurface ?? materialTheme.colorScheme.onSurface).withValues(alpha: 0.6),
-        );
+        (uxTypography?.bS_default ?? materialTheme.textTheme.bodyMedium)
+            ?.copyWith(
+              color:
+                  (uxColors?.onSurface ?? materialTheme.colorScheme.onSurface)
+                      .withValues(alpha: 0.6),
+            );
 
     // Tonal button: filled light-primary background, primary-coloured text.
-    final buttonBg = (uxColors?.primary ?? materialTheme.colorScheme.primary).withValues(alpha: 0.12);
+    final buttonBg = (uxColors?.primary ?? materialTheme.colorScheme.primary)
+        .withValues(alpha: 0.12);
     final buttonFg = uxColors?.primary ?? materialTheme.colorScheme.primary;
 
     return Padding(

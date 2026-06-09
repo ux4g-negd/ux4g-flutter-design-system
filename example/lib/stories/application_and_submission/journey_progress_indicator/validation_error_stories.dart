@@ -21,7 +21,8 @@ final validationErrorComponent = WidgetbookComponent(
           label: 'Variant',
           options: const ['Default', 'Card style'],
           initialOption: 'Default',
-          description: 'Switch between the standard flat layout and the card-style layout.',
+          description:
+              'Switch between the standard flat layout and the card-style layout.',
         );
 
         final code = variant == 'Card style'
@@ -34,7 +35,8 @@ final validationErrorComponent = WidgetbookComponent(
         return ComponentDocs(
           mobileMockup: true,
           name: 'Validation Error',
-          description: 'A pattern showing an application screen with validation errors, featuring a global error banner, an error state in the stepper, and field-level error feedback.',
+          description:
+              'A pattern showing an application screen with validation errors, featuring a global error banner, an error state in the stepper, and field-level error feedback.',
           code: code,
           center: true,
           child: child,
@@ -479,17 +481,22 @@ class _ValidationErrorMockupState extends State<_ValidationErrorMockup> {
               title: '',
               leadingWidgets: [
                 SvgPicture.asset(
-                  _nationalEmblemLogoPath, 
-                  height: 40, 
-                  errorBuilder: (c, e, s) => const Icon(Icons.account_balance, size: 32, color: Colors.grey)
+                  _nationalEmblemLogoPath,
+                  height: 40,
+                  errorBuilder: (c, e, s) => const Icon(
+                    Icons.account_balance,
+                    size: 32,
+                    color: Colors.grey,
+                  ),
                 ),
                 const SizedBox(width: 1),
                 Container(height: 32, width: 1, color: const Color(0xFFD1D5DB)),
                 const SizedBox(width: 1),
                 SvgPicture.asset(
-                  _unionLogoPath, 
-                  height: 32, 
-                  errorBuilder: (c, e, s) => const Icon(Icons.blur_on, size: 32, color: Colors.blue)
+                  _unionLogoPath,
+                  height: 32,
+                  errorBuilder: (c, e, s) =>
+                      const Icon(Icons.blur_on, size: 32, color: Colors.blue),
                 ),
               ],
             ),
@@ -498,7 +505,10 @@ class _ValidationErrorMockupState extends State<_ValidationErrorMockup> {
             // Main Content
             Expanded(
               child: SingleChildScrollView(
-                padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 24,
+                  vertical: 32,
+                ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -510,9 +520,13 @@ class _ValidationErrorMockupState extends State<_ValidationErrorMockup> {
                         Ux4gStepItem(title: ''),
                         Ux4gStepItem(title: ''),
                         Ux4gStepItem(
-                          title: 'Documents', 
+                          title: 'Documents',
                           isError: true,
-                          titleStyle: TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: Color(0xFF4B5563)),
+                          titleStyle: TextStyle(
+                            fontSize: 11,
+                            fontWeight: FontWeight.w600,
+                            color: Color(0xFF4B5563),
+                          ),
                         ),
                         Ux4gStepItem(title: ''),
                       ],
@@ -524,11 +538,17 @@ class _ValidationErrorMockupState extends State<_ValidationErrorMockup> {
                       variant: Ux4gBannerVariant.errorLight,
                       title: 'Documents — 1 error found. Tap to jump.',
                       margin: EdgeInsets.zero,
-                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 12,
+                      ),
                       backgroundColor: const Color(0xFFFFF8F8), // red50
-                      borderColor: const Color(0xFFFFDADC),     // red200
+                      borderColor: const Color(0xFFFFDADC), // red200
                       actionsAlignment: WrapAlignment.start,
-                      titleStyle: const TextStyle(color: Color(0xFF8A1A16), fontWeight: FontWeight.w500),
+                      titleStyle: const TextStyle(
+                        color: Color(0xFF8A1A16),
+                        fontWeight: FontWeight.w500,
+                      ),
                       actions: [
                         GestureDetector(
                           onTap: () {},
@@ -548,12 +568,21 @@ class _ValidationErrorMockupState extends State<_ValidationErrorMockup> {
                     // Title & Subtitle
                     const Text(
                       'Verify your details',
-                      style: TextStyle(fontSize: 24, fontWeight: FontWeight.w800, color: _titleColor, height: 1.2),
+                      style: TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.w800,
+                        color: _titleColor,
+                        height: 1.2,
+                      ),
                     ),
                     const SizedBox(height: 8),
                     const Text(
                       'Confirm the information below to proceed.',
-                      style: TextStyle(fontSize: 15, color: _subtleText, height: 1.4),
+                      style: TextStyle(
+                        fontSize: 15,
+                        color: _subtleText,
+                        height: 1.4,
+                      ),
                     ),
                     const SizedBox(height: 32),
 
@@ -584,7 +613,8 @@ class _ValidationErrorMockupState extends State<_ValidationErrorMockup> {
                       label: 'Accept terms and conditions',
                       isRequired: true,
                       value: _acceptTerms,
-                      onChanged: (val) => setState(() => _acceptTerms = val ?? false),
+                      onChanged: (val) =>
+                          setState(() => _acceptTerms = val ?? false),
                     ),
                   ],
                 ),
@@ -622,12 +652,21 @@ class _ValidationErrorMockupState extends State<_ValidationErrorMockup> {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  const Text('Powered by -', style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+                  const Text(
+                    'Powered by -',
+                    style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF)),
+                  ),
                   const SizedBox(height: 6),
                   Image.asset(
-                    _digitalIndiaLogoPath, 
-                    height: 24, 
-                    errorBuilder: (c, e, s) => const Text('Digital India', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12))
+                    _digitalIndiaLogoPath,
+                    height: 24,
+                    errorBuilder: (c, e, s) => const Text(
+                      'Digital India',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 12,
+                      ),
+                    ),
                   ),
                 ],
               ),
@@ -643,10 +682,12 @@ class _ValidationErrorCardMockup extends StatefulWidget {
   const _ValidationErrorCardMockup();
 
   @override
-  State<_ValidationErrorCardMockup> createState() => _ValidationErrorCardMockupState();
+  State<_ValidationErrorCardMockup> createState() =>
+      _ValidationErrorCardMockupState();
 }
 
-class _ValidationErrorCardMockupState extends State<_ValidationErrorCardMockup> {
+class _ValidationErrorCardMockupState
+    extends State<_ValidationErrorCardMockup> {
   bool _acceptTerms = false;
   String _fullName = '';
   String _panNumber = 'ABCDE12345';
@@ -669,17 +710,29 @@ class _ValidationErrorCardMockupState extends State<_ValidationErrorCardMockup> 
                     title: '',
                     leadingWidgets: [
                       SvgPicture.asset(
-                        _nationalEmblemLogoPath, 
-                        height: 40, 
-                        errorBuilder: (c, e, s) => const Icon(Icons.account_balance, size: 32, color: Colors.grey)
+                        _nationalEmblemLogoPath,
+                        height: 40,
+                        errorBuilder: (c, e, s) => const Icon(
+                          Icons.account_balance,
+                          size: 32,
+                          color: Colors.grey,
+                        ),
                       ),
                       const SizedBox(width: 1),
-                      Container(height: 32, width: 1, color: const Color(0xFFD1D5DB)),
+                      Container(
+                        height: 32,
+                        width: 1,
+                        color: const Color(0xFFD1D5DB),
+                      ),
                       const SizedBox(width: 1),
                       SvgPicture.asset(
-                        _unionLogoPath, 
-                        height: 32, 
-                        errorBuilder: (c, e, s) => const Icon(Icons.blur_on, size: 32, color: Colors.blue)
+                        _unionLogoPath,
+                        height: 32,
+                        errorBuilder: (c, e, s) => const Icon(
+                          Icons.blur_on,
+                          size: 32,
+                          color: Colors.blue,
+                        ),
                       ),
                     ],
                   ),
@@ -691,7 +744,10 @@ class _ValidationErrorCardMockupState extends State<_ValidationErrorCardMockup> 
             // Main Content
             Expanded(
               child: SingleChildScrollView(
-                padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 24,
+                  vertical: 32,
+                ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
@@ -703,9 +759,13 @@ class _ValidationErrorCardMockupState extends State<_ValidationErrorCardMockup> 
                         Ux4gStepItem(title: ''),
                         Ux4gStepItem(title: ''),
                         Ux4gStepItem(
-                          title: 'Documents', 
+                          title: 'Documents',
                           isError: true,
-                          titleStyle: TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: Color(0xFF4B5563)),
+                          titleStyle: TextStyle(
+                            fontSize: 11,
+                            fontWeight: FontWeight.w600,
+                            color: Color(0xFF4B5563),
+                          ),
                         ),
                         Ux4gStepItem(title: ''),
                       ],
@@ -727,11 +787,17 @@ class _ValidationErrorCardMockupState extends State<_ValidationErrorCardMockup> 
                             variant: Ux4gBannerVariant.errorLight,
                             title: 'Documents — 1 error found. Tap to jump.',
                             margin: EdgeInsets.zero,
-                            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 16,
+                              vertical: 12,
+                            ),
                             backgroundColor: const Color(0xFFFFF8F8), // red50
-                            borderColor: const Color(0xFFFFDADC),     // red200
+                            borderColor: const Color(0xFFFFDADC), // red200
                             actionsAlignment: WrapAlignment.start,
-                            titleStyle: const TextStyle(color: Color(0xFF8A1A16), fontWeight: FontWeight.w500),
+                            titleStyle: const TextStyle(
+                              color: Color(0xFF8A1A16),
+                              fontWeight: FontWeight.w500,
+                            ),
                             actions: [
                               GestureDetector(
                                 onTap: () {},
@@ -751,12 +817,21 @@ class _ValidationErrorCardMockupState extends State<_ValidationErrorCardMockup> 
                           // Title & Subtitle
                           const Text(
                             'Verify your details',
-                            style: TextStyle(fontSize: 24, fontWeight: FontWeight.w800, color: _titleColor, height: 1.2),
+                            style: TextStyle(
+                              fontSize: 24,
+                              fontWeight: FontWeight.w800,
+                              color: _titleColor,
+                              height: 1.2,
+                            ),
                           ),
                           const SizedBox(height: 8),
                           const Text(
                             'Confirm the information below to proceed.',
-                            style: TextStyle(fontSize: 15, color: _subtleText, height: 1.4),
+                            style: TextStyle(
+                              fontSize: 15,
+                              color: _subtleText,
+                              height: 1.4,
+                            ),
                           ),
                           const SizedBox(height: 32),
 
@@ -764,7 +839,8 @@ class _ValidationErrorCardMockupState extends State<_ValidationErrorCardMockup> 
                           Ux4gInputField(
                             label: 'Full name (as per Aadhaar)',
                             value: _fullName,
-                            onValueChange: (val) => setState(() => _fullName = val),
+                            onValueChange: (val) =>
+                                setState(() => _fullName = val),
                             placeholder: '',
                             size: Ux4gInputFieldSize.medium,
                           ),
@@ -773,7 +849,8 @@ class _ValidationErrorCardMockupState extends State<_ValidationErrorCardMockup> 
                           Ux4gInputField(
                             label: 'PAN number',
                             value: _panNumber,
-                            onValueChange: (val) => setState(() => _panNumber = val),
+                            onValueChange: (val) =>
+                                setState(() => _panNumber = val),
                             placeholder: '',
                             size: Ux4gInputFieldSize.medium,
                             status: Ux4gInputFieldStatus.error,
@@ -787,7 +864,8 @@ class _ValidationErrorCardMockupState extends State<_ValidationErrorCardMockup> 
                             label: 'Accept terms and conditions',
                             isRequired: true,
                             value: _acceptTerms,
-                            onChanged: (val) => setState(() => _acceptTerms = val ?? false),
+                            onChanged: (val) =>
+                                setState(() => _acceptTerms = val ?? false),
                           ),
                         ],
                       ),
@@ -827,12 +905,21 @@ class _ValidationErrorCardMockupState extends State<_ValidationErrorCardMockup> 
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  const Text('Powered by -', style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+                  const Text(
+                    'Powered by -',
+                    style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF)),
+                  ),
                   const SizedBox(height: 6),
                   Image.asset(
-                    _digitalIndiaLogoPath, 
-                    height: 24, 
-                    errorBuilder: (c, e, s) => const Text('Digital India', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12))
+                    _digitalIndiaLogoPath,
+                    height: 24,
+                    errorBuilder: (c, e, s) => const Text(
+                      'Digital India',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 12,
+                      ),
+                    ),
                   ),
                 ],
               ),

@@ -180,7 +180,10 @@ class _AppointmentConfirmedMockup extends StatelessWidget {
               // App Header
               Container(
                 width: double.infinity,
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 10,
+                ),
                 color: _primaryColor,
                 child: const Row(
                   children: [
@@ -188,7 +191,11 @@ class _AppointmentConfirmedMockup extends StatelessWidget {
                     SizedBox(width: 12),
                     Text(
                       'National Services Portal',
-                      style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: Colors.white),
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.white,
+                      ),
                     ),
                   ],
                 ),
@@ -210,14 +217,22 @@ class _AppointmentConfirmedMockup extends StatelessWidget {
                           color: Color(0xFFDCFCE7),
                           shape: BoxShape.circle,
                         ),
-                        child: const Icon(Icons.check_circle, size: 36, color: Color(0xFF16A34A)),
+                        child: const Icon(
+                          Icons.check_circle,
+                          size: 36,
+                          color: Color(0xFF16A34A),
+                        ),
                       ),
                       const SizedBox(height: 16),
 
                       // Title
                       const Text(
                         'Appointment confirmed',
-                        style: TextStyle(fontSize: 20, fontWeight: FontWeight.w800, color: _titleColor),
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w800,
+                          color: _titleColor,
+                        ),
                       ),
                       const SizedBox(height: 8),
 
@@ -225,8 +240,18 @@ class _AppointmentConfirmedMockup extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: const [
-                          Text('Reference  ', style: TextStyle(fontSize: 13, color: _subtleText)),
-                          Text('APPT-2026-04127', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w700, color: _titleColor)),
+                          Text(
+                            'Reference  ',
+                            style: TextStyle(fontSize: 13, color: _subtleText),
+                          ),
+                          Text(
+                            'APPT-2026-04127',
+                            style: TextStyle(
+                              fontSize: 13,
+                              fontWeight: FontWeight.w700,
+                              color: _titleColor,
+                            ),
+                          ),
                         ],
                       ),
                       const SizedBox(height: 8),
@@ -250,13 +275,26 @@ class _AppointmentConfirmedMockup extends StatelessWidget {
                         child: const Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            _DetailItem(label: 'Date & time', value: 'Thu, 18 Apr 2026 · 11:00 – 11:30 AM'),
+                            _DetailItem(
+                              label: 'Date & time',
+                              value: 'Thu, 18 Apr 2026 · 11:00 – 11:30 AM',
+                            ),
                             SizedBox(height: 16),
-                            _DetailItem(label: 'Advocate', value: 'Adv. M. Sharma · Family Law'),
+                            _DetailItem(
+                              label: 'Advocate',
+                              value: 'Adv. M. Sharma · Family Law',
+                            ),
                             SizedBox(height: 16),
-                            _DetailItem(label: 'Office', value: 'Block C, Room 12, District Legal Services Authority, Pune'),
+                            _DetailItem(
+                              label: 'Office',
+                              value:
+                                  'Block C, Room 12, District Legal Services Authority, Pune',
+                            ),
                             SizedBox(height: 16),
-                            _DetailItem(label: 'Documents to carry', value: 'Aadhaar, case papers, ID proof'),
+                            _DetailItem(
+                              label: 'Documents to carry',
+                              value: 'Aadhaar, case papers, ID proof',
+                            ),
                           ],
                         ),
                       ),
@@ -312,9 +350,19 @@ class _DetailItem extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(label, style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: Color(0xFF404040))),
+        Text(
+          label,
+          style: const TextStyle(
+            fontSize: 12,
+            fontWeight: FontWeight.w600,
+            color: Color(0xFF404040),
+          ),
+        ),
         const SizedBox(height: 2),
-        Text(value, style: const TextStyle(fontSize: 14, color: Color(0xFF171717))),
+        Text(
+          value,
+          style: const TextStyle(fontSize: 14, color: Color(0xFF171717)),
+        ),
       ],
     );
   }

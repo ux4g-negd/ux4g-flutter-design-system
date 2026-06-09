@@ -284,7 +284,10 @@ class _SearchAndBrowseMockup extends StatelessWidget {
               // App Header - filled purple
               Container(
                 width: double.infinity,
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 10,
+                ),
                 color: _primaryColor,
                 child: Row(
                   children: [
@@ -292,7 +295,11 @@ class _SearchAndBrowseMockup extends StatelessWidget {
                     const SizedBox(width: 12),
                     const Text(
                       'National Services Portal',
-                      style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: Colors.white),
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.white,
+                      ),
                     ),
                   ],
                 ),
@@ -315,12 +322,19 @@ class _SearchAndBrowseMockup extends StatelessWidget {
                             // Title
                             const Text(
                               'Find any government service',
-                              style: TextStyle(fontSize: 18, fontWeight: FontWeight.w800, color: _titleColor),
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.w800,
+                                color: _titleColor,
+                              ),
                             ),
                             const SizedBox(height: 4),
                             const Text(
                               'Search 3,000+ services & schemes',
-                              style: TextStyle(fontSize: 13, color: _subtleText),
+                              style: TextStyle(
+                                fontSize: 13,
+                                color: _subtleText,
+                              ),
                             ),
                             const SizedBox(height: 16),
 
@@ -330,7 +344,9 @@ class _SearchAndBrowseMockup extends StatelessWidget {
                                 Expanded(
                                   child: Container(
                                     height: 44,
-                                    padding: const EdgeInsets.symmetric(horizontal: 12),
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 12,
+                                    ),
                                     decoration: BoxDecoration(
                                       color: Colors.white,
                                       borderRadius: BorderRadius.circular(8),
@@ -338,17 +354,32 @@ class _SearchAndBrowseMockup extends StatelessWidget {
                                     ),
                                     child: Row(
                                       children: [
-                                        Icon(Icons.search, size: 20, color: _subtleText),
+                                        Icon(
+                                          Icons.search,
+                                          size: 20,
+                                          color: _subtleText,
+                                        ),
                                         const SizedBox(width: 8),
                                         Expanded(
                                           child: Text(
                                             'Search services...',
-                                            style: TextStyle(fontSize: 14, color: _subtleText),
+                                            style: TextStyle(
+                                              fontSize: 14,
+                                              color: _subtleText,
+                                            ),
                                           ),
                                         ),
-                                        Icon(Icons.mic, size: 20, color: _subtleText),
+                                        Icon(
+                                          Icons.mic,
+                                          size: 20,
+                                          color: _subtleText,
+                                        ),
                                         const SizedBox(width: 8),
-                                        Icon(Icons.close, size: 18, color: _subtleText),
+                                        Icon(
+                                          Icons.close,
+                                          size: 18,
+                                          color: _subtleText,
+                                        ),
                                       ],
                                     ),
                                   ),
@@ -361,7 +392,11 @@ class _SearchAndBrowseMockup extends StatelessWidget {
                                     color: _primaryColor,
                                     borderRadius: BorderRadius.circular(8),
                                   ),
-                                  child: const Icon(Icons.search, color: Colors.white, size: 20),
+                                  child: const Icon(
+                                    Icons.search,
+                                    color: Colors.white,
+                                    size: 20,
+                                  ),
                                 ),
                               ],
                             ),
@@ -375,36 +410,59 @@ class _SearchAndBrowseMockup extends StatelessWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                      // Browse by category
-                      const Text(
-                        'Browse by category',
-                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: _titleColor),
-                      ),
-                      const SizedBox(height: 12),
+                            // Browse by category
+                            const Text(
+                              'Browse by category',
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w700,
+                                color: _titleColor,
+                              ),
+                            ),
+                            const SizedBox(height: 12),
 
-                      // Category grid
-                      _buildCategoryGrid(),
-                      const SizedBox(height: 24),
+                            // Category grid
+                            _buildCategoryGrid(),
+                            const SizedBox(height: 24),
 
-                      // Featured scheme
-                      _buildFeaturedScheme(),
-                      const SizedBox(height: 24),
+                            // Featured scheme
+                            _buildFeaturedScheme(),
+                            const SizedBox(height: 24),
 
-                      // Popular services
-                      const Text(
-                        'Popular services',
-                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: _titleColor),
-                      ),
-                      const SizedBox(height: 12),
-                      _buildServiceCard('Income Certificate', 'Revenue Department', 'Free', '20 mins'),
-                      const SizedBox(height: 12),
-                      _buildServiceCard('Caste Certificate', 'Social Welfare Dept', 'Free', '15 mins'),
-                      const SizedBox(height: 12),
-                      _buildServiceCard('Driving Licence', 'Transport Department', '₹200', '30 days'),
-                      const SizedBox(height: 24),
+                            // Popular services
+                            const Text(
+                              'Popular services',
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w700,
+                                color: _titleColor,
+                              ),
+                            ),
+                            const SizedBox(height: 12),
+                            _buildServiceCard(
+                              'Income Certificate',
+                              'Revenue Department',
+                              'Free',
+                              '20 mins',
+                            ),
+                            const SizedBox(height: 12),
+                            _buildServiceCard(
+                              'Caste Certificate',
+                              'Social Welfare Dept',
+                              'Free',
+                              '15 mins',
+                            ),
+                            const SizedBox(height: 12),
+                            _buildServiceCard(
+                              'Driving Licence',
+                              'Transport Department',
+                              '₹200',
+                              '30 days',
+                            ),
+                            const SizedBox(height: 24),
 
-                      // Quiz CTA
-                      _buildQuizCta(),
+                            // Quiz CTA
+                            _buildQuizCta(),
                           ],
                         ),
                       ),
@@ -463,9 +521,19 @@ class _SearchAndBrowseMockup extends StatelessWidget {
                 child: Icon(icon, size: 20, color: _primaryColor),
               ),
               const SizedBox(height: 10),
-              Text(label, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: _titleColor)),
+              Text(
+                label,
+                style: const TextStyle(
+                  fontSize: 13,
+                  fontWeight: FontWeight.w600,
+                  color: _titleColor,
+                ),
+              ),
               const SizedBox(height: 2),
-              Text(count, style: const TextStyle(fontSize: 11, color: _subtleText)),
+              Text(
+                count,
+                style: const TextStyle(fontSize: 11, color: _subtleText),
+              ),
             ],
           ),
         );
@@ -486,12 +554,21 @@ class _SearchAndBrowseMockup extends StatelessWidget {
         children: [
           Text(
             'FEATURED SCHEME',
-            style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: _primaryColor, letterSpacing: 0.5),
+            style: TextStyle(
+              fontSize: 11,
+              fontWeight: FontWeight.w600,
+              color: _primaryColor,
+              letterSpacing: 0.5,
+            ),
           ),
           const SizedBox(height: 6),
           const Text(
             'PM Awas Yojana (Urban)',
-            style: TextStyle(fontSize: 15, fontWeight: FontWeight.w700, color: _titleColor),
+            style: TextStyle(
+              fontSize: 15,
+              fontWeight: FontWeight.w700,
+              color: _titleColor,
+            ),
           ),
           const SizedBox(height: 4),
           const Text(
@@ -513,7 +590,12 @@ class _SearchAndBrowseMockup extends StatelessWidget {
     );
   }
 
-  static Widget _buildServiceCard(String title, String dept, String fee, String time) {
+  static Widget _buildServiceCard(
+    String title,
+    String dept,
+    String fee,
+    String time,
+  ) {
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
@@ -525,14 +607,31 @@ class _SearchAndBrowseMockup extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(title, style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: _titleColor)),
+          Text(
+            title,
+            style: const TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.w600,
+              color: _titleColor,
+            ),
+          ),
           const SizedBox(height: 2),
           Text(dept, style: const TextStyle(fontSize: 12, color: _subtleText)),
           const SizedBox(height: 8),
           Row(
             children: [
-              Text(fee, style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: _greenColor)),
-              Text('  ·  $time', style: const TextStyle(fontSize: 12, color: _subtleText)),
+              Text(
+                fee,
+                style: const TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.w600,
+                  color: _greenColor,
+                ),
+              ),
+              Text(
+                '  ·  $time',
+                style: const TextStyle(fontSize: 12, color: _subtleText),
+              ),
             ],
           ),
           const SizedBox(height: 10),
@@ -561,7 +660,11 @@ class _SearchAndBrowseMockup extends StatelessWidget {
         children: [
           const Text(
             'Not sure what you\'re eligible for?',
-            style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700, color: _titleColor),
+            style: TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.w700,
+              color: _titleColor,
+            ),
           ),
           const SizedBox(height: 4),
           const Text(

@@ -1,3 +1,8 @@
+## 0.3.0
+
+* Updated components and patterns to align with the latest design requirements.
+* Bug fixes and improvements.
+
 ## 0.2.0
 
 * Updated components and foundations to align with UX4G Android Compose.

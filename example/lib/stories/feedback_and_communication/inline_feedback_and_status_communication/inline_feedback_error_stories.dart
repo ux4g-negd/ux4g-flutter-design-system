@@ -27,10 +27,12 @@ final inlineFeedbackErrorComponent = WidgetbookComponent(
           name: 'Inline Feedback Error ($variant)',
           description: isCard
               ? 'Form input with inline error validation feedback inside a card container. '
-                'Shows an error message below the input field with a light purple card background.'
+                    'Shows an error message below the input field with a light purple card background.'
               : 'Form input with inline error validation feedback. '
-                'Shows an error message below the input field when validation fails.',
-          code: isCard ? _inlineFeedbackErrorCardCode : _inlineFeedbackErrorCode,
+                    'Shows an error message below the input field when validation fails.',
+          code: isCard
+              ? _inlineFeedbackErrorCardCode
+              : _inlineFeedbackErrorCode,
           center: true,
           child: _InlineFeedbackErrorMockup(isCard: isCard),
         );
@@ -239,13 +241,25 @@ class _InlineFeedbackErrorMockup extends StatelessWidget {
               // App Header with logos
               Container(
                 width: double.infinity,
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 10,
+                ),
                 color: Colors.white,
                 child: Row(
                   children: [
-                    SvgPicture.asset('assets/national_amblam_logo.svg', height: 40),
+                    SvgPicture.asset(
+                      'assets/national_amblam_logo.svg',
+                      height: 40,
+                    ),
                     const SizedBox(width: 8),
-                    SizedBox(height: 32, child: Ux4gDivider(orientation: Ux4gDividerOrientation.vertical, color: const Color(0xFFD1D5DB))),
+                    SizedBox(
+                      height: 32,
+                      child: Ux4gDivider(
+                        orientation: Ux4gDividerOrientation.vertical,
+                        color: const Color(0xFFD1D5DB),
+                      ),
+                    ),
                     const SizedBox(width: 8),
                     SvgPicture.asset('assets/Union.svg', height: 32),
                   ],
@@ -311,7 +325,11 @@ class _InlineFeedbackErrorMockup extends StatelessWidget {
         // Title
         const Text(
           'Enter your Mobile Number',
-          style: TextStyle(fontSize: 18, fontWeight: FontWeight.w800, color: _titleColor),
+          style: TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.w800,
+            color: _titleColor,
+          ),
         ),
         const SizedBox(height: 8),
 
@@ -385,7 +403,11 @@ class _InlineFeedbackErrorMockup extends StatelessWidget {
           // Title
           const Text(
             'Enter your Mobile Number',
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.w800, color: _titleColor),
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.w800,
+              color: _titleColor,
+            ),
           ),
           const SizedBox(height: 8),
 

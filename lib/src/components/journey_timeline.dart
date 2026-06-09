@@ -25,6 +25,7 @@ enum Ux4gJourneyStepState {
 enum Ux4gJourneyBadgePosition {
   /// Badge renders at the bottom of the card (default, original behavior).
   bottom,
+
   /// Badge renders at the top-right corner next to the date.
   topRight,
 }
@@ -216,7 +217,8 @@ class Ux4gJourneyTimeline extends StatelessWidget {
     final ux4gTypography = materialTheme.extension<Ux4gTypography>();
 
     final primary = ux4gColors?.primary ?? materialTheme.colorScheme.primary;
-    final onSurface = ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
+    final onSurface =
+        ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
 
     final resolvedActiveColor = activeColor ?? primary;
     final resolvedInactiveColor =
@@ -371,7 +373,8 @@ class _JourneyHeaderWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final onSurface = ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
+    final onSurface =
+        ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
 
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -385,9 +388,12 @@ class _JourneyHeaderWidget extends StatelessWidget {
                 children: [
                   Text(
                     header.title,
-                    style: (ux4gTypography?.tS_strong ?? materialTheme.textTheme.titleSmall?.copyWith(fontWeight: FontWeight.bold))?.copyWith(
-                      color: onSurface,
-                    ),
+                    style:
+                        (ux4gTypography?.tS_strong ??
+                                materialTheme.textTheme.titleSmall?.copyWith(
+                                  fontWeight: FontWeight.bold,
+                                ))
+                            ?.copyWith(color: onSurface),
                   ),
                   if (header.icon != null) ...[
                     const SizedBox(width: Ux4gSpace.space8),
@@ -406,9 +412,10 @@ class _JourneyHeaderWidget extends StatelessWidget {
                 const SizedBox(height: Ux4gSpace.space4),
                 Text(
                   header.description!,
-                  style: (ux4gTypography?.bS_default ?? materialTheme.textTheme.bodySmall)?.copyWith(
-                    color: onSurface.withValues(alpha: 0.6),
-                  ),
+                  style:
+                      (ux4gTypography?.bS_default ??
+                              materialTheme.textTheme.bodySmall)
+                          ?.copyWith(color: onSurface.withValues(alpha: 0.6)),
                 ),
               ],
             ],
@@ -635,7 +642,8 @@ class _JourneyStepCard extends StatelessWidget {
     final isUpcoming = state == Ux4gJourneyStepState.upcoming;
     final textOpacity = isUpcoming ? 0.5 : 1.0;
 
-    final onSurface = ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
+    final onSurface =
+        ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
     final surface = ux4gColors?.surface ?? materialTheme.colorScheme.surface;
     final primary = ux4gColors?.primary ?? materialTheme.colorScheme.primary;
     final warning = ux4gColors?.warning ?? Colors.orange;
@@ -659,36 +667,58 @@ class _JourneyStepCard extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           // Date + Tag/Status badge row
-          if (step.date != null || step.tag != null || (step.status != null && step.status!.badgeText != null && step.status!.badgePosition == Ux4gJourneyBadgePosition.topRight))
+          if (step.date != null ||
+              step.tag != null ||
+              (step.status != null &&
+                  step.status!.badgeText != null &&
+                  step.status!.badgePosition ==
+                      Ux4gJourneyBadgePosition.topRight))
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 if (step.date != null)
                   Text(
                     step.date!,
-                    style: (ux4gTypography?.bXS_default ?? materialTheme.textTheme.bodySmall?.copyWith(fontSize: 12))?.copyWith(
-                      color: onSurface.withValues(
-                        alpha: isUpcoming ? 0.4 : 0.6,
-                      ),
-                    ),
+                    style:
+                        (ux4gTypography?.bXS_default ??
+                                materialTheme.textTheme.bodySmall?.copyWith(
+                                  fontSize: 12,
+                                ))
+                            ?.copyWith(
+                              color: onSurface.withValues(
+                                alpha: isUpcoming ? 0.4 : 0.6,
+                              ),
+                            ),
                   ),
-                if (step.status != null && step.status!.badgeText != null && step.status!.badgePosition == Ux4gJourneyBadgePosition.topRight)
+                if (step.status != null &&
+                    step.status!.badgeText != null &&
+                    step.status!.badgePosition ==
+                        Ux4gJourneyBadgePosition.topRight)
                   Container(
                     padding: const EdgeInsets.symmetric(
                       horizontal: Ux4gSpace.space8,
                       vertical: Ux4gSpace.space2,
                     ),
                     decoration: BoxDecoration(
-                      color: step.status!.badgeColor ?? onSurface.withValues(alpha: 0.06),
+                      color:
+                          step.status!.badgeColor ??
+                          onSurface.withValues(alpha: 0.06),
                       borderRadius: BorderRadius.circular(Ux4gRadius.radius4),
                     ),
                     child: Text(
                       step.status!.badgeText!,
-                      style: (ux4gTypography?.bXS_default ?? materialTheme.textTheme.bodySmall?.copyWith(fontSize: 12))?.copyWith(
-                        color: step.status!.badgeTextColor ?? onSurface.withValues(alpha: 0.6),
-                        fontSize: 11,
-                        fontWeight: FontWeight.w600,
-                      ),
+                      style:
+                          (ux4gTypography?.bXS_default ??
+                                  materialTheme.textTheme.bodySmall?.copyWith(
+                                    fontSize: 12,
+                                  ))
+                              ?.copyWith(
+                                color:
+                                    step.status!.badgeTextColor ??
+                                    onSurface.withValues(alpha: 0.6),
+                                fontSize: 11,
+                                fontWeight: FontWeight.w600,
+                              ),
                     ),
                   )
                 else if (step.tag != null)
@@ -703,26 +733,41 @@ class _JourneyStepCard extends StatelessWidget {
                     ),
                     child: Text(
                       step.tag!,
-                      style: (ux4gTypography?.bXS_default ?? materialTheme.textTheme.bodySmall?.copyWith(fontSize: 12))?.copyWith(
-                        color: onSurface.withValues(
-                          alpha: isUpcoming ? 0.4 : 0.6,
-                        ),
-                        fontSize: 11,
-                      ),
+                      style:
+                          (ux4gTypography?.bXS_default ??
+                                  materialTheme.textTheme.bodySmall?.copyWith(
+                                    fontSize: 12,
+                                  ))
+                              ?.copyWith(
+                                color: onSurface.withValues(
+                                  alpha: isUpcoming ? 0.4 : 0.6,
+                                ),
+                                fontSize: 11,
+                              ),
                     ),
                   ),
               ],
             ),
 
           // Title
-          if (step.date != null || step.tag != null || (step.status != null && step.status!.badgeText != null && step.status!.badgePosition == Ux4gJourneyBadgePosition.topRight))
+          if (step.date != null ||
+              step.tag != null ||
+              (step.status != null &&
+                  step.status!.badgeText != null &&
+                  step.status!.badgePosition ==
+                      Ux4gJourneyBadgePosition.topRight))
             const SizedBox(height: Ux4gSpace.space6),
           Text(
             step.title,
-            style: (ux4gTypography?.tS_strong ?? materialTheme.textTheme.titleSmall?.copyWith(fontWeight: FontWeight.bold))?.copyWith(
-              color: onSurface.withValues(alpha: textOpacity),
-              fontSize: 14,
-            ),
+            style:
+                (ux4gTypography?.tS_strong ??
+                        materialTheme.textTheme.titleSmall?.copyWith(
+                          fontWeight: FontWeight.bold,
+                        ))
+                    ?.copyWith(
+                      color: onSurface.withValues(alpha: textOpacity),
+                      fontSize: 14,
+                    ),
           ),
 
           // Helping text
@@ -730,9 +775,12 @@ class _JourneyStepCard extends StatelessWidget {
             const SizedBox(height: Ux4gSpace.space4),
             Text(
               step.helpingText!,
-              style: (ux4gTypography?.bXS_default ?? materialTheme.textTheme.bodySmall?.copyWith(fontSize: 12))?.copyWith(
-                color: onSurface.withValues(alpha: 0.5),
-              ),
+              style:
+                  (ux4gTypography?.bXS_default ??
+                          materialTheme.textTheme.bodySmall?.copyWith(
+                            fontSize: 12,
+                          ))
+                      ?.copyWith(color: onSurface.withValues(alpha: 0.5)),
             ),
           ],
 
@@ -749,7 +797,9 @@ class _JourneyStepCard extends StatelessWidget {
           ],
 
           // Status indicator at bottom (original behavior, only when badgePosition is bottom)
-          if (step.status != null && step.status!.badgePosition == Ux4gJourneyBadgePosition.bottom) ...[
+          if (step.status != null &&
+              step.status!.badgePosition ==
+                  Ux4gJourneyBadgePosition.bottom) ...[
             const SizedBox(height: Ux4gSpace.space8),
             Ux4gUnifiedPillTag(
               size: Ux4gTagSize.l,
@@ -770,8 +820,7 @@ class _JourneyStepCard extends StatelessWidget {
                   Ux4gPillSegment(
                     text: step.status!.badgeText!,
                     bold: true,
-                    textColor:
-                        step.status!.badgeTextColor ?? warning,
+                    textColor: step.status!.badgeTextColor ?? warning,
                   ),
               ],
             ),

@@ -182,7 +182,10 @@ class _ConfirmAppointmentV2Mockup extends StatelessWidget {
               // App Header
               Container(
                 width: double.infinity,
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 10,
+                ),
                 color: _primaryColor,
                 child: const Row(
                   children: [
@@ -190,7 +193,11 @@ class _ConfirmAppointmentV2Mockup extends StatelessWidget {
                     SizedBox(width: 12),
                     Text(
                       'National Services Portal',
-                      style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: Colors.white),
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.white,
+                      ),
                     ),
                   ],
                 ),
@@ -206,7 +213,11 @@ class _ConfirmAppointmentV2Mockup extends StatelessWidget {
                       const SizedBox(height: 8),
                       const Text(
                         'Confirm appointment',
-                        style: TextStyle(fontSize: 22, fontWeight: FontWeight.w800, color: _titleColor),
+                        style: TextStyle(
+                          fontSize: 22,
+                          fontWeight: FontWeight.w800,
+                          color: _titleColor,
+                        ),
                       ),
                       const SizedBox(height: 8),
                       const Text(
@@ -227,13 +238,26 @@ class _ConfirmAppointmentV2Mockup extends StatelessWidget {
                         child: const Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            _DetailItem(label: 'Date & time', value: 'Thu, 18 Apr 2026 · 11:00 – 11:30 AM'),
+                            _DetailItem(
+                              label: 'Date & time',
+                              value: 'Thu, 18 Apr 2026 · 11:00 – 11:30 AM',
+                            ),
                             SizedBox(height: 16),
-                            _DetailItem(label: 'Advocate', value: 'Adv. M. Sharma · Family Law'),
+                            _DetailItem(
+                              label: 'Advocate',
+                              value: 'Adv. M. Sharma · Family Law',
+                            ),
                             SizedBox(height: 16),
-                            _DetailItem(label: 'Office', value: 'Block C, Room 12, District Legal Services Authority, Pune'),
+                            _DetailItem(
+                              label: 'Office',
+                              value:
+                                  'Block C, Room 12, District Legal Services Authority, Pune',
+                            ),
                             SizedBox(height: 16),
-                            _DetailItem(label: 'Consultation type', value: 'In-person · 30 minutes'),
+                            _DetailItem(
+                              label: 'Consultation type',
+                              value: 'In-person · 30 minutes',
+                            ),
                           ],
                         ),
                       ),
@@ -243,19 +267,29 @@ class _ConfirmAppointmentV2Mockup extends StatelessWidget {
                       // Warning banner with icon
                       Container(
                         width: double.infinity,
-                        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 16,
+                          vertical: 12,
+                        ),
                         decoration: BoxDecoration(
                           color: const Color(0xFFFEF3C7),
                           borderRadius: BorderRadius.circular(8),
                         ),
                         child: const Row(
                           children: [
-                            Icon(Icons.error, size: 18, color: Color(0xFFD97706)),
+                            Icon(
+                              Icons.error,
+                              size: 18,
+                              color: Color(0xFFD97706),
+                            ),
                             SizedBox(width: 8),
                             Expanded(
                               child: Text(
                                 'Your slot is held for 5 minutes — please confirm soon to avoid losing it.',
-                                style: TextStyle(fontSize: 13, color: Color(0xFFB45309)),
+                                style: TextStyle(
+                                  fontSize: 13,
+                                  color: Color(0xFFB45309),
+                                ),
                               ),
                             ),
                           ],
@@ -310,7 +344,14 @@ class _DetailItem extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(label, style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: _subtleText)),
+        Text(
+          label,
+          style: const TextStyle(
+            fontSize: 12,
+            fontWeight: FontWeight.w600,
+            color: _subtleText,
+          ),
+        ),
         const SizedBox(height: 2),
         Text(value, style: const TextStyle(fontSize: 14, color: _titleColor)),
       ],

@@ -165,19 +165,37 @@ class _BulkActionsMockupState extends State<_BulkActionsMockup> {
                       SvgPicture.asset(
                         _nationalEmblemLogoPath,
                         height: 36,
-                        errorBuilder: (c, e, s) => const Icon(Icons.account_balance, size: 28, color: Colors.grey),
+                        errorBuilder: (c, e, s) => const Icon(
+                          Icons.account_balance,
+                          size: 28,
+                          color: Colors.grey,
+                        ),
                       ),
                       const SizedBox(width: 8),
                       SvgPicture.asset(
                         _unionLogoPath,
                         height: 28,
-                        errorBuilder: (c, e, s) => const Icon(Icons.blur_on, size: 28, color: Colors.blue),
+                        errorBuilder: (c, e, s) => const Icon(
+                          Icons.blur_on,
+                          size: 28,
+                          color: Colors.blue,
+                        ),
                       ),
                       const SizedBox(width: 8),
-                      const Text('Government of India', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: _titleColor)),
+                      const Text(
+                        'Government of India',
+                        style: TextStyle(
+                          fontSize: 13,
+                          fontWeight: FontWeight.w600,
+                          color: _titleColor,
+                        ),
+                      ),
                     ],
                     actions: [
-                      Ux4gAppHeaderAction(icon: Icons.notifications_outlined, onPressed: () {}),
+                      Ux4gAppHeaderAction(
+                        icon: Icons.notifications_outlined,
+                        onPressed: () {},
+                      ),
                     ],
                     showAvatar: true,
                     avatarInitials: 'R',
@@ -195,9 +213,19 @@ class _BulkActionsMockupState extends State<_BulkActionsMockup> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     // Greeting
-                    const Text('Good morning, Ramesh', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w800, color: _titleColor)),
+                    const Text(
+                      'Good morning, Ramesh',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w800,
+                        color: _titleColor,
+                      ),
+                    ),
                     const SizedBox(height: 4),
-                    const Text('Select applications to download or track together', style: TextStyle(fontSize: 13, color: _subtleText)),
+                    const Text(
+                      'Select applications to download or track together',
+                      style: TextStyle(fontSize: 13, color: _subtleText),
+                    ),
                     const SizedBox(height: 20),
 
                     // Bulk action bar
@@ -215,11 +243,22 @@ class _BulkActionsMockupState extends State<_BulkActionsMockup> {
                             children: [
                               Text(
                                 '${_selected.length} selected',
-                                style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: _titleColor),
+                                style: const TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w600,
+                                  color: _titleColor,
+                                ),
                               ),
                               GestureDetector(
                                 onTap: () => setState(() => _selected.clear()),
-                                child: const Text('Clear filters', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w500, color: _primaryColor)),
+                                child: const Text(
+                                  'Clear filters',
+                                  style: TextStyle(
+                                    fontSize: 13,
+                                    fontWeight: FontWeight.w500,
+                                    color: _primaryColor,
+                                  ),
+                                ),
                               ),
                             ],
                           ),
@@ -280,10 +319,7 @@ class _BulkActionsMockupState extends State<_BulkActionsMockup> {
                       actionText: 'Track',
                     ),
                     const SizedBox(height: 12),
-                    _buildCompletedCard(
-                      index: 3,
-                      title: 'Birth\nCertificate',
-                    ),
+                    _buildCompletedCard(index: 3, title: 'Birth\nCertificate'),
                   ],
                 ),
               ),
@@ -331,7 +367,10 @@ class _BulkActionsMockupState extends State<_BulkActionsMockup> {
               decoration: BoxDecoration(
                 color: isSelected ? _primaryColor : Colors.white,
                 borderRadius: BorderRadius.circular(4),
-                border: Border.all(color: isSelected ? _primaryColor : const Color(0xFFD1D5DB), width: 1.5),
+                border: Border.all(
+                  color: isSelected ? _primaryColor : const Color(0xFFD1D5DB),
+                  width: 1.5,
+                ),
               ),
               child: isSelected
                   ? const Icon(Icons.check, size: 14, color: Colors.white)
@@ -347,7 +386,14 @@ class _BulkActionsMockupState extends State<_BulkActionsMockup> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(title, style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: _titleColor)),
+                      Text(
+                        title,
+                        style: const TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
+                          color: _titleColor,
+                        ),
+                      ),
                       Row(
                         children: [
                           Ux4gButton(
@@ -357,7 +403,11 @@ class _BulkActionsMockupState extends State<_BulkActionsMockup> {
                             size: Ux4gButtonSize.small,
                           ),
                           const SizedBox(width: 6),
-                          const Icon(Icons.keyboard_arrow_down, size: 18, color: _subtleText),
+                          const Icon(
+                            Icons.keyboard_arrow_down,
+                            size: 18,
+                            color: _subtleText,
+                          ),
                         ],
                       ),
                     ],
@@ -365,19 +415,40 @@ class _BulkActionsMockupState extends State<_BulkActionsMockup> {
                   const SizedBox(height: 8),
                   Row(
                     children: [
-                      Container(width: 7, height: 7, decoration: BoxDecoration(color: statusColor, shape: BoxShape.circle)),
+                      Container(
+                        width: 7,
+                        height: 7,
+                        decoration: BoxDecoration(
+                          color: statusColor,
+                          shape: BoxShape.circle,
+                        ),
+                      ),
                       const SizedBox(width: 6),
-                      Text(statusText, style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w500, color: Color(0xFF1F2937))),
+                      Text(
+                        statusText,
+                        style: const TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w500,
+                          color: Color(0xFF1F2937),
+                        ),
+                      ),
                       const SizedBox(width: 12),
                       Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 8,
+                          vertical: 2,
+                        ),
                         decoration: BoxDecoration(
                           color: badgeColor.withValues(alpha: 0.1),
                           borderRadius: BorderRadius.circular(4),
                         ),
                         child: Text(
                           badgeText,
-                          style: TextStyle(fontSize: 11, fontWeight: FontWeight.w500, color: badgeColor),
+                          style: TextStyle(
+                            fontSize: 11,
+                            fontWeight: FontWeight.w500,
+                            color: badgeColor,
+                          ),
                         ),
                       ),
                     ],
@@ -391,10 +462,7 @@ class _BulkActionsMockupState extends State<_BulkActionsMockup> {
     );
   }
 
-  Widget _buildCompletedCard({
-    required int index,
-    required String title,
-  }) {
+  Widget _buildCompletedCard({required int index, required String title}) {
     final isSelected = _selected.contains(index);
     return GestureDetector(
       onTap: () {
@@ -422,7 +490,10 @@ class _BulkActionsMockupState extends State<_BulkActionsMockup> {
               decoration: BoxDecoration(
                 color: isSelected ? _primaryColor : Colors.white,
                 borderRadius: BorderRadius.circular(4),
-                border: Border.all(color: isSelected ? _primaryColor : const Color(0xFFD1D5DB), width: 1.5),
+                border: Border.all(
+                  color: isSelected ? _primaryColor : const Color(0xFFD1D5DB),
+                  width: 1.5,
+                ),
               ),
               child: isSelected
                   ? const Icon(Icons.check, size: 14, color: Colors.white)
@@ -434,7 +505,14 @@ class _BulkActionsMockupState extends State<_BulkActionsMockup> {
             Expanded(
               child: Row(
                 children: [
-                  Text(title, style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: _titleColor)),
+                  Text(
+                    title,
+                    style: const TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w600,
+                      color: _titleColor,
+                    ),
+                  ),
                   const SizedBox(width: 6),
                   const Icon(Icons.check_circle, size: 18, color: _greenColor),
                 ],
@@ -453,7 +531,11 @@ class _BulkActionsMockupState extends State<_BulkActionsMockup> {
                   leadingIcon: Icons.file_download_outlined,
                 ),
                 const SizedBox(width: 6),
-                const Icon(Icons.keyboard_arrow_down, size: 18, color: _subtleText),
+                const Icon(
+                  Icons.keyboard_arrow_down,
+                  size: 18,
+                  color: _subtleText,
+                ),
               ],
             ),
           ],

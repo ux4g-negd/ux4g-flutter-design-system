@@ -709,7 +709,10 @@ class _ComponentShowcasePageState extends State<ComponentShowcasePage> {
                             const SizedBox(height: 16),
                             const Ux4gDivider(),
                             const SizedBox(height: 16),
-                            Text('Aadhaar Input (Specialized)', style: typography.lS_strong),
+                            Text(
+                              'Aadhaar Input (Specialized)',
+                              style: typography.lS_strong,
+                            ),
                             const SizedBox(height: 12),
                             Ux4gAadhaarInputField(
                               value: _aadhaarValue,
@@ -717,25 +720,34 @@ class _ComponentShowcasePageState extends State<ComponentShowcasePage> {
                                 setState(() {
                                   _aadhaarValue = v;
                                   if (v.replaceAll(' ', '').length == 12) {
-                                    final isValid = Ux4gAadhaarInputField.validateAadhaar(v);
+                                    final isValid =
+                                        Ux4gAadhaarInputField.validateAadhaar(
+                                          v,
+                                        );
                                     _aadhaarStatus = isValid
                                         ? Ux4gInputFieldStatus.success
                                         : Ux4gInputFieldStatus.error;
                                   } else {
-                                    _aadhaarStatus = Ux4gInputFieldStatus.defaultStatus;
+                                    _aadhaarStatus =
+                                        Ux4gInputFieldStatus.defaultStatus;
                                   }
                                 });
                               },
                               status: _aadhaarStatus,
                               required: true,
-                              caption: _aadhaarStatus == Ux4gInputFieldStatus.error
+                              caption:
+                                  _aadhaarStatus == Ux4gInputFieldStatus.error
                                   ? 'Invalid Aadhaar number (Verhoeff check failed)'
-                                  : (_aadhaarStatus == Ux4gInputFieldStatus.success
-                                      ? 'Valid Aadhaar number'
-                                      : 'Enter your 12-digit Aadhaar number'),
+                                  : (_aadhaarStatus ==
+                                            Ux4gInputFieldStatus.success
+                                        ? 'Valid Aadhaar number'
+                                        : 'Enter your 12-digit Aadhaar number'),
                             ),
                             const SizedBox(height: 16),
-                            Text('PAN Input (Specialized)', style: typography.lS_strong),
+                            Text(
+                              'PAN Input (Specialized)',
+                              style: typography.lS_strong,
+                            ),
                             const SizedBox(height: 12),
                             Ux4gPanInputField(
                               value: _panValue,
@@ -743,12 +755,14 @@ class _ComponentShowcasePageState extends State<ComponentShowcasePage> {
                                 setState(() {
                                   _panValue = v;
                                   if (v.length == 10) {
-                                    final isValid = Ux4gPanInputField.validatePan(v);
+                                    final isValid =
+                                        Ux4gPanInputField.validatePan(v);
                                     _panStatus = isValid
                                         ? Ux4gInputFieldStatus.success
                                         : Ux4gInputFieldStatus.error;
                                   } else {
-                                    _panStatus = Ux4gInputFieldStatus.defaultStatus;
+                                    _panStatus =
+                                        Ux4gInputFieldStatus.defaultStatus;
                                   }
                                 });
                               },
@@ -757,8 +771,8 @@ class _ComponentShowcasePageState extends State<ComponentShowcasePage> {
                               caption: _panStatus == Ux4gInputFieldStatus.error
                                   ? 'Invalid PAN number (Format: ABCDE1234F)'
                                   : (_panStatus == Ux4gInputFieldStatus.success
-                                      ? 'Valid PAN number'
-                                      : 'Enter your 10-character PAN number'),
+                                        ? 'Valid PAN number'
+                                        : 'Enter your 10-character PAN number'),
                             ),
                           ],
                         ),
@@ -777,22 +791,32 @@ class _ComponentShowcasePageState extends State<ComponentShowcasePage> {
                               padding: const EdgeInsets.all(16),
                               decoration: BoxDecoration(
                                 color: colors.primary.withValues(alpha: 0.05),
-                                borderRadius: BorderRadius.circular(Ux4gRadius.radius12),
-                                border: Border.all(color: colors.primary.withValues(alpha: 0.1)),
+                                borderRadius: BorderRadius.circular(
+                                  Ux4gRadius.radius12,
+                                ),
+                                border: Border.all(
+                                  color: colors.primary.withValues(alpha: 0.1),
+                                ),
                               ),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Text('Interactive Testing Demo', 
-                                          style: typography.lM_strong.copyWith(color: colors.primary)),
+                                      Text(
+                                        'Interactive Testing Demo',
+                                        style: typography.lM_strong.copyWith(
+                                          color: colors.primary,
+                                        ),
+                                      ),
                                       TextButton(
                                         onPressed: () {
                                           setState(() {
                                             _otpTestValue = '';
-                                            _otpTestStatus = Ux4gOtpInputStatus.defaultStatus;
+                                            _otpTestStatus = Ux4gOtpInputStatus
+                                                .defaultStatus;
                                             _otpAttemptsLeft = 3;
                                             _otpIsLocked = false;
                                           });
@@ -807,40 +831,51 @@ class _ComponentShowcasePageState extends State<ComponentShowcasePage> {
                                     value: _otpTestValue,
                                     enabled: !_otpIsLocked,
                                     status: _otpTestStatus,
-                                    label: 'Enter Verification Code (Default OTP is 123456)',
+                                    label:
+                                        'Enter Verification Code (Default OTP is 123456)',
                                     captionVariant: _otpIsLocked
                                         ? Ux4gOtpCaptionVariant.locked
-                                        : (_otpTestStatus == Ux4gOtpInputStatus.success
-                                            ? Ux4gOtpCaptionVariant.success
-                                            : (_otpAttemptsLeft < 3
-                                                ? Ux4gOtpCaptionVariant.attemptWithTimer
-                                                : Ux4gOtpCaptionVariant.plain)),
+                                        : (_otpTestStatus ==
+                                                  Ux4gOtpInputStatus.success
+                                              ? Ux4gOtpCaptionVariant.success
+                                              : (_otpAttemptsLeft < 3
+                                                    ? Ux4gOtpCaptionVariant
+                                                          .attemptWithTimer
+                                                    : Ux4gOtpCaptionVariant
+                                                          .plain)),
                                     captionLeadingText: _otpIsLocked
                                         ? 'Locked for 30:00'
                                         : (_otpAttemptsLeft < 3
-                                            ? 'Attempt ${4 - _otpAttemptsLeft} of 3'
-                                            : 'Correct code is 123456'),
-                                    captionTrailingText: _otpIsLocked ? 'Resend OTP' : null,
+                                              ? 'Attempt ${4 - _otpAttemptsLeft} of 3'
+                                              : 'Correct code is 123456'),
+                                    captionTrailingText: _otpIsLocked
+                                        ? 'Resend OTP'
+                                        : null,
                                     onChanged: (v) {
                                       setState(() {
                                         _otpTestValue = v;
                                         // Reset error state when user types again
-                                        if (_otpTestStatus == Ux4gOtpInputStatus.error) {
-                                          _otpTestStatus = Ux4gOtpInputStatus.defaultStatus;
+                                        if (_otpTestStatus ==
+                                            Ux4gOtpInputStatus.error) {
+                                          _otpTestStatus =
+                                              Ux4gOtpInputStatus.defaultStatus;
                                         }
                                       });
                                     },
                                     onCompleted: (v) {
                                       setState(() {
                                         if (v == '123456') {
-                                          _otpTestStatus = Ux4gOtpInputStatus.success;
+                                          _otpTestStatus =
+                                              Ux4gOtpInputStatus.success;
                                         } else {
                                           _otpAttemptsLeft--;
                                           if (_otpAttemptsLeft <= 0) {
                                             _otpIsLocked = true;
-                                            _otpTestStatus = Ux4gOtpInputStatus.locked;
+                                            _otpTestStatus =
+                                                Ux4gOtpInputStatus.locked;
                                           } else {
-                                            _otpTestStatus = Ux4gOtpInputStatus.error;
+                                            _otpTestStatus =
+                                                Ux4gOtpInputStatus.error;
                                           }
                                         }
                                       });
@@ -850,18 +885,20 @@ class _ComponentShowcasePageState extends State<ComponentShowcasePage> {
                               ),
                             ),
                             const SizedBox(height: 16),
-                            
+
                             // 4-Digit Demo
                             Ux4gOtpInput(
                               length: 4,
                               value: _otpCountdown,
-                              onChanged: (v) => setState(() => _otpCountdown = v),
+                              onChanged: (v) =>
+                                  setState(() => _otpCountdown = v),
                               label: '4-Digit Mode',
                               captionVariant: Ux4gOtpCaptionVariant.plain,
-                              captionText: 'Demo of 4-box layout with separators',
+                              captionText:
+                                  'Demo of 4-box layout with separators',
                             ),
                             const SizedBox(height: 32),
-                            
+
                             // Default
                             Text('Default', style: typography.lS_strong),
                             const SizedBox(height: 8),
@@ -886,7 +923,8 @@ class _ComponentShowcasePageState extends State<ComponentShowcasePage> {
                               length: 6,
                               value: _otpDefault,
                               onChanged: (v) => setState(() => _otpDefault = v),
-                              captionVariant: Ux4gOtpCaptionVariant.resendAction,
+                              captionVariant:
+                                  Ux4gOtpCaptionVariant.resendAction,
                               captionLeadingText: "Didn't receive OTP?",
                               captionTrailingText: 'Resend OTP',
                               onCaptionTrailingTap: () {},
@@ -894,14 +932,18 @@ class _ComponentShowcasePageState extends State<ComponentShowcasePage> {
                             const SizedBox(height: 20),
 
                             // Error / Attempt
-                            Text('Error — Attempt 2 of 3', style: typography.lS_strong),
+                            Text(
+                              'Error — Attempt 2 of 3',
+                              style: typography.lS_strong,
+                            ),
                             const SizedBox(height: 8),
                             Ux4gOtpInput(
                               length: 6,
                               value: _otpError,
                               onChanged: (v) => setState(() => _otpError = v),
                               status: Ux4gOtpInputStatus.error,
-                              captionVariant: Ux4gOtpCaptionVariant.attemptWithTimer,
+                              captionVariant:
+                                  Ux4gOtpCaptionVariant.attemptWithTimer,
                               captionLeadingText: 'Attempt 2 of 3',
                               captionTrailingText: 'Resend OTP in 00:17',
                             ),
@@ -949,12 +991,16 @@ class _ComponentShowcasePageState extends State<ComponentShowcasePage> {
                             const SizedBox(height: 20),
 
                             // Auto Countdown (30s)
-                            Text('Auto Countdown (30s)', style: typography.lS_strong),
+                            Text(
+                              'Auto Countdown (30s)',
+                              style: typography.lS_strong,
+                            ),
                             const SizedBox(height: 8),
                             Ux4gOtpInput(
                               length: 4,
                               value: _otpCountdown,
-                              onChanged: (v) => setState(() => _otpCountdown = v),
+                              onChanged: (v) =>
+                                  setState(() => _otpCountdown = v),
                               captionVariant: _otpCountdownExpired
                                   ? Ux4gOtpCaptionVariant.resendAction
                                   : Ux4gOtpCaptionVariant.resendTimer,
@@ -963,16 +1009,21 @@ class _ComponentShowcasePageState extends State<ComponentShowcasePage> {
                                   ? 'Resend OTP'
                                   : 'Resend in',
                               onCaptionTrailingTap: _otpCountdownExpired
-                                  ? () => setState(() => _otpCountdownExpired = false)
+                                  ? () => setState(
+                                      () => _otpCountdownExpired = false,
+                                    )
                                   : null,
                               autoCountdownSeconds: 30,
-                              onCountdownComplete:
-                                  () => setState(() => _otpCountdownExpired = true),
+                              onCountdownComplete: () =>
+                                  setState(() => _otpCountdownExpired = true),
                             ),
                             const SizedBox(height: 20),
 
                             // Obscure / Password mode
-                            Text('Obscure (Password mode)', style: typography.lS_strong),
+                            Text(
+                              'Obscure (Password mode)',
+                              style: typography.lS_strong,
+                            ),
                             const SizedBox(height: 8),
                             Ux4gOtpInput(
                               length: 6,
@@ -1191,7 +1242,11 @@ class _ComponentShowcasePageState extends State<ComponentShowcasePage> {
                                   Text(
                                     '(Replace with desired banner content)',
                                     style: typography.lS_default.copyWith(
-                                      color: Theme.of(context).brightness == Brightness.dark ? Colors.white70 : Colors.black54,
+                                      color:
+                                          Theme.of(context).brightness ==
+                                              Brightness.dark
+                                          ? Colors.white70
+                                          : Colors.black54,
                                     ),
                                   ),
                                 ],
@@ -1232,7 +1287,9 @@ class _ComponentShowcasePageState extends State<ComponentShowcasePage> {
                               mode: Ux4gDatePickerMode.range,
                               placeholder: 'Select range',
                               onDateRangeSelected: (range) {
-                                print('Selected Range: ${range.start} to ${range.end}');
+                                print(
+                                  'Selected Range: ${range.start} to ${range.end}',
+                                );
                               },
                             ),
                           ],
@@ -1297,25 +1354,40 @@ class _ComponentShowcasePageState extends State<ComponentShowcasePage> {
                                       color: const Color(0xFFFFE5B4),
                                       shape: BoxShape.circle,
                                     ),
-                                    child: const Icon(Icons.inventory_2_outlined, color: Color(0xFFF58220), size: 16),
+                                    child: const Icon(
+                                      Icons.inventory_2_outlined,
+                                      color: Color(0xFFF58220),
+                                      size: 16,
+                                    ),
                                   ),
                                   title: 'Income Certificate Application',
                                   subtitle: 'Last saved: 10 Apr 2026',
                                   badge: Container(
-                                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 8,
+                                      vertical: 2,
+                                    ),
                                     decoration: BoxDecoration(
                                       color: const Color(0xFFFFE5B4),
                                       borderRadius: BorderRadius.circular(4),
                                     ),
                                     child: Text(
                                       'Step 3 of 5 Document Upload',
-                                      style: typography.lM_default.copyWith(color: const Color(0xFFF58220), fontSize: 12),
+                                      style: typography.lM_default.copyWith(
+                                        color: const Color(0xFFF58220),
+                                        fontSize: 12,
+                                      ),
                                     ),
                                   ),
                                   actions: [
                                     TextButton(
                                       onPressed: () => Ux4gBannerManager.hide(),
-                                      child: Text('Discard', style: typography.bM_strong.copyWith(color: const Color(0xFFC41D7F))),
+                                      child: Text(
+                                        'Discard',
+                                        style: typography.bM_strong.copyWith(
+                                          color: const Color(0xFFC41D7F),
+                                        ),
+                                      ),
                                     ),
                                     Ux4gButton(
                                       text: 'Resume',
@@ -1341,18 +1413,28 @@ class _ComponentShowcasePageState extends State<ComponentShowcasePage> {
                                       color: const Color(0xFFFFE5B4),
                                       shape: BoxShape.circle,
                                     ),
-                                    child: const Icon(Icons.inventory_2_outlined, color: Color(0xFFF58220), size: 16),
+                                    child: const Icon(
+                                      Icons.inventory_2_outlined,
+                                      color: Color(0xFFF58220),
+                                      size: 16,
+                                    ),
                                   ),
                                   title: 'Your draft expires in 5 days',
                                   badge: Container(
-                                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 8,
+                                      vertical: 2,
+                                    ),
                                     decoration: BoxDecoration(
                                       color: const Color(0xFFFFE5B4),
                                       borderRadius: BorderRadius.circular(4),
                                     ),
                                     child: Text(
                                       '16 Apr',
-                                      style: typography.lM_default.copyWith(color: const Color(0xFFF58220), fontSize: 12),
+                                      style: typography.lM_default.copyWith(
+                                        color: const Color(0xFFF58220),
+                                        fontSize: 12,
+                                      ),
                                     ),
                                   ),
                                 );
@@ -1372,9 +1454,14 @@ class _ComponentShowcasePageState extends State<ComponentShowcasePage> {
                                       color: Colors.white,
                                       shape: BoxShape.circle,
                                     ),
-                                    child: const Icon(Icons.inventory_2_outlined, color: Color(0xFFF58220), size: 16),
+                                    child: const Icon(
+                                      Icons.inventory_2_outlined,
+                                      color: Color(0xFFF58220),
+                                      size: 16,
+                                    ),
                                   ),
-                                  title: 'Your draft expires tomorrow. Submit today',
+                                  title:
+                                      'Your draft expires tomorrow. Submit today',
                                 );
                               },
                             ),
@@ -1385,12 +1472,21 @@ class _ComponentShowcasePageState extends State<ComponentShowcasePage> {
                                 Ux4gBannerManager.show(
                                   context,
                                   variant: Ux4gBannerVariant.errorLight,
-                                  leadingIcon: const Icon(Icons.error_outline, color: Color(0xFFFF4D4F), size: 24),
+                                  leadingIcon: const Icon(
+                                    Icons.error_outline,
+                                    color: Color(0xFFFF4D4F),
+                                    size: 24,
+                                  ),
                                   title: 'Draft expired on 9 April 2026',
                                   actions: [
                                     TextButton(
                                       onPressed: () => Ux4gBannerManager.hide(),
-                                      child: Text('Action', style: typography.bM_strong.copyWith(color: const Color(0xFFA8071A))),
+                                      child: Text(
+                                        'Action',
+                                        style: typography.bM_strong.copyWith(
+                                          color: const Color(0xFFA8071A),
+                                        ),
+                                      ),
                                     ),
                                   ],
                                 );
@@ -1410,10 +1506,18 @@ class _ComponentShowcasePageState extends State<ComponentShowcasePage> {
                                       const SizedBox(
                                         width: 16,
                                         height: 16,
-                                        child: CircularProgressIndicator(strokeWidth: 2, color: Color(0xFF722ED1)),
+                                        child: CircularProgressIndicator(
+                                          strokeWidth: 2,
+                                          color: Color(0xFF722ED1),
+                                        ),
                                       ),
                                       const SizedBox(width: 8),
-                                      Text('Saving', style: typography.bM_default.copyWith(color: Ux4gPalette.neutral500)),
+                                      Text(
+                                        'Saving',
+                                        style: typography.bM_default.copyWith(
+                                          color: Ux4gPalette.neutral500,
+                                        ),
+                                      ),
                                     ],
                                   ),
                                 );
@@ -1430,9 +1534,18 @@ class _ComponentShowcasePageState extends State<ComponentShowcasePage> {
                                   trailingIcon: Row(
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
-                                      const Icon(Icons.check_circle_outline, color: Color(0xFF52C41A), size: 20),
+                                      const Icon(
+                                        Icons.check_circle_outline,
+                                        color: Color(0xFF52C41A),
+                                        size: 20,
+                                      ),
                                       const SizedBox(width: 8),
-                                      Text('Saved 3:14 PM', style: typography.bM_default.copyWith(color: Ux4gPalette.gray900)),
+                                      Text(
+                                        'Saved 3:14 PM',
+                                        style: typography.bM_default.copyWith(
+                                          color: Ux4gPalette.gray900,
+                                        ),
+                                      ),
                                     ],
                                   ),
                                 );
@@ -1445,7 +1558,11 @@ class _ComponentShowcasePageState extends State<ComponentShowcasePage> {
                                 Ux4gBannerManager.show(
                                   context,
                                   variant: Ux4gBannerVariant.successLight,
-                                  leadingIcon: const Icon(Icons.check_circle_outline, color: Color(0xFF52C41A), size: 24),
+                                  leadingIcon: const Icon(
+                                    Icons.check_circle_outline,
+                                    color: Color(0xFF52C41A),
+                                    size: 24,
+                                  ),
                                   title: 'Draft saved successfully at 3:14 PM',
                                 );
                               },
@@ -1461,11 +1578,18 @@ class _ComponentShowcasePageState extends State<ComponentShowcasePage> {
                         colors: colors,
                         child: Center(
                           child: Ux4gFeedbackForm(
-                            improvementOptions: const ['Content accuracy', 'Visual design', 'Performance', 'Navigation'],
+                            improvementOptions: const [
+                              'Content accuracy',
+                              'Visual design',
+                              'Performance',
+                              'Navigation',
+                            ],
                             minWords: 0,
                             maxLength: 200,
                             onSubmit: (rating, chip, comment) {
-                              print('Feedback Submitted: Rating: $rating, Chip: $chip, Comment: $comment');
+                              print(
+                                'Feedback Submitted: Rating: $rating, Chip: $chip, Comment: $comment',
+                              );
                             },
                             onSkip: () {
                               print('Feedback Skipped');
@@ -1482,7 +1606,9 @@ class _ComponentShowcasePageState extends State<ComponentShowcasePage> {
                         child: Center(
                           child: Ux4gFeedbackFormNps(
                             onSubmit: (score, comment) {
-                              print('NPS Submitted: Score: $score, Comment: $comment');
+                              print(
+                                'NPS Submitted: Score: $score, Comment: $comment',
+                              );
                             },
                             onSkip: () {
                               print('NPS Skipped');
@@ -1499,7 +1625,9 @@ class _ComponentShowcasePageState extends State<ComponentShowcasePage> {
                         child: Center(
                           child: Ux4gFeedbackFormCsat(
                             onSubmit: (score, comment) {
-                              print('CSAT Submitted: Score: $score, Comment: $comment');
+                              print(
+                                'CSAT Submitted: Score: $score, Comment: $comment',
+                              );
                             },
                             onSkip: () {
                               print('CSAT Skipped');
@@ -1522,12 +1650,30 @@ class _ComponentShowcasePageState extends State<ComponentShowcasePage> {
                               tagColorScheme: Ux4gTagColor.warning,
                               actionButtonText: 'Track',
                               details: const [
-                                Ux4gResultDetail(label: 'Reference Number', value: 'INC-2026-MH-04127'),
-                                Ux4gResultDetail(label: 'Last Updated Date', value: '10 Apr 2026'),
-                                Ux4gResultDetail(label: 'Submitted Date', value: '1 Apr 2026'),
-                                Ux4gResultDetail(label: 'Assigned Officer', value: 'Rahul Sharma'),
-                                Ux4gResultDetail(label: 'Department', value: 'Revenue Department'),
-                                Ux4gResultDetail(label: 'Documents', value: 'ID Proof, Address Proof'),
+                                Ux4gResultDetail(
+                                  label: 'Reference Number',
+                                  value: 'INC-2026-MH-04127',
+                                ),
+                                Ux4gResultDetail(
+                                  label: 'Last Updated Date',
+                                  value: '10 Apr 2026',
+                                ),
+                                Ux4gResultDetail(
+                                  label: 'Submitted Date',
+                                  value: '1 Apr 2026',
+                                ),
+                                Ux4gResultDetail(
+                                  label: 'Assigned Officer',
+                                  value: 'Rahul Sharma',
+                                ),
+                                Ux4gResultDetail(
+                                  label: 'Department',
+                                  value: 'Revenue Department',
+                                ),
+                                Ux4gResultDetail(
+                                  label: 'Documents',
+                                  value: 'ID Proof, Address Proof',
+                                ),
                               ],
                             ),
 
@@ -1537,14 +1683,38 @@ class _ComponentShowcasePageState extends State<ComponentShowcasePage> {
                               actionButtonText: 'Download',
                               actionButtonIcon: Icons.file_download_outlined,
                               details: const [
-                                Ux4gResultDetail(label: 'Issued', value: '05 Apr 2026'),
-                                Ux4gResultDetail(label: 'Valid till', value: '05 Apr 2027'),
-                                Ux4gResultDetail(label: 'Reference Number', value: 'INC-2026-MH-04127'),
-                                Ux4gResultDetail(label: 'Last Updated Date', value: '10 Apr 2026'),
-                                Ux4gResultDetail(label: 'Submitted Date', value: '1 Apr 2026'),
-                                Ux4gResultDetail(label: 'Assigned Officer', value: 'Rahul Sharma'),
-                                Ux4gResultDetail(label: 'Department', value: 'Revenue Department'),
-                                Ux4gResultDetail(label: 'Documents', value: 'ID Proof, Address Proof'),
+                                Ux4gResultDetail(
+                                  label: 'Issued',
+                                  value: '05 Apr 2026',
+                                ),
+                                Ux4gResultDetail(
+                                  label: 'Valid till',
+                                  value: '05 Apr 2027',
+                                ),
+                                Ux4gResultDetail(
+                                  label: 'Reference Number',
+                                  value: 'INC-2026-MH-04127',
+                                ),
+                                Ux4gResultDetail(
+                                  label: 'Last Updated Date',
+                                  value: '10 Apr 2026',
+                                ),
+                                Ux4gResultDetail(
+                                  label: 'Submitted Date',
+                                  value: '1 Apr 2026',
+                                ),
+                                Ux4gResultDetail(
+                                  label: 'Assigned Officer',
+                                  value: 'Rahul Sharma',
+                                ),
+                                Ux4gResultDetail(
+                                  label: 'Department',
+                                  value: 'Revenue Department',
+                                ),
+                                Ux4gResultDetail(
+                                  label: 'Documents',
+                                  value: 'ID Proof, Address Proof',
+                                ),
                               ],
                             ),
 
@@ -1554,16 +1724,37 @@ class _ComponentShowcasePageState extends State<ComponentShowcasePage> {
                               metadataSegments: const [
                                 Ux4gPillSegment(text: 'Paid', bold: true),
                                 Ux4gPillSegment(text: '₹ 120/-'),
-                                Ux4gPillSegment(text: '20 mins', leading: Icon(Icons.access_time, size: 12)),
+                                Ux4gPillSegment(
+                                  text: '20 mins',
+                                  leading: Icon(Icons.access_time, size: 12),
+                                ),
                               ],
                               actionButtonText: 'Apply',
                               details: const [
-                                Ux4gResultDetail(label: 'Reference Number', value: 'INC-2026-MH-04127'),
-                                Ux4gResultDetail(label: 'Last Updated Date', value: '10 Apr 2026'),
-                                Ux4gResultDetail(label: 'Submitted Date', value: '1 Apr 2026'),
-                                Ux4gResultDetail(label: 'Assigned Officer', value: 'Rahul Sharma'),
-                                Ux4gResultDetail(label: 'Department', value: 'Revenue Department'),
-                                Ux4gResultDetail(label: 'Documents', value: 'ID Proof, Address Proof'),
+                                Ux4gResultDetail(
+                                  label: 'Reference Number',
+                                  value: 'INC-2026-MH-04127',
+                                ),
+                                Ux4gResultDetail(
+                                  label: 'Last Updated Date',
+                                  value: '10 Apr 2026',
+                                ),
+                                Ux4gResultDetail(
+                                  label: 'Submitted Date',
+                                  value: '1 Apr 2026',
+                                ),
+                                Ux4gResultDetail(
+                                  label: 'Assigned Officer',
+                                  value: 'Rahul Sharma',
+                                ),
+                                Ux4gResultDetail(
+                                  label: 'Department',
+                                  value: 'Revenue Department',
+                                ),
+                                Ux4gResultDetail(
+                                  label: 'Documents',
+                                  value: 'ID Proof, Address Proof',
+                                ),
                               ],
                             ),
 
@@ -1574,7 +1765,10 @@ class _ComponentShowcasePageState extends State<ComponentShowcasePage> {
                               tagColorScheme: Ux4gTagColor.error,
                               actionButtonText: 'Track',
                               details: const [
-                                Ux4gResultDetail(label: 'Reference Number', value: 'GRV-2026-04127'),
+                                Ux4gResultDetail(
+                                  label: 'Reference Number',
+                                  value: 'GRV-2026-04127',
+                                ),
                                 Ux4gResultDetail(
                                   label: 'SLA Status',
                                   value: 'SLA 3 days overdue',
@@ -1582,10 +1776,22 @@ class _ComponentShowcasePageState extends State<ComponentShowcasePage> {
                                   valueColor: Ux4gPalette.orange700,
                                   isBold: true,
                                 ),
-                                Ux4gResultDetail(label: 'Submitted Date', value: '1 Apr 2026'),
-                                Ux4gResultDetail(label: 'Assigned Officer', value: 'Rahul Sharma'),
-                                Ux4gResultDetail(label: 'Department', value: 'Revenue Department'),
-                                Ux4gResultDetail(label: 'Documents', value: 'ID Proof, Address Proof'),
+                                Ux4gResultDetail(
+                                  label: 'Submitted Date',
+                                  value: '1 Apr 2026',
+                                ),
+                                Ux4gResultDetail(
+                                  label: 'Assigned Officer',
+                                  value: 'Rahul Sharma',
+                                ),
+                                Ux4gResultDetail(
+                                  label: 'Department',
+                                  value: 'Revenue Department',
+                                ),
+                                Ux4gResultDetail(
+                                  label: 'Documents',
+                                  value: 'ID Proof, Address Proof',
+                                ),
                               ],
                             ),
 
@@ -1599,12 +1805,31 @@ class _ComponentShowcasePageState extends State<ComponentShowcasePage> {
                               detailsColumns: 2,
                               showBottomDivider: false,
                               details: const [
-                                Ux4gResultDetail(label: 'Amount paid', value: '₹400/-', isBold: true),
-                                Ux4gResultDetail(label: 'Paid on', value: '12 Apr 2026'),
-                                Ux4gResultDetail(label: 'Submitted Date', value: '1 Apr 2026'),
-                                Ux4gResultDetail(label: 'Assigned Officer', value: 'Rahul Sharma'),
-                                Ux4gResultDetail(label: 'Department', value: 'Revenue Department'),
-                                Ux4gResultDetail(label: 'Documents', value: 'ID Proof, Address Proof'),
+                                Ux4gResultDetail(
+                                  label: 'Amount paid',
+                                  value: '₹400/-',
+                                  isBold: true,
+                                ),
+                                Ux4gResultDetail(
+                                  label: 'Paid on',
+                                  value: '12 Apr 2026',
+                                ),
+                                Ux4gResultDetail(
+                                  label: 'Submitted Date',
+                                  value: '1 Apr 2026',
+                                ),
+                                Ux4gResultDetail(
+                                  label: 'Assigned Officer',
+                                  value: 'Rahul Sharma',
+                                ),
+                                Ux4gResultDetail(
+                                  label: 'Department',
+                                  value: 'Revenue Department',
+                                ),
+                                Ux4gResultDetail(
+                                  label: 'Documents',
+                                  value: 'ID Proof, Address Proof',
+                                ),
                               ],
                             ),
 
@@ -1615,14 +1840,27 @@ class _ComponentShowcasePageState extends State<ComponentShowcasePage> {
                               tagColorScheme: Ux4gTagColor.success,
                               actionButtonText: 'Download',
                               actionButtonIcon: Icons.download,
-                              actionButtonColor: Ux4gPalette.blue700, // Custom Blue Button
+                              actionButtonColor:
+                                  Ux4gPalette.blue700, // Custom Blue Button
                               detailsColumns: 2, // Explicitly 2 columns
                               showBottomDivider: false,
                               details: const [
-                                Ux4gResultDetail(label: 'Reference Number', value: 'INC-2026-MH-04127'),
-                                Ux4gResultDetail(label: 'Last Updated Date', value: '10 Apr 2026'),
-                                Ux4gResultDetail(label: 'Submitted Date', value: '1 Apr 2026'),
-                                Ux4gResultDetail(label: 'Assigned Officer', value: 'Rahul Sharma'),
+                                Ux4gResultDetail(
+                                  label: 'Reference Number',
+                                  value: 'INC-2026-MH-04127',
+                                ),
+                                Ux4gResultDetail(
+                                  label: 'Last Updated Date',
+                                  value: '10 Apr 2026',
+                                ),
+                                Ux4gResultDetail(
+                                  label: 'Submitted Date',
+                                  value: '1 Apr 2026',
+                                ),
+                                Ux4gResultDetail(
+                                  label: 'Assigned Officer',
+                                  value: 'Rahul Sharma',
+                                ),
                               ],
                             ),
                           ],
@@ -2133,7 +2371,11 @@ class _ComponentShowcasePageState extends State<ComponentShowcasePage> {
                       // Elevated card
                       Ux4gCard(
                         elevation: 4,
-                        backgroundColor: Color.lerp(colors.surface, colors.primary, 0.08),
+                        backgroundColor: Color.lerp(
+                          colors.surface,
+                          colors.primary,
+                          0.08,
+                        ),
                         cornerRadius: Ux4gRadius.radius16,
                         title: 'Elevated Card',
                         body:
@@ -2518,7 +2760,9 @@ class _ComponentShowcasePageState extends State<ComponentShowcasePage> {
                               child: Ux4gAnimatedCircularProgress(
                                 value: _circularProgressValue,
                                 size: Ux4gCircularProgressSize.xxxl,
-                                backgroundColor: colors.onSurface.withValues(alpha: 0.05),
+                                backgroundColor: colors.onSurface.withValues(
+                                  alpha: 0.05,
+                                ),
                                 progressGradient: SweepGradient(
                                   transform: GradientRotation(-math.pi / 2),
                                   colors: [
@@ -4222,7 +4466,9 @@ class _ComponentShowcasePageState extends State<ComponentShowcasePage> {
                                   Navigator.of(context).push(
                                     MaterialPageRoute(
                                       builder: (_) =>
-                                          const BiometricShowcasePage(mockSuccess: true),
+                                          const BiometricShowcasePage(
+                                            mockSuccess: true,
+                                          ),
                                     ),
                                   );
                                 },
@@ -4240,7 +4486,9 @@ class _ComponentShowcasePageState extends State<ComponentShowcasePage> {
                                   Navigator.of(context).push(
                                     MaterialPageRoute(
                                       builder: (_) =>
-                                          const BiometricShowcasePage(mockSuccess: false),
+                                          const BiometricShowcasePage(
+                                            mockSuccess: false,
+                                          ),
                                     ),
                                   );
                                 },
@@ -4353,7 +4601,8 @@ class _ComponentShowcasePageState extends State<ComponentShowcasePage> {
                               icon: Icons.lock_outline_rounded,
                               iconColor: Ux4gPalette.secondary,
                               title: 'Access restricted',
-                              subtitle: 'You do not have permission to view this content.',
+                              subtitle:
+                                  'You do not have permission to view this content.',
                               description: 'Please contact your administrator.',
                               buttonText: 'Request access',
                               onButtonPressed: () {},
@@ -4375,8 +4624,10 @@ class _ComponentShowcasePageState extends State<ComponentShowcasePage> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text('Original White Icon (As Imported):',
-                                style: typography.lS_strong),
+                            Text(
+                              'Original White Icon (As Imported):',
+                              style: typography.lS_strong,
+                            ),
                             const SizedBox(height: 12),
                             Center(
                               child: Column(
@@ -4387,14 +4638,17 @@ class _ComponentShowcasePageState extends State<ComponentShowcasePage> {
                                     color: Ux4gPalette.white,
                                     enableBackground: true,
                                     containerSize: 100,
-                                    containerColor: _isDark ? colors.surface : colors.primary,
+                                    containerColor: _isDark
+                                        ? colors.surface
+                                        : colors.primary,
                                     tooltip: _selectedSocialIcon.name,
                                   ),
                                   const SizedBox(height: 12),
                                   Text(
                                     _selectedSocialIcon.name.toUpperCase(),
-                                    style: typography.lM_strong
-                                        .copyWith(color: colors.onBackground),
+                                    style: typography.lM_strong.copyWith(
+                                      color: colors.onBackground,
+                                    ),
                                   ),
                                 ],
                               ),
@@ -4402,7 +4656,6 @@ class _ComponentShowcasePageState extends State<ComponentShowcasePage> {
                           ],
                         ),
                       ),
-
 
                       const SizedBox(height: 16),
 
@@ -4413,7 +4666,10 @@ class _ComponentShowcasePageState extends State<ComponentShowcasePage> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text('Colored Icon (Original colored version):', style: typography.lS_strong),
+                            Text(
+                              'Colored Icon (Original colored version):',
+                              style: typography.lS_strong,
+                            ),
                             const SizedBox(height: 12),
                             Center(
                               child: Column(
@@ -4426,7 +4682,9 @@ class _ComponentShowcasePageState extends State<ComponentShowcasePage> {
                                   const SizedBox(height: 12),
                                   Text(
                                     _selectedSocialIcon.name.toUpperCase(),
-                                    style: typography.lM_strong.copyWith(color: colors.onBackground),
+                                    style: typography.lM_strong.copyWith(
+                                      color: colors.onBackground,
+                                    ),
                                   ),
                                 ],
                               ),
@@ -4444,45 +4702,66 @@ class _ComponentShowcasePageState extends State<ComponentShowcasePage> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text('Select Tint Color:', style: typography.lS_strong),
+                            Text(
+                              'Select Tint Color:',
+                              style: typography.lS_strong,
+                            ),
                             const SizedBox(height: 12),
                             Wrap(
                               spacing: 8,
                               runSpacing: 8,
-                              children: [
-                                (Ux4gPalette.red500, 'Red'),
-                                (Ux4gPalette.green500, 'Green'),
-                                (Ux4gPalette.primary500, 'Blue'),
-                                (Ux4gPalette.gold600, 'Gold'),
-                                (Ux4gPalette.purple500, 'Purple'),
-                                (Ux4gPalette.cyan500, 'Cyan'),
-                              ]
-                                  .map((colorTuple) {
-                                final color = colorTuple.$1;
-                                final label = colorTuple.$2;
-                                final isSelected = _selectedTintColor == color;
-                                return GestureDetector(
-                                  onTap: () => setState(() => _selectedTintColor = color),
-                                  child: AnimatedContainer(
-                                    duration: const Duration(milliseconds: 150),
-                                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                                    decoration: BoxDecoration(
-                                      color: isSelected ? color.withValues(alpha: 0.15) : colors.surface,
-                                      borderRadius: BorderRadius.circular(8),
-                                      border: Border.all(
-                                        color: isSelected ? color : colors.onSurface.withValues(alpha: 0.12),
-                                        width: isSelected ? 1.5 : 1,
+                              children:
+                                  [
+                                    (Ux4gPalette.red500, 'Red'),
+                                    (Ux4gPalette.green500, 'Green'),
+                                    (Ux4gPalette.primary500, 'Blue'),
+                                    (Ux4gPalette.gold600, 'Gold'),
+                                    (Ux4gPalette.purple500, 'Purple'),
+                                    (Ux4gPalette.cyan500, 'Cyan'),
+                                  ].map((colorTuple) {
+                                    final color = colorTuple.$1;
+                                    final label = colorTuple.$2;
+                                    final isSelected =
+                                        _selectedTintColor == color;
+                                    return GestureDetector(
+                                      onTap: () => setState(
+                                        () => _selectedTintColor = color,
                                       ),
-                                    ),
-                                    child: Text(
-                                      label,
-                                      style: typography.tS_strong.copyWith(
-                                        color: isSelected ? color : colors.onSurface,
+                                      child: AnimatedContainer(
+                                        duration: const Duration(
+                                          milliseconds: 150,
+                                        ),
+                                        padding: const EdgeInsets.symmetric(
+                                          horizontal: 12,
+                                          vertical: 8,
+                                        ),
+                                        decoration: BoxDecoration(
+                                          color: isSelected
+                                              ? color.withValues(alpha: 0.15)
+                                              : colors.surface,
+                                          borderRadius: BorderRadius.circular(
+                                            8,
+                                          ),
+                                          border: Border.all(
+                                            color: isSelected
+                                                ? color
+                                                : colors.onSurface.withValues(
+                                                    alpha: 0.12,
+                                                  ),
+                                            width: isSelected ? 1.5 : 1,
+                                          ),
+                                        ),
+                                        child: Text(
+                                          label,
+                                          style: typography.tS_strong.copyWith(
+                                            color: isSelected
+                                                ? color
+                                                : colors.onSurface,
+                                          ),
+                                        ),
                                       ),
-                                    ),
-                                  ),
-                                );
-                              }).toList(),
+                                    );
+                                  }).toList(),
                             ),
                             const SizedBox(height: 16),
                             Center(
@@ -4494,13 +4773,16 @@ class _ComponentShowcasePageState extends State<ComponentShowcasePage> {
                                     color: _selectedTintColor,
                                     enableBackground: true,
                                     containerSize: 100,
-                                    containerColor: _selectedTintColor.withValues(alpha: 0.1),
+                                    containerColor: _selectedTintColor
+                                        .withValues(alpha: 0.1),
                                     onPressed: () {},
                                   ),
                                   const SizedBox(height: 12),
                                   Text(
                                     '${_selectedSocialIcon.name.toUpperCase()} with custom tint',
-                                    style: typography.lM_strong.copyWith(color: _selectedTintColor),
+                                    style: typography.lM_strong.copyWith(
+                                      color: _selectedTintColor,
+                                    ),
                                   ),
                                 ],
                               ),
@@ -4518,7 +4800,10 @@ class _ComponentShowcasePageState extends State<ComponentShowcasePage> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text('Select Icon to Preview:', style: typography.lS_strong),
+                            Text(
+                              'Select Icon to Preview:',
+                              style: typography.lS_strong,
+                            ),
                             const SizedBox(height: 12),
                             Wrap(
                               spacing: 8,
@@ -4526,26 +4811,34 @@ class _ComponentShowcasePageState extends State<ComponentShowcasePage> {
                               children: SocialMediaIcon.values.map((icon) {
                                 final isSelected = _selectedSocialIcon == icon;
                                 return GestureDetector(
-                                  onTap: () => setState(() => _selectedSocialIcon = icon),
+                                  onTap: () => setState(
+                                    () => _selectedSocialIcon = icon,
+                                  ),
                                   child: AnimatedContainer(
                                     duration: const Duration(milliseconds: 150),
                                     padding: const EdgeInsets.all(8),
                                     decoration: BoxDecoration(
                                       color: isSelected
-                                          ? colors.primary.withValues(alpha: 0.15)
+                                          ? colors.primary.withValues(
+                                              alpha: 0.15,
+                                            )
                                           : colors.surface,
                                       borderRadius: BorderRadius.circular(8),
                                       border: Border.all(
                                         color: isSelected
                                             ? colors.primary
-                                            : colors.onSurface.withValues(alpha: 0.12),
+                                            : colors.onSurface.withValues(
+                                                alpha: 0.12,
+                                              ),
                                         width: isSelected ? 1.5 : 1,
                                       ),
                                     ),
                                     child: Ux4gSocialLink(
                                       icon: icon,
                                       size: SocialLinkSize.m,
-                                      color: isSelected ? colors.primary : colors.onSurface,
+                                      color: isSelected
+                                          ? colors.primary
+                                          : colors.onSurface,
                                     ),
                                   ),
                                 );
@@ -4592,7 +4885,6 @@ class _ComponentShowcasePageState extends State<ComponentShowcasePage> {
                         colors: colors,
                         child: SlotGridShowcase(),
                       ),
-
 
                       const SizedBox(height: 80),
                     ],
@@ -4796,45 +5088,54 @@ class _SlotGridShowcaseState extends State<SlotGridShowcase> {
     return {
       "year": now.year,
       "month": now.month,
-      "today": '${now.year}-${now.month.toString().padLeft(2, '0')}-${now.day.toString().padLeft(2, '0')}',
+      "today":
+          '${now.year}-${now.month.toString().padLeft(2, '0')}-${now.day.toString().padLeft(2, '0')}',
       "weeklyOffWeekdays": [6, 7],
       "allowTapOnPublicHoliday": false,
       "allowTapOnWeeklyOff": false,
-      "viewMode": _selectedViewMode == SlotPickerViewMode.compact ? "compact" : "expanded",
+      "viewMode": _selectedViewMode == SlotPickerViewMode.compact
+          ? "compact"
+          : "expanded",
       "dates": [
         {
-          "date": '${now.year}-${now.month.toString().padLeft(2, '0')}-${_pad(now.day + 2)}',
-          "status": "publicHoliday"
+          "date":
+              '${now.year}-${now.month.toString().padLeft(2, '0')}-${_pad(now.day + 2)}',
+          "status": "publicHoliday",
         },
         {
-          "date": '${now.year}-${now.month.toString().padLeft(2, '0')}-${_pad(now.day + 4)}',
-          "status": "noSlots"
+          "date":
+              '${now.year}-${now.month.toString().padLeft(2, '0')}-${_pad(now.day + 4)}',
+          "status": "noSlots",
         },
         {
-          "date": '${now.year}-${now.month.toString().padLeft(2, '0')}-${_pad(now.day + 6)}',
-          "status": "noSlots"
+          "date":
+              '${now.year}-${now.month.toString().padLeft(2, '0')}-${_pad(now.day + 6)}',
+          "status": "noSlots",
         },
       ],
       "timeSlots": {
-        '${tomorrow.year}-${tomorrow.month.toString().padLeft(2, '0')}-${tomorrow.day.toString().padLeft(2, '0')}': [
-          {"time": "9:00 AM", "slotCount": 2, "status": "available"},
-          {"time": "10:00 AM", "slotCount": 1, "status": "limited"},
-          {"time": "11:00 AM", "slotCount": 0, "status": "noSlots"},
-          {"time": "2:00 PM", "slotCount": 3, "status": "available"},
-        ],
-        '${dayAfter.year}-${dayAfter.month.toString().padLeft(2, '0')}-${dayAfter.day.toString().padLeft(2, '0')}': [
-          {"time": "9:30 AM", "slotCount": 5, "status": "available"},
-          {"time": "10:30 AM", "slotCount": 2, "status": "available"},
-          {"time": "1:00 PM", "slotCount": 4, "status": "available"},
-          {"time": "3:00 PM", "slotCount": 1, "status": "limited"},
-          {"time": "4:00 PM", "slotCount": 0, "status": "noSlots"},
-        ],
-        '${day4.year}-${day4.month.toString().padLeft(2, '0')}-${day4.day.toString().padLeft(2, '0')}': [
-          {"time": "11:00 AM", "slotCount": 8, "status": "available"},
-          {"time": "12:00 PM", "slotCount": 6, "status": "available"},
-          {"time": "1:00 PM", "slotCount": 3, "status": "available"},
-          {"time": "2:30 PM", "slotCount": 1, "status": "limited"},
-        ],
+        '${tomorrow.year}-${tomorrow.month.toString().padLeft(2, '0')}-${tomorrow.day.toString().padLeft(2, '0')}':
+            [
+              {"time": "9:00 AM", "slotCount": 2, "status": "available"},
+              {"time": "10:00 AM", "slotCount": 1, "status": "limited"},
+              {"time": "11:00 AM", "slotCount": 0, "status": "noSlots"},
+              {"time": "2:00 PM", "slotCount": 3, "status": "available"},
+            ],
+        '${dayAfter.year}-${dayAfter.month.toString().padLeft(2, '0')}-${dayAfter.day.toString().padLeft(2, '0')}':
+            [
+              {"time": "9:30 AM", "slotCount": 5, "status": "available"},
+              {"time": "10:30 AM", "slotCount": 2, "status": "available"},
+              {"time": "1:00 PM", "slotCount": 4, "status": "available"},
+              {"time": "3:00 PM", "slotCount": 1, "status": "limited"},
+              {"time": "4:00 PM", "slotCount": 0, "status": "noSlots"},
+            ],
+        '${day4.year}-${day4.month.toString().padLeft(2, '0')}-${day4.day.toString().padLeft(2, '0')}':
+            [
+              {"time": "11:00 AM", "slotCount": 8, "status": "available"},
+              {"time": "12:00 PM", "slotCount": 6, "status": "available"},
+              {"time": "1:00 PM", "slotCount": 3, "status": "available"},
+              {"time": "2:30 PM", "slotCount": 1, "status": "limited"},
+            ],
         "default": [
           {"time": "9:00 AM", "slotCount": 4, "status": "available"},
           {"time": "9:30 AM", "slotCount": 6, "status": "available"},
@@ -4851,8 +5152,8 @@ class _SlotGridShowcaseState extends State<SlotGridShowcase> {
           {"time": "4:30 PM", "slotCount": 2, "status": "limited"},
           {"time": "5:00 PM", "slotCount": 2, "status": "limited"},
           {"time": "5:30 PM", "slotCount": 0, "status": "noSlots"},
-        ]
-      }
+        ],
+      },
     };
   }
 
@@ -4862,10 +5163,14 @@ class _SlotGridShowcaseState extends State<SlotGridShowcase> {
   Map<String, List<Map<String, dynamic>>> _buildMutableSlots() {
     final json = _getJsonInput();
     final raw = json['timeSlots'] as Map<String, dynamic>;
-    return raw.map((key, value) => MapEntry(
-          key,
-          (value as List).map((e) => Map<String, dynamic>.from(e as Map)).toList(),
-        ));
+    return raw.map(
+      (key, value) => MapEntry(
+        key,
+        (value as List)
+            .map((e) => Map<String, dynamic>.from(e as Map))
+            .toList(),
+      ),
+    );
   }
 
   @override
@@ -4877,7 +5182,8 @@ class _SlotGridShowcaseState extends State<SlotGridShowcase> {
 
   /// Returns current slots for [date], falling back to "default".
   List<SlotTimeEntry> _timeSlotsFor(DateTime date) {
-    final dateStr = '${date.year}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}';
+    final dateStr =
+        '${date.year}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}';
     if (_mutableTimeSlots.isEmpty) {
       _mutableTimeSlots = _buildMutableSlots();
     }
@@ -4895,7 +5201,8 @@ class _SlotGridShowcaseState extends State<SlotGridShowcase> {
 
   /// Increments slotCount for [bookedTime] on [date] and updates status.
   void _onSlotBooked(DateTime date, SlotTimeEntry bookedTime) {
-    final dateStr = '${date.year}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}';
+    final dateStr =
+        '${date.year}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}';
     if (_mutableTimeSlots.isEmpty) {
       _mutableTimeSlots = _buildMutableSlots();
     }

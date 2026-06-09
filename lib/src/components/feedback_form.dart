@@ -9,11 +9,12 @@ class Ux4gFeedbackForm extends StatefulWidget {
   final List<String> improvementOptions;
   final int minWords;
   final int maxLength;
-  final void Function(int rating, List<String> selectedChips, String comment) onSubmit;
+  final void Function(int rating, List<String> selectedChips, String comment)
+  onSubmit;
   final VoidCallback? onSkip;
   final VoidCallback? onCloseSuccess;
   final double chipBorderRadius;
-  
+
   // Customization
   final String title;
   final String improvementTitle;
@@ -58,7 +59,8 @@ class Ux4gFeedbackForm extends StatefulWidget {
     this.submitButtonText = 'Submit',
     this.skipButtonText = 'Skip',
     this.successTitle = 'Feedback submitted',
-    this.successMessage = 'Thank you for your feedback. This helps improve government services.',
+    this.successMessage =
+        'Thank you for your feedback. This helps improve government services.',
     this.titleStyle,
     this.improvementTitleStyle,
     this.successTitleStyle,
@@ -93,7 +95,8 @@ class _Ux4gFeedbackFormState extends State<Ux4gFeedbackForm> {
     if (_rating == 0) return false;
     if (_selectedChips.isEmpty) return false;
     if (_comment.trim().isEmpty) return false;
-    if (widget.minWords > 0 && _getWordCount(_comment) < widget.minWords) return false;
+    if (widget.minWords > 0 && _getWordCount(_comment) < widget.minWords)
+      return false;
     return true;
   }
 
@@ -113,7 +116,8 @@ class _Ux4gFeedbackFormState extends State<Ux4gFeedbackForm> {
     final ux4gTypography = materialTheme.extension<Ux4gTypography>();
 
     final surface = ux4gColors?.surface ?? materialTheme.colorScheme.surface;
-    final onSurface = ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
+    final onSurface =
+        ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
 
     return Container(
       width: double.infinity,
@@ -131,20 +135,36 @@ class _Ux4gFeedbackFormState extends State<Ux4gFeedbackForm> {
           ),
         ],
       ),
-      child: _isSubmitted 
-          ? _buildSuccessView(materialTheme, ux4gColors, ux4gTypography) 
+      child: _isSubmitted
+          ? _buildSuccessView(materialTheme, ux4gColors, ux4gTypography)
           : _buildFormView(materialTheme, ux4gColors, ux4gTypography),
     );
   }
 
-  Widget _buildFormView(ThemeData materialTheme, Ux4gColors? ux4gColors, Ux4gTypography? ux4gTypography) {
+  Widget _buildFormView(
+    ThemeData materialTheme,
+    Ux4gColors? ux4gColors,
+    Ux4gTypography? ux4gTypography,
+  ) {
     final info = ux4gColors?.info ?? materialTheme.colorScheme.primary;
-    final onSurface = ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
-    final onBackground = ux4gColors?.onBackground ?? materialTheme.colorScheme.onSurface;
+    final onSurface =
+        ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
+    final onBackground =
+        ux4gColors?.onBackground ?? materialTheme.colorScheme.onSurface;
     final primary = ux4gColors?.primary ?? materialTheme.colorScheme.primary;
 
-    final hlStrong = ux4gTypography?.hL_strong ?? materialTheme.textTheme.headlineLarge?.copyWith(fontWeight: FontWeight.w700) ?? const TextStyle(fontWeight: FontWeight.w700, fontSize: 28);
-    final bmStrong = ux4gTypography?.bM_strong ?? materialTheme.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w700) ?? const TextStyle(fontWeight: FontWeight.w700, fontSize: 16);
+    final hlStrong =
+        ux4gTypography?.hL_strong ??
+        materialTheme.textTheme.headlineLarge?.copyWith(
+          fontWeight: FontWeight.w700,
+        ) ??
+        const TextStyle(fontWeight: FontWeight.w700, fontSize: 28);
+    final bmStrong =
+        ux4gTypography?.bM_strong ??
+        materialTheme.textTheme.bodyMedium?.copyWith(
+          fontWeight: FontWeight.w700,
+        ) ??
+        const TextStyle(fontWeight: FontWeight.w700, fontSize: 16);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -152,10 +172,15 @@ class _Ux4gFeedbackFormState extends State<Ux4gFeedbackForm> {
       children: [
         Text(
           widget.title,
-          style: widget.titleStyle ?? hlStrong.copyWith(color: onBackground, fontWeight: FontWeight.w700),
+          style:
+              widget.titleStyle ??
+              hlStrong.copyWith(
+                color: onBackground,
+                fontWeight: FontWeight.w700,
+              ),
         ),
         const SizedBox(height: 16),
-        
+
         // Star Rating
         Row(
           children: List.generate(5, (index) {
@@ -186,18 +211,21 @@ class _Ux4gFeedbackFormState extends State<Ux4gFeedbackForm> {
                   size: 32,
                   color: isSelected
                       ? activeColor
-                      : (widget.inactiveRatingColor ?? onSurface.withValues(alpha: 0.15)),
+                      : (widget.inactiveRatingColor ??
+                            onSurface.withValues(alpha: 0.15)),
                 ),
               ),
             );
           }),
         ),
         const SizedBox(height: 24),
-        
+
         // Improvement Section
         Text(
           widget.improvementTitle,
-          style: widget.improvementTitleStyle ?? bmStrong.copyWith(color: onBackground),
+          style:
+              widget.improvementTitleStyle ??
+              bmStrong.copyWith(color: onBackground),
         ),
         const SizedBox(height: 12),
         Wrap(
@@ -224,7 +252,7 @@ class _Ux4gFeedbackFormState extends State<Ux4gFeedbackForm> {
           }).toList(),
         ),
         const SizedBox(height: 24),
-        
+
         // Comment Section
         Ux4gTextArea(
           value: _comment,
@@ -239,7 +267,7 @@ class _Ux4gFeedbackFormState extends State<Ux4gFeedbackForm> {
           characterCountText: '${_comment.length}/${widget.maxLength}',
         ),
         const SizedBox(height: 24),
-        
+
         // Buttons
         SizedBox(
           width: double.infinity,
@@ -256,9 +284,7 @@ class _Ux4gFeedbackFormState extends State<Ux4gFeedbackForm> {
             width: double.infinity,
             child: TextButton(
               onPressed: widget.onSkip,
-              style: TextButton.styleFrom(
-                foregroundColor: onBackground,
-              ),
+              style: TextButton.styleFrom(foregroundColor: onBackground),
               child: Text(
                 widget.skipButtonText,
                 style: bmStrong.copyWith(color: onBackground),
@@ -270,13 +296,27 @@ class _Ux4gFeedbackFormState extends State<Ux4gFeedbackForm> {
     );
   }
 
-  Widget _buildSuccessView(ThemeData materialTheme, Ux4gColors? ux4gColors, Ux4gTypography? ux4gTypography) {
+  Widget _buildSuccessView(
+    ThemeData materialTheme,
+    Ux4gColors? ux4gColors,
+    Ux4gTypography? ux4gTypography,
+  ) {
     final success = ux4gColors?.success ?? Colors.green;
-    final onBackground = ux4gColors?.onBackground ?? materialTheme.colorScheme.onSurface;
-    final onSurface = ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
+    final onBackground =
+        ux4gColors?.onBackground ?? materialTheme.colorScheme.onSurface;
+    final onSurface =
+        ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
 
-    final hlStrong = ux4gTypography?.hL_strong ?? materialTheme.textTheme.headlineLarge?.copyWith(fontWeight: FontWeight.w700) ?? const TextStyle(fontWeight: FontWeight.w700, fontSize: 28);
-    final bmDefault = ux4gTypography?.bM_default ?? materialTheme.textTheme.bodyMedium ?? const TextStyle(fontSize: 16);
+    final hlStrong =
+        ux4gTypography?.hL_strong ??
+        materialTheme.textTheme.headlineLarge?.copyWith(
+          fontWeight: FontWeight.w700,
+        ) ??
+        const TextStyle(fontWeight: FontWeight.w700, fontSize: 28);
+    final bmDefault =
+        ux4gTypography?.bM_default ??
+        materialTheme.textTheme.bodyMedium ??
+        const TextStyle(fontSize: 16);
 
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -285,7 +325,9 @@ class _Ux4gFeedbackFormState extends State<Ux4gFeedbackForm> {
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
           decoration: BoxDecoration(
-            color: widget.successBackgroundColor ?? success.withValues(alpha: 0.12),
+            color:
+                widget.successBackgroundColor ??
+                success.withValues(alpha: 0.12),
             borderRadius: BorderRadius.circular(8),
           ),
           child: Column(
@@ -300,13 +342,20 @@ class _Ux4gFeedbackFormState extends State<Ux4gFeedbackForm> {
               Text(
                 widget.successTitle,
                 textAlign: TextAlign.center,
-                style: widget.successTitleStyle ?? hlStrong.copyWith(color: onBackground, fontWeight: FontWeight.w700),
+                style:
+                    widget.successTitleStyle ??
+                    hlStrong.copyWith(
+                      color: onBackground,
+                      fontWeight: FontWeight.w700,
+                    ),
               ),
               const SizedBox(height: 8),
               Text(
                 widget.successMessage,
                 textAlign: TextAlign.center,
-                style: widget.successMessageStyle ?? bmDefault.copyWith(color: onSurface.withValues(alpha: 0.7)),
+                style:
+                    widget.successMessageStyle ??
+                    bmDefault.copyWith(color: onSurface.withValues(alpha: 0.7)),
               ),
             ],
           ),

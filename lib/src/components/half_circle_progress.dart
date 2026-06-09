@@ -123,39 +123,59 @@ class Ux4gHalfCircleProgress extends StatelessWidget {
     final sw = _resolvedStrokeWidth(w);
     final arcHeight = w / 2 + sw / 2;
 
-    final resolvedProgressColor = progressColor ?? (ux4gColors?.primary ?? materialTheme.colorScheme.primary);
+    final resolvedProgressColor =
+        progressColor ??
+        (ux4gColors?.primary ?? materialTheme.colorScheme.primary);
     final resolvedTrackColor =
-        trackColor ?? (ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface).withValues(alpha: 0.16);
+        trackColor ??
+        (ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface)
+            .withValues(alpha: 0.16);
 
     final percent = (value * 100).round();
     final displayValue = valueText ?? '$percent%';
 
     final resolvedValueStyle =
         valueStyle ??
-        (ux4gTypography?.bS_strong ?? materialTheme.textTheme.bodySmall?.copyWith(fontWeight: FontWeight.w700) ?? const TextStyle()).copyWith(
-          fontSize: _valueFontSize(w),
-          fontWeight: FontWeight.w700,
-          height: 1.1,
-          color: ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface,
-        );
+        (ux4gTypography?.bS_strong ??
+                materialTheme.textTheme.bodySmall?.copyWith(
+                  fontWeight: FontWeight.w700,
+                ) ??
+                const TextStyle())
+            .copyWith(
+              fontSize: _valueFontSize(w),
+              fontWeight: FontWeight.w700,
+              height: 1.1,
+              color:
+                  ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface,
+            );
 
     final resolvedDescriptionStyle =
         descriptionStyle ??
-        (ux4gTypography?.bXS_default ?? materialTheme.textTheme.bodySmall?.copyWith(fontSize: 12) ?? const TextStyle()).copyWith(
-          fontSize: _descriptionFontSize(w),
-          fontWeight: FontWeight.w500,
-          height: 1.2,
-          color: (ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface).withValues(alpha: 0.6),
-        );
+        (ux4gTypography?.bXS_default ??
+                materialTheme.textTheme.bodySmall?.copyWith(fontSize: 12) ??
+                const TextStyle())
+            .copyWith(
+              fontSize: _descriptionFontSize(w),
+              fontWeight: FontWeight.w500,
+              height: 1.2,
+              color:
+                  (ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface)
+                      .withValues(alpha: 0.6),
+            );
 
     final resolvedScaleStyle =
         scaleStyle ??
-        (ux4gTypography?.bXS_default ?? materialTheme.textTheme.bodySmall?.copyWith(fontSize: 12) ?? const TextStyle()).copyWith(
-          fontSize: _scaleFontSize(w),
-          fontWeight: FontWeight.w400,
-          height: 1.2,
-          color: (ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface).withValues(alpha: 0.5),
-        );
+        (ux4gTypography?.bXS_default ??
+                materialTheme.textTheme.bodySmall?.copyWith(fontSize: 12) ??
+                const TextStyle())
+            .copyWith(
+              fontSize: _scaleFontSize(w),
+              fontWeight: FontWeight.w400,
+              height: 1.2,
+              color:
+                  (ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface)
+                      .withValues(alpha: 0.5),
+            );
 
     // Description fits inside the arc only for larger sizes
     final bool descriptionFitsInside = w >= 120;

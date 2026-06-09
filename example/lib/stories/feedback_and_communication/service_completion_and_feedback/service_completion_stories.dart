@@ -38,14 +38,14 @@ final serviceCompletionComponent = WidgetbookComponent(
           name: 'Service Completed ($variant)',
           description: isCard
               ? 'Service completion confirmation with downloaded certificate info '
-                'inside a card container with light purple background.'
+                    'inside a card container with light purple background.'
               : 'Service completion confirmation with downloaded certificate info '
-                'on a white background.',
-          code: isCard ? _serviceCompletionCardCode : _serviceCompletionDefaultCode,
+                    'on a white background.',
+          code: isCard
+              ? _serviceCompletionCardCode
+              : _serviceCompletionDefaultCode,
           center: true,
-          child: _ServiceCompletionMockup(
-            isCard: isCard,
-          ),
+          child: _ServiceCompletionMockup(isCard: isCard),
         );
       },
     ),
@@ -56,7 +56,8 @@ final serviceCompletionComponent = WidgetbookComponent(
 // Source Code String — Default
 // ───────────────────────────────────────────────────────────────────────
 
-const _serviceCompletionDefaultCode = r"""import 'package:flutter/material.dart';
+const _serviceCompletionDefaultCode =
+    r"""import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:ux4g_flutter_design_system/ux4g_flutter_design_system.dart';
 
@@ -463,11 +464,17 @@ class _ServiceCompletionMockup extends StatelessWidget {
               // App Header with logos
               Container(
                 width: double.infinity,
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 10,
+                ),
                 color: Colors.white,
                 child: Row(
                   children: [
-                    SvgPicture.asset('assets/national_amblam_logo.svg', height: 40),
+                    SvgPicture.asset(
+                      'assets/national_amblam_logo.svg',
+                      height: 40,
+                    ),
                     const SizedBox(width: 8),
                     SizedBox(
                       height: 32,
@@ -485,19 +492,41 @@ class _ServiceCompletionMockup extends StatelessWidget {
               // Gov bar
               Container(
                 width: double.infinity,
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 6,
+                ),
                 color: const Color(0xFF1E3A8A),
                 child: Row(
                   children: [
-                    Image.asset('assets/india_flag.png', height: 14, width: 22,
-                        errorBuilder: (_, __, ___) => const Text('🇮🇳', style: TextStyle(fontSize: 14))),
+                    Image.asset(
+                      'assets/india_flag.png',
+                      height: 14,
+                      width: 22,
+                      errorBuilder: (_, __, ___) =>
+                          const Text('🇮🇳', style: TextStyle(fontSize: 14)),
+                    ),
                     const SizedBox(width: 8),
-                    const Text('Government of India',
-                        style: TextStyle(color: Colors.white, fontSize: 12, fontWeight: FontWeight.w500)),
+                    const Text(
+                      'Government of India',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 12,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
                     const SizedBox(width: 4),
-                    const Icon(Icons.open_in_new, size: 11, color: Colors.white),
+                    const Icon(
+                      Icons.open_in_new,
+                      size: 11,
+                      color: Colors.white,
+                    ),
                     const Spacer(),
-                    const Icon(Icons.accessibility_new, size: 16, color: Colors.white),
+                    const Icon(
+                      Icons.accessibility_new,
+                      size: 16,
+                      color: Colors.white,
+                    ),
                   ],
                 ),
               ),
@@ -534,12 +563,22 @@ class _ServiceCompletionMockup extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text('Powered by -',
-                        style: TextStyle(fontSize: 11, color: Color(0xFF6B7280))),
+                    const Text(
+                      'Powered by -',
+                      style: TextStyle(fontSize: 11, color: Color(0xFF6B7280)),
+                    ),
                     const SizedBox(width: 4),
-                    Image.asset('assets/digital_india_logo.png', height: 20,
-                        errorBuilder: (_, __, ___) => const Text('Digital India',
-                            style: TextStyle(fontSize: 10, color: Color(0xFF432CBB)))),
+                    Image.asset(
+                      'assets/digital_india_logo.png',
+                      height: 20,
+                      errorBuilder: (_, __, ___) => const Text(
+                        'Digital India',
+                        style: TextStyle(
+                          fontSize: 10,
+                          color: Color(0xFF432CBB),
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -568,7 +607,11 @@ class _ServiceCompletionMockup extends StatelessWidget {
         // Title
         const Text(
           'Service Completed',
-          style: TextStyle(fontSize: 18, fontWeight: FontWeight.w800, color: _titleColor),
+          style: TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.w800,
+            color: _titleColor,
+          ),
         ),
         const SizedBox(height: 6),
         const Text(
@@ -586,47 +629,47 @@ class _ServiceCompletionMockup extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.all(14),
             child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
-                  Icon(Icons.check_circle, size: 20, color: _successGreen),
-                  SizedBox(width: 8),
-                  Expanded(
-                    child: Text(
-                      'Income Certificate Downloaded.',
-                      style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w700,
-                        color: _successTextColor,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: const [
+                    Icon(Icons.check_circle, size: 20, color: _successGreen),
+                    SizedBox(width: 8),
+                    Expanded(
+                      child: Text(
+                        'Income Certificate Downloaded.',
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w700,
+                          color: _successTextColor,
+                        ),
                       ),
                     ),
+                  ],
+                ),
+                const SizedBox(height: 6),
+                const Padding(
+                  padding: EdgeInsets.only(left: 28),
+                  child: Text(
+                    'Your certificate has been saved to your\ndevice.',
+                    style: TextStyle(fontSize: 13, color: _successTextColor),
                   ),
-                ],
-              ),
-              const SizedBox(height: 6),
-              const Padding(
-                padding: EdgeInsets.only(left: 28),
-                child: Text(
-                  'Your certificate has been saved to your\ndevice.',
-                  style: TextStyle(fontSize: 13, color: _successTextColor),
                 ),
-              ),
-              const SizedBox(height: 4),
-              Padding(
-                padding: const EdgeInsets.only(left: 28),
-                child: Ux4gButton(
-                  onPressed: () {},
-                  text: 'View',
-                  variant: Ux4gButtonVariant.ghost,
-                  size: Ux4gButtonSize.small,
-                  contentColor: _successTextColor,
-                  padding: EdgeInsets.zero,
+                const SizedBox(height: 4),
+                Padding(
+                  padding: const EdgeInsets.only(left: 28),
+                  child: Ux4gButton(
+                    onPressed: () {},
+                    text: 'View',
+                    variant: Ux4gButtonVariant.ghost,
+                    size: Ux4gButtonSize.small,
+                    contentColor: _successTextColor,
+                    padding: EdgeInsets.zero,
+                  ),
                 ),
-              ),
-            ],
-          ),
+              ],
+            ),
           ),
         ),
         const SizedBox(height: 16),
@@ -638,18 +681,22 @@ class _ServiceCompletionMockup extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
             child: Row(
-            children: const [
-              Text(
-                'income_certificate_2026.pdf',
-                style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: _titleColor),
-              ),
-              SizedBox(width: 8),
-              Text(
-                '28 KB · PDF',
-                style: TextStyle(fontSize: 12, color: Color(0xFF6B7280)),
-              ),
-            ],
-          ),
+              children: const [
+                Text(
+                  'income_certificate_2026.pdf',
+                  style: TextStyle(
+                    fontSize: 13,
+                    fontWeight: FontWeight.w600,
+                    color: _titleColor,
+                  ),
+                ),
+                SizedBox(width: 8),
+                Text(
+                  '28 KB · PDF',
+                  style: TextStyle(fontSize: 12, color: Color(0xFF6B7280)),
+                ),
+              ],
+            ),
           ),
         ),
       ],

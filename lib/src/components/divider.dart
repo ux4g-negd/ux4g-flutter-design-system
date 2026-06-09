@@ -1,16 +1,9 @@
 import 'package:flutter/material.dart';
 import '../foundation/colors.dart';
 
-enum Ux4gDividerOrientation {
-  horizontal,
-  vertical
-}
+enum Ux4gDividerOrientation { horizontal, vertical }
 
-enum Ux4gDividerStyle {
-  solid,
-  dashed,
-  dotted
-}
+enum Ux4gDividerStyle { solid, dashed, dotted }
 
 class Ux4gDivider extends StatelessWidget {
   final Ux4gDividerOrientation orientation;
@@ -38,7 +31,10 @@ class Ux4gDivider extends StatelessWidget {
   Widget build(BuildContext context) {
     final materialTheme = Theme.of(context);
     final ux4gColors = materialTheme.extension<Ux4gColors>();
-    final dividerColor = color ?? (ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface).withValues(alpha: 0.2);
+    final dividerColor =
+        color ??
+        (ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface)
+            .withValues(alpha: 0.2);
 
     if (label != null) {
       if (orientation == Ux4gDividerOrientation.horizontal) {

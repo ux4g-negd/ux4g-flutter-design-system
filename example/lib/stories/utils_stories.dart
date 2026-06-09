@@ -62,7 +62,7 @@ final quickGuideComponent = WidgetbookComponent(
             label:
                 "This will add a line like this to your package's pubspec.yaml\n"
                 "(and run an implicit flutter pub get):",
-            code: 'dependencies:\n  ux4g_flutter_design_system: ^0.2.0',
+            code: 'dependencies:\n  ux4g_flutter_design_system: ^0.3.0',
           ),
         ],
         trailingSections: const [
@@ -126,7 +126,12 @@ final themeColorComponent = WidgetbookComponent(
           _Swatch('secondary-200', Ux4gPalette.secondary200, '200'),
           _Swatch('secondary-300', Ux4gPalette.secondary300, '300'),
           _Swatch('secondary-400', Ux4gPalette.secondary400, '400'),
-          _Swatch('secondary-500', Ux4gPalette.secondary500, '500 ★', main: true),
+          _Swatch(
+            'secondary-500',
+            Ux4gPalette.secondary500,
+            '500 ★',
+            main: true,
+          ),
           _Swatch('secondary-600', Ux4gPalette.secondary600, '600'),
           _Swatch('secondary-700', Ux4gPalette.secondary700, '700'),
           _Swatch('secondary-800', Ux4gPalette.secondary800, '800'),
@@ -146,7 +151,7 @@ final themeColorComponent = WidgetbookComponent(
             _PaletteView(
               label: 'Red  (Error)',
               swatches: const [
-                _Swatch('red-50',  Ux4gPalette.red50,  '50'),
+                _Swatch('red-50', Ux4gPalette.red50, '50'),
                 _Swatch('red-100', Ux4gPalette.red100, '100'),
                 _Swatch('red-200', Ux4gPalette.red200, '200'),
                 _Swatch('red-300', Ux4gPalette.red300, '300'),
@@ -165,7 +170,7 @@ final themeColorComponent = WidgetbookComponent(
             _PaletteView(
               label: 'Green  (Success)',
               swatches: const [
-                _Swatch('green-50',  Ux4gPalette.green50,  '50'),
+                _Swatch('green-50', Ux4gPalette.green50, '50'),
                 _Swatch('green-100', Ux4gPalette.green100, '100'),
                 _Swatch('green-200', Ux4gPalette.green200, '200'),
                 _Swatch('green-300', Ux4gPalette.green300, '300'),
@@ -184,7 +189,7 @@ final themeColorComponent = WidgetbookComponent(
             _PaletteView(
               label: 'Blue  (Info)',
               swatches: const [
-                _Swatch('blue-50',  Ux4gPalette.blue50,  '50'),
+                _Swatch('blue-50', Ux4gPalette.blue50, '50'),
                 _Swatch('blue-500', Ux4gPalette.blue500, '500 ★', main: true),
                 _Swatch('blue-700', Ux4gPalette.blue700, '700'),
               ],
@@ -195,8 +200,13 @@ final themeColorComponent = WidgetbookComponent(
             _PaletteView(
               label: 'Orange  (Warning)',
               swatches: const [
-                _Swatch('orange-50',  Ux4gPalette.orange50,  '50'),
-                _Swatch('orange-500', Ux4gPalette.orange500, '500 ★', main: true),
+                _Swatch('orange-50', Ux4gPalette.orange50, '50'),
+                _Swatch(
+                  'orange-500',
+                  Ux4gPalette.orange500,
+                  '500 ★',
+                  main: true,
+                ),
                 _Swatch('orange-700', Ux4gPalette.orange700, '700'),
               ],
               compact: true,
@@ -206,7 +216,7 @@ final themeColorComponent = WidgetbookComponent(
             _PaletteView(
               label: 'Gold',
               swatches: const [
-                _Swatch('gold-50',  Ux4gPalette.gold50,  '50'),
+                _Swatch('gold-50', Ux4gPalette.gold50, '50'),
                 _Swatch('gold-500', Ux4gPalette.gold500, '500 ★', main: true),
                 _Swatch('gold-600', Ux4gPalette.gold600, '600'),
                 _Swatch('gold-700', Ux4gPalette.gold700, '700'),
@@ -218,7 +228,7 @@ final themeColorComponent = WidgetbookComponent(
             _PaletteView(
               label: 'Cyan',
               swatches: const [
-                _Swatch('cyan-50',  Ux4gPalette.cyan50,  '50'),
+                _Swatch('cyan-50', Ux4gPalette.cyan50, '50'),
                 _Swatch('cyan-500', Ux4gPalette.cyan500, '500 ★', main: true),
                 _Swatch('cyan-600', Ux4gPalette.cyan600, '600'),
               ],
@@ -229,8 +239,13 @@ final themeColorComponent = WidgetbookComponent(
             _PaletteView(
               label: 'Purple',
               swatches: const [
-                _Swatch('purple-50',  Ux4gPalette.purple50,  '50'),
-                _Swatch('purple-500', Ux4gPalette.purple500, '500 ★', main: true),
+                _Swatch('purple-50', Ux4gPalette.purple50, '50'),
+                _Swatch(
+                  'purple-500',
+                  Ux4gPalette.purple500,
+                  '500 ★',
+                  main: true,
+                ),
                 _Swatch('purple-600', Ux4gPalette.purple600, '600'),
               ],
               compact: true,
@@ -250,19 +265,19 @@ final themeColorComponent = WidgetbookComponent(
             _PaletteView(
               label: 'Gray Scale',
               swatches: const [
-                _Swatch('gray-100',     Ux4gPalette.gray100,       '100'),
-                _Swatch('gray-200',     Ux4gPalette.gray200,       '200'),
-                _Swatch('neutral-500',  Ux4gPalette.neutral500,    'neutral-500'),
-                _Swatch('neutral-700',  Ux4gPalette.neutral700,    'neutral-700'),
-                _Swatch('gray-800',     Ux4gPalette.gray800,       '800'),
-                _Swatch('gray-900',     Ux4gPalette.gray900,       '900'),
+                _Swatch('gray-100', Ux4gPalette.gray100, '100'),
+                _Swatch('gray-200', Ux4gPalette.gray200, '200'),
+                _Swatch('neutral-500', Ux4gPalette.neutral500, 'neutral-500'),
+                _Swatch('neutral-700', Ux4gPalette.neutral700, 'neutral-700'),
+                _Swatch('gray-800', Ux4gPalette.gray800, '800'),
+                _Swatch('gray-900', Ux4gPalette.gray900, '900'),
               ],
             ),
             const SizedBox(height: 24),
             _PaletteView(
               label: 'Base',
               swatches: const [
-                _Swatch('white', Ux4gPalette.white,           'white'),
+                _Swatch('white', Ux4gPalette.white, 'white'),
                 _Swatch('black', Ux4gPalette.neutral1000black, 'black'),
               ],
             ),
@@ -303,13 +318,16 @@ final themeColorComponent = WidgetbookComponent(
                 ),
                 const SizedBox(height: 12),
                 Container(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 12,
+                    vertical: 10,
+                  ),
                   decoration: BoxDecoration(
                     color: const Color(0xFF6A4EFF).withValues(alpha: 0.08),
                     borderRadius: BorderRadius.circular(6),
                     border: Border.all(
-                        color: const Color(0xFF6A4EFF).withValues(alpha: 0.25)),
+                      color: const Color(0xFF6A4EFF).withValues(alpha: 0.25),
+                    ),
                   ),
                   child: const Text(
                     'final colors = Ux4gTheme.colors(context);\n'
@@ -325,11 +343,36 @@ final themeColorComponent = WidgetbookComponent(
                 const SizedBox(height: 24),
                 _SemanticTokenRow(
                   pairs: [
-                    _SemanticPair('primary',    colors.primary,    'onPrimary',    colors.onPrimary),
-                    _SemanticPair('secondary',  colors.secondary,  'onSecondary',  colors.onSecondary),
-                    _SemanticPair('background', colors.background, 'onBackground', colors.onBackground),
-                    _SemanticPair('surface',    colors.surface,    'onSurface',    colors.onSurface),
-                    _SemanticPair('error',      colors.error,      'onError',      colors.onError),
+                    _SemanticPair(
+                      'primary',
+                      colors.primary,
+                      'onPrimary',
+                      colors.onPrimary,
+                    ),
+                    _SemanticPair(
+                      'secondary',
+                      colors.secondary,
+                      'onSecondary',
+                      colors.onSecondary,
+                    ),
+                    _SemanticPair(
+                      'background',
+                      colors.background,
+                      'onBackground',
+                      colors.onBackground,
+                    ),
+                    _SemanticPair(
+                      'surface',
+                      colors.surface,
+                      'onSurface',
+                      colors.onSurface,
+                    ),
+                    _SemanticPair(
+                      'error',
+                      colors.error,
+                      'onError',
+                      colors.onError,
+                    ),
                   ],
                 ),
               ],
@@ -356,7 +399,8 @@ final themeColorComponent = WidgetbookComponent(
         codeBlocks: const [
           _CodeBlock(
             label: 'Dart — Ux4gPalette',
-            code: '''import 'package:ux4g_flutter_design_system/ux4g_flutter_design_system.dart';
+            code:
+                '''import 'package:ux4g_flutter_design_system/ux4g_flutter_design_system.dart';
 
 // Fixed palette shades
 Container(color: Ux4gPalette.primary500)       // #6A4EFF  — brand purple
@@ -374,7 +418,8 @@ Container(color: Ux4gPalette.neutral1000black) // #000000''',
         trailingSections: const [
           _DocSection(
             heading: '2. Semantic Tokens  (theme-aware, recommended)',
-            body: '''Ux4gColors holds semantic tokens that automatically switch value when the user changes between Light and Dark themes. Always prefer these inside your own widgets to keep the UI consistent with the rest of the design system.
+            body:
+                '''Ux4gColors holds semantic tokens that automatically switch value when the user changes between Light and Dark themes. Always prefer these inside your own widgets to keep the UI consistent with the rest of the design system.
 
 Available tokens:
   • primary / onPrimary
@@ -387,7 +432,8 @@ Available tokens:
         trailingCodeBlocks: const [
           _CodeBlock(
             label: 'Dart — Ux4gTheme.colors(context)',
-            code: '''// Inside any build() method, after Ux4gTheme is in the widget tree:
+            code:
+                '''// Inside any build() method, after Ux4gTheme is in the widget tree:
 final colors = Ux4gTheme.colors(context);
 
 // Pair usage — background + foreground
@@ -508,7 +554,8 @@ final dimensionsSpacingComponent = WidgetbookComponent(
         codeBlocks: [
           _CodeBlock(
             label: 'Dart — Ux4gSpace',
-            code: '''import 'package:ux4g_flutter_design_system/ux4g_flutter_design_system.dart';
+            code:
+                '''import 'package:ux4g_flutter_design_system/ux4g_flutter_design_system.dart';
 
 // Padding
 Padding(
@@ -754,7 +801,9 @@ class _DocPage extends StatelessWidget {
   Widget _buildSection(BuildContext context, _DocSection s) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final headColor = isDark ? Colors.white : const Color(0xFF111827);
-    final bodyColor = isDark ? const Color(0xFF9CA3AF) : const Color(0xFF4B5563);
+    final bodyColor = isDark
+        ? const Color(0xFF9CA3AF)
+        : const Color(0xFF4B5563);
 
     return Padding(
       padding: const EdgeInsets.only(bottom: 24),
@@ -772,11 +821,7 @@ class _DocPage extends StatelessWidget {
           const SizedBox(height: 8),
           Text(
             s.body,
-            style: TextStyle(
-              fontSize: 14,
-              color: bodyColor,
-              height: 1.65,
-            ),
+            style: TextStyle(fontSize: 14, color: bodyColor, height: 1.65),
           ),
         ],
       ),
@@ -785,8 +830,10 @@ class _DocPage extends StatelessWidget {
 
   Widget _buildCodeBlock(BuildContext context, _CodeBlock c) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
-    final labelColor = isDark ? const Color(0xFF9CA3AF) : const Color(0xFF6B7280);
-    
+    final labelColor = isDark
+        ? const Color(0xFF9CA3AF)
+        : const Color(0xFF6B7280);
+
     // Theme-aware code block colors
     final codeBg = isDark ? const Color(0xFF1E1E2E) : const Color(0xFFF3F4F6);
     final codeText = isDark ? const Color(0xFFCDD6F4) : const Color(0xFF374151);
@@ -862,14 +909,14 @@ class _CopyButtonState extends State<_CopyButton> {
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
-    
+
     // Theme-aware button colors for high visibility
-    final bg = isDark 
-        ? Colors.white.withValues(alpha: 0.1) 
+    final bg = isDark
+        ? Colors.white.withValues(alpha: 0.1)
         : const Color(0xFFE5E7EB);
-    final textColor = isDark 
-        ? ( _copied ? const Color(0xFFA6E3A1) : const Color(0xFF89DCEB) )
-        : ( _copied ? const Color(0xFF059669) : const Color(0xFF2563EB) );
+    final textColor = isDark
+        ? (_copied ? const Color(0xFFA6E3A1) : const Color(0xFF89DCEB))
+        : (_copied ? const Color(0xFF059669) : const Color(0xFF2563EB));
 
     return GestureDetector(
       onTap: () async {
@@ -884,7 +931,9 @@ class _CopyButtonState extends State<_CopyButton> {
           color: bg,
           borderRadius: BorderRadius.circular(6),
           border: Border.all(
-            color: isDark ? Colors.white10 : Colors.black.withValues(alpha: 0.05),
+            color: isDark
+                ? Colors.white10
+                : Colors.black.withValues(alpha: 0.05),
           ),
         ),
         child: Row(
@@ -928,7 +977,11 @@ class _SemanticPair {
   final String onToken;
   final Color onColor;
   const _SemanticPair(
-      this.baseToken, this.baseColor, this.onToken, this.onColor);
+    this.baseToken,
+    this.baseColor,
+    this.onToken,
+    this.onColor,
+  );
 }
 
 class _SemanticTokenRow extends StatelessWidget {
@@ -939,7 +992,8 @@ class _SemanticTokenRow extends StatelessWidget {
     final r = c.r.toInt();
     final g = c.g.toInt();
     final b = c.b.toInt();
-    return '#${r.toRadixString(16).padLeft(2, '0')}${g.toRadixString(16).padLeft(2, '0')}${b.toRadixString(16).padLeft(2, '0')}'.toUpperCase();
+    return '#${r.toRadixString(16).padLeft(2, '0')}${g.toRadixString(16).padLeft(2, '0')}${b.toRadixString(16).padLeft(2, '0')}'
+        .toUpperCase();
   }
 
   @override
@@ -1029,7 +1083,9 @@ class _PaletteView extends StatelessWidget {
           Wrap(
             spacing: 8,
             runSpacing: 8,
-            children: swatches.map((s) => _SwatchTile(s, compact: compact)).toList(),
+            children: swatches
+                .map((s) => _SwatchTile(s, compact: compact))
+                .toList(),
           ),
         ],
       ),
@@ -1053,11 +1109,11 @@ class _SwatchTileState extends State<_SwatchTile> {
     final r = (c.r * 255).toInt();
     final g = (c.g * 255).toInt();
     final b = (c.b * 255).toInt();
-    return '#${r.toRadixString(16).padLeft(2, '0')}${g.toRadixString(16).padLeft(2, '0')}${b.toRadixString(16).padLeft(2, '0')}'.toUpperCase();
+    return '#${r.toRadixString(16).padLeft(2, '0')}${g.toRadixString(16).padLeft(2, '0')}${b.toRadixString(16).padLeft(2, '0')}'
+        .toUpperCase();
   }
 
-  bool _isDark(Color c) =>
-      (c.r * 0.299 + c.g * 0.587 + c.b * 0.114) < 0.5;
+  bool _isDark(Color c) => (c.r * 0.299 + c.g * 0.587 + c.b * 0.114) < 0.5;
 
   @override
   Widget build(BuildContext context) {
@@ -1082,7 +1138,11 @@ class _SwatchTileState extends State<_SwatchTile> {
             borderRadius: BorderRadius.circular(8),
             border: widget.swatch.main
                 ? Border.all(color: const Color(0xFF6A4EFF), width: 2)
-                : Border.all(color: isDarkTheme ? Colors.white12 : const Color(0xFFE5E7EB)),
+                : Border.all(
+                    color: isDarkTheme
+                        ? Colors.white12
+                        : const Color(0xFFE5E7EB),
+                  ),
             boxShadow: isDarkTheme
                 ? []
                 : [
@@ -1101,20 +1161,19 @@ class _SwatchTileState extends State<_SwatchTile> {
                 decoration: BoxDecoration(
                   color: widget.swatch.color,
                   borderRadius: const BorderRadius.vertical(
-                      top: Radius.circular(7)),
+                    top: Radius.circular(7),
+                  ),
                 ),
                 alignment: Alignment.center,
-                child: _copied
-                    ? Icon(Icons.check, color: fg, size: 16)
-                    : null,
+                child: _copied ? Icon(Icons.check, color: fg, size: 16) : null,
               ),
               Container(
-                padding: const EdgeInsets.symmetric(
-                    horizontal: 6, vertical: 6),
+                padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 6),
                 decoration: BoxDecoration(
                   color: isDarkTheme ? const Color(0xFF1E1E2E) : Colors.white,
-                  borderRadius:
-                      const BorderRadius.vertical(bottom: Radius.circular(7)),
+                  borderRadius: const BorderRadius.vertical(
+                    bottom: Radius.circular(7),
+                  ),
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -1124,14 +1183,18 @@ class _SwatchTileState extends State<_SwatchTile> {
                       style: TextStyle(
                         fontSize: 11,
                         fontWeight: FontWeight.w600,
-                        color: isDarkTheme ? Colors.white : const Color(0xFF111827),
+                        color: isDarkTheme
+                            ? Colors.white
+                            : const Color(0xFF111827),
                       ),
                     ),
                     Text(
                       hex,
                       style: TextStyle(
                         fontSize: 10,
-                        color: isDarkTheme ? Colors.white38 : const Color(0xFF6B7280),
+                        color: isDarkTheme
+                            ? Colors.white38
+                            : const Color(0xFF6B7280),
                       ),
                     ),
                   ],
@@ -1250,7 +1313,8 @@ class _RadiusCard extends StatelessWidget {
           decoration: BoxDecoration(
             color: const Color(0xFF6A4EFF).withValues(alpha: 0.12),
             border: Border.all(
-                color: const Color(0xFF6A4EFF).withValues(alpha: 0.5)),
+              color: const Color(0xFF6A4EFF).withValues(alpha: 0.5),
+            ),
             borderRadius: BorderRadius.circular(r),
           ),
         ),
@@ -1266,8 +1330,9 @@ class _RadiusCard extends StatelessWidget {
         Text(
           '${value.toStringAsFixed(0)}px',
           style: TextStyle(
-              fontSize: 11,
-              color: isDark ? Colors.white38 : const Color(0xFF6B7280)),
+            fontSize: 11,
+            color: isDark ? Colors.white38 : const Color(0xFF6B7280),
+          ),
         ),
       ],
     );

@@ -33,9 +33,11 @@ final findServiceCentreComponent = WidgetbookComponent(
           name: 'Find Service Centre ($variant)',
           description: isCard
               ? 'Find nearest service centre with search and result card inside a '
-                'card container with light purple background.'
+                    'card container with light purple background.'
               : 'Find nearest service centre with search and result card on white background.',
-          code: isCard ? _findServiceCentreCardCode : _findServiceCentreDefaultCode,
+          code: isCard
+              ? _findServiceCentreCardCode
+              : _findServiceCentreDefaultCode,
           center: true,
           child: _FindServiceCentreMockup(isCard: isCard),
         );
@@ -48,7 +50,8 @@ final findServiceCentreComponent = WidgetbookComponent(
 // Source Code String — Default
 // ───────────────────────────────────────────────────────────────────────
 
-const _findServiceCentreDefaultCode = r"""import 'package:flutter/material.dart';
+const _findServiceCentreDefaultCode =
+    r"""import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:ux4g_flutter_design_system/ux4g_flutter_design_system.dart';
 
@@ -382,8 +385,11 @@ class _FindServiceCentreMockup extends StatelessWidget {
                 title: '',
                 leadingSpacing: 2,
                 leadingWidgets: [
-                  SvgPicture.asset('assets/national_amblam_logo.svg', height: 40),
-                SizedBox(width: 3),
+                  SvgPicture.asset(
+                    'assets/national_amblam_logo.svg',
+                    height: 40,
+                  ),
+                  SizedBox(width: 3),
                   SizedBox(
                     height: 32,
                     child: Ux4gDivider(
@@ -391,7 +397,7 @@ class _FindServiceCentreMockup extends StatelessWidget {
                       color: const Color(0xFFD1D5DB),
                     ),
                   ),
-                SizedBox(width: 3),
+                  SizedBox(width: 3),
                   SvgPicture.asset('assets/Union.svg', height: 32),
                 ],
               ),
@@ -399,19 +405,43 @@ class _FindServiceCentreMockup extends StatelessWidget {
               // Gov bar
               Container(
                 width: double.infinity,
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 6,
+                ),
                 color: const Color(0xFF1E3A8A),
                 child: Row(
                   children: [
-                    Image.asset('assets/india_flag.png', height: 14, width: 22,
-                        errorBuilder: (_, __, ___) => const Text('\u{1f1ee}\u{1f1f3}', style: TextStyle(fontSize: 14))),
+                    Image.asset(
+                      'assets/india_flag.png',
+                      height: 14,
+                      width: 22,
+                      errorBuilder: (_, __, ___) => const Text(
+                        '\u{1f1ee}\u{1f1f3}',
+                        style: TextStyle(fontSize: 14),
+                      ),
+                    ),
                     const SizedBox(width: 8),
-                    const Text('Government of India',
-                        style: TextStyle(color: Colors.white, fontSize: 12, fontWeight: FontWeight.w500)),
+                    const Text(
+                      'Government of India',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 12,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
                     const SizedBox(width: 4),
-                    const Icon(Icons.open_in_new, size: 11, color: Colors.white),
+                    const Icon(
+                      Icons.open_in_new,
+                      size: 11,
+                      color: Colors.white,
+                    ),
                     const Spacer(),
-                    const Icon(Icons.accessibility_new, size: 16, color: Colors.white),
+                    const Icon(
+                      Icons.accessibility_new,
+                      size: 16,
+                      color: Colors.white,
+                    ),
                   ],
                 ),
               ),
@@ -470,12 +500,22 @@ class _FindServiceCentreMockup extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text('Powered by -',
-                        style: TextStyle(fontSize: 11, color: Color(0xFF6B7280))),
+                    const Text(
+                      'Powered by -',
+                      style: TextStyle(fontSize: 11, color: Color(0xFF6B7280)),
+                    ),
                     const SizedBox(width: 4),
-                    Image.asset('assets/digital_india_logo.png', height: 20,
-                        errorBuilder: (_, __, ___) => const Text('Digital India',
-                            style: TextStyle(fontSize: 10, color: Color(0xFF432CBB)))),
+                    Image.asset(
+                      'assets/digital_india_logo.png',
+                      height: 20,
+                      errorBuilder: (_, __, ___) => const Text(
+                        'Digital India',
+                        style: TextStyle(
+                          fontSize: 10,
+                          color: Color(0xFF432CBB),
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -492,7 +532,11 @@ class _FindServiceCentreMockup extends StatelessWidget {
       children: [
         const Text(
           'Find your nearest Service Centre',
-          style: TextStyle(fontSize: 22, fontWeight: FontWeight.w800, color: _titleColor),
+          style: TextStyle(
+            fontSize: 22,
+            fontWeight: FontWeight.w800,
+            color: _titleColor,
+          ),
         ),
         const SizedBox(height: 8),
         const Text(
@@ -526,7 +570,11 @@ class _FindServiceCentreMockup extends StatelessWidget {
               children: const [
                 Text(
                   'CSC Sector 12 — Pune City',
-                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.w700, color: _titleColor),
+                  style: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.w700,
+                    color: _titleColor,
+                  ),
                 ),
                 SizedBox(height: 4),
                 Text(

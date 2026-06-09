@@ -145,19 +145,37 @@ class _PendingTasksMockupState extends State<_PendingTasksMockup> {
                       SvgPicture.asset(
                         _nationalEmblemLogoPath,
                         height: 36,
-                        errorBuilder: (c, e, s) => const Icon(Icons.account_balance, size: 28, color: Colors.grey),
+                        errorBuilder: (c, e, s) => const Icon(
+                          Icons.account_balance,
+                          size: 28,
+                          color: Colors.grey,
+                        ),
                       ),
                       const SizedBox(width: 8),
                       SvgPicture.asset(
                         _unionLogoPath,
                         height: 28,
-                        errorBuilder: (c, e, s) => const Icon(Icons.blur_on, size: 28, color: Colors.blue),
+                        errorBuilder: (c, e, s) => const Icon(
+                          Icons.blur_on,
+                          size: 28,
+                          color: Colors.blue,
+                        ),
                       ),
                       const SizedBox(width: 8),
-                      const Text('Government of India', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: _titleColor)),
+                      const Text(
+                        'Government of India',
+                        style: TextStyle(
+                          fontSize: 13,
+                          fontWeight: FontWeight.w600,
+                          color: _titleColor,
+                        ),
+                      ),
                     ],
                     actions: [
-                      Ux4gAppHeaderAction(icon: Icons.notifications_outlined, onPressed: () {}),
+                      Ux4gAppHeaderAction(
+                        icon: Icons.notifications_outlined,
+                        onPressed: () {},
+                      ),
                     ],
                     showAvatar: true,
                     avatarInitials: 'R',
@@ -175,9 +193,19 @@ class _PendingTasksMockupState extends State<_PendingTasksMockup> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     // Title
-                    const Text('Pending Tasks', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w800, color: _titleColor)),
+                    const Text(
+                      'Pending Tasks',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w800,
+                        color: _titleColor,
+                      ),
+                    ),
                     const SizedBox(height: 4),
-                    const Text('3 tasks need your attention', style: TextStyle(fontSize: 13, color: _subtleText)),
+                    const Text(
+                      '3 tasks need your attention',
+                      style: TextStyle(fontSize: 13, color: _subtleText),
+                    ),
                     const SizedBox(height: 16),
 
                     // Tab filters
@@ -228,7 +256,14 @@ class _PendingTasksMockupState extends State<_PendingTasksMockup> {
                     // Completed section
                     const Divider(color: _borderColor),
                     const SizedBox(height: 16),
-                    const Text('Completed today', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: _titleColor)),
+                    const Text(
+                      'Completed today',
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600,
+                        color: _titleColor,
+                      ),
+                    ),
                     const SizedBox(height: 16),
 
                     // Completed card
@@ -270,12 +305,18 @@ class _PendingTasksMockupState extends State<_PendingTasksMockup> {
           trailingContent: Container(
             padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 2),
             decoration: BoxDecoration(
-              color: isSelected ? Colors.white.withValues(alpha: 0.25) : _primaryColor,
+              color: isSelected
+                  ? Colors.white.withValues(alpha: 0.25)
+                  : _primaryColor,
               borderRadius: BorderRadius.circular(10),
             ),
             child: Text(
               tabs[index]['count']!,
-              style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: Colors.white),
+              style: const TextStyle(
+                fontSize: 11,
+                fontWeight: FontWeight.w600,
+                color: Colors.white,
+              ),
             ),
           ),
         );
@@ -324,13 +365,30 @@ class _PendingTasksMockupState extends State<_PendingTasksMockup> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(title, style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: _titleColor)),
+                      Text(
+                        title,
+                        style: const TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
+                          color: _titleColor,
+                        ),
+                      ),
                       const SizedBox(height: 2),
-                      Text(subtitle, style: const TextStyle(fontSize: 12, color: _subtleText)),
+                      Text(
+                        subtitle,
+                        style: const TextStyle(
+                          fontSize: 12,
+                          color: _subtleText,
+                        ),
+                      ),
                     ],
                   ),
                 ),
-                const Icon(Icons.keyboard_arrow_up, size: 20, color: _subtleText),
+                const Icon(
+                  Icons.keyboard_arrow_up,
+                  size: 20,
+                  color: _subtleText,
+                ),
               ],
             ),
             const SizedBox(height: 10),
@@ -342,7 +400,14 @@ class _PendingTasksMockupState extends State<_PendingTasksMockup> {
                 color: urgencyColor.withValues(alpha: 0.08),
                 borderRadius: BorderRadius.circular(4),
               ),
-              child: Text(urgencyText, style: TextStyle(fontSize: 12, fontWeight: FontWeight.w500, color: urgencyColor)),
+              child: Text(
+                urgencyText,
+                style: TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.w500,
+                  color: urgencyColor,
+                ),
+              ),
             ),
             const SizedBox(height: 12),
             const Divider(color: _borderColor, height: 1),
@@ -356,9 +421,19 @@ class _PendingTasksMockupState extends State<_PendingTasksMockup> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text('Deadline', style: TextStyle(fontSize: 11, color: _subtleText)),
+                      const Text(
+                        'Deadline',
+                        style: TextStyle(fontSize: 11, color: _subtleText),
+                      ),
                       const SizedBox(height: 2),
-                      Text(deadline, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w500, color: _titleColor)),
+                      Text(
+                        deadline,
+                        style: const TextStyle(
+                          fontSize: 13,
+                          fontWeight: FontWeight.w500,
+                          color: _titleColor,
+                        ),
+                      ),
                     ],
                   ),
                 ),
@@ -366,9 +441,19 @@ class _PendingTasksMockupState extends State<_PendingTasksMockup> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text('Reference', style: TextStyle(fontSize: 11, color: _subtleText)),
+                      const Text(
+                        'Reference',
+                        style: TextStyle(fontSize: 11, color: _subtleText),
+                      ),
                       const SizedBox(height: 2),
-                      Text(reference, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w500, color: _titleColor)),
+                      Text(
+                        reference,
+                        style: const TextStyle(
+                          fontSize: 13,
+                          fontWeight: FontWeight.w500,
+                          color: _titleColor,
+                        ),
+                      ),
                     ],
                   ),
                 ),
@@ -382,9 +467,19 @@ class _PendingTasksMockupState extends State<_PendingTasksMockup> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text('Department', style: TextStyle(fontSize: 11, color: _subtleText)),
+                      const Text(
+                        'Department',
+                        style: TextStyle(fontSize: 11, color: _subtleText),
+                      ),
                       const SizedBox(height: 2),
-                      Text(department, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w500, color: _titleColor)),
+                      Text(
+                        department,
+                        style: const TextStyle(
+                          fontSize: 13,
+                          fontWeight: FontWeight.w500,
+                          color: _titleColor,
+                        ),
+                      ),
                     ],
                   ),
                 ),
@@ -392,13 +487,27 @@ class _PendingTasksMockupState extends State<_PendingTasksMockup> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text('Have issues?', style: TextStyle(fontSize: 11, color: _subtleText)),
+                      const Text(
+                        'Have issues?',
+                        style: TextStyle(fontSize: 11, color: _subtleText),
+                      ),
                       const SizedBox(height: 2),
                       Row(
                         children: [
-                          Text(supportText, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w500, color: _primaryColor)),
+                          Text(
+                            supportText,
+                            style: const TextStyle(
+                              fontSize: 13,
+                              fontWeight: FontWeight.w500,
+                              color: _primaryColor,
+                            ),
+                          ),
                           const SizedBox(width: 4),
-                          const Icon(Icons.arrow_forward, size: 14, color: _primaryColor),
+                          const Icon(
+                            Icons.arrow_forward,
+                            size: 14,
+                            color: _primaryColor,
+                          ),
                         ],
                       ),
                     ],
@@ -461,13 +570,30 @@ class _PendingTasksMockupState extends State<_PendingTasksMockup> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(title, style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: _titleColor)),
+                      Text(
+                        title,
+                        style: const TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
+                          color: _titleColor,
+                        ),
+                      ),
                       const SizedBox(height: 2),
-                      Text(subtitle, style: const TextStyle(fontSize: 12, color: _subtleText)),
+                      Text(
+                        subtitle,
+                        style: const TextStyle(
+                          fontSize: 12,
+                          color: _subtleText,
+                        ),
+                      ),
                     ],
                   ),
                 ),
-                const Icon(Icons.keyboard_arrow_down, size: 20, color: _subtleText),
+                const Icon(
+                  Icons.keyboard_arrow_down,
+                  size: 20,
+                  color: _subtleText,
+                ),
               ],
             ),
             const SizedBox(height: 8),
@@ -477,7 +603,14 @@ class _PendingTasksMockupState extends State<_PendingTasksMockup> {
                 color: urgencyBgColor ?? urgencyColor.withValues(alpha: 0.08),
                 borderRadius: BorderRadius.circular(4),
               ),
-              child: Text(urgencyText, style: TextStyle(fontSize: 12, fontWeight: FontWeight.w500, color: urgencyColor)),
+              child: Text(
+                urgencyText,
+                style: TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.w500,
+                  color: urgencyColor,
+                ),
+              ),
             ),
             const SizedBox(height: 12),
 
@@ -487,7 +620,9 @@ class _PendingTasksMockupState extends State<_PendingTasksMockup> {
               child: Ux4gButton(
                 text: actionText,
                 onPressed: () {},
-                variant: actionFilled ? Ux4gButtonVariant.primary : Ux4gButtonVariant.outline,
+                variant: actionFilled
+                    ? Ux4gButtonVariant.primary
+                    : Ux4gButtonVariant.outline,
                 contentColor: actionFilled ? null : _primaryColor,
               ),
             ),
@@ -531,13 +666,30 @@ class _PendingTasksMockupState extends State<_PendingTasksMockup> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(title, style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: _titleColor)),
+                      Text(
+                        title,
+                        style: const TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
+                          color: _titleColor,
+                        ),
+                      ),
                       const SizedBox(height: 2),
-                      Text(subtitle, style: const TextStyle(fontSize: 12, color: _subtleText)),
+                      Text(
+                        subtitle,
+                        style: const TextStyle(
+                          fontSize: 12,
+                          color: _subtleText,
+                        ),
+                      ),
                     ],
                   ),
                 ),
-                const Icon(Icons.keyboard_arrow_down, size: 20, color: _subtleText),
+                const Icon(
+                  Icons.keyboard_arrow_down,
+                  size: 20,
+                  color: _subtleText,
+                ),
               ],
             ),
             const SizedBox(height: 8),
@@ -549,13 +701,27 @@ class _PendingTasksMockupState extends State<_PendingTasksMockup> {
                 color: _greenColor.withValues(alpha: 0.1),
                 borderRadius: BorderRadius.circular(4),
               ),
-              child: const Text('Completed', style: TextStyle(fontSize: 11, fontWeight: FontWeight.w500, color: _greenColor)),
+              child: const Text(
+                'Completed',
+                style: TextStyle(
+                  fontSize: 11,
+                  fontWeight: FontWeight.w500,
+                  color: _greenColor,
+                ),
+              ),
             ),
             const SizedBox(height: 12),
 
             // View receipt link
             Center(
-              child: Text(actionText, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w500, color: _primaryColor)),
+              child: Text(
+                actionText,
+                style: const TextStyle(
+                  fontSize: 13,
+                  fontWeight: FontWeight.w500,
+                  color: _primaryColor,
+                ),
+              ),
             ),
           ],
         ),

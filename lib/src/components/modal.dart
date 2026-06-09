@@ -270,7 +270,8 @@ class Ux4gModalContent extends StatelessWidget {
     final ux4gTypography = materialTheme.extension<Ux4gTypography>();
 
     final primary = ux4gColors?.primary ?? materialTheme.colorScheme.primary;
-    final onSurface = ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
+    final onSurface =
+        ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
     final surface = ux4gColors?.surface ?? materialTheme.colorScheme.surface;
     final error = ux4gColors?.error ?? materialTheme.colorScheme.error;
 
@@ -324,7 +325,13 @@ class Ux4gModalContent extends StatelessWidget {
                           if (showSubtitle)
                             Text(
                               subtitleText,
-                              style: (ux4gTypography?.tS_strong ?? materialTheme.textTheme.titleSmall?.copyWith(fontWeight: FontWeight.bold))?.copyWith(color: onSurface),
+                              style:
+                                  (ux4gTypography?.tS_strong ??
+                                          materialTheme.textTheme.titleSmall
+                                              ?.copyWith(
+                                                fontWeight: FontWeight.bold,
+                                              ))
+                                      ?.copyWith(color: onSurface),
                               textAlign: textAlign,
                             ),
                           if (showBody) ...[
@@ -334,11 +341,14 @@ class Ux4gModalContent extends StatelessWidget {
                             else
                               Text(
                                 bodyText,
-                                style: (ux4gTypography?.bM_default ?? materialTheme.textTheme.bodyMedium)?.copyWith(
-                                      color: onSurface.withValues(
-                                        alpha: 0.6,
-                                      ),
-                                    ),
+                                style:
+                                    (ux4gTypography?.bM_default ??
+                                            materialTheme.textTheme.bodyMedium)
+                                        ?.copyWith(
+                                          color: onSurface.withValues(
+                                            alpha: 0.6,
+                                          ),
+                                        ),
                                 textAlign: textAlign,
                               ),
                           ],
@@ -349,9 +359,7 @@ class Ux4gModalContent extends StatelessWidget {
                     Column(
                       children: [
                         if (showDividers)
-                          Ux4gDivider(
-                            color: onSurface.withValues(alpha: 0.2),
-                          ),
+                          Ux4gDivider(color: onSurface.withValues(alpha: 0.2)),
                         _Ux4gModalFooter(
                           footerButtons: footerButtons,
                           footerAlign: footerAlign,
@@ -387,11 +395,7 @@ class Ux4gModalContent extends StatelessWidget {
                         child: IconButton(
                           padding: EdgeInsets.zero,
                           onPressed: onDismiss,
-                          icon: Icon(
-                            Icons.close,
-                            size: 16,
-                            color: surface,
-                          ),
+                          icon: Icon(Icons.close, size: 16, color: surface),
                         ),
                       )
                     : IconButton(
@@ -401,11 +405,7 @@ class Ux4gModalContent extends StatelessWidget {
                           minHeight: 32,
                         ),
                         onPressed: onDismiss,
-                        icon: Icon(
-                          Icons.close,
-                          size: 20,
-                          color: onSurface,
-                        ),
+                        icon: Icon(Icons.close, size: 20, color: onSurface),
                       ),
               ),
           ],
@@ -450,7 +450,8 @@ class Ux4gModalContent extends StatelessWidget {
     required Ux4gTypography? ux4gTypography,
     required ThemeData materialTheme,
   }) {
-    final onSurface = ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
+    final onSurface =
+        ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
     final isCentered = alignment == Ux4gModalAlignment.centered;
 
     return Column(
@@ -460,8 +461,7 @@ class Ux4gModalContent extends StatelessWidget {
             Ux4gSpace.space16,
             Ux4gSpace.space16,
             // Reserve space for the close button (right: 16 + width: 32 + gap: 4)
-            showCloseButton &&
-                    headerImageStyle != Ux4gModalHeaderImage.padded
+            showCloseButton && headerImageStyle != Ux4gModalHeaderImage.padded
                 ? Ux4gSpace.space16 + 36
                 : Ux4gSpace.space16,
             Ux4gSpace.space16,
@@ -497,9 +497,12 @@ class Ux4gModalContent extends StatelessWidget {
                   Flexible(
                     child: Text(
                       headerTitle,
-                      style: (ux4gTypography?.tS_strong ?? materialTheme.textTheme.titleSmall?.copyWith(fontWeight: FontWeight.bold))?.copyWith(
-                        color: onSurface,
-                      ),
+                      style:
+                          (ux4gTypography?.tS_strong ??
+                                  materialTheme.textTheme.titleSmall?.copyWith(
+                                    fontWeight: FontWeight.bold,
+                                  ))
+                              ?.copyWith(color: onSurface),
                       textAlign: textAlign,
                     ),
                   ),
@@ -509,17 +512,17 @@ class Ux4gModalContent extends StatelessWidget {
                 const SizedBox(height: Ux4gSpace.space4),
                 Text(
                   descriptionText,
-                  style: (ux4gTypography?.bS_default ?? materialTheme.textTheme.bodySmall)?.copyWith(
-                    color: onSurface.withValues(alpha: 0.5),
-                  ),
+                  style:
+                      (ux4gTypography?.bS_default ??
+                              materialTheme.textTheme.bodySmall)
+                          ?.copyWith(color: onSurface.withValues(alpha: 0.5)),
                   textAlign: textAlign,
                 ),
               ],
             ],
           ),
         ),
-        if (showDividers)
-          Ux4gDivider(color: onSurface.withValues(alpha: 0.2)),
+        if (showDividers) Ux4gDivider(color: onSurface.withValues(alpha: 0.2)),
       ],
     );
   }
@@ -603,7 +606,8 @@ class _Ux4gModalFooter extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final primary = ux4gColors?.primary ?? materialTheme.colorScheme.primary;
-    final onPrimary = ux4gColors?.onPrimary ?? materialTheme.colorScheme.onPrimary;
+    final onPrimary =
+        ux4gColors?.onPrimary ?? materialTheme.colorScheme.onPrimary;
     final onError = ux4gColors?.onError ?? materialTheme.colorScheme.onError;
 
     final hasLeadingIcon =
@@ -679,9 +683,7 @@ class _Ux4gModalFooter extends StatelessWidget {
                   onPressed: onPrimaryClick,
                   width: double.infinity,
                   backgroundColor: primaryColor,
-                  contentColor: isDestructive
-                      ? onError
-                      : onPrimary,
+                  contentColor: isDestructive ? onError : onPrimary,
                   borderRadius: Ux4gRadius.radius8,
                   padding: const EdgeInsets.symmetric(
                     horizontal: Ux4gSpace.space16,

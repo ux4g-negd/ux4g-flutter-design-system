@@ -33,7 +33,7 @@ final liveChatSupportComponent = WidgetbookComponent(
           name: 'Live Chat Support ($variant)',
           description: isCard
               ? 'Live chat support page with agent availability status inside a '
-                'card container with light purple background.'
+                    'card container with light purple background.'
               : 'Live chat support page with agent availability status on white background.',
           code: isCard ? _liveChatCardCode : _liveChatDefaultCode,
           center: true,
@@ -361,7 +361,10 @@ class _LiveChatSupportMockup extends StatelessWidget {
                 variant: Ux4gAppHeaderVariant.light,
                 title: '',
                 leadingWidgets: [
-                  SvgPicture.asset('assets/national_amblam_logo.svg', height: 40),
+                  SvgPicture.asset(
+                    'assets/national_amblam_logo.svg',
+                    height: 40,
+                  ),
                   const SizedBox(width: 3),
                   SizedBox(
                     height: 32,
@@ -378,19 +381,43 @@ class _LiveChatSupportMockup extends StatelessWidget {
               // Gov bar
               Container(
                 width: double.infinity,
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 6,
+                ),
                 color: const Color(0xFF1E3A8A),
                 child: Row(
                   children: [
-                    Image.asset('assets/india_flag.png', height: 14, width: 22,
-                        errorBuilder: (_, __, ___) => const Text('\u{1f1ee}\u{1f1f3}', style: TextStyle(fontSize: 14))),
+                    Image.asset(
+                      'assets/india_flag.png',
+                      height: 14,
+                      width: 22,
+                      errorBuilder: (_, __, ___) => const Text(
+                        '\u{1f1ee}\u{1f1f3}',
+                        style: TextStyle(fontSize: 14),
+                      ),
+                    ),
                     const SizedBox(width: 8),
-                    const Text('Government of India',
-                        style: TextStyle(color: Colors.white, fontSize: 12, fontWeight: FontWeight.w500)),
+                    const Text(
+                      'Government of India',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 12,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
                     const SizedBox(width: 4),
-                    const Icon(Icons.open_in_new, size: 11, color: Colors.white),
+                    const Icon(
+                      Icons.open_in_new,
+                      size: 11,
+                      color: Colors.white,
+                    ),
                     const Spacer(),
-                    const Icon(Icons.accessibility_new, size: 16, color: Colors.white),
+                    const Icon(
+                      Icons.accessibility_new,
+                      size: 16,
+                      color: Colors.white,
+                    ),
                   ],
                 ),
               ),
@@ -449,12 +476,22 @@ class _LiveChatSupportMockup extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text('Powered by -',
-                        style: TextStyle(fontSize: 11, color: Color(0xFF6B7280))),
+                    const Text(
+                      'Powered by -',
+                      style: TextStyle(fontSize: 11, color: Color(0xFF6B7280)),
+                    ),
                     const SizedBox(width: 4),
-                    Image.asset('assets/digital_india_logo.png', height: 20,
-                        errorBuilder: (_, __, ___) => const Text('Digital India',
-                            style: TextStyle(fontSize: 10, color: Color(0xFF432CBB)))),
+                    Image.asset(
+                      'assets/digital_india_logo.png',
+                      height: 20,
+                      errorBuilder: (_, __, ___) => const Text(
+                        'Digital India',
+                        style: TextStyle(
+                          fontSize: 10,
+                          color: Color(0xFF432CBB),
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -471,7 +508,11 @@ class _LiveChatSupportMockup extends StatelessWidget {
       children: [
         const Text(
           'Live Chat Support',
-          style: TextStyle(fontSize: 22, fontWeight: FontWeight.w800, color: _titleColor),
+          style: TextStyle(
+            fontSize: 22,
+            fontWeight: FontWeight.w800,
+            color: _titleColor,
+          ),
         ),
         const SizedBox(height: 8),
         const Text(
@@ -491,14 +532,22 @@ class _LiveChatSupportMockup extends StatelessWidget {
           ),
           child: Row(
             children: [
-              const Icon(Icons.check_circle, color: Color(0xFF00522C), size: 22),
+              const Icon(
+                Icons.check_circle,
+                color: Color(0xFF00522C),
+                size: 22,
+              ),
               const SizedBox(width: 10),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Text(
                     'Queue agent available',
-                    style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700, color: Color(0xFF065F46)),
+                    style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w700,
+                      color: Color(0xFF065F46),
+                    ),
                   ),
                   const SizedBox(height: 2),
                   const Text(

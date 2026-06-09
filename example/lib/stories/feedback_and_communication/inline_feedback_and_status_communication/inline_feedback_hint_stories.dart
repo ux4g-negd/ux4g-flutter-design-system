@@ -26,9 +26,9 @@ final inlineFeedbackHintComponent = WidgetbookComponent(
           name: 'Inline Feedback Hint ($variant)',
           description: isCard
               ? 'Form input with inline hint feedback inside a card container. '
-                'Shows a helper message below the input field with a light purple card background.'
+                    'Shows a helper message below the input field with a light purple card background.'
               : 'Form input with inline hint feedback. '
-                'Shows a helper message below the input field on white background.',
+                    'Shows a helper message below the input field on white background.',
           code: isCard ? _inlineFeedbackHintCardCode : _inlineFeedbackHintCode,
           center: true,
           child: _InlineFeedbackHintMockup(isCard: isCard),
@@ -236,13 +236,25 @@ class _InlineFeedbackHintMockup extends StatelessWidget {
               // App Header with logos
               Container(
                 width: double.infinity,
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 10,
+                ),
                 color: Colors.white,
                 child: Row(
                   children: [
-                    SvgPicture.asset('assets/national_amblam_logo.svg', height: 40),
+                    SvgPicture.asset(
+                      'assets/national_amblam_logo.svg',
+                      height: 40,
+                    ),
                     const SizedBox(width: 8),
-                    SizedBox(height: 32, child: Ux4gDivider(orientation: Ux4gDividerOrientation.vertical, color: const Color(0xFFD1D5DB))),
+                    SizedBox(
+                      height: 32,
+                      child: Ux4gDivider(
+                        orientation: Ux4gDividerOrientation.vertical,
+                        color: const Color(0xFFD1D5DB),
+                      ),
+                    ),
                     const SizedBox(width: 8),
                     SvgPicture.asset('assets/Union.svg', height: 32),
                   ],
@@ -308,7 +320,11 @@ class _InlineFeedbackHintMockup extends StatelessWidget {
         // Title
         const Text(
           'Identity Verification',
-          style: TextStyle(fontSize: 18, fontWeight: FontWeight.w800, color: _titleColor),
+          style: TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.w800,
+            color: _titleColor,
+          ),
         ),
         const SizedBox(height: 8),
 
@@ -381,7 +397,11 @@ class _InlineFeedbackHintMockup extends StatelessWidget {
           // Title
           const Text(
             'Identity Verification',
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.w800, color: _titleColor),
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.w800,
+              color: _titleColor,
+            ),
           ),
           const SizedBox(height: 8),
 

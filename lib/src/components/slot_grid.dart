@@ -52,10 +52,10 @@ class SlotDateEntry {
   }
 
   Map<String, dynamic> toJson() => {
-        'date':
-            '${date.year}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}',
-        'status': _statusToString(status),
-      };
+    'date':
+        '${date.year}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}',
+    'status': _statusToString(status),
+  };
 
   static SlotDateStatus _parseStatus(String raw) {
     switch (raw) {
@@ -156,10 +156,11 @@ class SlotGridData {
           : [6, 7],
       dates: json['dates'] != null
           ? (json['dates'] as List)
-              .map((e) => SlotDateEntry.fromJson(e as Map<String, dynamic>))
-              .toList()
+                .map((e) => SlotDateEntry.fromJson(e as Map<String, dynamic>))
+                .toList()
           : [],
-      allowTapOnPublicHoliday: json['allowTapOnPublicHoliday'] as bool? ?? false,
+      allowTapOnPublicHoliday:
+          json['allowTapOnPublicHoliday'] as bool? ?? false,
       allowTapOnWeeklyOff: json['allowTapOnWeeklyOff'] as bool? ?? false,
       viewMode: viewMode,
     );
@@ -169,12 +170,12 @@ class SlotGridData {
     if (viewModeValue == null) {
       return SlotPickerViewMode.expanded;
     }
-    
+
     final viewModeStr = viewModeValue.toString().toLowerCase().trim();
     if (viewModeStr == 'compact') {
       return SlotPickerViewMode.compact;
     }
-    
+
     return SlotPickerViewMode.expanded;
   }
 }
@@ -359,7 +360,8 @@ class _SlotGridState extends State<SlotGrid> {
     final ux4gColors = materialTheme.extension<Ux4gColors>();
     final ux4gTypography = materialTheme.extension<Ux4gTypography>();
 
-    final onSurface = ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
+    final onSurface =
+        ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
     final surface = ux4gColors?.surface ?? materialTheme.colorScheme.surface;
 
     return Container(
@@ -395,7 +397,11 @@ class _SlotGridState extends State<SlotGrid> {
   // Header  "← April 2026 →"
   // ------------------------------------------------------------------
 
-  Widget _buildHeader(Ux4gColors? colors, Ux4gTypography? typography, ThemeData materialTheme) {
+  Widget _buildHeader(
+    Ux4gColors? colors,
+    Ux4gTypography? typography,
+    ThemeData materialTheme,
+  ) {
     final monthName = _monthName(_month);
     final isPrevDisabled = _isCurrentMonth;
     final primary = colors?.primary ?? materialTheme.colorScheme.primary;
@@ -410,15 +416,18 @@ class _SlotGridState extends State<SlotGrid> {
         ),
         Text(
           '$monthName $_year',
-          style: (typography?.tM_strong ??
-                  materialTheme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold) ??
-                  const TextStyle(fontSize: 16, fontWeight: FontWeight.w600))
-              .copyWith(color: primary),
+          style:
+              (typography?.tM_strong ??
+                      materialTheme.textTheme.titleMedium?.copyWith(
+                        fontWeight: FontWeight.bold,
+                      ) ??
+                      const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                      ))
+                  .copyWith(color: primary),
         ),
-        _NavArrow(
-          icon: Icons.chevron_right_rounded,
-          onTap: _goToNextMonth,
-        ),
+        _NavArrow(icon: Icons.chevron_right_rounded, onTap: _goToNextMonth),
       ],
     );
   }
@@ -427,18 +436,24 @@ class _SlotGridState extends State<SlotGrid> {
   // Weekday row  Mo Tu We Th Fr Sa Su
   // ------------------------------------------------------------------
 
-  Widget _buildWeekdayRow(Ux4gColors? colors, Ux4gTypography? typography, ThemeData materialTheme) {
+  Widget _buildWeekdayRow(
+    Ux4gColors? colors,
+    Ux4gTypography? typography,
+    ThemeData materialTheme,
+  ) {
     const labels = ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'];
     final onSurface = colors?.onSurface ?? materialTheme.colorScheme.onSurface;
     // ISO weekday: Mo=1 … Su=7
-    final baseStyle = typography?.lM_strong ??
-        materialTheme.textTheme.labelMedium?.copyWith(fontWeight: FontWeight.bold) ??
+    final baseStyle =
+        typography?.lM_strong ??
+        materialTheme.textTheme.labelMedium?.copyWith(
+          fontWeight: FontWeight.bold,
+        ) ??
         const TextStyle(fontSize: 12, fontWeight: FontWeight.w600);
     return Row(
       children: List.generate(7, (index) {
         final weekday = index + 1; // 1-based ISO
-        final isWeeklyOff =
-            widget.data.weeklyOffWeekdays.contains(weekday);
+        final isWeeklyOff = widget.data.weeklyOffWeekdays.contains(weekday);
         return Expanded(
           child: Center(
             child: Text(
@@ -459,7 +474,11 @@ class _SlotGridState extends State<SlotGrid> {
   // Dates grid
   // ------------------------------------------------------------------
 
-  Widget _buildDatesGrid(Ux4gColors? colors, Ux4gTypography? typography, ThemeData materialTheme) {
+  Widget _buildDatesGrid(
+    Ux4gColors? colors,
+    Ux4gTypography? typography,
+    ThemeData materialTheme,
+  ) {
     // First day of current month (ISO weekday 1=Mon … 7=Sun).
     final firstDay = DateTime(_year, _month, 1);
     // Offset so the grid starts on Monday.
@@ -480,7 +499,13 @@ class _SlotGridState extends State<SlotGrid> {
             // Determine if this is in the current month.
             if (dayOffset < 1 || dayOffset > daysInMonth) {
               return Expanded(
-                child: _buildOutOfMonthCell(dayOffset, daysInMonth, colors, typography, materialTheme),
+                child: _buildOutOfMonthCell(
+                  dayOffset,
+                  daysInMonth,
+                  colors,
+                  typography,
+                  materialTheme,
+                ),
               );
             }
 
@@ -494,7 +519,13 @@ class _SlotGridState extends State<SlotGrid> {
     );
   }
 
-  Widget _buildOutOfMonthCell(int dayOffset, int daysInMonth, Ux4gColors? colors, Ux4gTypography? typography, ThemeData materialTheme) {
+  Widget _buildOutOfMonthCell(
+    int dayOffset,
+    int daysInMonth,
+    Ux4gColors? colors,
+    Ux4gTypography? typography,
+    ThemeData materialTheme,
+  ) {
     final int day;
     final onSurface = colors?.onSurface ?? materialTheme.colorScheme.onSurface;
     if (dayOffset < 1) {
@@ -512,16 +543,25 @@ class _SlotGridState extends State<SlotGrid> {
       child: Center(
         child: Text(
           '$day',
-          style: (typography?.bS_default ??
-                  materialTheme.textTheme.bodySmall ??
-                  const TextStyle(fontSize: 13, fontWeight: FontWeight.w400))
-              .copyWith(color: onSurface.withValues(alpha: 0.38)),
+          style:
+              (typography?.bS_default ??
+                      materialTheme.textTheme.bodySmall ??
+                      const TextStyle(
+                        fontSize: 13,
+                        fontWeight: FontWeight.w400,
+                      ))
+                  .copyWith(color: onSurface.withValues(alpha: 0.38)),
         ),
       ),
     );
   }
 
-  Widget _buildDateCell(DateTime date, Ux4gColors? colors, Ux4gTypography? typography, ThemeData materialTheme) {
+  Widget _buildDateCell(
+    DateTime date,
+    Ux4gColors? colors,
+    Ux4gTypography? typography,
+    ThemeData materialTheme,
+  ) {
     final status = _statusFor(date);
     final isSelected = _isSelected(date);
     final isToday = _isToday(date);
@@ -531,11 +571,13 @@ class _SlotGridState extends State<SlotGrid> {
     final isPast = date.isBefore(DateTime(today.year, today.month, today.day));
 
     // Determine tappability based on status and data flags.
-    final canTap = !isPast && (
-      status == SlotDateStatus.available ||
-      (status == SlotDateStatus.publicHoliday && widget.data.allowTapOnPublicHoliday) ||
-      (status == SlotDateStatus.weeklyOff && widget.data.allowTapOnWeeklyOff)
-    );
+    final canTap =
+        !isPast &&
+        (status == SlotDateStatus.available ||
+            (status == SlotDateStatus.publicHoliday &&
+                widget.data.allowTapOnPublicHoliday) ||
+            (status == SlotDateStatus.weeklyOff &&
+                widget.data.allowTapOnWeeklyOff));
 
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
@@ -576,7 +618,15 @@ class _SlotGridState extends State<SlotGrid> {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              _buildDateLabel(date, status, isSelected, isPast, colors, typography, materialTheme),
+              _buildDateLabel(
+                date,
+                status,
+                isSelected,
+                isPast,
+                colors,
+                typography,
+                materialTheme,
+              ),
               if (isToday && !isSelected) _buildTodayDot(colors, materialTheme),
             ],
           ),
@@ -607,10 +657,14 @@ class _SlotGridState extends State<SlotGrid> {
         child: Center(
           child: Text(
             '${date.day}',
-            style: (typography?.bS_default ??
-                    materialTheme.textTheme.bodySmall ??
-                    const TextStyle(fontSize: 13, fontWeight: FontWeight.w400))
-                .copyWith(color: onSurface.withValues(alpha: 0.38)),
+            style:
+                (typography?.bS_default ??
+                        materialTheme.textTheme.bodySmall ??
+                        const TextStyle(
+                          fontSize: 13,
+                          fontWeight: FontWeight.w400,
+                        ))
+                    .copyWith(color: onSurface.withValues(alpha: 0.38)),
           ),
         ),
       );
@@ -627,10 +681,16 @@ class _SlotGridState extends State<SlotGrid> {
         child: Center(
           child: Text(
             '${date.day}',
-            style: (typography?.bS_strong ??
-                    materialTheme.textTheme.bodySmall?.copyWith(fontWeight: FontWeight.bold) ??
-                    const TextStyle(fontSize: 13, fontWeight: FontWeight.w600))
-                .copyWith(color: onPrimary),
+            style:
+                (typography?.bS_strong ??
+                        materialTheme.textTheme.bodySmall?.copyWith(
+                          fontWeight: FontWeight.bold,
+                        ) ??
+                        const TextStyle(
+                          fontSize: 13,
+                          fontWeight: FontWeight.w600,
+                        ))
+                    .copyWith(color: onPrimary),
           ),
         ),
       );
@@ -649,10 +709,16 @@ class _SlotGridState extends State<SlotGrid> {
           child: Center(
             child: Text(
               '${date.day}',
-              style: (typography?.bS_strong ??
-                      materialTheme.textTheme.bodySmall?.copyWith(fontWeight: FontWeight.w500) ??
-                      const TextStyle(fontSize: 13, fontWeight: FontWeight.w500))
-                  .copyWith(color: warning),
+              style:
+                  (typography?.bS_strong ??
+                          materialTheme.textTheme.bodySmall?.copyWith(
+                            fontWeight: FontWeight.w500,
+                          ) ??
+                          const TextStyle(
+                            fontSize: 13,
+                            fontWeight: FontWeight.w500,
+                          ))
+                      .copyWith(color: warning),
             ),
           ),
         );
@@ -668,10 +734,16 @@ class _SlotGridState extends State<SlotGrid> {
           child: Center(
             child: Text(
               '${date.day}',
-              style: (typography?.bS_strong ??
-                      materialTheme.textTheme.bodySmall?.copyWith(fontWeight: FontWeight.w500) ??
-                      const TextStyle(fontSize: 13, fontWeight: FontWeight.w500))
-                  .copyWith(color: onSurface.withValues(alpha: 0.38)),
+              style:
+                  (typography?.bS_strong ??
+                          materialTheme.textTheme.bodySmall?.copyWith(
+                            fontWeight: FontWeight.w500,
+                          ) ??
+                          const TextStyle(
+                            fontSize: 13,
+                            fontWeight: FontWeight.w500,
+                          ))
+                      .copyWith(color: onSurface.withValues(alpha: 0.38)),
             ),
           ),
         );
@@ -687,10 +759,14 @@ class _SlotGridState extends State<SlotGrid> {
           child: Center(
             child: Text(
               '${date.day}',
-              style: (typography?.bS_default ??
-                      materialTheme.textTheme.bodySmall ??
-                      const TextStyle(fontSize: 13, fontWeight: FontWeight.w400))
-                  .copyWith(color: onSurface.withValues(alpha: 0.38)),
+              style:
+                  (typography?.bS_default ??
+                          materialTheme.textTheme.bodySmall ??
+                          const TextStyle(
+                            fontSize: 13,
+                            fontWeight: FontWeight.w400,
+                          ))
+                      .copyWith(color: onSurface.withValues(alpha: 0.38)),
             ),
           ),
         );
@@ -702,10 +778,14 @@ class _SlotGridState extends State<SlotGrid> {
           child: Center(
             child: Text(
               '${date.day}',
-              style: (typography?.bS_default ??
-                      materialTheme.textTheme.bodySmall ??
-                      const TextStyle(fontSize: 13, fontWeight: FontWeight.w400))
-                  .copyWith(color: onSurface),
+              style:
+                  (typography?.bS_default ??
+                          materialTheme.textTheme.bodySmall ??
+                          const TextStyle(
+                            fontSize: 13,
+                            fontWeight: FontWeight.w400,
+                          ))
+                      .copyWith(color: onSurface),
             ),
           ),
         );
@@ -718,10 +798,7 @@ class _SlotGridState extends State<SlotGrid> {
       width: 4,
       height: 4,
       margin: const EdgeInsets.only(top: 2),
-      decoration: BoxDecoration(
-        color: primary,
-        shape: BoxShape.circle,
-      ),
+      decoration: BoxDecoration(color: primary, shape: BoxShape.circle),
     );
   }
 
@@ -729,7 +806,11 @@ class _SlotGridState extends State<SlotGrid> {
   // Legend
   // ------------------------------------------------------------------
 
-  Widget _buildLegend(Ux4gColors? colors, Ux4gTypography? typography, ThemeData materialTheme) {
+  Widget _buildLegend(
+    Ux4gColors? colors,
+    Ux4gTypography? typography,
+    ThemeData materialTheme,
+  ) {
     final onSurface = colors?.onSurface ?? materialTheme.colorScheme.onSurface;
     final warning = colors?.warning ?? Colors.orange;
 
@@ -806,7 +887,8 @@ class _NavArrow extends StatelessWidget {
   Widget build(BuildContext context) {
     final materialTheme = Theme.of(context);
     final ux4gColors = materialTheme.extension<Ux4gColors>();
-    final onSurface = ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
+    final onSurface =
+        ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
     final surface = ux4gColors?.surface ?? materialTheme.colorScheme.surface;
 
     return GestureDetector(
@@ -815,13 +897,9 @@ class _NavArrow extends StatelessWidget {
         width: 32,
         height: 32,
         decoration: BoxDecoration(
-          color: disabled
-              ? onSurface.withValues(alpha: 0.05)
-              : surface,
+          color: disabled ? onSurface.withValues(alpha: 0.05) : surface,
           borderRadius: BorderRadius.circular(6),
-          border: Border.all(
-            color: onSurface.withValues(alpha: 0.12),
-          ),
+          border: Border.all(color: onSurface.withValues(alpha: 0.12)),
         ),
         child: Icon(
           icon,
@@ -854,7 +932,8 @@ class _LegendItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final onSurface = ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
+    final onSurface =
+        ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
 
     return Row(
       mainAxisSize: MainAxisSize.min,
@@ -874,16 +953,19 @@ class _LegendItem extends StatelessWidget {
         const SizedBox(width: 4),
         Text(
           label,
-          style: (typography?.lS_default ??
-                  materialTheme.textTheme.labelSmall ??
-                  const TextStyle(fontSize: 11, fontWeight: FontWeight.w400))
-              .copyWith(color: onSurface.withValues(alpha: 0.6)),
+          style:
+              (typography?.lS_default ??
+                      materialTheme.textTheme.labelSmall ??
+                      const TextStyle(
+                        fontSize: 11,
+                        fontWeight: FontWeight.w400,
+                      ))
+                  .copyWith(color: onSurface.withValues(alpha: 0.6)),
         ),
       ],
     );
   }
 }
-
 
 // ---------------------------------------------------------------------------
 // SlotTimePickerSheet
@@ -898,10 +980,10 @@ class SlotTimePickerSheet extends StatefulWidget {
   final DateTime today;
   final SlotPickerViewMode viewMode;
   final void Function(SlotTimeEntry selected)? onConfirm;
-  
+
   /// Called when user taps the back arrow. Should update the date and return new slots.
   final Future<List<SlotTimeEntry>> Function(DateTime newDate)? onPreviousDay;
-  
+
   /// Called when user taps the next arrow. Should update the date and return new slots.
   final Future<List<SlotTimeEntry>> Function(DateTime newDate)? onNextDay;
 
@@ -961,11 +1043,27 @@ class _SlotTimePickerSheetState extends State<SlotTimePickerSheet> {
   }
 
   static const _weekDayNames = [
-    'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun',
+    'Mon',
+    'Tue',
+    'Wed',
+    'Thu',
+    'Fri',
+    'Sat',
+    'Sun',
   ];
   static const _monthNames = [
-    'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-    'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec',
+    'Jan',
+    'Feb',
+    'Mar',
+    'Apr',
+    'May',
+    'Jun',
+    'Jul',
+    'Aug',
+    'Sep',
+    'Oct',
+    'Nov',
+    'Dec',
   ];
 
   String get _dateLabel {
@@ -982,13 +1080,14 @@ class _SlotTimePickerSheetState extends State<SlotTimePickerSheet> {
 
   bool get _canGoPrevious {
     // Allow going back until we reach today
-    return _currentDate.isAfter(DateTime(
-        widget.today.year, widget.today.month, widget.today.day));
+    return _currentDate.isAfter(
+      DateTime(widget.today.year, widget.today.month, widget.today.day),
+    );
   }
 
   Future<void> _goToPreviousDay() async {
     if (!_canGoPrevious || widget.onPreviousDay == null) return;
-    
+
     final newDate = _currentDate.subtract(const Duration(days: 1));
     setState(() => _isLoading = true);
     try {
@@ -1005,7 +1104,7 @@ class _SlotTimePickerSheetState extends State<SlotTimePickerSheet> {
 
   Future<void> _goToNextDay() async {
     if (widget.onNextDay == null) return;
-    
+
     final newDate = _currentDate.add(const Duration(days: 1));
     setState(() => _isLoading = true);
     try {
@@ -1038,8 +1137,20 @@ class _SlotTimePickerSheetState extends State<SlotTimePickerSheet> {
       ),
       padding: EdgeInsets.only(bottom: mq.viewInsets.bottom),
       child: widget.viewMode == SlotPickerViewMode.compact
-          ? _buildCompactView(context, ux4gColors, ux4gTypography, mq, materialTheme)
-          : _buildExpandedView(context, ux4gColors, ux4gTypography, mq, materialTheme),
+          ? _buildCompactView(
+              context,
+              ux4gColors,
+              ux4gTypography,
+              mq,
+              materialTheme,
+            )
+          : _buildExpandedView(
+              context,
+              ux4gColors,
+              ux4gTypography,
+              mq,
+              materialTheme,
+            ),
     );
   }
 
@@ -1047,8 +1158,15 @@ class _SlotTimePickerSheetState extends State<SlotTimePickerSheet> {
   // Expanded View (Vertical List)
   // ------------------------------------------------------------------
 
-  Widget _buildExpandedView(BuildContext context, Ux4gColors? ux4gColors, Ux4gTypography? ux4gTypography, MediaQueryData mq, ThemeData materialTheme) {
-    final onSurface = ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
+  Widget _buildExpandedView(
+    BuildContext context,
+    Ux4gColors? ux4gColors,
+    Ux4gTypography? ux4gTypography,
+    MediaQueryData mq,
+    ThemeData materialTheme,
+  ) {
+    final onSurface =
+        ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
 
     return Column(
       children: [
@@ -1067,25 +1185,41 @@ class _SlotTimePickerSheetState extends State<SlotTimePickerSheet> {
         // Header
         _buildSheetHeader(ux4gColors, ux4gTypography, materialTheme),
 
-        Divider(height: 1, thickness: 1, color: onSurface.withValues(alpha: 0.08)),
+        Divider(
+          height: 1,
+          thickness: 1,
+          color: onSurface.withValues(alpha: 0.08),
+        ),
 
         // Time slot list (fills remaining space)
         Expanded(
           child: ListView.separated(
             padding: const EdgeInsets.symmetric(vertical: 8),
             itemCount: _slots.length,
-            separatorBuilder: (_, __) =>
-                Divider(height: 1, thickness: 1, color: onSurface.withValues(alpha: 0.08)),
-            itemBuilder: (_, i) => _buildSlotTile(i, ux4gColors, ux4gTypography, materialTheme),
+            separatorBuilder: (_, __) => Divider(
+              height: 1,
+              thickness: 1,
+              color: onSurface.withValues(alpha: 0.08),
+            ),
+            itemBuilder: (_, i) =>
+                _buildSlotTile(i, ux4gColors, ux4gTypography, materialTheme),
           ),
         ),
 
-        Divider(height: 1, thickness: 1, color: onSurface.withValues(alpha: 0.08)),
+        Divider(
+          height: 1,
+          thickness: 1,
+          color: onSurface.withValues(alpha: 0.08),
+        ),
 
         // Legend
         _buildLegend(ux4gColors, ux4gTypography, materialTheme),
 
-        Divider(height: 1, thickness: 1, color: onSurface.withValues(alpha: 0.08)),
+        Divider(
+          height: 1,
+          thickness: 1,
+          color: onSurface.withValues(alpha: 0.08),
+        ),
 
         // Buttons
         _buildFooter(ux4gColors, ux4gTypography, materialTheme),
@@ -1099,8 +1233,15 @@ class _SlotTimePickerSheetState extends State<SlotTimePickerSheet> {
   // Compact View (Grid Layout)
   // ------------------------------------------------------------------
 
-  Widget _buildCompactView(BuildContext context, Ux4gColors? ux4gColors, Ux4gTypography? ux4gTypography, MediaQueryData mq, ThemeData materialTheme) {
-    final onSurface = ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
+  Widget _buildCompactView(
+    BuildContext context,
+    Ux4gColors? ux4gColors,
+    Ux4gTypography? ux4gTypography,
+    MediaQueryData mq,
+    ThemeData materialTheme,
+  ) {
+    final onSurface =
+        ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
     final primary = ux4gColors?.primary ?? materialTheme.colorScheme.primary;
 
     // Pair slots into rows of 2
@@ -1128,15 +1269,22 @@ class _SlotTimePickerSheetState extends State<SlotTimePickerSheet> {
         // Header
         _buildSheetHeader(ux4gColors, ux4gTypography, materialTheme),
 
-        Divider(height: 1, thickness: 1, color: onSurface.withValues(alpha: 0.08)),
+        Divider(
+          height: 1,
+          thickness: 1,
+          color: onSurface.withValues(alpha: 0.08),
+        ),
 
         // Time slot 2-column grid
         Expanded(
           child: ListView.separated(
             padding: const EdgeInsets.symmetric(vertical: 8),
             itemCount: rows.length,
-            separatorBuilder: (_, __) =>
-                Divider(height: 1, thickness: 1, color: onSurface.withValues(alpha: 0.08)),
+            separatorBuilder: (_, __) => Divider(
+              height: 1,
+              thickness: 1,
+              color: onSurface.withValues(alpha: 0.08),
+            ),
             itemBuilder: (_, rowIndex) {
               final row = rows[rowIndex];
               return IntrinsicHeight(
@@ -1147,53 +1295,82 @@ class _SlotTimePickerSheetState extends State<SlotTimePickerSheet> {
                       final (index, slot) = row[i];
                       final isSelected = _selectedIndex == index;
                       if (i > 0) {
-                        cells.add(VerticalDivider(
-                            width: 1, thickness: 1, color: onSurface.withValues(alpha: 0.08)));
+                        cells.add(
+                          VerticalDivider(
+                            width: 1,
+                            thickness: 1,
+                            color: onSurface.withValues(alpha: 0.08),
+                          ),
+                        );
                       }
-                      cells.add(Expanded(
-                        child: GestureDetector(
-                          onTap: slot.status == SlotTimeStatus.noSlots
-                              ? null
-                              : () => setState(() => _selectedIndex = index),
-                          child: AnimatedContainer(
-                            duration: const Duration(milliseconds: 150),
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 12, vertical: 14),
-                            color: isSelected
-                                ? primary.withValues(alpha: 0.08)
-                                : Colors.transparent,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  slot.time,
-                                  style: (ux4gTypography?.bS_default ?? materialTheme.textTheme.bodySmall)?.copyWith(
-                                    color: slot.status == SlotTimeStatus.noSlots
-                                        ? onSurface.withValues(alpha: 0.38)
-                                        : isSelected
-                                            ? primary
-                                            : onSurface,
-                                    fontWeight: isSelected
-                                        ? FontWeight.w600
-                                        : FontWeight.w400,
+                      cells.add(
+                        Expanded(
+                          child: GestureDetector(
+                            onTap: slot.status == SlotTimeStatus.noSlots
+                                ? null
+                                : () => setState(() => _selectedIndex = index),
+                            child: AnimatedContainer(
+                              duration: const Duration(milliseconds: 150),
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 12,
+                                vertical: 14,
+                              ),
+                              color: isSelected
+                                  ? primary.withValues(alpha: 0.08)
+                                  : Colors.transparent,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    slot.time,
+                                    style:
+                                        (ux4gTypography?.bS_default ??
+                                                materialTheme
+                                                    .textTheme
+                                                    .bodySmall)
+                                            ?.copyWith(
+                                              color:
+                                                  slot.status ==
+                                                      SlotTimeStatus.noSlots
+                                                  ? onSurface.withValues(
+                                                      alpha: 0.38,
+                                                    )
+                                                  : isSelected
+                                                  ? primary
+                                                  : onSurface,
+                                              fontWeight: isSelected
+                                                  ? FontWeight.w600
+                                                  : FontWeight.w400,
+                                            ),
                                   ),
-                                ),
-                                const SizedBox(width: 6),
-                                _buildCompactSlotBadge(slot, isSelected, ux4gColors, ux4gTypography, materialTheme),
-                              ],
+                                  const SizedBox(width: 6),
+                                  _buildCompactSlotBadge(
+                                    slot,
+                                    isSelected,
+                                    ux4gColors,
+                                    ux4gTypography,
+                                    materialTheme,
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         ),
-                      ));
+                      );
                     }
-                    
+
                     // If only one item in row, add empty column
                     if (row.length == 1) {
-                      cells.add(VerticalDivider(
-                          width: 1, thickness: 1, color: onSurface.withValues(alpha: 0.08)));
+                      cells.add(
+                        VerticalDivider(
+                          width: 1,
+                          thickness: 1,
+                          color: onSurface.withValues(alpha: 0.08),
+                        ),
+                      );
                       cells.add(Expanded(child: Container()));
                     }
-                    
+
                     return cells;
                   }(),
                 ),
@@ -1202,7 +1379,11 @@ class _SlotTimePickerSheetState extends State<SlotTimePickerSheet> {
           ),
         ),
 
-        Divider(height: 1, thickness: 1, color: onSurface.withValues(alpha: 0.08)),
+        Divider(
+          height: 1,
+          thickness: 1,
+          color: onSurface.withValues(alpha: 0.08),
+        ),
 
         // Buttons
         _buildFooter(ux4gColors, ux4gTypography, materialTheme),
@@ -1213,10 +1394,17 @@ class _SlotTimePickerSheetState extends State<SlotTimePickerSheet> {
   }
 
   Widget _buildCompactSlotBadge(
-      SlotTimeEntry slot, bool isSelected, Ux4gColors? ux4gColors, Ux4gTypography? ux4gTypography, ThemeData materialTheme) {
-    final onSurface = ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
+    SlotTimeEntry slot,
+    bool isSelected,
+    Ux4gColors? ux4gColors,
+    Ux4gTypography? ux4gTypography,
+    ThemeData materialTheme,
+  ) {
+    final onSurface =
+        ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
     final primary = ux4gColors?.primary ?? materialTheme.colorScheme.primary;
-    final onPrimary = ux4gColors?.onPrimary ?? materialTheme.colorScheme.onPrimary;
+    final onPrimary =
+        ux4gColors?.onPrimary ?? materialTheme.colorScheme.onPrimary;
     final warning = ux4gColors?.warning ?? Colors.orange;
     final success = ux4gColors?.success ?? Colors.green;
 
@@ -1231,7 +1419,12 @@ class _SlotTimePickerSheetState extends State<SlotTimePickerSheet> {
         alignment: Alignment.center,
         child: Text(
           '0',
-          style: (ux4gTypography?.lS_strong ?? materialTheme.textTheme.labelSmall?.copyWith(fontWeight: FontWeight.bold))?.copyWith(color: onSurface.withValues(alpha: 0.38)),
+          style:
+              (ux4gTypography?.lS_strong ??
+                      materialTheme.textTheme.labelSmall?.copyWith(
+                        fontWeight: FontWeight.bold,
+                      ))
+                  ?.copyWith(color: onSurface.withValues(alpha: 0.38)),
         ),
       );
     }
@@ -1248,16 +1441,18 @@ class _SlotTimePickerSheetState extends State<SlotTimePickerSheet> {
     return Container(
       width: 22,
       height: 22,
-      decoration: BoxDecoration(
-        color: badgeColor,
-        shape: BoxShape.circle,
-      ),
+      decoration: BoxDecoration(color: badgeColor, shape: BoxShape.circle),
       alignment: Alignment.center,
       child: isSelected
           ? Icon(Icons.check_rounded, size: 13, color: onPrimary)
           : Text(
               '${slot.slotCount}',
-              style: (ux4gTypography?.lS_strong ?? materialTheme.textTheme.labelSmall?.copyWith(fontWeight: FontWeight.bold))?.copyWith(color: isSelected ? onPrimary : Colors.white),
+              style:
+                  (ux4gTypography?.lS_strong ??
+                          materialTheme.textTheme.labelSmall?.copyWith(
+                            fontWeight: FontWeight.bold,
+                          ))
+                      ?.copyWith(color: isSelected ? onPrimary : Colors.white),
             ),
     );
   }
@@ -1266,8 +1461,13 @@ class _SlotTimePickerSheetState extends State<SlotTimePickerSheet> {
   // Header  "← Mon 14 Apr →"
   // ------------------------------------------------------------------
 
-  Widget _buildSheetHeader(Ux4gColors? ux4gColors, Ux4gTypography? ux4gTypography, ThemeData materialTheme) {
-    final onSurface = ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
+  Widget _buildSheetHeader(
+    Ux4gColors? ux4gColors,
+    Ux4gTypography? ux4gTypography,
+    ThemeData materialTheme,
+  ) {
+    final onSurface =
+        ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
     final primary = ux4gColors?.primary ?? materialTheme.colorScheme.primary;
 
     return Padding(
@@ -1286,7 +1486,12 @@ class _SlotTimePickerSheetState extends State<SlotTimePickerSheet> {
               ),
               Text(
                 _dateLabel,
-                style: (ux4gTypography?.tM_strong ?? materialTheme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold))?.copyWith(color: onSurface),
+                style:
+                    (ux4gTypography?.tM_strong ??
+                            materialTheme.textTheme.titleMedium?.copyWith(
+                              fontWeight: FontWeight.bold,
+                            ))
+                        ?.copyWith(color: onSurface),
               ),
               _buildHeaderArrow(
                 ux4gColors: ux4gColors,
@@ -1301,7 +1506,12 @@ class _SlotTimePickerSheetState extends State<SlotTimePickerSheet> {
             const SizedBox(height: 2),
             Text(
               'Today',
-              style: (ux4gTypography?.lS_strong ?? materialTheme.textTheme.labelSmall?.copyWith(fontWeight: FontWeight.bold))?.copyWith(color: primary),
+              style:
+                  (ux4gTypography?.lS_strong ??
+                          materialTheme.textTheme.labelSmall?.copyWith(
+                            fontWeight: FontWeight.bold,
+                          ))
+                      ?.copyWith(color: primary),
             ),
           ],
         ],
@@ -1313,10 +1523,16 @@ class _SlotTimePickerSheetState extends State<SlotTimePickerSheet> {
   // Slot tile
   // ------------------------------------------------------------------
 
-  Widget _buildSlotTile(int index, Ux4gColors? ux4gColors, Ux4gTypography? ux4gTypography, ThemeData materialTheme) {
+  Widget _buildSlotTile(
+    int index,
+    Ux4gColors? ux4gColors,
+    Ux4gTypography? ux4gTypography,
+    ThemeData materialTheme,
+  ) {
     final slot = _slots[index];
     final isSelected = _selectedIndex == index;
-    final onSurface = ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
+    final onSurface =
+        ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
     final primary = ux4gColors?.primary ?? materialTheme.colorScheme.primary;
     final surface = ux4gColors?.surface ?? materialTheme.colorScheme.surface;
     final warning = ux4gColors?.warning ?? Colors.orange;
@@ -1328,7 +1544,9 @@ class _SlotTimePickerSheetState extends State<SlotTimePickerSheet> {
         alignment: Alignment.center,
         child: Text(
           'No slots available',
-          style: (ux4gTypography?.bS_default ?? materialTheme.textTheme.bodySmall)?.copyWith(color: onSurface.withValues(alpha: 0.38)),
+          style:
+              (ux4gTypography?.bS_default ?? materialTheme.textTheme.bodySmall)
+                  ?.copyWith(color: onSurface.withValues(alpha: 0.38)),
         ),
       );
     }
@@ -1340,14 +1558,10 @@ class _SlotTimePickerSheetState extends State<SlotTimePickerSheet> {
         height: 56,
         margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
         decoration: BoxDecoration(
-          color: isSelected
-              ? primary.withValues(alpha: 0.08)
-              : surface,
+          color: isSelected ? primary.withValues(alpha: 0.08) : surface,
           borderRadius: BorderRadius.circular(8),
           border: Border.all(
-            color: isSelected
-                ? primary
-                : onSurface.withValues(alpha: 0.12),
+            color: isSelected ? primary : onSurface.withValues(alpha: 0.12),
             width: isSelected ? 1.5 : 1,
           ),
         ),
@@ -1355,12 +1569,16 @@ class _SlotTimePickerSheetState extends State<SlotTimePickerSheet> {
             ? Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(Icons.check_circle_rounded,
-                      size: 18, color: primary),
+                  Icon(Icons.check_circle_rounded, size: 18, color: primary),
                   const SizedBox(width: 6),
                   Text(
                     'Selected',
-                    style: (ux4gTypography?.bS_strong ?? materialTheme.textTheme.bodySmall?.copyWith(fontWeight: FontWeight.bold))?.copyWith(color: primary),
+                    style:
+                        (ux4gTypography?.bS_strong ??
+                                materialTheme.textTheme.bodySmall?.copyWith(
+                                  fontWeight: FontWeight.bold,
+                                ))
+                            ?.copyWith(color: primary),
                   ),
                 ],
               )
@@ -1369,16 +1587,24 @@ class _SlotTimePickerSheetState extends State<SlotTimePickerSheet> {
                 children: [
                   Text(
                     slot.time,
-                    style: (ux4gTypography?.bS_strong ?? materialTheme.textTheme.bodySmall?.copyWith(fontWeight: FontWeight.bold))?.copyWith(color: onSurface),
+                    style:
+                        (ux4gTypography?.bS_strong ??
+                                materialTheme.textTheme.bodySmall?.copyWith(
+                                  fontWeight: FontWeight.bold,
+                                ))
+                            ?.copyWith(color: onSurface),
                   ),
                   const SizedBox(height: 2),
                   Text(
                     '${slot.slotCount} slots',
-                    style: (ux4gTypography?.lS_default ?? materialTheme.textTheme.labelSmall)?.copyWith(
-                      color: slot.status == SlotTimeStatus.limited
-                          ? warning
-                          : onSurface.withValues(alpha: 0.38),
-                    ),
+                    style:
+                        (ux4gTypography?.lS_default ??
+                                materialTheme.textTheme.labelSmall)
+                            ?.copyWith(
+                              color: slot.status == SlotTimeStatus.limited
+                                  ? warning
+                                  : onSurface.withValues(alpha: 0.38),
+                            ),
                   ),
                 ],
               ),
@@ -1390,8 +1616,13 @@ class _SlotTimePickerSheetState extends State<SlotTimePickerSheet> {
   // Legend
   // ------------------------------------------------------------------
 
-  Widget _buildLegend(Ux4gColors? ux4gColors, Ux4gTypography? ux4gTypography, ThemeData materialTheme) {
-    final onSurface = ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
+  Widget _buildLegend(
+    Ux4gColors? ux4gColors,
+    Ux4gTypography? ux4gTypography,
+    ThemeData materialTheme,
+  ) {
+    final onSurface =
+        ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
     final primary = ux4gColors?.primary ?? materialTheme.colorScheme.primary;
     final surface = ux4gColors?.surface ?? materialTheme.colorScheme.surface;
     final warning = ux4gColors?.warning ?? Colors.orange;
@@ -1405,30 +1636,33 @@ class _SlotTimePickerSheetState extends State<SlotTimePickerSheet> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               _sheetLegendItem(
-                  icon: null,
-                  boxColor: surface,
-                  borderColor: onSurface.withValues(alpha: 0.38),
-                  label: 'Available',
-                  ux4gColors: ux4gColors,
-                  ux4gTypography: ux4gTypography,
-                  materialTheme: materialTheme),
+                icon: null,
+                boxColor: surface,
+                borderColor: onSurface.withValues(alpha: 0.38),
+                label: 'Available',
+                ux4gColors: ux4gColors,
+                ux4gTypography: ux4gTypography,
+                materialTheme: materialTheme,
+              ),
               _sheetLegendItem(
-                  icon: Icons.check_circle_rounded,
-                  iconColor: primary,
-                  boxColor: primary.withValues(alpha: 0.08),
-                  borderColor: primary,
-                  label: 'Selected',
-                  ux4gColors: ux4gColors,
-                  ux4gTypography: ux4gTypography,
-                  materialTheme: materialTheme),
+                icon: Icons.check_circle_rounded,
+                iconColor: primary,
+                boxColor: primary.withValues(alpha: 0.08),
+                borderColor: primary,
+                label: 'Selected',
+                ux4gColors: ux4gColors,
+                ux4gTypography: ux4gTypography,
+                materialTheme: materialTheme,
+              ),
               _sheetLegendItem(
-                  icon: null,
-                  boxColor: onSurface.withValues(alpha: 0.04),
-                  borderColor: onSurface.withValues(alpha: 0.12),
-                  label: 'No slots',
-                  ux4gColors: ux4gColors,
-                  ux4gTypography: ux4gTypography,
-                  materialTheme: materialTheme),
+                icon: null,
+                boxColor: onSurface.withValues(alpha: 0.04),
+                borderColor: onSurface.withValues(alpha: 0.12),
+                label: 'No slots',
+                ux4gColors: ux4gColors,
+                ux4gTypography: ux4gTypography,
+                materialTheme: materialTheme,
+              ),
             ],
           ),
           const SizedBox(height: 6),
@@ -1437,29 +1671,32 @@ class _SlotTimePickerSheetState extends State<SlotTimePickerSheet> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               _sheetLegendItem(
-                  icon: null,
-                  boxColor: warning.withValues(alpha: 0.08),
-                  borderColor: warning,
-                  label: 'Limited slots',
-                  ux4gColors: ux4gColors,
-                  ux4gTypography: ux4gTypography,
-                  materialTheme: materialTheme),
+                icon: null,
+                boxColor: warning.withValues(alpha: 0.08),
+                borderColor: warning,
+                label: 'Limited slots',
+                ux4gColors: ux4gColors,
+                ux4gTypography: ux4gTypography,
+                materialTheme: materialTheme,
+              ),
               _sheetLegendItem(
-                  icon: null,
-                  boxColor: warning.withValues(alpha: 0.08),
-                  borderColor: warning,
-                  label: 'Public holiday',
-                  ux4gColors: ux4gColors,
-                  ux4gTypography: ux4gTypography,
-                  materialTheme: materialTheme),
+                icon: null,
+                boxColor: warning.withValues(alpha: 0.08),
+                borderColor: warning,
+                label: 'Public holiday',
+                ux4gColors: ux4gColors,
+                ux4gTypography: ux4gTypography,
+                materialTheme: materialTheme,
+              ),
               _sheetLegendItem(
-                  icon: null,
-                  boxColor: onSurface.withValues(alpha: 0.08),
-                  borderColor: onSurface.withValues(alpha: 0.12),
-                  label: 'Weekly off',
-                  ux4gColors: ux4gColors,
-                  ux4gTypography: ux4gTypography,
-                  materialTheme: materialTheme),
+                icon: null,
+                boxColor: onSurface.withValues(alpha: 0.08),
+                borderColor: onSurface.withValues(alpha: 0.12),
+                label: 'Weekly off',
+                ux4gColors: ux4gColors,
+                ux4gTypography: ux4gTypography,
+                materialTheme: materialTheme,
+              ),
             ],
           ),
         ],
@@ -1477,7 +1714,8 @@ class _SlotTimePickerSheetState extends State<SlotTimePickerSheet> {
     IconData? icon,
     Color? iconColor,
   }) {
-    final onSurface = ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
+    final onSurface =
+        ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
 
     return Row(
       mainAxisSize: MainAxisSize.min,
@@ -1490,14 +1728,14 @@ class _SlotTimePickerSheetState extends State<SlotTimePickerSheet> {
             borderRadius: BorderRadius.circular(3),
             border: Border.all(color: borderColor, width: 1),
           ),
-          child: icon != null
-              ? Icon(icon, size: 10, color: iconColor)
-              : null,
+          child: icon != null ? Icon(icon, size: 10, color: iconColor) : null,
         ),
         const SizedBox(width: 4),
         Text(
           label,
-          style: (ux4gTypography?.lS_default ?? materialTheme.textTheme.labelSmall)?.copyWith(color: onSurface.withValues(alpha: 0.6)),
+          style:
+              (ux4gTypography?.lS_default ?? materialTheme.textTheme.labelSmall)
+                  ?.copyWith(color: onSurface.withValues(alpha: 0.6)),
         ),
       ],
     );
@@ -1514,7 +1752,8 @@ class _SlotTimePickerSheetState extends State<SlotTimePickerSheet> {
     required bool disabled,
     required ThemeData materialTheme,
   }) {
-    final onSurface = ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
+    final onSurface =
+        ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
     final surface = ux4gColors?.surface ?? materialTheme.colorScheme.surface;
 
     return GestureDetector(
@@ -1526,13 +1765,17 @@ class _SlotTimePickerSheetState extends State<SlotTimePickerSheet> {
           color: disabled ? onSurface.withValues(alpha: 0.04) : surface,
           borderRadius: BorderRadius.circular(6),
           border: Border.all(
-            color: disabled ? onSurface.withValues(alpha: 0.08) : onSurface.withValues(alpha: 0.12),
+            color: disabled
+                ? onSurface.withValues(alpha: 0.08)
+                : onSurface.withValues(alpha: 0.12),
           ),
         ),
         child: Icon(
           icon,
           size: 18,
-          color: disabled ? onSurface.withValues(alpha: 0.12) : onSurface.withValues(alpha: 0.6),
+          color: disabled
+              ? onSurface.withValues(alpha: 0.12)
+              : onSurface.withValues(alpha: 0.6),
         ),
       ),
     );
@@ -1542,10 +1785,16 @@ class _SlotTimePickerSheetState extends State<SlotTimePickerSheet> {
   // Footer  Cancel | Confirm
   // ------------------------------------------------------------------
 
-  Widget _buildFooter(Ux4gColors? ux4gColors, Ux4gTypography? ux4gTypography, ThemeData materialTheme) {
-    final onSurface = ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
+  Widget _buildFooter(
+    Ux4gColors? ux4gColors,
+    Ux4gTypography? ux4gTypography,
+    ThemeData materialTheme,
+  ) {
+    final onSurface =
+        ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
     final primary = ux4gColors?.primary ?? materialTheme.colorScheme.primary;
-    final onPrimary = ux4gColors?.onPrimary ?? materialTheme.colorScheme.onPrimary;
+    final onPrimary =
+        ux4gColors?.onPrimary ?? materialTheme.colorScheme.onPrimary;
 
     final hasSelection = _selectedIndex != null;
     return Padding(
@@ -1558,16 +1807,22 @@ class _SlotTimePickerSheetState extends State<SlotTimePickerSheet> {
               style: OutlinedButton.styleFrom(
                 side: BorderSide(color: onSurface.withValues(alpha: 0.12)),
                 shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8)),
+                  borderRadius: BorderRadius.circular(8),
+                ),
                 padding: const EdgeInsets.symmetric(vertical: 14),
               ),
               child: Text(
                 'Cancel',
-                style: (ux4gTypography?.bS_strong ?? materialTheme.textTheme.bodySmall?.copyWith(fontWeight: FontWeight.bold))?.copyWith(
-                  color: _isLoading
-                      ? onSurface.withValues(alpha: 0.38)
-                      : onSurface,
-                ),
+                style:
+                    (ux4gTypography?.bS_strong ??
+                            materialTheme.textTheme.bodySmall?.copyWith(
+                              fontWeight: FontWeight.bold,
+                            ))
+                        ?.copyWith(
+                          color: _isLoading
+                              ? onSurface.withValues(alpha: 0.38)
+                              : onSurface,
+                        ),
               ),
             ),
           ),
@@ -1585,17 +1840,23 @@ class _SlotTimePickerSheetState extends State<SlotTimePickerSheet> {
                 backgroundColor: primary,
                 disabledBackgroundColor: onSurface.withValues(alpha: 0.12),
                 shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8)),
+                  borderRadius: BorderRadius.circular(8),
+                ),
                 padding: const EdgeInsets.symmetric(vertical: 14),
                 elevation: 0,
               ),
               child: Text(
                 'Confirm',
-                style: (ux4gTypography?.bS_strong ?? materialTheme.textTheme.bodySmall?.copyWith(fontWeight: FontWeight.bold))?.copyWith(
-                  color: hasSelection
-                      ? onPrimary
-                      : onSurface.withValues(alpha: 0.38),
-                ),
+                style:
+                    (ux4gTypography?.bS_strong ??
+                            materialTheme.textTheme.bodySmall?.copyWith(
+                              fontWeight: FontWeight.bold,
+                            ))
+                        ?.copyWith(
+                          color: hasSelection
+                              ? onPrimary
+                              : onSurface.withValues(alpha: 0.38),
+                        ),
               ),
             ),
           ),

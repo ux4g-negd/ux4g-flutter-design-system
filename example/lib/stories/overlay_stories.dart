@@ -32,8 +32,12 @@ Ux4gModal.show(
             Ux4gModal.show(
               context,
               modal: Ux4gModal(
-                headerTitle: context.knobs.string(label: 'Title', initialValue: 'Confirmation'),
-                bodyText: 'This is a live interactive modal triggered by a button click.',
+                headerTitle: context.knobs.string(
+                  label: 'Title',
+                  initialValue: 'Confirmation',
+                ),
+                bodyText:
+                    'This is a live interactive modal triggered by a button click.',
                 alignment: context.knobs.list(
                   label: 'Alignment',
                   options: Ux4gModalAlignment.values,
@@ -42,9 +46,12 @@ Ux4gModal.show(
                 footerButtons: Ux4gModalFooterButtons.twoButtons,
                 primaryButtonText: 'Confirm',
                 secondaryButtonText: 'Cancel',
-                onPrimaryClick: () => Navigator.of(context, rootNavigator: true).pop(),
-                onSecondaryClick: () => Navigator.of(context, rootNavigator: true).pop(),
-                onDismiss: () => Navigator.of(context, rootNavigator: true).pop(),
+                onPrimaryClick: () =>
+                    Navigator.of(context, rootNavigator: true).pop(),
+                onSecondaryClick: () =>
+                    Navigator.of(context, rootNavigator: true).pop(),
+                onDismiss: () =>
+                    Navigator.of(context, rootNavigator: true).pop(),
               ),
             );
           },
@@ -57,11 +64,36 @@ Ux4gModal.show(
         name: 'Ux4gModal — Variants',
         description: 'Common modal patterns used in the design system.',
         props: const [
-          PropRow(name: 'onDismiss', type: 'VoidCallback', description: 'Called when backdrop or close button is tapped.', required: true),
-          PropRow(name: 'showHeader', type: 'bool', description: 'Show the header section.', defaultValue: 'true'),
-          PropRow(name: 'alignment', type: 'Ux4gModalAlignment', description: 'leftAligned or centered.', defaultValue: 'leftAligned'),
-          PropRow(name: 'footerAlign', type: 'Ux4gModalFooterAlign', description: 'left, right, center, split.', defaultValue: 'right'),
-          PropRow(name: 'isDestructive', type: 'bool', description: 'Use error color for primary action.', defaultValue: 'false'),
+          PropRow(
+            name: 'onDismiss',
+            type: 'VoidCallback',
+            description: 'Called when backdrop or close button is tapped.',
+            required: true,
+          ),
+          PropRow(
+            name: 'showHeader',
+            type: 'bool',
+            description: 'Show the header section.',
+            defaultValue: 'true',
+          ),
+          PropRow(
+            name: 'alignment',
+            type: 'Ux4gModalAlignment',
+            description: 'leftAligned or centered.',
+            defaultValue: 'leftAligned',
+          ),
+          PropRow(
+            name: 'footerAlign',
+            type: 'Ux4gModalFooterAlign',
+            description: 'left, right, center, split.',
+            defaultValue: 'right',
+          ),
+          PropRow(
+            name: 'isDestructive',
+            type: 'bool',
+            description: 'Use error color for primary action.',
+            defaultValue: 'false',
+          ),
         ],
         child: SizedBox(
           width: 400,
@@ -70,7 +102,8 @@ Ux4gModal.show(
               // 1. Default (Left Aligned)
               Ux4gModal(
                 headerTitle: 'Default Modal',
-                bodyText: 'This is the standard left-aligned modal with two footer buttons.',
+                bodyText:
+                    'This is the standard left-aligned modal with two footer buttons.',
                 footerButtons: Ux4gModalFooterButtons.twoButtons,
                 footerAlign: Ux4gModalFooterAlign.right,
                 onDismiss: () {},
@@ -80,7 +113,8 @@ Ux4gModal.show(
               Ux4gModal(
                 headerTitle: 'Warning',
                 subtitleText: 'Delete Item?',
-                bodyText: 'Are you sure you want to permanently delete this item?',
+                bodyText:
+                    'Are you sure you want to permanently delete this item?',
                 alignment: Ux4gModalAlignment.centered,
                 footerAlign: Ux4gModalFooterAlign.center,
                 isDestructive: true,
@@ -93,7 +127,8 @@ Ux4gModal.show(
                 headerImageStyle: Ux4gModalHeaderImage.none,
                 showHeader: false,
                 subtitleText: 'Confirm Action',
-                bodyText: 'This will permanently remove the selected items. Continue?',
+                bodyText:
+                    'This will permanently remove the selected items. Continue?',
                 footerAlign: Ux4gModalFooterAlign.split,
                 showCloseButton: false,
                 onDismiss: () {},
@@ -101,7 +136,9 @@ Ux4gModal.show(
               const SizedBox(height: 32),
               // 4. Avatar (Padded Image)
               Ux4gModal(
-                headerImageContent: Container(color: const Color(0xFF6A4EFF).withValues(alpha: 0.1)),
+                headerImageContent: Container(
+                  color: const Color(0xFF6A4EFF).withValues(alpha: 0.1),
+                ),
                 headerImageStyle: Ux4gModalHeaderImage.padded,
                 leadingItem: Ux4gModalLeadingItem.avatar,
                 avatarInitials: 'JD',
@@ -119,7 +156,8 @@ Ux4gModal.show(
                 headerTitle: 'Image Header',
                 descriptionText: 'Optional description below header',
                 showDescription: true,
-                bodyText: 'Modals with full-bleed images are great for onboarding or marketing content.',
+                bodyText:
+                    'Modals with full-bleed images are great for onboarding or marketing content.',
                 footerButtons: Ux4gModalFooterButtons.twoButtons,
                 primaryButtonText: 'Continue',
                 secondaryButtonText: 'Back',
@@ -134,7 +172,8 @@ Ux4gModal.show(
       name: 'Icon Centered',
       builder: (context) => ComponentDocs(
         name: 'Ux4gModal — Icon Centered',
-        description: 'Centered modal with top icon, header, description, and subtitle.',
+        description:
+            'Centered modal with top icon, header, description, and subtitle.',
         code: '''Ux4gModal(
   leadingItem: Ux4gModalLeadingItem.icon,
   leadingIcon: Icons.category_outlined,
@@ -178,25 +217,88 @@ Ux4gModal.show(
         name: 'Ux4gModal — All Props',
         description: 'Complete technical reference with a full visual example.',
         props: const [
-          PropRow(name: 'onDismiss', type: 'VoidCallback', description: 'Called when backdrop or close button is tapped.', required: true),
-          PropRow(name: 'headerImageContent', type: 'Widget?', description: 'Widget rendered as the header image.'),
-          PropRow(name: 'headerImageUrl', type: 'String?', description: 'URL for the header image.'),
-          PropRow(name: 'headerImageHeight', type: 'double', description: 'Height of the header image.', defaultValue: '160'),
-          PropRow(name: 'headerImageStyle', type: 'Ux4gModalHeaderImage', description: 'Style: fullBleed, padded, none.', defaultValue: 'fullBleed'),
-          PropRow(name: 'leadingItem', type: 'Ux4gModalLeadingItem', description: 'none, icon, avatar, image.', defaultValue: 'none'),
-          PropRow(name: 'headerTitle', type: 'String', description: 'Header title text.', defaultValue: '"Header"'),
-          PropRow(name: 'footerButtons', type: 'Ux4gModalFooterButtons', description: 'oneButton, twoButtons, etc.', defaultValue: 'twoButtons'),
-          PropRow(name: 'footerAlign', type: 'Ux4gModalFooterAlign', description: 'left, right, center, split.', defaultValue: 'right'),
-          PropRow(name: 'isDestructive', type: 'bool', description: 'Use error color for primary action.', defaultValue: 'false'),
-          PropRow(name: 'alignment', type: 'Ux4gModalAlignment', description: 'leftAligned or centered.', defaultValue: 'leftAligned'),
-          PropRow(name: 'backgroundColor', type: 'Color?', description: 'Background color of modal.'),
-          PropRow(name: 'cornerRadius', type: 'double', description: 'Corner radius of modal.', defaultValue: '16.0'),
+          PropRow(
+            name: 'onDismiss',
+            type: 'VoidCallback',
+            description: 'Called when backdrop or close button is tapped.',
+            required: true,
+          ),
+          PropRow(
+            name: 'headerImageContent',
+            type: 'Widget?',
+            description: 'Widget rendered as the header image.',
+          ),
+          PropRow(
+            name: 'headerImageUrl',
+            type: 'String?',
+            description: 'URL for the header image.',
+          ),
+          PropRow(
+            name: 'headerImageHeight',
+            type: 'double',
+            description: 'Height of the header image.',
+            defaultValue: '160',
+          ),
+          PropRow(
+            name: 'headerImageStyle',
+            type: 'Ux4gModalHeaderImage',
+            description: 'Style: fullBleed, padded, none.',
+            defaultValue: 'fullBleed',
+          ),
+          PropRow(
+            name: 'leadingItem',
+            type: 'Ux4gModalLeadingItem',
+            description: 'none, icon, avatar, image.',
+            defaultValue: 'none',
+          ),
+          PropRow(
+            name: 'headerTitle',
+            type: 'String',
+            description: 'Header title text.',
+            defaultValue: '"Header"',
+          ),
+          PropRow(
+            name: 'footerButtons',
+            type: 'Ux4gModalFooterButtons',
+            description: 'oneButton, twoButtons, etc.',
+            defaultValue: 'twoButtons',
+          ),
+          PropRow(
+            name: 'footerAlign',
+            type: 'Ux4gModalFooterAlign',
+            description: 'left, right, center, split.',
+            defaultValue: 'right',
+          ),
+          PropRow(
+            name: 'isDestructive',
+            type: 'bool',
+            description: 'Use error color for primary action.',
+            defaultValue: 'false',
+          ),
+          PropRow(
+            name: 'alignment',
+            type: 'Ux4gModalAlignment',
+            description: 'leftAligned or centered.',
+            defaultValue: 'leftAligned',
+          ),
+          PropRow(
+            name: 'backgroundColor',
+            type: 'Color?',
+            description: 'Background color of modal.',
+          ),
+          PropRow(
+            name: 'cornerRadius',
+            type: 'double',
+            description: 'Corner radius of modal.',
+            defaultValue: '16.0',
+          ),
         ],
         child: SizedBox(
           width: 400,
           child: Ux4gModal(
             headerTitle: 'Full Preview Modal',
-            bodyText: 'This modal is shown here so you can see the visual effect while browsing the Props tab.',
+            bodyText:
+                'This modal is shown here so you can see the visual effect while browsing the Props tab.',
             onDismiss: () {},
           ),
         ),
@@ -227,17 +329,31 @@ final bottomSheetComponent = WidgetbookComponent(
           onPressed: () {
             Ux4gBottomSheet.show(
               context,
-              title: context.knobs.string(label: 'Title', initialValue: 'Filter Options'),
+              title: context.knobs.string(
+                label: 'Title',
+                initialValue: 'Filter Options',
+              ),
               description: 'Choose one of the sorting methods below.',
-              isDraggable: context.knobs.boolean(label: 'Draggable', initialValue: true),
+              isDraggable: context.knobs.boolean(
+                label: 'Draggable',
+                initialValue: true,
+              ),
               footerType: Ux4gCardFooterType.primaryAndSecondary,
-              onPrimaryClick: () => Navigator.of(context, rootNavigator: true).pop(),
-              onSecondaryClick: () => Navigator.of(context, rootNavigator: true).pop(),
+              onPrimaryClick: () =>
+                  Navigator.of(context, rootNavigator: true).pop(),
+              onSecondaryClick: () =>
+                  Navigator.of(context, rootNavigator: true).pop(),
               content: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  ListTile(leading: const Icon(Icons.sort), title: const Text('Sort by date')),
-                  ListTile(leading: const Icon(Icons.filter_list), title: const Text('Filter by category')),
+                  ListTile(
+                    leading: const Icon(Icons.sort),
+                    title: const Text('Sort by date'),
+                  ),
+                  ListTile(
+                    leading: const Icon(Icons.filter_list),
+                    title: const Text('Filter by category'),
+                  ),
                   const SizedBox(height: 20),
                 ],
               ),
@@ -252,23 +368,100 @@ final bottomSheetComponent = WidgetbookComponent(
         name: 'Ux4gBottomSheet',
         description: 'Static visual preview of the sheet surface.',
         props: const [
-          PropRow(name: 'onDismiss', type: 'VoidCallback', description: 'Called when sheet is dismissed.', required: true),
-          PropRow(name: 'headerTitle', type: 'String?', description: 'Title in header.'),
-          PropRow(name: 'headerSubtleText', type: 'String?', description: 'Subtle text next to title.'),
-          PropRow(name: 'headerIcon', type: 'IconData?', description: 'Icon in header.'),
-          PropRow(name: 'showCloseButton', type: 'bool', description: 'Show close icon.', defaultValue: 'true'),
-          PropRow(name: 'description', type: 'String?', description: 'Description below header.'),
-          PropRow(name: 'content', type: 'Widget', description: 'Main content widget.', required: true),
-          PropRow(name: 'footerType', type: 'Ux4gCardFooterType', description: 'none, primaryOnly, etc.', defaultValue: 'none'),
-          PropRow(name: 'footerAlignment', type: 'Ux4gBottomSheetFooterAlignment', description: 'left, centered, right, justified.', defaultValue: 'left'),
-          PropRow(name: 'primaryButtonText', type: 'String', description: 'Primary button label.', defaultValue: '"Confirm"'),
-          PropRow(name: 'secondaryButtonText', type: 'String', description: 'Secondary button label.', defaultValue: '"Cancel"'),
-          PropRow(name: 'onPrimaryClick', type: 'VoidCallback?', description: 'Action for primary button.'),
-          PropRow(name: 'onSecondaryClick', type: 'VoidCallback?', description: 'Action for secondary button.'),
-          PropRow(name: 'showDividers', type: 'bool', description: 'Show top/bottom dividers.', defaultValue: 'true'),
-          PropRow(name: 'isDraggable', type: 'bool', description: 'Show drag handle and enable drag.', defaultValue: 'true'),
-          PropRow(name: 'containerColor', type: 'Color?', description: 'Background color of sheet.'),
-          PropRow(name: 'scrimColor', type: 'Color?', description: 'Color of the background scrim.'),
+          PropRow(
+            name: 'onDismiss',
+            type: 'VoidCallback',
+            description: 'Called when sheet is dismissed.',
+            required: true,
+          ),
+          PropRow(
+            name: 'headerTitle',
+            type: 'String?',
+            description: 'Title in header.',
+          ),
+          PropRow(
+            name: 'headerSubtleText',
+            type: 'String?',
+            description: 'Subtle text next to title.',
+          ),
+          PropRow(
+            name: 'headerIcon',
+            type: 'IconData?',
+            description: 'Icon in header.',
+          ),
+          PropRow(
+            name: 'showCloseButton',
+            type: 'bool',
+            description: 'Show close icon.',
+            defaultValue: 'true',
+          ),
+          PropRow(
+            name: 'description',
+            type: 'String?',
+            description: 'Description below header.',
+          ),
+          PropRow(
+            name: 'content',
+            type: 'Widget',
+            description: 'Main content widget.',
+            required: true,
+          ),
+          PropRow(
+            name: 'footerType',
+            type: 'Ux4gCardFooterType',
+            description: 'none, primaryOnly, etc.',
+            defaultValue: 'none',
+          ),
+          PropRow(
+            name: 'footerAlignment',
+            type: 'Ux4gBottomSheetFooterAlignment',
+            description: 'left, centered, right, justified.',
+            defaultValue: 'left',
+          ),
+          PropRow(
+            name: 'primaryButtonText',
+            type: 'String',
+            description: 'Primary button label.',
+            defaultValue: '"Confirm"',
+          ),
+          PropRow(
+            name: 'secondaryButtonText',
+            type: 'String',
+            description: 'Secondary button label.',
+            defaultValue: '"Cancel"',
+          ),
+          PropRow(
+            name: 'onPrimaryClick',
+            type: 'VoidCallback?',
+            description: 'Action for primary button.',
+          ),
+          PropRow(
+            name: 'onSecondaryClick',
+            type: 'VoidCallback?',
+            description: 'Action for secondary button.',
+          ),
+          PropRow(
+            name: 'showDividers',
+            type: 'bool',
+            description: 'Show top/bottom dividers.',
+            defaultValue: 'true',
+          ),
+          PropRow(
+            name: 'isDraggable',
+            type: 'bool',
+            description: 'Show drag handle and enable drag.',
+            defaultValue: 'true',
+          ),
+          PropRow(
+            name: 'containerColor',
+            type: 'Color?',
+            description: 'Background color of sheet.',
+          ),
+          PropRow(
+            name: 'scrimColor',
+            type: 'Color?',
+            description: 'Color of the background scrim.',
+          ),
         ],
         child: SizedBox(
           width: 380,
@@ -327,14 +520,49 @@ toastState.showToast(
   category: Ux4gToastCategory.success,
 );''',
         props: const [
-          PropRow(name: 'category', type: 'Ux4gToastCategory', description: 'info, success, warning, error, slot.', required: true),
-          PropRow(name: 'title', type: 'String', description: 'Main toast title.', required: true),
-          PropRow(name: 'subtitle', type: 'String?', description: 'Supporting description text.'),
-          PropRow(name: 'actionText', type: 'String?', description: 'Text for action button.'),
-          PropRow(name: 'onActionClick', type: 'VoidCallback?', description: 'Action button callback.'),
-          PropRow(name: 'onCloseClick', type: 'VoidCallback?', description: 'Close button callback.'),
-          PropRow(name: 'showCloseButton', type: 'bool', description: 'Whether to show close icon.', defaultValue: 'true'),
-          PropRow(name: 'layout', type: 'Ux4gToastLayout?', description: 'full or stacked. Defaults based on screen width.'),
+          PropRow(
+            name: 'category',
+            type: 'Ux4gToastCategory',
+            description: 'info, success, warning, error, slot.',
+            required: true,
+          ),
+          PropRow(
+            name: 'title',
+            type: 'String',
+            description: 'Main toast title.',
+            required: true,
+          ),
+          PropRow(
+            name: 'subtitle',
+            type: 'String?',
+            description: 'Supporting description text.',
+          ),
+          PropRow(
+            name: 'actionText',
+            type: 'String?',
+            description: 'Text for action button.',
+          ),
+          PropRow(
+            name: 'onActionClick',
+            type: 'VoidCallback?',
+            description: 'Action button callback.',
+          ),
+          PropRow(
+            name: 'onCloseClick',
+            type: 'VoidCallback?',
+            description: 'Close button callback.',
+          ),
+          PropRow(
+            name: 'showCloseButton',
+            type: 'bool',
+            description: 'Whether to show close icon.',
+            defaultValue: 'true',
+          ),
+          PropRow(
+            name: 'layout',
+            type: 'Ux4gToastLayout?',
+            description: 'full or stacked. Defaults based on screen width.',
+          ),
         ],
         child: SizedBox(
           width: 380,
@@ -342,14 +570,17 @@ toastState.showToast(
             mainAxisSize: MainAxisSize.min,
             children: Ux4gToastCategory.values
                 .where((c) => c != Ux4gToastCategory.slot)
-                .map((c) => Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 4),
-                      child: Ux4gToast(
-                        category: c,
-                        title: '${c.name[0].toUpperCase()}${c.name.substring(1)} message',
-                        subtitle: 'Supporting description text.',
-                      ),
-                    ))
+                .map(
+                  (c) => Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 4),
+                    child: Ux4gToast(
+                      category: c,
+                      title:
+                          '${c.name[0].toUpperCase()}${c.name.substring(1)} message',
+                      subtitle: 'Supporting description text.',
+                    ),
+                  ),
+                )
                 .toList(),
           ),
         ),
@@ -374,24 +605,57 @@ final tooltipComponent = WidgetbookComponent(
   child: Icon(Icons.info_outline),
 );''',
         props: const [
-          PropRow(name: 'child', type: 'Widget', description: 'Trigger widget.', required: true),
-          PropRow(name: 'tooltipText', type: 'String', description: 'Tooltip body text.', required: true),
-          PropRow(name: 'placement', type: 'Ux4gTooltipPlacement', description: 'top / bottom / left / right.', defaultValue: 'top'),
-          PropRow(name: 'icon', type: 'IconData?', description: 'Optional icon inside tooltip.'),
-          PropRow(name: 'backgroundColor', type: 'Color?', description: 'Custom background color.'),
-          PropRow(name: 'contentColor', type: 'Color?', description: 'Custom text/icon color.'),
+          PropRow(
+            name: 'child',
+            type: 'Widget',
+            description: 'Trigger widget.',
+            required: true,
+          ),
+          PropRow(
+            name: 'tooltipText',
+            type: 'String',
+            description: 'Tooltip body text.',
+            required: true,
+          ),
+          PropRow(
+            name: 'placement',
+            type: 'Ux4gTooltipPlacement',
+            description: 'top / bottom / left / right.',
+            defaultValue: 'top',
+          ),
+          PropRow(
+            name: 'icon',
+            type: 'IconData?',
+            description: 'Optional icon inside tooltip.',
+          ),
+          PropRow(
+            name: 'backgroundColor',
+            type: 'Color?',
+            description: 'Custom background color.',
+          ),
+          PropRow(
+            name: 'contentColor',
+            type: 'Color?',
+            description: 'Custom text/icon color.',
+          ),
         ],
         child: Padding(
           padding: const EdgeInsets.all(80),
           child: Ux4gTooltip(
-            tooltipText: context.knobs.string(label: 'Text', initialValue: 'Interactive Tooltip'),
+            tooltipText: context.knobs.string(
+              label: 'Text',
+              initialValue: 'Interactive Tooltip',
+            ),
             placement: context.knobs.list(
               label: 'Placement',
               options: Ux4gTooltipPlacement.values,
               initialOption: Ux4gTooltipPlacement.top,
               labelBuilder: (v) => v.name,
             ),
-            child: const Ux4gButton(text: 'Long Press / Tap Me', onPressed: null), // Use null to show disabled or empty callback
+            child: const Ux4gButton(
+              text: 'Long Press / Tap Me',
+              onPressed: null,
+            ), // Use null to show disabled or empty callback
           ),
         ),
       ),
@@ -411,13 +675,23 @@ final tooltipComponent = WidgetbookComponent(
                   Ux4gTooltip(
                     tooltipText: 'Top placement',
                     placement: Ux4gTooltipPlacement.top,
-                    child: Ux4gButton(text: 'Top', size: Ux4gButtonSize.small, variant: Ux4gButtonVariant.outline, onPressed: () {}),
+                    child: Ux4gButton(
+                      text: 'Top',
+                      size: Ux4gButtonSize.small,
+                      variant: Ux4gButtonVariant.outline,
+                      onPressed: () {},
+                    ),
                   ),
                   const SizedBox(width: 40),
                   Ux4gTooltip(
                     tooltipText: 'Bottom placement',
                     placement: Ux4gTooltipPlacement.bottom,
-                    child: Ux4gButton(text: 'Bottom', size: Ux4gButtonSize.small, variant: Ux4gButtonVariant.outline, onPressed: () {}),
+                    child: Ux4gButton(
+                      text: 'Bottom',
+                      size: Ux4gButtonSize.small,
+                      variant: Ux4gButtonVariant.outline,
+                      onPressed: () {},
+                    ),
                   ),
                 ],
               ),
@@ -428,13 +702,23 @@ final tooltipComponent = WidgetbookComponent(
                   Ux4gTooltip(
                     tooltipText: 'Left placement',
                     placement: Ux4gTooltipPlacement.left,
-                    child: Ux4gButton(text: 'Left', size: Ux4gButtonSize.small, variant: Ux4gButtonVariant.outline, onPressed: () {}),
+                    child: Ux4gButton(
+                      text: 'Left',
+                      size: Ux4gButtonSize.small,
+                      variant: Ux4gButtonVariant.outline,
+                      onPressed: () {},
+                    ),
                   ),
                   const SizedBox(width: 80),
                   Ux4gTooltip(
                     tooltipText: 'Right placement',
                     placement: Ux4gTooltipPlacement.right,
-                    child: Ux4gButton(text: 'Right', size: Ux4gButtonSize.small, variant: Ux4gButtonVariant.outline, onPressed: () {}),
+                    child: Ux4gButton(
+                      text: 'Right',
+                      size: Ux4gButtonSize.small,
+                      variant: Ux4gButtonVariant.outline,
+                      onPressed: () {},
+                    ),
                   ),
                 ],
               ),
@@ -459,11 +743,15 @@ final richTooltipComponent = WidgetbookComponent(
           children: [
             const SizedBox(height: 12),
             Ux4gRichTooltip(
-              tooltipText: 'This is a rich tooltip with a title, icon, and action.',
+              tooltipText:
+                  'This is a rich tooltip with a title, icon, and action.',
               title: 'More Info',
               icon: Icons.info_outline,
               placement: Ux4gTooltipPlacement.bottom,
-              action: TextButton(onPressed: () {}, child: const Text('Learn more')),
+              action: TextButton(
+                onPressed: () {},
+                child: const Text('Learn more'),
+              ),
               child: const Icon(Icons.help_outline, size: 28),
             ),
           ],

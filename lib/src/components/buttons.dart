@@ -79,9 +79,10 @@ class Ux4gButton extends StatelessWidget {
 
     final effectiveBgColor = backgroundColor ?? style.backgroundColor;
     final effectiveContentColor = contentColor ?? style.contentColor;
-    
-    final onSurface = ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
-    
+
+    final onSurface =
+        ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
+
     final effectiveDisabledBgColor =
         disabledBackgroundColor ??
         (variant == Ux4gButtonVariant.primary ||
@@ -94,7 +95,10 @@ class Ux4gButton extends StatelessWidget {
     final effectiveBorderWidth =
         borderWidth ?? (variant == Ux4gButtonVariant.outline ? 1.0 : 0.0);
 
-    final textStyle = ux4gTypography?.lM_default ?? materialTheme.textTheme.labelLarge ?? const TextStyle();
+    final textStyle =
+        ux4gTypography?.lM_default ??
+        materialTheme.textTheme.labelLarge ??
+        const TextStyle();
 
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 4),
@@ -149,9 +153,7 @@ class Ux4gButton extends StatelessWidget {
                 if (text != null || child != null) const SizedBox(width: 8),
               ],
               DefaultTextStyle(
-                style: textStyle.copyWith(
-                  color: effectiveContentColor,
-                ),
+                style: textStyle.copyWith(color: effectiveContentColor),
                 child:
                     child ??
                     (text != null ? Text(text!) : const SizedBox.shrink()),
@@ -174,7 +176,7 @@ class Ux4gButton extends StatelessWidget {
 
   _ButtonStyle _getStyle(Ux4gColors? ux4gColors, ThemeData materialTheme) {
     final colorScheme = materialTheme.colorScheme;
-    
+
     final primary = ux4gColors?.primary ?? colorScheme.primary;
     final onPrimary = ux4gColors?.onPrimary ?? colorScheme.onPrimary;
     final secondary = ux4gColors?.secondary ?? colorScheme.secondary;
@@ -266,9 +268,12 @@ class Ux4gIconButton extends StatelessWidget {
     final ux4gColors = materialTheme.extension<Ux4gColors>();
 
     final primary = ux4gColors?.primary ?? materialTheme.colorScheme.primary;
-    final onPrimary = ux4gColors?.onPrimary ?? materialTheme.colorScheme.onPrimary;
-    final secondary = ux4gColors?.secondary ?? materialTheme.colorScheme.secondary;
-    final onSecondary = ux4gColors?.onSecondary ?? materialTheme.colorScheme.onSecondary;
+    final onPrimary =
+        ux4gColors?.onPrimary ?? materialTheme.colorScheme.onPrimary;
+    final secondary =
+        ux4gColors?.secondary ?? materialTheme.colorScheme.secondary;
+    final onSecondary =
+        ux4gColors?.onSecondary ?? materialTheme.colorScheme.onSecondary;
 
     final bgColor = switch (variant) {
       Ux4gButtonVariant.primary => primary,

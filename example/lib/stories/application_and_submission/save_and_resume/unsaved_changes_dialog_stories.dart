@@ -98,7 +98,11 @@ class _UnsavedChangesDialogMockup extends StatelessWidget {
             color: Colors.white,
             borderRadius: BorderRadius.circular(16),
             boxShadow: [
-              BoxShadow(color: Colors.black.withOpacity(0.1), blurRadius: 20, offset: const Offset(0, 8)),
+              BoxShadow(
+                color: Colors.black.withOpacity(0.1),
+                blurRadius: 20,
+                offset: const Offset(0, 8),
+              ),
             ],
           ),
           child: Column(
@@ -106,7 +110,11 @@ class _UnsavedChangesDialogMockup extends StatelessWidget {
             children: [
               const Text(
                 'Unsaved changes',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700, color: _titleColor),
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.w700,
+                  color: _titleColor,
+                ),
               ),
               const SizedBox(height: 12),
               const Text(
@@ -124,7 +132,11 @@ class _UnsavedChangesDialogMockup extends StatelessWidget {
               const SizedBox(height: 12),
               const Text(
                 'Leave without saving',
-                style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500, color: Color(0xFFDC2626)),
+                style: TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w500,
+                  color: Color(0xFFDC2626),
+                ),
               ),
             ],
           ),

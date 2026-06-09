@@ -33,9 +33,11 @@ final inlineLanguageToggleComponent = WidgetbookComponent(
           name: 'Inline Language Toggle ($variant)',
           description: isCard
               ? 'Inline language toggle with choice chips inside a '
-                'card container with light purple background.'
+                    'card container with light purple background.'
               : 'Inline language toggle with choice chips on white background.',
-          code: isCard ? _inlineLanguageToggleCardCode : _inlineLanguageToggleDefaultCode,
+          code: isCard
+              ? _inlineLanguageToggleCardCode
+              : _inlineLanguageToggleDefaultCode,
           center: true,
           child: _InlineLanguageToggleMockup(isCard: isCard),
         );
@@ -48,7 +50,8 @@ final inlineLanguageToggleComponent = WidgetbookComponent(
 // Source Code String — Default
 // ───────────────────────────────────────────────────────────────────────
 
-const _inlineLanguageToggleDefaultCode = r"""import 'package:flutter/material.dart';
+const _inlineLanguageToggleDefaultCode =
+    r"""import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:ux4g_flutter_design_system/ux4g_flutter_design_system.dart';
 
@@ -159,7 +162,8 @@ class _InlineLanguageToggleScreenState extends State<InlineLanguageToggleScreen>
 // Source Code String — Card Style
 // ───────────────────────────────────────────────────────────────────────
 
-const _inlineLanguageToggleCardCode = r"""import 'package:flutter/material.dart';
+const _inlineLanguageToggleCardCode =
+    r"""import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:ux4g_flutter_design_system/ux4g_flutter_design_system.dart';
 
@@ -282,10 +286,12 @@ class _InlineLanguageToggleMockup extends StatefulWidget {
   const _InlineLanguageToggleMockup({this.isCard = false});
 
   @override
-  State<_InlineLanguageToggleMockup> createState() => _InlineLanguageToggleMockupState();
+  State<_InlineLanguageToggleMockup> createState() =>
+      _InlineLanguageToggleMockupState();
 }
 
-class _InlineLanguageToggleMockupState extends State<_InlineLanguageToggleMockup> {
+class _InlineLanguageToggleMockupState
+    extends State<_InlineLanguageToggleMockup> {
   int _selectedIndex = 0;
 
   final _languages = const ['English', 'हिन्दी', 'தமிழ்', 'తెలుగు'];
@@ -305,8 +311,11 @@ class _InlineLanguageToggleMockupState extends State<_InlineLanguageToggleMockup
                 title: '',
                 leadingSpacing: 2,
                 leadingWidgets: [
-                  SvgPicture.asset('assets/national_amblam_logo.svg', height: 40),
-                SizedBox(width: 3),
+                  SvgPicture.asset(
+                    'assets/national_amblam_logo.svg',
+                    height: 40,
+                  ),
+                  SizedBox(width: 3),
                   SizedBox(
                     height: 32,
                     child: Ux4gDivider(
@@ -314,7 +323,7 @@ class _InlineLanguageToggleMockupState extends State<_InlineLanguageToggleMockup
                       color: const Color(0xFFD1D5DB),
                     ),
                   ),
-                SizedBox(width: 3),
+                  SizedBox(width: 3),
                   SvgPicture.asset('assets/Union.svg', height: 32),
                 ],
               ),
@@ -322,19 +331,43 @@ class _InlineLanguageToggleMockupState extends State<_InlineLanguageToggleMockup
               // Gov bar
               Container(
                 width: double.infinity,
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 6,
+                ),
                 color: const Color(0xFF1E3A8A),
                 child: Row(
                   children: [
-                    Image.asset('assets/india_flag.png', height: 14, width: 22,
-                        errorBuilder: (_, __, ___) => const Text('\u{1f1ee}\u{1f1f3}', style: TextStyle(fontSize: 14))),
+                    Image.asset(
+                      'assets/india_flag.png',
+                      height: 14,
+                      width: 22,
+                      errorBuilder: (_, __, ___) => const Text(
+                        '\u{1f1ee}\u{1f1f3}',
+                        style: TextStyle(fontSize: 14),
+                      ),
+                    ),
                     const SizedBox(width: 8),
-                    const Text('Government of India',
-                        style: TextStyle(color: Colors.white, fontSize: 12, fontWeight: FontWeight.w500)),
+                    const Text(
+                      'Government of India',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 12,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
                     const SizedBox(width: 4),
-                    const Icon(Icons.open_in_new, size: 11, color: Colors.white),
+                    const Icon(
+                      Icons.open_in_new,
+                      size: 11,
+                      color: Colors.white,
+                    ),
                     const Spacer(),
-                    const Icon(Icons.accessibility_new, size: 16, color: Colors.white),
+                    const Icon(
+                      Icons.accessibility_new,
+                      size: 16,
+                      color: Colors.white,
+                    ),
                   ],
                 ),
               ),
@@ -362,12 +395,22 @@ class _InlineLanguageToggleMockupState extends State<_InlineLanguageToggleMockup
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text('Powered by -',
-                        style: TextStyle(fontSize: 11, color: Color(0xFF6B7280))),
+                    const Text(
+                      'Powered by -',
+                      style: TextStyle(fontSize: 11, color: Color(0xFF6B7280)),
+                    ),
                     const SizedBox(width: 4),
-                    Image.asset('assets/digital_india_logo.png', height: 20,
-                        errorBuilder: (_, __, ___) => const Text('Digital India',
-                            style: TextStyle(fontSize: 10, color: Color(0xFF432CBB)))),
+                    Image.asset(
+                      'assets/digital_india_logo.png',
+                      height: 20,
+                      errorBuilder: (_, __, ___) => const Text(
+                        'Digital India',
+                        style: TextStyle(
+                          fontSize: 10,
+                          color: Color(0xFF432CBB),
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -384,7 +427,11 @@ class _InlineLanguageToggleMockupState extends State<_InlineLanguageToggleMockup
       children: [
         const Text(
           'Apply for Income Certificate',
-          style: TextStyle(fontSize: 22, fontWeight: FontWeight.w800, color: _titleColor),
+          style: TextStyle(
+            fontSize: 22,
+            fontWeight: FontWeight.w800,
+            color: _titleColor,
+          ),
         ),
         const SizedBox(height: 8),
         const Text(

@@ -52,13 +52,17 @@ class Ux4gTag extends StatelessWidget {
 
     final height = size == Ux4gTagSize.m ? 20.0 : 24.0;
     final horizontalPadding = size == Ux4gTagSize.m ? 8.0 : 12.0;
-    
-    final lSDefault = ux4gTypography?.lS_default ?? materialTheme.textTheme.labelSmall ?? const TextStyle();
-    final lMDefault = ux4gTypography?.lM_default ?? materialTheme.textTheme.labelMedium ?? const TextStyle();
-    
-    final textStyle = size == Ux4gTagSize.m
-        ? lSDefault
-        : lMDefault;
+
+    final lSDefault =
+        ux4gTypography?.lS_default ??
+        materialTheme.textTheme.labelSmall ??
+        const TextStyle();
+    final lMDefault =
+        ux4gTypography?.lM_default ??
+        materialTheme.textTheme.labelMedium ??
+        const TextStyle();
+
+    final textStyle = size == Ux4gTagSize.m ? lSDefault : lMDefault;
 
     final borderRadius =
         customBorderRadius ??
@@ -116,11 +120,7 @@ class Ux4gTag extends StatelessWidget {
         onSurface.withValues(alpha: 0.5),
         onSurface.withValues(alpha: 0.8),
       ),
-      Ux4gTagColor.brand => (
-        primary.withValues(alpha: 0.12),
-        primary,
-        primary,
-      ),
+      Ux4gTagColor.brand => (primary.withValues(alpha: 0.12), primary, primary),
       Ux4gTagColor.success => (
         success.withValues(alpha: 0.12),
         success,
@@ -131,16 +131,8 @@ class Ux4gTag extends StatelessWidget {
         warning,
         warning,
       ),
-      Ux4gTagColor.error => (
-        error.withValues(alpha: 0.12),
-        error,
-        error,
-      ),
-      Ux4gTagColor.info => (
-        info.withValues(alpha: 0.12),
-        info,
-        info,
-      ),
+      Ux4gTagColor.error => (error.withValues(alpha: 0.12), error, error),
+      Ux4gTagColor.info => (info.withValues(alpha: 0.12), info, info),
     };
 
     return switch (style) {
@@ -151,8 +143,7 @@ class Ux4gTag extends StatelessWidget {
       ),
       Ux4gTagStyle.filled => _TagColors(
         backgroundColor: baseNormal,
-        contentColor:
-            (this.colorScheme == Ux4gTagColor.neutral)
+        contentColor: (this.colorScheme == Ux4gTagColor.neutral)
             ? surface
             : onPrimary, // Usually onPrimary works for brand/error/success/warning
         borderColor: Colors.transparent,
@@ -263,21 +254,34 @@ class Ux4gUnifiedPillTag extends StatelessWidget {
     final ux4gColors = materialTheme.extension<Ux4gColors>();
     final ux4gTypography = materialTheme.extension<Ux4gTypography>();
 
-    final lSDefault = ux4gTypography?.lS_default ?? materialTheme.textTheme.labelSmall ?? const TextStyle();
-    final lMDefault = ux4gTypography?.lM_default ?? materialTheme.textTheme.labelMedium ?? const TextStyle();
-    final lSStrong = ux4gTypography?.lS_strong ?? materialTheme.textTheme.labelSmall?.copyWith(fontWeight: FontWeight.bold) ?? const TextStyle();
-    final lMStrong = ux4gTypography?.lM_strong ?? materialTheme.textTheme.labelMedium?.copyWith(fontWeight: FontWeight.bold) ?? const TextStyle();
+    final lSDefault =
+        ux4gTypography?.lS_default ??
+        materialTheme.textTheme.labelSmall ??
+        const TextStyle();
+    final lMDefault =
+        ux4gTypography?.lM_default ??
+        materialTheme.textTheme.labelMedium ??
+        const TextStyle();
+    final lSStrong =
+        ux4gTypography?.lS_strong ??
+        materialTheme.textTheme.labelSmall?.copyWith(
+          fontWeight: FontWeight.bold,
+        ) ??
+        const TextStyle();
+    final lMStrong =
+        ux4gTypography?.lM_strong ??
+        materialTheme.textTheme.labelMedium?.copyWith(
+          fontWeight: FontWeight.bold,
+        ) ??
+        const TextStyle();
 
     final height = size == Ux4gTagSize.m ? 20.0 : 24.0;
     final horizontalPadding = size == Ux4gTagSize.m ? 8.0 : 12.0;
-    final textStyleDefault = size == Ux4gTagSize.m
-        ? lSDefault
-        : lMDefault;
-    final textStyleBold = size == Ux4gTagSize.m
-        ? lSStrong
-        : lMStrong;
+    final textStyleDefault = size == Ux4gTagSize.m ? lSDefault : lMDefault;
+    final textStyleBold = size == Ux4gTagSize.m ? lSStrong : lMStrong;
 
-    final onSurface = ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
+    final onSurface =
+        ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
     final surface = ux4gColors?.surface ?? materialTheme.colorScheme.surface;
 
     final bgColor = backgroundColor ?? surface;
@@ -286,7 +290,10 @@ class Ux4gUnifiedPillTag extends StatelessWidget {
     final defaultTextColor = onSurface.withValues(alpha: 0.7);
 
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: horizontalPadding, vertical: size == Ux4gTagSize.m ? 4.0 : 6.0),
+      padding: EdgeInsets.symmetric(
+        horizontal: horizontalPadding,
+        vertical: size == Ux4gTagSize.m ? 4.0 : 6.0,
+      ),
       decoration: BoxDecoration(
         color: bgColor,
         borderRadius: customBorderRadius ?? BorderRadius.circular(8),

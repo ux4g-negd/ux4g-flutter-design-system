@@ -1,4 +1,3 @@
-
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -32,15 +31,21 @@ final consentCaptureComponent = WidgetbookComponent(
           label: 'Variant',
           options: const ['Default', 'Card style'],
           initialOption: 'Default',
-          description: 'Switch between the standard flat layout and the card-style layout on a soft-purple background.',
+          description:
+              'Switch between the standard flat layout and the card-style layout on a soft-purple background.',
         );
 
-        final code = variant == 'Card style' ? _consentCaptureCardCode : _consentCaptureCode;
-        final child = variant == 'Card style' ? const _ConsentCaptureCardMockup() : const _ConsentCaptureMobileMockup();
+        final code = variant == 'Card style'
+            ? _consentCaptureCardCode
+            : _consentCaptureCode;
+        final child = variant == 'Card style'
+            ? const _ConsentCaptureCardMockup()
+            : const _ConsentCaptureMobileMockup();
 
         return ComponentDocs(
           name: 'Consent Capture',
-          description: 'Pattern for capturing user consent to share data and optionally receive updates. '
+          description:
+              'Pattern for capturing user consent to share data and optionally receive updates. '
               'Use the [Variant] knob on the right to toggle layouts. Mobile-sized layout (360px).',
           code: code,
           center: true,
@@ -222,10 +227,12 @@ class _ConsentCaptureMobileMockup extends StatefulWidget {
   const _ConsentCaptureMobileMockup();
 
   @override
-  State<_ConsentCaptureMobileMockup> createState() => _ConsentCaptureMobileMockupState();
+  State<_ConsentCaptureMobileMockup> createState() =>
+      _ConsentCaptureMobileMockupState();
 }
 
-class _ConsentCaptureMobileMockupState extends State<_ConsentCaptureMobileMockup> {
+class _ConsentCaptureMobileMockupState
+    extends State<_ConsentCaptureMobileMockup> {
   bool _isInfoConsentGiven = true;
   bool _isEmailUpdatesConsentGiven = false;
 
@@ -311,15 +318,20 @@ class _ConsentCaptureMobileMockupState extends State<_ConsentCaptureMobileMockup
                   // Checkboxes
                   Ux4gCheckbox(
                     value: _isInfoConsentGiven,
-                    onChanged: (val) => setState(() => _isInfoConsentGiven = val ?? false),
-                    label: 'I consent to sharing the required information listed above',
+                    onChanged: (val) =>
+                        setState(() => _isInfoConsentGiven = val ?? false),
+                    label:
+                        'I consent to sharing the required information listed above',
                     isRequired: true,
                   ),
                   const SizedBox(height: 8),
                   Ux4gCheckbox(
                     value: _isEmailUpdatesConsentGiven,
-                    onChanged: (val) => setState(() => _isEmailUpdatesConsentGiven = val ?? false),
-                    label: 'I also consent to receiving email updates regarding my application',
+                    onChanged: (val) => setState(
+                      () => _isEmailUpdatesConsentGiven = val ?? false,
+                    ),
+                    label:
+                        'I also consent to receiving email updates regarding my application',
                     isRequired: false,
                   ),
                   const SizedBox(height: 24),
@@ -359,7 +371,8 @@ class _ConsentCaptureCardMockup extends StatefulWidget {
   const _ConsentCaptureCardMockup();
 
   @override
-  State<_ConsentCaptureCardMockup> createState() => _ConsentCaptureCardMockupState();
+  State<_ConsentCaptureCardMockup> createState() =>
+      _ConsentCaptureCardMockupState();
 }
 
 class _ConsentCaptureCardMockupState extends State<_ConsentCaptureCardMockup> {
@@ -466,15 +479,22 @@ class _ConsentCaptureCardMockupState extends State<_ConsentCaptureCardMockup> {
                             // Checkboxes
                             Ux4gCheckbox(
                               value: _isInfoConsentGiven,
-                              onChanged: (val) => setState(() => _isInfoConsentGiven = val ?? false),
-                              label: 'I consent to sharing the required information listed above',
+                              onChanged: (val) => setState(
+                                () => _isInfoConsentGiven = val ?? false,
+                              ),
+                              label:
+                                  'I consent to sharing the required information listed above',
                               isRequired: true,
                             ),
                             const SizedBox(height: 8),
                             Ux4gCheckbox(
                               value: _isEmailUpdatesConsentGiven,
-                              onChanged: (val) => setState(() => _isEmailUpdatesConsentGiven = val ?? false),
-                              label: 'I also consent to receiving email updates regarding my application',
+                              onChanged: (val) => setState(
+                                () =>
+                                    _isEmailUpdatesConsentGiven = val ?? false,
+                              ),
+                              label:
+                                  'I also consent to receiving email updates regarding my application',
                               isRequired: false,
                             ),
                             const SizedBox(height: 20),
@@ -482,7 +502,9 @@ class _ConsentCaptureCardMockupState extends State<_ConsentCaptureCardMockup> {
                             // Actions
                             Ux4gButton(
                               text: 'Proceed',
-                              onPressed: _isInfoConsentGiven == true ? () {} : null,
+                              onPressed: _isInfoConsentGiven == true
+                                  ? () {}
+                                  : null,
                               size: Ux4gButtonSize.large,
                               width: double.infinity,
                             ),
@@ -1041,15 +1063,21 @@ final consentCaptureWithWarningComponent = WidgetbookComponent(
           label: 'Variant',
           options: const ['Default', 'Card style'],
           initialOption: 'Default',
-          description: 'Switch between the standard flat layout and the card-style layout with warning banner.',
+          description:
+              'Switch between the standard flat layout and the card-style layout with warning banner.',
         );
 
-        final code = variant == 'Card style' ? _consentCaptureWarningCardCode : _consentCaptureWarningCode;
-        final child = variant == 'Card style' ? const _ConsentCaptureWarningCardMockup() : const _ConsentCaptureWarningMobileMockup();
+        final code = variant == 'Card style'
+            ? _consentCaptureWarningCardCode
+            : _consentCaptureWarningCode;
+        final child = variant == 'Card style'
+            ? const _ConsentCaptureWarningCardMockup()
+            : const _ConsentCaptureWarningMobileMockup();
 
         return ComponentDocs(
           name: 'Consent Capture (Consent Not Given)',
-          description: 'Pattern showing the error state when the required consent is not selected. '
+          description:
+              'Pattern showing the error state when the required consent is not selected. '
               'Displays the warning banner and disables the Proceed button.',
           code: code,
           center: true,
@@ -1068,10 +1096,12 @@ class _ConsentCaptureWarningMobileMockup extends StatefulWidget {
   const _ConsentCaptureWarningMobileMockup();
 
   @override
-  State<_ConsentCaptureWarningMobileMockup> createState() => _ConsentCaptureWarningMobileMockupState();
+  State<_ConsentCaptureWarningMobileMockup> createState() =>
+      _ConsentCaptureWarningMobileMockupState();
 }
 
-class _ConsentCaptureWarningMobileMockupState extends State<_ConsentCaptureWarningMobileMockup> {
+class _ConsentCaptureWarningMobileMockupState
+    extends State<_ConsentCaptureWarningMobileMockup> {
   bool _isInfoConsentGiven = false;
   bool _isEmailUpdatesConsentGiven = false;
 
@@ -1157,7 +1187,8 @@ class _ConsentCaptureWarningMobileMockupState extends State<_ConsentCaptureWarni
                   if (!_isInfoConsentGiven) ...[
                     Ux4gStatusBanner(
                       variant: Ux4gBannerVariant.warningLight,
-                      title: 'Consent not given. You cannot proceed without consenting.',
+                      title:
+                          'Consent not given. You cannot proceed without consenting.',
                       leadingIcon: const Icon(
                         Icons.warning_amber_rounded,
                         color: Color(0xFFC2410C),
@@ -1169,7 +1200,10 @@ class _ConsentCaptureWarningMobileMockupState extends State<_ConsentCaptureWarni
                         color: Color(0xFFC2410C),
                       ),
                       margin: EdgeInsets.zero,
-                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 12,
+                        vertical: 12,
+                      ),
                     ),
                     const SizedBox(height: 16),
                   ],
@@ -1177,15 +1211,20 @@ class _ConsentCaptureWarningMobileMockupState extends State<_ConsentCaptureWarni
                   // Checkboxes
                   Ux4gCheckbox(
                     value: _isInfoConsentGiven,
-                    onChanged: (val) => setState(() => _isInfoConsentGiven = val ?? false),
-                    label: 'I consent to sharing the required information listed above',
+                    onChanged: (val) =>
+                        setState(() => _isInfoConsentGiven = val ?? false),
+                    label:
+                        'I consent to sharing the required information listed above',
                     isRequired: true,
                   ),
                   const SizedBox(height: 8),
                   Ux4gCheckbox(
                     value: _isEmailUpdatesConsentGiven,
-                    onChanged: (val) => setState(() => _isEmailUpdatesConsentGiven = val ?? false),
-                    label: 'I also consent to receiving email updates regarding my application',
+                    onChanged: (val) => setState(
+                      () => _isEmailUpdatesConsentGiven = val ?? false,
+                    ),
+                    label:
+                        'I also consent to receiving email updates regarding my application',
                     isRequired: false,
                   ),
                   const SizedBox(height: 24),
@@ -1221,10 +1260,12 @@ class _ConsentCaptureWarningCardMockup extends StatefulWidget {
   const _ConsentCaptureWarningCardMockup();
 
   @override
-  State<_ConsentCaptureWarningCardMockup> createState() => _ConsentCaptureWarningCardMockupState();
+  State<_ConsentCaptureWarningCardMockup> createState() =>
+      _ConsentCaptureWarningCardMockupState();
 }
 
-class _ConsentCaptureWarningCardMockupState extends State<_ConsentCaptureWarningCardMockup> {
+class _ConsentCaptureWarningCardMockupState
+    extends State<_ConsentCaptureWarningCardMockup> {
   bool _isInfoConsentGiven = false;
   bool _isEmailUpdatesConsentGiven = false;
 
@@ -1328,7 +1369,8 @@ class _ConsentCaptureWarningCardMockupState extends State<_ConsentCaptureWarning
                             if (!_isInfoConsentGiven) ...[
                               Ux4gStatusBanner(
                                 variant: Ux4gBannerVariant.warningLight,
-                                title: 'Consent not given. You cannot proceed without consenting.',
+                                title:
+                                    'Consent not given. You cannot proceed without consenting.',
                                 leadingIcon: const Icon(
                                   Icons.warning_amber_rounded,
                                   color: Color(0xFFC2410C),
@@ -1340,7 +1382,10 @@ class _ConsentCaptureWarningCardMockupState extends State<_ConsentCaptureWarning
                                   color: Color(0xFFC2410C),
                                 ),
                                 margin: EdgeInsets.zero,
-                                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 12,
+                                  vertical: 12,
+                                ),
                               ),
                               const SizedBox(height: 16),
                             ],
@@ -1348,15 +1393,22 @@ class _ConsentCaptureWarningCardMockupState extends State<_ConsentCaptureWarning
                             // Checkboxes
                             Ux4gCheckbox(
                               value: _isInfoConsentGiven,
-                              onChanged: (val) => setState(() => _isInfoConsentGiven = val ?? false),
-                              label: 'I consent to sharing the required information listed above',
+                              onChanged: (val) => setState(
+                                () => _isInfoConsentGiven = val ?? false,
+                              ),
+                              label:
+                                  'I consent to sharing the required information listed above',
                               isRequired: true,
                             ),
                             const SizedBox(height: 8),
                             Ux4gCheckbox(
                               value: _isEmailUpdatesConsentGiven,
-                              onChanged: (val) => setState(() => _isEmailUpdatesConsentGiven = val ?? false),
-                              label: 'I also consent to receiving email updates regarding my application',
+                              onChanged: (val) => setState(
+                                () =>
+                                    _isEmailUpdatesConsentGiven = val ?? false,
+                              ),
+                              label:
+                                  'I also consent to receiving email updates regarding my application',
                               isRequired: false,
                             ),
                             const SizedBox(height: 20),
@@ -1364,7 +1416,9 @@ class _ConsentCaptureWarningCardMockupState extends State<_ConsentCaptureWarning
                             // Actions
                             Ux4gButton(
                               text: 'Proceed',
-                              onPressed: _isInfoConsentGiven == true ? () {} : null,
+                              onPressed: _isInfoConsentGiven == true
+                                  ? () {}
+                                  : null,
                               size: Ux4gButtonSize.large,
                               width: double.infinity,
                             ),
@@ -1396,7 +1450,8 @@ class _ConsentCaptureWarningCardMockupState extends State<_ConsentCaptureWarning
 // Source Code Snippets for Consent Not Given
 // ───────────────────────────────────────────────────────────────────────
 
-const _consentCaptureWarningCode = r'''// Consent Capture – Flat Layout (Consent Not Given)
+const _consentCaptureWarningCode =
+    r'''// Consent Capture – Flat Layout (Consent Not Given)
 Column(
   children: [
     // Header
@@ -1662,7 +1717,8 @@ Column(
   ],
 )''';
 
-const _consentCaptureWarningCardCode = r'''// Consent Capture – Card Style Layout (Consent Not Given)
+const _consentCaptureWarningCardCode =
+    r'''// Consent Capture – Card Style Layout (Consent Not Given)
 Column(
   children: [
     // Header
@@ -1963,15 +2019,21 @@ final consentManagementComponent = WidgetbookComponent(
           label: 'Variant',
           options: const ['Default', 'Card style'],
           initialOption: 'Default',
-          description: 'Switch between the standard flat layout and the card-style layout for managing active/withdrawn consents.',
+          description:
+              'Switch between the standard flat layout and the card-style layout for managing active/withdrawn consents.',
         );
 
-        final code = variant == 'Card style' ? _consentManagementCardCode : _consentManagementCode;
-        final child = variant == 'Card style' ? const _ConsentManagementCardMockup() : const _ConsentManagementMobileMockup();
+        final code = variant == 'Card style'
+            ? _consentManagementCardCode
+            : _consentManagementCode;
+        final child = variant == 'Card style'
+            ? const _ConsentManagementCardMockup()
+            : const _ConsentManagementMobileMockup();
 
         return ComponentDocs(
           name: 'Consent Management',
-          description: 'Pattern for viewing consent history, downloading PDF records, and toggling (withdrawing/restoring) active consents.',
+          description:
+              'Pattern for viewing consent history, downloading PDF records, and toggling (withdrawing/restoring) active consents.',
           code: code,
           center: true,
           child: child,
@@ -1989,10 +2051,12 @@ class _ConsentManagementMobileMockup extends StatefulWidget {
   const _ConsentManagementMobileMockup();
 
   @override
-  State<_ConsentManagementMobileMockup> createState() => _ConsentManagementMobileMockupState();
+  State<_ConsentManagementMobileMockup> createState() =>
+      _ConsentManagementMobileMockupState();
 }
 
-class _ConsentManagementMobileMockupState extends State<_ConsentManagementMobileMockup> {
+class _ConsentManagementMobileMockupState
+    extends State<_ConsentManagementMobileMockup> {
   bool _isAadhaarActive = true;
   bool _isAddressActive = true;
   bool _isEmailActive = false;
@@ -2058,21 +2122,24 @@ class _ConsentManagementMobileMockupState extends State<_ConsentManagementMobile
                     title: 'Aadhaar Number',
                     dateVersion: '10 Apr 2026, 14:34 · v2.1',
                     isActive: _isAadhaarActive,
-                    onToggle: () => setState(() => _isAadhaarActive = !_isAadhaarActive),
+                    onToggle: () =>
+                        setState(() => _isAadhaarActive = !_isAadhaarActive),
                   ),
                   const SizedBox(height: 12),
                   _buildManagementCard(
                     title: 'Address',
                     dateVersion: '02 Jan 2026, 09:15 · v1.8',
                     isActive: _isAddressActive,
-                    onToggle: () => setState(() => _isAddressActive = !_isAddressActive),
+                    onToggle: () =>
+                        setState(() => _isAddressActive = !_isAddressActive),
                   ),
                   const SizedBox(height: 12),
                   _buildManagementCard(
                     title: 'Email',
                     dateVersion: '15 Sep 2025, 11:02 · v1.6',
                     isActive: _isEmailActive,
-                    onToggle: () => setState(() => _isEmailActive = !_isEmailActive),
+                    onToggle: () =>
+                        setState(() => _isEmailActive = !_isEmailActive),
                   ),
                   const SizedBox(height: 20),
 
@@ -2131,10 +2198,12 @@ class _ConsentManagementCardMockup extends StatefulWidget {
   const _ConsentManagementCardMockup();
 
   @override
-  State<_ConsentManagementCardMockup> createState() => _ConsentManagementCardMockupState();
+  State<_ConsentManagementCardMockup> createState() =>
+      _ConsentManagementCardMockupState();
 }
 
-class _ConsentManagementCardMockupState extends State<_ConsentManagementCardMockup> {
+class _ConsentManagementCardMockupState
+    extends State<_ConsentManagementCardMockup> {
   bool _isAadhaarActive = true;
   bool _isAddressActive = true;
   bool _isEmailActive = false;
@@ -2218,21 +2287,27 @@ class _ConsentManagementCardMockupState extends State<_ConsentManagementCardMock
                               title: 'Aadhaar Number',
                               dateVersion: '10 Apr 2026, 14:34 · v2.1',
                               isActive: _isAadhaarActive,
-                              onToggle: () => setState(() => _isAadhaarActive = !_isAadhaarActive),
+                              onToggle: () => setState(
+                                () => _isAadhaarActive = !_isAadhaarActive,
+                              ),
                             ),
                             const SizedBox(height: 12),
                             _buildManagementCard(
                               title: 'Address',
                               dateVersion: '02 Jan 2026, 09:15 · v1.8',
                               isActive: _isAddressActive,
-                              onToggle: () => setState(() => _isAddressActive = !_isAddressActive),
+                              onToggle: () => setState(
+                                () => _isAddressActive = !_isAddressActive,
+                              ),
                             ),
                             const SizedBox(height: 12),
                             _buildManagementCard(
                               title: 'Email',
                               dateVersion: '15 Sep 2025, 11:02 · v1.6',
                               isActive: _isEmailActive,
-                              onToggle: () => setState(() => _isEmailActive = !_isEmailActive),
+                              onToggle: () => setState(
+                                () => _isEmailActive = !_isEmailActive,
+                              ),
                             ),
                             const SizedBox(height: 20),
 
@@ -2322,8 +2397,12 @@ Widget _buildManagementCard({
             ),
             Ux4gTag(
               text: isActive ? 'Active' : 'Withdrawn',
-              customBackgroundColor: isActive ? const Color(0xFFDCFCE7) : const Color(0xFFFFF0F0),
-              customContentColor: isActive ? const Color(0xFF166534) : const Color(0xFF8A1A16),
+              customBackgroundColor: isActive
+                  ? const Color(0xFFDCFCE7)
+                  : const Color(0xFFFFF0F0),
+              customContentColor: isActive
+                  ? const Color(0xFF166534)
+                  : const Color(0xFF8A1A16),
               shape: Ux4gTagShape.rectangular,
               size: Ux4gTagSize.m,
             ),
@@ -2975,15 +3054,21 @@ final dataSharingConsentComponent = WidgetbookComponent(
           label: 'Variant',
           options: const ['Default', 'Card style'],
           initialOption: 'Default',
-          description: 'Switch between the standard flat layout and the card-style layout for data sharing consent.',
+          description:
+              'Switch between the standard flat layout and the card-style layout for data sharing consent.',
         );
 
-        final code = variant == 'Card style' ? _dataSharingConsentCardCode : _dataSharingConsentCode;
-        final child = variant == 'Card style' ? const _DataSharingConsentCardMockup() : const _DataSharingConsentMobileMockup();
+        final code = variant == 'Card style'
+            ? _dataSharingConsentCardCode
+            : _dataSharingConsentCode;
+        final child = variant == 'Card style'
+            ? const _DataSharingConsentCardMockup()
+            : const _DataSharingConsentMobileMockup();
 
         return ComponentDocs(
           name: 'Data Sharing Consent',
-          description: 'Pattern for displaying data sharing consent details under the DPDP Act 2023, listing third-party sharing details, warning banners, and Manage/Cancel actions.',
+          description:
+              'Pattern for displaying data sharing consent details under the DPDP Act 2023, listing third-party sharing details, warning banners, and Manage/Cancel actions.',
           code: code,
           center: true,
           child: child,
@@ -3124,7 +3209,8 @@ class _DataSharingConsentMobileMockup extends StatelessWidget {
                   // Warning banner
                   Ux4gStatusBanner(
                     variant: Ux4gBannerVariant.warningLight,
-                    title: 'Required consents cannot be withdrawn as they are necessary for the scheme to function.',
+                    title:
+                        'Required consents cannot be withdrawn as they are necessary for the scheme to function.',
                     leadingIcon: const Icon(
                       Icons.error,
                       color: Color(0xFFD97706),
@@ -3136,7 +3222,10 @@ class _DataSharingConsentMobileMockup extends StatelessWidget {
                       color: Color(0xFFB45309),
                     ),
                     margin: EdgeInsets.zero,
-                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 12,
+                    ),
                   ),
                   const SizedBox(height: 24),
 
@@ -3219,7 +3308,9 @@ class _DataSharingConsentCardMockup extends StatelessWidget {
                                 child: Center(
                                   child: Icon(
                                     Icons.shield_outlined,
-                                    color: Theme.of(context).colorScheme.primary,
+                                    color: Theme.of(
+                                      context,
+                                    ).colorScheme.primary,
                                     size: 28,
                                   ),
                                 ),
@@ -3272,10 +3363,10 @@ class _DataSharingConsentCardMockup extends StatelessWidget {
                             const Text(
                               'Scheme: PM Kisan',
                               style: TextStyle(
-                                  fontSize: 13,
-                                  fontWeight: FontWeight.w700,
-                                  color: Color(0xFF6A4EFF),
-                                ),
+                                fontSize: 13,
+                                fontWeight: FontWeight.w700,
+                                color: Color(0xFF6A4EFF),
+                              ),
                             ),
                             const SizedBox(height: 8),
 
@@ -3319,7 +3410,8 @@ class _DataSharingConsentCardMockup extends StatelessWidget {
                             // Warning banner
                             Ux4gStatusBanner(
                               variant: Ux4gBannerVariant.warningLight,
-                              title: 'Required consents cannot be withdrawn as they are necessary for the scheme to function.',
+                              title:
+                                  'Required consents cannot be withdrawn as they are necessary for the scheme to function.',
                               leadingIcon: const Icon(
                                 Icons.error,
                                 color: Color(0xFFD97706),
@@ -3331,7 +3423,10 @@ class _DataSharingConsentCardMockup extends StatelessWidget {
                                 color: Color(0xFFB45309),
                               ),
                               margin: EdgeInsets.zero,
-                              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 16,
+                                vertical: 12,
+                              ),
                             ),
                             const SizedBox(height: 20),
 
@@ -3405,8 +3500,12 @@ Widget _buildSharingCard({
             ),
             Ux4gTag(
               text: isRequired ? 'Required' : 'Optional',
-              customBackgroundColor: isRequired ? const Color(0xFFFFF0F0) : const Color(0xFFF3F4F6),
-              customContentColor: isRequired ? const Color(0xFF8A1A16) : const Color(0xFF4B5563),
+              customBackgroundColor: isRequired
+                  ? const Color(0xFFFFF0F0)
+                  : const Color(0xFFF3F4F6),
+              customContentColor: isRequired
+                  ? const Color(0xFF8A1A16)
+                  : const Color(0xFF4B5563),
               shape: Ux4gTagShape.circular,
               size: Ux4gTagSize.m,
             ),
@@ -3744,7 +3843,8 @@ Column(
   ],
 )''';
 
-const _dataSharingConsentCardCode = r'''// Data Sharing Consent – Card Style Layout
+const _dataSharingConsentCardCode =
+    r'''// Data Sharing Consent – Card Style Layout
 Column(
   children: [
     // Header
@@ -4075,15 +4175,21 @@ final dataSharingConsentManagementComponent = WidgetbookComponent(
           label: 'Variant',
           options: const ['Default', 'Card style'],
           initialOption: 'Default',
-          description: 'Switch between the standard flat layout and the card-style layout for managing consents.',
+          description:
+              'Switch between the standard flat layout and the card-style layout for managing consents.',
         );
 
-        final code = variant == 'Card style' ? _manageDataSharingConsentsCardCode : _manageDataSharingConsentsCode;
-        final child = variant == 'Card style' ? const _ManageDataSharingConsentsCardMockup() : const _ManageDataSharingConsentsMobileMockup();
+        final code = variant == 'Card style'
+            ? _manageDataSharingConsentsCardCode
+            : _manageDataSharingConsentsCode;
+        final child = variant == 'Card style'
+            ? const _ManageDataSharingConsentsCardMockup()
+            : const _ManageDataSharingConsentsMobileMockup();
 
         return ComponentDocs(
           name: 'Manage Data Sharing Consents',
-          description: 'Pattern for managing and withdrawing data sharing consents under the DPDP Act 2023.',
+          description:
+              'Pattern for managing and withdrawing data sharing consents under the DPDP Act 2023.',
           code: code,
           center: true,
           child: child,
@@ -4101,10 +4207,12 @@ class _ManageDataSharingConsentsMobileMockup extends StatefulWidget {
   const _ManageDataSharingConsentsMobileMockup();
 
   @override
-  State<_ManageDataSharingConsentsMobileMockup> createState() => _ManageDataSharingConsentsMobileMockupState();
+  State<_ManageDataSharingConsentsMobileMockup> createState() =>
+      _ManageDataSharingConsentsMobileMockupState();
 }
 
-class _ManageDataSharingConsentsMobileMockupState extends State<_ManageDataSharingConsentsMobileMockup> {
+class _ManageDataSharingConsentsMobileMockupState
+    extends State<_ManageDataSharingConsentsMobileMockup> {
   bool _isSmsGatewayWithdrawn = false;
 
   @override
@@ -4183,7 +4291,8 @@ class _ManageDataSharingConsentsMobileMockupState extends State<_ManageDataShari
                   // Warning banner
                   Ux4gStatusBanner(
                     variant: Ux4gBannerVariant.warningLight,
-                    title: 'Required consents cannot be withdrawn as they are necessary for the scheme to function.',
+                    title:
+                        'Required consents cannot be withdrawn as they are necessary for the scheme to function.',
                     leadingIcon: const Icon(
                       Icons.error,
                       color: Color(0xFFD97706),
@@ -4195,7 +4304,10 @@ class _ManageDataSharingConsentsMobileMockupState extends State<_ManageDataShari
                       color: Color(0xFFB45309),
                     ),
                     margin: EdgeInsets.zero,
-                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 12,
+                    ),
                   ),
                   const SizedBox(height: 20),
 
@@ -4233,10 +4345,12 @@ class _ManageDataSharingConsentsCardMockup extends StatefulWidget {
   const _ManageDataSharingConsentsCardMockup();
 
   @override
-  State<_ManageDataSharingConsentsCardMockup> createState() => _ManageDataSharingConsentsCardMockupState();
+  State<_ManageDataSharingConsentsCardMockup> createState() =>
+      _ManageDataSharingConsentsCardMockupState();
 }
 
-class _ManageDataSharingConsentsCardMockupState extends State<_ManageDataSharingConsentsCardMockup> {
+class _ManageDataSharingConsentsCardMockupState
+    extends State<_ManageDataSharingConsentsCardMockup> {
   bool _isSmsGatewayWithdrawn = false;
 
   @override
@@ -4324,7 +4438,8 @@ class _ManageDataSharingConsentsCardMockupState extends State<_ManageDataSharing
                               isWithdrawn: _isSmsGatewayWithdrawn,
                               onWithdrawToggle: () {
                                 setState(() {
-                                  _isSmsGatewayWithdrawn = !_isSmsGatewayWithdrawn;
+                                  _isSmsGatewayWithdrawn =
+                                      !_isSmsGatewayWithdrawn;
                                 });
                               },
                             ),
@@ -4333,7 +4448,8 @@ class _ManageDataSharingConsentsCardMockupState extends State<_ManageDataSharing
                             // Warning banner
                             Ux4gStatusBanner(
                               variant: Ux4gBannerVariant.warningLight,
-                              title: 'Required consents cannot be withdrawn as they are necessary for the scheme to function.',
+                              title:
+                                  'Required consents cannot be withdrawn as they are necessary for the scheme to function.',
                               leadingIcon: const Icon(
                                 Icons.error,
                                 color: Color(0xFFD97706),
@@ -4345,7 +4461,10 @@ class _ManageDataSharingConsentsCardMockupState extends State<_ManageDataSharing
                                 color: Color(0xFFB45309),
                               ),
                               margin: EdgeInsets.zero,
-                              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 16,
+                                vertical: 12,
+                              ),
                             ),
                             const SizedBox(height: 20),
 
@@ -4416,8 +4535,12 @@ Widget _buildDataSharingManagementCard({
             ),
             Ux4gTag(
               text: isWithdrawn ? 'Withdrawn' : 'Active',
-              customBackgroundColor: isWithdrawn ? const Color(0xFFF3F4F6) : const Color(0xFFE6F4EA),
-              customContentColor: isWithdrawn ? const Color(0xFF4B5563) : const Color(0xFF137333),
+              customBackgroundColor: isWithdrawn
+                  ? const Color(0xFFF3F4F6)
+                  : const Color(0xFFE6F4EA),
+              customContentColor: isWithdrawn
+                  ? const Color(0xFF4B5563)
+                  : const Color(0xFF137333),
               shape: Ux4gTagShape.circular,
               size: Ux4gTagSize.m,
             ),
@@ -4468,7 +4591,8 @@ Widget _buildDataSharingManagementCard({
 // Source Code Snippets for Manage Data Sharing Consents
 // ───────────────────────────────────────────────────────────────────────
 
-const _manageDataSharingConsentsCode = r'''// Manage Data Sharing Consents – Flat Layout
+const _manageDataSharingConsentsCode =
+    r'''// Manage Data Sharing Consents – Flat Layout
 Column(
   children: [
     // Header
@@ -4724,7 +4848,8 @@ Column(
   ],
 )''';
 
-const _manageDataSharingConsentsCardCode = r'''// Manage Data Sharing Consents – Card Style Layout
+const _manageDataSharingConsentsCardCode =
+    r'''// Manage Data Sharing Consents – Card Style Layout
 Column(
   children: [
     // Header
@@ -5014,7 +5139,8 @@ final withdrawConsentDialogComponent = WidgetbookComponent(
       builder: (context) {
         return ComponentDocs(
           name: 'Withdraw Consent Dialog',
-          description: 'A modal dialog pattern used to confirm the withdrawal of data sharing consents.',
+          description:
+              'A modal dialog pattern used to confirm the withdrawal of data sharing consents.',
           code: _withdrawConsentDialogCode,
           center: true,
           child: const _WithdrawConsentDialogMockup(),
@@ -5094,7 +5220,8 @@ class _WithdrawConsentDialogMockup extends StatelessWidget {
                 backgroundColor: Colors.white,
                 cornerRadius: 16,
                 alignment: Ux4gModalAlignment.centered,
-                showHeader: false, // Custom header inside bodyContent to achieve exact spacing/size
+                showHeader:
+                    false, // Custom header inside bodyContent to achieve exact spacing/size
                 showCloseButton: false,
                 showDividers: false,
                 showSubtitle: false,
@@ -5111,13 +5238,17 @@ class _WithdrawConsentDialogMockup extends StatelessWidget {
                         width: 76,
                         height: 76,
                         decoration: const BoxDecoration(
-                          color: Color(0xFFFFEBD5), // Soft peach/amber matching mockup
+                          color: Color(
+                            0xFFFFEBD5,
+                          ), // Soft peach/amber matching mockup
                           shape: BoxShape.circle,
                         ),
                         child: const Center(
                           child: Icon(
                             Icons.warning_rounded, // Solid warning triangle
-                            color: Color(0xFFEA580C), // Vivid warning orange/amber
+                            color: Color(
+                              0xFFEA580C,
+                            ), // Vivid warning orange/amber
                             size: 38,
                           ),
                         ),
@@ -5149,7 +5280,9 @@ class _WithdrawConsentDialogMockup extends StatelessWidget {
                       Ux4gButton(
                         text: 'Withdraw Consent',
                         onPressed: () {},
-                        backgroundColor: const Color(0xFF4B2BD9), // Deep violet/indigo purple from mockup
+                        backgroundColor: const Color(
+                          0xFF4B2BD9,
+                        ), // Deep violet/indigo purple from mockup
                         contentColor: Colors.white,
                         size: Ux4gButtonSize.large,
                         width: double.infinity,
@@ -5302,15 +5435,21 @@ final consentHistoryComponent = WidgetbookComponent(
           label: 'Variant',
           options: const ['Default', 'Card style'],
           initialOption: 'Default',
-          description: 'Switch between the standard flat layout and the card-style layout on a soft-purple background.',
+          description:
+              'Switch between the standard flat layout and the card-style layout on a soft-purple background.',
         );
 
-        final code = variant == 'Card style' ? _consentHistoryCardCode : _consentHistoryCode;
-        final child = variant == 'Card style' ? const _ConsentHistoryCardMockup() : const _ConsentHistoryMockup();
+        final code = variant == 'Card style'
+            ? _consentHistoryCardCode
+            : _consentHistoryCode;
+        final child = variant == 'Card style'
+            ? const _ConsentHistoryCardMockup()
+            : const _ConsentHistoryMockup();
 
         return ComponentDocs(
           name: 'Consent History',
-          description: 'A screen pattern displaying all data sharing consents history with scheme filter chips. '
+          description:
+              'A screen pattern displaying all data sharing consents history with scheme filter chips. '
               'Use the [Variant] knob on the right to toggle layouts.',
           code: code,
           center: true,
@@ -5320,7 +5459,6 @@ final consentHistoryComponent = WidgetbookComponent(
     ),
   ],
 );
-
 
 const _consentHistoryCode = r'''// Consent History Screen Pattern
 Column(
@@ -6255,20 +6393,26 @@ class _ConsentHistoryMockupState extends State<_ConsentHistoryMockup> {
                                   decoration: BoxDecoration(
                                     color: Colors.white,
                                     borderRadius: BorderRadius.circular(8),
-                                    border: Border.all(color: const Color(0xFFE5E7EB)),
+                                    border: Border.all(
+                                      color: const Color(0xFFE5E7EB),
+                                    ),
                                     boxShadow: [
                                       BoxShadow(
-                                        color: Colors.black.withValues(alpha: 0.02),
+                                        color: Colors.black.withValues(
+                                          alpha: 0.02,
+                                        ),
                                         blurRadius: 4,
                                         offset: const Offset(0, 2),
                                       ),
                                     ],
                                   ),
                                   child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
                                         children: [
                                           Text(
                                             item.title,
@@ -6280,7 +6424,8 @@ class _ConsentHistoryMockupState extends State<_ConsentHistoryMockup> {
                                           ),
                                           Ux4gTag(
                                             text: item.status,
-                                            customBackgroundColor: item.statusColor,
+                                            customBackgroundColor:
+                                                item.statusColor,
                                             customContentColor: item.textColor,
                                             shape: Ux4gTagShape.circular,
                                           ),
@@ -6301,7 +6446,8 @@ class _ConsentHistoryMockupState extends State<_ConsentHistoryMockup> {
                                             fontSize: 14,
                                             color: Color(0xFF6A4EFF),
                                             fontWeight: FontWeight.w600,
-                                            decoration: TextDecoration.underline,
+                                            decoration:
+                                                TextDecoration.underline,
                                           ),
                                         ),
                                       ),
@@ -6434,7 +6580,8 @@ class _ConsentHistoryCardMockup extends StatefulWidget {
   const _ConsentHistoryCardMockup();
 
   @override
-  State<_ConsentHistoryCardMockup> createState() => _ConsentHistoryCardMockupState();
+  State<_ConsentHistoryCardMockup> createState() =>
+      _ConsentHistoryCardMockupState();
 }
 
 class _ConsentHistoryCardMockupState extends State<_ConsentHistoryCardMockup> {
@@ -6564,13 +6711,14 @@ class _ConsentHistoryCardMockupState extends State<_ConsentHistoryCardMockup> {
                             ),
                             const SizedBox(height: 20),
                             ScrollConfiguration(
-                              behavior: ScrollConfiguration.of(context).copyWith(
-                                dragDevices: {
-                                  PointerDeviceKind.mouse,
-                                  PointerDeviceKind.touch,
-                                  PointerDeviceKind.stylus,
-                                },
-                              ),
+                              behavior: ScrollConfiguration.of(context)
+                                  .copyWith(
+                                    dragDevices: {
+                                      PointerDeviceKind.mouse,
+                                      PointerDeviceKind.touch,
+                                      PointerDeviceKind.stylus,
+                                    },
+                                  ),
                               child: SingleChildScrollView(
                                 scrollDirection: Axis.horizontal,
                                 child: Row(
@@ -6608,13 +6756,17 @@ class _ConsentHistoryCardMockupState extends State<_ConsentHistoryCardMockup> {
                                       decoration: BoxDecoration(
                                         color: Colors.white,
                                         borderRadius: BorderRadius.circular(8),
-                                        border: Border.all(color: const Color(0xFFE5E7EB)),
+                                        border: Border.all(
+                                          color: const Color(0xFFE5E7EB),
+                                        ),
                                       ),
                                       child: Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
                                         children: [
                                           Row(
-                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
                                             children: [
                                               Text(
                                                 item.title,
@@ -6626,8 +6778,10 @@ class _ConsentHistoryCardMockupState extends State<_ConsentHistoryCardMockup> {
                                               ),
                                               Ux4gTag(
                                                 text: item.status,
-                                                customBackgroundColor: item.statusColor,
-                                                customContentColor: item.textColor,
+                                                customBackgroundColor:
+                                                    item.statusColor,
+                                                customContentColor:
+                                                    item.textColor,
                                                 shape: Ux4gTagShape.circular,
                                               ),
                                             ],
@@ -6635,9 +6789,15 @@ class _ConsentHistoryCardMockupState extends State<_ConsentHistoryCardMockup> {
                                           const SizedBox(height: 8),
                                           _buildCardRow('Scheme', item.scheme),
                                           const SizedBox(height: 4),
-                                          _buildCardRow('Data', item.dataShared),
+                                          _buildCardRow(
+                                            'Data',
+                                            item.dataShared,
+                                          ),
                                           const SizedBox(height: 4),
-                                          _buildCardRow('Given', item.givenDate),
+                                          _buildCardRow(
+                                            'Given',
+                                            item.givenDate,
+                                          ),
                                           const SizedBox(height: 8),
                                           GestureDetector(
                                             onTap: () {},
@@ -6647,7 +6807,8 @@ class _ConsentHistoryCardMockupState extends State<_ConsentHistoryCardMockup> {
                                                 fontSize: 13,
                                                 color: Color(0xFF6A4EFF),
                                                 fontWeight: FontWeight.w600,
-                                                decoration: TextDecoration.underline,
+                                                decoration:
+                                                    TextDecoration.underline,
                                               ),
                                             ),
                                           ),

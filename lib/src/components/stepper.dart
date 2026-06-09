@@ -46,37 +46,62 @@ class Ux4gStepper extends StatelessWidget {
   }
 
   Widget _buildHorizontalStepper(BuildContext context) {
-    return LayoutBuilder(builder: (context, constraints) {
-      return Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: List.generate(totalSteps, (index) {
-          final stepIndex = index + 1;
-          final isCompleted = currentStep > stepIndex;
-          final isActive = currentStep == stepIndex;
-          final isPending = currentStep < stepIndex;
-          final stepData = steps.length > index ? steps[index] : null;
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        return Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: List.generate(totalSteps, (index) {
+            final stepIndex = index + 1;
+            final isCompleted = currentStep > stepIndex;
+            final isActive = currentStep == stepIndex;
+            final isPending = currentStep < stepIndex;
+            final stepData = steps.length > index ? steps[index] : null;
 
-          return Expanded(
-            child: Column(
-              children: [
-                Row(
-                  children: [
-                    Expanded(child: index == 0 ? const SizedBox() : _buildLine(context, currentStep > index)),
-                    _buildStepIcon(context, stepIndex, isCompleted, isActive, isPending, stepData?.isError ?? false),
-                    Expanded(child: index == totalSteps - 1 ? const SizedBox() : _buildLine(context, currentStep > stepIndex)),
-                  ],
-                ),
-                const SizedBox(height: 8),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 4),
-                  child: _buildLabels(context, stepData, stepIndex, isPending, isCompleted, isActive, true),
-                ),
-              ],
-            ),
-          );
-        }),
-      );
-    });
+            return Expanded(
+              child: Column(
+                children: [
+                  Row(
+                    children: [
+                      Expanded(
+                        child: index == 0
+                            ? const SizedBox()
+                            : _buildLine(context, currentStep > index),
+                      ),
+                      _buildStepIcon(
+                        context,
+                        stepIndex,
+                        isCompleted,
+                        isActive,
+                        isPending,
+                        stepData?.isError ?? false,
+                      ),
+                      Expanded(
+                        child: index == totalSteps - 1
+                            ? const SizedBox()
+                            : _buildLine(context, currentStep > stepIndex),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 8),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 4),
+                    child: _buildLabels(
+                      context,
+                      stepData,
+                      stepIndex,
+                      isPending,
+                      isCompleted,
+                      isActive,
+                      true,
+                    ),
+                  ),
+                ],
+              ),
+            );
+          }),
+        );
+      },
+    );
   }
 
   Widget _buildVerticalStepper(BuildContext context) {
@@ -94,16 +119,35 @@ class Ux4gStepper extends StatelessWidget {
             children: [
               Column(
                 children: [
-                  _buildStepIcon(context, stepIndex, isCompleted, isActive, isPending, stepData?.isError ?? false),
+                  _buildStepIcon(
+                    context,
+                    stepIndex,
+                    isCompleted,
+                    isActive,
+                    isPending,
+                    stepData?.isError ?? false,
+                  ),
                   if (index < totalSteps - 1)
-                    Expanded(child: _buildLine(context, isCompleted, isVertical: true)),
+                    Expanded(
+                      child: _buildLine(context, isCompleted, isVertical: true),
+                    ),
                 ],
               ),
               const SizedBox(width: 12),
               Expanded(
                 child: Padding(
-                  padding: EdgeInsets.only(bottom: index < totalSteps - 1 ? 24 : 0),
-                  child: _buildLabels(context, stepData, stepIndex, isPending, isCompleted, isActive, false),
+                  padding: EdgeInsets.only(
+                    bottom: index < totalSteps - 1 ? 24 : 0,
+                  ),
+                  child: _buildLabels(
+                    context,
+                    stepData,
+                    stepIndex,
+                    isPending,
+                    isCompleted,
+                    isActive,
+                    false,
+                  ),
                 ),
               ),
             ],
@@ -113,21 +157,34 @@ class Ux4gStepper extends StatelessWidget {
     );
   }
 
-  Widget _buildStepIcon(BuildContext context, int index, bool isCompleted, bool isActive, bool isPending, bool isError) {
+  Widget _buildStepIcon(
+    BuildContext context,
+    int index,
+    bool isCompleted,
+    bool isActive,
+    bool isPending,
+    bool isError,
+  ) {
     final materialTheme = Theme.of(context);
     final ux4gColors = materialTheme.extension<Ux4gColors>();
     final ux4gTypography = materialTheme.extension<Ux4gTypography>();
 
     final primary = ux4gColors?.primary ?? materialTheme.colorScheme.primary;
-    final onPrimary = ux4gColors?.onPrimary ?? materialTheme.colorScheme.onPrimary;
-    final onSurface = ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
+    final onPrimary =
+        ux4gColors?.onPrimary ?? materialTheme.colorScheme.onPrimary;
+    final onSurface =
+        ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
     final error = ux4gColors?.error ?? materialTheme.colorScheme.error;
 
     Color bgColor = Colors.transparent;
     Color borderColor = onSurface.withValues(alpha: 0.2);
     Widget content = Text(
       index.toString(),
-      style: (ux4gTypography?.lM_default ?? materialTheme.textTheme.labelMedium)?.copyWith(color: onSurface.withValues(alpha: 0.3), fontWeight: FontWeight.bold),
+      style: (ux4gTypography?.lM_default ?? materialTheme.textTheme.labelMedium)
+          ?.copyWith(
+            color: onSurface.withValues(alpha: 0.3),
+            fontWeight: FontWeight.bold,
+          ),
     );
 
     if (isError) {
@@ -152,19 +209,26 @@ class Ux4gStepper extends StatelessWidget {
       decoration: BoxDecoration(
         color: bgColor,
         shape: BoxShape.circle,
-        border: (isActive || isPending || isError) ? Border.all(color: borderColor, width: 2) : null,
+        border: (isActive || isPending || isError)
+            ? Border.all(color: borderColor, width: 2)
+            : null,
       ),
       alignment: Alignment.center,
       child: content,
     );
   }
 
-  Widget _buildLine(BuildContext context, bool isCompleted, {bool isVertical = false}) {
+  Widget _buildLine(
+    BuildContext context,
+    bool isCompleted, {
+    bool isVertical = false,
+  }) {
     final materialTheme = Theme.of(context);
     final ux4gColors = materialTheme.extension<Ux4gColors>();
 
     final primary = ux4gColors?.primary ?? materialTheme.colorScheme.primary;
-    final onSurface = ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
+    final onSurface =
+        ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
 
     final color = isCompleted ? primary : onSurface.withValues(alpha: 0.2);
 
@@ -174,44 +238,80 @@ class Ux4gStepper extends StatelessWidget {
         style: lineStyle,
         isVertical: isVertical,
       ),
-      child: isVertical ? const SizedBox(width: 2, height: double.infinity) : const SizedBox(height: 2, width: double.infinity),
+      child: isVertical
+          ? const SizedBox(width: 2, height: double.infinity)
+          : const SizedBox(height: 2, width: double.infinity),
     );
   }
 
-  Widget _buildLabels(BuildContext context, Ux4gStepItem? data, int index, bool isPending, bool isCompleted, bool isActive, bool centered) {
+  Widget _buildLabels(
+    BuildContext context,
+    Ux4gStepItem? data,
+    int index,
+    bool isPending,
+    bool isCompleted,
+    bool isActive,
+    bool centered,
+  ) {
     final materialTheme = Theme.of(context);
     final ux4gColors = materialTheme.extension<Ux4gColors>();
     final ux4gTypography = materialTheme.extension<Ux4gTypography>();
 
-    final onSurface = ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
+    final onSurface =
+        ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
     final error = ux4gColors?.error ?? materialTheme.colorScheme.error;
     final primary = ux4gColors?.primary ?? materialTheme.colorScheme.primary;
     final success = ux4gColors?.success ?? Colors.green;
 
     final align = centered ? TextAlign.center : TextAlign.start;
 
-    final titleColor = isPending ? onSurface.withValues(alpha: 0.4) : (data?.isError ?? false ? error : onSurface);
-    final statusText = data?.statusLabel ?? (data?.isError == true ? "Error" : (isCompleted ? "Completed" : (isActive ? "In progress" : null)));
-    final statusColor = data?.isError == true ? error : (isCompleted ? success : (isActive ? primary : onSurface.withValues(alpha: 0.4)));
+    final titleColor = isPending
+        ? onSurface.withValues(alpha: 0.4)
+        : (data?.isError ?? false ? error : onSurface);
+    final statusText =
+        data?.statusLabel ??
+        (data?.isError == true
+            ? "Error"
+            : (isCompleted ? "Completed" : (isActive ? "In progress" : null)));
+    final statusColor = data?.isError == true
+        ? error
+        : (isCompleted
+              ? success
+              : (isActive ? primary : onSurface.withValues(alpha: 0.4)));
 
     return Column(
-      crossAxisAlignment: centered ? CrossAxisAlignment.center : CrossAxisAlignment.start,
+      crossAxisAlignment: centered
+          ? CrossAxisAlignment.center
+          : CrossAxisAlignment.start,
       children: [
         Text(
           data?.title ?? "Step $index",
-          style: (ux4gTypography?.lL_strong ?? materialTheme.textTheme.labelLarge?.copyWith(fontWeight: FontWeight.bold))?.copyWith(color: titleColor),
+          style:
+              (ux4gTypography?.lL_strong ??
+                      materialTheme.textTheme.labelLarge?.copyWith(
+                        fontWeight: FontWeight.bold,
+                      ))
+                  ?.copyWith(color: titleColor),
           textAlign: align,
         ),
         if (data?.description != null)
           Text(
             data!.description!,
-            style: (ux4gTypography?.lM_default ?? materialTheme.textTheme.labelMedium)?.copyWith(color: onSurface.withValues(alpha: 0.4)),
+            style:
+                (ux4gTypography?.lM_default ??
+                        materialTheme.textTheme.labelMedium)
+                    ?.copyWith(color: onSurface.withValues(alpha: 0.4)),
             textAlign: align,
           ),
         if (statusText != null)
           Text(
             statusText,
-            style: (ux4gTypography?.lS_strong ?? materialTheme.textTheme.labelSmall?.copyWith(fontWeight: FontWeight.bold))?.copyWith(color: statusColor),
+            style:
+                (ux4gTypography?.lS_strong ??
+                        materialTheme.textTheme.labelSmall?.copyWith(
+                          fontWeight: FontWeight.bold,
+                        ))
+                    ?.copyWith(color: statusColor),
             textAlign: align,
           ),
       ],
@@ -224,7 +324,11 @@ class _StepperLinePainter extends CustomPainter {
   final Ux4gStepperLineStyle style;
   final bool isVertical;
 
-  _StepperLinePainter({required this.color, required this.style, required this.isVertical});
+  _StepperLinePainter({
+    required this.color,
+    required this.style,
+    required this.isVertical,
+  });
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -237,20 +341,36 @@ class _StepperLinePainter extends CustomPainter {
       double dashWidth = 8, dashSpace = 4, current = 0;
       if (isVertical) {
         while (current < size.height) {
-          canvas.drawLine(Offset(size.width / 2, current), Offset(size.width / 2, current + dashWidth), paint);
+          canvas.drawLine(
+            Offset(size.width / 2, current),
+            Offset(size.width / 2, current + dashWidth),
+            paint,
+          );
           current += dashWidth + dashSpace;
         }
       } else {
         while (current < size.width) {
-          canvas.drawLine(Offset(current, size.height / 2), Offset(current + dashWidth, size.height / 2), paint);
+          canvas.drawLine(
+            Offset(current, size.height / 2),
+            Offset(current + dashWidth, size.height / 2),
+            paint,
+          );
           current += dashWidth + dashSpace;
         }
       }
     } else {
       if (isVertical) {
-        canvas.drawLine(Offset(size.width / 2, 0), Offset(size.width / 2, size.height), paint);
+        canvas.drawLine(
+          Offset(size.width / 2, 0),
+          Offset(size.width / 2, size.height),
+          paint,
+        );
       } else {
-        canvas.drawLine(Offset(0, size.height / 2), Offset(size.width, size.height / 2), paint);
+        canvas.drawLine(
+          Offset(0, size.height / 2),
+          Offset(size.width, size.height / 2),
+          paint,
+        );
       }
     }
   }

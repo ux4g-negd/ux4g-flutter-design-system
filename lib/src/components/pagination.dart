@@ -44,10 +44,15 @@ class Ux4gPaginationIndicator extends StatelessWidget {
     final uxColors = Theme.of(context).extension<Ux4gColors>();
     final materialTheme = Theme.of(context);
 
-    final effectiveActiveColor = activeColor ?? uxColors?.primary ?? materialTheme.colorScheme.primary;
-    final effectiveInactiveColor = inactiveColor ?? uxColors?.surface ?? materialTheme.colorScheme.surface;
+    final effectiveActiveColor =
+        activeColor ?? uxColors?.primary ?? materialTheme.colorScheme.primary;
+    final effectiveInactiveColor =
+        inactiveColor ?? uxColors?.surface ?? materialTheme.colorScheme.surface;
     final effectiveInactiveBorderColor =
-        inactiveBorderColor ?? (uxColors?.onSurface ?? materialTheme.colorScheme.onSurface).withValues(alpha: 0.3);
+        inactiveBorderColor ??
+        (uxColors?.onSurface ?? materialTheme.colorScheme.onSurface).withValues(
+          alpha: 0.3,
+        );
 
     Widget content = Row(
       mainAxisSize: MainAxisSize.min,

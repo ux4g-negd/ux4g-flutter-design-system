@@ -114,8 +114,10 @@ class Ux4gLinearProgress extends StatelessWidget {
     this.showPercentage = false,
     this.labelPosition = Ux4gProgressLabelPosition.outside,
     this.insideLabelStyle,
-  }) : assert(value >= 0.0 && value <= 1.0,
-            'value must be between 0.0 and 1.0');
+  }) : assert(
+         value >= 0.0 && value <= 1.0,
+         'value must be between 0.0 and 1.0',
+       );
 
   double _resolvedRadius() {
     if (customBorderRadius != null) return customBorderRadius!;
@@ -132,11 +134,17 @@ class Ux4gLinearProgress extends StatelessWidget {
     final clampedValue = value.clamp(0.0, 1.0);
     final percent = (clampedValue * 100).toStringAsFixed(0);
 
-    final resolvedColor = color ?? (ux4gColors?.primary ?? materialTheme.colorScheme.primary);
+    final resolvedColor =
+        color ?? (ux4gColors?.primary ?? materialTheme.colorScheme.primary);
     final resolvedTrack =
-        trackColor ?? (ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface).withValues(alpha: 0.12);
+        trackColor ??
+        (ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface)
+            .withValues(alpha: 0.12);
 
-    final hasHeader = icon != null || label != null || hint != null ||
+    final hasHeader =
+        icon != null ||
+        label != null ||
+        hint != null ||
         (showPercentage && labelPosition == Ux4gProgressLabelPosition.outside);
 
     return Column(
@@ -151,9 +159,14 @@ class Ux4gLinearProgress extends StatelessWidget {
               if (icon != null) ...[
                 _IconBubble(
                   icon: icon!,
-                  iconColor: iconColor ?? (ux4gColors?.primary ?? materialTheme.colorScheme.primary),
-                  backgroundColor: iconBackgroundColor ??
-                      (ux4gColors?.primary ?? materialTheme.colorScheme.primary).withValues(alpha: 0.12),
+                  iconColor:
+                      iconColor ??
+                      (ux4gColors?.primary ??
+                          materialTheme.colorScheme.primary),
+                  backgroundColor:
+                      iconBackgroundColor ??
+                      (ux4gColors?.primary ?? materialTheme.colorScheme.primary)
+                          .withValues(alpha: 0.12),
                   size: 32,
                 ),
                 const SizedBox(width: Ux4gSpace.space8),
@@ -164,8 +177,17 @@ class Ux4gLinearProgress extends StatelessWidget {
                 Expanded(
                   child: Text(
                     label!,
-                    style: (ux4gTypography?.bS_strong ?? materialTheme.textTheme.bodySmall?.copyWith(fontWeight: FontWeight.bold) ?? const TextStyle())
-                        .copyWith(color: ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface),
+                    style:
+                        (ux4gTypography?.bS_strong ??
+                                materialTheme.textTheme.bodySmall?.copyWith(
+                                  fontWeight: FontWeight.bold,
+                                ) ??
+                                const TextStyle())
+                            .copyWith(
+                              color:
+                                  ux4gColors?.onSurface ??
+                                  materialTheme.colorScheme.onSurface,
+                            ),
                     overflow: TextOverflow.ellipsis,
                   ),
                 )
@@ -179,19 +201,33 @@ class Ux4gLinearProgress extends StatelessWidget {
                   if (hint != null)
                     Text(
                       hint!,
-                      style: (ux4gTypography?.bS_default ?? materialTheme.textTheme.bodySmall ?? const TextStyle()).copyWith(
-                        color: (ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface).withValues(alpha: 0.5),
-                      ),
+                      style:
+                          (ux4gTypography?.bS_default ??
+                                  materialTheme.textTheme.bodySmall ??
+                                  const TextStyle())
+                              .copyWith(
+                                color:
+                                    (ux4gColors?.onSurface ??
+                                            materialTheme.colorScheme.onSurface)
+                                        .withValues(alpha: 0.5),
+                              ),
                     ),
                   if (showPercentage &&
-                      labelPosition ==
-                          Ux4gProgressLabelPosition.outside) ...[
-                    if (hint != null)
-                      const SizedBox(width: Ux4gSpace.space8),
+                      labelPosition == Ux4gProgressLabelPosition.outside) ...[
+                    if (hint != null) const SizedBox(width: Ux4gSpace.space8),
                     Text(
                       '$percent%',
-                      style: (ux4gTypography?.bS_strong ?? materialTheme.textTheme.bodySmall?.copyWith(fontWeight: FontWeight.bold) ?? const TextStyle())
-                          .copyWith(color: ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface),
+                      style:
+                          (ux4gTypography?.bS_strong ??
+                                  materialTheme.textTheme.bodySmall?.copyWith(
+                                    fontWeight: FontWeight.bold,
+                                  ) ??
+                                  const TextStyle())
+                              .copyWith(
+                                color:
+                                    ux4gColors?.onSurface ??
+                                    materialTheme.colorScheme.onSurface,
+                              ),
                     ),
                   ],
                 ],
@@ -213,11 +249,17 @@ class Ux4gLinearProgress extends StatelessWidget {
               showPercentage &&
               labelPosition == Ux4gProgressLabelPosition.inside,
           percent: percent,
-          insideLabelStyle: insideLabelStyle ??
-              (ux4gTypography?.lS_strong ?? materialTheme.textTheme.labelSmall?.copyWith(fontWeight: FontWeight.bold) ?? const TextStyle()).copyWith(
-                color: Colors.white,
-                fontSize: height > 14 ? 11 : (height * 0.7).clamp(8, 11),
-              ),
+          insideLabelStyle:
+              insideLabelStyle ??
+              (ux4gTypography?.lS_strong ??
+                      materialTheme.textTheme.labelSmall?.copyWith(
+                        fontWeight: FontWeight.bold,
+                      ) ??
+                      const TextStyle())
+                  .copyWith(
+                    color: Colors.white,
+                    fontSize: height > 14 ? 11 : (height * 0.7).clamp(8, 11),
+                  ),
         ),
       ],
     );
@@ -367,10 +409,7 @@ class _IconBubble extends StatelessWidget {
     return Container(
       width: size,
       height: size,
-      decoration: BoxDecoration(
-        color: backgroundColor,
-        shape: BoxShape.circle,
-      ),
+      decoration: BoxDecoration(color: backgroundColor, shape: BoxShape.circle),
       child: Icon(icon, color: iconColor, size: size * 0.55),
     );
   }

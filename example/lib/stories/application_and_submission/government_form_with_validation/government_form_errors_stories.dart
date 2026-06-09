@@ -25,15 +25,20 @@ final governmentFormWithErrorsComponent = WidgetbookComponent(
         );
 
         final isCardStyle = variant == 'Card style';
-        final code = isCardStyle ? _governmentFormErrorsCardCode : _governmentFormErrorsDefaultCode;
+        final code = isCardStyle
+            ? _governmentFormErrorsCardCode
+            : _governmentFormErrorsDefaultCode;
 
         return ComponentDocs(
           mobileMockup: true,
           name: 'Government form with errors',
-          description: 'A government form pattern demonstrating field-level validation errors, toggle switches, and customized sliders.',
+          description:
+              'A government form pattern demonstrating field-level validation errors, toggle switches, and customized sliders.',
           code: code,
           center: true,
-          child: isCardStyle ? const _GovernmentFormErrorsCardMockup() : const _GovernmentFormErrorsMockup(),
+          child: isCardStyle
+              ? const _GovernmentFormErrorsCardMockup()
+              : const _GovernmentFormErrorsMockup(),
         );
       },
     ),
@@ -75,7 +80,8 @@ class _PhoneFrame extends StatelessWidget {
 // Source Code Strings
 // ───────────────────────────────────────────────────────────────────────
 
-const _governmentFormErrorsDefaultCode = r"""import 'package:flutter/material.dart';
+const _governmentFormErrorsDefaultCode =
+    r"""import 'package:flutter/material.dart';
 import 'package:ux4g_flutter_design_system/ux4g_flutter_design_system.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -228,7 +234,8 @@ class _GovernmentFormErrorsScreenState extends State<GovernmentFormErrorsScreen>
 }
 """;
 
-const _governmentFormErrorsCardCode = r"""import 'package:flutter/material.dart';
+const _governmentFormErrorsCardCode =
+    r"""import 'package:flutter/material.dart';
 import 'package:ux4g_flutter_design_system/ux4g_flutter_design_system.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -378,10 +385,12 @@ class _GovernmentFormErrorsCardScreenState extends State<GovernmentFormErrorsCar
 class _GovernmentFormErrorsMockup extends StatefulWidget {
   const _GovernmentFormErrorsMockup({super.key});
   @override
-  State<_GovernmentFormErrorsMockup> createState() => _GovernmentFormErrorsMockupState();
+  State<_GovernmentFormErrorsMockup> createState() =>
+      _GovernmentFormErrorsMockupState();
 }
 
-class _GovernmentFormErrorsMockupState extends State<_GovernmentFormErrorsMockup> {
+class _GovernmentFormErrorsMockupState
+    extends State<_GovernmentFormErrorsMockup> {
   bool _acceptTerms = true;
   bool _smsUpdates = false;
   String _fullName = 'Ramesh Kumar';
@@ -407,7 +416,11 @@ class _GovernmentFormErrorsMockupState extends State<_GovernmentFormErrorsMockup
                 leadingWidgets: [
                   SvgPicture.asset(_nationalEmblemLogoPath, height: 40),
                   const SizedBox(width: 1),
-                  Container(height: 32, width: 1, color: const Color(0xFFD1D5DB)),
+                  Container(
+                    height: 32,
+                    width: 1,
+                    color: const Color(0xFFD1D5DB),
+                  ),
                   const SizedBox(width: 1),
                   SvgPicture.asset(_unionLogoPath, height: 32),
                 ],
@@ -423,9 +436,20 @@ class _GovernmentFormErrorsMockupState extends State<_GovernmentFormErrorsMockup
                   Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      const Icon(Icons.check_circle_outline, color: Color(0xFF065F46), size: 16),
+                      const Icon(
+                        Icons.check_circle_outline,
+                        color: Color(0xFF065F46),
+                        size: 16,
+                      ),
                       const SizedBox(width: 6),
-                      const Text('Saved 3:14 PM', style: TextStyle(color: Color(0xFF065F46), fontSize: 12, fontWeight: FontWeight.w500)),
+                      const Text(
+                        'Saved 3:14 PM',
+                        style: TextStyle(
+                          color: Color(0xFF065F46),
+                          fontSize: 12,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
                     ],
                   ),
                 ],
@@ -433,35 +457,96 @@ class _GovernmentFormErrorsMockupState extends State<_GovernmentFormErrorsMockup
               ),
               Expanded(
                 child: SingleChildScrollView(
-                  padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 24,
+                    vertical: 24,
+                  ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Ux4gStepper(
-                        totalSteps: 4, currentStep: 2, stepSize: 20,
+                        totalSteps: 4,
+                        currentStep: 2,
+                        stepSize: 20,
                         steps: const [
-                          Ux4gStepItem(title: 'Eligibility', titleStyle: TextStyle(fontSize: 10, fontWeight: FontWeight.w600)),
-                          Ux4gStepItem(title: 'Personal', titleStyle: TextStyle(fontSize: 10, fontWeight: FontWeight.w600)),
-                          Ux4gStepItem(title: 'Documents', titleStyle: TextStyle(fontSize: 10, fontWeight: FontWeight.w600)),
+                          Ux4gStepItem(
+                            title: 'Eligibility',
+                            titleStyle: TextStyle(
+                              fontSize: 10,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          Ux4gStepItem(
+                            title: 'Personal',
+                            titleStyle: TextStyle(
+                              fontSize: 10,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          Ux4gStepItem(
+                            title: 'Documents',
+                            titleStyle: TextStyle(
+                              fontSize: 10,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
                           Ux4gStepItem(title: ''),
                         ],
                       ),
                       const SizedBox(height: 32),
-                      const Text('Personal information', style: TextStyle(fontSize: 24, fontWeight: FontWeight.w800, color: _titleColor)),
+                      const Text(
+                        'Personal information',
+                        style: TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.w800,
+                          color: _titleColor,
+                        ),
+                      ),
                       const SizedBox(height: 8),
-                      const Text('Please enter your details.', style: TextStyle(fontSize: 15, color: _subtleText)),
+                      const Text(
+                        'Please enter your details.',
+                        style: TextStyle(fontSize: 15, color: _subtleText),
+                      ),
                       const SizedBox(height: 32),
-                      Ux4gInputField(label: 'Full name', value: _fullName, onValueChange: (val) => setState(() => _fullName = val), size: Ux4gInputFieldSize.medium),
+                      Ux4gInputField(
+                        label: 'Full name',
+                        value: _fullName,
+                        onValueChange: (val) => setState(() => _fullName = val),
+                        size: Ux4gInputFieldSize.medium,
+                      ),
                       const SizedBox(height: 24),
-                      Ux4gInputField(label: 'Mobile number', value: _mobileNumber, onValueChange: (val) => setState(() => _mobileNumber = val), size: Ux4gInputFieldSize.medium),
+                      Ux4gInputField(
+                        label: 'Mobile number',
+                        value: _mobileNumber,
+                        onValueChange: (val) =>
+                            setState(() => _mobileNumber = val),
+                        size: Ux4gInputFieldSize.medium,
+                      ),
                       const SizedBox(height: 24),
-                      Ux4gInputField(label: 'Email address', value: _emailAddress, onValueChange: (val) => setState(() => _emailAddress = val), size: Ux4gInputFieldSize.medium, status: Ux4gInputFieldStatus.error, caption: 'Enter a valid email.'),
+                      Ux4gInputField(
+                        label: 'Email address',
+                        value: _emailAddress,
+                        onValueChange: (val) =>
+                            setState(() => _emailAddress = val),
+                        size: Ux4gInputFieldSize.medium,
+                        status: Ux4gInputFieldStatus.error,
+                        caption: 'Enter a valid email.',
+                      ),
                       const SizedBox(height: 24),
                       Ux4gSelectionDropdown(
                         label: 'State of residence',
-                        options: const [Ux4gDropdownOption(id: 'dl', label: 'Delhi'), Ux4gDropdownOption(id: 'mh', label: 'Maharashtra')],
-                        selectedOptionIds: _selectedState != null ? [_selectedState!] : [],
-                        onSelectionChange: (ids) => setState(() => _selectedState = ids.isNotEmpty ? ids.first : null),
+                        options: const [
+                          Ux4gDropdownOption(id: 'dl', label: 'Delhi'),
+                          Ux4gDropdownOption(id: 'mh', label: 'Maharashtra'),
+                        ],
+                        selectedOptionIds: _selectedState != null
+                            ? [_selectedState!]
+                            : [],
+                        onSelectionChange: (ids) => setState(
+                          () => _selectedState = ids.isNotEmpty
+                              ? ids.first
+                              : null,
+                        ),
                         placeholder: 'Please select..',
                         size: Ux4gDropdownSize.m,
                       ),
@@ -469,32 +554,85 @@ class _GovernmentFormErrorsMockupState extends State<_GovernmentFormErrorsMockup
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          const Text('Annual Income (Lakh ₹) *', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600)),
-                          const Text('₹3.2 Lakh', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w800)),
+                          const Text(
+                            'Annual Income (Lakh ₹) *',
+                            style: TextStyle(
+                              fontSize: 13,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          const Text(
+                            '₹3.2 Lakh',
+                            style: TextStyle(
+                              fontSize: 13,
+                              fontWeight: FontWeight.w800,
+                            ),
+                          ),
                         ],
                       ),
-                      Ux4gSlider(label: '', value: _income, onValueChange: (val) => setState(() => _income = val), min: 0, max: 100, steps: 10, showMarksAndValues: true),
+                      Ux4gSlider(
+                        label: '',
+                        value: _income,
+                        onValueChange: (val) => setState(() => _income = val),
+                        min: 0,
+                        max: 100,
+                        steps: 10,
+                        showMarksAndValues: true,
+                      ),
                       const SizedBox(height: 32),
                       Row(
                         children: [
-                          const Text('Receive SMS updates', style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600)),
+                          const Text(
+                            'Receive SMS updates',
+                            style: TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
                           const Spacer(),
-                          Ux4gToggle(checked: _smsUpdates, onCheckedChange: (v) => setState(() => _smsUpdates = v), size: Ux4gToggleSize.s),
+                          Ux4gToggle(
+                            checked: _smsUpdates,
+                            onCheckedChange: (v) =>
+                                setState(() => _smsUpdates = v),
+                            size: Ux4gToggleSize.s,
+                          ),
                         ],
                       ),
                       const SizedBox(height: 16),
-                      Ux4gCheckbox(label: 'Accept terms and conditions *', isRequired: true, value: _acceptTerms, onChanged: (val) => setState(() => _acceptTerms = val ?? false)),
+                      Ux4gCheckbox(
+                        label: 'Accept terms and conditions *',
+                        isRequired: true,
+                        value: _acceptTerms,
+                        onChanged: (val) =>
+                            setState(() => _acceptTerms = val ?? false),
+                      ),
                     ],
                   ),
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 24,
+                  vertical: 16,
+                ),
                 child: Column(
                   children: [
-                    Ux4gButton(text: 'Continue', onPressed: () {}, size: Ux4gButtonSize.large, width: double.infinity),
+                    Ux4gButton(
+                      text: 'Continue',
+                      onPressed: () {},
+                      size: Ux4gButtonSize.large,
+                      width: double.infinity,
+                    ),
                     const SizedBox(height: 12),
-                    Ux4gButton(text: 'Back', onPressed: () {}, variant: Ux4gButtonVariant.outline, size: Ux4gButtonSize.large, width: double.infinity, contentColor: primaryColor, borderColor: primaryColor),
+                    Ux4gButton(
+                      text: 'Back',
+                      onPressed: () {},
+                      variant: Ux4gButtonVariant.outline,
+                      size: Ux4gButtonSize.large,
+                      width: double.infinity,
+                      contentColor: primaryColor,
+                      borderColor: primaryColor,
+                    ),
                   ],
                 ),
               ),
@@ -503,7 +641,10 @@ class _GovernmentFormErrorsMockupState extends State<_GovernmentFormErrorsMockup
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    const Text('Powered by -', style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+                    const Text(
+                      'Powered by -',
+                      style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF)),
+                    ),
                     const SizedBox(height: 6),
                     Image.asset(_digitalIndiaLogoPath, height: 24),
                   ],
@@ -520,10 +661,12 @@ class _GovernmentFormErrorsMockupState extends State<_GovernmentFormErrorsMockup
 class _GovernmentFormErrorsCardMockup extends StatefulWidget {
   const _GovernmentFormErrorsCardMockup({super.key});
   @override
-  State<_GovernmentFormErrorsCardMockup> createState() => _GovernmentFormErrorsCardMockupState();
+  State<_GovernmentFormErrorsCardMockup> createState() =>
+      _GovernmentFormErrorsCardMockupState();
 }
 
-class _GovernmentFormErrorsCardMockupState extends State<_GovernmentFormErrorsCardMockup> {
+class _GovernmentFormErrorsCardMockupState
+    extends State<_GovernmentFormErrorsCardMockup> {
   bool _acceptTerms = true;
   bool _smsUpdates = false;
   String _fullName = 'Ramesh Kumar';
@@ -552,7 +695,11 @@ class _GovernmentFormErrorsCardMockupState extends State<_GovernmentFormErrorsCa
                       leadingWidgets: [
                         SvgPicture.asset(_nationalEmblemLogoPath, height: 40),
                         const SizedBox(width: 1),
-                        Container(height: 32, width: 1, color: const Color(0xFFD1D5DB)),
+                        Container(
+                          height: 32,
+                          width: 1,
+                          color: const Color(0xFFD1D5DB),
+                        ),
                         const SizedBox(width: 1),
                         SvgPicture.asset(_unionLogoPath, height: 32),
                       ],
@@ -563,7 +710,10 @@ class _GovernmentFormErrorsCardMockupState extends State<_GovernmentFormErrorsCa
               ),
               Expanded(
                 child: SingleChildScrollView(
-                  padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 24,
+                    vertical: 32,
+                  ),
                   child: Column(
                     children: [
                       Container(
@@ -572,7 +722,11 @@ class _GovernmentFormErrorsCardMockupState extends State<_GovernmentFormErrorsCa
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(16),
                           boxShadow: [
-                            BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 10, offset: const Offset(0, 4)),
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.05),
+                              blurRadius: 10,
+                              offset: const Offset(0, 4),
+                            ),
                           ],
                         ),
                         child: Column(
@@ -582,7 +736,10 @@ class _GovernmentFormErrorsCardMockupState extends State<_GovernmentFormErrorsCa
                               variant: Ux4gBannerVariant.successLight,
                               title: '',
                               margin: EdgeInsets.zero,
-                              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 12,
+                                vertical: 6,
+                              ),
                               backgroundColor: const Color(0xFFF0FDF4),
                               borderColor: Colors.transparent,
                               actionsAlignment: WrapAlignment.end,
@@ -590,9 +747,20 @@ class _GovernmentFormErrorsCardMockupState extends State<_GovernmentFormErrorsCa
                                 Row(
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
-                                    const Icon(Icons.check_circle_outline, color: Color(0xFF065F46), size: 16),
+                                    const Icon(
+                                      Icons.check_circle_outline,
+                                      color: Color(0xFF065F46),
+                                      size: 16,
+                                    ),
                                     const SizedBox(width: 6),
-                                    const Text('Saved 3:14 PM', style: TextStyle(color: Color(0xFF065F46), fontSize: 12, fontWeight: FontWeight.w500)),
+                                    const Text(
+                                      'Saved 3:14 PM',
+                                      style: TextStyle(
+                                        color: Color(0xFF065F46),
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                    ),
                                   ],
                                 ),
                               ],
@@ -600,39 +768,124 @@ class _GovernmentFormErrorsCardMockupState extends State<_GovernmentFormErrorsCa
                             ),
                             const SizedBox(height: 32),
                             Ux4gStepper(
-                              totalSteps: 4, currentStep: 2, stepSize: 20,
+                              totalSteps: 4,
+                              currentStep: 2,
+                              stepSize: 20,
                               steps: const [
-                                Ux4gStepItem(title: 'Eligibility', titleStyle: TextStyle(fontSize: 10, fontWeight: FontWeight.w600)),
-                                Ux4gStepItem(title: 'Personal', titleStyle: TextStyle(fontSize: 10, fontWeight: FontWeight.w600)),
-                                Ux4gStepItem(title: 'Documents', titleStyle: TextStyle(fontSize: 10, fontWeight: FontWeight.w600)),
+                                Ux4gStepItem(
+                                  title: 'Eligibility',
+                                  titleStyle: TextStyle(
+                                    fontSize: 10,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                                Ux4gStepItem(
+                                  title: 'Personal',
+                                  titleStyle: TextStyle(
+                                    fontSize: 10,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                                Ux4gStepItem(
+                                  title: 'Documents',
+                                  titleStyle: TextStyle(
+                                    fontSize: 10,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
                                 Ux4gStepItem(title: ''),
                               ],
                             ),
                             const SizedBox(height: 32),
-                            const Text('Personal information', style: TextStyle(fontSize: 24, fontWeight: FontWeight.w800, color: _titleColor, height: 1.2)),
+                            const Text(
+                              'Personal information',
+                              style: TextStyle(
+                                fontSize: 24,
+                                fontWeight: FontWeight.w800,
+                                color: _titleColor,
+                                height: 1.2,
+                              ),
+                            ),
                             const SizedBox(height: 8),
-                            const Text('Please enter your details.', style: TextStyle(fontSize: 15, color: _subtleText, height: 1.4)),
+                            const Text(
+                              'Please enter your details.',
+                              style: TextStyle(
+                                fontSize: 15,
+                                color: _subtleText,
+                                height: 1.4,
+                              ),
+                            ),
                             const SizedBox(height: 32),
-                            Ux4gInputField(label: 'Full name', value: _fullName, onValueChange: (val) => setState(() => _fullName = val), size: Ux4gInputFieldSize.medium, style: const TextStyle(color: Color(0xFF111827))),
+                            Ux4gInputField(
+                              label: 'Full name',
+                              value: _fullName,
+                              onValueChange: (val) =>
+                                  setState(() => _fullName = val),
+                              size: Ux4gInputFieldSize.medium,
+                              style: const TextStyle(color: Color(0xFF111827)),
+                            ),
                             const SizedBox(height: 8),
                             Row(
                               children: [
-                                const Text('From Aadhaar · ', style: TextStyle(fontSize: 12, color: Color(0xFF6B7280))),
-                                const Text('Update via UIDAI', style: TextStyle(fontSize: 12, color: primaryColor, fontWeight: FontWeight.w600)),
+                                const Text(
+                                  'From Aadhaar · ',
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                    color: Color(0xFF6B7280),
+                                  ),
+                                ),
+                                const Text(
+                                  'Update via UIDAI',
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                    color: primaryColor,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
                                 const SizedBox(width: 4),
-                                const Icon(Icons.open_in_new, size: 12, color: primaryColor),
+                                const Icon(
+                                  Icons.open_in_new,
+                                  size: 12,
+                                  color: primaryColor,
+                                ),
                               ],
                             ),
                             const SizedBox(height: 24),
-                            Ux4gInputField(label: 'Mobile number', value: _mobileNumber, onValueChange: (val) => setState(() => _mobileNumber = val), size: Ux4gInputFieldSize.medium),
+                            Ux4gInputField(
+                              label: 'Mobile number',
+                              value: _mobileNumber,
+                              onValueChange: (val) =>
+                                  setState(() => _mobileNumber = val),
+                              size: Ux4gInputFieldSize.medium,
+                            ),
                             const SizedBox(height: 24),
-                            Ux4gInputField(label: 'Email address', value: _emailAddress, onValueChange: (val) => setState(() => _emailAddress = val), size: Ux4gInputFieldSize.medium, status: Ux4gInputFieldStatus.error, caption: 'Enter a valid email.'),
+                            Ux4gInputField(
+                              label: 'Email address',
+                              value: _emailAddress,
+                              onValueChange: (val) =>
+                                  setState(() => _emailAddress = val),
+                              size: Ux4gInputFieldSize.medium,
+                              status: Ux4gInputFieldStatus.error,
+                              caption: 'Enter a valid email.',
+                            ),
                             const SizedBox(height: 24),
                             Ux4gSelectionDropdown(
                               label: 'State of residence',
-                              options: const [Ux4gDropdownOption(id: 'dl', label: 'Delhi'), Ux4gDropdownOption(id: 'mh', label: 'Maharashtra')],
-                              selectedOptionIds: _selectedState != null ? [_selectedState!] : [],
-                              onSelectionChange: (ids) => setState(() => _selectedState = ids.isNotEmpty ? ids.first : null),
+                              options: const [
+                                Ux4gDropdownOption(id: 'dl', label: 'Delhi'),
+                                Ux4gDropdownOption(
+                                  id: 'mh',
+                                  label: 'Maharashtra',
+                                ),
+                              ],
+                              selectedOptionIds: _selectedState != null
+                                  ? [_selectedState!]
+                                  : [],
+                              onSelectionChange: (ids) => setState(
+                                () => _selectedState = ids.isNotEmpty
+                                    ? ids.first
+                                    : null,
+                              ),
                               placeholder: 'Please select..',
                               size: Ux4gDropdownSize.m,
                             ),
@@ -640,21 +893,59 @@ class _GovernmentFormErrorsCardMockupState extends State<_GovernmentFormErrorsCa
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                const Text('Annual Income (Lakh ₹) *', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600)),
-                                const Text('₹3.2 Lakh', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w800)),
+                                const Text(
+                                  'Annual Income (Lakh ₹) *',
+                                  style: TextStyle(
+                                    fontSize: 13,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                                const Text(
+                                  '₹3.2 Lakh',
+                                  style: TextStyle(
+                                    fontSize: 13,
+                                    fontWeight: FontWeight.w800,
+                                  ),
+                                ),
                               ],
                             ),
-                            Ux4gSlider(label: '', value: _income, onValueChange: (val) => setState(() => _income = val), min: 0, max: 100, steps: 10, showMarksAndValues: true),
+                            Ux4gSlider(
+                              label: '',
+                              value: _income,
+                              onValueChange: (val) =>
+                                  setState(() => _income = val),
+                              min: 0,
+                              max: 100,
+                              steps: 10,
+                              showMarksAndValues: true,
+                            ),
                             const SizedBox(height: 32),
                             Row(
                               children: [
-                                const Text('Receive SMS updates', style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600)),
+                                const Text(
+                                  'Receive SMS updates',
+                                  style: TextStyle(
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
                                 const Spacer(),
-                                Ux4gToggle(checked: _smsUpdates, onCheckedChange: (v) => setState(() => _smsUpdates = v), size: Ux4gToggleSize.s),
+                                Ux4gToggle(
+                                  checked: _smsUpdates,
+                                  onCheckedChange: (v) =>
+                                      setState(() => _smsUpdates = v),
+                                  size: Ux4gToggleSize.s,
+                                ),
                               ],
                             ),
                             const SizedBox(height: 16),
-                            Ux4gCheckbox(label: 'Accept terms and conditions *', isRequired: true, value: _acceptTerms, onChanged: (val) => setState(() => _acceptTerms = val ?? false)),
+                            Ux4gCheckbox(
+                              label: 'Accept terms and conditions *',
+                              isRequired: true,
+                              value: _acceptTerms,
+                              onChanged: (val) =>
+                                  setState(() => _acceptTerms = val ?? false),
+                            ),
                           ],
                         ),
                       ),
@@ -664,12 +955,28 @@ class _GovernmentFormErrorsCardMockupState extends State<_GovernmentFormErrorsCa
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 24,
+                  vertical: 16,
+                ),
                 child: Column(
                   children: [
-                    Ux4gButton(text: 'Continue', onPressed: () {}, size: Ux4gButtonSize.large, width: double.infinity),
+                    Ux4gButton(
+                      text: 'Continue',
+                      onPressed: () {},
+                      size: Ux4gButtonSize.large,
+                      width: double.infinity,
+                    ),
                     const SizedBox(height: 12),
-                    Ux4gButton(text: 'Back', onPressed: () {}, variant: Ux4gButtonVariant.outline, size: Ux4gButtonSize.large, width: double.infinity, contentColor: primaryColor, borderColor: primaryColor),
+                    Ux4gButton(
+                      text: 'Back',
+                      onPressed: () {},
+                      variant: Ux4gButtonVariant.outline,
+                      size: Ux4gButtonSize.large,
+                      width: double.infinity,
+                      contentColor: primaryColor,
+                      borderColor: primaryColor,
+                    ),
                   ],
                 ),
               ),
@@ -678,7 +985,10 @@ class _GovernmentFormErrorsCardMockupState extends State<_GovernmentFormErrorsCa
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    const Text('Powered by -', style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+                    const Text(
+                      'Powered by -',
+                      style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF)),
+                    ),
                     const SizedBox(height: 6),
                     Image.asset(_digitalIndiaLogoPath, height: 24),
                   ],

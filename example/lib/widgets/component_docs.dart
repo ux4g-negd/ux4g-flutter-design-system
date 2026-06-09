@@ -308,8 +308,8 @@ class _PreviewPane extends StatelessWidget {
                     : child,
               )
             : (mobileMockup
-                ? SizedBox(width: 360, height: 760, child: child)
-                : child),
+                  ? SizedBox(width: 360, height: 760, child: child)
+                  : child),
       ),
     );
   }

@@ -122,7 +122,9 @@ class Ux4gBadge extends StatelessWidget {
       );
     }
 
-    final resolvedBg = containerColor ?? (ux4gColors?.primary ?? materialTheme.colorScheme.primary);
+    final resolvedBg =
+        containerColor ??
+        (ux4gColors?.primary ?? materialTheme.colorScheme.primary);
     final resolvedContent = contentColor ?? Colors.white;
 
     switch (_type) {
@@ -148,11 +150,13 @@ class Ux4gBadge extends StatelessWidget {
           alignment: Alignment.center,
           child: Text(
             displayCount,
-            style: (ux4gTypography?.lS_strong ?? materialTheme.textTheme.labelSmall?.copyWith(fontWeight: FontWeight.bold) ?? const TextStyle()).copyWith(
-              color: resolvedContent,
-              fontSize: 10,
-              height: 1,
-            ),
+            style:
+                (ux4gTypography?.lS_strong ??
+                        materialTheme.textTheme.labelSmall?.copyWith(
+                          fontWeight: FontWeight.bold,
+                        ) ??
+                        const TextStyle())
+                    .copyWith(color: resolvedContent, fontSize: 10, height: 1),
           ),
         );
       case _Ux4gBadgeInternalType.label:
@@ -165,10 +169,13 @@ class Ux4gBadge extends StatelessWidget {
           ),
           child: Text(
             label!,
-            style: (ux4gTypography?.lS_strong ?? materialTheme.textTheme.labelSmall?.copyWith(fontWeight: FontWeight.bold) ?? const TextStyle()).copyWith(
-              color: resolvedContent,
-              height: 1,
-            ),
+            style:
+                (ux4gTypography?.lS_strong ??
+                        materialTheme.textTheme.labelSmall?.copyWith(
+                          fontWeight: FontWeight.bold,
+                        ) ??
+                        const TextStyle())
+                    .copyWith(color: resolvedContent, height: 1),
           ),
         );
       case _Ux4gBadgeInternalType.icon:

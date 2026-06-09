@@ -110,7 +110,9 @@ class Ux4gBottomSheet extends StatelessWidget {
       color: Colors.transparent,
       child: Container(
         decoration: BoxDecoration(
-          color: containerColor ?? (ux4gColors?.surface ?? materialTheme.colorScheme.surface),
+          color:
+              containerColor ??
+              (ux4gColors?.surface ?? materialTheme.colorScheme.surface),
           borderRadius: const BorderRadius.vertical(
             top: Radius.circular(Ux4gRadius.radius24),
           ),
@@ -197,7 +199,9 @@ class Ux4gBottomSheetLayout extends StatelessWidget {
             width: 32,
             height: 4,
             decoration: BoxDecoration(
-              color: (ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface).withValues(alpha: 0.1),
+              color:
+                  (ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface)
+                      .withValues(alpha: 0.1),
               borderRadius: BorderRadius.circular(2),
             ),
           ),
@@ -214,13 +218,30 @@ class Ux4gBottomSheetLayout extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     if (headerIcon != null) ...[
-                      Icon(headerIcon, size: 24, color: ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface),
+                      Icon(
+                        headerIcon,
+                        size: 24,
+                        color:
+                            ux4gColors?.onSurface ??
+                            materialTheme.colorScheme.onSurface,
+                      ),
                       const SizedBox(width: Ux4gSpace.space12),
                     ],
                     Expanded(
                       child: Text(
                         headerTitle ?? '',
-                        style: (ux4gTypography?.tS_strong ?? materialTheme.textTheme.titleSmall?.copyWith(fontWeight: FontWeight.bold) ?? const TextStyle()).copyWith(color: ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface),
+                        style:
+                            (ux4gTypography?.tS_strong ??
+                                    materialTheme.textTheme.titleSmall
+                                        ?.copyWith(
+                                          fontWeight: FontWeight.bold,
+                                        ) ??
+                                    const TextStyle())
+                                .copyWith(
+                                  color:
+                                      ux4gColors?.onSurface ??
+                                      materialTheme.colorScheme.onSurface,
+                                ),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                       ),
@@ -230,10 +251,18 @@ class Ux4gBottomSheetLayout extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(horizontal: 8),
                         child: Text(
                           headerSubtleText!,
-                          style: (ux4gTypography?.lS_default ?? materialTheme.textTheme.labelSmall ?? const TextStyle())
-                              .copyWith(
-                                color: (ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface).withValues(alpha: 0.5),
-                              ),
+                          style:
+                              (ux4gTypography?.lS_default ??
+                                      materialTheme.textTheme.labelSmall ??
+                                      const TextStyle())
+                                  .copyWith(
+                                    color:
+                                        (ux4gColors?.onSurface ??
+                                                materialTheme
+                                                    .colorScheme
+                                                    .onSurface)
+                                            .withValues(alpha: 0.5),
+                                  ),
                         ),
                       ),
                     if (showCloseButton)
@@ -247,7 +276,9 @@ class Ux4gBottomSheetLayout extends StatelessWidget {
                         icon: Icon(
                           Icons.close,
                           size: 20,
-                          color: ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface,
+                          color:
+                              ux4gColors?.onSurface ??
+                              materialTheme.colorScheme.onSurface,
                         ),
                       ),
                   ],
@@ -264,14 +295,26 @@ class Ux4gBottomSheetLayout extends StatelessWidget {
                     alignment: Alignment.centerLeft,
                     child: Text(
                       description!,
-                      style: (ux4gTypography?.bS_default ?? materialTheme.textTheme.bodySmall ?? const TextStyle()).copyWith(
-                        color: (ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface).withValues(alpha: 0.6),
-                      ),
+                      style:
+                          (ux4gTypography?.bS_default ??
+                                  materialTheme.textTheme.bodySmall ??
+                                  const TextStyle())
+                              .copyWith(
+                                color:
+                                    (ux4gColors?.onSurface ??
+                                            materialTheme.colorScheme.onSurface)
+                                        .withValues(alpha: 0.6),
+                              ),
                     ),
                   ),
                 ),
               if (showDividers)
-                Ux4gDivider(color: (ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface).withValues(alpha: 0.1)),
+                Ux4gDivider(
+                  color:
+                      (ux4gColors?.onSurface ??
+                              materialTheme.colorScheme.onSurface)
+                          .withValues(alpha: 0.1),
+                ),
             ],
           ),
         Flexible(
@@ -287,7 +330,12 @@ class Ux4gBottomSheetLayout extends StatelessWidget {
           Column(
             children: [
               if (showDividers)
-                Ux4gDivider(color: (ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface).withValues(alpha: 0.1)),
+                Ux4gDivider(
+                  color:
+                      (ux4gColors?.onSurface ??
+                              materialTheme.colorScheme.onSurface)
+                          .withValues(alpha: 0.1),
+                ),
               _BottomSheetFooterRow(
                 footerType: footerType,
                 footerAlignment: footerAlignment,

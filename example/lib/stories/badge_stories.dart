@@ -1,4 +1,4 @@
-﻿import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:ux4g_flutter_design_system/ux4g_flutter_design_system.dart';
 import 'package:widgetbook/widgetbook.dart';
 
@@ -28,26 +28,67 @@ Ux4gBadge.label('NEW', child: Icon(Icons.star, size: 32));
 // Icon badge
 Ux4gBadge.icon(Icons.check, child: Icon(Icons.person, size: 32));''',
         props: const [
-          PropRow(name: 'child', type: 'Widget?', description: 'Widget the badge is anchored to.'),
-          PropRow(name: 'containerColor', type: 'Color?', description: 'Background color of the badge.'),
-          PropRow(name: 'contentColor', type: 'Color?', description: 'Color of the badge content (text/icon).'),
-          PropRow(name: 'alignment', type: 'AlignmentGeometry', description: 'Position of the badge relative to child.', defaultValue: 'Alignment.topRight'),
-          PropRow(name: 'count (factory)', type: 'int', description: 'Number shown on count badge.', required: true),
-          PropRow(name: 'limit', type: 'Ux4gBadgeLimit', description: 'Limit for count display (9+ or 99+).', defaultValue: 'singleDigit'),
-          PropRow(name: 'label (factory)', type: 'String', description: 'Text shown on label badge.', required: true),
-          PropRow(name: 'icon (factory)', type: 'IconData', description: 'Icon shown on icon badge.', required: true),
-          PropRow(name: 'assetPath (factory)', type: 'String', description: 'Asset path for readyToUse badge.', required: true),
+          PropRow(
+            name: 'child',
+            type: 'Widget?',
+            description: 'Widget the badge is anchored to.',
+          ),
+          PropRow(
+            name: 'containerColor',
+            type: 'Color?',
+            description: 'Background color of the badge.',
+          ),
+          PropRow(
+            name: 'contentColor',
+            type: 'Color?',
+            description: 'Color of the badge content (text/icon).',
+          ),
+          PropRow(
+            name: 'alignment',
+            type: 'AlignmentGeometry',
+            description: 'Position of the badge relative to child.',
+            defaultValue: 'Alignment.topRight',
+          ),
+          PropRow(
+            name: 'count (factory)',
+            type: 'int',
+            description: 'Number shown on count badge.',
+            required: true,
+          ),
+          PropRow(
+            name: 'limit',
+            type: 'Ux4gBadgeLimit',
+            description: 'Limit for count display (9+ or 99+).',
+            defaultValue: 'singleDigit',
+          ),
+          PropRow(
+            name: 'label (factory)',
+            type: 'String',
+            description: 'Text shown on label badge.',
+            required: true,
+          ),
+          PropRow(
+            name: 'icon (factory)',
+            type: 'IconData',
+            description: 'Icon shown on icon badge.',
+            required: true,
+          ),
+          PropRow(
+            name: 'assetPath (factory)',
+            type: 'String',
+            description: 'Asset path for readyToUse badge.',
+            required: true,
+          ),
         ],
-        child: Ux4gBadge.dot(
-          child: const Icon(Icons.notifications, size: 32),
-        ),
+        child: Ux4gBadge.dot(child: const Icon(Icons.notifications, size: 32)),
       ),
     ),
     WidgetbookUseCase(
       name: 'Count',
       builder: (context) => ComponentDocs(
         name: 'Ux4gBadge — Count',
-        description: 'Shows a numeric count. Use the limit param to cap at 9 or 99.',
+        description:
+            'Shows a numeric count. Use the limit param to cap at 9 or 99.',
         code: '''Ux4gBadge.count(
   5,
   limit: Ux4gBadgeLimit.singleDigit,   // shows "9+" when > 9
@@ -81,7 +122,8 @@ Ux4gBadge.icon(Icons.check, child: Icon(Icons.person, size: 32));''',
       name: 'Standalone variants',
       builder: (context) => ComponentDocs(
         name: 'Ux4gBadge — Standalone',
-        description: 'Badges can be used without a child widget as standalone indicators.',
+        description:
+            'Badges can be used without a child widget as standalone indicators.',
         code: '''Row(children: [
   Ux4gBadge.dot(),
   Ux4gBadge.count(7),

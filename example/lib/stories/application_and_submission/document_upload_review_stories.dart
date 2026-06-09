@@ -25,15 +25,20 @@ final documentUploadReviewComponent = WidgetbookComponent(
         );
 
         final isCardStyle = variant == 'Card style';
-        final code = isCardStyle ? _documentReviewCardCode : _documentReviewDefaultCode;
+        final code = isCardStyle
+            ? _documentReviewCardCode
+            : _documentReviewDefaultCode;
 
         return ComponentDocs(
           mobileMockup: true,
           name: 'Document upload with review',
-          description: 'A pattern demonstrating documents that require review or re-upload action.',
+          description:
+              'A pattern demonstrating documents that require review or re-upload action.',
           code: code,
           center: true,
-          child: isCardStyle ? const _DocumentReviewCardMockup() : const _DocumentReviewMockup(),
+          child: isCardStyle
+              ? const _DocumentReviewCardMockup()
+              : const _DocumentReviewMockup(),
         );
       },
     ),
@@ -471,7 +476,11 @@ class _DocumentReviewMockup extends StatelessWidget {
                 leadingWidgets: [
                   SvgPicture.asset(_nationalEmblemLogoPath, height: 40),
                   const SizedBox(width: 1),
-                  Container(height: 32, width: 1, color: const Color(0xFFD1D5DB)),
+                  Container(
+                    height: 32,
+                    width: 1,
+                    color: const Color(0xFFD1D5DB),
+                  ),
                   const SizedBox(width: 1),
                   SvgPicture.asset(_unionLogoPath, height: 32),
                 ],
@@ -479,30 +488,78 @@ class _DocumentReviewMockup extends StatelessWidget {
               const Divider(height: 1, color: Color(0xFFE5E7EB)),
               Expanded(
                 child: SingleChildScrollView(
-                  padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 24,
+                    vertical: 24,
+                  ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Ux4gStepper(
-                        totalSteps: 4, currentStep: 3, stepSize: 20,
+                        totalSteps: 4,
+                        currentStep: 3,
+                        stepSize: 20,
                         steps: const [
-                          Ux4gStepItem(title: 'Eligibility', titleStyle: TextStyle(fontSize: 10, fontWeight: FontWeight.w600)),
-                          Ux4gStepItem(title: 'Personal', titleStyle: TextStyle(fontSize: 10, fontWeight: FontWeight.w600)),
-                          Ux4gStepItem(title: 'Documents', titleStyle: TextStyle(fontSize: 10, fontWeight: FontWeight.w600)),
+                          Ux4gStepItem(
+                            title: 'Eligibility',
+                            titleStyle: TextStyle(
+                              fontSize: 10,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          Ux4gStepItem(
+                            title: 'Personal',
+                            titleStyle: TextStyle(
+                              fontSize: 10,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          Ux4gStepItem(
+                            title: 'Documents',
+                            titleStyle: TextStyle(
+                              fontSize: 10,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
                           Ux4gStepItem(title: ''),
                         ],
                       ),
                       const SizedBox(height: 32),
-                      const Text('Upload documents', style: TextStyle(fontSize: 24, fontWeight: FontWeight.w800, color: _titleColor)),
+                      const Text(
+                        'Upload documents',
+                        style: TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.w800,
+                          color: _titleColor,
+                        ),
+                      ),
                       const SizedBox(height: 8),
-                      const Text('PDF or JPG, max 5 MB each. Self-attested.', style: TextStyle(fontSize: 15, color: _subtleText)),
+                      const Text(
+                        'PDF or JPG, max 5 MB each. Self-attested.',
+                        style: TextStyle(fontSize: 15, color: _subtleText),
+                      ),
                       const SizedBox(height: 24),
-                      const Text('Required documents — 1 of 4 uploaded', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700, color: _titleColor)),
+                      const Text(
+                        'Required documents — 1 of 4 uploaded',
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w700,
+                          color: _titleColor,
+                        ),
+                      ),
                       const SizedBox(height: 24),
 
-                      const _UploadedItem(title: 'Aadhaar Card', fileName: 'aadhaar_card.pdf', size: '1.2 MB'),
+                      const _UploadedItem(
+                        title: 'Aadhaar Card',
+                        fileName: 'aadhaar_card.pdf',
+                        size: '1.2 MB',
+                      ),
                       const SizedBox(height: 16),
-                      const _UploadedItem(title: 'Proof of Income', fileName: 'income_proof.pdf', size: '1.8 MB'),
+                      const _UploadedItem(
+                        title: 'Proof of Income',
+                        fileName: 'income_proof.pdf',
+                        size: '1.8 MB',
+                      ),
                       const SizedBox(height: 16),
 
                       // Residence proof (Review State)
@@ -518,18 +575,48 @@ class _DocumentReviewMockup extends StatelessWidget {
                           children: [
                             Row(
                               children: [
-                                const Icon(Icons.error, color: Color(0xFFD46B08), size: 20),
+                                const Icon(
+                                  Icons.error,
+                                  color: Color(0xFFD46B08),
+                                  size: 20,
+                                ),
                                 const SizedBox(width: 12),
-                                Text('Residence proof', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: _titleColor)),
+                                Text(
+                                  'Residence proof',
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w700,
+                                    color: _titleColor,
+                                  ),
+                                ),
                               ],
                             ),
                             const SizedBox(height: 16),
                             Wrap(
-                              spacing: 12, runSpacing: 12,
+                              spacing: 12,
+                              runSpacing: 12,
                               children: [
-                                Ux4gButton(text: 'Re-upload', onPressed: () {}, variant: Ux4gButtonVariant.outline, size: Ux4gButtonSize.small, width: 120),
-                                Ux4gButton(text: 'View', onPressed: () {}, variant: Ux4gButtonVariant.outline, size: Ux4gButtonSize.small, width: 90),
-                                Ux4gButton(text: 'Keep', onPressed: () {}, variant: Ux4gButtonVariant.outline, size: Ux4gButtonSize.small, width: 90),
+                                Ux4gButton(
+                                  text: 'Re-upload',
+                                  onPressed: () {},
+                                  variant: Ux4gButtonVariant.outline,
+                                  size: Ux4gButtonSize.small,
+                                  width: 120,
+                                ),
+                                Ux4gButton(
+                                  text: 'View',
+                                  onPressed: () {},
+                                  variant: Ux4gButtonVariant.outline,
+                                  size: Ux4gButtonSize.small,
+                                  width: 90,
+                                ),
+                                Ux4gButton(
+                                  text: 'Keep',
+                                  onPressed: () {},
+                                  variant: Ux4gButtonVariant.outline,
+                                  size: Ux4gButtonSize.small,
+                                  width: 90,
+                                ),
                               ],
                             ),
                           ],
@@ -537,24 +624,48 @@ class _DocumentReviewMockup extends StatelessWidget {
                       ),
                       const SizedBox(height: 16),
 
-                      const _PendingItem(title: 'Caste certificate', subtitle: 'SC/ST/OBC applicants only', badge: 'Optional'),
+                      const _PendingItem(
+                        title: 'Caste certificate',
+                        subtitle: 'SC/ST/OBC applicants only',
+                        badge: 'Optional',
+                      ),
 
                       const SizedBox(height: 32),
                       const Text(
                         'All documents must be self-attested. AI flags quality issues; officers make the final call.',
-                        style: TextStyle(fontSize: 13, color: Color(0xFF6B7280), height: 1.4),
+                        style: TextStyle(
+                          fontSize: 13,
+                          color: Color(0xFF6B7280),
+                          height: 1.4,
+                        ),
                       ),
                     ],
                   ),
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 24,
+                  vertical: 16,
+                ),
                 child: Column(
                   children: [
-                    Ux4gButton(text: 'Continue', onPressed: () {}, size: Ux4gButtonSize.large, width: double.infinity),
+                    Ux4gButton(
+                      text: 'Continue',
+                      onPressed: () {},
+                      size: Ux4gButtonSize.large,
+                      width: double.infinity,
+                    ),
                     const SizedBox(height: 12),
-                    Ux4gButton(text: 'Back', onPressed: () {}, variant: Ux4gButtonVariant.outline, size: Ux4gButtonSize.large, width: double.infinity, contentColor: primaryColor, borderColor: primaryColor),
+                    Ux4gButton(
+                      text: 'Back',
+                      onPressed: () {},
+                      variant: Ux4gButtonVariant.outline,
+                      size: Ux4gButtonSize.large,
+                      width: double.infinity,
+                      contentColor: primaryColor,
+                      borderColor: primaryColor,
+                    ),
                   ],
                 ),
               ),
@@ -563,7 +674,10 @@ class _DocumentReviewMockup extends StatelessWidget {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    const Text('Powered by -', style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+                    const Text(
+                      'Powered by -',
+                      style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF)),
+                    ),
                     const SizedBox(height: 6),
                     Image.asset(_digitalIndiaLogoPath, height: 24),
                   ],
@@ -600,7 +714,11 @@ class _DocumentReviewCardMockup extends StatelessWidget {
                       leadingWidgets: [
                         SvgPicture.asset(_nationalEmblemLogoPath, height: 40),
                         const SizedBox(width: 1),
-                        Container(height: 32, width: 1, color: const Color(0xFFD1D5DB)),
+                        Container(
+                          height: 32,
+                          width: 1,
+                          color: const Color(0xFFD1D5DB),
+                        ),
                         const SizedBox(width: 1),
                         SvgPicture.asset(_unionLogoPath, height: 32),
                       ],
@@ -611,35 +729,81 @@ class _DocumentReviewCardMockup extends StatelessWidget {
               ),
               Expanded(
                 child: SingleChildScrollView(
-                  padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 24,
+                    vertical: 32,
+                  ),
                   child: Container(
                     padding: const EdgeInsets.all(24),
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(16),
                       boxShadow: [
-                        BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 10, offset: const Offset(0, 4)),
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.05),
+                          blurRadius: 10,
+                          offset: const Offset(0, 4),
+                        ),
                       ],
                     ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Ux4gStepper(
-                          totalSteps: 4, currentStep: 3, stepSize: 20,
+                          totalSteps: 4,
+                          currentStep: 3,
+                          stepSize: 20,
                           steps: const [
-                            Ux4gStepItem(title: 'Eligibility', titleStyle: TextStyle(fontSize: 10, fontWeight: FontWeight.w600)),
-                            Ux4gStepItem(title: 'Personal', titleStyle: TextStyle(fontSize: 10, fontWeight: FontWeight.w600)),
-                            Ux4gStepItem(title: 'Documents', titleStyle: TextStyle(fontSize: 10, fontWeight: FontWeight.w600)),
+                            Ux4gStepItem(
+                              title: 'Eligibility',
+                              titleStyle: TextStyle(
+                                fontSize: 10,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                            Ux4gStepItem(
+                              title: 'Personal',
+                              titleStyle: TextStyle(
+                                fontSize: 10,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                            Ux4gStepItem(
+                              title: 'Documents',
+                              titleStyle: TextStyle(
+                                fontSize: 10,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
                             Ux4gStepItem(title: ''),
                           ],
                         ),
                         const SizedBox(height: 32),
-                        const Text('Upload documents', style: TextStyle(fontSize: 24, fontWeight: FontWeight.w800, color: _titleColor, height: 1.2)),
+                        const Text(
+                          'Upload documents',
+                          style: TextStyle(
+                            fontSize: 24,
+                            fontWeight: FontWeight.w800,
+                            color: _titleColor,
+                            height: 1.2,
+                          ),
+                        ),
                         const SizedBox(height: 8),
-                        const Text('Please review flagged items.', style: TextStyle(fontSize: 15, color: _subtleText, height: 1.4)),
+                        const Text(
+                          'Please review flagged items.',
+                          style: TextStyle(
+                            fontSize: 15,
+                            color: _subtleText,
+                            height: 1.4,
+                          ),
+                        ),
                         const SizedBox(height: 24),
 
-                        const _UploadedItem(title: 'Aadhaar Card', fileName: 'aadhaar_card.pdf', size: '1.2 MB'),
+                        const _UploadedItem(
+                          title: 'Aadhaar Card',
+                          fileName: 'aadhaar_card.pdf',
+                          size: '1.2 MB',
+                        ),
                         const SizedBox(height: 16),
 
                         // Residence proof (Review State)
@@ -655,18 +819,48 @@ class _DocumentReviewCardMockup extends StatelessWidget {
                             children: [
                               Row(
                                 children: [
-                                  const Icon(Icons.error, color: Color(0xFFD46B08), size: 20),
+                                  const Icon(
+                                    Icons.error,
+                                    color: Color(0xFFD46B08),
+                                    size: 20,
+                                  ),
                                   const SizedBox(width: 12),
-                                  Text('Residence proof', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: _titleColor)),
+                                  Text(
+                                    'Residence proof',
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w700,
+                                      color: _titleColor,
+                                    ),
+                                  ),
                                 ],
                               ),
                               const SizedBox(height: 16),
                               Wrap(
-                                spacing: 12, runSpacing: 12,
+                                spacing: 12,
+                                runSpacing: 12,
                                 children: [
-                                  Ux4gButton(text: 'Re-upload', onPressed: () {}, variant: Ux4gButtonVariant.outline, size: Ux4gButtonSize.small, width: 120),
-                                  Ux4gButton(text: 'View', onPressed: () {}, variant: Ux4gButtonVariant.outline, size: Ux4gButtonSize.small, width: 90),
-                                  Ux4gButton(text: 'Keep', onPressed: () {}, variant: Ux4gButtonVariant.outline, size: Ux4gButtonSize.small, width: 90),
+                                  Ux4gButton(
+                                    text: 'Re-upload',
+                                    onPressed: () {},
+                                    variant: Ux4gButtonVariant.outline,
+                                    size: Ux4gButtonSize.small,
+                                    width: 120,
+                                  ),
+                                  Ux4gButton(
+                                    text: 'View',
+                                    onPressed: () {},
+                                    variant: Ux4gButtonVariant.outline,
+                                    size: Ux4gButtonSize.small,
+                                    width: 90,
+                                  ),
+                                  Ux4gButton(
+                                    text: 'Keep',
+                                    onPressed: () {},
+                                    variant: Ux4gButtonVariant.outline,
+                                    size: Ux4gButtonSize.small,
+                                    width: 90,
+                                  ),
                                 ],
                               ),
                             ],
@@ -678,12 +872,28 @@ class _DocumentReviewCardMockup extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 24,
+                  vertical: 16,
+                ),
                 child: Column(
                   children: [
-                    Ux4gButton(text: 'Continue', onPressed: () {}, size: Ux4gButtonSize.large, width: double.infinity),
+                    Ux4gButton(
+                      text: 'Continue',
+                      onPressed: () {},
+                      size: Ux4gButtonSize.large,
+                      width: double.infinity,
+                    ),
                     const SizedBox(height: 12),
-                    Ux4gButton(text: 'Back', onPressed: () {}, variant: Ux4gButtonVariant.outline, size: Ux4gButtonSize.large, width: double.infinity, contentColor: primaryColor, borderColor: primaryColor),
+                    Ux4gButton(
+                      text: 'Back',
+                      onPressed: () {},
+                      variant: Ux4gButtonVariant.outline,
+                      size: Ux4gButtonSize.large,
+                      width: double.infinity,
+                      contentColor: primaryColor,
+                      borderColor: primaryColor,
+                    ),
                   ],
                 ),
               ),
@@ -692,7 +902,10 @@ class _DocumentReviewCardMockup extends StatelessWidget {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    const Text('Powered by -', style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+                    const Text(
+                      'Powered by -',
+                      style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF)),
+                    ),
                     const SizedBox(height: 6),
                     Image.asset(_digitalIndiaLogoPath, height: 24),
                   ],
@@ -708,7 +921,11 @@ class _DocumentReviewCardMockup extends StatelessWidget {
 
 class _UploadedItem extends StatelessWidget {
   final String title, fileName, size;
-  const _UploadedItem({required this.title, required this.fileName, required this.size});
+  const _UploadedItem({
+    required this.title,
+    required this.fileName,
+    required this.size,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -725,15 +942,32 @@ class _UploadedItem extends StatelessWidget {
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Icon(Icons.check_circle, color: Color(0xFF16A34A), size: 20),
+              const Icon(
+                Icons.check_circle,
+                color: Color(0xFF16A34A),
+                size: 20,
+              ),
               const SizedBox(width: 12),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(title, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: Color(0xFF111827))),
+                    Text(
+                      title,
+                      style: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w700,
+                        color: Color(0xFF111827),
+                      ),
+                    ),
                     const SizedBox(height: 4),
-                    Text('$fileName · $size · Uploaded just now', style: const TextStyle(fontSize: 13, color: Color(0xFF4B5563))),
+                    Text(
+                      '$fileName · $size · Uploaded just now',
+                      style: const TextStyle(
+                        fontSize: 13,
+                        color: Color(0xFF4B5563),
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -741,10 +975,23 @@ class _UploadedItem extends StatelessWidget {
           ),
           const SizedBox(height: 16),
           Wrap(
-            spacing: 12, runSpacing: 12,
+            spacing: 12,
+            runSpacing: 12,
             children: [
-              Ux4gButton(text: 'View', onPressed: () {}, variant: Ux4gButtonVariant.outline, size: Ux4gButtonSize.small, width: 100),
-              Ux4gButton(text: 'Re-upload', onPressed: () {}, variant: Ux4gButtonVariant.outline, size: Ux4gButtonSize.small, width: 120),
+              Ux4gButton(
+                text: 'View',
+                onPressed: () {},
+                variant: Ux4gButtonVariant.outline,
+                size: Ux4gButtonSize.small,
+                width: 100,
+              ),
+              Ux4gButton(
+                text: 'Re-upload',
+                onPressed: () {},
+                variant: Ux4gButtonVariant.outline,
+                size: Ux4gButtonSize.small,
+                width: 120,
+              ),
             ],
           ),
         ],
@@ -755,7 +1002,11 @@ class _UploadedItem extends StatelessWidget {
 
 class _PendingItem extends StatelessWidget {
   final String title, subtitle, badge;
-  const _PendingItem({required this.title, required this.subtitle, required this.badge});
+  const _PendingItem({
+    required this.title,
+    required this.subtitle,
+    required this.badge,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -771,7 +1022,14 @@ class _PendingItem extends StatelessWidget {
         children: [
           Row(
             children: [
-              Container(width: 20, height: 20, decoration: BoxDecoration(shape: BoxShape.circle, border: Border.all(color: const Color(0xFFD1D5DB)))),
+              Container(
+                width: 20,
+                height: 20,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  border: Border.all(color: const Color(0xFFD1D5DB)),
+                ),
+              ),
               const SizedBox(width: 12),
               Expanded(
                 child: Column(
@@ -779,24 +1037,55 @@ class _PendingItem extends StatelessWidget {
                   children: [
                     Row(
                       children: [
-                        Text(title, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: Color(0xFF111827))),
+                        Text(
+                          title,
+                          style: const TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w700,
+                            color: Color(0xFF111827),
+                          ),
+                        ),
                         const SizedBox(width: 8),
                         Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
-                          decoration: BoxDecoration(color: const Color(0xFFF3F4F6), borderRadius: BorderRadius.circular(4)),
-                          child: Text(badge, style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w700, color: Color(0xFF374151))),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 8,
+                            vertical: 2,
+                          ),
+                          decoration: BoxDecoration(
+                            color: const Color(0xFFF3F4F6),
+                            borderRadius: BorderRadius.circular(4),
+                          ),
+                          child: Text(
+                            badge,
+                            style: const TextStyle(
+                              fontSize: 11,
+                              fontWeight: FontWeight.w700,
+                              color: Color(0xFF374151),
+                            ),
+                          ),
                         ),
                       ],
                     ),
                     const SizedBox(height: 4),
-                    Text(subtitle, style: const TextStyle(fontSize: 13, color: Color(0xFF4B5563))),
+                    Text(
+                      subtitle,
+                      style: const TextStyle(
+                        fontSize: 13,
+                        color: Color(0xFF4B5563),
+                      ),
+                    ),
                   ],
                 ),
               ),
             ],
           ),
           const SizedBox(height: 16),
-          Ux4gButton(text: 'Upload', onPressed: () {}, size: Ux4gButtonSize.small, width: 100),
+          Ux4gButton(
+            text: 'Upload',
+            onPressed: () {},
+            size: Ux4gButtonSize.small,
+            width: 100,
+          ),
         ],
       ),
     );

@@ -12346,7 +12346,8 @@ class _AadhaarAccountLockedCardMockup extends StatelessWidget {
   }
 }
 
-const _aadhaarAccountLockedCode = r'''// Mobile-sized Aadhaar account-locked screen (360 x 760)
+const _aadhaarAccountLockedCode =
+    r'''// Mobile-sized Aadhaar account-locked screen (360 x 760)
 Container(
   width: 360,
   height: 760,
@@ -12486,7 +12487,8 @@ Container(
   ),
 )''';
 
-const _aadhaarAccountLockedCardCode = r'''// Mobile-sized card-style Aadhaar account-locked screen (360 x 760)
+const _aadhaarAccountLockedCardCode =
+    r'''// Mobile-sized card-style Aadhaar account-locked screen (360 x 760)
 Container(
   width: 360,
   height: 760,
@@ -12660,10 +12662,12 @@ class _OperatorAssistedAuthMockup extends StatefulWidget {
   const _OperatorAssistedAuthMockup();
 
   @override
-  State<_OperatorAssistedAuthMockup> createState() => _OperatorAssistedAuthMockupState();
+  State<_OperatorAssistedAuthMockup> createState() =>
+      _OperatorAssistedAuthMockupState();
 }
 
-class _OperatorAssistedAuthMockupState extends State<_OperatorAssistedAuthMockup> {
+class _OperatorAssistedAuthMockupState
+    extends State<_OperatorAssistedAuthMockup> {
   bool _consent = false;
 
   @override
@@ -12716,10 +12720,7 @@ class _OperatorAssistedAuthMockupState extends State<_OperatorAssistedAuthMockup
                       children: [
                         const Text(
                           'VLE Operator',
-                          style: TextStyle(
-                            fontSize: 13,
-                            color: _subtleText,
-                          ),
+                          style: TextStyle(fontSize: 13, color: _subtleText),
                         ),
                         const SizedBox(height: 4),
                         const Text(
@@ -12733,10 +12734,7 @@ class _OperatorAssistedAuthMockupState extends State<_OperatorAssistedAuthMockup
                         const SizedBox(height: 8),
                         const Text(
                           'ID: VLE-MH-2024-00387 · Certified by MeitY',
-                          style: TextStyle(
-                            fontSize: 12,
-                            color: _mutedText,
-                          ),
+                          style: TextStyle(fontSize: 12, color: _mutedText),
                         ),
                       ],
                     ),
@@ -12748,7 +12746,8 @@ class _OperatorAssistedAuthMockupState extends State<_OperatorAssistedAuthMockup
                     value: _consent,
                     onChanged: (v) => setState(() => _consent = v ?? false),
                     isRequired: true,
-                    label: 'I consent to operator-assisted Aadhaar authentication. My identity documents have been verified by the VLE.',
+                    label:
+                        'I consent to operator-assisted Aadhaar authentication. My identity documents have been verified by the VLE.',
                   ),
                 ],
               ),
@@ -12774,10 +12773,12 @@ class _OperatorAssistedAuthCardMockup extends StatefulWidget {
   const _OperatorAssistedAuthCardMockup();
 
   @override
-  State<_OperatorAssistedAuthCardMockup> createState() => _OperatorAssistedAuthCardMockupState();
+  State<_OperatorAssistedAuthCardMockup> createState() =>
+      _OperatorAssistedAuthCardMockupState();
 }
 
-class _OperatorAssistedAuthCardMockupState extends State<_OperatorAssistedAuthCardMockup> {
+class _OperatorAssistedAuthCardMockupState
+    extends State<_OperatorAssistedAuthCardMockup> {
   bool _consent = false;
   static const _cardBg = Color(0xFFE9E5FF);
 
@@ -12881,9 +12882,11 @@ class _OperatorAssistedAuthCardMockupState extends State<_OperatorAssistedAuthCa
                           // Consent Checkbox
                           Ux4gCheckbox(
                             value: _consent,
-                            onChanged: (v) => setState(() => _consent = v ?? false),
+                            onChanged: (v) =>
+                                setState(() => _consent = v ?? false),
                             isRequired: true,
-                            label: 'I consent to operator-assisted Aadhaar authentication. My identity documents have been verified by the VLE.',
+                            label:
+                                'I consent to operator-assisted Aadhaar authentication. My identity documents have been verified by the VLE.',
                           ),
                         ],
                       ),
@@ -12908,7 +12911,8 @@ class _OperatorAssistedAuthCardMockupState extends State<_OperatorAssistedAuthCa
   }
 }
 
-const _operatorAssistedAuthCode = r'''// Mobile-sized Operator-assisted authentication (360 x 760)
+const _operatorAssistedAuthCode =
+    r'''// Mobile-sized Operator-assisted authentication (360 x 760)
 Container(
   width: 360,
   height: 760,
@@ -13049,7 +13053,8 @@ Container(
   ),
 )''';
 
-const _operatorAssistedAuthCardCode = r'''// Mobile-sized card-style Operator-assisted authentication (360 x 760)
+const _operatorAssistedAuthCardCode =
+    r'''// Mobile-sized card-style Operator-assisted authentication (360 x 760)
 Container(
   width: 360,
   height: 760,
@@ -13223,7 +13228,6 @@ Container(
   ),
 )''';
 
-
 // ---------------------------------------------------------------------------
 // SIGN UP PATTERN
 // 5 steps mirroring the SignIn card / default style.
@@ -13246,7 +13250,9 @@ class _SignInLink extends StatelessWidget {
         child: Text(
           'Already have an account? Sign in',
           style: TextStyle(
-            color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.75),
+            color: Theme.of(
+              context,
+            ).colorScheme.primary.withValues(alpha: 0.75),
             fontWeight: FontWeight.w700,
             fontSize: fontSize,
             letterSpacing: -0.1,
@@ -13270,14 +13276,22 @@ Widget _signUpErrorBanner({
     margin: EdgeInsets.zero,
     padding: const EdgeInsets.fromLTRB(12, 12, 10, 12),
     titleStyle: const TextStyle(
-      fontSize: 14, fontWeight: FontWeight.w400,
-      color: Color(0xFF991B1B), height: 1.3,
+      fontSize: 14,
+      fontWeight: FontWeight.w400,
+      color: Color(0xFF991B1B),
+      height: 1.3,
     ),
     subtitleStyle: const TextStyle(
-      fontSize: 14, fontWeight: FontWeight.w700,
-      color: Color(0xFF991B1B), height: 1.3,
+      fontSize: 14,
+      fontWeight: FontWeight.w700,
+      color: Color(0xFF991B1B),
+      height: 1.3,
     ),
-    leadingIcon: const Icon(Icons.error_outline, color: Color(0xFFDC2626), size: 20),
+    leadingIcon: const Icon(
+      Icons.error_outline,
+      color: Color(0xFFDC2626),
+      size: 20,
+    ),
     trailingIcon: Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
       decoration: BoxDecoration(
@@ -13287,8 +13301,10 @@ Widget _signUpErrorBanner({
       child: Text(
         badge,
         style: const TextStyle(
-          fontSize: 12, color: Color(0xFF991B1B),
-          fontWeight: FontWeight.w500, height: 1.2,
+          fontSize: 12,
+          color: Color(0xFF991B1B),
+          fontWeight: FontWeight.w500,
+          height: 1.2,
         ),
       ),
     ),
@@ -13324,13 +13340,17 @@ final signUpStep1Component = WidgetbookComponent(
           label: 'Variant',
           options: const ['Default', 'Card style'],
           initialOption: 'Default',
-          description: 'Switch between the flat phone layout and the card-style layout.',
+          description:
+              'Switch between the flat phone layout and the card-style layout.',
         );
         return ComponentDocs(
           name: 'Create your account',
-          description: 'First step of the sign-up flow. User enters their +91 mobile number '
+          description:
+              'First step of the sign-up flow. User enters their +91 mobile number '
               'and taps Send OTP. An error banner appears on invalid input.',
-          code: variant == 'Card style' ? _signUpStep1CardCode : _signUpStep1Code,
+          code: variant == 'Card style'
+              ? _signUpStep1CardCode
+              : _signUpStep1Code,
           center: true,
           child: variant == 'Card style'
               ? const _SignUpStep1CardMockup()
@@ -13362,12 +13382,25 @@ class _SignUpStep1MockupState extends State<_SignUpStep1Mockup> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text('Create your account',
-                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.w800,
-                        color: _titleColor, height: 1.2, letterSpacing: -0.3)),
+                  const Text(
+                    'Create your account',
+                    style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.w800,
+                      color: _titleColor,
+                      height: 1.2,
+                      letterSpacing: -0.3,
+                    ),
+                  ),
                   const SizedBox(height: 6),
-                  const Text('Enter your mobile number to get started',
-                    style: TextStyle(fontSize: 14, color: _subtleText, height: 1.3)),
+                  const Text(
+                    'Enter your mobile number to get started',
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: _subtleText,
+                      height: 1.3,
+                    ),
+                  ),
                   const SizedBox(height: 24),
                   Ux4gInputField(
                     value: _mobile,
@@ -13382,8 +13415,12 @@ class _SignUpStep1MockupState extends State<_SignUpStep1Mockup> {
                   const SizedBox(height: 16),
                   _signUpErrorBanner(),
                   const SizedBox(height: 20),
-                  Ux4gButton(text: 'Send OTP', onPressed: () {},
-                      size: Ux4gButtonSize.large, width: double.infinity),
+                  Ux4gButton(
+                    text: 'Send OTP',
+                    onPressed: () {},
+                    size: Ux4gButtonSize.large,
+                    width: double.infinity,
+                  ),
                   const SizedBox(height: 20),
                   const _SignInLink(),
                 ],
@@ -13426,12 +13463,25 @@ class _SignUpStep1CardMockupState extends State<_SignUpStep1CardMockup> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Text('Create your account',
-                              style: TextStyle(fontSize: 22, fontWeight: FontWeight.w800,
-                                  color: _titleColor, height: 1.2, letterSpacing: -0.3)),
+                            const Text(
+                              'Create your account',
+                              style: TextStyle(
+                                fontSize: 22,
+                                fontWeight: FontWeight.w800,
+                                color: _titleColor,
+                                height: 1.2,
+                                letterSpacing: -0.3,
+                              ),
+                            ),
                             const SizedBox(height: 6),
-                            const Text('Enter your mobile number to get started',
-                              style: TextStyle(fontSize: 13, color: _subtleText, height: 1.3)),
+                            const Text(
+                              'Enter your mobile number to get started',
+                              style: TextStyle(
+                                fontSize: 13,
+                                color: _subtleText,
+                                height: 1.3,
+                              ),
+                            ),
                             const SizedBox(height: 20),
                             Ux4gInputField(
                               value: _mobile,
@@ -13446,8 +13496,12 @@ class _SignUpStep1CardMockupState extends State<_SignUpStep1CardMockup> {
                             const SizedBox(height: 12),
                             _signUpErrorBanner(),
                             const SizedBox(height: 16),
-                            Ux4gButton(text: 'Send OTP', onPressed: () {},
-                                size: Ux4gButtonSize.large, width: double.infinity),
+                            Ux4gButton(
+                              text: 'Send OTP',
+                              onPressed: () {},
+                              size: Ux4gButtonSize.large,
+                              width: double.infinity,
+                            ),
                             const SizedBox(height: 16),
                             const _SignInLink(fontSize: 14),
                           ],
@@ -13544,7 +13598,8 @@ Container(
   ]),
 )''';
 
-const _signUpStep1CardCode = r'''// Step 1 � Create your account, card style (360 � 760)
+const _signUpStep1CardCode =
+    r'''// Step 1 � Create your account, card style (360 � 760)
 Container(
   width: 360, height: 760, color: Colors.white,
   child: Column(children: [
@@ -13653,13 +13708,17 @@ final signUpStep2Component = WidgetbookComponent(
           label: 'Variant',
           options: const ['Default', 'Card style'],
           initialOption: 'Default',
-          description: 'Switch between the flat phone layout and the card-style layout.',
+          description:
+              'Switch between the flat phone layout and the card-style layout.',
         );
         return ComponentDocs(
           name: 'Verify your mobile',
-          description: 'OTP verification screen with 6 single-digit boxes, a built-in '
+          description:
+              'OTP verification screen with 6 single-digit boxes, a built-in '
               '60-second resend countdown, and a Verify OTP action.',
-          code: variant == 'Card style' ? _signUpStep2CardCode : _signUpStep2Code,
+          code: variant == 'Card style'
+              ? _signUpStep2CardCode
+              : _signUpStep2Code,
           center: true,
           child: variant == 'Card style'
               ? const _SignUpStep2CardMockup()
@@ -13692,12 +13751,25 @@ class _SignUpStep2MockupState extends State<_SignUpStep2Mockup> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text('Verify your mobile',
-                    style: TextStyle(fontSize: 26, fontWeight: FontWeight.w800,
-                        color: _titleColor, height: 1.2, letterSpacing: -0.3)),
+                  const Text(
+                    'Verify your mobile',
+                    style: TextStyle(
+                      fontSize: 26,
+                      fontWeight: FontWeight.w800,
+                      color: _titleColor,
+                      height: 1.2,
+                      letterSpacing: -0.3,
+                    ),
+                  ),
                   const SizedBox(height: 6),
-                  const Text('Enter the 6-digit OTP sent to +91 98765 XXXXX',
-                    style: TextStyle(fontSize: 14, color: _subtleText, height: 1.4)),
+                  const Text(
+                    'Enter the 6-digit OTP sent to +91 98765 XXXXX',
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: _subtleText,
+                      height: 1.4,
+                    ),
+                  ),
                   const SizedBox(height: 28),
                   Ux4gOtpInput(
                     key: ValueKey('su2_$_resendNonce'),
@@ -13711,12 +13783,18 @@ class _SignUpStep2MockupState extends State<_SignUpStep2Mockup> {
                     captionLeadingText: "Didn't receive OTP?",
                     captionTrailingText: 'Resend OTP',
                     autoCountdownSeconds: 60,
-                    onCaptionTrailingTap: () =>
-                        setState(() { _otp = ''; _resendNonce++; }),
+                    onCaptionTrailingTap: () => setState(() {
+                      _otp = '';
+                      _resendNonce++;
+                    }),
                   ),
                   const SizedBox(height: 28),
-                  Ux4gButton(text: 'Verify OTP', onPressed: () {},
-                      size: Ux4gButtonSize.large, width: double.infinity),
+                  Ux4gButton(
+                    text: 'Verify OTP',
+                    onPressed: () {},
+                    size: Ux4gButtonSize.large,
+                    width: double.infinity,
+                  ),
                 ],
               ),
             ),
@@ -13758,12 +13836,25 @@ class _SignUpStep2CardMockupState extends State<_SignUpStep2CardMockup> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Text('Verify your mobile',
-                              style: TextStyle(fontSize: 22, fontWeight: FontWeight.w800,
-                                  color: _titleColor, height: 1.2, letterSpacing: -0.3)),
+                            const Text(
+                              'Verify your mobile',
+                              style: TextStyle(
+                                fontSize: 22,
+                                fontWeight: FontWeight.w800,
+                                color: _titleColor,
+                                height: 1.2,
+                                letterSpacing: -0.3,
+                              ),
+                            ),
                             const SizedBox(height: 6),
-                            const Text('Enter the 6-digit OTP sent to +91 98765 XXXXX',
-                              style: TextStyle(fontSize: 13, color: _subtleText, height: 1.4)),
+                            const Text(
+                              'Enter the 6-digit OTP sent to +91 98765 XXXXX',
+                              style: TextStyle(
+                                fontSize: 13,
+                                color: _subtleText,
+                                height: 1.4,
+                              ),
+                            ),
                             const SizedBox(height: 24),
                             Ux4gOtpInput(
                               key: ValueKey('su2c_$_resendNonce'),
@@ -13777,12 +13868,18 @@ class _SignUpStep2CardMockupState extends State<_SignUpStep2CardMockup> {
                               captionLeadingText: "Didn't receive OTP?",
                               captionTrailingText: 'Resend OTP',
                               autoCountdownSeconds: 60,
-                              onCaptionTrailingTap: () =>
-                                  setState(() { _otp = ''; _resendNonce++; }),
+                              onCaptionTrailingTap: () => setState(() {
+                                _otp = '';
+                                _resendNonce++;
+                              }),
                             ),
                             const SizedBox(height: 24),
-                            Ux4gButton(text: 'Verify OTP', onPressed: () {},
-                                size: Ux4gButtonSize.large, width: double.infinity),
+                            Ux4gButton(
+                              text: 'Verify OTP',
+                              onPressed: () {},
+                              size: Ux4gButtonSize.large,
+                              width: double.infinity,
+                            ),
                           ],
                         ),
                       ),
@@ -13857,7 +13954,8 @@ Container(
   ]),
 )''';
 
-const _signUpStep2CardCode = r'''// Step 2 � Verify your mobile, card style (360 � 760)
+const _signUpStep2CardCode =
+    r'''// Step 2 � Verify your mobile, card style (360 � 760)
 Container(
   width: 360, height: 760, color: Colors.white,
   child: Column(children: [
@@ -13947,13 +14045,17 @@ final signUpStep3Component = WidgetbookComponent(
           label: 'Variant',
           options: const ['Default', 'Card style'],
           initialOption: 'Default',
-          description: 'Switch between the flat phone layout and the card-style layout.',
+          description:
+              'Switch between the flat phone layout and the card-style layout.',
         );
         return ComponentDocs(
           name: 'Complete your profile',
-          description: 'Profile completion screen. Collects full name, email, mobile, '
+          description:
+              'Profile completion screen. Collects full name, email, mobile, '
               'and category before continuing to password setup.',
-          code: variant == 'Card style' ? _signUpStep3CardCode : _signUpStep3Code,
+          code: variant == 'Card style'
+              ? _signUpStep3CardCode
+              : _signUpStep3Code,
           center: true,
           child: variant == 'Card style'
               ? const _SignUpStep3CardMockup()
@@ -13992,25 +14094,42 @@ class _SignUpStep3MockupState extends State<_SignUpStep3Mockup> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Ux4gInputField(value: _fullName,
+                  Ux4gInputField(
+                    value: _fullName,
                     onValueChange: (v) => setState(() => _fullName = v),
-                    label: 'Full name', placeholder: 'Enter your full name',
-                    placeholderStyle: _placeholderStyle),
-                  const SizedBox(height: 16),
-                  Ux4gInputField(value: _email,
-                    onValueChange: (v) => setState(() => _email = v),
-                    label: 'Email Address', placeholder: 'example@mail.com',
+                    label: 'Full name',
+                    placeholder: 'Enter your full name',
                     placeholderStyle: _placeholderStyle,
-                    type: Ux4gInputFieldType.email),
+                  ),
                   const SizedBox(height: 16),
-                  Ux4gInputField(value: _mobile,
+                  Ux4gInputField(
+                    value: _email,
+                    onValueChange: (v) => setState(() => _email = v),
+                    label: 'Email Address',
+                    placeholder: 'example@mail.com',
+                    placeholderStyle: _placeholderStyle,
+                    type: Ux4gInputFieldType.email,
+                  ),
+                  const SizedBox(height: 16),
+                  Ux4gInputField(
+                    value: _mobile,
                     onValueChange: (v) => setState(() => _mobile = v),
-                    label: 'Mobile Number', placeholder: 'Enter mobile number',
-                    placeholderStyle: _placeholderStyle, prefixText: '+91',
-                    type: Ux4gInputFieldType.number, maxLength: 10),
+                    label: 'Mobile Number',
+                    placeholder: 'Enter mobile number',
+                    placeholderStyle: _placeholderStyle,
+                    prefixText: '+91',
+                    type: Ux4gInputFieldType.number,
+                    maxLength: 10,
+                  ),
                   const SizedBox(height: 16),
-                  const Text('Category',
-                    style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700, color: _titleColor)),
+                  const Text(
+                    'Category',
+                    style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w700,
+                      color: _titleColor,
+                    ),
+                  ),
                   const SizedBox(height: 4),
                   Ux4gSelectionDropdown(
                     options: _cats,
@@ -14020,8 +14139,12 @@ class _SignUpStep3MockupState extends State<_SignUpStep3Mockup> {
                     mode: Ux4gDropdownMode.single,
                   ),
                   const SizedBox(height: 28),
-                  Ux4gButton(text: 'Continue', onPressed: () {},
-                      size: Ux4gButtonSize.large, width: double.infinity),
+                  Ux4gButton(
+                    text: 'Continue',
+                    onPressed: () {},
+                    size: Ux4gButtonSize.large,
+                    width: double.infinity,
+                  ),
                 ],
               ),
             ),
@@ -14069,36 +14192,59 @@ class _SignUpStep3CardMockupState extends State<_SignUpStep3CardMockup> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Ux4gInputField(value: _fullName,
-                              onValueChange: (v) => setState(() => _fullName = v),
-                              label: 'Full name', placeholder: 'Enter your full name',
-                              placeholderStyle: _placeholderStyle),
-                            const SizedBox(height: 14),
-                            Ux4gInputField(value: _email,
-                              onValueChange: (v) => setState(() => _email = v),
-                              label: 'Email Address', placeholder: 'example@mail.com',
+                            Ux4gInputField(
+                              value: _fullName,
+                              onValueChange: (v) =>
+                                  setState(() => _fullName = v),
+                              label: 'Full name',
+                              placeholder: 'Enter your full name',
                               placeholderStyle: _placeholderStyle,
-                              type: Ux4gInputFieldType.email),
+                            ),
                             const SizedBox(height: 14),
-                            Ux4gInputField(value: _mobile,
+                            Ux4gInputField(
+                              value: _email,
+                              onValueChange: (v) => setState(() => _email = v),
+                              label: 'Email Address',
+                              placeholder: 'example@mail.com',
+                              placeholderStyle: _placeholderStyle,
+                              type: Ux4gInputFieldType.email,
+                            ),
+                            const SizedBox(height: 14),
+                            Ux4gInputField(
+                              value: _mobile,
                               onValueChange: (v) => setState(() => _mobile = v),
-                              label: 'Mobile Number', placeholder: 'Enter mobile number',
-                              placeholderStyle: _placeholderStyle, prefixText: '+91',
-                              type: Ux4gInputFieldType.number, maxLength: 10),
+                              label: 'Mobile Number',
+                              placeholder: 'Enter mobile number',
+                              placeholderStyle: _placeholderStyle,
+                              prefixText: '+91',
+                              type: Ux4gInputFieldType.number,
+                              maxLength: 10,
+                            ),
                             const SizedBox(height: 14),
-                            const Text('Category',
-                              style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700, color: _titleColor)),
+                            const Text(
+                              'Category',
+                              style: TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w700,
+                                color: _titleColor,
+                              ),
+                            ),
                             const SizedBox(height: 4),
                             Ux4gSelectionDropdown(
                               options: _cats,
                               selectedOptionIds: _category,
-                              onSelectionChange: (ids) => setState(() => _category = ids),
+                              onSelectionChange: (ids) =>
+                                  setState(() => _category = ids),
                               placeholder: 'Please select..',
                               mode: Ux4gDropdownMode.single,
                             ),
                             const SizedBox(height: 24),
-                            Ux4gButton(text: 'Continue', onPressed: () {},
-                                size: Ux4gButtonSize.large, width: double.infinity),
+                            Ux4gButton(
+                              text: 'Continue',
+                              onPressed: () {},
+                              size: Ux4gButtonSize.large,
+                              width: double.infinity,
+                            ),
                           ],
                         ),
                       ),
@@ -14189,7 +14335,8 @@ Container(
   ]),
 )''';
 
-const _signUpStep3CardCode = r'''// Step 3 � Complete your profile, card style (360 � 760)
+const _signUpStep3CardCode =
+    r'''// Step 3 � Complete your profile, card style (360 � 760)
 Container(
   width: 360, height: 760, color: Colors.white,
   child: Column(children: [
@@ -14295,13 +14442,17 @@ final signUpStep4Component = WidgetbookComponent(
           label: 'Variant',
           options: const ['Default', 'Card style'],
           initialOption: 'Default',
-          description: 'Switch between the flat phone layout and the card-style layout.',
+          description:
+              'Switch between the flat phone layout and the card-style layout.',
         );
         return ComponentDocs(
           name: 'Password setup',
-          description: 'Password creation screen. User sets and confirms their account '
+          description:
+              'Password creation screen. User sets and confirms their account '
               'password before the account is created.',
-          code: variant == 'Card style' ? _signUpStep4CardCode : _signUpStep4Code,
+          code: variant == 'Card style'
+              ? _signUpStep4CardCode
+              : _signUpStep4Code,
           center: true,
           child: variant == 'Card style'
               ? const _SignUpStep4CardMockup()
@@ -14333,24 +14484,41 @@ class _SignUpStep4MockupState extends State<_SignUpStep4Mockup> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text('Password setup',
-                    style: TextStyle(fontSize: 26, fontWeight: FontWeight.w800,
-                        color: _titleColor, height: 1.2, letterSpacing: -0.3)),
+                  const Text(
+                    'Password setup',
+                    style: TextStyle(
+                      fontSize: 26,
+                      fontWeight: FontWeight.w800,
+                      color: _titleColor,
+                      height: 1.2,
+                      letterSpacing: -0.3,
+                    ),
+                  ),
                   const SizedBox(height: 24),
-                  Ux4gInputField(value: _password,
+                  Ux4gInputField(
+                    value: _password,
                     onValueChange: (v) => setState(() => _password = v),
-                    label: 'Password', placeholder: '...........',
+                    label: 'Password',
+                    placeholder: '...........',
                     placeholderStyle: _placeholderStyle,
-                    type: Ux4gInputFieldType.password),
+                    type: Ux4gInputFieldType.password,
+                  ),
                   const SizedBox(height: 16),
-                  Ux4gInputField(value: _confirm,
+                  Ux4gInputField(
+                    value: _confirm,
                     onValueChange: (v) => setState(() => _confirm = v),
-                    label: 'Confirm password', placeholder: '...........',
+                    label: 'Confirm password',
+                    placeholder: '...........',
                     placeholderStyle: _placeholderStyle,
-                    type: Ux4gInputFieldType.password),
+                    type: Ux4gInputFieldType.password,
+                  ),
                   const SizedBox(height: 28),
-                  Ux4gButton(text: 'Create account', onPressed: () {},
-                      size: Ux4gButtonSize.large, width: double.infinity),
+                  Ux4gButton(
+                    text: 'Create account',
+                    onPressed: () {},
+                    size: Ux4gButtonSize.large,
+                    width: double.infinity,
+                  ),
                 ],
               ),
             ),
@@ -14391,24 +14559,43 @@ class _SignUpStep4CardMockupState extends State<_SignUpStep4CardMockup> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Text('Password setup',
-                              style: TextStyle(fontSize: 22, fontWeight: FontWeight.w800,
-                                  color: _titleColor, height: 1.2, letterSpacing: -0.3)),
+                            const Text(
+                              'Password setup',
+                              style: TextStyle(
+                                fontSize: 22,
+                                fontWeight: FontWeight.w800,
+                                color: _titleColor,
+                                height: 1.2,
+                                letterSpacing: -0.3,
+                              ),
+                            ),
                             const SizedBox(height: 20),
-                            Ux4gInputField(value: _password,
-                              onValueChange: (v) => setState(() => _password = v),
-                              label: 'Password', placeholder: '...........',
+                            Ux4gInputField(
+                              value: _password,
+                              onValueChange: (v) =>
+                                  setState(() => _password = v),
+                              label: 'Password',
+                              placeholder: '...........',
                               placeholderStyle: _placeholderStyle,
-                              type: Ux4gInputFieldType.password),
+                              type: Ux4gInputFieldType.password,
+                            ),
                             const SizedBox(height: 16),
-                            Ux4gInputField(value: _confirm,
-                              onValueChange: (v) => setState(() => _confirm = v),
-                              label: 'Confirm password', placeholder: '...........',
+                            Ux4gInputField(
+                              value: _confirm,
+                              onValueChange: (v) =>
+                                  setState(() => _confirm = v),
+                              label: 'Confirm password',
+                              placeholder: '...........',
                               placeholderStyle: _placeholderStyle,
-                              type: Ux4gInputFieldType.password),
+                              type: Ux4gInputFieldType.password,
+                            ),
                             const SizedBox(height: 24),
-                            Ux4gButton(text: 'Create account', onPressed: () {},
-                                size: Ux4gButtonSize.large, width: double.infinity),
+                            Ux4gButton(
+                              text: 'Create account',
+                              onPressed: () {},
+                              size: Ux4gButtonSize.large,
+                              width: double.infinity,
+                            ),
                           ],
                         ),
                       ),
@@ -14483,7 +14670,8 @@ Container(
   ]),
 )''';
 
-const _signUpStep4CardCode = r'''// Step 4 � Password setup, card style (360 � 760)
+const _signUpStep4CardCode =
+    r'''// Step 4 � Password setup, card style (360 � 760)
 Container(
   width: 360, height: 760, color: Colors.white,
   child: Column(children: [
@@ -14573,13 +14761,17 @@ final signUpStep5Component = WidgetbookComponent(
           label: 'Variant',
           options: const ['Default', 'Card style'],
           initialOption: 'Default',
-          description: 'Switch between the flat phone layout and the card-style layout.',
+          description:
+              'Switch between the flat phone layout and the card-style layout.',
         );
         return ComponentDocs(
           name: 'Account Created',
-          description: 'Success screen after registration. Offers a recommended action to '
+          description:
+              'Success screen after registration. Offers a recommended action to '
               'link Aadhaar or skip to browse services.',
-          code: variant == 'Card style' ? _signUpStep5CardCode : _signUpStep5Code,
+          code: variant == 'Card style'
+              ? _signUpStep5CardCode
+              : _signUpStep5Code,
           center: true,
           child: variant == 'Card style'
               ? const _SignUpStep5CardMockup()
@@ -14619,41 +14811,81 @@ class _SignUpStep5Mockup extends StatelessWidget {
                         color: Ux4gPalette.green,
                         shape: BoxShape.circle,
                       ),
-                      child: const Icon(Icons.check, color: Colors.white, size: 22),
+                      child: const Icon(
+                        Icons.check,
+                        color: Colors.white,
+                        size: 22,
+                      ),
                     ),
                   ),
                   const SizedBox(height: 24),
-                  const Text('Account Created!',
+                  const Text(
+                    'Account Created!',
                     textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 26, fontWeight: FontWeight.w800,
-                        color: _titleColor, height: 1.2, letterSpacing: -0.3)),
+                    style: TextStyle(
+                      fontSize: 26,
+                      fontWeight: FontWeight.w800,
+                      color: _titleColor,
+                      height: 1.2,
+                      letterSpacing: -0.3,
+                    ),
+                  ),
                   const SizedBox(height: 8),
-                  const Text('Welcome, Ramesh Kumar',
+                  const Text(
+                    'Welcome, Ramesh Kumar',
                     textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 15, color: _subtleText, height: 1.3)),
+                    style: TextStyle(
+                      fontSize: 15,
+                      color: _subtleText,
+                      height: 1.3,
+                    ),
+                  ),
                   const SizedBox(height: 32),
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 12,
+                      vertical: 4,
+                    ),
                     decoration: BoxDecoration(
                       color: const Color(0xFFFEF3C7),
                       borderRadius: BorderRadius.circular(6),
                       border: Border.all(color: const Color(0xFFFDE68A)),
                     ),
-                    child: const Text('RECOMMENDED',
-                      style: TextStyle(fontSize: 11, fontWeight: FontWeight.w700,
-                          color: Color(0xFF92400E), letterSpacing: 0.8)),
+                    child: const Text(
+                      'RECOMMENDED',
+                      style: TextStyle(
+                        fontSize: 11,
+                        fontWeight: FontWeight.w700,
+                        color: Color(0xFF92400E),
+                        letterSpacing: 0.8,
+                      ),
+                    ),
                   ),
                   const SizedBox(height: 12),
-                  Ux4gButton(text: 'Link Aadhaar Now', onPressed: () {},
-                      size: Ux4gButtonSize.large, width: double.infinity),
+                  Ux4gButton(
+                    text: 'Link Aadhaar Now',
+                    onPressed: () {},
+                    size: Ux4gButtonSize.large,
+                    width: double.infinity,
+                  ),
                   const SizedBox(height: 12),
-                  Ux4gButton(text: 'Skip and Browse Services', onPressed: () {},
-                      variant: Ux4gButtonVariant.outline,
-                      size: Ux4gButtonSize.large, width: double.infinity),
+                  Ux4gButton(
+                    text: 'Skip and Browse Services',
+                    onPressed: () {},
+                    variant: Ux4gButtonVariant.outline,
+                    size: Ux4gButtonSize.large,
+                    width: double.infinity,
+                  ),
                   const SizedBox(height: 16),
-                  const Text('You can link Aadhaar later from your profile',
+                  const Text(
+                    'You can link Aadhaar later from your profile',
                     textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 13, color: _subtleText, height: 1.4)),
+                    style: TextStyle(
+                      fontSize: 13,
+                      color: _subtleText,
+                      height: 1.4,
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -14702,41 +14934,83 @@ class _SignUpStep5CardMockup extends StatelessWidget {
                                   color: Ux4gPalette.green,
                                   shape: BoxShape.circle,
                                 ),
-                                child: const Icon(Icons.check, color: Colors.white, size: 22),
+                                child: const Icon(
+                                  Icons.check,
+                                  color: Colors.white,
+                                  size: 22,
+                                ),
                               ),
                             ),
                             const SizedBox(height: 20),
-                            const Text('Account Created!',
+                            const Text(
+                              'Account Created!',
                               textAlign: TextAlign.center,
-                              style: TextStyle(fontSize: 22, fontWeight: FontWeight.w800,
-                                  color: _titleColor, height: 1.2, letterSpacing: -0.3)),
+                              style: TextStyle(
+                                fontSize: 22,
+                                fontWeight: FontWeight.w800,
+                                color: _titleColor,
+                                height: 1.2,
+                                letterSpacing: -0.3,
+                              ),
+                            ),
                             const SizedBox(height: 6),
-                            const Text('Welcome, Ramesh Kumar',
+                            const Text(
+                              'Welcome, Ramesh Kumar',
                               textAlign: TextAlign.center,
-                              style: TextStyle(fontSize: 13, color: _subtleText, height: 1.3)),
+                              style: TextStyle(
+                                fontSize: 13,
+                                color: _subtleText,
+                                height: 1.3,
+                              ),
+                            ),
                             const SizedBox(height: 28),
                             Container(
-                              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 12,
+                                vertical: 4,
+                              ),
                               decoration: BoxDecoration(
                                 color: const Color(0xFFFEF3C7),
                                 borderRadius: BorderRadius.circular(6),
-                                border: Border.all(color: const Color(0xFFFDE68A)),
+                                border: Border.all(
+                                  color: const Color(0xFFFDE68A),
+                                ),
                               ),
-                              child: const Text('RECOMMENDED',
-                                style: TextStyle(fontSize: 11, fontWeight: FontWeight.w700,
-                                    color: Color(0xFF92400E), letterSpacing: 0.8)),
+                              child: const Text(
+                                'RECOMMENDED',
+                                style: TextStyle(
+                                  fontSize: 11,
+                                  fontWeight: FontWeight.w700,
+                                  color: Color(0xFF92400E),
+                                  letterSpacing: 0.8,
+                                ),
+                              ),
                             ),
                             const SizedBox(height: 12),
-                            Ux4gButton(text: 'Link Aadhaar Now', onPressed: () {},
-                                size: Ux4gButtonSize.large, width: double.infinity),
+                            Ux4gButton(
+                              text: 'Link Aadhaar Now',
+                              onPressed: () {},
+                              size: Ux4gButtonSize.large,
+                              width: double.infinity,
+                            ),
                             const SizedBox(height: 12),
-                            Ux4gButton(text: 'Skip and Browse Services', onPressed: () {},
-                                variant: Ux4gButtonVariant.outline,
-                                size: Ux4gButtonSize.large, width: double.infinity),
+                            Ux4gButton(
+                              text: 'Skip and Browse Services',
+                              onPressed: () {},
+                              variant: Ux4gButtonVariant.outline,
+                              size: Ux4gButtonSize.large,
+                              width: double.infinity,
+                            ),
                             const SizedBox(height: 12),
-                            const Text('You can link Aadhaar later from your profile',
+                            const Text(
+                              'You can link Aadhaar later from your profile',
                               textAlign: TextAlign.center,
-                              style: TextStyle(fontSize: 12, color: _subtleText, height: 1.4)),
+                              style: TextStyle(
+                                fontSize: 12,
+                                color: _subtleText,
+                                height: 1.4,
+                              ),
+                            ),
                           ],
                         ),
                       ),
@@ -14832,7 +15106,8 @@ Container(
   ]),
 )''';
 
-const _signUpStep5CardCode = r'''// Step 5 � Account Created, card style (360 � 760)
+const _signUpStep5CardCode =
+    r'''// Step 5 � Account Created, card style (360 � 760)
 Container(
   width: 360, height: 760, color: Colors.white,
   child: Column(children: [
@@ -14963,17 +15238,25 @@ Widget _fpWarningBanner() => Ux4gStatusBanner(
   margin: EdgeInsets.zero,
   padding: const EdgeInsets.fromLTRB(12, 10, 12, 10),
   titleStyle: const TextStyle(
-    fontSize: 13, fontWeight: FontWeight.w400,
-    color: Color(0xFF92400E), height: 1.4,
+    fontSize: 13,
+    fontWeight: FontWeight.w400,
+    color: Color(0xFF92400E),
+    height: 1.4,
   ),
-  leadingIcon: const Icon(Icons.info_outline_rounded,
-      color: Color(0xFFD97706), size: 18),
+  leadingIcon: const Icon(
+    Icons.info_outline_rounded,
+    color: Color(0xFFD97706),
+    size: 18,
+  ),
 );
 
 /// Password strength row (Ux4gLinearProgress + checklist).
 Widget _passwordStrength() {
-  const greenCheck = Icon(Icons.check_circle_rounded,
-      color: Color(0xFF16A34A), size: 16);
+  const greenCheck = Icon(
+    Icons.check_circle_rounded,
+    color: Color(0xFF16A34A),
+    size: 16,
+  );
   const redX = Icon(Icons.error, color: Color(0xFFDC2626), size: 16);
   const itemStyle = TextStyle(fontSize: 13, color: Color(0xFF374151));
 
@@ -14988,21 +15271,46 @@ Widget _passwordStrength() {
         height: 8,
       ),
       const SizedBox(height: 6),
-      const Text('Password Strength: Strong',
-          style: TextStyle(fontSize: 12, color: Color(0xFF16A34A),
-              fontWeight: FontWeight.w700)),
+      const Text(
+        'Password Strength: Strong',
+        style: TextStyle(
+          fontSize: 12,
+          color: Color(0xFF16A34A),
+          fontWeight: FontWeight.w700,
+        ),
+      ),
       const SizedBox(height: 10),
-      Row(children: [greenCheck, const SizedBox(width: 6),
-        const Text('8+ characters', style: itemStyle)]),
+      Row(
+        children: [
+          greenCheck,
+          const SizedBox(width: 6),
+          const Text('8+ characters', style: itemStyle),
+        ],
+      ),
       const SizedBox(height: 4),
-      Row(children: [greenCheck, const SizedBox(width: 6),
-        const Text('Uppercase letter', style: itemStyle)]),
+      Row(
+        children: [
+          greenCheck,
+          const SizedBox(width: 6),
+          const Text('Uppercase letter', style: itemStyle),
+        ],
+      ),
       const SizedBox(height: 4),
-      Row(children: [greenCheck, const SizedBox(width: 6),
-        const Text('Number', style: itemStyle)]),
+      Row(
+        children: [
+          greenCheck,
+          const SizedBox(width: 6),
+          const Text('Number', style: itemStyle),
+        ],
+      ),
       const SizedBox(height: 4),
-      Row(children: [redX, const SizedBox(width: 6),
-        const Text('Special character', style: itemStyle)]),
+      Row(
+        children: [
+          redX,
+          const SizedBox(width: 6),
+          const Text('Special character', style: itemStyle),
+        ],
+      ),
     ],
   );
 }
@@ -15021,11 +15329,13 @@ final fpStep1Component = WidgetbookComponent(
           label: 'Variant',
           options: const ['Default', 'Card style'],
           initialOption: 'Default',
-          description: 'Switch between the flat phone layout and the card-style layout.',
+          description:
+              'Switch between the flat phone layout and the card-style layout.',
         );
         return ComponentDocs(
           name: 'Reset Password',
-          description: 'Entry point for the forgot-password flow. User enters their '
+          description:
+              'Entry point for the forgot-password flow. User enters their '
               'registered mobile number to receive an OTP.',
           code: variant == 'Card style' ? _fpStep1CardCode : _fpStep1Code,
           center: true,
@@ -15061,13 +15371,25 @@ class _FpStep1MockupState extends State<_FpStep1Mockup> {
                 children: [
                   const _NavLink(label: 'Back to Sign In'),
                   const SizedBox(height: 20),
-                  const Text('Reset Password',
-                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.w800,
-                        color: _titleColor, height: 1.2, letterSpacing: -0.3)),
+                  const Text(
+                    'Reset Password',
+                    style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.w800,
+                      color: _titleColor,
+                      height: 1.2,
+                      letterSpacing: -0.3,
+                    ),
+                  ),
                   const SizedBox(height: 6),
                   const Text(
                     'Enter your registered mobile number to receive a verification code',
-                    style: TextStyle(fontSize: 14, color: _subtleText, height: 1.4)),
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: _subtleText,
+                      height: 1.4,
+                    ),
+                  ),
                   const SizedBox(height: 24),
                   Ux4gInputField(
                     value: _mobile,
@@ -15080,36 +15402,59 @@ class _FpStep1MockupState extends State<_FpStep1Mockup> {
                     maxLength: 10,
                   ),
                   const SizedBox(height: 20),
-                  Ux4gButton(text: 'Send OTP', onPressed: () {},
-                      size: Ux4gButtonSize.large, width: double.infinity),
+                  Ux4gButton(
+                    text: 'Send OTP',
+                    onPressed: () {},
+                    size: Ux4gButtonSize.large,
+                    width: double.infinity,
+                  ),
                   const SizedBox(height: 14),
                   Center(
                     child: TextButton(
                       onPressed: () {},
                       style: TextButton.styleFrom(
-                          padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 4)),
-                      child: Text('Recover account using Aadhaar Number  ?',
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 4,
+                          vertical: 4,
+                        ),
+                      ),
+                      child: Text(
+                        'Recover account using Aadhaar Number  ?',
                         style: TextStyle(
                           fontSize: 13,
                           color: Theme.of(context).colorScheme.primary,
                           fontWeight: FontWeight.w600,
-                        )),
+                        ),
+                      ),
                     ),
                   ),
                   const SizedBox(height: 8),
-                  Row(children: const [
-                    Expanded(child: Divider(color: _border, thickness: 1)),
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 16),
-                      child: Text('OR', style: TextStyle(fontSize: 12,
-                          color: _mutedText, fontWeight: FontWeight.w500, letterSpacing: 0.5)),
-                    ),
-                    Expanded(child: Divider(color: _border, thickness: 1)),
-                  ]),
+                  Row(
+                    children: const [
+                      Expanded(child: Divider(color: _border, thickness: 1)),
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 16),
+                        child: Text(
+                          'OR',
+                          style: TextStyle(
+                            fontSize: 12,
+                            color: _mutedText,
+                            fontWeight: FontWeight.w500,
+                            letterSpacing: 0.5,
+                          ),
+                        ),
+                      ),
+                      Expanded(child: Divider(color: _border, thickness: 1)),
+                    ],
+                  ),
                   const SizedBox(height: 8),
-                  Ux4gButton(text: 'Sign in with OTP instead', onPressed: () {},
-                      variant: Ux4gButtonVariant.outline,
-                      size: Ux4gButtonSize.large, width: double.infinity),
+                  Ux4gButton(
+                    text: 'Sign in with OTP instead',
+                    onPressed: () {},
+                    variant: Ux4gButtonVariant.outline,
+                    size: Ux4gButtonSize.large,
+                    width: double.infinity,
+                  ),
                   const SizedBox(height: 16),
                   _fpWarningBanner(),
                 ],
@@ -15157,17 +15502,30 @@ class _FpStep1CardMockupState extends State<_FpStep1CardMockup> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                const Text('Reset Password',
-                                  style: TextStyle(fontSize: 22, fontWeight: FontWeight.w800,
-                                      color: _titleColor, height: 1.2, letterSpacing: -0.3)),
+                                const Text(
+                                  'Reset Password',
+                                  style: TextStyle(
+                                    fontSize: 22,
+                                    fontWeight: FontWeight.w800,
+                                    color: _titleColor,
+                                    height: 1.2,
+                                    letterSpacing: -0.3,
+                                  ),
+                                ),
                                 const SizedBox(height: 6),
                                 const Text(
                                   'Enter your registered mobile number to receive a verification code',
-                                  style: TextStyle(fontSize: 13, color: _subtleText, height: 1.4)),
+                                  style: TextStyle(
+                                    fontSize: 13,
+                                    color: _subtleText,
+                                    height: 1.4,
+                                  ),
+                                ),
                                 const SizedBox(height: 20),
                                 Ux4gInputField(
                                   value: _mobile,
-                                  onValueChange: (v) => setState(() => _mobile = v),
+                                  onValueChange: (v) =>
+                                      setState(() => _mobile = v),
                                   label: 'Mobile Number',
                                   placeholder: 'Enter mobile number',
                                   placeholderStyle: _placeholderStyle,
@@ -15176,36 +15534,72 @@ class _FpStep1CardMockupState extends State<_FpStep1CardMockup> {
                                   maxLength: 10,
                                 ),
                                 const SizedBox(height: 16),
-                                Ux4gButton(text: 'Send OTP', onPressed: () {},
-                                    size: Ux4gButtonSize.large, width: double.infinity),
+                                Ux4gButton(
+                                  text: 'Send OTP',
+                                  onPressed: () {},
+                                  size: Ux4gButtonSize.large,
+                                  width: double.infinity,
+                                ),
                                 const SizedBox(height: 12),
                                 Center(
                                   child: TextButton(
                                     onPressed: () {},
                                     style: TextButton.styleFrom(
-                                        padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 4)),
-                                    child: Text('Recover account using Aadhaar Number  ?',
+                                      padding: const EdgeInsets.symmetric(
+                                        horizontal: 4,
+                                        vertical: 4,
+                                      ),
+                                    ),
+                                    child: Text(
+                                      'Recover account using Aadhaar Number  ?',
                                       style: TextStyle(
                                         fontSize: 12,
-                                        color: Theme.of(context).colorScheme.primary,
+                                        color: Theme.of(
+                                          context,
+                                        ).colorScheme.primary,
                                         fontWeight: FontWeight.w600,
-                                      )),
+                                      ),
+                                    ),
                                   ),
                                 ),
                                 const SizedBox(height: 6),
-                                Row(children: const [
-                                  Expanded(child: Divider(color: _border, thickness: 1)),
-                                  Padding(
-                                    padding: EdgeInsets.symmetric(horizontal: 12),
-                                    child: Text('OR', style: TextStyle(fontSize: 12,
-                                        color: _mutedText, fontWeight: FontWeight.w500)),
-                                  ),
-                                  Expanded(child: Divider(color: _border, thickness: 1)),
-                                ]),
+                                Row(
+                                  children: const [
+                                    Expanded(
+                                      child: Divider(
+                                        color: _border,
+                                        thickness: 1,
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsets.symmetric(
+                                        horizontal: 12,
+                                      ),
+                                      child: Text(
+                                        'OR',
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          color: _mutedText,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                      ),
+                                    ),
+                                    Expanded(
+                                      child: Divider(
+                                        color: _border,
+                                        thickness: 1,
+                                      ),
+                                    ),
+                                  ],
+                                ),
                                 const SizedBox(height: 6),
-                                Ux4gButton(text: 'Sign in with OTP instead', onPressed: () {},
-                                    variant: Ux4gButtonVariant.outline,
-                                    size: Ux4gButtonSize.large, width: double.infinity),
+                                Ux4gButton(
+                                  text: 'Sign in with OTP instead',
+                                  onPressed: () {},
+                                  variant: Ux4gButtonVariant.outline,
+                                  size: Ux4gButtonSize.large,
+                                  width: double.infinity,
+                                ),
                                 const SizedBox(height: 14),
                                 _fpWarningBanner(),
                               ],
@@ -15316,7 +15710,8 @@ Container(
   ]),
 )''';
 
-const _fpStep1CardCode = r'''// FP Step 1 � Reset Password, card style (360 � 760)
+const _fpStep1CardCode =
+    r'''// FP Step 1 � Reset Password, card style (360 � 760)
 Container(
   width: 360, height: 760, color: Colors.white,
   child: Column(children: [
@@ -15438,7 +15833,8 @@ final fpStep2Component = WidgetbookComponent(
           label: 'Variant',
           options: const ['Default', 'Card style'],
           initialOption: 'Default',
-          description: 'Switch between the flat phone layout and the card-style layout.',
+          description:
+              'Switch between the flat phone layout and the card-style layout.',
         );
         return ComponentDocs(
           name: 'Enter OTP',
@@ -15478,12 +15874,25 @@ class _FpStep2MockupState extends State<_FpStep2Mockup> {
                 children: [
                   const _NavLink(label: 'Change mobile number'),
                   const SizedBox(height: 20),
-                  const Text('Enter OTP',
-                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.w800,
-                        color: _titleColor, height: 1.2, letterSpacing: -0.3)),
+                  const Text(
+                    'Enter OTP',
+                    style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.w800,
+                      color: _titleColor,
+                      height: 1.2,
+                      letterSpacing: -0.3,
+                    ),
+                  ),
                   const SizedBox(height: 6),
-                  const Text('Sent to +91 98765 XXXXX',
-                    style: TextStyle(fontSize: 14, color: _subtleText, height: 1.3)),
+                  const Text(
+                    'Sent to +91 98765 XXXXX',
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: _subtleText,
+                      height: 1.3,
+                    ),
+                  ),
                   const SizedBox(height: 28),
                   Ux4gOtpInput(
                     key: ValueKey('fp2_$_resendNonce'),
@@ -15497,12 +15906,18 @@ class _FpStep2MockupState extends State<_FpStep2Mockup> {
                     captionLeadingText: "Didn't receive OTP?",
                     captionTrailingText: 'Resend',
                     autoCountdownSeconds: 60,
-                    onCaptionTrailingTap: () =>
-                        setState(() { _otp = ''; _resendNonce++; }),
+                    onCaptionTrailingTap: () => setState(() {
+                      _otp = '';
+                      _resendNonce++;
+                    }),
                   ),
                   const SizedBox(height: 28),
-                  Ux4gButton(text: 'Verify OTP', onPressed: () {},
-                      size: Ux4gButtonSize.large, width: double.infinity),
+                  Ux4gButton(
+                    text: 'Verify OTP',
+                    onPressed: () {},
+                    size: Ux4gButtonSize.large,
+                    width: double.infinity,
+                  ),
                 ],
               ),
             ),
@@ -15549,12 +15964,25 @@ class _FpStep2CardMockupState extends State<_FpStep2CardMockup> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                const Text('Enter OTP',
-                                  style: TextStyle(fontSize: 22, fontWeight: FontWeight.w800,
-                                      color: _titleColor, height: 1.2, letterSpacing: -0.3)),
+                                const Text(
+                                  'Enter OTP',
+                                  style: TextStyle(
+                                    fontSize: 22,
+                                    fontWeight: FontWeight.w800,
+                                    color: _titleColor,
+                                    height: 1.2,
+                                    letterSpacing: -0.3,
+                                  ),
+                                ),
                                 const SizedBox(height: 6),
-                                const Text('Sent to +91 98765 XXXXX',
-                                  style: TextStyle(fontSize: 13, color: _subtleText, height: 1.3)),
+                                const Text(
+                                  'Sent to +91 98765 XXXXX',
+                                  style: TextStyle(
+                                    fontSize: 13,
+                                    color: _subtleText,
+                                    height: 1.3,
+                                  ),
+                                ),
                                 const SizedBox(height: 24),
                                 Ux4gOtpInput(
                                   key: ValueKey('fp2c_$_resendNonce'),
@@ -15564,16 +15992,23 @@ class _FpStep2CardMockupState extends State<_FpStep2CardMockup> {
                                   boxSize: 44,
                                   gap: 8,
                                   showSeparator: true,
-                                  captionVariant: Ux4gOtpCaptionVariant.resendTimer,
+                                  captionVariant:
+                                      Ux4gOtpCaptionVariant.resendTimer,
                                   captionLeadingText: "Didn't receive OTP?",
                                   captionTrailingText: 'Resend',
                                   autoCountdownSeconds: 60,
-                                  onCaptionTrailingTap: () =>
-                                      setState(() { _otp = ''; _resendNonce++; }),
+                                  onCaptionTrailingTap: () => setState(() {
+                                    _otp = '';
+                                    _resendNonce++;
+                                  }),
                                 ),
                                 const SizedBox(height: 24),
-                                Ux4gButton(text: 'Verify OTP', onPressed: () {},
-                                    size: Ux4gButtonSize.large, width: double.infinity),
+                                Ux4gButton(
+                                  text: 'Verify OTP',
+                                  onPressed: () {},
+                                  size: Ux4gButtonSize.large,
+                                  width: double.infinity,
+                                ),
                               ],
                             ),
                           ),
@@ -15754,11 +16189,13 @@ final fpStep3Component = WidgetbookComponent(
           label: 'Variant',
           options: const ['Default', 'Card style'],
           initialOption: 'Default',
-          description: 'Switch between the flat phone layout and the card-style layout.',
+          description:
+              'Switch between the flat phone layout and the card-style layout.',
         );
         return ComponentDocs(
           name: 'Create new password',
-          description: 'Password creation screen with strength indicator and mismatch error state.',
+          description:
+              'Password creation screen with strength indicator and mismatch error state.',
           code: variant == 'Card style' ? _fpStep3CardCode : _fpStep3Code,
           center: true,
           child: variant == 'Card style'
@@ -15792,12 +16229,25 @@ class _FpStep3MockupState extends State<_FpStep3Mockup> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text('Create new password',
-                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.w800,
-                        color: _titleColor, height: 1.2, letterSpacing: -0.3)),
+                  const Text(
+                    'Create new password',
+                    style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.w800,
+                      color: _titleColor,
+                      height: 1.2,
+                      letterSpacing: -0.3,
+                    ),
+                  ),
                   const SizedBox(height: 6),
-                  const Text('Choose a strong password to secure your account',
-                    style: TextStyle(fontSize: 14, color: _subtleText, height: 1.4)),
+                  const Text(
+                    'Choose a strong password to secure your account',
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: _subtleText,
+                      height: 1.4,
+                    ),
+                  ),
                   const SizedBox(height: 24),
                   Ux4gInputField(
                     value: _password,
@@ -15816,14 +16266,22 @@ class _FpStep3MockupState extends State<_FpStep3Mockup> {
                     label: 'Confirm password',
                     placeholder: '...........',
                     placeholderStyle: _placeholderStyle,
-                    labelStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w700, color: _titleColor),
+                    labelStyle: const TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w700,
+                      color: _titleColor,
+                    ),
                     type: Ux4gInputFieldType.password,
                     status: Ux4gInputFieldStatus.error,
                     caption: 'Passwords do not match',
                   ),
                   const SizedBox(height: 24),
-                  Ux4gButton(text: 'Reset password', onPressed: () {},
-                      size: Ux4gButtonSize.large, width: double.infinity),
+                  Ux4gButton(
+                    text: 'Reset password',
+                    onPressed: () {},
+                    size: Ux4gButtonSize.large,
+                    width: double.infinity,
+                  ),
                 ],
               ),
             ),
@@ -15865,16 +16323,30 @@ class _FpStep3CardMockupState extends State<_FpStep3CardMockup> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Text('Create new password',
-                              style: TextStyle(fontSize: 22, fontWeight: FontWeight.w800,
-                                  color: _titleColor, height: 1.2, letterSpacing: -0.3)),
+                            const Text(
+                              'Create new password',
+                              style: TextStyle(
+                                fontSize: 22,
+                                fontWeight: FontWeight.w800,
+                                color: _titleColor,
+                                height: 1.2,
+                                letterSpacing: -0.3,
+                              ),
+                            ),
                             const SizedBox(height: 6),
-                            const Text('Choose a strong password to secure your account',
-                              style: TextStyle(fontSize: 13, color: _subtleText, height: 1.4)),
+                            const Text(
+                              'Choose a strong password to secure your account',
+                              style: TextStyle(
+                                fontSize: 13,
+                                color: _subtleText,
+                                height: 1.4,
+                              ),
+                            ),
                             const SizedBox(height: 20),
                             Ux4gInputField(
                               value: _password,
-                              onValueChange: (v) => setState(() => _password = v),
+                              onValueChange: (v) =>
+                                  setState(() => _password = v),
                               label: 'Password',
                               placeholder: '...........',
                               placeholderStyle: _placeholderStyle,
@@ -15885,18 +16357,27 @@ class _FpStep3CardMockupState extends State<_FpStep3CardMockup> {
                             const SizedBox(height: 14),
                             Ux4gInputField(
                               value: _confirm,
-                              onValueChange: (v) => setState(() => _confirm = v),
+                              onValueChange: (v) =>
+                                  setState(() => _confirm = v),
                               label: 'Confirm password',
                               placeholder: '...........',
                               placeholderStyle: _placeholderStyle,
-                              labelStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w700, color: _titleColor),
+                              labelStyle: const TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w700,
+                                color: _titleColor,
+                              ),
                               type: Ux4gInputFieldType.password,
                               status: Ux4gInputFieldStatus.error,
                               caption: 'Passwords do not match',
                             ),
                             const SizedBox(height: 20),
-                            Ux4gButton(text: 'Reset password', onPressed: () {},
-                                size: Ux4gButtonSize.large, width: double.infinity),
+                            Ux4gButton(
+                              text: 'Reset password',
+                              onPressed: () {},
+                              size: Ux4gButtonSize.large,
+                              width: double.infinity,
+                            ),
                           ],
                         ),
                       ),
@@ -16014,7 +16495,8 @@ Container(
   ]),
 )''';
 
-const _fpStep3CardCode = r'''// FP Step 3 � Create new password, card style (360 � 760)
+const _fpStep3CardCode =
+    r'''// FP Step 3 � Create new password, card style (360 � 760)
 Container(
   width: 360, height: 760, color: Colors.white,
   child: Column(children: [
@@ -16147,11 +16629,13 @@ final fpStep4Component = WidgetbookComponent(
           label: 'Variant',
           options: const ['Default', 'Card style'],
           initialOption: 'Default',
-          description: 'Switch between the flat phone layout and the card-style layout.',
+          description:
+              'Switch between the flat phone layout and the card-style layout.',
         );
         return ComponentDocs(
           name: 'Password reset successfully',
-          description: 'Success confirmation after the new password has been saved.',
+          description:
+              'Success confirmation after the new password has been saved.',
           code: variant == 'Card style' ? _fpStep4CardCode : _fpStep4Code,
           center: true,
           child: variant == 'Card style'
@@ -16192,22 +16676,42 @@ class _FpStep4Mockup extends StatelessWidget {
                         color: Ux4gPalette.green,
                         shape: BoxShape.circle,
                       ),
-                      child: const Icon(Icons.check, color: Colors.white, size: 22),
+                      child: const Icon(
+                        Icons.check,
+                        color: Colors.white,
+                        size: 22,
+                      ),
                     ),
                   ),
                   const SizedBox(height: 24),
-                  const Text('Password reset\nsuccessfully',
+                  const Text(
+                    'Password reset\nsuccessfully',
                     textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 26, fontWeight: FontWeight.w800,
-                        color: Color(0xFF16A34A), height: 1.25, letterSpacing: -0.3)),
+                    style: TextStyle(
+                      fontSize: 26,
+                      fontWeight: FontWeight.w800,
+                      color: Color(0xFF16A34A),
+                      height: 1.25,
+                      letterSpacing: -0.3,
+                    ),
+                  ),
                   const SizedBox(height: 12),
                   const Text(
                     'Sign in with your new password to continue access to government services.',
                     textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 14, color: _subtleText, height: 1.5)),
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: _subtleText,
+                      height: 1.5,
+                    ),
+                  ),
                   const SizedBox(height: 36),
-                  Ux4gButton(text: 'Sign in', onPressed: () {},
-                      size: Ux4gButtonSize.large, width: double.infinity),
+                  Ux4gButton(
+                    text: 'Sign in',
+                    onPressed: () {},
+                    size: Ux4gButtonSize.large,
+                    width: double.infinity,
+                  ),
                 ],
               ),
             ),
@@ -16256,22 +16760,42 @@ class _FpStep4CardMockup extends StatelessWidget {
                                   color: Ux4gPalette.green,
                                   shape: BoxShape.circle,
                                 ),
-                                child: const Icon(Icons.check, color: Colors.white, size: 22),
+                                child: const Icon(
+                                  Icons.check,
+                                  color: Colors.white,
+                                  size: 22,
+                                ),
                               ),
                             ),
                             const SizedBox(height: 20),
-                            const Text('Password reset\nsuccessfully',
+                            const Text(
+                              'Password reset\nsuccessfully',
                               textAlign: TextAlign.center,
-                              style: TextStyle(fontSize: 22, fontWeight: FontWeight.w800,
-                                  color: Color(0xFF16A34A), height: 1.25, letterSpacing: -0.3)),
+                              style: TextStyle(
+                                fontSize: 22,
+                                fontWeight: FontWeight.w800,
+                                color: Color(0xFF16A34A),
+                                height: 1.25,
+                                letterSpacing: -0.3,
+                              ),
+                            ),
                             const SizedBox(height: 10),
                             const Text(
                               'Sign in with your new password to continue access to government services.',
                               textAlign: TextAlign.center,
-                              style: TextStyle(fontSize: 13, color: _subtleText, height: 1.5)),
+                              style: TextStyle(
+                                fontSize: 13,
+                                color: _subtleText,
+                                height: 1.5,
+                              ),
+                            ),
                             const SizedBox(height: 28),
-                            Ux4gButton(text: 'Sign in', onPressed: () {},
-                                size: Ux4gButtonSize.large, width: double.infinity),
+                            Ux4gButton(
+                              text: 'Sign in',
+                              onPressed: () {},
+                              size: Ux4gButtonSize.large,
+                              width: double.infinity,
+                            ),
                           ],
                         ),
                       ),
@@ -16350,7 +16874,8 @@ Container(
   ]),
 )''';
 
-const _fpStep4CardCode = r'''// FP Step 4 � Password reset successfully, card style (360 � 760)
+const _fpStep4CardCode =
+    r'''// FP Step 4 � Password reset successfully, card style (360 � 760)
 Container(
   width: 360, height: 760, color: Colors.white,
   child: Column(children: [
@@ -16444,11 +16969,13 @@ final fpStep5Component = WidgetbookComponent(
           label: 'Variant',
           options: const ['Default', 'Card style'],
           initialOption: 'Default',
-          description: 'Switch between the flat phone layout and the card-style layout.',
+          description:
+              'Switch between the flat phone layout and the card-style layout.',
         );
         return ComponentDocs(
           name: 'Account recovery',
-          description: 'Aadhaar-based account recovery screen. Shows masked Aadhaar number '
+          description:
+              'Aadhaar-based account recovery screen. Shows masked Aadhaar number '
               'and consent text before sending OTP.',
           code: variant == 'Card style' ? _fpStep5CardCode : _fpStep5Code,
           center: true,
@@ -16482,9 +17009,16 @@ class _FpStep5MockupState extends State<_FpStep5Mockup> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text('Account recovery',
-                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.w800,
-                        color: _titleColor, height: 1.2, letterSpacing: -0.3)),
+                  const Text(
+                    'Account recovery',
+                    style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.w800,
+                      color: _titleColor,
+                      height: 1.2,
+                      letterSpacing: -0.3,
+                    ),
+                  ),
                   const SizedBox(height: 24),
                   Ux4gAadhaarInputField(
                     value: _aadhaar,
@@ -16503,11 +17037,20 @@ class _FpStep5MockupState extends State<_FpStep5Mockup> {
                     ),
                     child: const Text(
                       'I agree to verify my identity via Aadhaar OTP for the purpose of password recovery.',
-                      style: TextStyle(fontSize: 13, color: _subtleText, height: 1.5)),
+                      style: TextStyle(
+                        fontSize: 13,
+                        color: _subtleText,
+                        height: 1.5,
+                      ),
+                    ),
                   ),
                   const SizedBox(height: 24),
-                  Ux4gButton(text: 'Send OTP', onPressed: () {},
-                      size: Ux4gButtonSize.large, width: double.infinity),
+                  Ux4gButton(
+                    text: 'Send OTP',
+                    onPressed: () {},
+                    size: Ux4gButtonSize.large,
+                    width: double.infinity,
+                  ),
                 ],
               ),
             ),
@@ -16551,13 +17094,21 @@ class _FpStep5CardMockupState extends State<_FpStep5CardMockup> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                const Text('Account recovery',
-                                  style: TextStyle(fontSize: 22, fontWeight: FontWeight.w800,
-                                      color: _titleColor, height: 1.2, letterSpacing: -0.3)),
+                                const Text(
+                                  'Account recovery',
+                                  style: TextStyle(
+                                    fontSize: 22,
+                                    fontWeight: FontWeight.w800,
+                                    color: _titleColor,
+                                    height: 1.2,
+                                    letterSpacing: -0.3,
+                                  ),
+                                ),
                                 const SizedBox(height: 20),
                                 Ux4gAadhaarInputField(
                                   value: _aadhaar,
-                                  onValueChange: (v) => setState(() => _aadhaar = v),
+                                  onValueChange: (v) =>
+                                      setState(() => _aadhaar = v),
                                   label: 'Aadhaar Number',
                                   placeholder: 'XXXX XXXX XXXX',
                                   placeholderStyle: _placeholderStyle,
@@ -16572,11 +17123,20 @@ class _FpStep5CardMockupState extends State<_FpStep5CardMockup> {
                                   ),
                                   child: const Text(
                                     'I agree to verify my identity via Aadhaar OTP for the purpose of password recovery.',
-                                    style: TextStyle(fontSize: 12, color: _subtleText, height: 1.5)),
+                                    style: TextStyle(
+                                      fontSize: 12,
+                                      color: _subtleText,
+                                      height: 1.5,
+                                    ),
+                                  ),
                                 ),
                                 const SizedBox(height: 20),
-                                Ux4gButton(text: 'Send OTP', onPressed: () {},
-                                    size: Ux4gButtonSize.large, width: double.infinity),
+                                Ux4gButton(
+                                  text: 'Send OTP',
+                                  onPressed: () {},
+                                  size: Ux4gButtonSize.large,
+                                  width: double.infinity,
+                                ),
                               ],
                             ),
                           ),
@@ -16661,7 +17221,8 @@ Container(
   ]),
 )''';
 
-const _fpStep5CardCode = r'''// FP Step 5 � Account recovery, card style (360 � 760)
+const _fpStep5CardCode =
+    r'''// FP Step 5 � Account recovery, card style (360 � 760)
 Container(
   width: 360, height: 760, color: Colors.white,
   child: Column(children: [
@@ -16754,18 +17315,27 @@ enum _NotifType { actionRequired, statusUpdate, reminder, info }
 extension _NotifTypeExt on _NotifType {
   String get label {
     switch (this) {
-      case _NotifType.actionRequired: return 'Action required';
-      case _NotifType.statusUpdate: return 'Status Update';
-      case _NotifType.reminder: return 'Reminder';
-      case _NotifType.info: return 'Info';
+      case _NotifType.actionRequired:
+        return 'Action required';
+      case _NotifType.statusUpdate:
+        return 'Status Update';
+      case _NotifType.reminder:
+        return 'Reminder';
+      case _NotifType.info:
+        return 'Info';
     }
   }
+
   Color get dotColor {
     switch (this) {
-      case _NotifType.actionRequired: return const Color(0xFFEF4444);
-      case _NotifType.statusUpdate: return const Color(0xFF3B82F6);
-      case _NotifType.reminder: return const Color(0xFFF59E0B);
-      case _NotifType.info: return const Color(0xFF14B8A6);
+      case _NotifType.actionRequired:
+        return const Color(0xFFEF4444);
+      case _NotifType.statusUpdate:
+        return const Color(0xFF3B82F6);
+      case _NotifType.reminder:
+        return const Color(0xFFF59E0B);
+      case _NotifType.info:
+        return const Color(0xFF14B8A6);
     }
   }
 }
@@ -16777,8 +17347,14 @@ class _NotifData {
   final String time;
   final String? actionLabel;
   bool isRead;
-  _NotifData({required this.type, required this.title, required this.body,
-    required this.time, this.actionLabel, this.isRead = false});
+  _NotifData({
+    required this.type,
+    required this.title,
+    required this.body,
+    required this.time,
+    this.actionLabel,
+    this.isRead = false,
+  });
 }
 
 class _NotifSection {
@@ -16788,53 +17364,95 @@ class _NotifSection {
 }
 
 List<_NotifSection> _buildDefaultNotifSections() => [
-  _NotifSection(label: 'TODAY', items: [
-    _NotifData(type: _NotifType.actionRequired,
-      title: 'Income Certificate . Action required',
-      body: 'Upload your income proof by 15 Apr to avoid rejection.',
-      time: '10:24 AM', actionLabel: 'Upload now', isRead: false),
-    _NotifData(type: _NotifType.actionRequired,
-      title: 'Income Certificate . Action required',
-      body: 'Upload your income proof by 15 Apr to avoid rejection.',
-      time: '8:03 AM', actionLabel: 'Upload now', isRead: false),
-  ]),
-  _NotifSection(label: 'YESTERDAY', items: [
-    _NotifData(type: _NotifType.reminder,
-      title: 'Draft expiring . Income Certificate',
-      body: 'Your draft expires in 5 days.',
-      time: '8:03 AM', isRead: true),
-    _NotifData(type: _NotifType.info,
-      title: 'PAN Correction . Status update',
-      body: 'Under review by Income Tax Dept.',
-      time: '8:03 AM', isRead: true),
-  ]),
-  _NotifSection(label: 'EARLIER THIS WEEK', items: [
-    _NotifData(type: _NotifType.info,
-      title: 'Birth Certificate . Submitted',
-      body: 'Reference: BC-2026-MH-001.',
-      time: '8:03 AM', isRead: true),
-  ]),
+  _NotifSection(
+    label: 'TODAY',
+    items: [
+      _NotifData(
+        type: _NotifType.actionRequired,
+        title: 'Income Certificate . Action required',
+        body: 'Upload your income proof by 15 Apr to avoid rejection.',
+        time: '10:24 AM',
+        actionLabel: 'Upload now',
+        isRead: false,
+      ),
+      _NotifData(
+        type: _NotifType.actionRequired,
+        title: 'Income Certificate . Action required',
+        body: 'Upload your income proof by 15 Apr to avoid rejection.',
+        time: '8:03 AM',
+        actionLabel: 'Upload now',
+        isRead: false,
+      ),
+    ],
+  ),
+  _NotifSection(
+    label: 'YESTERDAY',
+    items: [
+      _NotifData(
+        type: _NotifType.reminder,
+        title: 'Draft expiring . Income Certificate',
+        body: 'Your draft expires in 5 days.',
+        time: '8:03 AM',
+        isRead: true,
+      ),
+      _NotifData(
+        type: _NotifType.info,
+        title: 'PAN Correction . Status update',
+        body: 'Under review by Income Tax Dept.',
+        time: '8:03 AM',
+        isRead: true,
+      ),
+    ],
+  ),
+  _NotifSection(
+    label: 'EARLIER THIS WEEK',
+    items: [
+      _NotifData(
+        type: _NotifType.info,
+        title: 'Birth Certificate . Submitted',
+        body: 'Reference: BC-2026-MH-001.',
+        time: '8:03 AM',
+        isRead: true,
+      ),
+    ],
+  ),
 ];
 
 List<_NotifSection> _buildNotifTypesSections() => [
-  _NotifSection(label: 'NOTIFICATION TYPES', items: [
-    _NotifData(type: _NotifType.actionRequired,
-      title: 'Income Certificate . Action required',
-      body: 'Upload your income proof by 15 Apr to avoid rejection.',
-      time: '8:03 AM', actionLabel: 'Upload now', isRead: false),
-    _NotifData(type: _NotifType.statusUpdate,
-      title: 'Income Certificate . Action required',
-      body: 'Upload your income proof by 15 Apr to avoid rejection.',
-      time: '8:03 AM', isRead: false),
-    _NotifData(type: _NotifType.reminder,
-      title: 'Draft expiring . Income Certificate',
-      body: 'Your draft expires in 5 days.',
-      time: '8:03 AM', isRead: true),
-    _NotifData(type: _NotifType.info,
-      title: 'Birth Certificate . Submitted',
-      body: 'Reference: BC-2026-MH-001.',
-      time: '8:03 AM', isRead: true),
-  ]),
+  _NotifSection(
+    label: 'NOTIFICATION TYPES',
+    items: [
+      _NotifData(
+        type: _NotifType.actionRequired,
+        title: 'Income Certificate . Action required',
+        body: 'Upload your income proof by 15 Apr to avoid rejection.',
+        time: '8:03 AM',
+        actionLabel: 'Upload now',
+        isRead: false,
+      ),
+      _NotifData(
+        type: _NotifType.statusUpdate,
+        title: 'Income Certificate . Action required',
+        body: 'Upload your income proof by 15 Apr to avoid rejection.',
+        time: '8:03 AM',
+        isRead: false,
+      ),
+      _NotifData(
+        type: _NotifType.reminder,
+        title: 'Draft expiring . Income Certificate',
+        body: 'Your draft expires in 5 days.',
+        time: '8:03 AM',
+        isRead: true,
+      ),
+      _NotifData(
+        type: _NotifType.info,
+        title: 'Birth Certificate . Submitted',
+        body: 'Reference: BC-2026-MH-001.',
+        time: '8:03 AM',
+        isRead: true,
+      ),
+    ],
+  ),
 ];
 
 // -- Reminder alerts ---------------------------------------------------------
@@ -16860,32 +17478,36 @@ class _ReminderAlert {
 List<_ReminderAlert> _buildReminderAlerts() => [
   _ReminderAlert(
     title: '30 days before expiry',
-    body: 'Your Income Certificate expires on 15 May 2026 (30 days away). '
-          'Renew early to avoid a service gap: bit.ly/renew-mh.',
+    body:
+        'Your Income Certificate expires on 15 May 2026 (30 days away). '
+        'Renew early to avoid a service gap: bit.ly/renew-mh.',
     variant: Ux4gBannerVariant.infoLight,
     icon: Icons.info_outline_rounded,
     iconColor: const Color(0xFF14B8A6),
   ),
   _ReminderAlert(
     title: '5 days before expiry',
-    body: 'Your Income Certificate draft expires in 5 days (16 Apr). '
-          'Resume now: bit.ly/resume-mh.',
+    body:
+        'Your Income Certificate draft expires in 5 days (16 Apr). '
+        'Resume now: bit.ly/resume-mh.',
     variant: Ux4gBannerVariant.warningLight,
     icon: Icons.warning_amber_rounded,
     iconColor: const Color(0xFFF59E0B),
   ),
   _ReminderAlert(
     title: '2 days before expiry',
-    body: 'Only 2 days left. Submit your Income Certificate before 16 Apr '
-          'or your draft will be deleted. Resume: bit.ly/resume-mh.',
+    body:
+        'Only 2 days left. Submit your Income Certificate before 16 Apr '
+        'or your draft will be deleted. Resume: bit.ly/resume-mh.',
     variant: Ux4gBannerVariant.errorLight,
     icon: Icons.error_outline_rounded,
     iconColor: const Color(0xFFEF4444),
   ),
   _ReminderAlert(
     title: 'On expiry day',
-    body: 'Your Income Certificate draft expired on 16 Apr. Your saved data '
-          'has been removed. Start a new application: bit.ly/apply-mh.',
+    body:
+        'Your Income Certificate draft expired on 16 Apr. Your saved data '
+        'has been removed. Start a new application: bit.ly/apply-mh.',
     variant: Ux4gBannerVariant.errorLight,
     icon: Icons.error_outline_rounded,
     iconColor: const Color(0xFFEF4444),
@@ -16893,8 +17515,9 @@ List<_ReminderAlert> _buildReminderAlerts() => [
   ),
   _ReminderAlert(
     title: '1 hour before: Sent 10:13 AM',
-    body: 'In 1 hour: Your 11:00 AM field inspection. Revenue Inspector, '
-          'Sector 12 office. Directions: bit.ly/dir-mh.',
+    body:
+        'In 1 hour: Your 11:00 AM field inspection. Revenue Inspector, '
+        'Sector 12 office. Directions: bit.ly/dir-mh.',
     variant: Ux4gBannerVariant.successLight,
     icon: Icons.check_circle_outline_rounded,
     iconColor: const Color(0xFF22C55E),
@@ -16932,25 +17555,39 @@ class _NotifRemindersMockupState extends State<_NotifRemindersMockup> {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Container(
-                            width: 64, height: 64,
+                            width: 64,
+                            height: 64,
                             decoration: const BoxDecoration(
                               color: Color(0xFFF3F4F6),
                               shape: BoxShape.circle,
                             ),
                             alignment: Alignment.center,
-                            child: const Icon(Icons.notifications_none_outlined,
-                              size: 32, color: Color(0xFF9CA3AF)),
+                            child: const Icon(
+                              Icons.notifications_none_outlined,
+                              size: 32,
+                              color: Color(0xFF9CA3AF),
+                            ),
                           ),
                           const SizedBox(height: 16),
-                          const Text('No reminders',
-                            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700,
-                              color: Color(0xFF111827)),
-                            textAlign: TextAlign.center),
+                          const Text(
+                            'No reminders',
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w700,
+                              color: Color(0xFF111827),
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
                           const SizedBox(height: 8),
-                          const Text('All reminders have been dismissed.',
-                            style: TextStyle(fontSize: 13, color: Color(0xFF6B7280),
-                              height: 1.5),
-                            textAlign: TextAlign.center),
+                          const Text(
+                            'All reminders have been dismissed.',
+                            style: TextStyle(
+                              fontSize: 13,
+                              color: Color(0xFF6B7280),
+                              height: 1.5,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
                         ],
                       ),
                     ),
@@ -16959,38 +17596,58 @@ class _NotifRemindersMockupState extends State<_NotifRemindersMockup> {
                     padding: const EdgeInsets.symmetric(vertical: 8),
                     children: [
                       const _NotifSectionLabel(label: 'REMINDERS'),
-                      ...visible.map((alert) => Ux4gStatusBanner(
-                        variant: alert.variant,
-                        title: alert.title,
-                        subtitle: alert.body,
-                        leadingIcon: Icon(alert.icon,
-                          color: alert.iconColor, size: 20),
-                        trailingIcon: IconButton(
-                          icon: const Icon(Icons.close, size: 18,
-                            color: Color(0xFF6B7280)),
-                          onPressed: () => setState(() => alert.dismissed = true),
-                          padding: EdgeInsets.zero,
-                          constraints: const BoxConstraints(),
-                        ),
-                        actions: alert.actionLabel != null ? [
-                          TextButton(
-                            onPressed: () {},
-                            style: TextButton.styleFrom(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 8, vertical: 4),
-                              minimumSize: Size.zero,
-                              tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                            ),
-                            child: Text(alert.actionLabel!,
-                              style: const TextStyle(fontSize: 12,
-                                color: Color(0xFF2563EB),
-                                fontWeight: FontWeight.w600)),
+                      ...visible.map(
+                        (alert) => Ux4gStatusBanner(
+                          variant: alert.variant,
+                          title: alert.title,
+                          subtitle: alert.body,
+                          leadingIcon: Icon(
+                            alert.icon,
+                            color: alert.iconColor,
+                            size: 20,
                           ),
-                        ] : null,
-                        margin: const EdgeInsets.symmetric(
-                          horizontal: 12, vertical: 4),
-                        padding: const EdgeInsets.fromLTRB(12, 10, 4, 10),
-                      )),
+                          trailingIcon: IconButton(
+                            icon: const Icon(
+                              Icons.close,
+                              size: 18,
+                              color: Color(0xFF6B7280),
+                            ),
+                            onPressed: () =>
+                                setState(() => alert.dismissed = true),
+                            padding: EdgeInsets.zero,
+                            constraints: const BoxConstraints(),
+                          ),
+                          actions: alert.actionLabel != null
+                              ? [
+                                  TextButton(
+                                    onPressed: () {},
+                                    style: TextButton.styleFrom(
+                                      padding: const EdgeInsets.symmetric(
+                                        horizontal: 8,
+                                        vertical: 4,
+                                      ),
+                                      minimumSize: Size.zero,
+                                      tapTargetSize:
+                                          MaterialTapTargetSize.shrinkWrap,
+                                    ),
+                                    child: Text(
+                                      alert.actionLabel!,
+                                      style: const TextStyle(
+                                        fontSize: 12,
+                                        color: Color(0xFF2563EB),
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                                  ),
+                                ]
+                              : null,
+                          margin: const EdgeInsets.symmetric(
+                            horizontal: 12,
+                            vertical: 4,
+                          ),
+                          padding: const EdgeInsets.fromLTRB(12, 10, 4, 10),
+                        ),
+                      ),
                     ],
                   ),
           ),
@@ -17013,29 +17670,48 @@ class _NotifPanelHeader extends StatelessWidget {
         Container(
           color: Colors.white,
           padding: const EdgeInsets.fromLTRB(16, 14, 4, 14),
-          child: Row(children: [
-            const Text('Notification',
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700,
-                color: Color(0xFF111827))),
-            const Spacer(),
-            TextButton(
-              onPressed: onMarkAsRead,
-              style: TextButton.styleFrom(
-                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                minimumSize: Size.zero,
-                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+          child: Row(
+            children: [
+              const Text(
+                'Notification',
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w700,
+                  color: Color(0xFF111827),
+                ),
               ),
-              child: const Text('Mark as read',
-                style: TextStyle(fontSize: 13, color: Color(0xFF6B7280),
-                  fontWeight: FontWeight.w500)),
-            ),
-            IconButton(
-              icon: const Icon(Icons.close, size: 20, color: Color(0xFF6B7280)),
-              onPressed: onClose ?? () {},
-              padding: const EdgeInsets.all(8),
-              constraints: const BoxConstraints(),
-            ),
-          ]),
+              const Spacer(),
+              TextButton(
+                onPressed: onMarkAsRead,
+                style: TextButton.styleFrom(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 8,
+                    vertical: 4,
+                  ),
+                  minimumSize: Size.zero,
+                  tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                ),
+                child: const Text(
+                  'Mark as read',
+                  style: TextStyle(
+                    fontSize: 13,
+                    color: Color(0xFF6B7280),
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ),
+              IconButton(
+                icon: const Icon(
+                  Icons.close,
+                  size: 20,
+                  color: Color(0xFF6B7280),
+                ),
+                onPressed: onClose ?? () {},
+                padding: const EdgeInsets.all(8),
+                constraints: const BoxConstraints(),
+              ),
+            ],
+          ),
         ),
         const Divider(height: 1, thickness: 1, color: _border),
       ],
@@ -17052,9 +17728,15 @@ class _NotifSectionLabel extends StatelessWidget {
     return Container(
       color: Colors.white,
       padding: const EdgeInsets.fromLTRB(16, 14, 16, 6),
-      child: Text(label,
-        style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w600,
-          color: Color(0xFF9CA3AF), letterSpacing: 0.6)),
+      child: Text(
+        label,
+        style: const TextStyle(
+          fontSize: 11,
+          fontWeight: FontWeight.w600,
+          color: Color(0xFF9CA3AF),
+          letterSpacing: 0.6,
+        ),
+      ),
     );
   }
 }
@@ -17074,8 +17756,12 @@ class _NotifTile extends StatelessWidget {
         children: [
           Container(
             margin: const EdgeInsets.only(top: 5),
-            width: 8, height: 8,
-            decoration: BoxDecoration(color: item.type.dotColor, shape: BoxShape.circle),
+            width: 8,
+            height: 8,
+            decoration: BoxDecoration(
+              color: item.type.dotColor,
+              shape: BoxShape.circle,
+            ),
           ),
           const SizedBox(width: 10),
           Expanded(
@@ -17085,26 +17771,52 @@ class _NotifTile extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(item.type.label,
-                      style: TextStyle(fontSize: 11, color: item.type.dotColor,
-                        fontWeight: FontWeight.w600)),
-                    Text(item.time,
-                      style: const TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+                    Text(
+                      item.type.label,
+                      style: TextStyle(
+                        fontSize: 11,
+                        color: item.type.dotColor,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    Text(
+                      item.time,
+                      style: const TextStyle(
+                        fontSize: 11,
+                        color: Color(0xFF9CA3AF),
+                      ),
+                    ),
                   ],
                 ),
                 const SizedBox(height: 4),
-                Text(item.title,
-                  style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w700,
-                    color: Color(0xFF111827), height: 1.3)),
+                Text(
+                  item.title,
+                  style: const TextStyle(
+                    fontSize: 13,
+                    fontWeight: FontWeight.w700,
+                    color: Color(0xFF111827),
+                    height: 1.3,
+                  ),
+                ),
                 const SizedBox(height: 3),
-                Text(item.body,
-                  style: const TextStyle(fontSize: 12, color: Color(0xFF6B7280),
-                    height: 1.45)),
+                Text(
+                  item.body,
+                  style: const TextStyle(
+                    fontSize: 12,
+                    color: Color(0xFF6B7280),
+                    height: 1.45,
+                  ),
+                ),
                 if (item.actionLabel != null) ...[
                   const SizedBox(height: 6),
-                  Text(item.actionLabel!,
-                    style: const TextStyle(fontSize: 12, color: Color(0xFF2563EB),
-                      fontWeight: FontWeight.w600)),
+                  Text(
+                    item.actionLabel!,
+                    style: const TextStyle(
+                      fontSize: 12,
+                      color: Color(0xFF2563EB),
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
                 ],
               ],
             ),
@@ -17128,7 +17840,9 @@ class _NotifListMockupState extends State<_NotifListMockup> {
   @override
   void initState() {
     super.initState();
-    _sections = widget.showTypes ? _buildNotifTypesSections() : _buildDefaultNotifSections();
+    _sections = widget.showTypes
+        ? _buildNotifTypesSections()
+        : _buildDefaultNotifSections();
   }
 
   @override
@@ -17136,7 +17850,9 @@ class _NotifListMockupState extends State<_NotifListMockup> {
     super.didUpdateWidget(old);
     if (old.showTypes != widget.showTypes) {
       setState(() {
-        _sections = widget.showTypes ? _buildNotifTypesSections() : _buildDefaultNotifSections();
+        _sections = widget.showTypes
+            ? _buildNotifTypesSections()
+            : _buildDefaultNotifSections();
       });
     }
   }
@@ -17144,7 +17860,9 @@ class _NotifListMockupState extends State<_NotifListMockup> {
   void _markAllAsRead() {
     setState(() {
       for (final s in _sections) {
-        for (final item in s.items) { item.isRead = true; }
+        for (final item in s.items) {
+          item.isRead = true;
+        }
       }
     });
   }
@@ -17168,12 +17886,21 @@ class _NotifListMockupState extends State<_NotifListMockup> {
                 final row = rows[index];
                 if (row is String) return _NotifSectionLabel(label: row);
                 final item = row as _NotifData;
-                final nextIsItem = index + 1 < rows.length && rows[index + 1] is _NotifData;
-                return Column(mainAxisSize: MainAxisSize.min, children: [
-                  _NotifTile(item: item),
-                  if (nextIsItem) const Divider(height: 1, thickness: 1,
-                    color: Color(0xFFE5E7EB), indent: 34),
-                ]);
+                final nextIsItem =
+                    index + 1 < rows.length && rows[index + 1] is _NotifData;
+                return Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    _NotifTile(item: item),
+                    if (nextIsItem)
+                      const Divider(
+                        height: 1,
+                        thickness: 1,
+                        color: Color(0xFFE5E7EB),
+                        indent: 34,
+                      ),
+                  ],
+                );
               },
             ),
           ),
@@ -17211,7 +17938,8 @@ class _NotifEmptyMockup extends StatelessWidget {
                       width: 64,
                       height: 64,
                       decoration: BoxDecoration(
-                        color: _iconBgAllCaughtUp,   // change to _iconBgNever for "never had" state
+                        color:
+                            _iconBgAllCaughtUp, // change to _iconBgNever for "never had" state
                         shape: BoxShape.circle,
                       ),
                       alignment: Alignment.center,
@@ -17261,11 +17989,16 @@ final notificationComponent = WidgetbookComponent(
       builder: (context) {
         final variant = context.knobs.list(
           label: 'Variant',
-          options: const ['With Notifications', 'Notification Types', 'Empty State'],
+          options: const [
+            'With Notifications',
+            'Notification Types',
+            'Empty State',
+          ],
           initialOption: 'With Notifications',
-          description: 'Switch between a populated list, type showcase, and empty state.\n\n'
-            'Unread ? gray bg (0xFFF3F4F6) | Read ? white bg. '
-            'Tap "Mark as read" to clear.',
+          description:
+              'Switch between a populated list, type showcase, and empty state.\n\n'
+              'Unread ? gray bg (0xFFF3F4F6) | Read ? white bg. '
+              'Tap "Mark as read" to clear.',
         );
         final Widget child = switch (variant) {
           'Notification Types' => const _NotifListMockup(showTypes: true),
@@ -17279,11 +18012,12 @@ final notificationComponent = WidgetbookComponent(
         };
         return ComponentDocs(
           name: 'Notification',
-          description: 'Notification panel pattern. Unread items have a gray background '
-            '(Color(0xFFF3F4F6)); read items are white. '
-            '"Mark as read" clears all unread states. '
-            'Empty state: bell icon shown in a 64x64 rounded container '
-            '(0xFFF3F4F6 for all-caught-up; 0xFFEFF6FF for never-had-any).',
+          description:
+              'Notification panel pattern. Unread items have a gray background '
+              '(Color(0xFFF3F4F6)); read items are white. '
+              '"Mark as read" clears all unread states. '
+              'Empty state: bell icon shown in a 64x64 rounded container '
+              '(0xFFF3F4F6 for all-caught-up; 0xFFEFF6FF for never-had-any).',
           code: code,
           center: true,
           child: child,
@@ -17293,7 +18027,8 @@ final notificationComponent = WidgetbookComponent(
   ],
 );
 
-const _notifDefaultCode = r'''// Notification panel . With Notifications (360 . 760)
+const _notifDefaultCode =
+    r'''// Notification panel . With Notifications (360 . 760)
 Container(
   width: 360, height: 760, color: Colors.white,
   child: Column(children: [
@@ -17376,7 +18111,8 @@ Container(
   ]),
 )''';
 
-const _notifTypesCode = r'''// Notification panel . Notification Types (360 . 760)
+const _notifTypesCode =
+    r'''// Notification panel . Notification Types (360 . 760)
 // Dot + label color match the type. Unread = 0xFFF3F4F6 bg | Read = white bg.
 Container(
   width: 360, height: 760, color: Colors.white,
@@ -17504,7 +18240,9 @@ class _ReminderAlertMockupState extends State<_ReminderAlertMockup> {
               children: [
                 // alert card pinned to the bottom
                 Positioned(
-                  left: 0, right: 0, bottom: 0,
+                  left: 0,
+                  right: 0,
+                  bottom: 0,
                   child: Container(
                     margin: const EdgeInsets.fromLTRB(12, 0, 12, 12),
                     decoration: BoxDecoration(
@@ -17527,31 +18265,43 @@ class _ReminderAlertMockupState extends State<_ReminderAlertMockup> {
                           Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Icon(widget.alert.icon,
-                                color: widget.alert.iconColor, size: 20),
+                              Icon(
+                                widget.alert.icon,
+                                color: widget.alert.iconColor,
+                                size: 20,
+                              ),
                               const SizedBox(width: 10),
                               Expanded(
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text(widget.alert.title,
+                                    Text(
+                                      widget.alert.title,
                                       style: const TextStyle(
                                         fontSize: 13,
                                         fontWeight: FontWeight.w700,
-                                        color: Color(0xFF111827))),
+                                        color: Color(0xFF111827),
+                                      ),
+                                    ),
                                     const SizedBox(height: 3),
-                                    Text(widget.alert.body,
+                                    Text(
+                                      widget.alert.body,
                                       style: const TextStyle(
                                         fontSize: 12,
-                                        color: Color(0xFF6B7280))),
+                                        color: Color(0xFF6B7280),
+                                      ),
+                                    ),
                                   ],
                                 ),
                               ),
                               IconButton(
-                                icon: const Icon(Icons.close, size: 16,
-                                  color: Color(0xFF9CA3AF)),
+                                icon: const Icon(
+                                  Icons.close,
+                                  size: 16,
+                                  color: Color(0xFF9CA3AF),
+                                ),
                                 onPressed: () =>
-                                  setState(() => _dismissed = true),
+                                    setState(() => _dismissed = true),
                                 padding: EdgeInsets.zero,
                                 constraints: const BoxConstraints(),
                               ),
@@ -17563,14 +18313,20 @@ class _ReminderAlertMockupState extends State<_ReminderAlertMockup> {
                               onPressed: () {},
                               style: TextButton.styleFrom(
                                 padding: const EdgeInsets.symmetric(
-                                  horizontal: 4, vertical: 2),
+                                  horizontal: 4,
+                                  vertical: 2,
+                                ),
                                 minimumSize: Size.zero,
                                 tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                               ),
-                              child: Text(widget.alert.actionLabel!,
-                                style: const TextStyle(fontSize: 12,
+                              child: Text(
+                                widget.alert.actionLabel!,
+                                style: const TextStyle(
+                                  fontSize: 12,
                                   color: Color(0xFF2563EB),
-                                  fontWeight: FontWeight.w600)),
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
                             ),
                           ],
                         ],
@@ -17586,7 +18342,8 @@ class _ReminderAlertMockupState extends State<_ReminderAlertMockup> {
 
 // -- Per-type code snippets ----------------------------------------------------
 
-const _reminder30DaysCode = r'''// Reminder Alert . 30 days before expiry (infoLight)
+const _reminder30DaysCode =
+    r'''// Reminder Alert . 30 days before expiry (infoLight)
 Ux4gStatusBanner(
   variant: Ux4gBannerVariant.infoLight,
   title: '30 days before expiry',
@@ -17602,7 +18359,8 @@ Ux4gStatusBanner(
   padding: EdgeInsets.fromLTRB(12, 10, 4, 10),
 )''';
 
-const _reminder5DaysCode = r'''// Reminder Alert . 5 days before expiry (warningLight)
+const _reminder5DaysCode =
+    r'''// Reminder Alert . 5 days before expiry (warningLight)
 Ux4gStatusBanner(
   variant: Ux4gBannerVariant.warningLight,
   title: '5 days before expiry',
@@ -17618,7 +18376,8 @@ Ux4gStatusBanner(
   padding: EdgeInsets.fromLTRB(12, 10, 4, 10),
 )''';
 
-const _reminder2DaysCode = r'''// Reminder Alert . 2 days before expiry (errorLight)
+const _reminder2DaysCode =
+    r'''// Reminder Alert . 2 days before expiry (errorLight)
 Ux4gStatusBanner(
   variant: Ux4gBannerVariant.errorLight,
   title: '2 days before expiry',
@@ -17634,7 +18393,8 @@ Ux4gStatusBanner(
   padding: EdgeInsets.fromLTRB(12, 10, 4, 10),
 )''';
 
-const _reminderExpiryDayCode = r'''// Reminder Alert . On expiry day (errorLight + Action button)
+const _reminderExpiryDayCode =
+    r'''// Reminder Alert . On expiry day (errorLight + Action button)
 Ux4gStatusBanner(
   variant: Ux4gBannerVariant.errorLight,
   title: 'On expiry day',
@@ -17702,9 +18462,10 @@ final reminderAlertsComponent = WidgetbookComponent(
             '1 hour before',
           ],
           initialOption: '30 days before expiry',
-          description: 'Each type maps to a Ux4gStatusBanner variant:\n'
-            'infoLight (30 days) . warningLight (5 days) . '
-            'errorLight (2 days / expiry day) . successLight (1 hour)',
+          description:
+              'Each type maps to a Ux4gStatusBanner variant:\n'
+              'infoLight (30 days) . warningLight (5 days) . '
+              'errorLight (2 days / expiry day) . successLight (1 hour)',
         );
         final alert = _buildReminderAlerts().firstWhere(
           (a) => scenario == '1 hour before'
@@ -17713,9 +18474,10 @@ final reminderAlertsComponent = WidgetbookComponent(
         );
         return ComponentDocs(
           name: 'Reminder Alert',
-          description: 'Deadline-aware reminder alerts using Ux4gStatusBanner. '
-            'Variant changes by urgency: infoLight . warningLight . '
-            'errorLight . successLight. Tap X to dismiss.',
+          description:
+              'Deadline-aware reminder alerts using Ux4gStatusBanner. '
+              'Variant changes by urgency: infoLight . warningLight . '
+              'errorLight . successLight. Tap X to dismiss.',
           code: _reminderCodeMap[scenario] ?? _reminder30DaysCode,
           center: true,
           child: _ReminderAlertMockup(key: ValueKey(scenario), alert: alert),
@@ -17757,10 +18519,7 @@ const _defaultPrefChips = [
 class _PrefChipBar extends StatefulWidget {
   final List<_PrefChipData> chips;
   final int initialIndex;
-  const _PrefChipBar({
-    required this.chips,
-    this.initialIndex = 0,
-  });
+  const _PrefChipBar({required this.chips, this.initialIndex = 0});
   @override
   State<_PrefChipBar> createState() => _PrefChipBarState();
 }
@@ -17797,24 +18556,31 @@ class _PrefChipBarState extends State<_PrefChipBar> {
             unselectedBorderColor: const Color(0xFFD1D5DB),
             unselectedTextColor: const Color(0xFF374151),
             trailingContent: sel
-                ? Text('${chip.count}',
+                ? Text(
+                    '${chip.count}',
                     style: const TextStyle(
                       fontSize: 9,
                       fontWeight: FontWeight.w700,
                       color: Colors.white,
-                    ))
+                    ),
+                  )
                 : Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 1),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 5,
+                      vertical: 1,
+                    ),
                     decoration: BoxDecoration(
                       color: const Color(0xFF2563EB),
                       borderRadius: BorderRadius.circular(10),
                     ),
-                    child: Text('${chip.count}',
+                    child: Text(
+                      '${chip.count}',
                       style: const TextStyle(
                         fontSize: 9,
                         fontWeight: FontWeight.w700,
                         color: Colors.white,
-                      )),
+                      ),
+                    ),
                   ),
           );
         },
@@ -17840,10 +18606,15 @@ class _PrefPageHeader extends StatelessWidget {
         width: double.infinity,
         padding: const EdgeInsets.fromLTRB(16, 12, 16, 4),
         alignment: Alignment.centerLeft,
-        child: const Text('Notification Preferences',
+        child: const Text(
+          'Notification Preferences',
           textAlign: TextAlign.left,
-          style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700,
-            color: _prefTitle)),
+          style: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.w700,
+            color: _prefTitle,
+          ),
+        ),
       ),
       _PrefChipBar(chips: chips),
     ],
@@ -17893,9 +18664,12 @@ class _PrefToggleRow extends StatelessWidget {
   final bool value;
   final ValueChanged<bool>? onChanged;
   const _PrefToggleRow({
-    required this.icon, required this.iconColor,
-    required this.label, this.sub,
-    required this.value, this.onChanged,
+    required this.icon,
+    required this.iconColor,
+    required this.label,
+    this.sub,
+    required this.value,
+    this.onChanged,
   });
   @override
   Widget build(BuildContext context) => Padding(
@@ -17903,7 +18677,8 @@ class _PrefToggleRow extends StatelessWidget {
     child: Row(
       children: [
         Container(
-          width: 32, height: 32,
+          width: 32,
+          height: 32,
           decoration: BoxDecoration(
             color: iconColor.withValues(alpha: 0.12),
             borderRadius: BorderRadius.circular(8),
@@ -17912,15 +18687,26 @@ class _PrefToggleRow extends StatelessWidget {
           child: Icon(icon, color: iconColor, size: 16),
         ),
         const SizedBox(width: 12),
-        Expanded(child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(label, style: const TextStyle(fontSize: 12,
-              fontWeight: FontWeight.w600, color: _prefTitle)),
-            if (sub != null)
-              Text(sub!, style: const TextStyle(fontSize: 10, color: _prefSub)),
-          ],
-        )),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                label,
+                style: const TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.w600,
+                  color: _prefTitle,
+                ),
+              ),
+              if (sub != null)
+                Text(
+                  sub!,
+                  style: const TextStyle(fontSize: 10, color: _prefSub),
+                ),
+            ],
+          ),
+        ),
         Switch(
           value: value,
           onChanged: onChanged,
@@ -17947,61 +18733,63 @@ class _PrefChannelScreenState extends State<_PrefChannelScreen> {
     child: Column(
       children: [
         const _PrefPageHeader(),
-        Expanded(child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                margin: const EdgeInsets.symmetric(horizontal: 12),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(10),
-                  border: Border.all(color: _prefBorder),
+        Expanded(
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 12),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(color: _prefBorder),
+                  ),
+                  child: Column(
+                    children: [
+                      _PrefToggleRow(
+                        icon: Icons.notifications_outlined,
+                        iconColor: _prefPurple,
+                        label: '+91 9696-XXXXX',
+                        sub: 'Push alerts on this device',
+                        value: _push,
+                        onChanged: (v) => setState(() => _push = v),
+                      ),
+                      Divider(height: 1, color: _prefBorder),
+                      _PrefToggleRow(
+                        icon: Icons.email_outlined,
+                        iconColor: const Color(0xFF2563EB),
+                        label: 'Email',
+                        sub: 'user@digimail.gov',
+                        value: _email,
+                        onChanged: (v) => setState(() => _email = v),
+                      ),
+                      Divider(height: 1, color: _prefBorder),
+                      _PrefToggleRow(
+                        icon: Icons.apps,
+                        iconColor: const Color(0xFF0891B2),
+                        label: 'App notifications',
+                        sub: 'Push alerts on this device',
+                        value: _app,
+                        onChanged: (v) => setState(() => _app = v),
+                      ),
+                      Divider(height: 1, color: _prefBorder),
+                      _PrefToggleRow(
+                        icon: Icons.chat_bubble_outline,
+                        iconColor: const Color(0xFF16A34A),
+                        label: 'WhatsApp',
+                        sub: 'Opted out',
+                        value: _whatsapp,
+                        onChanged: (v) => setState(() => _whatsapp = v),
+                      ),
+                    ],
+                  ),
                 ),
-                child: Column(
-                  children: [
-                    _PrefToggleRow(
-                      icon: Icons.notifications_outlined,
-                      iconColor: _prefPurple,
-                      label: '+91 9696-XXXXX',
-                      sub: 'Push alerts on this device',
-                      value: _push,
-                      onChanged: (v) => setState(() => _push = v),
-                    ),
-                    Divider(height: 1, color: _prefBorder),
-                    _PrefToggleRow(
-                      icon: Icons.email_outlined,
-                      iconColor: const Color(0xFF2563EB),
-                      label: 'Email',
-                      sub: 'user@digimail.gov',
-                      value: _email,
-                      onChanged: (v) => setState(() => _email = v),
-                    ),
-                    Divider(height: 1, color: _prefBorder),
-                    _PrefToggleRow(
-                      icon: Icons.apps,
-                      iconColor: const Color(0xFF0891B2),
-                      label: 'App notifications',
-                      sub: 'Push alerts on this device',
-                      value: _app,
-                      onChanged: (v) => setState(() => _app = v),
-                    ),
-                    Divider(height: 1, color: _prefBorder),
-                    _PrefToggleRow(
-                      icon: Icons.chat_bubble_outline,
-                      iconColor: const Color(0xFF16A34A),
-                      label: 'WhatsApp',
-                      sub: 'Opted out',
-                      value: _whatsapp,
-                      onChanged: (v) => setState(() => _whatsapp = v),
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(height: 16),
-            ],
+                const SizedBox(height: 16),
+              ],
+            ),
           ),
-        )),
+        ),
       ],
     ),
   );
@@ -18018,80 +18806,113 @@ class _PrefFrequencyScreen extends StatefulWidget {
 class _PrefFrequencyScreenState extends State<_PrefFrequencyScreen> {
   String _selected = 'Immediately';
   static const _options = [
-    _FreqOption('Immediately', 'Get each notification the moment it�',
-      Icons.flash_on_outlined),
-    _FreqOption('Daily Summary', 'One digest every day at 6:00 PM.',
-      Icons.today_outlined),
-    _FreqOption('Weekly Digest', 'A round-up every Monday morning.',
-      Icons.calendar_month_outlined),
+    _FreqOption(
+      'Immediately',
+      'Get each notification the moment it�',
+      Icons.flash_on_outlined,
+    ),
+    _FreqOption(
+      'Daily Summary',
+      'One digest every day at 6:00 PM.',
+      Icons.today_outlined,
+    ),
+    _FreqOption(
+      'Weekly Digest',
+      'A round-up every Monday morning.',
+      Icons.calendar_month_outlined,
+    ),
   ];
   @override
   Widget build(BuildContext context) => _PhoneFrame(
     child: Column(
       children: [
         const _PrefPageHeader(),
-        Expanded(child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                margin: const EdgeInsets.symmetric(horizontal: 12),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(10),
-                  border: Border.all(color: _prefBorder),
-                ),
-                child: Column(
-                  children: _options.asMap().entries.map((e) {
-                    final opt = e.value;
-                    final isLast = e.key == _options.length - 1;
-                    final selected = _selected == opt.label;
-                    return Column(
-                      children: [
-                        InkWell(
-                          onTap: () => setState(() => _selected = opt.label),
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 16, vertical: 12),
-                            child: Row(
-                              children: [
-                                Icon(opt.icon,
-                                  color: selected ? _prefPurple : _prefMuted,
-                                  size: 20),
-                                const SizedBox(width: 12),
-                                Expanded(child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(opt.label,
-                                      style: TextStyle(fontSize: 12,
-                                        fontWeight: FontWeight.w600,
-                                        color: selected
-                                          ? _prefPurple : _prefTitle)),
-                                    Text(opt.sub,
-                                      style: const TextStyle(fontSize: 10,
-                                        color: _prefSub)),
-                                  ],
-                                )),
-                                if (selected)
-                                  const Icon(Icons.check_circle,
-                                    color: _prefPurple, size: 18)
-                                else
-                                  const Icon(Icons.radio_button_unchecked,
-                                    color: _prefMuted, size: 18),
-                              ],
+        Expanded(
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 12),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(color: _prefBorder),
+                  ),
+                  child: Column(
+                    children: _options.asMap().entries.map((e) {
+                      final opt = e.value;
+                      final isLast = e.key == _options.length - 1;
+                      final selected = _selected == opt.label;
+                      return Column(
+                        children: [
+                          InkWell(
+                            onTap: () => setState(() => _selected = opt.label),
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 16,
+                                vertical: 12,
+                              ),
+                              child: Row(
+                                children: [
+                                  Icon(
+                                    opt.icon,
+                                    color: selected ? _prefPurple : _prefMuted,
+                                    size: 20,
+                                  ),
+                                  const SizedBox(width: 12),
+                                  Expanded(
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          opt.label,
+                                          style: TextStyle(
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.w600,
+                                            color: selected
+                                                ? _prefPurple
+                                                : _prefTitle,
+                                          ),
+                                        ),
+                                        Text(
+                                          opt.sub,
+                                          style: const TextStyle(
+                                            fontSize: 10,
+                                            color: _prefSub,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  if (selected)
+                                    const Icon(
+                                      Icons.check_circle,
+                                      color: _prefPurple,
+                                      size: 18,
+                                    )
+                                  else
+                                    const Icon(
+                                      Icons.radio_button_unchecked,
+                                      color: _prefMuted,
+                                      size: 18,
+                                    ),
+                                ],
+                              ),
                             ),
                           ),
-                        ),
-                        if (!isLast) Divider(height: 1, color: _prefBorder),
-                      ],
-                    );
-                  }).toList(),
+                          if (!isLast) Divider(height: 1, color: _prefBorder),
+                        ],
+                      );
+                    }).toList(),
+                  ),
                 ),
-              ),
-              const SizedBox(height: 16),
-            ],
+                const SizedBox(height: 16),
+              ],
+            ),
           ),
-        )),
+        ),
       ],
     ),
   );
@@ -18110,8 +18931,7 @@ class _PrefCategory {
   final String summary;
   final List<_PrefNotifItem> items;
   bool expanded;
-  _PrefCategory(this.name, this.summary, this.items,
-    {this.expanded = false});
+  _PrefCategory(this.name, this.summary, this.items, {this.expanded = false});
 }
 
 class _PrefNotifItem {
@@ -18163,84 +18983,124 @@ class _PrefCategoryScreenState extends State<_PrefCategoryScreen> {
     child: Column(
       children: [
         const _PrefPageHeader(),
-        Expanded(child: ListView.builder(
-          padding: const EdgeInsets.fromLTRB(12, 8, 12, 12),
-          itemCount: _cats.length,
-          itemBuilder: (_, i) {
-            final cat = _cats[i];
-            return Container(
-              margin: const EdgeInsets.only(bottom: 8),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(10),
-                border: Border.all(color: _prefBorder),
-              ),
-              child: Column(
-                children: [
-                  InkWell(
-                    borderRadius: BorderRadius.circular(10),
-                    onTap: () => setState(
-                      () => cat.expanded = !cat.expanded),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 14, vertical: 12),
-                      child: Row(children: [
-                        Expanded(child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+        Expanded(
+          child: ListView.builder(
+            padding: const EdgeInsets.fromLTRB(12, 8, 12, 12),
+            itemCount: _cats.length,
+            itemBuilder: (_, i) {
+              final cat = _cats[i];
+              return Container(
+                margin: const EdgeInsets.only(bottom: 8),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(10),
+                  border: Border.all(color: _prefBorder),
+                ),
+                child: Column(
+                  children: [
+                    InkWell(
+                      borderRadius: BorderRadius.circular(10),
+                      onTap: () => setState(() => cat.expanded = !cat.expanded),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 14,
+                          vertical: 12,
+                        ),
+                        child: Row(
                           children: [
-                            Text(cat.name, style: const TextStyle(
-                              fontSize: 12, fontWeight: FontWeight.w700,
-                              color: _prefTitle)),
-                            Text(cat.summary, style: const TextStyle(
-                              fontSize: 10, color: _prefSub)),
-                          ],
-                        )),
-                        Icon(cat.expanded
-                          ? Icons.keyboard_arrow_up
-                          : Icons.keyboard_arrow_down,
-                          color: _prefMuted, size: 18),
-                      ]),
-                    ),
-                  ),
-                  if (cat.expanded) ...[
-                    Divider(height: 1, color: _prefBorder),
-                    ...cat.items.map((item) => Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 14, vertical: 6),
-                      child: Row(children: [
-                        Expanded(child: Text(item.label,
-                          style: const TextStyle(fontSize: 11,
-                            color: _prefTitle))),
-                        if (item.locked)
-                          Container(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 6, vertical: 2),
-                            decoration: BoxDecoration(
-                              color: const Color(0xFFF3F4F6),
-                              borderRadius: BorderRadius.circular(4),
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    cat.name,
+                                    style: const TextStyle(
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w700,
+                                      color: _prefTitle,
+                                    ),
+                                  ),
+                                  Text(
+                                    cat.summary,
+                                    style: const TextStyle(
+                                      fontSize: 10,
+                                      color: _prefSub,
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
-                            child: const Text('Locked',
-                              style: TextStyle(fontSize: 9,
-                                color: _prefMuted)),
+                            Icon(
+                              cat.expanded
+                                  ? Icons.keyboard_arrow_up
+                                  : Icons.keyboard_arrow_down,
+                              color: _prefMuted,
+                              size: 18,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    if (cat.expanded) ...[
+                      Divider(height: 1, color: _prefBorder),
+                      ...cat.items
+                          .map(
+                            (item) => Padding(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 14,
+                                vertical: 6,
+                              ),
+                              child: Row(
+                                children: [
+                                  Expanded(
+                                    child: Text(
+                                      item.label,
+                                      style: const TextStyle(
+                                        fontSize: 11,
+                                        color: _prefTitle,
+                                      ),
+                                    ),
+                                  ),
+                                  if (item.locked)
+                                    Container(
+                                      padding: const EdgeInsets.symmetric(
+                                        horizontal: 6,
+                                        vertical: 2,
+                                      ),
+                                      decoration: BoxDecoration(
+                                        color: const Color(0xFFF3F4F6),
+                                        borderRadius: BorderRadius.circular(4),
+                                      ),
+                                      child: const Text(
+                                        'Locked',
+                                        style: TextStyle(
+                                          fontSize: 9,
+                                          color: _prefMuted,
+                                        ),
+                                      ),
+                                    )
+                                  else
+                                    Switch(
+                                      value: item.enabled,
+                                      onChanged: (v) =>
+                                          setState(() => item.enabled = v),
+                                      activeColor: _prefPurple,
+                                      materialTapTargetSize:
+                                          MaterialTapTargetSize.shrinkWrap,
+                                    ),
+                                ],
+                              ),
+                            ),
                           )
-                        else
-                          Switch(
-                            value: item.enabled,
-                            onChanged: (v) =>
-                              setState(() => item.enabled = v),
-                            activeColor: _prefPurple,
-                            materialTapTargetSize:
-                              MaterialTapTargetSize.shrinkWrap,
-                          ),
-                      ]),
-                    )).toList(),
-                    const SizedBox(height: 4),
+                          .toList(),
+                      const SizedBox(height: 4),
+                    ],
                   ],
-                ],
-              ),
-            );
-          },
-        )),
+                ),
+              );
+            },
+          ),
+        ),
       ],
     ),
   );
@@ -18288,90 +19148,137 @@ class _PrefLockedScreenState extends State<_PrefLockedScreen> {
             borderRadius: BorderRadius.circular(8),
             border: Border.all(color: const Color(0xFFFED7AA)),
           ),
-          child: Row(children: const [
-            Icon(Icons.lock_outline, size: 14, color: Color(0xFFF59E0B)),
-            SizedBox(width: 8),
-            Expanded(child: Text(
-              'Some notifications are required and cannot be turned off.',
-              style: TextStyle(fontSize: 10, color: Color(0xFF92400E)))),
-          ]),
-        ),
-        Expanded(child: ListView.builder(
-          padding: const EdgeInsets.symmetric(horizontal: 12),
-          itemCount: _cats.length,
-          itemBuilder: (_, i) {
-            final cat = _cats[i];
-            return Container(
-              margin: const EdgeInsets.only(bottom: 8),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(10),
-                border: Border.all(color: _prefBorder),
-              ),
-              child: Column(children: [
-                InkWell(
-                  borderRadius: BorderRadius.circular(10),
-                  onTap: () => setState(
-                    () => cat.expanded = !cat.expanded),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 14, vertical: 12),
-                    child: Row(children: [
-                      Expanded(child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(cat.name, style: const TextStyle(
-                            fontSize: 12, fontWeight: FontWeight.w700,
-                            color: _prefTitle)),
-                          Text(cat.summary, style: const TextStyle(
-                            fontSize: 10, color: _prefSub)),
-                        ],
-                      )),
-                      Icon(cat.expanded
-                        ? Icons.keyboard_arrow_up
-                        : Icons.keyboard_arrow_down,
-                        color: _prefMuted, size: 18),
-                    ]),
-                  ),
+          child: Row(
+            children: const [
+              Icon(Icons.lock_outline, size: 14, color: Color(0xFFF59E0B)),
+              SizedBox(width: 8),
+              Expanded(
+                child: Text(
+                  'Some notifications are required and cannot be turned off.',
+                  style: TextStyle(fontSize: 10, color: Color(0xFF92400E)),
                 ),
-                if (cat.expanded) ...[
-                  Divider(height: 1, color: _prefBorder),
-                  ...cat.items.map((item) => Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 14, vertical: 6),
-                    child: Row(children: [
-                      Expanded(child: Text(item.label,
-                        style: const TextStyle(fontSize: 11,
-                          color: _prefTitle))),
-                      if (item.locked)
-                        Container(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 6, vertical: 2),
-                          decoration: BoxDecoration(
-                            color: const Color(0xFFF3F4F6),
-                            borderRadius: BorderRadius.circular(4),
-                          ),
-                          child: const Text('Locked',
-                            style: TextStyle(fontSize: 9,
-                              color: _prefMuted)),
-                        )
-                      else
-                        Switch(
-                          value: item.enabled,
-                          onChanged: (v) =>
-                            setState(() => item.enabled = v),
-                          activeColor: _prefPurple,
-                          materialTapTargetSize:
-                            MaterialTapTargetSize.shrinkWrap,
+              ),
+            ],
+          ),
+        ),
+        Expanded(
+          child: ListView.builder(
+            padding: const EdgeInsets.symmetric(horizontal: 12),
+            itemCount: _cats.length,
+            itemBuilder: (_, i) {
+              final cat = _cats[i];
+              return Container(
+                margin: const EdgeInsets.only(bottom: 8),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(10),
+                  border: Border.all(color: _prefBorder),
+                ),
+                child: Column(
+                  children: [
+                    InkWell(
+                      borderRadius: BorderRadius.circular(10),
+                      onTap: () => setState(() => cat.expanded = !cat.expanded),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 14,
+                          vertical: 12,
                         ),
-                    ]),
-                  )).toList(),
-                  const SizedBox(height: 4),
-                ],
-              ]),
-            );
-          },
-        )),
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    cat.name,
+                                    style: const TextStyle(
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w700,
+                                      color: _prefTitle,
+                                    ),
+                                  ),
+                                  Text(
+                                    cat.summary,
+                                    style: const TextStyle(
+                                      fontSize: 10,
+                                      color: _prefSub,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Icon(
+                              cat.expanded
+                                  ? Icons.keyboard_arrow_up
+                                  : Icons.keyboard_arrow_down,
+                              color: _prefMuted,
+                              size: 18,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    if (cat.expanded) ...[
+                      Divider(height: 1, color: _prefBorder),
+                      ...cat.items
+                          .map(
+                            (item) => Padding(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 14,
+                                vertical: 6,
+                              ),
+                              child: Row(
+                                children: [
+                                  Expanded(
+                                    child: Text(
+                                      item.label,
+                                      style: const TextStyle(
+                                        fontSize: 11,
+                                        color: _prefTitle,
+                                      ),
+                                    ),
+                                  ),
+                                  if (item.locked)
+                                    Container(
+                                      padding: const EdgeInsets.symmetric(
+                                        horizontal: 6,
+                                        vertical: 2,
+                                      ),
+                                      decoration: BoxDecoration(
+                                        color: const Color(0xFFF3F4F6),
+                                        borderRadius: BorderRadius.circular(4),
+                                      ),
+                                      child: const Text(
+                                        'Locked',
+                                        style: TextStyle(
+                                          fontSize: 9,
+                                          color: _prefMuted,
+                                        ),
+                                      ),
+                                    )
+                                  else
+                                    Switch(
+                                      value: item.enabled,
+                                      onChanged: (v) =>
+                                          setState(() => item.enabled = v),
+                                      activeColor: _prefPurple,
+                                      materialTapTargetSize:
+                                          MaterialTapTargetSize.shrinkWrap,
+                                    ),
+                                ],
+                              ),
+                            ),
+                          )
+                          .toList(),
+                      const SizedBox(height: 4),
+                    ],
+                  ],
+                ),
+              );
+            },
+          ),
+        ),
       ],
     ),
   );
@@ -18392,78 +19299,100 @@ class _PrefWhatsAppScreenState extends State<_PrefWhatsAppScreen> {
     child: Column(
       children: [
         const _PrefPageHeader(),
-        Expanded(child: SingleChildScrollView(
-          padding: const EdgeInsets.all(16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Text('What you will receive on WhatsApp',
-                style: TextStyle(fontSize: 13, fontWeight: FontWeight.w700,
-                  color: _prefTitle)),
-              const SizedBox(height: 12),
-              ...const [
-                'Application status changes',
-                'Appointment reminders (D-1 and H-1)',
-                'Action-required alerts with quick links',
-              ].map((s) => Padding(
-                padding: EdgeInsets.symmetric(vertical: 3),
-                child: Row(children: [
-                  Icon(Icons.check, color: Color(0xFF16A34A), size: 14),
-                  SizedBox(width: 8),
-                  Expanded(child: Text(s,
-                    style: TextStyle(fontSize: 11, color: _prefSub))),
-                ]),
-              )),
-              const SizedBox(height: 20),
-              Container(
-                padding: const EdgeInsets.all(12),
-                decoration: BoxDecoration(
-                  border: Border.all(color: _prefBorder),
-                  borderRadius: BorderRadius.circular(8),
-                  color: Colors.white,
-                ),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Checkbox(
-                      value: _consented,
-                      onChanged: (v) =>
-                        setState(() => _consented = v ?? false),
-                      activeColor: _prefPurple,
-                      materialTapTargetSize:
-                        MaterialTapTargetSize.shrinkWrap,
-                      visualDensity: VisualDensity.compact,
-                    ),
-                    const SizedBox(width: 8),
-                    const Expanded(child: Text(
-                      'I consent to receiving notifications on WhatsApp '
-                      'at +91 98765 43210.\nYou can withdraw this consent '
-                      'at any time. This checkbox is linked to DPDP Act 2023.',
-                      style: TextStyle(fontSize: 10, color: _prefSub))),
-                  ],
-                ),
-              ),
-              const SizedBox(height: 16),
-              SizedBox(
-                width: double.infinity,
-                child: ElevatedButton(
-                  onPressed: _consented ? () {} : null,
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: _prefPurple,
-                    foregroundColor: Colors.white,
-                    disabledBackgroundColor: _prefBorder,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8)),
-                    padding: const EdgeInsets.symmetric(vertical: 12),
+        Expanded(
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.all(16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  'What you will receive on WhatsApp',
+                  style: TextStyle(
+                    fontSize: 13,
+                    fontWeight: FontWeight.w700,
+                    color: _prefTitle,
                   ),
-                  child: const Text('Enable WhatsApp Notifications',
-                    style: TextStyle(fontSize: 12,
-                      fontWeight: FontWeight.w600)),
                 ),
-              ),
-            ],
+                const SizedBox(height: 12),
+                ...const [
+                  'Application status changes',
+                  'Appointment reminders (D-1 and H-1)',
+                  'Action-required alerts with quick links',
+                ].map(
+                  (s) => Padding(
+                    padding: EdgeInsets.symmetric(vertical: 3),
+                    child: Row(
+                      children: [
+                        Icon(Icons.check, color: Color(0xFF16A34A), size: 14),
+                        SizedBox(width: 8),
+                        Expanded(
+                          child: Text(
+                            s,
+                            style: TextStyle(fontSize: 11, color: _prefSub),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 20),
+                Container(
+                  padding: const EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    border: Border.all(color: _prefBorder),
+                    borderRadius: BorderRadius.circular(8),
+                    color: Colors.white,
+                  ),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Checkbox(
+                        value: _consented,
+                        onChanged: (v) =>
+                            setState(() => _consented = v ?? false),
+                        activeColor: _prefPurple,
+                        materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                        visualDensity: VisualDensity.compact,
+                      ),
+                      const SizedBox(width: 8),
+                      const Expanded(
+                        child: Text(
+                          'I consent to receiving notifications on WhatsApp '
+                          'at +91 98765 43210.\nYou can withdraw this consent '
+                          'at any time. This checkbox is linked to DPDP Act 2023.',
+                          style: TextStyle(fontSize: 10, color: _prefSub),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 16),
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    onPressed: _consented ? () {} : null,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: _prefPurple,
+                      foregroundColor: Colors.white,
+                      disabledBackgroundColor: _prefBorder,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      padding: const EdgeInsets.symmetric(vertical: 12),
+                    ),
+                    child: const Text(
+                      'Enable WhatsApp Notifications',
+                      style: TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
-        )),
+        ),
       ],
     ),
   );
@@ -18476,8 +19405,12 @@ class _PrefManageItem {
   final String? sub;
   final bool alwaysOn;
   bool enabled;
-  _PrefManageItem(this.label, {this.sub, this.alwaysOn = false,
-    this.enabled = true});
+  _PrefManageItem(
+    this.label, {
+    this.sub,
+    this.alwaysOn = false,
+    this.enabled = true,
+  });
 }
 
 class _PrefManageAllScreen extends StatefulWidget {
@@ -18488,22 +19421,32 @@ class _PrefManageAllScreen extends StatefulWidget {
 
 class _PrefManageAllScreenState extends State<_PrefManageAllScreen> {
   final _optional = [
-    _PrefManageItem('Status updates',
-      sub: 'Track progress of your applications'),
-    _PrefManageItem('Action reminders',
-      sub: 'Upload and payment reminders'),
-    _PrefManageItem('Certificates expiry',
-      sub: 'Renewal reminders before documents expire'),
-    _PrefManageItem('Promotional updates',
-      sub: 'New services and announcements', enabled: false),
+    _PrefManageItem(
+      'Status updates',
+      sub: 'Track progress of your applications',
+    ),
+    _PrefManageItem('Action reminders', sub: 'Upload and payment reminders'),
+    _PrefManageItem(
+      'Certificates expiry',
+      sub: 'Renewal reminders before documents expire',
+    ),
+    _PrefManageItem(
+      'Promotional updates',
+      sub: 'New services and announcements',
+      enabled: false,
+    ),
   ];
   final _mandatory = [
-    _PrefManageItem('SLA breach alerts',
+    _PrefManageItem(
+      'SLA breach alerts',
       sub: 'Mandatory statutory deadline notifications',
-      alwaysOn: true),
-    _PrefManageItem('Rejection notices',
+      alwaysOn: true,
+    ),
+    _PrefManageItem(
+      'Rejection notices',
       sub: 'Application rejections with reasons',
-      alwaysOn: true),
+      alwaysOn: true,
+    ),
   ];
 
   @override
@@ -18511,131 +19454,197 @@ class _PrefManageAllScreenState extends State<_PrefManageAllScreen> {
     child: Column(
       children: [
         const _PrefPageHeader(),
-        Expanded(child: SingleChildScrollView(
-          padding: const EdgeInsets.all(12),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Padding(
-                padding: EdgeInsets.only(left: 4, bottom: 8),
-                child: Text('OPTIONAL � YOU CAN TURN OFF',
-                  style: TextStyle(fontSize: 9, fontWeight: FontWeight.w700,
-                    color: _prefMuted, letterSpacing: 0.6)),
-              ),
-              Container(
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(10),
-                  border: Border.all(color: _prefBorder),
-                ),
-                child: Column(children: _optional.asMap().entries.map((e) {
-                  final item = e.value;
-                  final isLast = e.key == _optional.length - 1;
-                  return Column(children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 14, vertical: 8),
-                      child: Row(children: [
-                        Expanded(child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(item.label, style: const TextStyle(
-                              fontSize: 11, fontWeight: FontWeight.w600,
-                              color: _prefTitle)),
-                            if (item.sub != null)
-                              Text(item.sub!, style: const TextStyle(
-                                fontSize: 10, color: _prefSub)),
-                          ],
-                        )),
-                        Switch(
-                          value: item.enabled,
-                          onChanged: (v) =>
-                            setState(() => item.enabled = v),
-                          activeColor: _prefPurple,
-                          materialTapTargetSize:
-                            MaterialTapTargetSize.shrinkWrap,
-                        ),
-                      ]),
+        Expanded(
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.all(12),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Padding(
+                  padding: EdgeInsets.only(left: 4, bottom: 8),
+                  child: Text(
+                    'OPTIONAL � YOU CAN TURN OFF',
+                    style: TextStyle(
+                      fontSize: 9,
+                      fontWeight: FontWeight.w700,
+                      color: _prefMuted,
+                      letterSpacing: 0.6,
                     ),
-                    if (!isLast) Divider(height: 1, color: _prefBorder),
-                  ]);
-                }).toList()),
-              ),
-              const SizedBox(height: 16),
-              const Padding(
-                padding: EdgeInsets.only(left: 4, bottom: 8),
-                child: Text('MANDATORY � REQUIRED IN SCREENSHOT POLICY',
-                  style: TextStyle(fontSize: 9, fontWeight: FontWeight.w700,
-                    color: _prefMuted, letterSpacing: 0.6)),
-              ),
-              Container(
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(10),
-                  border: Border.all(color: _prefBorder),
+                  ),
                 ),
-                child: Column(children: _mandatory.asMap().entries.map((e) {
-                  final item = e.value;
-                  final isLast = e.key == _mandatory.length - 1;
-                  return Column(children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 14, vertical: 8),
-                      child: Row(children: [
-                        Expanded(child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(item.label, style: const TextStyle(
-                              fontSize: 11, fontWeight: FontWeight.w600,
-                              color: _prefTitle)),
-                            if (item.sub != null)
-                              Text(item.sub!, style: const TextStyle(
-                                fontSize: 10, color: _prefSub)),
-                          ],
-                        )),
-                        Container(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 8, vertical: 3),
-                          decoration: BoxDecoration(
-                            color: const Color(0xFFF3F4F6),
-                            borderRadius: BorderRadius.circular(4),
+                Container(
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(color: _prefBorder),
+                  ),
+                  child: Column(
+                    children: _optional.asMap().entries.map((e) {
+                      final item = e.value;
+                      final isLast = e.key == _optional.length - 1;
+                      return Column(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 14,
+                              vertical: 8,
+                            ),
+                            child: Row(
+                              children: [
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        item.label,
+                                        style: const TextStyle(
+                                          fontSize: 11,
+                                          fontWeight: FontWeight.w600,
+                                          color: _prefTitle,
+                                        ),
+                                      ),
+                                      if (item.sub != null)
+                                        Text(
+                                          item.sub!,
+                                          style: const TextStyle(
+                                            fontSize: 10,
+                                            color: _prefSub,
+                                          ),
+                                        ),
+                                    ],
+                                  ),
+                                ),
+                                Switch(
+                                  value: item.enabled,
+                                  onChanged: (v) =>
+                                      setState(() => item.enabled = v),
+                                  activeColor: _prefPurple,
+                                  materialTapTargetSize:
+                                      MaterialTapTargetSize.shrinkWrap,
+                                ),
+                              ],
+                            ),
                           ),
-                          child: const Text('Always on',
-                            style: TextStyle(fontSize: 9,
-                              color: _prefMuted)),
-                        ),
-                      ]),
+                          if (!isLast) Divider(height: 1, color: _prefBorder),
+                        ],
+                      );
+                    }).toList(),
+                  ),
+                ),
+                const SizedBox(height: 16),
+                const Padding(
+                  padding: EdgeInsets.only(left: 4, bottom: 8),
+                  child: Text(
+                    'MANDATORY � REQUIRED IN SCREENSHOT POLICY',
+                    style: TextStyle(
+                      fontSize: 9,
+                      fontWeight: FontWeight.w700,
+                      color: _prefMuted,
+                      letterSpacing: 0.6,
                     ),
-                    if (!isLast) Divider(height: 1, color: _prefBorder),
-                  ]);
-                }).toList()),
-              ),
-              const SizedBox(height: 16),
-              SizedBox(
-                width: double.infinity,
-                child: OutlinedButton(
-                  onPressed: () =>
-                    setState(() {
+                  ),
+                ),
+                Container(
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(color: _prefBorder),
+                  ),
+                  child: Column(
+                    children: _mandatory.asMap().entries.map((e) {
+                      final item = e.value;
+                      final isLast = e.key == _mandatory.length - 1;
+                      return Column(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 14,
+                              vertical: 8,
+                            ),
+                            child: Row(
+                              children: [
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        item.label,
+                                        style: const TextStyle(
+                                          fontSize: 11,
+                                          fontWeight: FontWeight.w600,
+                                          color: _prefTitle,
+                                        ),
+                                      ),
+                                      if (item.sub != null)
+                                        Text(
+                                          item.sub!,
+                                          style: const TextStyle(
+                                            fontSize: 10,
+                                            color: _prefSub,
+                                          ),
+                                        ),
+                                    ],
+                                  ),
+                                ),
+                                Container(
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 8,
+                                    vertical: 3,
+                                  ),
+                                  decoration: BoxDecoration(
+                                    color: const Color(0xFFF3F4F6),
+                                    borderRadius: BorderRadius.circular(4),
+                                  ),
+                                  child: const Text(
+                                    'Always on',
+                                    style: TextStyle(
+                                      fontSize: 9,
+                                      color: _prefMuted,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          if (!isLast) Divider(height: 1, color: _prefBorder),
+                        ],
+                      );
+                    }).toList(),
+                  ),
+                ),
+                const SizedBox(height: 16),
+                SizedBox(
+                  width: double.infinity,
+                  child: OutlinedButton(
+                    onPressed: () => setState(() {
                       for (final i in _optional) {
                         i.enabled = false;
                       }
                     }),
-                  style: OutlinedButton.styleFrom(
-                    foregroundColor: const Color(0xFFDC2626),
-                    side: const BorderSide(color: Color(0xFFDC2626)),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8)),
-                    padding: const EdgeInsets.symmetric(vertical: 10),
+                    style: OutlinedButton.styleFrom(
+                      foregroundColor: const Color(0xFFDC2626),
+                      side: const BorderSide(color: Color(0xFFDC2626)),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      padding: const EdgeInsets.symmetric(vertical: 10),
+                    ),
+                    child: const Text(
+                      'Turn off all optional notifications',
+                      style: TextStyle(
+                        fontSize: 11,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
                   ),
-                  child: const Text('Turn off all optional notifications',
-                    style: TextStyle(fontSize: 11,
-                      fontWeight: FontWeight.w600)),
                 ),
-              ),
-              const SizedBox(height: 12),
-            ],
+                const SizedBox(height: 12),
+              ],
+            ),
           ),
-        )),
+        ),
       ],
     ),
   );
@@ -18650,10 +19659,7 @@ class _NotifPrefMockup extends StatelessWidget {
   @override
   Widget build(BuildContext context) => _PhoneFrame(
     child: Column(
-      children: const [
-        _PrefPageHeader(),
-        _PrefPlaceholderContent(),
-      ],
+      children: const [_PrefPageHeader(), _PrefPlaceholderContent()],
     ),
   );
 }
@@ -18699,10 +19705,10 @@ final notificationPreferencesComponent = WidgetbookComponent(
       builder: (context) => ComponentDocs(
         name: 'Notification Preferences',
         description:
-          'Filter chip bar with dynamic chip list. Each chip shows a label '
-          'and a count badge (purple bg when unselected, plain white text '
-          'when selected). Tap any chip to select it. '
-          'Replace the content area with your own widget.',
+            'Filter chip bar with dynamic chip list. Each chip shows a label '
+            'and a count badge (purple bg when unselected, plain white text '
+            'when selected). Tap any chip to select it. '
+            'Replace the content area with your own widget.',
         code: _notifPrefCode,
         center: true,
         child: const _NotifPrefMockup(),
@@ -18730,7 +19736,8 @@ class _PmtStepBar extends StatelessWidget {
     final materialTheme = Theme.of(context);
     final ux4gColors = materialTheme.extension<Ux4gColors>();
     final primary = ux4gColors?.primary ?? materialTheme.colorScheme.primary;
-    final onPrimary = ux4gColors?.onPrimary ?? materialTheme.colorScheme.onPrimary;
+    final onPrimary =
+        ux4gColors?.onPrimary ?? materialTheme.colorScheme.onPrimary;
     return Padding(
       padding: const EdgeInsets.fromLTRB(16, 10, 16, 10),
       child: Row(
@@ -18798,22 +19805,19 @@ class _PmtCircle extends StatelessWidget {
       child: isCompleted
           ? Icon(Icons.check, size: 18, color: onPrimary)
           : isActive
-              ? Container(
-                  width: 12,
-                  height: 12,
-                  decoration: BoxDecoration(
-                    color: primary,
-                    shape: BoxShape.circle,
-                  ),
-                )
-              : Text(
-                  '$stepIndex',
-                  style: const TextStyle(
-                    fontSize: 12,
-                    fontWeight: FontWeight.bold,
-                    color: Color(0xFFD1D5DB),
-                  ),
-                ),
+          ? Container(
+              width: 12,
+              height: 12,
+              decoration: BoxDecoration(color: primary, shape: BoxShape.circle),
+            )
+          : Text(
+              '$stepIndex',
+              style: const TextStyle(
+                fontSize: 12,
+                fontWeight: FontWeight.bold,
+                color: Color(0xFFD1D5DB),
+              ),
+            ),
     );
     if (label == null) return circle;
     return Column(
@@ -18913,7 +19917,11 @@ class _PayDetailRow extends StatelessWidget {
             flex: 4,
             child: Text(
               label,
-              style: const TextStyle(fontSize: 13, color: _subtleText, height: 1.3),
+              style: const TextStyle(
+                fontSize: 13,
+                color: _subtleText,
+                height: 1.3,
+              ),
             ),
           ),
           Expanded(
@@ -19085,17 +20093,29 @@ class _PaymentSummaryMockup extends StatelessWidget {
                                   label: 'Application fee',
                                   amount: 'Rs 30.00',
                                 ),
-                                Divider(height: 1, thickness: 1, color: _border),
+                                Divider(
+                                  height: 1,
+                                  thickness: 1,
+                                  color: _border,
+                                ),
                                 const _FeeRow(
                                   label: 'Processing charge',
                                   amount: 'Rs 5.00',
                                 ),
-                                Divider(height: 1, thickness: 1, color: _border),
+                                Divider(
+                                  height: 1,
+                                  thickness: 1,
+                                  color: _border,
+                                ),
                                 const _FeeRow(
                                   label: 'GST 18%',
                                   amount: 'Rs 6.30',
                                 ),
-                                Divider(height: 1, thickness: 1, color: _border),
+                                Divider(
+                                  height: 1,
+                                  thickness: 1,
+                                  color: _border,
+                                ),
                                 const _FeeRow(
                                   label: 'Total',
                                   amount: 'Rs 41.30',
@@ -19203,17 +20223,29 @@ class _PaymentSummaryCardMockup extends StatelessWidget {
                                     label: 'Application fee',
                                     amount: 'Rs 30.00',
                                   ),
-                                  Divider(height: 1, thickness: 1, color: _border),
+                                  Divider(
+                                    height: 1,
+                                    thickness: 1,
+                                    color: _border,
+                                  ),
                                   const _FeeRow(
                                     label: 'Processing charge',
                                     amount: 'Rs 5.00',
                                   ),
-                                  Divider(height: 1, thickness: 1, color: _border),
+                                  Divider(
+                                    height: 1,
+                                    thickness: 1,
+                                    color: _border,
+                                  ),
                                   const _FeeRow(
                                     label: 'GST 18%',
                                     amount: 'Rs 6.30',
                                   ),
-                                  Divider(height: 1, thickness: 1, color: _border),
+                                  Divider(
+                                    height: 1,
+                                    thickness: 1,
+                                    color: _border,
+                                  ),
                                   const _FeeRow(
                                     label: 'Total',
                                     amount: 'Rs 41.30',
@@ -19229,7 +20261,12 @@ class _PaymentSummaryCardMockup extends StatelessWidget {
                                   'Secure payment via PayGov. Your payment '
                                   'information is protected by 256-bit encryption.',
                               margin: EdgeInsets.zero,
-                              padding: const EdgeInsets.fromLTRB(12, 10, 12, 10),
+                              padding: const EdgeInsets.fromLTRB(
+                                12,
+                                10,
+                                12,
+                                10,
+                              ),
                             ),
                             const SizedBox(height: 20),
                             Ux4gButton(
@@ -19244,7 +20281,10 @@ class _PaymentSummaryCardMockup extends StatelessWidget {
                                 onPressed: () {},
                                 child: Text(
                                   'Back to review',
-                                  style: TextStyle(fontSize: 14, color: primary),
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    color: primary,
+                                  ),
                                 ),
                               ),
                             ),
@@ -19694,8 +20734,7 @@ class _PaymentMethodMockupState extends State<_PaymentMethodMockup> {
                             const SizedBox(height: 4),
                             Ux4gInputField(
                               value: _upiId,
-                              onValueChange: (v) =>
-                                  setState(() => _upiId = v),
+                              onValueChange: (v) => setState(() => _upiId = v),
                               label: 'Enter UPI ID',
                               placeholder: 'yourname@upi',
                               placeholderStyle: _placeholderStyle,
@@ -19846,7 +20885,10 @@ class _PaymentMethodCardMockupState extends State<_PaymentMethodCardMockup> {
                                 onPressed: () {},
                                 child: Text(
                                   'Back to summary',
-                                  style: TextStyle(fontSize: 14, color: primary),
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    color: primary,
+                                  ),
                                 ),
                               ),
                             ),
@@ -20286,9 +21328,7 @@ class _PaymentProcessingMockup extends StatelessWidget {
           ),
           // Semi-transparent scrim
           Positioned.fill(
-            child: Container(
-              color: Colors.black.withValues(alpha: 0.45),
-            ),
+            child: Container(color: Colors.black.withValues(alpha: 0.45)),
           ),
           // Centered modal card
           Positioned.fill(
@@ -20397,9 +21437,7 @@ class _PaymentProcessingCardMockup extends StatelessWidget {
             ],
           ),
           Positioned.fill(
-            child: Container(
-              color: Colors.black.withValues(alpha: 0.45),
-            ),
+            child: Container(color: Colors.black.withValues(alpha: 0.45)),
           ),
           Positioned.fill(
             child: Center(
@@ -20969,7 +22007,10 @@ class _PaymentSuccessCardMockup extends StatelessWidget {
                                 onPressed: () {},
                                 child: Text(
                                   'Return to services',
-                                  style: TextStyle(fontSize: 14, color: primary),
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    color: primary,
+                                  ),
                                 ),
                               ),
                             ),
@@ -21510,7 +22551,10 @@ class _PaymentFailedCardMockup extends StatelessWidget {
                                 onPressed: () {},
                                 child: Text(
                                   'Pay at CSC centre',
-                                  style: TextStyle(fontSize: 14, color: primary),
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    color: primary,
+                                  ),
                                 ),
                               ),
                             ),
@@ -22038,7 +23082,10 @@ class _FeeWaivedCardMockup extends StatelessWidget {
                                 onPressed: () {},
                                 child: Text(
                                   'Pay anyway',
-                                  style: TextStyle(fontSize: 14, color: primary),
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    color: primary,
+                                  ),
                                 ),
                               ),
                             ),
@@ -22535,11 +23582,11 @@ final feeWaivedComponent = WidgetbookComponent(
 // -- Status helpers ------------------------------------------------------
 
 Ux4gTagColor _astTagColor(String status) => switch (status) {
-      'Approved' => Ux4gTagColor.success,
-      'Rejected' => Ux4gTagColor.error,
-      'Delayed' || 'Action Required' => Ux4gTagColor.warning,
-      _ => Ux4gTagColor.neutral,
-    };
+  'Approved' => Ux4gTagColor.success,
+  'Rejected' => Ux4gTagColor.error,
+  'Delayed' || 'Action Required' => Ux4gTagColor.warning,
+  _ => Ux4gTagColor.neutral,
+};
 
 // -- Alert banner --------------------------------------------------------
 
@@ -22552,155 +23599,173 @@ class _AstBanner extends StatelessWidget {
   Widget build(BuildContext context) {
     return switch (status) {
       'Action Required' => Container(
-          margin: EdgeInsets.fromLTRB(hPad, 12, hPad, 0),
-          padding: const EdgeInsets.all(12),
-          decoration: BoxDecoration(
-            color: Ux4gPalette.orange50,
-            border: Border.all(color: Ux4gPalette.orange500),
-            borderRadius: BorderRadius.circular(8),
-          ),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Icon(Icons.warning_amber_rounded,
-                  color: Ux4gPalette.orange500, size: 18),
-              const SizedBox(width: 8),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text(
-                      'Action required upload your income proof document',
+        margin: EdgeInsets.fromLTRB(hPad, 12, hPad, 0),
+        padding: const EdgeInsets.all(12),
+        decoration: BoxDecoration(
+          color: Ux4gPalette.orange50,
+          border: Border.all(color: Ux4gPalette.orange500),
+          borderRadius: BorderRadius.circular(8),
+        ),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Icon(
+              Icons.warning_amber_rounded,
+              color: Ux4gPalette.orange500,
+              size: 18,
+            ),
+            const SizedBox(width: 8),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    'Action required upload your income proof document',
+                    style: TextStyle(
+                      fontSize: 12,
+                      color: Ux4gPalette.orange700,
+                      fontWeight: FontWeight.w500,
+                      height: 1.4,
+                    ),
+                  ),
+                  const SizedBox(height: 6),
+                  GestureDetector(
+                    onTap: () {},
+                    child: const Text(
+                      'Upload Document',
                       style: TextStyle(
                         fontSize: 12,
-                        color: Ux4gPalette.orange700,
-                        fontWeight: FontWeight.w500,
-                        height: 1.4,
+                        color: Ux4gPalette.orange500,
+                        fontWeight: FontWeight.w600,
+                        decoration: TextDecoration.underline,
                       ),
                     ),
-                    const SizedBox(height: 6),
-                    GestureDetector(
-                      onTap: () {},
-                      child: const Text(
-                        'Upload Document',
-                        style: TextStyle(
-                          fontSize: 12,
-                          color: Ux4gPalette.orange500,
-                          fontWeight: FontWeight.w600,
-                          decoration: TextDecoration.underline,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+                  ),
+                ],
               ),
-            ],
-          ),
+            ),
+          ],
         ),
+      ),
       'Rejected' => Container(
-          margin: EdgeInsets.fromLTRB(hPad, 12, hPad, 0),
-          padding: const EdgeInsets.all(12),
-          decoration: BoxDecoration(
-            color: const Color(0xFFFEF2F2),
-            border: Border.all(color: Ux4gPalette.red100),
-            borderRadius: BorderRadius.circular(8),
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                children: const [
-                  Icon(Icons.cancel_outlined,
-                      color: Ux4gPalette.red600, size: 18),
-                  SizedBox(width: 6),
-                  Expanded(
-                    child: Text(
-                      'Why was this rejected?',
-                      style: TextStyle(
-                        fontSize: 13,
-                        color: Ux4gPalette.red600,
-                        fontWeight: FontWeight.w600,
-                      ),
+        margin: EdgeInsets.fromLTRB(hPad, 12, hPad, 0),
+        padding: const EdgeInsets.all(12),
+        decoration: BoxDecoration(
+          color: const Color(0xFFFEF2F2),
+          border: Border.all(color: Ux4gPalette.red100),
+          borderRadius: BorderRadius.circular(8),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: const [
+                Icon(
+                  Icons.cancel_outlined,
+                  color: Ux4gPalette.red600,
+                  size: 18,
+                ),
+                SizedBox(width: 6),
+                Expanded(
+                  child: Text(
+                    'Why was this rejected?',
+                    style: TextStyle(
+                      fontSize: 13,
+                      color: Ux4gPalette.red600,
+                      fontWeight: FontWeight.w600,
                     ),
                   ),
-                ],
+                ),
+              ],
+            ),
+            const SizedBox(height: 6),
+            const Text(
+              'The income proof document submitted was not legible; '
+              'the scan was too blurry to read.',
+              style: TextStyle(
+                fontSize: 11,
+                color: Ux4gPalette.red600,
+                height: 1.4,
               ),
-              const SizedBox(height: 6),
-              const Text(
-                'The income proof document submitted was not legible; '
-                'the scan was too blurry to read.',
-                style: TextStyle(
-                    fontSize: 11, color: Ux4gPalette.red600, height: 1.4),
-              ),
-              const SizedBox(height: 6),
-              const _AstBullet(
-                  text: 'Re-scan the document in good lighting',
-                  color: Ux4gPalette.red600),
-              const _AstBullet(
-                  text: 'Upload a clear JPG or PDF under 2 MB',
-                  color: Ux4gPalette.red600),
-              const _AstBullet(
-                  text: 'Reapply with the corrected document',
-                  color: Ux4gPalette.red600),
-            ],
-          ),
+            ),
+            const SizedBox(height: 6),
+            const _AstBullet(
+              text: 'Re-scan the document in good lighting',
+              color: Ux4gPalette.red600,
+            ),
+            const _AstBullet(
+              text: 'Upload a clear JPG or PDF under 2 MB',
+              color: Ux4gPalette.red600,
+            ),
+            const _AstBullet(
+              text: 'Reapply with the corrected document',
+              color: Ux4gPalette.red600,
+            ),
+          ],
         ),
+      ),
       'Delayed' => Container(
-          margin: EdgeInsets.fromLTRB(hPad, 12, hPad, 0),
-          padding: const EdgeInsets.all(12),
-          decoration: BoxDecoration(
-            color: Ux4gPalette.cyan50,
-            border: Border.all(color: Ux4gPalette.cyan500),
-            borderRadius: BorderRadius.circular(8),
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                children: const [
-                  Icon(Icons.access_time_outlined,
-                      color: Ux4gPalette.cyan600, size: 18),
-                  SizedBox(width: 6),
-                  Expanded(
-                    child: Text(
-                      'Why is this delayed?',
-                      style: TextStyle(
-                        fontSize: 13,
-                        color: Ux4gPalette.cyan600,
-                        fontWeight: FontWeight.w600,
-                      ),
+        margin: EdgeInsets.fromLTRB(hPad, 12, hPad, 0),
+        padding: const EdgeInsets.all(12),
+        decoration: BoxDecoration(
+          color: Ux4gPalette.cyan50,
+          border: Border.all(color: Ux4gPalette.cyan500),
+          borderRadius: BorderRadius.circular(8),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: const [
+                Icon(
+                  Icons.access_time_outlined,
+                  color: Ux4gPalette.cyan600,
+                  size: 18,
+                ),
+                SizedBox(width: 6),
+                Expanded(
+                  child: Text(
+                    'Why is this delayed?',
+                    style: TextStyle(
+                      fontSize: 13,
+                      color: Ux4gPalette.cyan600,
+                      fontWeight: FontWeight.w600,
                     ),
                   ),
-                ],
-              ),
-              const SizedBox(height: 6),
-              const Text(
-                'Additional field verification is required due to an '
-                'address discrepancy in your application.',
-                style: TextStyle(
-                    fontSize: 11, color: Color(0xFF0E7490), height: 1.4),
-              ),
-              const SizedBox(height: 8),
-              const Text(
-                'Revised expected date',
-                style: TextStyle(
-                  fontSize: 11,
-                  color: Color(0xFF0E7490),
-                  fontWeight: FontWeight.w600,
                 ),
+              ],
+            ),
+            const SizedBox(height: 6),
+            const Text(
+              'Additional field verification is required due to an '
+              'address discrepancy in your application.',
+              style: TextStyle(
+                fontSize: 11,
+                color: Color(0xFF0E7490),
+                height: 1.4,
               ),
-              const SizedBox(height: 2),
-              const Text(
-                '25 Apr 2026',
-                style: TextStyle(
-                  fontSize: 13,
-                  color: Ux4gPalette.cyan600,
-                  fontWeight: FontWeight.w700,
-                ),
+            ),
+            const SizedBox(height: 8),
+            const Text(
+              'Revised expected date',
+              style: TextStyle(
+                fontSize: 11,
+                color: Color(0xFF0E7490),
+                fontWeight: FontWeight.w600,
               ),
-            ],
-          ),
+            ),
+            const SizedBox(height: 2),
+            const Text(
+              '25 Apr 2026',
+              style: TextStyle(
+                fontSize: 13,
+                color: Ux4gPalette.cyan600,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+          ],
         ),
+      ),
       _ => const SizedBox.shrink(),
     };
   }
@@ -22756,8 +23821,9 @@ class _AstTimelineStep extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final dotColor =
-        (isCompleted || isActive) ? primary : const Color(0xFFD1D5DB);
+    final dotColor = (isCompleted || isActive)
+        ? primary
+        : const Color(0xFFD1D5DB);
 
     return IntrinsicHeight(
       child: Row(
@@ -22778,26 +23844,24 @@ class _AstTimelineStep extends StatelessWidget {
                   child: isCompleted
                       ? const Icon(Icons.check, color: Colors.white, size: 10)
                       : isActive
-                          ? Center(
-                              child: Container(
-                                width: 6,
-                                height: 6,
-                                decoration: const BoxDecoration(
-                                  color: Colors.white,
-                                  shape: BoxShape.circle,
-                                ),
-                              ),
-                            )
-                          : null,
+                      ? Center(
+                          child: Container(
+                            width: 6,
+                            height: 6,
+                            decoration: const BoxDecoration(
+                              color: Colors.white,
+                              shape: BoxShape.circle,
+                            ),
+                          ),
+                        )
+                      : null,
                 ),
                 if (!isLast)
                   Expanded(
                     child: Center(
                       child: Container(
                         width: 2,
-                        color: isCompleted
-                            ? primary
-                            : const Color(0xFFE5E7EB),
+                        color: isCompleted ? primary : const Color(0xFFE5E7EB),
                       ),
                     ),
                   ),
@@ -22845,8 +23909,11 @@ class _AstTimelineStep extends StatelessWidget {
                       const SizedBox(height: 6),
                       Row(
                         children: [
-                          const Icon(Icons.schedule,
-                              size: 12, color: Ux4gPalette.orange500),
+                          const Icon(
+                            Icons.schedule,
+                            size: 12,
+                            color: Ux4gPalette.orange500,
+                          ),
                           const SizedBox(width: 4),
                           Text(
                             pendingNote!,
@@ -22923,7 +23990,9 @@ class _AstJourney extends StatelessWidget {
                 ? Ux4gJourneyStepState.current
                 : Ux4gJourneyStepState.upcoming,
             date: 'Est. 22 Apr 2026',
-            title: isApproved ? 'Certificate Issued' : 'Certificate Will Be Issued',
+            title: isApproved
+                ? 'Certificate Issued'
+                : 'Certificate Will Be Issued',
             status: isApproved
                 ? null
                 : const Ux4gJourneyStepStatus(
@@ -23010,59 +24079,59 @@ class _AstInfoCard extends StatelessWidget {
 // -- Bottom actions -------------------------------------------------------
 
 Widget _astActions(String status, Color primary) => switch (status) {
-      'Rejected' => Column(
-          children: [
-            Ux4gButton(
-              text: 'Reapply',
-              onPressed: () {},
-              size: Ux4gButtonSize.large,
-              width: double.infinity,
-            ),
-            const SizedBox(height: 10),
-            Center(
-              child: TextButton(
-                onPressed: () {},
-                child: Text(
-                  'Contact district office',
-                  style: TextStyle(fontSize: 14, color: primary),
-                ),
-              ),
-            ),
-          ],
-        ),
-      'Delayed' => Center(
-          child: TextButton(
-            onPressed: () {},
-            child: const Text(
-              'Escalate this application',
-              style: TextStyle(
-                fontSize: 14,
-                color: Ux4gPalette.red600,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
+  'Rejected' => Column(
+    children: [
+      Ux4gButton(
+        text: 'Reapply',
+        onPressed: () {},
+        size: Ux4gButtonSize.large,
+        width: double.infinity,
+      ),
+      const SizedBox(height: 10),
+      Center(
+        child: TextButton(
+          onPressed: () {},
+          child: Text(
+            'Contact district office',
+            style: TextStyle(fontSize: 14, color: primary),
           ),
         ),
-      'Approved' => Column(
-          children: [
-            Ux4gButton(
-              text: 'Download Certificate (PDF)',
-              onPressed: () {},
-              size: Ux4gButtonSize.large,
-              width: double.infinity,
-            ),
-            const SizedBox(height: 10),
-            Ux4gButton(
-              text: 'Save to DigiLocker',
-              onPressed: () {},
-              variant: Ux4gButtonVariant.outline,
-              size: Ux4gButtonSize.large,
-              width: double.infinity,
-            ),
-          ],
+      ),
+    ],
+  ),
+  'Delayed' => Center(
+    child: TextButton(
+      onPressed: () {},
+      child: const Text(
+        'Escalate this application',
+        style: TextStyle(
+          fontSize: 14,
+          color: Ux4gPalette.red600,
+          fontWeight: FontWeight.w600,
         ),
-      _ => const SizedBox.shrink(),
-    };
+      ),
+    ),
+  ),
+  'Approved' => Column(
+    children: [
+      Ux4gButton(
+        text: 'Download Certificate (PDF)',
+        onPressed: () {},
+        size: Ux4gButtonSize.large,
+        width: double.infinity,
+      ),
+      const SizedBox(height: 10),
+      Ux4gButton(
+        text: 'Save to DigiLocker',
+        onPressed: () {},
+        variant: Ux4gButtonVariant.outline,
+        size: Ux4gButtonSize.large,
+        width: double.infinity,
+      ),
+    ],
+  ),
+  _ => const SizedBox.shrink(),
+};
 
 // -- Flat mockup ----------------------------------------------------------
 
@@ -23096,14 +24165,12 @@ class _AppStatusTrackerMockup extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Padding(
-                            padding:
-                                const EdgeInsets.fromLTRB(16, 10, 16, 0),
+                            padding: const EdgeInsets.fromLTRB(16, 10, 16, 0),
                             child: const _BackButton(),
                           ),
                           _AstBanner(status: status),
                           Padding(
-                            padding:
-                                const EdgeInsets.fromLTRB(16, 12, 16, 0),
+                            padding: const EdgeInsets.fromLTRB(16, 12, 16, 0),
                             child: _AstInfoCard(
                               status: status,
                               tagColor: tagColor,
@@ -23111,15 +24178,15 @@ class _AppStatusTrackerMockup extends StatelessWidget {
                             ),
                           ),
                           Padding(
-                            padding:
-                                const EdgeInsets.fromLTRB(16, 16, 16, 16),
+                            padding: const EdgeInsets.fromLTRB(16, 16, 16, 16),
                             child: _AstJourney(
-                                status: status, primary: primary),
+                              status: status,
+                              primary: primary,
+                            ),
                           ),
                           if (hasActions)
                             Padding(
-                              padding:
-                                  const EdgeInsets.fromLTRB(16, 0, 16, 8),
+                              padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
                               child: _astActions(status, primary),
                             ),
                         ],
@@ -23172,14 +24239,12 @@ class _AppStatusTrackerCardMockup extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Padding(
-                              padding:
-                                  const EdgeInsets.fromLTRB(14, 10, 14, 0),
+                              padding: const EdgeInsets.fromLTRB(14, 10, 14, 0),
                               child: const _BackButton(),
                             ),
                             _AstBanner(status: status, hPad: 14),
                             Padding(
-                              padding:
-                                  const EdgeInsets.fromLTRB(14, 12, 14, 0),
+                              padding: const EdgeInsets.fromLTRB(14, 12, 14, 0),
                               child: _AstInfoCard(
                                 status: status,
                                 tagColor: tagColor,
@@ -23188,15 +24253,25 @@ class _AppStatusTrackerCardMockup extends StatelessWidget {
                               ),
                             ),
                             Padding(
-                              padding:
-                                  const EdgeInsets.fromLTRB(14, 16, 14, 16),
+                              padding: const EdgeInsets.fromLTRB(
+                                14,
+                                16,
+                                14,
+                                16,
+                              ),
                               child: _AstJourney(
-                                  status: status, primary: primary),
+                                status: status,
+                                primary: primary,
+                              ),
                             ),
                             if (hasActions)
                               Padding(
-                                padding:
-                                    const EdgeInsets.fromLTRB(14, 0, 14, 14),
+                                padding: const EdgeInsets.fromLTRB(
+                                  14,
+                                  0,
+                                  14,
+                                  14,
+                                ),
                                 child: _astActions(status, primary),
                               ),
                           ],
@@ -23653,9 +24728,7 @@ final appStatusTrackerComponent = WidgetbookComponent(
               'Required, Rejected, Delayed, and Approved. Use the '
               '[Status] knob to preview each state and [Variant] for '
               'card layout.',
-          code: variant == 'Card style'
-              ? _astCardCode
-              : _astDefaultCode,
+          code: variant == 'Card style' ? _astCardCode : _astDefaultCode,
           center: true,
           child: variant == 'Card style'
               ? _AppStatusTrackerCardMockup(status: status)
@@ -23672,12 +24745,12 @@ final appStatusTrackerComponent = WidgetbookComponent(
 
 // Status → Ux4gTag colour mapping
 Ux4gTagColor _gstTagColor(String status) => switch (status) {
-      'Resolved' => Ux4gTagColor.success,
-      'Assigned' => Ux4gTagColor.brand,
-      'Escalated' => Ux4gTagColor.warning,
-      'Reopened' => Ux4gTagColor.warning,
-      _ => Ux4gTagColor.warning, // In Progress
-    };
+  'Resolved' => Ux4gTagColor.success,
+  'Assigned' => Ux4gTagColor.brand,
+  'Escalated' => Ux4gTagColor.warning,
+  'Reopened' => Ux4gTagColor.warning,
+  _ => Ux4gTagColor.warning, // In Progress
+};
 
 Widget _gstTagIcon(String status) {
   final (icon, color) = switch (status) {
@@ -23829,15 +24902,14 @@ class _GstDetailTable extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 10),
-          const _GstDetailRow(
-              label: 'Category', value: 'Certificate Issuance'),
+          const _GstDetailRow(label: 'Category', value: 'Certificate Issuance'),
           const _GstDetailRow(label: 'Lodged on', value: '02 Apr 2026'),
+          const _GstDetailRow(label: 'Against', value: 'Revenue Dept, Pune'),
           const _GstDetailRow(
-              label: 'Against', value: 'Revenue Dept, Pune'),
-          const _GstDetailRow(
-              label: 'Current stage',
-              value: 'District Officer',
-              isLast: true),
+            label: 'Current stage',
+            value: 'District Officer',
+            isLast: true,
+          ),
         ],
       ),
     );
@@ -23939,9 +25011,10 @@ class _GstAssignedOfficer extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: const [
-                    Text('Office contact',
-                        style:
-                            TextStyle(fontSize: 11, color: _subtleText)),
+                    Text(
+                      'Office contact',
+                      style: TextStyle(fontSize: 11, color: _subtleText),
+                    ),
                     SizedBox(height: 2),
                     Text(
                       '020-2612-XXXX',
@@ -23958,9 +25031,10 @@ class _GstAssignedOfficer extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: const [
-                    Text('Handling since',
-                        style:
-                            TextStyle(fontSize: 11, color: _subtleText)),
+                    Text(
+                      'Handling since',
+                      style: TextStyle(fontSize: 11, color: _subtleText),
+                    ),
                     SizedBox(height: 2),
                     Text(
                       '08 Apr 2026',
@@ -24069,8 +25143,7 @@ class _GstEscalationLevel extends StatelessWidget {
       decoration: BoxDecoration(
         color: isActive ? Ux4gPalette.orange50 : const Color(0xFFF9FAFB),
         border: Border.all(
-          color:
-              isActive ? Ux4gPalette.orange500 : const Color(0xFFE5E7EB),
+          color: isActive ? Ux4gPalette.orange500 : const Color(0xFFE5E7EB),
         ),
         borderRadius: BorderRadius.circular(8),
       ),
@@ -24120,8 +25193,7 @@ class _GstResolutionSection extends StatelessWidget {
         // Green resolution banner
         Container(
           margin: const EdgeInsets.fromLTRB(16, 12, 16, 0),
-          padding:
-              const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
           decoration: BoxDecoration(
             color: Ux4gPalette.green50,
             border: Border.all(color: Ux4gPalette.green500),
@@ -24137,8 +25209,11 @@ class _GstResolutionSection extends StatelessWidget {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: const [
-              Icon(Icons.check_circle_outline,
-                  color: Ux4gPalette.green600, size: 20),
+              Icon(
+                Icons.check_circle_outline,
+                color: Ux4gPalette.green600,
+                size: 20,
+              ),
               SizedBox(width: 10),
               Expanded(
                 child: Text(
@@ -24193,11 +25268,7 @@ class _GstResolutionSection extends StatelessWidget {
               const SizedBox(height: 10),
               const Text(
                 'You have 30 days from the resolution date to reopen this complaint.',
-                style: TextStyle(
-                  fontSize: 11,
-                  color: _mutedText,
-                  height: 1.4,
-                ),
+                style: TextStyle(fontSize: 11, color: _mutedText, height: 1.4),
               ),
             ],
           ),
@@ -24267,8 +25338,7 @@ class _GstReopenForm extends StatelessWidget {
                     style: TextStyle(fontSize: 13, color: _titleColor),
                   ),
                 ),
-                Icon(Icons.keyboard_arrow_down,
-                    size: 20, color: _subtleText),
+                Icon(Icons.keyboard_arrow_down, size: 20, color: _subtleText),
               ],
             ),
           ),
@@ -24294,8 +25364,7 @@ class _GstReopenForm extends StatelessWidget {
               alignment: Alignment.topLeft,
               child: Text(
                 'Add any details that will help us re-examine your grievance.',
-                style:
-                    TextStyle(fontSize: 12, color: _mutedText, height: 1.4),
+                style: TextStyle(fontSize: 12, color: _mutedText, height: 1.4),
               ),
             ),
           ),
@@ -24331,13 +25400,13 @@ class _GstJourney extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final assignedOrLater = status == 'Assigned' ||
+    final assignedOrLater =
+        status == 'Assigned' ||
         status == 'Escalated' ||
         status == 'Resolved' ||
         status == 'Reopened';
-    final underReviewOrLater = status == 'Escalated' ||
-        status == 'Resolved' ||
-        status == 'Reopened';
+    final underReviewOrLater =
+        status == 'Escalated' || status == 'Resolved' || status == 'Reopened';
     final escalatedOrLater =
         status == 'Resolved' || status == 'Reopened' || status == 'Escalated';
     final isResolved = status == 'Resolved' || status == 'Reopened';
@@ -24437,12 +25506,9 @@ class _GstMockup extends StatelessWidget {
                             tagColor: tagColor,
                             primary: primary,
                           ),
-                          if (status == 'In Progress')
-                            const _GstDetailTable(),
-                          if (status == 'Assigned')
-                            const _GstAssignedOfficer(),
-                          if (status == 'Escalated')
-                            const _GstEscalationPath(),
+                          if (status == 'In Progress') const _GstDetailTable(),
+                          if (status == 'Assigned') const _GstAssignedOfficer(),
+                          if (status == 'Escalated') const _GstEscalationPath(),
                           if (status == 'Resolved')
                             const _GstResolutionSection(),
                           if (isReopened) _GstReopenForm(primary: primary),
@@ -24450,9 +25516,15 @@ class _GstMockup extends StatelessWidget {
                           if (!isReopened && status != 'In Progress')
                             Padding(
                               padding: const EdgeInsets.fromLTRB(
-                                  16, 16, 16, 16),
+                                16,
+                                16,
+                                16,
+                                16,
+                              ),
                               child: _GstJourney(
-                                  status: status, primary: primary),
+                                status: status,
+                                primary: primary,
+                              ),
                             ),
                           const SizedBox(height: 16),
                         ],

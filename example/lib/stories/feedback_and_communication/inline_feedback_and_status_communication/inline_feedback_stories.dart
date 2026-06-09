@@ -27,13 +27,15 @@ final inlineFeedbackComponent = WidgetbookComponent(
           name: 'Inline Feedback ($variant)',
           description: isCard
               ? 'Form input with inline validation feedback inside a card container. '
-                'Shows a success message below the input field with a light purple card background.'
+                    'Shows a success message below the input field with a light purple card background.'
               : 'Form input with inline validation feedback. '
-                'Shows a success message below the input field on white background.',
+                    'Shows a success message below the input field on white background.',
           code: isCard ? _inlineFeedbackCardCode : _inlineFeedbackDefaultCode,
           center: true,
           child: _InlineFeedbackMockup(
-            variant: isCard ? _CardVariant.cardStyle : _CardVariant.defaultStyle,
+            variant: isCard
+                ? _CardVariant.cardStyle
+                : _CardVariant.defaultStyle,
           ),
         );
       },
@@ -256,13 +258,25 @@ class _InlineFeedbackMockup extends StatelessWidget {
               // App Header with logos
               Container(
                 width: double.infinity,
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 10,
+                ),
                 color: Colors.white,
                 child: Row(
                   children: [
-                    SvgPicture.asset('assets/national_amblam_logo.svg', height: 40),
+                    SvgPicture.asset(
+                      'assets/national_amblam_logo.svg',
+                      height: 40,
+                    ),
                     const SizedBox(width: 8),
-                    SizedBox(height: 32, child: Ux4gDivider(orientation: Ux4gDividerOrientation.vertical, color: const Color(0xFFD1D5DB))),
+                    SizedBox(
+                      height: 32,
+                      child: Ux4gDivider(
+                        orientation: Ux4gDividerOrientation.vertical,
+                        color: const Color(0xFFD1D5DB),
+                      ),
+                    ),
                     const SizedBox(width: 8),
                     SvgPicture.asset('assets/Union.svg', height: 32),
                   ],
@@ -316,7 +330,11 @@ class _InlineFeedbackMockup extends StatelessWidget {
         // Title
         const Text(
           'Enter your Annual Income',
-          style: TextStyle(fontSize: 18, fontWeight: FontWeight.w800, color: _titleColor),
+          style: TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.w800,
+            color: _titleColor,
+          ),
         ),
         const SizedBox(height: 8),
 
@@ -330,7 +348,11 @@ class _InlineFeedbackMockup extends StatelessWidget {
         // Label
         const Text(
           'Income Amount',
-          style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: _titleColor),
+          style: TextStyle(
+            fontSize: 14,
+            fontWeight: FontWeight.w600,
+            color: _titleColor,
+          ),
         ),
         const SizedBox(height: 8),
 

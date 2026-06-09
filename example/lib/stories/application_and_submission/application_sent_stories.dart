@@ -23,15 +23,20 @@ final applicationSentComponent = WidgetbookComponent(
         );
 
         final isCardStyle = variant == 'Card style';
-        final code = isCardStyle ? _applicationSentCardCode : _applicationSentDefaultCode;
+        final code = isCardStyle
+            ? _applicationSentCardCode
+            : _applicationSentDefaultCode;
 
         return ComponentDocs(
           mobileMockup: true,
           name: 'Application sent success',
-          description: 'A success screen pattern shown after an application is submitted.',
+          description:
+              'A success screen pattern shown after an application is submitted.',
           code: code,
           center: true,
-          child: isCardStyle ? const _ApplicationSentCardMockup() : const _ApplicationSentMockup(),
+          child: isCardStyle
+              ? const _ApplicationSentCardMockup()
+              : const _ApplicationSentMockup(),
         );
       },
     ),
@@ -333,7 +338,11 @@ class _ApplicationSentMockup extends StatelessWidget {
                 leadingWidgets: [
                   SvgPicture.asset(_nationalEmblemLogoPath, height: 40),
                   const SizedBox(width: 1),
-                  Container(height: 32, width: 1, color: const Color(0xFFD1D5DB)),
+                  Container(
+                    height: 32,
+                    width: 1,
+                    color: const Color(0xFFD1D5DB),
+                  ),
                   const SizedBox(width: 1),
                   SvgPicture.asset(_unionLogoPath, height: 32),
                 ],
@@ -353,19 +362,31 @@ class _ApplicationSentMockup extends StatelessWidget {
                           shape: BoxShape.circle,
                         ),
                         child: const Center(
-                          child: Icon(Icons.check_circle, color: Color(0xFF16A34A), size: 48),
+                          child: Icon(
+                            Icons.check_circle,
+                            color: Color(0xFF16A34A),
+                            size: 48,
+                          ),
                         ),
                       ),
                       const SizedBox(height: 32),
                       const Text(
                         'Application sent!',
-                        style: TextStyle(fontSize: 28, fontWeight: FontWeight.w800, color: Color(0xFF111827)),
+                        style: TextStyle(
+                          fontSize: 28,
+                          fontWeight: FontWeight.w800,
+                          color: Color(0xFF111827),
+                        ),
                         textAlign: TextAlign.center,
                       ),
                       const SizedBox(height: 16),
                       const Text(
                         'We will review and contact you within 3 working days.',
-                        style: TextStyle(fontSize: 16, color: Color(0xFF4B5563), height: 1.5),
+                        style: TextStyle(
+                          fontSize: 16,
+                          color: Color(0xFF4B5563),
+                          height: 1.5,
+                        ),
                         textAlign: TextAlign.center,
                       ),
                     ],
@@ -400,7 +421,10 @@ class _ApplicationSentMockup extends StatelessWidget {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    const Text('Powered by -', style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+                    const Text(
+                      'Powered by -',
+                      style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF)),
+                    ),
                     const SizedBox(height: 6),
                     Image.asset(_digitalIndiaLogoPath, height: 24),
                   ],
@@ -437,7 +461,11 @@ class _ApplicationSentCardMockup extends StatelessWidget {
                       leadingWidgets: [
                         SvgPicture.asset(_nationalEmblemLogoPath, height: 40),
                         const SizedBox(width: 1),
-                        Container(height: 32, width: 1, color: const Color(0xFFD1D5DB)),
+                        Container(
+                          height: 32,
+                          width: 1,
+                          color: const Color(0xFFD1D5DB),
+                        ),
                         const SizedBox(width: 1),
                         SvgPicture.asset(_unionLogoPath, height: 32),
                       ],
@@ -456,7 +484,11 @@ class _ApplicationSentCardMockup extends StatelessWidget {
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(16),
                       boxShadow: [
-                        BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 10, offset: const Offset(0, 4)),
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.05),
+                          blurRadius: 10,
+                          offset: const Offset(0, 4),
+                        ),
                       ],
                     ),
                     child: Column(
@@ -470,19 +502,31 @@ class _ApplicationSentCardMockup extends StatelessWidget {
                             shape: BoxShape.circle,
                           ),
                           child: const Center(
-                            child: Icon(Icons.check_circle, color: Color(0xFF16A34A), size: 48),
+                            child: Icon(
+                              Icons.check_circle,
+                              color: Color(0xFF16A34A),
+                              size: 48,
+                            ),
                           ),
                         ),
                         const SizedBox(height: 32),
                         const Text(
                           'Application sent!',
-                          style: TextStyle(fontSize: 28, fontWeight: FontWeight.w800, color: Color(0xFF111827)),
+                          style: TextStyle(
+                            fontSize: 28,
+                            fontWeight: FontWeight.w800,
+                            color: Color(0xFF111827),
+                          ),
                           textAlign: TextAlign.center,
                         ),
                         const SizedBox(height: 16),
                         const Text(
                           'We will review and contact you within 3 working days.',
-                          style: TextStyle(fontSize: 16, color: Color(0xFF4B5563), height: 1.5),
+                          style: TextStyle(
+                            fontSize: 16,
+                            color: Color(0xFF4B5563),
+                            height: 1.5,
+                          ),
                           textAlign: TextAlign.center,
                         ),
                       ],
@@ -518,7 +562,10 @@ class _ApplicationSentCardMockup extends StatelessWidget {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    const Text('Powered by -', style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+                    const Text(
+                      'Powered by -',
+                      style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF)),
+                    ),
                     const SizedBox(height: 6),
                     Image.asset(_digitalIndiaLogoPath, height: 24),
                   ],

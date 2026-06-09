@@ -168,7 +168,8 @@ class _SearchApplicationsMockup extends StatefulWidget {
   const _SearchApplicationsMockup();
 
   @override
-  State<_SearchApplicationsMockup> createState() => _SearchApplicationsMockupState();
+  State<_SearchApplicationsMockup> createState() =>
+      _SearchApplicationsMockupState();
 }
 
 class _SearchApplicationsMockupState extends State<_SearchApplicationsMockup> {
@@ -193,19 +194,37 @@ class _SearchApplicationsMockupState extends State<_SearchApplicationsMockup> {
                       SvgPicture.asset(
                         _nationalEmblemLogoPath,
                         height: 36,
-                        errorBuilder: (c, e, s) => const Icon(Icons.account_balance, size: 28, color: Colors.grey),
+                        errorBuilder: (c, e, s) => const Icon(
+                          Icons.account_balance,
+                          size: 28,
+                          color: Colors.grey,
+                        ),
                       ),
                       const SizedBox(width: 8),
                       SvgPicture.asset(
                         _unionLogoPath,
                         height: 28,
-                        errorBuilder: (c, e, s) => const Icon(Icons.blur_on, size: 28, color: Colors.blue),
+                        errorBuilder: (c, e, s) => const Icon(
+                          Icons.blur_on,
+                          size: 28,
+                          color: Colors.blue,
+                        ),
                       ),
                       const SizedBox(width: 8),
-                      const Text('Government of India', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: _titleColor)),
+                      const Text(
+                        'Government of India',
+                        style: TextStyle(
+                          fontSize: 13,
+                          fontWeight: FontWeight.w600,
+                          color: _titleColor,
+                        ),
+                      ),
                     ],
                     actions: [
-                      Ux4gAppHeaderAction(icon: Icons.notifications_outlined, onPressed: () {}),
+                      Ux4gAppHeaderAction(
+                        icon: Icons.notifications_outlined,
+                        onPressed: () {},
+                      ),
                     ],
                     showAvatar: true,
                     avatarInitials: 'R',
@@ -223,9 +242,19 @@ class _SearchApplicationsMockupState extends State<_SearchApplicationsMockup> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     // Greeting
-                    const Text('Good morning, Ramesh', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w800, color: _titleColor)),
+                    const Text(
+                      'Good morning, Ramesh',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w800,
+                        color: _titleColor,
+                      ),
+                    ),
                     const SizedBox(height: 4),
-                    const Text('Find an application by reference or service name', style: TextStyle(fontSize: 13, color: _subtleText)),
+                    const Text(
+                      'Find an application by reference or service name',
+                      style: TextStyle(fontSize: 13, color: _subtleText),
+                    ),
                     const SizedBox(height: 16),
 
                     // Search bar
@@ -236,18 +265,25 @@ class _SearchApplicationsMockupState extends State<_SearchApplicationsMockup> {
                             controller: _searchController,
                             decoration: InputDecoration(
                               hintText: 'Search...',
-                              contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+                              contentPadding: const EdgeInsets.symmetric(
+                                horizontal: 12,
+                                vertical: 12,
+                              ),
                               suffixIcon: IconButton(
                                 icon: const Icon(Icons.clear, size: 18),
                                 onPressed: () => _searchController.clear(),
                               ),
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(8),
-                                borderSide: const BorderSide(color: _borderColor),
+                                borderSide: const BorderSide(
+                                  color: _borderColor,
+                                ),
                               ),
                               enabledBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(8),
-                                borderSide: const BorderSide(color: _borderColor),
+                                borderSide: const BorderSide(
+                                  color: _borderColor,
+                                ),
                               ),
                             ),
                           ),
@@ -268,7 +304,10 @@ class _SearchApplicationsMockupState extends State<_SearchApplicationsMockup> {
                     const SizedBox(height: 16),
 
                     // Result count
-                    const Text('2 results for "income"', style: TextStyle(fontSize: 13, color: _subtleText)),
+                    const Text(
+                      '2 results for "income"',
+                      style: TextStyle(fontSize: 13, color: _subtleText),
+                    ),
                     const SizedBox(height: 16),
 
                     // Result Card 1 - Expanded
@@ -300,7 +339,14 @@ class _SearchApplicationsMockupState extends State<_SearchApplicationsMockup> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text('Income Certificate', style: TextStyle(fontSize: 15, fontWeight: FontWeight.w700, color: _titleColor)),
+                const Text(
+                  'Income Certificate',
+                  style: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.w700,
+                    color: _titleColor,
+                  ),
+                ),
                 Row(
                   children: [
                     Ux4gButton(
@@ -310,7 +356,11 @@ class _SearchApplicationsMockupState extends State<_SearchApplicationsMockup> {
                       size: Ux4gButtonSize.small,
                     ),
                     const SizedBox(width: 8),
-                    const Icon(Icons.keyboard_arrow_up, size: 20, color: _subtleText),
+                    const Icon(
+                      Icons.keyboard_arrow_up,
+                      size: 20,
+                      color: _subtleText,
+                    ),
                   ],
                 ),
               ],
@@ -323,7 +373,14 @@ class _SearchApplicationsMockupState extends State<_SearchApplicationsMockup> {
                 Ux4gPillSegment(
                   text: '8 days left',
                   textColor: const Color(0xFF1F2937),
-                  leading: Container(width: 8, height: 8, decoration: const BoxDecoration(color: _orangeColor, shape: BoxShape.circle)),
+                  leading: Container(
+                    width: 8,
+                    height: 8,
+                    decoration: const BoxDecoration(
+                      color: _orangeColor,
+                      shape: BoxShape.circle,
+                    ),
+                  ),
                 ),
                 Ux4gPillSegment(
                   text: 'Under review',
@@ -335,14 +392,32 @@ class _SearchApplicationsMockupState extends State<_SearchApplicationsMockup> {
             const SizedBox(height: 16),
 
             // Details grid
-            _detailRow('Reference Number', 'INC-2026-MH-04127', 'Last Updated Date', '10 Apr 2026'),
+            _detailRow(
+              'Reference Number',
+              'INC-2026-MH-04127',
+              'Last Updated Date',
+              '10 Apr 2026',
+            ),
             const SizedBox(height: 12),
-            _detailRow('Submitted Date', '1 Apr 2026', 'Assigned Officer', 'Rahul Sharma'),
+            _detailRow(
+              'Submitted Date',
+              '1 Apr 2026',
+              'Assigned Officer',
+              'Rahul Sharma',
+            ),
             const SizedBox(height: 12),
-            _detailRow('Department', 'Revenue Department', 'Documents', 'ID Proof, Address\nProof'),
+            _detailRow(
+              'Department',
+              'Revenue Department',
+              'Documents',
+              'ID Proof, Address\nProof',
+            ),
 
             const SizedBox(height: 16),
-            Text('Action needed', style: TextStyle(fontSize: 11, color: _orangeColor)),
+            Text(
+              'Action needed',
+              style: TextStyle(fontSize: 11, color: _orangeColor),
+            ),
             const SizedBox(height: 4),
             Ux4gButton(
               text: 'Upload document',
@@ -370,7 +445,14 @@ class _SearchApplicationsMockupState extends State<_SearchApplicationsMockup> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text('Income Certificate', style: TextStyle(fontSize: 15, fontWeight: FontWeight.w700, color: _titleColor)),
+                const Text(
+                  'Income Certificate',
+                  style: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.w700,
+                    color: _titleColor,
+                  ),
+                ),
                 Row(
                   children: [
                     Ux4gButton(
@@ -380,7 +462,11 @@ class _SearchApplicationsMockupState extends State<_SearchApplicationsMockup> {
                       size: Ux4gButtonSize.small,
                     ),
                     const SizedBox(width: 8),
-                    const Icon(Icons.keyboard_arrow_down, size: 20, color: _subtleText),
+                    const Icon(
+                      Icons.keyboard_arrow_down,
+                      size: 20,
+                      color: _subtleText,
+                    ),
                   ],
                 ),
               ],
@@ -391,7 +477,14 @@ class _SearchApplicationsMockupState extends State<_SearchApplicationsMockup> {
                 Ux4gPillSegment(
                   text: '8 days left',
                   textColor: const Color(0xFF1F2937),
-                  leading: Container(width: 8, height: 8, decoration: const BoxDecoration(color: _orangeColor, shape: BoxShape.circle)),
+                  leading: Container(
+                    width: 8,
+                    height: 8,
+                    decoration: const BoxDecoration(
+                      color: _orangeColor,
+                      shape: BoxShape.circle,
+                    ),
+                  ),
                 ),
                 Ux4gPillSegment(
                   text: 'Under review',
@@ -406,7 +499,12 @@ class _SearchApplicationsMockupState extends State<_SearchApplicationsMockup> {
     );
   }
 
-  Widget _detailRow(String label1, String value1, String label2, String value2) {
+  Widget _detailRow(
+    String label1,
+    String value1,
+    String label2,
+    String value2,
+  ) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -414,9 +512,19 @@ class _SearchApplicationsMockupState extends State<_SearchApplicationsMockup> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(label1, style: const TextStyle(fontSize: 11, color: _subtleText)),
+              Text(
+                label1,
+                style: const TextStyle(fontSize: 11, color: _subtleText),
+              ),
               const SizedBox(height: 2),
-              Text(value1, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w500, color: _titleColor)),
+              Text(
+                value1,
+                style: const TextStyle(
+                  fontSize: 13,
+                  fontWeight: FontWeight.w500,
+                  color: _titleColor,
+                ),
+              ),
             ],
           ),
         ),
@@ -424,9 +532,19 @@ class _SearchApplicationsMockupState extends State<_SearchApplicationsMockup> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(label2, style: const TextStyle(fontSize: 11, color: _subtleText)),
+              Text(
+                label2,
+                style: const TextStyle(fontSize: 11, color: _subtleText),
+              ),
               const SizedBox(height: 2),
-              Text(value2, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w500, color: _titleColor)),
+              Text(
+                value2,
+                style: const TextStyle(
+                  fontSize: 13,
+                  fontWeight: FontWeight.w500,
+                  color: _titleColor,
+                ),
+              ),
             ],
           ),
         ),

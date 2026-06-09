@@ -46,51 +46,83 @@ class Ux4gAvatar extends StatelessWidget {
     final ux4gColors = materialTheme.extension<Ux4gColors>();
     final ux4gTypography = materialTheme.extension<Ux4gTypography>();
 
-    final resolvedPrimary = ux4gColors?.primary ?? materialTheme.colorScheme.primary;
-    final finalContainerColor = containerColor ?? resolvedPrimary.withValues(alpha: 0.1);
+    final resolvedPrimary =
+        ux4gColors?.primary ?? materialTheme.colorScheme.primary;
+    final finalContainerColor =
+        containerColor ?? resolvedPrimary.withValues(alpha: 0.1);
     final finalContentColor = contentColor ?? resolvedPrimary;
     final finalIconColor = iconColor ?? resolvedPrimary;
 
     return Container(
       width: size.size,
       height: size.size,
-      decoration: ShapeDecoration(
-        color: finalContainerColor,
-        shape: shape,
-      ),
+      decoration: ShapeDecoration(color: finalContainerColor, shape: shape),
       clipBehavior: Clip.antiAlias,
       child: Center(
-        child: _buildContent(context, ux4gTypography, materialTheme, finalContentColor, finalIconColor),
+        child: _buildContent(
+          context,
+          ux4gTypography,
+          materialTheme,
+          finalContentColor,
+          finalIconColor,
+        ),
       ),
     );
   }
 
-  Widget _buildContent(BuildContext context, Ux4gTypography? ux4gTypography, ThemeData materialTheme, Color contentColor, Color iconColor) {
+  Widget _buildContent(
+    BuildContext context,
+    Ux4gTypography? ux4gTypography,
+    ThemeData materialTheme,
+    Color contentColor,
+    Color iconColor,
+  ) {
     if (imageUrl != null) {
       return Image.network(
         imageUrl!,
         width: size.size,
         height: size.size,
         fit: BoxFit.cover,
-        errorBuilder: (context, error, stackTrace) => _buildFallback(ux4gTypography, materialTheme, contentColor, iconColor),
+        errorBuilder: (context, error, stackTrace) => _buildFallback(
+          ux4gTypography,
+          materialTheme,
+          contentColor,
+          iconColor,
+        ),
         loadingBuilder: (context, child, loadingProgress) {
           if (loadingProgress == null) return child;
           return Icon(Icons.person, size: size.iconSize, color: iconColor);
         },
       );
     }
-    return _buildFallback(ux4gTypography, materialTheme, contentColor, iconColor);
+    return _buildFallback(
+      ux4gTypography,
+      materialTheme,
+      contentColor,
+      iconColor,
+    );
   }
 
-  Widget _buildFallback(Ux4gTypography? ux4gTypography, ThemeData materialTheme, Color contentColor, Color iconColor) {
+  Widget _buildFallback(
+    Ux4gTypography? ux4gTypography,
+    ThemeData materialTheme,
+    Color contentColor,
+    Color iconColor,
+  ) {
     if (initials != null && initials!.isNotEmpty) {
       return Text(
-        initials!.substring(0, initials!.length > 2 ? 2 : initials!.length).toUpperCase(),
-        style: (ux4gTypography?.bM_default ?? materialTheme.textTheme.bodyMedium ?? const TextStyle()).copyWith(
-          fontSize: size.fontSize,
-          fontWeight: FontWeight.w500,
-          color: contentColor,
-        ),
+        initials!
+            .substring(0, initials!.length > 2 ? 2 : initials!.length)
+            .toUpperCase(),
+        style:
+            (ux4gTypography?.bM_default ??
+                    materialTheme.textTheme.bodyMedium ??
+                    const TextStyle())
+                .copyWith(
+                  fontSize: size.fontSize,
+                  fontWeight: FontWeight.w500,
+                  color: contentColor,
+                ),
       );
     }
     return Icon(icon ?? Icons.person, size: size.iconSize, color: iconColor);
@@ -139,10 +171,14 @@ class Ux4gAvatarGroup extends StatelessWidget {
 
     final materialTheme = Theme.of(context);
     final ux4gColors = materialTheme.extension<Ux4gColors>();
-    final resolvedBorderColor = borderColor ?? (ux4gColors?.surface ?? materialTheme.colorScheme.surface);
+    final resolvedBorderColor =
+        borderColor ??
+        (ux4gColors?.surface ?? materialTheme.colorScheme.surface);
     final actualLimit = maxLimit ?? items.length;
     final exceedsLimit = items.length > actualLimit;
-    final visibleItems = exceedsLimit ? items.take(actualLimit - 1).toList() : items;
+    final visibleItems = exceedsLimit
+        ? items.take(actualLimit - 1).toList()
+        : items;
     final remainingCount = exceedsLimit ? items.length - (actualLimit - 1) : 0;
 
     final double overlap = collapsed ? -(size.size * 0.25) : 8.0;
@@ -171,10 +207,7 @@ class Ux4gAvatarGroup extends StatelessWidget {
           GestureDetector(
             onTap: onRemainingClick,
             child: _buildGroupAvatar(
-              Ux4gAvatar(
-                size: size,
-                initials: "+$remainingCount",
-              ),
+              Ux4gAvatar(size: size, initials: "+$remainingCount"),
               resolvedBorderColor,
             ),
           ),
@@ -259,7 +292,11 @@ class Ux4gProfileAvatar extends StatelessWidget {
     };
   }
 
-  Widget _buildVariant(Ux4gColors? ux4gColors, ThemeData materialTheme, double size) {
+  Widget _buildVariant(
+    Ux4gColors? ux4gColors,
+    ThemeData materialTheme,
+    double size,
+  ) {
     if (variant is Ux4gProfileBadge) {
       final icon = switch (variant as Ux4gProfileBadge) {
         Ux4gProfileBadge.verified => Icons.verified,
@@ -280,7 +317,11 @@ class Ux4gProfileAvatar extends StatelessWidget {
           color: ux4gColors?.surface ?? materialTheme.colorScheme.surface,
           shape: BoxShape.circle,
         ),
-        child: Icon(icon, size: size * 0.8, color: ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface),
+        child: Icon(
+          icon,
+          size: size * 0.8,
+          color: ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface,
+        ),
       );
     }
     return const SizedBox.shrink();
@@ -361,10 +402,14 @@ class Ux4gStatusAvatar extends StatelessWidget {
   Color _getStatusColor(Ux4gColors? ux4gColors, ThemeData materialTheme) {
     return switch (variant) {
       Ux4gStatusVariant.online => ux4gColors?.success ?? Colors.green,
-      Ux4gStatusVariant.offline => (ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface).withValues(alpha: 0.5),
-      Ux4gStatusVariant.busy => ux4gColors?.error ?? materialTheme.colorScheme.error,
+      Ux4gStatusVariant.offline =>
+        (ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface)
+            .withValues(alpha: 0.5),
+      Ux4gStatusVariant.busy =>
+        ux4gColors?.error ?? materialTheme.colorScheme.error,
       Ux4gStatusVariant.success => ux4gColors?.success ?? Colors.green,
-      Ux4gStatusVariant.error => ux4gColors?.error ?? materialTheme.colorScheme.error,
+      Ux4gStatusVariant.error =>
+        ux4gColors?.error ?? materialTheme.colorScheme.error,
       Ux4gStatusVariant.warning => ux4gColors?.warning ?? Colors.orange,
     };
   }

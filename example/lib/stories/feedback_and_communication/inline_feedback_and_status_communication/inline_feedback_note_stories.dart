@@ -29,9 +29,9 @@ final inlineFeedbackNoteComponent = WidgetbookComponent(
           name: 'Inline Feedback Note ($variant)',
           description: isCard
               ? 'A note from a reviewing officer inside a card container. '
-                'Shows an important message with action required.'
+                    'Shows an important message with action required.'
               : 'A note from a reviewing officer displayed inline. '
-                'Shows an important message with action required.',
+                    'Shows an important message with action required.',
           code: isCard ? _noteCardCode : _noteDefaultCode,
           center: true,
           child: _NoteMockup(isCard: isCard),
@@ -290,7 +290,10 @@ class _NoteMockup extends StatelessWidget {
               // App Header with logos
               Container(
                 width: double.infinity,
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 10,
+                ),
                 decoration: BoxDecoration(
                   color: Colors.white,
                   boxShadow: [
@@ -303,9 +306,18 @@ class _NoteMockup extends StatelessWidget {
                 ),
                 child: Row(
                   children: [
-                    SvgPicture.asset('assets/national_amblam_logo.svg', height: 40),
+                    SvgPicture.asset(
+                      'assets/national_amblam_logo.svg',
+                      height: 40,
+                    ),
                     const SizedBox(width: 8),
-                    SizedBox(height: 32, child: Ux4gDivider(orientation: Ux4gDividerOrientation.vertical, color: const Color(0xFFD1D5DB))),
+                    SizedBox(
+                      height: 32,
+                      child: Ux4gDivider(
+                        orientation: Ux4gDividerOrientation.vertical,
+                        color: const Color(0xFFD1D5DB),
+                      ),
+                    ),
                     const SizedBox(width: 8),
                     SvgPicture.asset('assets/Union.svg', height: 32),
                   ],
@@ -370,7 +382,11 @@ class _NoteMockup extends StatelessWidget {
         // Title
         const Text(
           'Note to Citizen',
-          style: TextStyle(fontSize: 20, fontWeight: FontWeight.w900, color: _titleColor),
+          style: TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.w900,
+            color: _titleColor,
+          ),
         ),
         const SizedBox(height: 10),
 
@@ -401,12 +417,20 @@ class _NoteMockup extends StatelessWidget {
                   children: const [
                     Text(
                       'Note from Revenue Inspector - 12 April 2026, 11:34 AM',
-                      style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700, color: _noteTitle),
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w700,
+                        color: _noteTitle,
+                      ),
                     ),
                     SizedBox(height: 6),
                     Text(
                       'Please resubmit the income proof with a clearer scan. The current file shows glare on the income figure row. Resubmit within 5 working days to avoid delay.',
-                      style: TextStyle(fontSize: 13, color: _subtleText, height: 1.4),
+                      style: TextStyle(
+                        fontSize: 13,
+                        color: _subtleText,
+                        height: 1.4,
+                      ),
                     ),
                   ],
                 ),
@@ -421,9 +445,7 @@ class _NoteMockup extends StatelessWidget {
   Widget _buildDefaultContent() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        _buildFormFields(),
-      ],
+      children: [_buildFormFields()],
     );
   }
 

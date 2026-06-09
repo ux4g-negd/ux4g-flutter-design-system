@@ -6,11 +6,7 @@ class Ux4gTheme extends StatelessWidget {
   final Widget child;
   final bool isDark;
 
-  const Ux4gTheme({
-    super.key,
-    required this.child,
-    this.isDark = false,
-  });
+  const Ux4gTheme({super.key, required this.child, this.isDark = false});
 
   static ThemeData themeData({bool isDark = false}) {
     return ThemeData(
@@ -28,7 +24,8 @@ class Ux4gTheme extends StatelessWidget {
   }
 
   static Ux4gTypography typography(BuildContext context) {
-    return Theme.of(context).extension<Ux4gTypography>() ?? defaultUx4gTypography;
+    return Theme.of(context).extension<Ux4gTypography>() ??
+        defaultUx4gTypography;
   }
 
   @override

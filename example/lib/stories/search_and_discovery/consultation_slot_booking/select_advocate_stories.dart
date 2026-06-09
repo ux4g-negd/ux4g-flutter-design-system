@@ -160,7 +160,10 @@ class _SelectAdvocateMockup extends StatelessWidget {
               // App Header
               Container(
                 width: double.infinity,
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 10,
+                ),
                 color: _primaryColor,
                 child: const Row(
                   children: [
@@ -168,7 +171,11 @@ class _SelectAdvocateMockup extends StatelessWidget {
                     SizedBox(width: 12),
                     Text(
                       'National Services Portal',
-                      style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: Colors.white),
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.white,
+                      ),
                     ),
                   ],
                 ),
@@ -184,7 +191,11 @@ class _SelectAdvocateMockup extends StatelessWidget {
                       const SizedBox(height: 8),
                       const Text(
                         'Select an advocate',
-                        style: TextStyle(fontSize: 22, fontWeight: FontWeight.w800, color: _titleColor),
+                        style: TextStyle(
+                          fontSize: 22,
+                          fontWeight: FontWeight.w800,
+                          color: _titleColor,
+                        ),
                       ),
                       const SizedBox(height: 4),
                       const Text(
@@ -192,11 +203,29 @@ class _SelectAdvocateMockup extends StatelessWidget {
                         style: TextStyle(fontSize: 13, color: _subtleText),
                       ),
                       const SizedBox(height: 20),
-                      _buildAdvocateCard('Adv. M. Sharma', 'Family Law', '12 yrs', 'Hindi, Marathi, English', 8),
+                      _buildAdvocateCard(
+                        'Adv. M. Sharma',
+                        'Family Law',
+                        '12 yrs',
+                        'Hindi, Marathi, English',
+                        8,
+                      ),
                       const SizedBox(height: 16),
-                      _buildAdvocateCard('Adv. M. Sharma', 'Family Law', '12 yrs', 'Hindi, Marathi, English', 5),
+                      _buildAdvocateCard(
+                        'Adv. M. Sharma',
+                        'Family Law',
+                        '12 yrs',
+                        'Hindi, Marathi, English',
+                        5,
+                      ),
                       const SizedBox(height: 16),
-                      _buildAdvocateCard('Adv. M. Sharma', 'Family Law', '12 yrs', 'Hindi, Marathi, English', 3),
+                      _buildAdvocateCard(
+                        'Adv. M. Sharma',
+                        'Family Law',
+                        '12 yrs',
+                        'Hindi, Marathi, English',
+                        3,
+                      ),
                     ],
                   ),
                 ),
@@ -208,7 +237,13 @@ class _SelectAdvocateMockup extends StatelessWidget {
     );
   }
 
-  Widget _buildAdvocateCard(String name, String specialization, String experience, String languages, int slots) {
+  Widget _buildAdvocateCard(
+    String name,
+    String specialization,
+    String experience,
+    String languages,
+    int slots,
+  ) {
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.all(16),
@@ -230,15 +265,29 @@ class _SelectAdvocateMockup extends StatelessWidget {
                   color: const Color(0xFFF2EFFF),
                   borderRadius: BorderRadius.circular(20),
                 ),
-                child: const Icon(Icons.balance, size: 20, color: _primaryColor),
+                child: const Icon(
+                  Icons.balance,
+                  size: 20,
+                  color: _primaryColor,
+                ),
               ),
               const SizedBox(width: 12),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(name, style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w700, color: _titleColor)),
-                    Text('$specialization · $experience', style: const TextStyle(fontSize: 12, color: _subtleText)),
+                    Text(
+                      name,
+                      style: const TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w700,
+                        color: _titleColor,
+                      ),
+                    ),
+                    Text(
+                      '$specialization · $experience',
+                      style: const TextStyle(fontSize: 12, color: _subtleText),
+                    ),
                   ],
                 ),
               ),
@@ -248,12 +297,22 @@ class _SelectAdvocateMockup extends StatelessWidget {
                   color: const Color(0xFFDDF8D8),
                   borderRadius: BorderRadius.circular(4),
                 ),
-                child: Text('$slots slots', style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: _greenColor)),
+                child: Text(
+                  '$slots slots',
+                  style: const TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w600,
+                    color: _greenColor,
+                  ),
+                ),
               ),
             ],
           ),
           const SizedBox(height: 8),
-          Text('Languages: $languages', style: const TextStyle(fontSize: 12, color: _subtleText)),
+          Text(
+            'Languages: $languages',
+            style: const TextStyle(fontSize: 12, color: _subtleText),
+          ),
           const SizedBox(height: 12),
           SizedBox(
             width: double.infinity,

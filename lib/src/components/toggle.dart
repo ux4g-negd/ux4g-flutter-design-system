@@ -48,7 +48,8 @@ class Ux4gToggle extends StatelessWidget {
     final ux4gTypography = materialTheme.extension<Ux4gTypography>();
 
     final primary = ux4gColors?.primary ?? materialTheme.colorScheme.primary;
-    final onSurface = ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
+    final onSurface =
+        ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
     final surface = ux4gColors?.surface ?? materialTheme.colorScheme.surface;
 
     // Color definitions
@@ -65,7 +66,8 @@ class Ux4gToggle extends StatelessWidget {
         ? checkedTrackColor
         : uncheckedTrackColor;
 
-    final thumbColor = surface; // Thumb is always surface color in default setup
+    final thumbColor =
+        surface; // Thumb is always surface color in default setup
 
     final endOffset = size.width - size.thumbSize - size.thumbPadding;
     final startOffset = size.thumbPadding;
@@ -117,11 +119,23 @@ class Ux4gToggle extends StatelessWidget {
 
     TextStyle labelStyle;
     TextStyle descStyle;
-    
-    final lMDefault = ux4gTypography?.lM_default ?? materialTheme.textTheme.labelMedium ?? const TextStyle();
-    final lSDefault = ux4gTypography?.lS_default ?? materialTheme.textTheme.labelSmall ?? const TextStyle();
-    final lLDefault = ux4gTypography?.lL_default ?? materialTheme.textTheme.labelLarge ?? const TextStyle();
-    final lXLDefault = ux4gTypography?.lXL_default ?? materialTheme.textTheme.labelLarge?.copyWith(fontSize: 16) ?? const TextStyle();
+
+    final lMDefault =
+        ux4gTypography?.lM_default ??
+        materialTheme.textTheme.labelMedium ??
+        const TextStyle();
+    final lSDefault =
+        ux4gTypography?.lS_default ??
+        materialTheme.textTheme.labelSmall ??
+        const TextStyle();
+    final lLDefault =
+        ux4gTypography?.lL_default ??
+        materialTheme.textTheme.labelLarge ??
+        const TextStyle();
+    final lXLDefault =
+        ux4gTypography?.lXL_default ??
+        materialTheme.textTheme.labelLarge?.copyWith(fontSize: 16) ??
+        const TextStyle();
 
     switch (size) {
       case Ux4gToggleSize.s:
@@ -148,9 +162,7 @@ class Ux4gToggle extends StatelessWidget {
             Text(
               label!,
               style: labelStyle.copyWith(
-                color: enabled
-                    ? onSurface
-                    : onSurface.withValues(alpha: 0.38),
+                color: enabled ? onSurface : onSurface.withValues(alpha: 0.38),
               ),
             ),
           if (description != null) ...[

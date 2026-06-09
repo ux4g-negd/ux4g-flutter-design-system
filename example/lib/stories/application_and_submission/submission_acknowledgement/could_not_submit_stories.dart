@@ -24,7 +24,8 @@ final couldNotSubmitComponent = WidgetbookComponent(
           label: 'Variant',
           options: const ['Default', 'Card style'],
           initialOption: 'Default',
-          description: 'Switch between the standard flat layout and the card-style layout.',
+          description:
+              'Switch between the standard flat layout and the card-style layout.',
         );
 
         final code = variant == 'Card style'
@@ -61,10 +62,7 @@ class _ErrorIcon extends StatelessWidget {
     return Container(
       width: 56,
       height: 56,
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        color: _errorBg,
-      ),
+      decoration: BoxDecoration(shape: BoxShape.circle, color: _errorBg),
       child: const Icon(Icons.error_outline, color: _errorColor, size: 30),
     );
   }
@@ -82,7 +80,11 @@ class _ErrorToastCard extends StatelessWidget {
         color: Colors.white,
         borderRadius: BorderRadius.circular(12),
         boxShadow: [
-          BoxShadow(color: Colors.black.withOpacity(0.1), blurRadius: 16, offset: const Offset(0, -4)),
+          BoxShadow(
+            color: Colors.black.withOpacity(0.1),
+            blurRadius: 16,
+            offset: const Offset(0, -4),
+          ),
         ],
       ),
       child: Row(
@@ -97,7 +99,11 @@ class _ErrorToastCard extends StatelessWidget {
               children: [
                 const Text(
                   'Could not submit',
-                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: _titleColor),
+                  style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w600,
+                    color: _titleColor,
+                  ),
                 ),
                 const SizedBox(height: 4),
                 const Text(
@@ -528,15 +534,27 @@ class _CouldNotSubmitMockupState extends State<_CouldNotSubmitMockup> {
                           SvgPicture.asset(
                             _nationalEmblemLogoPath,
                             height: 40,
-                            errorBuilder: (c, e, s) => const Icon(Icons.account_balance, size: 32, color: Colors.grey),
+                            errorBuilder: (c, e, s) => const Icon(
+                              Icons.account_balance,
+                              size: 32,
+                              color: Colors.grey,
+                            ),
                           ),
                           const SizedBox(width: 1),
-                          Container(height: 32, width: 1, color: const Color(0xFFD1D5DB)),
+                          Container(
+                            height: 32,
+                            width: 1,
+                            color: const Color(0xFFD1D5DB),
+                          ),
                           const SizedBox(width: 1),
                           SvgPicture.asset(
                             _unionLogoPath,
                             height: 32,
-                            errorBuilder: (c, e, s) => const Icon(Icons.blur_on, size: 32, color: Colors.blue),
+                            errorBuilder: (c, e, s) => const Icon(
+                              Icons.blur_on,
+                              size: 32,
+                              color: Colors.blue,
+                            ),
                           ),
                         ],
                       ),
@@ -548,7 +566,10 @@ class _CouldNotSubmitMockupState extends State<_CouldNotSubmitMockup> {
                 // Content
                 Expanded(
                   child: SingleChildScrollView(
-                    padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 24,
+                      vertical: 24,
+                    ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -563,7 +584,12 @@ class _CouldNotSubmitMockupState extends State<_CouldNotSubmitMockup> {
                           child: Text(
                             'Could Not Submit\nApplication',
                             textAlign: TextAlign.center,
-                            style: TextStyle(fontSize: 24, fontWeight: FontWeight.w800, color: _titleColor, height: 1.2),
+                            style: TextStyle(
+                              fontSize: 24,
+                              fontWeight: FontWeight.w800,
+                              color: _titleColor,
+                              height: 1.2,
+                            ),
                           ),
                         ),
                         const SizedBox(height: 12),
@@ -571,19 +597,43 @@ class _CouldNotSubmitMockupState extends State<_CouldNotSubmitMockup> {
                           child: Text(
                             'We could not submit your application due to\na network or server error. Your data is saved —\ntry again.',
                             textAlign: TextAlign.center,
-                            style: TextStyle(fontSize: 14, color: _subtleText, height: 1.4),
+                            style: TextStyle(
+                              fontSize: 14,
+                              color: _subtleText,
+                              height: 1.4,
+                            ),
                           ),
                         ),
                         const SizedBox(height: 32),
 
                         // What happens next
-                        const Text('What happens next', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: _titleColor)),
+                        const Text(
+                          'What happens next',
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w700,
+                            color: _titleColor,
+                          ),
+                        ),
                         const SizedBox(height: 20),
 
                         // Timeline steps
-                        _TimelineItem(number: '1', title: 'Document verification', subtitle: '3-5 working days'),
-                        _TimelineItem(number: '2', title: 'Field inspection (if required)', subtitle: 'Inspector will contact you'),
-                        _TimelineItem(number: '3', title: 'Certificate issued', subtitle: 'Within 30 days · Legal SLA', isLast: true),
+                        _TimelineItem(
+                          number: '1',
+                          title: 'Document verification',
+                          subtitle: '3-5 working days',
+                        ),
+                        _TimelineItem(
+                          number: '2',
+                          title: 'Field inspection (if required)',
+                          subtitle: 'Inspector will contact you',
+                        ),
+                        _TimelineItem(
+                          number: '3',
+                          title: 'Certificate issued',
+                          subtitle: 'Within 30 days · Legal SLA',
+                          isLast: true,
+                        ),
                       ],
                     ),
                   ),
@@ -591,7 +641,10 @@ class _CouldNotSubmitMockupState extends State<_CouldNotSubmitMockup> {
 
                 // Actions
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 24,
+                    vertical: 16,
+                  ),
                   child: Column(
                     children: [
                       Ux4gButton(
@@ -614,7 +667,14 @@ class _CouldNotSubmitMockupState extends State<_CouldNotSubmitMockup> {
                       Center(
                         child: GestureDetector(
                           onTap: () {},
-                          child: const Text('Contact support', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: _titleColor)),
+                          child: const Text(
+                            'Contact support',
+                            style: TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w600,
+                              color: _titleColor,
+                            ),
+                          ),
                         ),
                       ),
                     ],
@@ -627,12 +687,24 @@ class _CouldNotSubmitMockupState extends State<_CouldNotSubmitMockup> {
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      const Text('Powered by -', style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+                      const Text(
+                        'Powered by -',
+                        style: TextStyle(
+                          fontSize: 11,
+                          color: Color(0xFF9CA3AF),
+                        ),
+                      ),
                       const SizedBox(height: 6),
                       Image.asset(
                         _digitalIndiaLogoPath,
                         height: 24,
-                        errorBuilder: (c, e, s) => const Text('Digital India', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12)),
+                        errorBuilder: (c, e, s) => const Text(
+                          'Digital India',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 12,
+                          ),
+                        ),
                       ),
                     ],
                   ),
@@ -646,7 +718,9 @@ class _CouldNotSubmitMockupState extends State<_CouldNotSubmitMockup> {
                 left: 16,
                 right: 16,
                 top: 80,
-                child: _ErrorToastCard(onClose: () => setState(() => _showToast = false)),
+                child: _ErrorToastCard(
+                  onClose: () => setState(() => _showToast = false),
+                ),
               ),
           ],
         ),
@@ -659,7 +733,8 @@ class _CouldNotSubmitCardMockup extends StatefulWidget {
   const _CouldNotSubmitCardMockup();
 
   @override
-  State<_CouldNotSubmitCardMockup> createState() => _CouldNotSubmitCardMockupState();
+  State<_CouldNotSubmitCardMockup> createState() =>
+      _CouldNotSubmitCardMockupState();
 }
 
 class _CouldNotSubmitCardMockupState extends State<_CouldNotSubmitCardMockup> {
@@ -672,7 +747,11 @@ class _CouldNotSubmitCardMockupState extends State<_CouldNotSubmitCardMockup> {
         color: _cardBg,
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
-          BoxShadow(color: Colors.black.withOpacity(0.08), blurRadius: 24, offset: const Offset(0, 6)),
+          BoxShadow(
+            color: Colors.black.withOpacity(0.08),
+            blurRadius: 24,
+            offset: const Offset(0, 6),
+          ),
         ],
       ),
       clipBehavior: Clip.antiAlias,
@@ -696,15 +775,27 @@ class _CouldNotSubmitCardMockupState extends State<_CouldNotSubmitCardMockup> {
                             SvgPicture.asset(
                               _nationalEmblemLogoPath,
                               height: 40,
-                              errorBuilder: (c, e, s) => const Icon(Icons.account_balance, size: 32, color: Colors.grey),
+                              errorBuilder: (c, e, s) => const Icon(
+                                Icons.account_balance,
+                                size: 32,
+                                color: Colors.grey,
+                              ),
                             ),
                             const SizedBox(width: 1),
-                            Container(height: 32, width: 1, color: const Color(0xFFD1D5DB)),
+                            Container(
+                              height: 32,
+                              width: 1,
+                              color: const Color(0xFFD1D5DB),
+                            ),
                             const SizedBox(width: 1),
                             SvgPicture.asset(
                               _unionLogoPath,
                               height: 32,
-                              errorBuilder: (c, e, s) => const Icon(Icons.blur_on, size: 32, color: Colors.blue),
+                              errorBuilder: (c, e, s) => const Icon(
+                                Icons.blur_on,
+                                size: 32,
+                                color: Colors.blue,
+                              ),
                             ),
                           ],
                         ),
@@ -716,14 +807,22 @@ class _CouldNotSubmitCardMockupState extends State<_CouldNotSubmitCardMockup> {
                   // White card with content
                   Expanded(
                     child: SingleChildScrollView(
-                      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 24,
+                        vertical: 32,
+                      ),
                       child: Container(
                         padding: const EdgeInsets.all(24),
                         decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(16),
                           boxShadow: [
-                            BoxShadow(color: Colors.black.withOpacity(0.06), blurRadius: 20, spreadRadius: 2, offset: const Offset(0, 4)),
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.06),
+                              blurRadius: 20,
+                              spreadRadius: 2,
+                              offset: const Offset(0, 4),
+                            ),
                           ],
                         ),
                         child: Column(
@@ -740,7 +839,12 @@ class _CouldNotSubmitCardMockupState extends State<_CouldNotSubmitCardMockup> {
                               child: Text(
                                 'Could Not Submit\nApplication',
                                 textAlign: TextAlign.center,
-                                style: TextStyle(fontSize: 24, fontWeight: FontWeight.w800, color: _titleColor, height: 1.2),
+                                style: TextStyle(
+                                  fontSize: 24,
+                                  fontWeight: FontWeight.w800,
+                                  color: _titleColor,
+                                  height: 1.2,
+                                ),
                               ),
                             ),
                             const SizedBox(height: 12),
@@ -748,19 +852,43 @@ class _CouldNotSubmitCardMockupState extends State<_CouldNotSubmitCardMockup> {
                               child: Text(
                                 'We could not submit your application due to\na network or server error. Your data is saved —\ntry again.',
                                 textAlign: TextAlign.center,
-                                style: TextStyle(fontSize: 14, color: _subtleText, height: 1.4),
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  color: _subtleText,
+                                  height: 1.4,
+                                ),
                               ),
                             ),
                             const SizedBox(height: 32),
 
                             // What happens next
-                            const Text('What happens next', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: _titleColor)),
+                            const Text(
+                              'What happens next',
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w700,
+                                color: _titleColor,
+                              ),
+                            ),
                             const SizedBox(height: 20),
 
                             // Timeline steps
-                            _TimelineItem(number: '1', title: 'Document verification', subtitle: '3-5 working days'),
-                            _TimelineItem(number: '2', title: 'Field inspection (if required)', subtitle: 'Inspector will contact you'),
-                            _TimelineItem(number: '3', title: 'Certificate issued', subtitle: 'Within 30 days · Legal SLA', isLast: true),
+                            _TimelineItem(
+                              number: '1',
+                              title: 'Document verification',
+                              subtitle: '3-5 working days',
+                            ),
+                            _TimelineItem(
+                              number: '2',
+                              title: 'Field inspection (if required)',
+                              subtitle: 'Inspector will contact you',
+                            ),
+                            _TimelineItem(
+                              number: '3',
+                              title: 'Certificate issued',
+                              subtitle: 'Within 30 days · Legal SLA',
+                              isLast: true,
+                            ),
                           ],
                         ),
                       ),
@@ -769,7 +897,10 @@ class _CouldNotSubmitCardMockupState extends State<_CouldNotSubmitCardMockup> {
 
                   // Actions
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 24,
+                      vertical: 16,
+                    ),
                     child: Column(
                       children: [
                         Ux4gButton(
@@ -792,7 +923,14 @@ class _CouldNotSubmitCardMockupState extends State<_CouldNotSubmitCardMockup> {
                         Center(
                           child: GestureDetector(
                             onTap: () {},
-                            child: const Text('Contact support', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: _titleColor)),
+                            child: const Text(
+                              'Contact support',
+                              style: TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w600,
+                                color: _titleColor,
+                              ),
+                            ),
                           ),
                         ),
                       ],
@@ -805,12 +943,24 @@ class _CouldNotSubmitCardMockupState extends State<_CouldNotSubmitCardMockup> {
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        const Text('Powered by -', style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+                        const Text(
+                          'Powered by -',
+                          style: TextStyle(
+                            fontSize: 11,
+                            color: Color(0xFF9CA3AF),
+                          ),
+                        ),
                         const SizedBox(height: 6),
                         Image.asset(
                           _digitalIndiaLogoPath,
                           height: 24,
-                          errorBuilder: (c, e, s) => const Text('Digital India', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12)),
+                          errorBuilder: (c, e, s) => const Text(
+                            'Digital India',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 12,
+                            ),
+                          ),
                         ),
                       ],
                     ),
@@ -824,7 +974,9 @@ class _CouldNotSubmitCardMockupState extends State<_CouldNotSubmitCardMockup> {
                   left: 16,
                   right: 16,
                   top: 80,
-                  child: _ErrorToastCard(onClose: () => setState(() => _showToast = false)),
+                  child: _ErrorToastCard(
+                    onClose: () => setState(() => _showToast = false),
+                  ),
                 ),
             ],
           ),
@@ -869,7 +1021,11 @@ class _TimelineItem extends StatelessWidget {
                 child: Center(
                   child: Text(
                     number,
-                    style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: Colors.white),
+                    style: const TextStyle(
+                      fontSize: 13,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.white,
+                    ),
                   ),
                 ),
               ),
@@ -892,7 +1048,11 @@ class _TimelineItem extends StatelessWidget {
                 children: [
                   Text(
                     title,
-                    style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w600, color: _titleColor),
+                    style: const TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.w600,
+                      color: _titleColor,
+                    ),
                   ),
                   const SizedBox(height: 2),
                   Text(

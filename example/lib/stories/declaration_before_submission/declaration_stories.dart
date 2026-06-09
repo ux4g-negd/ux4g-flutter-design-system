@@ -26,14 +26,17 @@ final declarationBeforeSubmissionComponent = WidgetbookComponent(
           initialOption: 'Default',
         );
 
-        final code = variant == 'Card style' ? _declarationBeforeSubmissionCardCode : _declarationBeforeSubmissionCode;
+        final code = variant == 'Card style'
+            ? _declarationBeforeSubmissionCardCode
+            : _declarationBeforeSubmissionCode;
         final child = variant == 'Card style'
             ? const _DeclarationBeforeSubmissionCardMockup()
             : const _DeclarationBeforeSubmissionMockup();
 
         return ComponentDocs(
           name: 'Declaration Before Submission',
-          description: 'A screen pattern for a formal declaration before application submission. '
+          description:
+              'A screen pattern for a formal declaration before application submission. '
               'Features a scrollable declaration box that must be read before agreeing. '
               'Use the [Variant] knob on the right to toggle layouts.',
           code: code,
@@ -62,14 +65,17 @@ final declarationWithDigitalSignComponent = WidgetbookComponent(
           initialOption: 'Unsigned',
         );
 
-        final code = variant == 'Card style' ? _declarationWithDigitalSignCardCode : _declarationWithDigitalSignCode;
+        final code = variant == 'Card style'
+            ? _declarationWithDigitalSignCardCode
+            : _declarationWithDigitalSignCode;
         final child = variant == 'Card style'
             ? _DeclarationWithDigitalSignCardMockup(initialState: state)
             : _DeclarationWithDigitalSignMockup(initialState: state);
 
         return ComponentDocs(
           name: 'Declaration with Digital Sign',
-          description: 'A formal declaration pattern where the user must agree and then sign by typing their name. '
+          description:
+              'A formal declaration pattern where the user must agree and then sign by typing their name. '
               'The signature is validated before the application can be submitted. '
               'Use the [Variant] knob to toggle between Default and Card style layouts.',
           code: code,
@@ -85,10 +91,12 @@ class _DeclarationBeforeSubmissionMockup extends StatefulWidget {
   const _DeclarationBeforeSubmissionMockup();
 
   @override
-  State<_DeclarationBeforeSubmissionMockup> createState() => _DeclarationBeforeSubmissionMockupState();
+  State<_DeclarationBeforeSubmissionMockup> createState() =>
+      _DeclarationBeforeSubmissionMockupState();
 }
 
-class _DeclarationBeforeSubmissionMockupState extends State<_DeclarationBeforeSubmissionMockup> {
+class _DeclarationBeforeSubmissionMockupState
+    extends State<_DeclarationBeforeSubmissionMockup> {
   bool _agreed = false;
   final ScrollController _scrollController = ScrollController();
   bool _reachedEnd = false;
@@ -97,7 +105,8 @@ class _DeclarationBeforeSubmissionMockupState extends State<_DeclarationBeforeSu
   void initState() {
     super.initState();
     _scrollController.addListener(() {
-      if (_scrollController.position.pixels >= _scrollController.position.maxScrollExtent - 10) {
+      if (_scrollController.position.pixels >=
+          _scrollController.position.maxScrollExtent - 10) {
         if (!_reachedEnd) {
           setState(() {
             _reachedEnd = true;
@@ -190,7 +199,9 @@ class _DeclarationBeforeSubmissionMockupState extends State<_DeclarationBeforeSu
                                   begin: Alignment.topCenter,
                                   end: Alignment.bottomCenter,
                                   colors: [
-                                    const Color(0xFFF9FAFB).withValues(alpha: 0),
+                                    const Color(
+                                      0xFFF9FAFB,
+                                    ).withValues(alpha: 0),
                                     const Color(0xFFF9FAFB),
                                   ],
                                 ),
@@ -238,7 +249,8 @@ class _DeclarationBeforeSubmissionMockupState extends State<_DeclarationBeforeSu
                           TextSpan(
                             children: [
                               TextSpan(
-                                text: 'I have read and agree to the above declaration.',
+                                text:
+                                    'I have read and agree to the above declaration.',
                                 style: TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.w600,
@@ -333,10 +345,12 @@ class _DeclarationBeforeSubmissionCardMockup extends StatefulWidget {
   const _DeclarationBeforeSubmissionCardMockup();
 
   @override
-  State<_DeclarationBeforeSubmissionCardMockup> createState() => _DeclarationBeforeSubmissionCardMockupState();
+  State<_DeclarationBeforeSubmissionCardMockup> createState() =>
+      _DeclarationBeforeSubmissionCardMockupState();
 }
 
-class _DeclarationBeforeSubmissionCardMockupState extends State<_DeclarationBeforeSubmissionCardMockup> {
+class _DeclarationBeforeSubmissionCardMockupState
+    extends State<_DeclarationBeforeSubmissionCardMockup> {
   bool _agreed = false;
   final ScrollController _scrollController = ScrollController();
   bool _reachedEnd = false;
@@ -345,7 +359,8 @@ class _DeclarationBeforeSubmissionCardMockupState extends State<_DeclarationBefo
   void initState() {
     super.initState();
     _scrollController.addListener(() {
-      if (_scrollController.position.pixels >= _scrollController.position.maxScrollExtent - 10) {
+      if (_scrollController.position.pixels >=
+          _scrollController.position.maxScrollExtent - 10) {
         if (!_reachedEnd) {
           setState(() {
             _reachedEnd = true;
@@ -416,7 +431,9 @@ class _DeclarationBeforeSubmissionCardMockupState extends State<_DeclarationBefo
                               decoration: BoxDecoration(
                                 color: const Color(0xFFF9FAFB),
                                 borderRadius: BorderRadius.circular(12),
-                                border: Border.all(color: const Color(0xFFE5E7EB)),
+                                border: Border.all(
+                                  color: const Color(0xFFE5E7EB),
+                                ),
                               ),
                               child: Stack(
                                 children: [
@@ -450,13 +467,17 @@ class _DeclarationBeforeSubmissionCardMockupState extends State<_DeclarationBefo
                                       left: 0,
                                       right: 0,
                                       child: Container(
-                                        padding: const EdgeInsets.symmetric(vertical: 8),
+                                        padding: const EdgeInsets.symmetric(
+                                          vertical: 8,
+                                        ),
                                         decoration: BoxDecoration(
                                           gradient: LinearGradient(
                                             begin: Alignment.topCenter,
                                             end: Alignment.bottomCenter,
                                             colors: [
-                                              const Color(0xFFF9FAFB).withValues(alpha: 0),
+                                              const Color(
+                                                0xFFF9FAFB,
+                                              ).withValues(alpha: 0),
                                               const Color(0xFFF9FAFB),
                                             ],
                                           ),
@@ -504,7 +525,8 @@ class _DeclarationBeforeSubmissionCardMockupState extends State<_DeclarationBefo
                                     TextSpan(
                                       children: [
                                         TextSpan(
-                                          text: 'I have read and agree to the above declaration.',
+                                          text:
+                                              'I have read and agree to the above declaration.',
                                           style: TextStyle(
                                             fontSize: 16,
                                             fontWeight: FontWeight.w600,
@@ -532,7 +554,9 @@ class _DeclarationBeforeSubmissionCardMockupState extends State<_DeclarationBefo
                               decoration: BoxDecoration(
                                 color: const Color(0xFFFFF7ED),
                                 borderRadius: BorderRadius.circular(8),
-                                border: Border.all(color: const Color(0xFFFFEDD5)),
+                                border: Border.all(
+                                  color: const Color(0xFFFFEDD5),
+                                ),
                               ),
                               child: Row(
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -676,10 +700,12 @@ class _DeclarationWithDigitalSignMockup extends StatefulWidget {
   const _DeclarationWithDigitalSignMockup({required this.initialState});
 
   @override
-  State<_DeclarationWithDigitalSignMockup> createState() => _DeclarationWithDigitalSignMockupState();
+  State<_DeclarationWithDigitalSignMockup> createState() =>
+      _DeclarationWithDigitalSignMockupState();
 }
 
-class _DeclarationWithDigitalSignMockupState extends State<_DeclarationWithDigitalSignMockup> {
+class _DeclarationWithDigitalSignMockupState
+    extends State<_DeclarationWithDigitalSignMockup> {
   late bool _agreed;
   late TextEditingController _nameController;
   late bool _isSigned;
@@ -689,7 +715,9 @@ class _DeclarationWithDigitalSignMockupState extends State<_DeclarationWithDigit
     super.initState();
     _isSigned = widget.initialState == 'Signed';
     _agreed = _isSigned;
-    _nameController = TextEditingController(text: _isSigned ? 'Ramesh Kumar' : '');
+    _nameController = TextEditingController(
+      text: _isSigned ? 'Ramesh Kumar' : '',
+    );
   }
 
   @override
@@ -792,7 +820,8 @@ class _DeclarationWithDigitalSignMockupState extends State<_DeclarationWithDigit
                           TextSpan(
                             children: [
                               TextSpan(
-                                text: 'I have read and agree to the above declaration.',
+                                text:
+                                    'I have read and agree to the above declaration.',
                                 style: TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.w600,
@@ -830,7 +859,10 @@ class _DeclarationWithDigitalSignMockupState extends State<_DeclarationWithDigit
                       borderRadius: BorderRadius.circular(8),
                       border: Border.all(color: const Color(0xFFD1D5DB)),
                     ),
-                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 12,
+                      vertical: 4,
+                    ),
                     child: TextField(
                       controller: _nameController,
                       onChanged: (val) {
@@ -843,7 +875,11 @@ class _DeclarationWithDigitalSignMockupState extends State<_DeclarationWithDigit
                         hintStyle: const TextStyle(color: Color(0xFF9CA3AF)),
                         border: InputBorder.none,
                         suffixIcon: _isSigned
-                            ? const Icon(Icons.check_circle, color: Color(0xFF137333), size: 20)
+                            ? const Icon(
+                                Icons.check_circle,
+                                color: Color(0xFF137333),
+                                size: 20,
+                              )
                             : null,
                       ),
                     ),
@@ -851,12 +887,19 @@ class _DeclarationWithDigitalSignMockupState extends State<_DeclarationWithDigit
                   const SizedBox(height: 8),
                   const Row(
                     children: [
-                      Icon(Icons.info_outline, size: 16, color: Color(0xFF6B7280)),
+                      Icon(
+                        Icons.info_outline,
+                        size: 16,
+                        color: Color(0xFF6B7280),
+                      ),
                       SizedBox(width: 8),
                       Expanded(
                         child: Text(
                           'Your name will be matched against your aadhaar records.',
-                          style: TextStyle(fontSize: 13, color: Color(0xFF6B7280)),
+                          style: TextStyle(
+                            fontSize: 13,
+                            color: Color(0xFF6B7280),
+                          ),
                         ),
                       ),
                     ],
@@ -874,7 +917,11 @@ class _DeclarationWithDigitalSignMockupState extends State<_DeclarationWithDigit
                       children: [
                         Padding(
                           padding: EdgeInsets.only(top: 2),
-                          child: Icon(Icons.error, color: Color(0xFFEA580C), size: 18),
+                          child: Icon(
+                            Icons.error,
+                            color: Color(0xFFEA580C),
+                            size: 18,
+                          ),
                         ),
                         SizedBox(width: 12),
                         Expanded(
@@ -931,10 +978,12 @@ class _DeclarationWithDigitalSignCardMockup extends StatefulWidget {
   const _DeclarationWithDigitalSignCardMockup({required this.initialState});
 
   @override
-  State<_DeclarationWithDigitalSignCardMockup> createState() => _DeclarationWithDigitalSignCardMockupState();
+  State<_DeclarationWithDigitalSignCardMockup> createState() =>
+      _DeclarationWithDigitalSignCardMockupState();
 }
 
-class _DeclarationWithDigitalSignCardMockupState extends State<_DeclarationWithDigitalSignCardMockup> {
+class _DeclarationWithDigitalSignCardMockupState
+    extends State<_DeclarationWithDigitalSignCardMockup> {
   late bool _agreed;
   late TextEditingController _nameController;
   late bool _isSigned;
@@ -944,7 +993,9 @@ class _DeclarationWithDigitalSignCardMockupState extends State<_DeclarationWithD
     super.initState();
     _isSigned = widget.initialState == 'Signed';
     _agreed = _isSigned;
-    _nameController = TextEditingController(text: _isSigned ? 'Ramesh Kumar' : '');
+    _nameController = TextEditingController(
+      text: _isSigned ? 'Ramesh Kumar' : '',
+    );
   }
 
   @override
@@ -1022,7 +1073,9 @@ class _DeclarationWithDigitalSignCardMockupState extends State<_DeclarationWithD
                               decoration: BoxDecoration(
                                 color: const Color(0xFFF9FAFB),
                                 borderRadius: BorderRadius.circular(12),
-                                border: Border.all(color: const Color(0xFFE5E7EB)),
+                                border: Border.all(
+                                  color: const Color(0xFFE5E7EB),
+                                ),
                               ),
                               child: const SingleChildScrollView(
                                 child: Text(
@@ -1065,7 +1118,8 @@ class _DeclarationWithDigitalSignCardMockupState extends State<_DeclarationWithD
                                     TextSpan(
                                       children: [
                                         TextSpan(
-                                          text: 'I have read and agree to the above declaration.',
+                                          text:
+                                              'I have read and agree to the above declaration.',
                                           style: TextStyle(
                                             fontSize: 16,
                                             fontWeight: FontWeight.w600,
@@ -1101,22 +1155,34 @@ class _DeclarationWithDigitalSignCardMockupState extends State<_DeclarationWithD
                               decoration: BoxDecoration(
                                 color: Colors.white,
                                 borderRadius: BorderRadius.circular(8),
-                                border: Border.all(color: const Color(0xFFD1D5DB)),
+                                border: Border.all(
+                                  color: const Color(0xFFD1D5DB),
+                                ),
                               ),
-                              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 12,
+                                vertical: 4,
+                              ),
                               child: TextField(
                                 controller: _nameController,
                                 onChanged: (val) {
                                   setState(() {
-                                    _isSigned = val.trim().split(' ').length >= 2;
+                                    _isSigned =
+                                        val.trim().split(' ').length >= 2;
                                   });
                                 },
                                 decoration: InputDecoration(
                                   hintText: 'Enter your full name',
-                                  hintStyle: const TextStyle(color: Color(0xFF9CA3AF)),
+                                  hintStyle: const TextStyle(
+                                    color: Color(0xFF9CA3AF),
+                                  ),
                                   border: InputBorder.none,
                                   suffixIcon: _isSigned
-                                      ? const Icon(Icons.check_circle, color: Color(0xFF137333), size: 20)
+                                      ? const Icon(
+                                          Icons.check_circle,
+                                          color: Color(0xFF137333),
+                                          size: 20,
+                                        )
                                       : null,
                                 ),
                               ),
@@ -1124,12 +1190,19 @@ class _DeclarationWithDigitalSignCardMockupState extends State<_DeclarationWithD
                             const SizedBox(height: 8),
                             const Row(
                               children: [
-                                Icon(Icons.info_outline, size: 16, color: Color(0xFF6B7280)),
+                                Icon(
+                                  Icons.info_outline,
+                                  size: 16,
+                                  color: Color(0xFF6B7280),
+                                ),
                                 SizedBox(width: 8),
                                 Expanded(
                                   child: Text(
                                     'Your name will be matched against your aadhaar records.',
-                                    style: TextStyle(fontSize: 13, color: Color(0xFF6B7280)),
+                                    style: TextStyle(
+                                      fontSize: 13,
+                                      color: Color(0xFF6B7280),
+                                    ),
                                   ),
                                 ),
                               ],
@@ -1140,14 +1213,20 @@ class _DeclarationWithDigitalSignCardMockupState extends State<_DeclarationWithD
                               decoration: BoxDecoration(
                                 color: const Color(0xFFFFF7ED),
                                 borderRadius: BorderRadius.circular(8),
-                                border: Border.all(color: const Color(0xFFFFEDD5)),
+                                border: Border.all(
+                                  color: const Color(0xFFFFEDD5),
+                                ),
                               ),
                               child: const Row(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Padding(
                                     padding: EdgeInsets.only(top: 2),
-                                    child: Icon(Icons.error, color: Color(0xFFEA580C), size: 18),
+                                    child: Icon(
+                                      Icons.error,
+                                      color: Color(0xFFEA580C),
+                                      size: 18,
+                                    ),
                                   ),
                                   SizedBox(width: 12),
                                   Expanded(
@@ -1204,7 +1283,8 @@ class _DeclarationWithDigitalSignCardMockupState extends State<_DeclarationWithD
   }
 }
 
-const _declarationWithDigitalSignCode = r'''// Declaration with Digital Sign Pattern
+const _declarationWithDigitalSignCode =
+    r'''// Declaration with Digital Sign Pattern
 Column(
   children: [
     // Header
@@ -1371,7 +1451,8 @@ Column(
   ],
 )''';
 
-const _declarationWithDigitalSignCardCode = r'''// Declaration with Digital Sign – Card Style Layout
+const _declarationWithDigitalSignCardCode =
+    r'''// Declaration with Digital Sign – Card Style Layout
 Column(
   children: [
     // Header
@@ -1559,7 +1640,8 @@ Column(
   ],
 )''';
 
-const _declarationBeforeSubmissionCode = r'''// Declaration Before Submission Screen Pattern
+const _declarationBeforeSubmissionCode =
+    r'''// Declaration Before Submission Screen Pattern
 Column(
   children: [
     // Header
@@ -1758,7 +1840,8 @@ Column(
   ],
 )''';
 
-const _declarationBeforeSubmissionCardCode = r'''// Declaration – Card Style Layout
+const _declarationBeforeSubmissionCardCode =
+    r'''// Declaration – Card Style Layout
 Column(
   children: [
     // Header

@@ -13,13 +13,13 @@ const _breadcrumbColor = Color(0xFF6B7280);
 
 const _faqAnswers = [
   'If your application was rejected, you can review the rejection reason in your application details. '
-  'You may reapply after addressing the issues mentioned, or file a grievance if you believe the decision was incorrect.',
+      'You may reapply after addressing the issues mentioned, or file a grievance if you believe the decision was incorrect.',
   'Go to My Applications, select the application, and tap "Upload Documents". '
-  'You can upload scanned copies or photos of the required documents. Supported formats: PDF, JPG, PNG (max 5MB each).',
+      'You can upload scanned copies or photos of the required documents. Supported formats: PDF, JPG, PNG (max 5MB each).',
   'Certificate issuance typically takes 7-15 working days after approval. '
-  'You will receive an SMS and email notification once your certificate is ready for download.',
+      'You will receive an SMS and email notification once your certificate is ready for download.',
   'You can contact the Revenue officer through the Help section in the app, '
-  'or visit your nearest Tehsil office during working hours (10 AM - 5 PM, Mon-Fri).',
+      'or visit your nearest Tehsil office during working hours (10 AM - 5 PM, Mon-Fri).',
 ];
 
 // ── Component ────────────────────────────────────────────────────────────
@@ -46,9 +46,9 @@ final faqDetailComponent = WidgetbookComponent(
           name: 'FAQ Detail ($variant)',
           description: isCard
               ? 'FAQ detail page with breadcrumb, answer content, and related '
-                'questions accordion inside a card with purple background.'
+                    'questions accordion inside a card with purple background.'
               : 'FAQ detail page with breadcrumb, answer content, and related '
-                'questions accordion on white background.',
+                    'questions accordion on white background.',
           code: isCard ? _faqDetailCardCode : _faqDetailDefaultCode,
           center: true,
           child: _FaqDetailMockup(isCard: isCard),
@@ -367,7 +367,10 @@ class _FaqDetailMockup extends StatelessWidget {
                 variant: Ux4gAppHeaderVariant.light,
                 title: '',
                 leadingWidgets: [
-                  SvgPicture.asset('assets/national_amblam_logo.svg', height: 40),
+                  SvgPicture.asset(
+                    'assets/national_amblam_logo.svg',
+                    height: 40,
+                  ),
                   const SizedBox(width: 8),
                   SizedBox(
                     height: 32,
@@ -384,19 +387,41 @@ class _FaqDetailMockup extends StatelessWidget {
               // Gov bar
               Container(
                 width: double.infinity,
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 6,
+                ),
                 color: const Color(0xFF1E3A8A),
                 child: Row(
                   children: [
-                    Image.asset('assets/india_flag.png', height: 14, width: 22,
-                        errorBuilder: (_, __, ___) => const Text('🇮🇳', style: TextStyle(fontSize: 14))),
+                    Image.asset(
+                      'assets/india_flag.png',
+                      height: 14,
+                      width: 22,
+                      errorBuilder: (_, __, ___) =>
+                          const Text('🇮🇳', style: TextStyle(fontSize: 14)),
+                    ),
                     const SizedBox(width: 8),
-                    const Text('Government of India',
-                        style: TextStyle(color: Colors.white, fontSize: 12, fontWeight: FontWeight.w500)),
+                    const Text(
+                      'Government of India',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 12,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
                     const SizedBox(width: 4),
-                    const Icon(Icons.open_in_new, size: 11, color: Colors.white),
+                    const Icon(
+                      Icons.open_in_new,
+                      size: 11,
+                      color: Colors.white,
+                    ),
                     const Spacer(),
-                    const Icon(Icons.accessibility_new, size: 16, color: Colors.white),
+                    const Icon(
+                      Icons.accessibility_new,
+                      size: 16,
+                      color: Colors.white,
+                    ),
                   ],
                 ),
               ),
@@ -424,12 +449,22 @@ class _FaqDetailMockup extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text('Powered by -',
-                        style: TextStyle(fontSize: 11, color: Color(0xFF6B7280))),
+                    const Text(
+                      'Powered by -',
+                      style: TextStyle(fontSize: 11, color: Color(0xFF6B7280)),
+                    ),
                     const SizedBox(width: 4),
-                    Image.asset('assets/digital_india_logo.png', height: 20,
-                        errorBuilder: (_, __, ___) => const Text('Digital India',
-                            style: TextStyle(fontSize: 10, color: Color(0xFF432CBB)))),
+                    Image.asset(
+                      'assets/digital_india_logo.png',
+                      height: 20,
+                      errorBuilder: (_, __, ___) => const Text(
+                        'Digital India',
+                        style: TextStyle(
+                          fontSize: 10,
+                          color: Color(0xFF432CBB),
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -449,12 +484,30 @@ class _FaqDetailMockup extends StatelessWidget {
           children: const [
             Icon(Icons.home, size: 14, color: _breadcrumbColor),
             SizedBox(width: 4),
-            Text('Home', style: TextStyle(fontSize: 13, color: _breadcrumbColor)),
-            Text('  >  ', style: TextStyle(fontSize: 13, color: _breadcrumbColor)),
-            Text('Help', style: TextStyle(fontSize: 13, color: _breadcrumbColor)),
-            Text('  >  ', style: TextStyle(fontSize: 13, color: _breadcrumbColor)),
-            Text('Application Issues',
-                style: TextStyle(fontSize: 13, color: _primaryColor, fontWeight: FontWeight.w500)),
+            Text(
+              'Home',
+              style: TextStyle(fontSize: 13, color: _breadcrumbColor),
+            ),
+            Text(
+              '  >  ',
+              style: TextStyle(fontSize: 13, color: _breadcrumbColor),
+            ),
+            Text(
+              'Help',
+              style: TextStyle(fontSize: 13, color: _breadcrumbColor),
+            ),
+            Text(
+              '  >  ',
+              style: TextStyle(fontSize: 13, color: _breadcrumbColor),
+            ),
+            Text(
+              'Application Issues',
+              style: TextStyle(
+                fontSize: 13,
+                color: _primaryColor,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
           ],
         ),
         const SizedBox(height: 20),
@@ -462,7 +515,11 @@ class _FaqDetailMockup extends StatelessWidget {
         // Title
         const Text(
           'How do I track my application?',
-          style: TextStyle(fontSize: 22, fontWeight: FontWeight.w800, color: _titleColor),
+          style: TextStyle(
+            fontSize: 22,
+            fontWeight: FontWeight.w800,
+            color: _titleColor,
+          ),
         ),
         const SizedBox(height: 12),
 
@@ -522,7 +579,11 @@ class _FaqAccordionListState extends State<_FaqAccordionList> {
                 padding: const EdgeInsets.only(bottom: 12),
                 child: Text(
                   _faqAnswers[index],
-                  style: const TextStyle(fontSize: 13, color: _subtleText, height: 1.5),
+                  style: const TextStyle(
+                    fontSize: 13,
+                    color: _subtleText,
+                    height: 1.5,
+                  ),
                 ),
               ),
             ),

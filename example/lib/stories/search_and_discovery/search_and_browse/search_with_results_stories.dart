@@ -125,7 +125,8 @@ class _SearchWithResultsMockup extends StatefulWidget {
   const _SearchWithResultsMockup();
 
   @override
-  State<_SearchWithResultsMockup> createState() => _SearchWithResultsMockupState();
+  State<_SearchWithResultsMockup> createState() =>
+      _SearchWithResultsMockupState();
 }
 
 class _SearchWithResultsMockupState extends State<_SearchWithResultsMockup> {
@@ -150,7 +151,10 @@ class _SearchWithResultsMockupState extends State<_SearchWithResultsMockup> {
               // App Header - filled purple
               Container(
                 width: double.infinity,
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 10,
+                ),
                 color: _primaryColor,
                 child: const Row(
                   children: [
@@ -158,7 +162,11 @@ class _SearchWithResultsMockupState extends State<_SearchWithResultsMockup> {
                     SizedBox(width: 12),
                     Text(
                       'National Services Portal',
-                      style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: Colors.white),
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.white,
+                      ),
                     ),
                   ],
                 ),
@@ -180,12 +188,19 @@ class _SearchWithResultsMockupState extends State<_SearchWithResultsMockup> {
                           children: [
                             const Text(
                               'Find any government service',
-                              style: TextStyle(fontSize: 18, fontWeight: FontWeight.w800, color: _titleColor),
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.w800,
+                                color: _titleColor,
+                              ),
                             ),
                             const SizedBox(height: 4),
                             const Text(
                               'Search 3,000+ services & schemes',
-                              style: TextStyle(fontSize: 13, color: _subtleText),
+                              style: TextStyle(
+                                fontSize: 13,
+                                color: _subtleText,
+                              ),
                             ),
                             const SizedBox(height: 16),
 
@@ -193,18 +208,25 @@ class _SearchWithResultsMockupState extends State<_SearchWithResultsMockup> {
                             Builder(
                               builder: (context) {
                                 final filtered = _options
-                                    .where((e) => e.toLowerCase().contains(_searchValue.toLowerCase()))
+                                    .where(
+                                      (e) => e.toLowerCase().contains(
+                                        _searchValue.toLowerCase(),
+                                      ),
+                                    )
                                     .toList();
                                 return Ux4gSearchField(
                                   value: _searchValue,
-                                  onValueChange: (v) => setState(() => _searchValue = v),
+                                  onValueChange: (v) =>
+                                      setState(() => _searchValue = v),
                                   variant: Ux4gSearchFieldVariant.autocomplete,
                                   placeholder: 'Search services...',
                                   showVoiceIcon: true,
                                   showClearIcon: true,
                                   options: filtered,
-                                  onOptionSelected: (s) => setState(() => _searchValue = s),
-                                  buttonStyle: Ux4gSearchFieldButtonStyle.filled,
+                                  onOptionSelected: (s) =>
+                                      setState(() => _searchValue = s),
+                                  buttonStyle:
+                                      Ux4gSearchFieldButtonStyle.filled,
                                 );
                               },
                             ),
@@ -221,7 +243,11 @@ class _SearchWithResultsMockupState extends State<_SearchWithResultsMockup> {
                             // Browse by category
                             const Text(
                               'Browse by category',
-                              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: _titleColor),
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w700,
+                                color: _titleColor,
+                              ),
                             ),
                             const SizedBox(height: 12),
                             _buildCategoryGrid(),
@@ -230,14 +256,33 @@ class _SearchWithResultsMockupState extends State<_SearchWithResultsMockup> {
                             // Popular services
                             const Text(
                               'Popular services',
-                              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: _titleColor),
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w700,
+                                color: _titleColor,
+                              ),
                             ),
                             const SizedBox(height: 12),
-                            _buildServiceCard('Income Certificate', 'Revenue Department', 'Free', '20 mins'),
+                            _buildServiceCard(
+                              'Income Certificate',
+                              'Revenue Department',
+                              'Free',
+                              '20 mins',
+                            ),
                             const SizedBox(height: 12),
-                            _buildServiceCard('Caste Certificate', 'Social Welfare Dept', 'Free', '15 mins'),
+                            _buildServiceCard(
+                              'Caste Certificate',
+                              'Social Welfare Dept',
+                              'Free',
+                              '15 mins',
+                            ),
                             const SizedBox(height: 12),
-                            _buildServiceCard('Driving Licence', 'Transport Department', '₹200', '30 days'),
+                            _buildServiceCard(
+                              'Driving Licence',
+                              'Transport Department',
+                              '₹200',
+                              '30 days',
+                            ),
                           ],
                         ),
                       ),
@@ -296,9 +341,19 @@ class _SearchWithResultsMockupState extends State<_SearchWithResultsMockup> {
                 child: Icon(icon, size: 20, color: _primaryColor),
               ),
               const SizedBox(height: 10),
-              Text(label, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: _titleColor)),
+              Text(
+                label,
+                style: const TextStyle(
+                  fontSize: 13,
+                  fontWeight: FontWeight.w600,
+                  color: _titleColor,
+                ),
+              ),
               const SizedBox(height: 2),
-              Text(count, style: const TextStyle(fontSize: 11, color: _subtleText)),
+              Text(
+                count,
+                style: const TextStyle(fontSize: 11, color: _subtleText),
+              ),
             ],
           ),
         );
@@ -306,7 +361,12 @@ class _SearchWithResultsMockupState extends State<_SearchWithResultsMockup> {
     );
   }
 
-  static Widget _buildServiceCard(String title, String dept, String fee, String time) {
+  static Widget _buildServiceCard(
+    String title,
+    String dept,
+    String fee,
+    String time,
+  ) {
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
@@ -318,14 +378,31 @@ class _SearchWithResultsMockupState extends State<_SearchWithResultsMockup> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(title, style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: _titleColor)),
+          Text(
+            title,
+            style: const TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.w600,
+              color: _titleColor,
+            ),
+          ),
           const SizedBox(height: 2),
           Text(dept, style: const TextStyle(fontSize: 12, color: _subtleText)),
           const SizedBox(height: 8),
           Row(
             children: [
-              Text(fee, style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: _greenColor)),
-              Text('  ·  $time', style: const TextStyle(fontSize: 12, color: _subtleText)),
+              Text(
+                fee,
+                style: const TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.w600,
+                  color: _greenColor,
+                ),
+              ),
+              Text(
+                '  ·  $time',
+                style: const TextStyle(fontSize: 12, color: _subtleText),
+              ),
             ],
           ),
           const SizedBox(height: 10),

@@ -123,7 +123,8 @@ class BiometricController extends ChangeNotifier {
         status: DeviceCheckStatus.pending,
         passedText: 'Connected',
         failedText: 'Not connected',
-        helperText: 'Fingerprint scanner not detected. Please check connection.',
+        helperText:
+            'Fingerprint scanner not detected. Please check connection.',
       ),
     ];
     notifyListeners();
@@ -161,7 +162,7 @@ class BiometricController extends ChangeNotifier {
     await Future.delayed(const Duration(milliseconds: 300));
     var camPermission = await Permission.camera.status;
     var permGranted = camPermission.isGranted || camPermission.isLimited;
-    
+
     if (!permGranted) {
       final status = await Permission.camera.request();
       permGranted = status.isGranted || status.isLimited;

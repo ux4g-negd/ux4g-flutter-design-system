@@ -29,18 +29,38 @@ class Ux4gTooltip extends StatelessWidget {
     final ux4gColors = materialTheme.extension<Ux4gColors>();
     final ux4gTypography = materialTheme.extension<Ux4gTypography>();
 
-    final onSurface = ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
-    final hXXSStrong = ux4gTypography?.hXXS_strong ?? materialTheme.textTheme.titleSmall?.copyWith(fontWeight: FontWeight.bold) ?? const TextStyle();
-    final lSDefault = ux4gTypography?.lS_default ?? materialTheme.textTheme.labelSmall ?? const TextStyle();
+    final onSurface =
+        ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
+    final hXXSStrong =
+        ux4gTypography?.hXXS_strong ??
+        materialTheme.textTheme.titleSmall?.copyWith(
+          fontWeight: FontWeight.bold,
+        ) ??
+        const TextStyle();
+    final lSDefault =
+        ux4gTypography?.lS_default ??
+        materialTheme.textTheme.labelSmall ??
+        const TextStyle();
 
     return Tooltip(
       message: text,
       richMessage: (title != null || icon != null || action != null)
           ? TextSpan(
               children: [
-                if (icon != null) WidgetSpan(child: Icon(icon, size: 14, color: Colors.white), alignment: PlaceholderAlignment.middle),
-                if (title != null) TextSpan(text: " $title\n", style: hXXSStrong.copyWith(color: Colors.white)),
-                TextSpan(text: text, style: lSDefault.copyWith(color: Colors.white)),
+                if (icon != null)
+                  WidgetSpan(
+                    child: Icon(icon, size: 14, color: Colors.white),
+                    alignment: PlaceholderAlignment.middle,
+                  ),
+                if (title != null)
+                  TextSpan(
+                    text: " $title\n",
+                    style: hXXSStrong.copyWith(color: Colors.white),
+                  ),
+                TextSpan(
+                  text: text,
+                  style: lSDefault.copyWith(color: Colors.white),
+                ),
               ],
             )
           : null,

@@ -81,9 +81,14 @@ class Ux4gSocialLink extends StatelessWidget {
   Widget build(BuildContext context) {
     final materialTheme = Theme.of(context);
     final ux4gColors = materialTheme.extension<Ux4gColors>();
-    
-    final finalColor = color ?? (ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface);
-    final finalBackgroundColor = containerColor ?? (ux4gColors?.primary ?? materialTheme.colorScheme.primary).withValues(alpha: 0.1);
+
+    final finalColor =
+        color ?? (ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface);
+    final finalBackgroundColor =
+        containerColor ??
+        (ux4gColors?.primary ?? materialTheme.colorScheme.primary).withValues(
+          alpha: 0.1,
+        );
 
     final assetPath = icon.getAssetPath(useColor: useColoredIcon);
     final shouldApplyColorFilter = !useColoredIcon || color != null;
@@ -92,7 +97,7 @@ class Ux4gSocialLink extends StatelessWidget {
       assetPath,
       width: size.size,
       height: size.size,
-      colorFilter: shouldApplyColorFilter 
+      colorFilter: shouldApplyColorFilter
           ? ColorFilter.mode(finalColor, BlendMode.srcIn)
           : null,
     );
@@ -125,10 +130,7 @@ class Ux4gSocialLink extends StatelessWidget {
         message: tooltip ?? icon.name,
         child: GestureDetector(
           onTap: onPressed,
-          child: Padding(
-            padding: const EdgeInsets.all(4),
-            child: iconWidget,
-          ),
+          child: Padding(padding: const EdgeInsets.all(4), child: iconWidget),
         ),
       );
     }
@@ -212,15 +214,9 @@ class Ux4gSocialLinkList extends StatelessWidget {
     }).toList();
 
     if (direction == Axis.horizontal) {
-      return Row(
-        mainAxisAlignment: alignment,
-        children: children,
-      );
+      return Row(mainAxisAlignment: alignment, children: children);
     } else {
-      return Column(
-        mainAxisAlignment: alignment,
-        children: children,
-      );
+      return Column(mainAxisAlignment: alignment, children: children);
     }
   }
 }

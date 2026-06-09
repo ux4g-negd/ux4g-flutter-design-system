@@ -33,9 +33,11 @@ final allScheduledLanguagesComponent = WidgetbookComponent(
           name: 'All Scheduled Languages ($variant)',
           description: isCard
               ? 'Full language list with search and selected state inside a '
-                'card container with light purple background.'
+                    'card container with light purple background.'
               : 'Full language list with search and selected state on white background.',
-          code: isCard ? _allScheduledLanguagesCardCode : _allScheduledLanguagesDefaultCode,
+          code: isCard
+              ? _allScheduledLanguagesCardCode
+              : _allScheduledLanguagesDefaultCode,
           center: true,
           child: _AllScheduledLanguagesMockup(isCard: isCard),
         );
@@ -48,7 +50,8 @@ final allScheduledLanguagesComponent = WidgetbookComponent(
 // Source Code String — Default
 // ───────────────────────────────────────────────────────────────────────
 
-const _allScheduledLanguagesDefaultCode = r"""import 'package:flutter/material.dart';
+const _allScheduledLanguagesDefaultCode =
+    r"""import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:ux4g_flutter_design_system/ux4g_flutter_design_system.dart';
 
@@ -245,7 +248,8 @@ class _AllScheduledLanguagesScreenState extends State<AllScheduledLanguagesScree
 // Source Code String — Card Style
 // ───────────────────────────────────────────────────────────────────────
 
-const _allScheduledLanguagesCardCode = r"""import 'package:flutter/material.dart';
+const _allScheduledLanguagesCardCode =
+    r"""import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:ux4g_flutter_design_system/ux4g_flutter_design_system.dart';
 
@@ -453,10 +457,12 @@ class _AllScheduledLanguagesMockup extends StatefulWidget {
   const _AllScheduledLanguagesMockup({this.isCard = false});
 
   @override
-  State<_AllScheduledLanguagesMockup> createState() => _AllScheduledLanguagesMockupState();
+  State<_AllScheduledLanguagesMockup> createState() =>
+      _AllScheduledLanguagesMockupState();
 }
 
-class _AllScheduledLanguagesMockupState extends State<_AllScheduledLanguagesMockup> {
+class _AllScheduledLanguagesMockupState
+    extends State<_AllScheduledLanguagesMockup> {
   int _selectedIndex = -1;
   String _searchValue = '';
   bool _isDropdownOpen = false;
@@ -489,7 +495,9 @@ class _AllScheduledLanguagesMockupState extends State<_AllScheduledLanguagesMock
         },
         behavior: HitTestBehavior.translucent,
         child: Scaffold(
-          backgroundColor: widget.isCard ? const Color(0xFFF2EFFF) : Colors.white,
+          backgroundColor: widget.isCard
+              ? const Color(0xFFF2EFFF)
+              : Colors.white,
           body: SafeArea(
             child: Column(
               children: [
@@ -499,8 +507,11 @@ class _AllScheduledLanguagesMockupState extends State<_AllScheduledLanguagesMock
                   title: '',
                   leadingSpacing: 2,
                   leadingWidgets: [
-                    SvgPicture.asset('assets/national_amblam_logo.svg', height: 40),
-                  SizedBox(width:3),
+                    SvgPicture.asset(
+                      'assets/national_amblam_logo.svg',
+                      height: 40,
+                    ),
+                    SizedBox(width: 3),
                     SizedBox(
                       height: 32,
                       child: Ux4gDivider(
@@ -508,7 +519,7 @@ class _AllScheduledLanguagesMockupState extends State<_AllScheduledLanguagesMock
                         color: const Color(0xFFD1D5DB),
                       ),
                     ),
-                  SizedBox(width:3),
+                    SizedBox(width: 3),
                     SvgPicture.asset('assets/Union.svg', height: 32),
                   ],
                 ),
@@ -516,19 +527,43 @@ class _AllScheduledLanguagesMockupState extends State<_AllScheduledLanguagesMock
                 // Gov bar
                 Container(
                   width: double.infinity,
-                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 12,
+                    vertical: 6,
+                  ),
                   color: const Color(0xFF1E3A8A),
                   child: Row(
                     children: [
-                      Image.asset('assets/india_flag.png', height: 14, width: 22,
-                          errorBuilder: (_, __, ___) => const Text('\u{1f1ee}\u{1f1f3}', style: TextStyle(fontSize: 14))),
+                      Image.asset(
+                        'assets/india_flag.png',
+                        height: 14,
+                        width: 22,
+                        errorBuilder: (_, __, ___) => const Text(
+                          '\u{1f1ee}\u{1f1f3}',
+                          style: TextStyle(fontSize: 14),
+                        ),
+                      ),
                       const SizedBox(width: 8),
-                      const Text('Government of India',
-                          style: TextStyle(color: Colors.white, fontSize: 12, fontWeight: FontWeight.w500)),
+                      const Text(
+                        'Government of India',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 12,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
                       const SizedBox(width: 4),
-                      const Icon(Icons.open_in_new, size: 11, color: Colors.white),
+                      const Icon(
+                        Icons.open_in_new,
+                        size: 11,
+                        color: Colors.white,
+                      ),
                       const Spacer(),
-                      const Icon(Icons.accessibility_new, size: 16, color: Colors.white),
+                      const Icon(
+                        Icons.accessibility_new,
+                        size: 16,
+                        color: Colors.white,
+                      ),
                     ],
                   ),
                 ),
@@ -556,12 +591,25 @@ class _AllScheduledLanguagesMockupState extends State<_AllScheduledLanguagesMock
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Text('Powered by -',
-                          style: TextStyle(fontSize: 11, color: Color(0xFF6B7280))),
+                      const Text(
+                        'Powered by -',
+                        style: TextStyle(
+                          fontSize: 11,
+                          color: Color(0xFF6B7280),
+                        ),
+                      ),
                       const SizedBox(width: 4),
-                      Image.asset('assets/digital_india_logo.png', height: 20,
-                          errorBuilder: (_, __, ___) => const Text('Digital India',
-                              style: TextStyle(fontSize: 10, color: Color(0xFF432CBB)))),
+                      Image.asset(
+                        'assets/digital_india_logo.png',
+                        height: 20,
+                        errorBuilder: (_, __, ___) => const Text(
+                          'Digital India',
+                          style: TextStyle(
+                            fontSize: 10,
+                            color: Color(0xFF432CBB),
+                          ),
+                        ),
+                      ),
                     ],
                   ),
                 ),
@@ -576,7 +624,9 @@ class _AllScheduledLanguagesMockupState extends State<_AllScheduledLanguagesMock
   Widget _buildContent() {
     // Filter languages based on search
     final query = _searchValue.toLowerCase();
-    final isExactSelection = _languages.any((lang) => lang['name']!.toLowerCase() == query);
+    final isExactSelection = _languages.any(
+      (lang) => lang['name']!.toLowerCase() == query,
+    );
     final filteredLanguages = (isExactSelection || query.isEmpty)
         ? _languages
         : _languages.where((lang) {
@@ -589,7 +639,11 @@ class _AllScheduledLanguagesMockupState extends State<_AllScheduledLanguagesMock
       children: [
         const Text(
           'All scheduled languages',
-          style: TextStyle(fontSize: 22, fontWeight: FontWeight.w800, color: _titleColor),
+          style: TextStyle(
+            fontSize: 22,
+            fontWeight: FontWeight.w800,
+            color: _titleColor,
+          ),
         ),
         const SizedBox(height: 8),
         const Text(
@@ -653,11 +707,19 @@ class _AllScheduledLanguagesMockupState extends State<_AllScheduledLanguagesMock
                     });
                   },
                   child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 12,
+                      vertical: 12,
+                    ),
                     decoration: BoxDecoration(
                       color: isSelected ? const Color(0xFFF2EFFF) : null,
                       border: i < filteredLanguages.length - 1
-                          ? const Border(bottom: BorderSide(color: Color(0xFFE5E7EB), width: 1))
+                          ? const Border(
+                              bottom: BorderSide(
+                                color: Color(0xFFE5E7EB),
+                                width: 1,
+                              ),
+                            )
                           : null,
                     ),
                     child: Row(
@@ -671,7 +733,9 @@ class _AllScheduledLanguagesMockupState extends State<_AllScheduledLanguagesMock
                                 style: TextStyle(
                                   fontSize: 15,
                                   fontWeight: FontWeight.w600,
-                                  color: isSelected ? const Color(0xFF4A2BC2) : _titleColor,
+                                  color: isSelected
+                                      ? const Color(0xFF4A2BC2)
+                                      : _titleColor,
                                 ),
                               ),
                               const SizedBox(height: 2),
@@ -679,14 +743,20 @@ class _AllScheduledLanguagesMockupState extends State<_AllScheduledLanguagesMock
                                 lang['sub']!,
                                 style: TextStyle(
                                   fontSize: 12,
-                                  color: isSelected ? const Color(0xFF4A2BC2) : const Color(0xFF6B7280),
+                                  color: isSelected
+                                      ? const Color(0xFF4A2BC2)
+                                      : const Color(0xFF6B7280),
                                 ),
                               ),
                             ],
                           ),
                         ),
                         if (isSelected)
-                          const Icon(Icons.check, color: Color(0xFF4A2BC2), size: 20),
+                          const Icon(
+                            Icons.check,
+                            color: Color(0xFF4A2BC2),
+                            size: 20,
+                          ),
                       ],
                     ),
                   ),

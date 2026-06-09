@@ -80,11 +80,13 @@ class _Ux4gCarouselState extends State<Ux4gCarousel> {
     setState(() {
       _currentIndex = index;
     });
-    _pageController.animateToPage(
-      index,
-      duration: const Duration(milliseconds: 300),
-      curve: Curves.easeInOut,
-    ).then((_) => _startTimer());
+    _pageController
+        .animateToPage(
+          index,
+          duration: const Duration(milliseconds: 300),
+          curve: Curves.easeInOut,
+        )
+        .then((_) => _startTimer());
   }
 
   @override

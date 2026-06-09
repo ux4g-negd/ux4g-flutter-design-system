@@ -394,13 +394,25 @@ class _VerificationMockup extends StatelessWidget {
               // App Header with logos
               Container(
                 width: double.infinity,
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 10,
+                ),
                 color: Colors.white,
                 child: Row(
                   children: [
-                    SvgPicture.asset('assets/national_amblam_logo.svg', height: 40),
+                    SvgPicture.asset(
+                      'assets/national_amblam_logo.svg',
+                      height: 40,
+                    ),
                     const SizedBox(width: 8),
-                    SizedBox(height: 32, child: Ux4gDivider(orientation: Ux4gDividerOrientation.vertical, color: const Color(0xFFD1D5DB))),
+                    SizedBox(
+                      height: 32,
+                      child: Ux4gDivider(
+                        orientation: Ux4gDividerOrientation.vertical,
+                        color: const Color(0xFFD1D5DB),
+                      ),
+                    ),
                     const SizedBox(width: 8),
                     SvgPicture.asset('assets/Union.svg', height: 32),
                   ],
@@ -457,7 +469,11 @@ class _VerificationMockup extends StatelessWidget {
         // Title
         const Text(
           'Verifying your Income Certificate Document',
-          style: TextStyle(fontSize: 20, fontWeight: FontWeight.w900, color: _titleColor),
+          style: TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.w900,
+            color: _titleColor,
+          ),
         ),
         const SizedBox(height: 10),
 
@@ -543,7 +559,11 @@ class _VerificationMockup extends StatelessWidget {
               const Expanded(
                 child: Text(
                   'Income Certificate',
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: _titleColor),
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w700,
+                    color: _titleColor,
+                  ),
                 ),
               ),
               Ux4gTag(
@@ -570,7 +590,11 @@ class _VerificationMockup extends StatelessWidget {
           Ux4gLinearProgress(
             value: 0.66,
             height: 6,
-            gradientColors: const [Color(0xFFFDE68A), Color(0xFFFBBF24), Color(0xFFF97316)],
+            gradientColors: const [
+              Color(0xFFFDE68A),
+              Color(0xFFFBBF24),
+              Color(0xFFF97316),
+            ],
             trackColor: const Color(0xFFE5E7EB),
             shape: Ux4gProgressShape.rounded,
           ),

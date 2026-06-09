@@ -91,7 +91,7 @@ class Ux4gPalette {
   static const Color neutral1000black = Color(0xFF000000);
   static const Color white = Color(0xFFFFFFFF);
   static const Color transparent = Color(0x00000000);
-  
+
   static const Color neutral500 = Color(0xFF737373);
   static const Color neutral700 = Color(0xFF404040);
 }
@@ -181,7 +181,8 @@ class Ux4gColors extends ThemeExtension<Ux4gColors> {
       secondary: Color.lerp(secondary, other.secondary, t) ?? secondary,
       onSecondary: Color.lerp(onSecondary, other.onSecondary, t) ?? onSecondary,
       background: Color.lerp(background, other.background, t) ?? background,
-      onBackground: Color.lerp(onBackground, other.onBackground, t) ?? onBackground,
+      onBackground:
+          Color.lerp(onBackground, other.onBackground, t) ?? onBackground,
       surface: Color.lerp(surface, other.surface, t) ?? surface,
       onSurface: Color.lerp(onSurface, other.onSurface, t) ?? onSurface,
       error: Color.lerp(error, other.error, t) ?? error,

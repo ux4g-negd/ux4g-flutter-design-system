@@ -362,19 +362,37 @@ class _EditProfileMockupState extends State<_EditProfileMockup> {
                         SvgPicture.asset(
                           _nationalEmblemLogoPath,
                           height: 36,
-                          errorBuilder: (c, e, s) => const Icon(Icons.account_balance, size: 28, color: Colors.grey),
+                          errorBuilder: (c, e, s) => const Icon(
+                            Icons.account_balance,
+                            size: 28,
+                            color: Colors.grey,
+                          ),
                         ),
                         const SizedBox(width: 8),
                         SvgPicture.asset(
                           _unionLogoPath,
                           height: 28,
-                          errorBuilder: (c, e, s) => const Icon(Icons.blur_on, size: 28, color: Colors.blue),
+                          errorBuilder: (c, e, s) => const Icon(
+                            Icons.blur_on,
+                            size: 28,
+                            color: Colors.blue,
+                          ),
                         ),
                         const SizedBox(width: 8),
-                        const Text('Government of India', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: _titleColor)),
+                        const Text(
+                          'Government of India',
+                          style: TextStyle(
+                            fontSize: 13,
+                            fontWeight: FontWeight.w600,
+                            color: _titleColor,
+                          ),
+                        ),
                       ],
                       actions: [
-                        Ux4gAppHeaderAction(icon: Icons.notifications_outlined, onPressed: () {}),
+                        Ux4gAppHeaderAction(
+                          icon: Icons.notifications_outlined,
+                          onPressed: () {},
+                        ),
                       ],
                       showAvatar: true,
                       avatar: const Ux4gStatusAvatar(
@@ -396,7 +414,14 @@ class _EditProfileMockupState extends State<_EditProfileMockup> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       // Title
-                      const Text('Profile & Preferences', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w800, color: _titleColor)),
+                      const Text(
+                        'Profile & Preferences',
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w800,
+                          color: _titleColor,
+                        ),
+                      ),
                       const SizedBox(height: 20),
 
                       // Profile card
@@ -448,7 +473,14 @@ class _EditProfileMockupState extends State<_EditProfileMockup> {
               variant: Ux4gProfileBadge.verified,
             ),
             const SizedBox(height: 12),
-            const Text('Ramesh Kumar', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: _titleColor)),
+            const Text(
+              'Ramesh Kumar',
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w700,
+                color: _titleColor,
+              ),
+            ),
             const SizedBox(height: 10),
 
             // Verification badges using Ux4gTag
@@ -459,14 +491,22 @@ class _EditProfileMockupState extends State<_EditProfileMockup> {
                   text: 'Mobile verified',
                   colorScheme: Ux4gTagColor.success,
                   style: Ux4gTagStyle.tonal,
-                  leadingContent: Icon(Icons.check_circle, size: 14, color: _greenColor),
+                  leadingContent: Icon(
+                    Icons.check_circle,
+                    size: 14,
+                    color: _greenColor,
+                  ),
                 ),
                 const SizedBox(width: 8),
                 Ux4gTag(
                   text: 'Aadhaar linked',
                   colorScheme: Ux4gTagColor.success,
                   style: Ux4gTagStyle.tonal,
-                  leadingContent: Icon(Icons.check_circle, size: 14, color: _greenColor),
+                  leadingContent: Icon(
+                    Icons.check_circle,
+                    size: 14,
+                    color: _greenColor,
+                  ),
                 ),
               ],
             ),
@@ -510,21 +550,98 @@ class _EditProfileMockupState extends State<_EditProfileMockup> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text('Aadhaar-linked Information', style: TextStyle(fontSize: 15, fontWeight: FontWeight.w700, color: _titleColor)),
+            const Text(
+              'Aadhaar-linked Information',
+              style: TextStyle(
+                fontSize: 15,
+                fontWeight: FontWeight.w700,
+                color: _titleColor,
+              ),
+            ),
             const SizedBox(height: 4),
-            const Text('Fetched from UIDAI — update via the UIDAI portal.', style: TextStyle(fontSize: 13, color: _subtleText)),
+            const Text(
+              'Fetched from UIDAI — update via the UIDAI portal.',
+              style: TextStyle(fontSize: 13, color: _subtleText),
+            ),
             const SizedBox(height: 16),
 
-            Ux4gInputField(value: 'Ramesh Kumar', onValueChange: (_) {}, label: 'Full name', readOnly: true, labelStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: _titleColor), style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: _titleColor)),
+            Ux4gInputField(
+              value: 'Ramesh Kumar',
+              onValueChange: (_) {},
+              label: 'Full name',
+              readOnly: true,
+              labelStyle: const TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.w400,
+                color: _titleColor,
+              ),
+              style: const TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.w400,
+                color: _titleColor,
+              ),
+            ),
             const SizedBox(height: 12),
-            Ux4gInputField(value: '15 Aug 1990', onValueChange: (_) {}, label: 'Date of birth', readOnly: true, labelStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: _titleColor), style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: _titleColor)),
+            Ux4gInputField(
+              value: '15 Aug 1990',
+              onValueChange: (_) {},
+              label: 'Date of birth',
+              readOnly: true,
+              labelStyle: const TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.w400,
+                color: _titleColor,
+              ),
+              style: const TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.w400,
+                color: _titleColor,
+              ),
+            ),
             const SizedBox(height: 12),
-            Ux4gInputField(value: 'Male', onValueChange: (_) {}, label: 'Gender', readOnly: true, labelStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: _titleColor), style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: _titleColor)),
+            Ux4gInputField(
+              value: 'Male',
+              onValueChange: (_) {},
+              label: 'Gender',
+              readOnly: true,
+              labelStyle: const TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.w400,
+                color: _titleColor,
+              ),
+              style: const TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.w400,
+                color: _titleColor,
+              ),
+            ),
             const SizedBox(height: 12),
-            Ux4gInputField(value: 'XXXX XXXX 4127', onValueChange: (_) {}, label: 'Aadhaar number (UID)', readOnly: true, labelStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: _titleColor), style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: _titleColor)),
+            Ux4gInputField(
+              value: 'XXXX XXXX 4127',
+              onValueChange: (_) {},
+              label: 'Aadhaar number (UID)',
+              readOnly: true,
+              labelStyle: const TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.w400,
+                color: _titleColor,
+              ),
+              style: const TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.w400,
+                color: _titleColor,
+              ),
+            ),
             const SizedBox(height: 12),
 
-            Text('Update via UIDAI', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w500, color: _primaryColor)),
+            Text(
+              'Update via UIDAI',
+              style: TextStyle(
+                fontSize: 13,
+                fontWeight: FontWeight.w500,
+                color: _primaryColor,
+              ),
+            ),
           ],
         ),
       ),
@@ -541,14 +658,66 @@ class _EditProfileMockupState extends State<_EditProfileMockup> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text('Personal information', style: TextStyle(fontSize: 15, fontWeight: FontWeight.w700, color: _titleColor)),
+            const Text(
+              'Personal information',
+              style: TextStyle(
+                fontSize: 15,
+                fontWeight: FontWeight.w700,
+                color: _titleColor,
+              ),
+            ),
             const SizedBox(height: 16),
 
-            Ux4gInputField(value: 'ramesh.kumar@gmail.com', onValueChange: (_) {}, label: 'Email address', readOnly: true, labelStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: _titleColor), style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: _titleColor)),
+            Ux4gInputField(
+              value: 'ramesh.kumar@gmail.com',
+              onValueChange: (_) {},
+              label: 'Email address',
+              readOnly: true,
+              labelStyle: const TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.w400,
+                color: _titleColor,
+              ),
+              style: const TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.w400,
+                color: _titleColor,
+              ),
+            ),
             const SizedBox(height: 12),
-            Ux4gInputField(value: '+91 98765 43210', onValueChange: (_) {}, label: 'Mobile number', readOnly: true, labelStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: _titleColor), style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: _titleColor)),
+            Ux4gInputField(
+              value: '+91 98765 43210',
+              onValueChange: (_) {},
+              label: 'Mobile number',
+              readOnly: true,
+              labelStyle: const TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.w400,
+                color: _titleColor,
+              ),
+              style: const TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.w400,
+                color: _titleColor,
+              ),
+            ),
             const SizedBox(height: 12),
-            Ux4gInputField(value: 'English', onValueChange: (_) {}, label: 'Language preference', readOnly: true, labelStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: _titleColor), style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: _titleColor)),
+            Ux4gInputField(
+              value: 'English',
+              onValueChange: (_) {},
+              label: 'Language preference',
+              readOnly: true,
+              labelStyle: const TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.w400,
+                color: _titleColor,
+              ),
+              style: const TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.w400,
+                color: _titleColor,
+              ),
+            ),
           ],
         ),
       ),
@@ -565,13 +734,27 @@ class _EditProfileMockupState extends State<_EditProfileMockup> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text('Linked accounts', style: TextStyle(fontSize: 15, fontWeight: FontWeight.w700, color: _titleColor)),
+            const Text(
+              'Linked accounts',
+              style: TextStyle(
+                fontSize: 15,
+                fontWeight: FontWeight.w700,
+                color: _titleColor,
+              ),
+            ),
             const SizedBox(height: 16),
 
             // DigiLocker
             Row(
               children: [
-                const Text('DigiLocker', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: _titleColor)),
+                const Text(
+                  'DigiLocker',
+                  style: TextStyle(
+                    fontSize: 13,
+                    fontWeight: FontWeight.w600,
+                    color: _titleColor,
+                  ),
+                ),
                 const SizedBox(width: 8),
                 Icon(Icons.check_circle, size: 16, color: _greenColor),
                 const SizedBox(width: 4),
@@ -584,17 +767,38 @@ class _EditProfileMockupState extends State<_EditProfileMockup> {
               ],
             ),
             const SizedBox(height: 4),
-            const Text('Access and share your digital documents', style: TextStyle(fontSize: 12, color: _subtleText)),
+            const Text(
+              'Access and share your digital documents',
+              style: TextStyle(fontSize: 12, color: _subtleText),
+            ),
             const SizedBox(height: 4),
-            Text('View in DigiLocker', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w500, color: _primaryColor)),
+            Text(
+              'View in DigiLocker',
+              style: TextStyle(
+                fontSize: 13,
+                fontWeight: FontWeight.w500,
+                color: _primaryColor,
+              ),
+            ),
             const SizedBox(height: 20),
 
             // UMANG App
             Row(
               children: [
-                const Text('UMANG App', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: _titleColor)),
+                const Text(
+                  'UMANG App',
+                  style: TextStyle(
+                    fontSize: 13,
+                    fontWeight: FontWeight.w600,
+                    color: _titleColor,
+                  ),
+                ),
                 const SizedBox(width: 8),
-                Icon(Icons.warning_amber_rounded, size: 16, color: Ux4gPalette.orange500),
+                Icon(
+                  Icons.warning_amber_rounded,
+                  size: 16,
+                  color: Ux4gPalette.orange500,
+                ),
                 const SizedBox(width: 4),
                 Ux4gTag(
                   text: 'Not linked',
@@ -605,7 +809,10 @@ class _EditProfileMockupState extends State<_EditProfileMockup> {
               ],
             ),
             const SizedBox(height: 4),
-            const Text('Unified access to government services', style: TextStyle(fontSize: 12, color: _subtleText)),
+            const Text(
+              'Unified access to government services',
+              style: TextStyle(fontSize: 12, color: _subtleText),
+            ),
             const SizedBox(height: 8),
             Ux4gButton(
               text: 'Connect',
@@ -616,11 +823,28 @@ class _EditProfileMockupState extends State<_EditProfileMockup> {
             const SizedBox(height: 20),
 
             // Bank account
-            const Text('Bank account for DBT', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: _titleColor)),
+            const Text(
+              'Bank account for DBT',
+              style: TextStyle(
+                fontSize: 13,
+                fontWeight: FontWeight.w600,
+                color: _titleColor,
+              ),
+            ),
             const SizedBox(height: 4),
-            const Text('XXXXXX7842 · State Bank of India', style: TextStyle(fontSize: 12, color: _subtleText)),
+            const Text(
+              'XXXXXX7842 · State Bank of India',
+              style: TextStyle(fontSize: 12, color: _subtleText),
+            ),
             const SizedBox(height: 4),
-            Text('Change', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w500, color: _primaryColor)),
+            Text(
+              'Change',
+              style: TextStyle(
+                fontSize: 13,
+                fontWeight: FontWeight.w500,
+                color: _primaryColor,
+              ),
+            ),
           ],
         ),
       ),
@@ -637,16 +861,43 @@ class _EditProfileMockupState extends State<_EditProfileMockup> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text('Notification preferences', style: TextStyle(fontSize: 15, fontWeight: FontWeight.w700, color: _titleColor)),
+            const Text(
+              'Notification preferences',
+              style: TextStyle(
+                fontSize: 15,
+                fontWeight: FontWeight.w700,
+                color: _titleColor,
+              ),
+            ),
             const SizedBox(height: 16),
 
-            _buildNotifToggleRow('SMS', 'Text message updates', _smsEnabled, (v) => setState(() => _smsEnabled = v)),
+            _buildNotifToggleRow(
+              'SMS',
+              'Text message updates',
+              _smsEnabled,
+              (v) => setState(() => _smsEnabled = v),
+            ),
             const SizedBox(height: 16),
-            _buildNotifToggleRow('Email', 'Email updates', _emailEnabled, (v) => setState(() => _emailEnabled = v)),
+            _buildNotifToggleRow(
+              'Email',
+              'Email updates',
+              _emailEnabled,
+              (v) => setState(() => _emailEnabled = v),
+            ),
             const SizedBox(height: 16),
-            _buildNotifToggleRow('App push', 'In-app alerts', _appPushEnabled, (v) => setState(() => _appPushEnabled = v)),
+            _buildNotifToggleRow(
+              'App push',
+              'In-app alerts',
+              _appPushEnabled,
+              (v) => setState(() => _appPushEnabled = v),
+            ),
             const SizedBox(height: 16),
-            _buildNotifToggleRow('WhatsApp', 'WhatsApp updates', _whatsAppEnabled, (v) => setState(() => _whatsAppEnabled = v)),
+            _buildNotifToggleRow(
+              'WhatsApp',
+              'WhatsApp updates',
+              _whatsAppEnabled,
+              (v) => setState(() => _whatsAppEnabled = v),
+            ),
             const SizedBox(height: 16),
 
             Ux4gSelectionDropdown(
@@ -659,8 +910,16 @@ class _EditProfileMockupState extends State<_EditProfileMockup> {
               onSelectionChange: (v) => setState(() => _selectedFrequency = v),
               label: 'Notification frequency',
               mode: Ux4gDropdownMode.single,
-              labelTextStyle: const TextStyle(fontSize: 13, fontWeight: FontWeight.w400, color: _subtleText),
-              valueTextStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: _titleColor),
+              labelTextStyle: const TextStyle(
+                fontSize: 13,
+                fontWeight: FontWeight.w400,
+                color: _subtleText,
+              ),
+              valueTextStyle: const TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.w400,
+                color: _titleColor,
+              ),
             ),
           ],
         ),
@@ -679,7 +938,14 @@ class _EditProfileMockupState extends State<_EditProfileMockup> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text('Delete account', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700, color: _titleColor)),
+            const Text(
+              'Delete account',
+              style: TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.w700,
+                color: _titleColor,
+              ),
+            ),
             const SizedBox(height: 4),
             const Text(
               'Permanently delete your account and all data.\n30-day grace period to restore before it is final.',
@@ -702,20 +968,39 @@ class _EditProfileMockupState extends State<_EditProfileMockup> {
     );
   }
 
-  Widget _buildNotifToggleRow(String label, String description, bool value, ValueChanged<bool> onChanged) {
+  Widget _buildNotifToggleRow(
+    String label,
+    String description,
+    bool value,
+    ValueChanged<bool> onChanged,
+  ) {
     return Row(
       children: [
         Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(label, style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: _titleColor)),
+              Text(
+                label,
+                style: const TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w600,
+                  color: _titleColor,
+                ),
+              ),
               const SizedBox(height: 2),
-              Text(description, style: const TextStyle(fontSize: 12, color: _subtleText)),
+              Text(
+                description,
+                style: const TextStyle(fontSize: 12, color: _subtleText),
+              ),
             ],
           ),
         ),
-        Ux4gToggle(checked: value, onCheckedChange: onChanged, size: Ux4gToggleSize.s),
+        Ux4gToggle(
+          checked: value,
+          onCheckedChange: onChanged,
+          size: Ux4gToggleSize.s,
+        ),
       ],
     );
   }

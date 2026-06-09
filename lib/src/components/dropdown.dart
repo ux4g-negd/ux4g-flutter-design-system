@@ -104,7 +104,9 @@ class _Ux4gActionDropdownState extends State<Ux4gActionDropdown> {
                 child: Material(
                   elevation: 4,
                   borderRadius: BorderRadius.circular(Ux4gRadius.radius8),
-                  color: Theme.of(context).extension<Ux4gColors>()?.surface ?? Theme.of(context).colorScheme.surface,
+                  color:
+                      Theme.of(context).extension<Ux4gColors>()?.surface ??
+                      Theme.of(context).colorScheme.surface,
                   child: Container(
                     constraints: const BoxConstraints(maxHeight: 300),
                     child: ListView.builder(
@@ -113,12 +115,16 @@ class _Ux4gActionDropdownState extends State<Ux4gActionDropdown> {
                       itemCount: widget.options.length,
                       itemBuilder: (context, index) {
                         final option = widget.options[index];
-                        final typography = Theme.of(context).extension<Ux4gTypography>();
+                        final typography = Theme.of(
+                          context,
+                        ).extension<Ux4gTypography>();
                         return ListTile(
                           dense: true,
                           title: Text(
                             option.label,
-                            style: typography?.lL_default ?? Theme.of(context).textTheme.labelLarge,
+                            style:
+                                typography?.lL_default ??
+                                Theme.of(context).textTheme.labelLarge,
                           ),
                           trailing: option.showTrailingArrow
                               ? const Icon(Icons.keyboard_arrow_right, size: 20)
@@ -253,7 +259,9 @@ class _Ux4gSelectionDropdownState extends State<Ux4gSelectionDropdown> {
               child: Material(
                 elevation: 8,
                 borderRadius: BorderRadius.circular(Ux4gRadius.radius8),
-                color: Theme.of(context).extension<Ux4gColors>()?.surface ?? Theme.of(context).colorScheme.surface,
+                color:
+                    Theme.of(context).extension<Ux4gColors>()?.surface ??
+                    Theme.of(context).colorScheme.surface,
                 clipBehavior: Clip.antiAlias,
                 child: Container(
                   width: size.width,
@@ -324,7 +332,9 @@ class _Ux4gSelectionDropdownState extends State<Ux4gSelectionDropdown> {
               final option = filteredOptions[index];
               final isSelected = widget.selectedOptionIds.contains(option.id);
               final uxColors = Theme.of(context).extension<Ux4gColors>();
-              final uxTypography = Theme.of(context).extension<Ux4gTypography>();
+              final uxTypography = Theme.of(
+                context,
+              ).extension<Ux4gTypography>();
               final materialTheme = Theme.of(context);
 
               return InkWell(
@@ -344,7 +354,9 @@ class _Ux4gSelectionDropdownState extends State<Ux4gSelectionDropdown> {
                             child: Checkbox(
                               value: isSelected,
                               onChanged: (_) {},
-                              activeColor: uxColors?.primary ?? materialTheme.colorScheme.primary,
+                              activeColor:
+                                  uxColors?.primary ??
+                                  materialTheme.colorScheme.primary,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(4),
                               ),
@@ -359,18 +371,26 @@ class _Ux4gSelectionDropdownState extends State<Ux4gSelectionDropdown> {
                       Expanded(
                         child: Text(
                           option.label,
-                          style: (uxTypography?.lL_default ?? materialTheme.textTheme.labelLarge)?.copyWith(
-                                color: isSelected
-                                    ? (uxColors?.primary ?? materialTheme.colorScheme.primary)
-                                    : null,
-                                fontWeight: isSelected ? FontWeight.w600 : null,
-                              ),
+                          style:
+                              (uxTypography?.lL_default ??
+                                      materialTheme.textTheme.labelLarge)
+                                  ?.copyWith(
+                                    color: isSelected
+                                        ? (uxColors?.primary ??
+                                              materialTheme.colorScheme.primary)
+                                        : null,
+                                    fontWeight: isSelected
+                                        ? FontWeight.w600
+                                        : null,
+                                  ),
                         ),
                       ),
                       if (widget.mode == Ux4gDropdownMode.single && isSelected)
                         Icon(
                           Icons.check,
-                          color: uxColors?.primary ?? materialTheme.colorScheme.primary,
+                          color:
+                              uxColors?.primary ??
+                              materialTheme.colorScheme.primary,
                           size: 20,
                         ),
                     ],
@@ -412,21 +432,32 @@ class _Ux4gSelectionDropdownState extends State<Ux4gSelectionDropdown> {
     };
 
     final textStyle = switch (widget.size) {
-      Ux4gDropdownSize.s => uxTypography?.lM_default ?? materialTheme.textTheme.labelMedium,
-      Ux4gDropdownSize.m => uxTypography?.lL_default ?? materialTheme.textTheme.labelLarge,
-      Ux4gDropdownSize.l => uxTypography?.lXL_default ?? materialTheme.textTheme.labelLarge,
+      Ux4gDropdownSize.s =>
+        uxTypography?.lM_default ?? materialTheme.textTheme.labelMedium,
+      Ux4gDropdownSize.m =>
+        uxTypography?.lL_default ?? materialTheme.textTheme.labelLarge,
+      Ux4gDropdownSize.l =>
+        uxTypography?.lXL_default ?? materialTheme.textTheme.labelLarge,
     };
 
     final borderColor = switch (widget.status) {
-      Ux4gDropdownStatus.disabled => (uxColors?.onSurface ?? materialTheme.colorScheme.onSurface).withValues(alpha: 0.2),
-      Ux4gDropdownStatus.error => uxColors?.error ?? materialTheme.colorScheme.error,
+      Ux4gDropdownStatus.disabled =>
+        (uxColors?.onSurface ?? materialTheme.colorScheme.onSurface).withValues(
+          alpha: 0.2,
+        ),
+      Ux4gDropdownStatus.error =>
+        uxColors?.error ?? materialTheme.colorScheme.error,
       Ux4gDropdownStatus.defaultStatus =>
-        _isExpanded ? (uxColors?.primary ?? materialTheme.colorScheme.primary) : (uxColors?.onSurface ?? materialTheme.colorScheme.onSurface).withValues(alpha: 0.2),
+        _isExpanded
+            ? (uxColors?.primary ?? materialTheme.colorScheme.primary)
+            : (uxColors?.onSurface ?? materialTheme.colorScheme.onSurface)
+                  .withValues(alpha: 0.2),
     };
 
     final descriptionColor = widget.status == Ux4gDropdownStatus.error
         ? (uxColors?.error ?? materialTheme.colorScheme.error)
-        : (uxColors?.onSurface ?? materialTheme.colorScheme.onSurface).withValues(alpha: 0.7);
+        : (uxColors?.onSurface ?? materialTheme.colorScheme.onSurface)
+              .withValues(alpha: 0.7);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -434,11 +465,18 @@ class _Ux4gSelectionDropdownState extends State<Ux4gSelectionDropdown> {
         if (widget.label != null) ...[
           Text(
             widget.label!,
-            style: widget.labelTextStyle ?? (uxTypography?.hS_default ?? materialTheme.textTheme.headlineSmall)?.copyWith(
-              color: widget.status == Ux4gDropdownStatus.disabled
-                  ? (uxColors?.onSurface ?? materialTheme.colorScheme.onSurface).withValues(alpha: 0.38)
-                  : (uxColors?.onSurface ?? materialTheme.colorScheme.onSurface),
-            ),
+            style:
+                widget.labelTextStyle ??
+                (uxTypography?.hS_default ??
+                        materialTheme.textTheme.headlineSmall)
+                    ?.copyWith(
+                      color: widget.status == Ux4gDropdownStatus.disabled
+                          ? (uxColors?.onSurface ??
+                                    materialTheme.colorScheme.onSurface)
+                                .withValues(alpha: 0.38)
+                          : (uxColors?.onSurface ??
+                                materialTheme.colorScheme.onSurface),
+                    ),
           ),
           const SizedBox(height: Ux4gSpace.space4),
         ],
@@ -455,7 +493,9 @@ class _Ux4gSelectionDropdownState extends State<Ux4gSelectionDropdown> {
               ),
               decoration: BoxDecoration(
                 color: widget.status == Ux4gDropdownStatus.disabled
-                    ? (uxColors?.onSurface ?? materialTheme.colorScheme.onSurface).withValues(alpha: 0.04)
+                    ? (uxColors?.onSurface ??
+                              materialTheme.colorScheme.onSurface)
+                          .withValues(alpha: 0.04)
                     : (uxColors?.surface ?? materialTheme.colorScheme.surface),
                 borderRadius: BorderRadius.circular(Ux4gRadius.radius8),
                 border: Border.all(color: borderColor),
@@ -463,7 +503,14 @@ class _Ux4gSelectionDropdownState extends State<Ux4gSelectionDropdown> {
               child: Row(
                 children: [
                   if (widget.leadingIcon != null) ...[
-                    Icon(widget.leadingIcon, size: 20, color: (uxColors?.onSurface ?? materialTheme.colorScheme.onSurface).withValues(alpha: 0.6)),
+                    Icon(
+                      widget.leadingIcon,
+                      size: 20,
+                      color:
+                          (uxColors?.onSurface ??
+                                  materialTheme.colorScheme.onSurface)
+                              .withValues(alpha: 0.6),
+                    ),
                     const SizedBox(width: 8),
                   ],
                   Expanded(
@@ -471,7 +518,10 @@ class _Ux4gSelectionDropdownState extends State<Ux4gSelectionDropdown> {
                         ? Text(
                             widget.placeholder,
                             style: (textStyle ?? const TextStyle()).copyWith(
-                              color: (uxColors?.onSurface ?? materialTheme.colorScheme.onSurface).withValues(alpha: 0.38),
+                              color:
+                                  (uxColors?.onSurface ??
+                                          materialTheme.colorScheme.onSurface)
+                                      .withValues(alpha: 0.38),
                             ),
                           )
                         : (widget.mode == Ux4gDropdownMode.single
@@ -506,7 +556,10 @@ class _Ux4gSelectionDropdownState extends State<Ux4gSelectionDropdown> {
                     _isExpanded
                         ? Icons.keyboard_arrow_up
                         : Icons.keyboard_arrow_down,
-                    color: (uxColors?.onSurface ?? materialTheme.colorScheme.onSurface).withValues(alpha: 0.6),
+                    color:
+                        (uxColors?.onSurface ??
+                                materialTheme.colorScheme.onSurface)
+                            .withValues(alpha: 0.6),
                   ),
                 ],
               ),
@@ -527,7 +580,10 @@ class _Ux4gSelectionDropdownState extends State<Ux4gSelectionDropdown> {
               const SizedBox(width: 4),
               Text(
                 widget.description!,
-                style: (uxTypography?.lS_default ?? materialTheme.textTheme.labelSmall)?.copyWith(color: descriptionColor),
+                style:
+                    (uxTypography?.lS_default ??
+                            materialTheme.textTheme.labelSmall)
+                        ?.copyWith(color: descriptionColor),
               ),
             ],
           ),

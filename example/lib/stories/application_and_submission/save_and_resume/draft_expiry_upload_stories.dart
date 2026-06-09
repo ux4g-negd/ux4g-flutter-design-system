@@ -23,7 +23,8 @@ final draftExpiryUploadComponent = WidgetbookComponent(
           label: 'Variant',
           options: const ['Default', 'Card style'],
           initialOption: 'Default',
-          description: 'Switch between the standard flat layout and the card-style layout.',
+          description:
+              'Switch between the standard flat layout and the card-style layout.',
         );
 
         final code = variant == 'Card style'
@@ -62,7 +63,11 @@ class _ExpiryBanner extends StatelessWidget {
       title: 'Your draft expires in 5 days',
       margin: EdgeInsets.zero,
       leadingIcon: const Icon(Icons.error, color: Color(0xFFF59E0B), size: 20),
-      titleStyle: const TextStyle(color: Color(0xFFAD530A), fontWeight: FontWeight.w500, fontSize: 13),
+      titleStyle: const TextStyle(
+        color: Color(0xFFAD530A),
+        fontWeight: FontWeight.w500,
+        fontSize: 13,
+      ),
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
       trailingIcon: Container(
         padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
@@ -70,7 +75,14 @@ class _ExpiryBanner extends StatelessWidget {
           color: const Color(0xFFFFEDD5),
           borderRadius: BorderRadius.circular(4),
         ),
-        child: const Text('16 Apr', style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: Color(0xFF9A3412))),
+        child: const Text(
+          '16 Apr',
+          style: TextStyle(
+            fontSize: 11,
+            fontWeight: FontWeight.w600,
+            color: Color(0xFF9A3412),
+          ),
+        ),
       ),
     );
   }
@@ -97,7 +109,10 @@ class _UploadedDocItem extends StatelessWidget {
               Container(
                 width: 28,
                 height: 28,
-                decoration: const BoxDecoration(shape: BoxShape.circle, color: _greenColor),
+                decoration: const BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: _greenColor,
+                ),
                 child: const Icon(Icons.check, color: Colors.white, size: 16),
               ),
               const SizedBox(width: 12),
@@ -105,9 +120,19 @@ class _UploadedDocItem extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Aadhaar Card', style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600, color: _titleColor)),
+                    Text(
+                      'Aadhaar Card',
+                      style: TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.w600,
+                        color: _titleColor,
+                      ),
+                    ),
                     SizedBox(height: 4),
-                    Text('aadhaar_card.pdf · 1.2 MB · Uploaded just now', style: TextStyle(fontSize: 13, color: _subtleText)),
+                    Text(
+                      'aadhaar_card.pdf · 1.2 MB · Uploaded just now',
+                      style: TextStyle(fontSize: 13, color: _subtleText),
+                    ),
                   ],
                 ),
               ),
@@ -119,15 +144,41 @@ class _UploadedDocItem extends StatelessWidget {
             child: Row(
               children: [
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
-                  decoration: BoxDecoration(border: Border.all(color: const Color(0xFFD1D5DB)), borderRadius: BorderRadius.circular(6)),
-                  child: const Text('View', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w500, color: _titleColor)),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 14,
+                    vertical: 6,
+                  ),
+                  decoration: BoxDecoration(
+                    border: Border.all(color: const Color(0xFFD1D5DB)),
+                    borderRadius: BorderRadius.circular(6),
+                  ),
+                  child: const Text(
+                    'View',
+                    style: TextStyle(
+                      fontSize: 13,
+                      fontWeight: FontWeight.w500,
+                      color: _titleColor,
+                    ),
+                  ),
                 ),
                 const SizedBox(width: 8),
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
-                  decoration: BoxDecoration(border: Border.all(color: const Color(0xFFD1D5DB)), borderRadius: BorderRadius.circular(6)),
-                  child: const Text('Re-upload', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w500, color: _titleColor)),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 14,
+                    vertical: 6,
+                  ),
+                  decoration: BoxDecoration(
+                    border: Border.all(color: const Color(0xFFD1D5DB)),
+                    borderRadius: BorderRadius.circular(6),
+                  ),
+                  child: const Text(
+                    'Re-upload',
+                    style: TextStyle(
+                      fontSize: 13,
+                      fontWeight: FontWeight.w500,
+                      color: _titleColor,
+                    ),
+                  ),
                 ),
               ],
             ),
@@ -170,7 +221,10 @@ class _PendingDocItem extends StatelessWidget {
                 height: 28,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  border: Border.all(color: const Color(0xFFE5E7EB), width: 1.5),
+                  border: Border.all(
+                    color: const Color(0xFFE5E7EB),
+                    width: 1.5,
+                  ),
                 ),
               ),
               const SizedBox(width: 12),
@@ -183,14 +237,23 @@ class _PendingDocItem extends StatelessWidget {
                         Flexible(
                           child: Text(
                             title,
-                            style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w600, color: _titleColor),
+                            style: const TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.w600,
+                              color: _titleColor,
+                            ),
                           ),
                         ),
                         const SizedBox(width: 8),
                         Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 8,
+                            vertical: 2,
+                          ),
                           decoration: BoxDecoration(
-                            color: isRequired ? const Color(0xFFFEE2E2) : const Color(0xFFF3F4F6),
+                            color: isRequired
+                                ? const Color(0xFFFEE2E2)
+                                : const Color(0xFFF3F4F6),
                             borderRadius: BorderRadius.circular(4),
                           ),
                           child: Text(
@@ -198,7 +261,9 @@ class _PendingDocItem extends StatelessWidget {
                             style: TextStyle(
                               fontSize: 11,
                               fontWeight: FontWeight.w600,
-                              color: isRequired ? const Color(0xFFDC2626) : const Color(0xFF6B7280),
+                              color: isRequired
+                                  ? const Color(0xFFDC2626)
+                                  : const Color(0xFF6B7280),
                             ),
                           ),
                         ),
@@ -287,7 +352,8 @@ class _DocumentList extends StatelessWidget {
 // Source Code Strings
 // ───────────────────────────────────────────────────────────────────────
 
-const _draftExpiryUploadDefaultCode = r"""import 'package:flutter/material.dart';
+const _draftExpiryUploadDefaultCode =
+    r"""import 'package:flutter/material.dart';
 import 'package:ux4g_flutter_design_system/ux4g_flutter_design_system.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -914,7 +980,11 @@ class _DraftExpiryUploadMockup extends StatelessWidget {
                 SvgPicture.asset(
                   _nationalEmblemLogoPath,
                   height: 40,
-                  errorBuilder: (c, e, s) => const Icon(Icons.account_balance, size: 32, color: Colors.grey),
+                  errorBuilder: (c, e, s) => const Icon(
+                    Icons.account_balance,
+                    size: 32,
+                    color: Colors.grey,
+                  ),
                 ),
                 const SizedBox(width: 1),
                 Container(height: 32, width: 1, color: const Color(0xFFD1D5DB)),
@@ -922,7 +992,8 @@ class _DraftExpiryUploadMockup extends StatelessWidget {
                 SvgPicture.asset(
                   _unionLogoPath,
                   height: 32,
-                  errorBuilder: (c, e, s) => const Icon(Icons.blur_on, size: 32, color: Colors.blue),
+                  errorBuilder: (c, e, s) =>
+                      const Icon(Icons.blur_on, size: 32, color: Colors.blue),
                 ),
               ],
             ),
@@ -931,7 +1002,10 @@ class _DraftExpiryUploadMockup extends StatelessWidget {
             // Content
             Expanded(
               child: SingleChildScrollView(
-                padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 24,
+                  vertical: 24,
+                ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -945,9 +1019,30 @@ class _DraftExpiryUploadMockup extends StatelessWidget {
                       currentStep: 3,
                       stepSize: 20,
                       steps: const [
-                        Ux4gStepItem(title: 'Eligibility', titleStyle: TextStyle(fontSize: 11, fontWeight: FontWeight.w500, color: Color(0xFF4B5563))),
-                        Ux4gStepItem(title: 'Personal', titleStyle: TextStyle(fontSize: 11, fontWeight: FontWeight.w500, color: Color(0xFF4B5563))),
-                        Ux4gStepItem(title: 'Documents', titleStyle: TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: Color(0xFF4B5563))),
+                        Ux4gStepItem(
+                          title: 'Eligibility',
+                          titleStyle: TextStyle(
+                            fontSize: 11,
+                            fontWeight: FontWeight.w500,
+                            color: Color(0xFF4B5563),
+                          ),
+                        ),
+                        Ux4gStepItem(
+                          title: 'Personal',
+                          titleStyle: TextStyle(
+                            fontSize: 11,
+                            fontWeight: FontWeight.w500,
+                            color: Color(0xFF4B5563),
+                          ),
+                        ),
+                        Ux4gStepItem(
+                          title: 'Documents',
+                          titleStyle: TextStyle(
+                            fontSize: 11,
+                            fontWeight: FontWeight.w600,
+                            color: Color(0xFF4B5563),
+                          ),
+                        ),
                         Ux4gStepItem(title: ''),
                       ],
                     ),
@@ -956,7 +1051,12 @@ class _DraftExpiryUploadMockup extends StatelessWidget {
                     // Title
                     const Text(
                       'Upload documents',
-                      style: TextStyle(fontSize: 24, fontWeight: FontWeight.w800, color: _titleColor, height: 1.2),
+                      style: TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.w800,
+                        color: _titleColor,
+                        height: 1.2,
+                      ),
                     ),
                     const SizedBox(height: 6),
                     const Text(
@@ -968,7 +1068,11 @@ class _DraftExpiryUploadMockup extends StatelessWidget {
                     // Required count
                     const Text(
                       'Required documents — 1 of 4 uploaded',
-                      style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700, color: _primaryColor),
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w700,
+                        color: _primaryColor,
+                      ),
                     ),
                     const SizedBox(height: 20),
 
@@ -979,7 +1083,11 @@ class _DraftExpiryUploadMockup extends StatelessWidget {
                     // Disclaimer
                     const Text(
                       'All documents must be self-attested. AI flags quality issues; officers make the final call.',
-                      style: TextStyle(fontSize: 12, color: _subtleText, height: 1.4),
+                      style: TextStyle(
+                        fontSize: 12,
+                        color: _subtleText,
+                        height: 1.4,
+                      ),
                     ),
                   ],
                 ),
@@ -1017,12 +1125,21 @@ class _DraftExpiryUploadMockup extends StatelessWidget {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  const Text('Powered by -', style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+                  const Text(
+                    'Powered by -',
+                    style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF)),
+                  ),
                   const SizedBox(height: 6),
                   Image.asset(
                     _digitalIndiaLogoPath,
                     height: 24,
-                    errorBuilder: (c, e, s) => const Text('Digital India', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12)),
+                    errorBuilder: (c, e, s) => const Text(
+                      'Digital India',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 12,
+                      ),
+                    ),
                   ),
                 ],
               ),
@@ -1044,7 +1161,11 @@ class _DraftExpiryUploadCardMockup extends StatelessWidget {
         color: _cardBg,
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
-          BoxShadow(color: Colors.black.withOpacity(0.08), blurRadius: 24, offset: const Offset(0, 6)),
+          BoxShadow(
+            color: Colors.black.withOpacity(0.08),
+            blurRadius: 24,
+            offset: const Offset(0, 6),
+          ),
         ],
       ),
       clipBehavior: Clip.antiAlias,
@@ -1066,15 +1187,27 @@ class _DraftExpiryUploadCardMockup extends StatelessWidget {
                         SvgPicture.asset(
                           _nationalEmblemLogoPath,
                           height: 40,
-                          errorBuilder: (c, e, s) => const Icon(Icons.account_balance, size: 32, color: Colors.grey),
+                          errorBuilder: (c, e, s) => const Icon(
+                            Icons.account_balance,
+                            size: 32,
+                            color: Colors.grey,
+                          ),
                         ),
                         const SizedBox(width: 1),
-                        Container(height: 32, width: 1, color: const Color(0xFFD1D5DB)),
+                        Container(
+                          height: 32,
+                          width: 1,
+                          color: const Color(0xFFD1D5DB),
+                        ),
                         const SizedBox(width: 1),
                         SvgPicture.asset(
                           _unionLogoPath,
                           height: 32,
-                          errorBuilder: (c, e, s) => const Icon(Icons.blur_on, size: 32, color: Colors.blue),
+                          errorBuilder: (c, e, s) => const Icon(
+                            Icons.blur_on,
+                            size: 32,
+                            color: Colors.blue,
+                          ),
                         ),
                       ],
                     ),
@@ -1086,14 +1219,22 @@ class _DraftExpiryUploadCardMockup extends StatelessWidget {
               // White card with all content inside
               Expanded(
                 child: SingleChildScrollView(
-                  padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 24,
+                    vertical: 32,
+                  ),
                   child: Container(
                     padding: const EdgeInsets.all(24),
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(16),
                       boxShadow: [
-                        BoxShadow(color: Colors.black.withOpacity(0.06), blurRadius: 20, spreadRadius: 2, offset: const Offset(0, 4)),
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.06),
+                          blurRadius: 20,
+                          spreadRadius: 2,
+                          offset: const Offset(0, 4),
+                        ),
                       ],
                     ),
                     child: Column(
@@ -1109,9 +1250,30 @@ class _DraftExpiryUploadCardMockup extends StatelessWidget {
                           currentStep: 3,
                           stepSize: 20,
                           steps: const [
-                            Ux4gStepItem(title: 'Eligibility', titleStyle: TextStyle(fontSize: 11, fontWeight: FontWeight.w500, color: Color(0xFF4B5563))),
-                            Ux4gStepItem(title: 'Personal', titleStyle: TextStyle(fontSize: 11, fontWeight: FontWeight.w500, color: Color(0xFF4B5563))),
-                            Ux4gStepItem(title: 'Documents', titleStyle: TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: Color(0xFF4B5563))),
+                            Ux4gStepItem(
+                              title: 'Eligibility',
+                              titleStyle: TextStyle(
+                                fontSize: 11,
+                                fontWeight: FontWeight.w500,
+                                color: Color(0xFF4B5563),
+                              ),
+                            ),
+                            Ux4gStepItem(
+                              title: 'Personal',
+                              titleStyle: TextStyle(
+                                fontSize: 11,
+                                fontWeight: FontWeight.w500,
+                                color: Color(0xFF4B5563),
+                              ),
+                            ),
+                            Ux4gStepItem(
+                              title: 'Documents',
+                              titleStyle: TextStyle(
+                                fontSize: 11,
+                                fontWeight: FontWeight.w600,
+                                color: Color(0xFF4B5563),
+                              ),
+                            ),
                             Ux4gStepItem(title: ''),
                           ],
                         ),
@@ -1120,7 +1282,12 @@ class _DraftExpiryUploadCardMockup extends StatelessWidget {
                         // Title
                         const Text(
                           'Upload documents',
-                          style: TextStyle(fontSize: 24, fontWeight: FontWeight.w800, color: _titleColor, height: 1.2),
+                          style: TextStyle(
+                            fontSize: 24,
+                            fontWeight: FontWeight.w800,
+                            color: _titleColor,
+                            height: 1.2,
+                          ),
                         ),
                         const SizedBox(height: 6),
                         const Text(
@@ -1132,7 +1299,11 @@ class _DraftExpiryUploadCardMockup extends StatelessWidget {
                         // Required count
                         const Text(
                           'Required documents — 1 of 4 uploaded',
-                          style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700, color: _primaryColor),
+                          style: TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w700,
+                            color: _primaryColor,
+                          ),
                         ),
                         const SizedBox(height: 20),
 
@@ -1143,7 +1314,11 @@ class _DraftExpiryUploadCardMockup extends StatelessWidget {
                         // Disclaimer
                         const Text(
                           'All documents must be self-attested. AI flags quality issues; officers make the final call.',
-                          style: TextStyle(fontSize: 12, color: _subtleText, height: 1.4),
+                          style: TextStyle(
+                            fontSize: 12,
+                            color: _subtleText,
+                            height: 1.4,
+                          ),
                         ),
                       ],
                     ),
@@ -1153,7 +1328,10 @@ class _DraftExpiryUploadCardMockup extends StatelessWidget {
 
               // Actions
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 24,
+                  vertical: 16,
+                ),
                 child: Column(
                   children: [
                     Ux4gButton(
@@ -1182,12 +1360,21 @@ class _DraftExpiryUploadCardMockup extends StatelessWidget {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    const Text('Powered by -', style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+                    const Text(
+                      'Powered by -',
+                      style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF)),
+                    ),
                     const SizedBox(height: 6),
                     Image.asset(
                       _digitalIndiaLogoPath,
                       height: 24,
-                      errorBuilder: (c, e, s) => const Text('Digital India', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12)),
+                      errorBuilder: (c, e, s) => const Text(
+                        'Digital India',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 12,
+                        ),
+                      ),
                     ),
                   ],
                 ),

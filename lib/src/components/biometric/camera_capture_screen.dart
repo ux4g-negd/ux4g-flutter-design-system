@@ -104,10 +104,11 @@ class CameraCaptureScreen extends StatelessWidget {
                   maskedAadhaar: controller.verificationResult?.maskedPhone,
                   failureReason: controller.failureReason,
                   onContinue: () {
-                  if (controller.verificationResult != null && onSuccess != null) {
-                    onSuccess!(controller.verificationResult!);
-                  }
-                },
+                    if (controller.verificationResult != null &&
+                        onSuccess != null) {
+                      onSuccess!(controller.verificationResult!);
+                    }
+                  },
                   onRetry: () => controller.retry(),
                   onAlternateVerify: onAlternateVerify,
                 ),

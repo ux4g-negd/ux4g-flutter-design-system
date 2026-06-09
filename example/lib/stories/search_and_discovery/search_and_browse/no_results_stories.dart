@@ -203,7 +203,10 @@ class _NoResultsMockupState extends State<_NoResultsMockup> {
               // App Header - filled purple
               Container(
                 width: double.infinity,
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 10,
+                ),
                 color: _primaryColor,
                 child: const Row(
                   children: [
@@ -211,7 +214,11 @@ class _NoResultsMockupState extends State<_NoResultsMockup> {
                     SizedBox(width: 12),
                     Text(
                       'National Services Portal',
-                      style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: Colors.white),
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.white,
+                      ),
                     ),
                   ],
                 ),
@@ -221,7 +228,10 @@ class _NoResultsMockupState extends State<_NoResultsMockup> {
 
               // Search bar area
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 10,
+                ),
                 color: Colors.white,
                 child: Ux4gSearchField(
                   value: _searchValue,
@@ -246,18 +256,28 @@ class _NoResultsMockupState extends State<_NoResultsMockup> {
                       const SizedBox(height: 16),
                       Text(
                         'No services found for "$_searchValue"',
-                        style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: _titleColor),
+                        style: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w700,
+                          color: _titleColor,
+                        ),
                         textAlign: TextAlign.center,
                       ),
                       const SizedBox(height: 12),
-                      const Text('Did you mean:', style: TextStyle(fontSize: 13, color: _subtleText)),
+                      const Text(
+                        'Did you mean:',
+                        style: TextStyle(fontSize: 13, color: _subtleText),
+                      ),
                       const SizedBox(height: 4),
                       Wrap(
                         children: _suggestions.asMap().entries.map((entry) {
                           final isLast = entry.key == _suggestions.length - 1;
                           return Text(
                             isLast ? entry.value : '${entry.value},  ',
-                            style: const TextStyle(fontSize: 13, color: _primaryColor),
+                            style: const TextStyle(
+                              fontSize: 13,
+                              color: _primaryColor,
+                            ),
                           );
                         }).toList(),
                       ),
@@ -276,13 +296,27 @@ class _NoResultsMockupState extends State<_NoResultsMockup> {
                         alignment: Alignment.centerLeft,
                         child: Text(
                           'Popular services',
-                          style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: _titleColor),
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w700,
+                            color: _titleColor,
+                          ),
                         ),
                       ),
                       const SizedBox(height: 12),
-                      _buildPopularCard('Income Certificate', 'Revenue Department', 'Free', '20 mins'),
+                      _buildPopularCard(
+                        'Income Certificate',
+                        'Revenue Department',
+                        'Free',
+                        '20 mins',
+                      ),
                       const SizedBox(height: 12),
-                      _buildPopularCard('Ration Card', 'Food & Civil Supplies', 'Free', '10 days'),
+                      _buildPopularCard(
+                        'Ration Card',
+                        'Food & Civil Supplies',
+                        'Free',
+                        '10 days',
+                      ),
                     ],
                   ),
                 ),
@@ -306,14 +340,31 @@ class _NoResultsMockupState extends State<_NoResultsMockup> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(title, style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: _titleColor)),
+          Text(
+            title,
+            style: const TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.w600,
+              color: _titleColor,
+            ),
+          ),
           const SizedBox(height: 2),
           Text(dept, style: const TextStyle(fontSize: 12, color: _subtleText)),
           const SizedBox(height: 8),
           Row(
             children: [
-              Text(fee, style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: _greenColor)),
-              Text('  ·  $time', style: const TextStyle(fontSize: 12, color: _subtleText)),
+              Text(
+                fee,
+                style: const TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.w600,
+                  color: _greenColor,
+                ),
+              ),
+              Text(
+                '  ·  $time',
+                style: const TextStyle(fontSize: 12, color: _subtleText),
+              ),
             ],
           ),
           const SizedBox(height: 10),

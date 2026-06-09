@@ -31,7 +31,8 @@ final eligibilityCheckWizardComponent = WidgetbookComponent(
           label: 'Variant',
           options: const ['Default', 'Card style'],
           initialOption: 'Default',
-          description: 'Switch between the standard flat layout and the card-style layout on a soft-purple background.',
+          description:
+              'Switch between the standard flat layout and the card-style layout on a soft-purple background.',
         );
 
         final code = variant == 'Card style'
@@ -166,39 +167,87 @@ class _EligibilityCheckMockup extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-            Padding(
-              padding: EdgeInsets.only(bottom: 16),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(padding: EdgeInsets.only(top: 6), child: Icon(Icons.circle, size: 8, color: Color(0xFF111827))),
-                  SizedBox(width: 12),
-                  Expanded(child: Text('5 questions', style: TextStyle(fontSize: 14, color: Color(0xFF6B7280), height: 1.4))),
-                ],
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.only(bottom: 16),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(padding: EdgeInsets.only(top: 6), child: Icon(Icons.circle, size: 8, color: Color(0xFF111827))),
-                  SizedBox(width: 12),
-                  Expanded(child: Text('~2 minutes to complete', style: TextStyle(fontSize: 14, color: Color(0xFF6B7280), height: 1.4))),
-                ],
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.only(bottom: 16),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(padding: EdgeInsets.only(top: 6), child: Icon(Icons.circle, size: 8, color: Color(0xFF111827))),
-                  SizedBox(width: 12),
-                  Expanded(child: Text('No documents needed at this step', style: TextStyle(fontSize: 14, color: Color(0xFF6B7280), height: 1.4))),
-                ],
-              ),
-            ),
+                        Padding(
+                          padding: EdgeInsets.only(bottom: 16),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding: EdgeInsets.only(top: 6),
+                                child: Icon(
+                                  Icons.circle,
+                                  size: 8,
+                                  color: Color(0xFF111827),
+                                ),
+                              ),
+                              SizedBox(width: 12),
+                              Expanded(
+                                child: Text(
+                                  '5 questions',
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    color: Color(0xFF6B7280),
+                                    height: 1.4,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(bottom: 16),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding: EdgeInsets.only(top: 6),
+                                child: Icon(
+                                  Icons.circle,
+                                  size: 8,
+                                  color: Color(0xFF111827),
+                                ),
+                              ),
+                              SizedBox(width: 12),
+                              Expanded(
+                                child: Text(
+                                  '~2 minutes to complete',
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    color: Color(0xFF6B7280),
+                                    height: 1.4,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(bottom: 16),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding: EdgeInsets.only(top: 6),
+                                child: Icon(
+                                  Icons.circle,
+                                  size: 8,
+                                  color: Color(0xFF111827),
+                                ),
+                              ),
+                              SizedBox(width: 12),
+                              Expanded(
+                                child: Text(
+                                  'No documents needed at this step',
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    color: Color(0xFF6B7280),
+                                    height: 1.4,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
                       ],
                     ),
                   ),
@@ -333,39 +382,90 @@ class _EligibilityCheckCardMockup extends StatelessWidget {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-            Padding(
-              padding: EdgeInsets.only(bottom: 16),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(padding: EdgeInsets.only(top: 6), child: Icon(Icons.circle, size: 8, color: Color(0xFF111827))),
-                  SizedBox(width: 12),
-                  Expanded(child: Text('5 questions', style: TextStyle(fontSize: 14, color: Color(0xFF6B7280), height: 1.4))),
-                ],
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.only(bottom: 16),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(padding: EdgeInsets.only(top: 6), child: Icon(Icons.circle, size: 8, color: Color(0xFF111827))),
-                  SizedBox(width: 12),
-                  Expanded(child: Text('~2 minutes to complete', style: TextStyle(fontSize: 14, color: Color(0xFF6B7280), height: 1.4))),
-                ],
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.only(bottom: 16),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(padding: EdgeInsets.only(top: 6), child: Icon(Icons.circle, size: 8, color: Color(0xFF111827))),
-                  SizedBox(width: 12),
-                  Expanded(child: Text('No documents needed at this step', style: TextStyle(fontSize: 14, color: Color(0xFF6B7280), height: 1.4))),
-                ],
-              ),
-            ),
+                                  Padding(
+                                    padding: EdgeInsets.only(bottom: 16),
+                                    child: Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Padding(
+                                          padding: EdgeInsets.only(top: 6),
+                                          child: Icon(
+                                            Icons.circle,
+                                            size: 8,
+                                            color: Color(0xFF111827),
+                                          ),
+                                        ),
+                                        SizedBox(width: 12),
+                                        Expanded(
+                                          child: Text(
+                                            '5 questions',
+                                            style: TextStyle(
+                                              fontSize: 14,
+                                              color: Color(0xFF6B7280),
+                                              height: 1.4,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsets.only(bottom: 16),
+                                    child: Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Padding(
+                                          padding: EdgeInsets.only(top: 6),
+                                          child: Icon(
+                                            Icons.circle,
+                                            size: 8,
+                                            color: Color(0xFF111827),
+                                          ),
+                                        ),
+                                        SizedBox(width: 12),
+                                        Expanded(
+                                          child: Text(
+                                            '~2 minutes to complete',
+                                            style: TextStyle(
+                                              fontSize: 14,
+                                              color: Color(0xFF6B7280),
+                                              height: 1.4,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsets.only(bottom: 16),
+                                    child: Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Padding(
+                                          padding: EdgeInsets.only(top: 6),
+                                          child: Icon(
+                                            Icons.circle,
+                                            size: 8,
+                                            color: Color(0xFF111827),
+                                          ),
+                                        ),
+                                        SizedBox(width: 12),
+                                        Expanded(
+                                          child: Text(
+                                            'No documents needed at this step',
+                                            style: TextStyle(
+                                              fontSize: 14,
+                                              color: Color(0xFF6B7280),
+                                              height: 1.4,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
                                 ],
                               ),
                             ),
@@ -440,7 +540,8 @@ class _EligibilityCheckCardMockup extends StatelessWidget {
 // Source Code Snippets
 // ───────────────────────────────────────────────────────────────────────
 
-const _eligibilityCheckCode = r'''// Eligibility Check Wizard – Landing Screen (Flat Layout)
+const _eligibilityCheckCode =
+    r'''// Eligibility Check Wizard – Landing Screen (Flat Layout)
 Column(
   children: [
     // Header
@@ -568,7 +669,8 @@ Column(
   ],
 )''';
 
-const _eligibilityCheckCardCode = r'''// Eligibility Check Wizard – Landing Screen (Card Style Layout)
+const _eligibilityCheckCardCode =
+    r'''// Eligibility Check Wizard – Landing Screen (Card Style Layout)
 Column(
   children: [
     // Header
@@ -724,7 +826,8 @@ final eligibilityQuestionStepComponent = WidgetbookComponent(
           label: 'Variant',
           options: const ['Default', 'Card style'],
           initialOption: 'Default',
-          description: 'Switch between the standard flat layout and the card-style layout.',
+          description:
+              'Switch between the standard flat layout and the card-style layout.',
         );
 
         final code = variant == 'Card style'
@@ -759,10 +862,12 @@ class _EligibilityQuestionMockup extends StatefulWidget {
   const _EligibilityQuestionMockup();
 
   @override
-  State<_EligibilityQuestionMockup> createState() => _EligibilityQuestionMockupState();
+  State<_EligibilityQuestionMockup> createState() =>
+      _EligibilityQuestionMockupState();
 }
 
-class _EligibilityQuestionMockupState extends State<_EligibilityQuestionMockup> {
+class _EligibilityQuestionMockupState
+    extends State<_EligibilityQuestionMockup> {
   String? _selected = 'yes';
 
   @override
@@ -816,19 +921,27 @@ class _EligibilityQuestionMockupState extends State<_EligibilityQuestionMockup> 
                   GestureDetector(
                     onTap: () => setState(() => _selected = 'yes'),
                     child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 14,
+                      ),
                       decoration: BoxDecoration(
-                        color: _selected == 'yes' ? const Color(0xFFF5F3FF) : const Color(0xFFF9FAFB),
+                        color: _selected == 'yes'
+                            ? const Color(0xFFF5F3FF)
+                            : const Color(0xFFF9FAFB),
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: Row(
                         children: [
                           Container(
-                            width: 22, height: 22,
+                            width: 22,
+                            height: 22,
                             decoration: BoxDecoration(
                               shape: BoxShape.circle,
                               border: Border.all(
-                                color: _selected == 'yes' ? const Color(0xFF6A4EFF) : const Color(0xFFD1D5DB),
+                                color: _selected == 'yes'
+                                    ? const Color(0xFF6A4EFF)
+                                    : const Color(0xFFD1D5DB),
                                 width: _selected == 'yes' ? 6 : 2,
                               ),
                               color: Colors.white,
@@ -844,13 +957,19 @@ class _EligibilityQuestionMockupState extends State<_EligibilityQuestionMockup> 
                                   style: TextStyle(
                                     fontSize: 16,
                                     fontWeight: FontWeight.w700,
-                                    color: _selected == 'yes' ? const Color(0xFF6A4EFF) : const Color(0xFF111827),
+                                    color: _selected == 'yes'
+                                        ? const Color(0xFF6A4EFF)
+                                        : const Color(0xFF111827),
                                   ),
                                 ),
                                 const SizedBox(height: 2),
                                 Text(
                                   'I am a resident of Maharashtra',
-                                  style: const TextStyle(fontSize: 13, color: Color(0xFF6B7280), height: 1.3),
+                                  style: const TextStyle(
+                                    fontSize: 13,
+                                    color: Color(0xFF6B7280),
+                                    height: 1.3,
+                                  ),
                                 ),
                               ],
                             ),
@@ -863,19 +982,27 @@ class _EligibilityQuestionMockupState extends State<_EligibilityQuestionMockup> 
                   GestureDetector(
                     onTap: () => setState(() => _selected = 'no'),
                     child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 14,
+                      ),
                       decoration: BoxDecoration(
-                        color: _selected == 'no' ? const Color(0xFFF5F3FF) : const Color(0xFFF9FAFB),
+                        color: _selected == 'no'
+                            ? const Color(0xFFF5F3FF)
+                            : const Color(0xFFF9FAFB),
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: Row(
                         children: [
                           Container(
-                            width: 22, height: 22,
+                            width: 22,
+                            height: 22,
                             decoration: BoxDecoration(
                               shape: BoxShape.circle,
                               border: Border.all(
-                                color: _selected == 'no' ? const Color(0xFF6A4EFF) : const Color(0xFFD1D5DB),
+                                color: _selected == 'no'
+                                    ? const Color(0xFF6A4EFF)
+                                    : const Color(0xFFD1D5DB),
                                 width: _selected == 'no' ? 6 : 2,
                               ),
                               color: Colors.white,
@@ -891,13 +1018,19 @@ class _EligibilityQuestionMockupState extends State<_EligibilityQuestionMockup> 
                                   style: TextStyle(
                                     fontSize: 16,
                                     fontWeight: FontWeight.w700,
-                                    color: _selected == 'no' ? const Color(0xFF6A4EFF) : const Color(0xFF111827),
+                                    color: _selected == 'no'
+                                        ? const Color(0xFF6A4EFF)
+                                        : const Color(0xFF111827),
                                   ),
                                 ),
                                 const SizedBox(height: 2),
                                 Text(
                                   'I reside in a different state',
-                                  style: const TextStyle(fontSize: 13, color: Color(0xFF6B7280), height: 1.3),
+                                  style: const TextStyle(
+                                    fontSize: 13,
+                                    color: Color(0xFF6B7280),
+                                    height: 1.3,
+                                  ),
                                 ),
                               ],
                             ),
@@ -967,10 +1100,12 @@ class _EligibilityQuestionCardMockup extends StatefulWidget {
   const _EligibilityQuestionCardMockup();
 
   @override
-  State<_EligibilityQuestionCardMockup> createState() => _EligibilityQuestionCardMockupState();
+  State<_EligibilityQuestionCardMockup> createState() =>
+      _EligibilityQuestionCardMockupState();
 }
 
-class _EligibilityQuestionCardMockupState extends State<_EligibilityQuestionCardMockup> {
+class _EligibilityQuestionCardMockupState
+    extends State<_EligibilityQuestionCardMockup> {
   String? _selected = 'yes';
 
   @override
@@ -1042,19 +1177,27 @@ class _EligibilityQuestionCardMockupState extends State<_EligibilityQuestionCard
                             GestureDetector(
                               onTap: () => setState(() => _selected = 'yes'),
                               child: Container(
-                                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 16,
+                                  vertical: 14,
+                                ),
                                 decoration: BoxDecoration(
-                                  color: _selected == 'yes' ? const Color(0xFFF5F3FF) : const Color(0xFFF9FAFB),
+                                  color: _selected == 'yes'
+                                      ? const Color(0xFFF5F3FF)
+                                      : const Color(0xFFF9FAFB),
                                   borderRadius: BorderRadius.circular(12),
                                 ),
                                 child: Row(
                                   children: [
                                     Container(
-                                      width: 22, height: 22,
+                                      width: 22,
+                                      height: 22,
                                       decoration: BoxDecoration(
                                         shape: BoxShape.circle,
                                         border: Border.all(
-                                          color: _selected == 'yes' ? const Color(0xFF6A4EFF) : const Color(0xFFD1D5DB),
+                                          color: _selected == 'yes'
+                                              ? const Color(0xFF6A4EFF)
+                                              : const Color(0xFFD1D5DB),
                                           width: _selected == 'yes' ? 6 : 2,
                                         ),
                                         color: Colors.white,
@@ -1063,20 +1206,27 @@ class _EligibilityQuestionCardMockupState extends State<_EligibilityQuestionCard
                                     const SizedBox(width: 14),
                                     Expanded(
                                       child: Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
                                         children: [
                                           Text(
                                             'Yes',
                                             style: TextStyle(
                                               fontSize: 16,
                                               fontWeight: FontWeight.w700,
-                                              color: _selected == 'yes' ? const Color(0xFF6A4EFF) : const Color(0xFF111827),
+                                              color: _selected == 'yes'
+                                                  ? const Color(0xFF6A4EFF)
+                                                  : const Color(0xFF111827),
                                             ),
                                           ),
                                           const SizedBox(height: 2),
                                           Text(
                                             'I am a resident of Maharashtra',
-                                            style: const TextStyle(fontSize: 13, color: Color(0xFF6B7280), height: 1.3),
+                                            style: const TextStyle(
+                                              fontSize: 13,
+                                              color: Color(0xFF6B7280),
+                                              height: 1.3,
+                                            ),
                                           ),
                                         ],
                                       ),
@@ -1089,19 +1239,27 @@ class _EligibilityQuestionCardMockupState extends State<_EligibilityQuestionCard
                             GestureDetector(
                               onTap: () => setState(() => _selected = 'no'),
                               child: Container(
-                                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 16,
+                                  vertical: 14,
+                                ),
                                 decoration: BoxDecoration(
-                                  color: _selected == 'no' ? const Color(0xFFF5F3FF) : const Color(0xFFF9FAFB),
+                                  color: _selected == 'no'
+                                      ? const Color(0xFFF5F3FF)
+                                      : const Color(0xFFF9FAFB),
                                   borderRadius: BorderRadius.circular(12),
                                 ),
                                 child: Row(
                                   children: [
                                     Container(
-                                      width: 22, height: 22,
+                                      width: 22,
+                                      height: 22,
                                       decoration: BoxDecoration(
                                         shape: BoxShape.circle,
                                         border: Border.all(
-                                          color: _selected == 'no' ? const Color(0xFF6A4EFF) : const Color(0xFFD1D5DB),
+                                          color: _selected == 'no'
+                                              ? const Color(0xFF6A4EFF)
+                                              : const Color(0xFFD1D5DB),
                                           width: _selected == 'no' ? 6 : 2,
                                         ),
                                         color: Colors.white,
@@ -1110,20 +1268,27 @@ class _EligibilityQuestionCardMockupState extends State<_EligibilityQuestionCard
                                     const SizedBox(width: 14),
                                     Expanded(
                                       child: Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
                                         children: [
                                           Text(
                                             'No',
                                             style: TextStyle(
                                               fontSize: 16,
                                               fontWeight: FontWeight.w700,
-                                              color: _selected == 'no' ? const Color(0xFF6A4EFF) : const Color(0xFF111827),
+                                              color: _selected == 'no'
+                                                  ? const Color(0xFF6A4EFF)
+                                                  : const Color(0xFF111827),
                                             ),
                                           ),
                                           const SizedBox(height: 2),
                                           Text(
                                             'I reside in a different state',
-                                            style: const TextStyle(fontSize: 13, color: Color(0xFF6B7280), height: 1.3),
+                                            style: const TextStyle(
+                                              fontSize: 13,
+                                              color: Color(0xFF6B7280),
+                                              height: 1.3,
+                                            ),
                                           ),
                                         ],
                                       ),
@@ -1347,7 +1512,8 @@ Column(
   ],
 )''';
 
-const _eligibilityQuestionCardCode = r'''// Eligibility Question Step – Card Style Layout
+const _eligibilityQuestionCardCode =
+    r'''// Eligibility Question Step – Card Style Layout
 Column(
   children: [
     // Header ...
@@ -1431,7 +1597,8 @@ final eligibilitySuccessStepComponent = WidgetbookComponent(
           label: 'Variant',
           options: const ['Default', 'Card style'],
           initialOption: 'Default',
-          description: 'Switch between the standard flat layout and the card-style layout.',
+          description:
+              'Switch between the standard flat layout and the card-style layout.',
         );
 
         final code = variant == 'Card style'
@@ -1482,7 +1649,11 @@ class _EligibilitySuccessMockup extends StatelessWidget {
                       color: Color(0xFFBBF7D0),
                       shape: BoxShape.circle,
                     ),
-                    child: const Icon(Icons.check_circle, color: Color(0xFF15803D), size: 32),
+                    child: const Icon(
+                      Icons.check_circle,
+                      color: Color(0xFF15803D),
+                      size: 32,
+                    ),
                   ),
                   const SizedBox(height: 16),
                   const Text(
@@ -1506,7 +1677,7 @@ class _EligibilitySuccessMockup extends StatelessWidget {
                   const SizedBox(height: 24),
                   const Divider(color: _border),
                   const SizedBox(height: 20),
-                  
+
                   // Criteria list
                   const Align(
                     alignment: Alignment.centerLeft,
@@ -1525,9 +1696,32 @@ class _EligibilitySuccessMockup extends StatelessWidget {
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Expanded(child: Text('Age requirement met (18 years or above)', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w500, color: Color(0xFF374151), height: 1.4))),
+                        Expanded(
+                          child: Text(
+                            'Age requirement met (18 years or above)',
+                            style: TextStyle(
+                              fontSize: 13,
+                              fontWeight: FontWeight.w500,
+                              color: Color(0xFF374151),
+                              height: 1.4,
+                            ),
+                          ),
+                        ),
                         SizedBox(width: 12),
-                        Container(width: 20, height: 20, alignment: Alignment.center, decoration: BoxDecoration(color: Color(0xFFDCFCE7), borderRadius: BorderRadius.circular(4)), child: Icon(Icons.check, size: 16, color: Color(0xFF16A34A))),
+                        Container(
+                          width: 20,
+                          height: 20,
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                            color: Color(0xFFDCFCE7),
+                            borderRadius: BorderRadius.circular(4),
+                          ),
+                          child: Icon(
+                            Icons.check,
+                            size: 16,
+                            color: Color(0xFF16A34A),
+                          ),
+                        ),
                       ],
                     ),
                   ),
@@ -1536,9 +1730,32 @@ class _EligibilitySuccessMockup extends StatelessWidget {
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Expanded(child: Text('Valid government-issued ID submitted', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w500, color: Color(0xFF374151), height: 1.4))),
+                        Expanded(
+                          child: Text(
+                            'Valid government-issued ID submitted',
+                            style: TextStyle(
+                              fontSize: 13,
+                              fontWeight: FontWeight.w500,
+                              color: Color(0xFF374151),
+                              height: 1.4,
+                            ),
+                          ),
+                        ),
                         SizedBox(width: 12),
-                        Container(width: 20, height: 20, alignment: Alignment.center, decoration: BoxDecoration(color: Color(0xFFDCFCE7), borderRadius: BorderRadius.circular(4)), child: Icon(Icons.check, size: 16, color: Color(0xFF16A34A))),
+                        Container(
+                          width: 20,
+                          height: 20,
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                            color: Color(0xFFDCFCE7),
+                            borderRadius: BorderRadius.circular(4),
+                          ),
+                          child: Icon(
+                            Icons.check,
+                            size: 16,
+                            color: Color(0xFF16A34A),
+                          ),
+                        ),
                       ],
                     ),
                   ),
@@ -1547,9 +1764,32 @@ class _EligibilitySuccessMockup extends StatelessWidget {
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Expanded(child: Text('Residential address confirmed', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w500, color: Color(0xFF374151), height: 1.4))),
+                        Expanded(
+                          child: Text(
+                            'Residential address confirmed',
+                            style: TextStyle(
+                              fontSize: 13,
+                              fontWeight: FontWeight.w500,
+                              color: Color(0xFF374151),
+                              height: 1.4,
+                            ),
+                          ),
+                        ),
                         SizedBox(width: 12),
-                        Container(width: 20, height: 20, alignment: Alignment.center, decoration: BoxDecoration(color: Color(0xFFDCFCE7), borderRadius: BorderRadius.circular(4)), child: Icon(Icons.check, size: 16, color: Color(0xFF16A34A))),
+                        Container(
+                          width: 20,
+                          height: 20,
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                            color: Color(0xFFDCFCE7),
+                            borderRadius: BorderRadius.circular(4),
+                          ),
+                          child: Icon(
+                            Icons.check,
+                            size: 16,
+                            color: Color(0xFF16A34A),
+                          ),
+                        ),
                       ],
                     ),
                   ),
@@ -1558,9 +1798,32 @@ class _EligibilitySuccessMockup extends StatelessWidget {
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Expanded(child: Text('Income within eligible range', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w500, color: Color(0xFF374151), height: 1.4))),
+                        Expanded(
+                          child: Text(
+                            'Income within eligible range',
+                            style: TextStyle(
+                              fontSize: 13,
+                              fontWeight: FontWeight.w500,
+                              color: Color(0xFF374151),
+                              height: 1.4,
+                            ),
+                          ),
+                        ),
                         SizedBox(width: 12),
-                        Container(width: 20, height: 20, alignment: Alignment.center, decoration: BoxDecoration(color: Color(0xFFDCFCE7), borderRadius: BorderRadius.circular(4)), child: Icon(Icons.check, size: 16, color: Color(0xFF16A34A))),
+                        Container(
+                          width: 20,
+                          height: 20,
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                            color: Color(0xFFDCFCE7),
+                            borderRadius: BorderRadius.circular(4),
+                          ),
+                          child: Icon(
+                            Icons.check,
+                            size: 16,
+                            color: Color(0xFF16A34A),
+                          ),
+                        ),
                       ],
                     ),
                   ),
@@ -1569,9 +1832,32 @@ class _EligibilitySuccessMockup extends StatelessWidget {
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Expanded(child: Text('No outstanding dues or penalties', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w500, color: Color(0xFF374151), height: 1.4))),
+                        Expanded(
+                          child: Text(
+                            'No outstanding dues or penalties',
+                            style: TextStyle(
+                              fontSize: 13,
+                              fontWeight: FontWeight.w500,
+                              color: Color(0xFF374151),
+                              height: 1.4,
+                            ),
+                          ),
+                        ),
                         SizedBox(width: 12),
-                        Container(width: 20, height: 20, alignment: Alignment.center, decoration: BoxDecoration(color: Color(0xFFDCFCE7), borderRadius: BorderRadius.circular(4)), child: Icon(Icons.check, size: 16, color: Color(0xFF16A34A))),
+                        Container(
+                          width: 20,
+                          height: 20,
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                            color: Color(0xFFDCFCE7),
+                            borderRadius: BorderRadius.circular(4),
+                          ),
+                          child: Icon(
+                            Icons.check,
+                            size: 16,
+                            color: Color(0xFF16A34A),
+                          ),
+                        ),
                       ],
                     ),
                   ),
@@ -1579,7 +1865,7 @@ class _EligibilitySuccessMockup extends StatelessWidget {
               ),
             ),
           ),
-          
+
           // Bottom actions
           Padding(
             padding: const EdgeInsets.fromLTRB(24, 16, 24, 0),
@@ -1590,7 +1876,7 @@ class _EligibilitySuccessMockup extends StatelessWidget {
               width: double.infinity,
             ),
           ),
-          
+
           // Footer
           Padding(
             padding: const EdgeInsets.only(bottom: 20, top: 16),
@@ -1660,7 +1946,11 @@ class _EligibilitySuccessCardMockup extends StatelessWidget {
                                 color: Color(0xFFBBF7D0),
                                 shape: BoxShape.circle,
                               ),
-                              child: const Icon(Icons.check_circle, color: Color(0xFF15803D), size: 32),
+                              child: const Icon(
+                                Icons.check_circle,
+                                color: Color(0xFF15803D),
+                                size: 32,
+                              ),
                             ),
                             const SizedBox(height: 16),
                             const Text(
@@ -1684,7 +1974,7 @@ class _EligibilitySuccessCardMockup extends StatelessWidget {
                             const SizedBox(height: 24),
                             const Divider(color: _border),
                             const SizedBox(height: 20),
-                            
+
                             // Criteria list
                             const Align(
                               alignment: Alignment.centerLeft,
@@ -1703,9 +1993,32 @@ class _EligibilitySuccessCardMockup extends StatelessWidget {
                               child: Row(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Expanded(child: Text('Age requirement met (18 years or above)', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w500, color: Color(0xFF374151), height: 1.4))),
+                                  Expanded(
+                                    child: Text(
+                                      'Age requirement met (18 years or above)',
+                                      style: TextStyle(
+                                        fontSize: 13,
+                                        fontWeight: FontWeight.w500,
+                                        color: Color(0xFF374151),
+                                        height: 1.4,
+                                      ),
+                                    ),
+                                  ),
                                   SizedBox(width: 12),
-                                  Container(width: 20, height: 20, alignment: Alignment.center, decoration: BoxDecoration(color: Color(0xFFDCFCE7), borderRadius: BorderRadius.circular(4)), child: Icon(Icons.check, size: 16, color: Color(0xFF16A34A))),
+                                  Container(
+                                    width: 20,
+                                    height: 20,
+                                    alignment: Alignment.center,
+                                    decoration: BoxDecoration(
+                                      color: Color(0xFFDCFCE7),
+                                      borderRadius: BorderRadius.circular(4),
+                                    ),
+                                    child: Icon(
+                                      Icons.check,
+                                      size: 16,
+                                      color: Color(0xFF16A34A),
+                                    ),
+                                  ),
                                 ],
                               ),
                             ),
@@ -1714,9 +2027,32 @@ class _EligibilitySuccessCardMockup extends StatelessWidget {
                               child: Row(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Expanded(child: Text('Valid government-issued ID submitted', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w500, color: Color(0xFF374151), height: 1.4))),
+                                  Expanded(
+                                    child: Text(
+                                      'Valid government-issued ID submitted',
+                                      style: TextStyle(
+                                        fontSize: 13,
+                                        fontWeight: FontWeight.w500,
+                                        color: Color(0xFF374151),
+                                        height: 1.4,
+                                      ),
+                                    ),
+                                  ),
                                   SizedBox(width: 12),
-                                  Container(width: 20, height: 20, alignment: Alignment.center, decoration: BoxDecoration(color: Color(0xFFDCFCE7), borderRadius: BorderRadius.circular(4)), child: Icon(Icons.check, size: 16, color: Color(0xFF16A34A))),
+                                  Container(
+                                    width: 20,
+                                    height: 20,
+                                    alignment: Alignment.center,
+                                    decoration: BoxDecoration(
+                                      color: Color(0xFFDCFCE7),
+                                      borderRadius: BorderRadius.circular(4),
+                                    ),
+                                    child: Icon(
+                                      Icons.check,
+                                      size: 16,
+                                      color: Color(0xFF16A34A),
+                                    ),
+                                  ),
                                 ],
                               ),
                             ),
@@ -1725,9 +2061,32 @@ class _EligibilitySuccessCardMockup extends StatelessWidget {
                               child: Row(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Expanded(child: Text('Residential address confirmed', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w500, color: Color(0xFF374151), height: 1.4))),
+                                  Expanded(
+                                    child: Text(
+                                      'Residential address confirmed',
+                                      style: TextStyle(
+                                        fontSize: 13,
+                                        fontWeight: FontWeight.w500,
+                                        color: Color(0xFF374151),
+                                        height: 1.4,
+                                      ),
+                                    ),
+                                  ),
                                   SizedBox(width: 12),
-                                  Container(width: 20, height: 20, alignment: Alignment.center, decoration: BoxDecoration(color: Color(0xFFDCFCE7), borderRadius: BorderRadius.circular(4)), child: Icon(Icons.check, size: 16, color: Color(0xFF16A34A))),
+                                  Container(
+                                    width: 20,
+                                    height: 20,
+                                    alignment: Alignment.center,
+                                    decoration: BoxDecoration(
+                                      color: Color(0xFFDCFCE7),
+                                      borderRadius: BorderRadius.circular(4),
+                                    ),
+                                    child: Icon(
+                                      Icons.check,
+                                      size: 16,
+                                      color: Color(0xFF16A34A),
+                                    ),
+                                  ),
                                 ],
                               ),
                             ),
@@ -1736,9 +2095,32 @@ class _EligibilitySuccessCardMockup extends StatelessWidget {
                               child: Row(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Expanded(child: Text('Income within eligible range', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w500, color: Color(0xFF374151), height: 1.4))),
+                                  Expanded(
+                                    child: Text(
+                                      'Income within eligible range',
+                                      style: TextStyle(
+                                        fontSize: 13,
+                                        fontWeight: FontWeight.w500,
+                                        color: Color(0xFF374151),
+                                        height: 1.4,
+                                      ),
+                                    ),
+                                  ),
                                   SizedBox(width: 12),
-                                  Container(width: 20, height: 20, alignment: Alignment.center, decoration: BoxDecoration(color: Color(0xFFDCFCE7), borderRadius: BorderRadius.circular(4)), child: Icon(Icons.check, size: 16, color: Color(0xFF16A34A))),
+                                  Container(
+                                    width: 20,
+                                    height: 20,
+                                    alignment: Alignment.center,
+                                    decoration: BoxDecoration(
+                                      color: Color(0xFFDCFCE7),
+                                      borderRadius: BorderRadius.circular(4),
+                                    ),
+                                    child: Icon(
+                                      Icons.check,
+                                      size: 16,
+                                      color: Color(0xFF16A34A),
+                                    ),
+                                  ),
                                 ],
                               ),
                             ),
@@ -1747,9 +2129,32 @@ class _EligibilitySuccessCardMockup extends StatelessWidget {
                               child: Row(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Expanded(child: Text('No outstanding dues or penalties', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w500, color: Color(0xFF374151), height: 1.4))),
+                                  Expanded(
+                                    child: Text(
+                                      'No outstanding dues or penalties',
+                                      style: TextStyle(
+                                        fontSize: 13,
+                                        fontWeight: FontWeight.w500,
+                                        color: Color(0xFF374151),
+                                        height: 1.4,
+                                      ),
+                                    ),
+                                  ),
                                   SizedBox(width: 12),
-                                  Container(width: 20, height: 20, alignment: Alignment.center, decoration: BoxDecoration(color: Color(0xFFDCFCE7), borderRadius: BorderRadius.circular(4)), child: Icon(Icons.check, size: 16, color: Color(0xFF16A34A))),
+                                  Container(
+                                    width: 20,
+                                    height: 20,
+                                    alignment: Alignment.center,
+                                    decoration: BoxDecoration(
+                                      color: Color(0xFFDCFCE7),
+                                      borderRadius: BorderRadius.circular(4),
+                                    ),
+                                    child: Icon(
+                                      Icons.check,
+                                      size: 16,
+                                      color: Color(0xFF16A34A),
+                                    ),
+                                  ),
                                 ],
                               ),
                             ),
@@ -1758,7 +2163,7 @@ class _EligibilitySuccessCardMockup extends StatelessWidget {
                       ),
                     ),
                   ),
-                  
+
                   // Bottom actions (outside card)
                   Padding(
                     padding: const EdgeInsets.fromLTRB(24, 8, 24, 0),
@@ -1769,7 +2174,7 @@ class _EligibilitySuccessCardMockup extends StatelessWidget {
                       width: double.infinity,
                     ),
                   ),
-                  
+
                   // Footer
                   Padding(
                     padding: const EdgeInsets.only(bottom: 20, top: 12),
@@ -1956,7 +2361,8 @@ Column(
   ],
 )''';
 
-const _eligibilitySuccessCardCode = r'''// Eligibility Success Step – Card Style Layout
+const _eligibilitySuccessCardCode =
+    r'''// Eligibility Success Step – Card Style Layout
 Column(
   children: [
     // Header ...
@@ -2047,7 +2453,8 @@ final eligibilityFailureStepComponent = WidgetbookComponent(
           label: 'Variant',
           options: const ['Default', 'Card style'],
           initialOption: 'Default',
-          description: 'Switch between the standard flat layout and the card-style layout.',
+          description:
+              'Switch between the standard flat layout and the card-style layout.',
         );
 
         final code = variant == 'Card style'
@@ -2098,7 +2505,11 @@ class _EligibilityFailureMockup extends StatelessWidget {
                       color: Color(0xFFFECACA),
                       shape: BoxShape.circle,
                     ),
-                    child: const Icon(Icons.close, color: Color(0xFFDC2626), size: 32),
+                    child: const Icon(
+                      Icons.close,
+                      color: Color(0xFFDC2626),
+                      size: 32,
+                    ),
                   ),
                   const SizedBox(height: 16),
                   const Text(
@@ -2122,7 +2533,7 @@ class _EligibilityFailureMockup extends StatelessWidget {
                   const SizedBox(height: 24),
                   const Divider(color: _border),
                   const SizedBox(height: 20),
-                  
+
                   // Criteria list
                   const Align(
                     alignment: Alignment.centerLeft,
@@ -2141,9 +2552,32 @@ class _EligibilityFailureMockup extends StatelessWidget {
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Expanded(child: Text('Age requirement met (18 years or above)', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w500, color: Color(0xFF374151), height: 1.4))),
+                        Expanded(
+                          child: Text(
+                            'Age requirement met (18 years or above)',
+                            style: TextStyle(
+                              fontSize: 13,
+                              fontWeight: FontWeight.w500,
+                              color: Color(0xFF374151),
+                              height: 1.4,
+                            ),
+                          ),
+                        ),
                         SizedBox(width: 12),
-                        Container(width: 20, height: 20, alignment: Alignment.center, decoration: BoxDecoration(color: Color(0xFFDCFCE7), borderRadius: BorderRadius.circular(4)), child: Icon(Icons.check, size: 16, color: Color(0xFF16A34A))),
+                        Container(
+                          width: 20,
+                          height: 20,
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                            color: Color(0xFFDCFCE7),
+                            borderRadius: BorderRadius.circular(4),
+                          ),
+                          child: Icon(
+                            Icons.check,
+                            size: 16,
+                            color: Color(0xFF16A34A),
+                          ),
+                        ),
                       ],
                     ),
                   ),
@@ -2152,9 +2586,32 @@ class _EligibilityFailureMockup extends StatelessWidget {
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Expanded(child: Text('Valid government-issued ID submitted', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w500, color: Color(0xFF374151), height: 1.4))),
+                        Expanded(
+                          child: Text(
+                            'Valid government-issued ID submitted',
+                            style: TextStyle(
+                              fontSize: 13,
+                              fontWeight: FontWeight.w500,
+                              color: Color(0xFF374151),
+                              height: 1.4,
+                            ),
+                          ),
+                        ),
                         SizedBox(width: 12),
-                        Container(width: 20, height: 20, alignment: Alignment.center, decoration: BoxDecoration(color: Color(0xFFDCFCE7), borderRadius: BorderRadius.circular(4)), child: Icon(Icons.check, size: 16, color: Color(0xFF16A34A))),
+                        Container(
+                          width: 20,
+                          height: 20,
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                            color: Color(0xFFDCFCE7),
+                            borderRadius: BorderRadius.circular(4),
+                          ),
+                          child: Icon(
+                            Icons.check,
+                            size: 16,
+                            color: Color(0xFF16A34A),
+                          ),
+                        ),
                       ],
                     ),
                   ),
@@ -2163,9 +2620,32 @@ class _EligibilityFailureMockup extends StatelessWidget {
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Expanded(child: Text('Residential address confirmed', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w500, color: Color(0xFF374151), height: 1.4))),
+                        Expanded(
+                          child: Text(
+                            'Residential address confirmed',
+                            style: TextStyle(
+                              fontSize: 13,
+                              fontWeight: FontWeight.w500,
+                              color: Color(0xFF374151),
+                              height: 1.4,
+                            ),
+                          ),
+                        ),
                         SizedBox(width: 12),
-                        Container(width: 20, height: 20, alignment: Alignment.center, decoration: BoxDecoration(color: Color(0xFFDCFCE7), borderRadius: BorderRadius.circular(4)), child: Icon(Icons.check, size: 16, color: Color(0xFF16A34A))),
+                        Container(
+                          width: 20,
+                          height: 20,
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                            color: Color(0xFFDCFCE7),
+                            borderRadius: BorderRadius.circular(4),
+                          ),
+                          child: Icon(
+                            Icons.check,
+                            size: 16,
+                            color: Color(0xFF16A34A),
+                          ),
+                        ),
                       ],
                     ),
                   ),
@@ -2174,9 +2654,32 @@ class _EligibilityFailureMockup extends StatelessWidget {
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Expanded(child: Text('Income within eligible range', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w500, color: Color(0xFF374151), height: 1.4))),
+                        Expanded(
+                          child: Text(
+                            'Income within eligible range',
+                            style: TextStyle(
+                              fontSize: 13,
+                              fontWeight: FontWeight.w500,
+                              color: Color(0xFF374151),
+                              height: 1.4,
+                            ),
+                          ),
+                        ),
                         SizedBox(width: 12),
-                        Container(width: 20, height: 20, alignment: Alignment.center, decoration: BoxDecoration(color: Color(0xFFFEE2E2), borderRadius: BorderRadius.circular(4)), child: Icon(Icons.close, size: 16, color: Color(0xFFDC2626))),
+                        Container(
+                          width: 20,
+                          height: 20,
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                            color: Color(0xFFFEE2E2),
+                            borderRadius: BorderRadius.circular(4),
+                          ),
+                          child: Icon(
+                            Icons.close,
+                            size: 16,
+                            color: Color(0xFFDC2626),
+                          ),
+                        ),
                       ],
                     ),
                   ),
@@ -2185,9 +2688,32 @@ class _EligibilityFailureMockup extends StatelessWidget {
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Expanded(child: Text('No outstanding dues or penalties', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w500, color: Color(0xFF374151), height: 1.4))),
+                        Expanded(
+                          child: Text(
+                            'No outstanding dues or penalties',
+                            style: TextStyle(
+                              fontSize: 13,
+                              fontWeight: FontWeight.w500,
+                              color: Color(0xFF374151),
+                              height: 1.4,
+                            ),
+                          ),
+                        ),
                         SizedBox(width: 12),
-                        Container(width: 20, height: 20, alignment: Alignment.center, decoration: BoxDecoration(color: Color(0xFFDCFCE7), borderRadius: BorderRadius.circular(4)), child: Icon(Icons.check, size: 16, color: Color(0xFF16A34A))),
+                        Container(
+                          width: 20,
+                          height: 20,
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                            color: Color(0xFFDCFCE7),
+                            borderRadius: BorderRadius.circular(4),
+                          ),
+                          child: Icon(
+                            Icons.check,
+                            size: 16,
+                            color: Color(0xFF16A34A),
+                          ),
+                        ),
                       ],
                     ),
                   ),
@@ -2195,7 +2721,7 @@ class _EligibilityFailureMockup extends StatelessWidget {
               ),
             ),
           ),
-          
+
           // Bottom actions
           Padding(
             padding: const EdgeInsets.fromLTRB(24, 16, 24, 0),
@@ -2206,7 +2732,7 @@ class _EligibilityFailureMockup extends StatelessWidget {
               width: double.infinity,
             ),
           ),
-          
+
           // Footer
           Padding(
             padding: const EdgeInsets.only(bottom: 20, top: 16),
@@ -2276,7 +2802,11 @@ class _EligibilityFailureCardMockup extends StatelessWidget {
                                 color: Color(0xFFFECACA),
                                 shape: BoxShape.circle,
                               ),
-                              child: const Icon(Icons.close, color: Color(0xFFDC2626), size: 32),
+                              child: const Icon(
+                                Icons.close,
+                                color: Color(0xFFDC2626),
+                                size: 32,
+                              ),
                             ),
                             const SizedBox(height: 16),
                             const Text(
@@ -2300,7 +2830,7 @@ class _EligibilityFailureCardMockup extends StatelessWidget {
                             const SizedBox(height: 24),
                             const Divider(color: _border),
                             const SizedBox(height: 20),
-                            
+
                             // Criteria list
                             const Align(
                               alignment: Alignment.centerLeft,
@@ -2319,9 +2849,32 @@ class _EligibilityFailureCardMockup extends StatelessWidget {
                               child: Row(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Expanded(child: Text('Age requirement met (18 years or above)', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w500, color: Color(0xFF374151), height: 1.4))),
+                                  Expanded(
+                                    child: Text(
+                                      'Age requirement met (18 years or above)',
+                                      style: TextStyle(
+                                        fontSize: 13,
+                                        fontWeight: FontWeight.w500,
+                                        color: Color(0xFF374151),
+                                        height: 1.4,
+                                      ),
+                                    ),
+                                  ),
                                   SizedBox(width: 12),
-                                  Container(width: 20, height: 20, alignment: Alignment.center, decoration: BoxDecoration(color: Color(0xFFDCFCE7), borderRadius: BorderRadius.circular(4)), child: Icon(Icons.check, size: 16, color: Color(0xFF16A34A))),
+                                  Container(
+                                    width: 20,
+                                    height: 20,
+                                    alignment: Alignment.center,
+                                    decoration: BoxDecoration(
+                                      color: Color(0xFFDCFCE7),
+                                      borderRadius: BorderRadius.circular(4),
+                                    ),
+                                    child: Icon(
+                                      Icons.check,
+                                      size: 16,
+                                      color: Color(0xFF16A34A),
+                                    ),
+                                  ),
                                 ],
                               ),
                             ),
@@ -2330,9 +2883,32 @@ class _EligibilityFailureCardMockup extends StatelessWidget {
                               child: Row(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Expanded(child: Text('Valid government-issued ID submitted', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w500, color: Color(0xFF374151), height: 1.4))),
+                                  Expanded(
+                                    child: Text(
+                                      'Valid government-issued ID submitted',
+                                      style: TextStyle(
+                                        fontSize: 13,
+                                        fontWeight: FontWeight.w500,
+                                        color: Color(0xFF374151),
+                                        height: 1.4,
+                                      ),
+                                    ),
+                                  ),
                                   SizedBox(width: 12),
-                                  Container(width: 20, height: 20, alignment: Alignment.center, decoration: BoxDecoration(color: Color(0xFFDCFCE7), borderRadius: BorderRadius.circular(4)), child: Icon(Icons.check, size: 16, color: Color(0xFF16A34A))),
+                                  Container(
+                                    width: 20,
+                                    height: 20,
+                                    alignment: Alignment.center,
+                                    decoration: BoxDecoration(
+                                      color: Color(0xFFDCFCE7),
+                                      borderRadius: BorderRadius.circular(4),
+                                    ),
+                                    child: Icon(
+                                      Icons.check,
+                                      size: 16,
+                                      color: Color(0xFF16A34A),
+                                    ),
+                                  ),
                                 ],
                               ),
                             ),
@@ -2341,9 +2917,32 @@ class _EligibilityFailureCardMockup extends StatelessWidget {
                               child: Row(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Expanded(child: Text('Residential address confirmed', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w500, color: Color(0xFF374151), height: 1.4))),
+                                  Expanded(
+                                    child: Text(
+                                      'Residential address confirmed',
+                                      style: TextStyle(
+                                        fontSize: 13,
+                                        fontWeight: FontWeight.w500,
+                                        color: Color(0xFF374151),
+                                        height: 1.4,
+                                      ),
+                                    ),
+                                  ),
                                   SizedBox(width: 12),
-                                  Container(width: 20, height: 20, alignment: Alignment.center, decoration: BoxDecoration(color: Color(0xFFDCFCE7), borderRadius: BorderRadius.circular(4)), child: Icon(Icons.check, size: 16, color: Color(0xFF16A34A))),
+                                  Container(
+                                    width: 20,
+                                    height: 20,
+                                    alignment: Alignment.center,
+                                    decoration: BoxDecoration(
+                                      color: Color(0xFFDCFCE7),
+                                      borderRadius: BorderRadius.circular(4),
+                                    ),
+                                    child: Icon(
+                                      Icons.check,
+                                      size: 16,
+                                      color: Color(0xFF16A34A),
+                                    ),
+                                  ),
                                 ],
                               ),
                             ),
@@ -2352,9 +2951,32 @@ class _EligibilityFailureCardMockup extends StatelessWidget {
                               child: Row(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Expanded(child: Text('Income within eligible range', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w500, color: Color(0xFF374151), height: 1.4))),
+                                  Expanded(
+                                    child: Text(
+                                      'Income within eligible range',
+                                      style: TextStyle(
+                                        fontSize: 13,
+                                        fontWeight: FontWeight.w500,
+                                        color: Color(0xFF374151),
+                                        height: 1.4,
+                                      ),
+                                    ),
+                                  ),
                                   SizedBox(width: 12),
-                                  Container(width: 20, height: 20, alignment: Alignment.center, decoration: BoxDecoration(color: Color(0xFFFEE2E2), borderRadius: BorderRadius.circular(4)), child: Icon(Icons.close, size: 16, color: Color(0xFFDC2626))),
+                                  Container(
+                                    width: 20,
+                                    height: 20,
+                                    alignment: Alignment.center,
+                                    decoration: BoxDecoration(
+                                      color: Color(0xFFFEE2E2),
+                                      borderRadius: BorderRadius.circular(4),
+                                    ),
+                                    child: Icon(
+                                      Icons.close,
+                                      size: 16,
+                                      color: Color(0xFFDC2626),
+                                    ),
+                                  ),
                                 ],
                               ),
                             ),
@@ -2363,9 +2985,32 @@ class _EligibilityFailureCardMockup extends StatelessWidget {
                               child: Row(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Expanded(child: Text('No outstanding dues or penalties', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w500, color: Color(0xFF374151), height: 1.4))),
+                                  Expanded(
+                                    child: Text(
+                                      'No outstanding dues or penalties',
+                                      style: TextStyle(
+                                        fontSize: 13,
+                                        fontWeight: FontWeight.w500,
+                                        color: Color(0xFF374151),
+                                        height: 1.4,
+                                      ),
+                                    ),
+                                  ),
                                   SizedBox(width: 12),
-                                  Container(width: 20, height: 20, alignment: Alignment.center, decoration: BoxDecoration(color: Color(0xFFDCFCE7), borderRadius: BorderRadius.circular(4)), child: Icon(Icons.check, size: 16, color: Color(0xFF16A34A))),
+                                  Container(
+                                    width: 20,
+                                    height: 20,
+                                    alignment: Alignment.center,
+                                    decoration: BoxDecoration(
+                                      color: Color(0xFFDCFCE7),
+                                      borderRadius: BorderRadius.circular(4),
+                                    ),
+                                    child: Icon(
+                                      Icons.check,
+                                      size: 16,
+                                      color: Color(0xFF16A34A),
+                                    ),
+                                  ),
                                 ],
                               ),
                             ),
@@ -2374,7 +3019,7 @@ class _EligibilityFailureCardMockup extends StatelessWidget {
                       ),
                     ),
                   ),
-                  
+
                   // Bottom actions (outside card)
                   Padding(
                     padding: const EdgeInsets.fromLTRB(24, 8, 24, 0),
@@ -2385,7 +3030,7 @@ class _EligibilityFailureCardMockup extends StatelessWidget {
                       width: double.infinity,
                     ),
                   ),
-                  
+
                   // Footer
                   Padding(
                     padding: const EdgeInsets.only(bottom: 20, top: 12),
@@ -2555,7 +3200,8 @@ Column(
   ],
 )''';
 
-const _eligibilityFailureCardCode = r'''// Eligibility Failure Step – Card Style Layout
+const _eligibilityFailureCardCode =
+    r'''// Eligibility Failure Step – Card Style Layout
 Column(
   children: [
     // Header ...
@@ -2646,7 +3292,8 @@ final eligibilityWarningStepComponent = WidgetbookComponent(
           label: 'Variant',
           options: const ['Default', 'Card style'],
           initialOption: 'Default',
-          description: 'Switch between the standard flat layout and the card-style layout.',
+          description:
+              'Switch between the standard flat layout and the card-style layout.',
         );
 
         final code = variant == 'Card style'
@@ -2697,7 +3344,11 @@ class _EligibilityWarningMockup extends StatelessWidget {
                       color: Color(0xFFFFEDD5),
                       shape: BoxShape.circle,
                     ),
-                    child: const Icon(Icons.warning, color: Color(0xFFEA580C), size: 32),
+                    child: const Icon(
+                      Icons.warning,
+                      color: Color(0xFFEA580C),
+                      size: 32,
+                    ),
                   ),
                   const SizedBox(height: 16),
                   const Text(
@@ -2721,7 +3372,7 @@ class _EligibilityWarningMockup extends StatelessWidget {
                   const SizedBox(height: 24),
                   const Divider(color: _border),
                   const SizedBox(height: 20),
-                  
+
                   // Criteria list
                   const Align(
                     alignment: Alignment.centerLeft,
@@ -2740,9 +3391,32 @@ class _EligibilityWarningMockup extends StatelessWidget {
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Expanded(child: Text('Age requirement met (18 years or above)', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w500, color: Color(0xFF374151), height: 1.4))),
+                        Expanded(
+                          child: Text(
+                            'Age requirement met (18 years or above)',
+                            style: TextStyle(
+                              fontSize: 13,
+                              fontWeight: FontWeight.w500,
+                              color: Color(0xFF374151),
+                              height: 1.4,
+                            ),
+                          ),
+                        ),
                         SizedBox(width: 12),
-                        Container(width: 20, height: 20, alignment: Alignment.center, decoration: BoxDecoration(color: Color(0xFFDCFCE7), borderRadius: BorderRadius.circular(4)), child: Icon(Icons.check, size: 16, color: Color(0xFF16A34A))),
+                        Container(
+                          width: 20,
+                          height: 20,
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                            color: Color(0xFFDCFCE7),
+                            borderRadius: BorderRadius.circular(4),
+                          ),
+                          child: Icon(
+                            Icons.check,
+                            size: 16,
+                            color: Color(0xFF16A34A),
+                          ),
+                        ),
                       ],
                     ),
                   ),
@@ -2751,9 +3425,32 @@ class _EligibilityWarningMockup extends StatelessWidget {
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Expanded(child: Text('Valid government-issued ID submitted', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w500, color: Color(0xFF374151), height: 1.4))),
+                        Expanded(
+                          child: Text(
+                            'Valid government-issued ID submitted',
+                            style: TextStyle(
+                              fontSize: 13,
+                              fontWeight: FontWeight.w500,
+                              color: Color(0xFF374151),
+                              height: 1.4,
+                            ),
+                          ),
+                        ),
                         SizedBox(width: 12),
-                        Container(width: 20, height: 20, alignment: Alignment.center, decoration: BoxDecoration(color: Color(0xFFDCFCE7), borderRadius: BorderRadius.circular(4)), child: Icon(Icons.check, size: 16, color: Color(0xFF16A34A))),
+                        Container(
+                          width: 20,
+                          height: 20,
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                            color: Color(0xFFDCFCE7),
+                            borderRadius: BorderRadius.circular(4),
+                          ),
+                          child: Icon(
+                            Icons.check,
+                            size: 16,
+                            color: Color(0xFF16A34A),
+                          ),
+                        ),
                       ],
                     ),
                   ),
@@ -2762,9 +3459,32 @@ class _EligibilityWarningMockup extends StatelessWidget {
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Expanded(child: Text('Residential address confirmed', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w500, color: Color(0xFF374151), height: 1.4))),
+                        Expanded(
+                          child: Text(
+                            'Residential address confirmed',
+                            style: TextStyle(
+                              fontSize: 13,
+                              fontWeight: FontWeight.w500,
+                              color: Color(0xFF374151),
+                              height: 1.4,
+                            ),
+                          ),
+                        ),
                         SizedBox(width: 12),
-                        Container(width: 20, height: 20, alignment: Alignment.center, decoration: BoxDecoration(color: Color(0xFFDCFCE7), borderRadius: BorderRadius.circular(4)), child: Icon(Icons.check, size: 16, color: Color(0xFF16A34A))),
+                        Container(
+                          width: 20,
+                          height: 20,
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                            color: Color(0xFFDCFCE7),
+                            borderRadius: BorderRadius.circular(4),
+                          ),
+                          child: Icon(
+                            Icons.check,
+                            size: 16,
+                            color: Color(0xFF16A34A),
+                          ),
+                        ),
                       ],
                     ),
                   ),
@@ -2773,9 +3493,35 @@ class _EligibilityWarningMockup extends StatelessWidget {
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Expanded(child: Text('Income within eligible range', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w500, color: Color(0xFF374151), height: 1.4))),
+                        Expanded(
+                          child: Text(
+                            'Income within eligible range',
+                            style: TextStyle(
+                              fontSize: 13,
+                              fontWeight: FontWeight.w500,
+                              color: Color(0xFF374151),
+                              height: 1.4,
+                            ),
+                          ),
+                        ),
                         SizedBox(width: 12),
-                        Container(width: 20, height: 20, alignment: Alignment.center, decoration: BoxDecoration(color: Color(0xFFFFEDD5), borderRadius: BorderRadius.circular(4)), child: Text('?', style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: Color(0xFFEA580C)))),
+                        Container(
+                          width: 20,
+                          height: 20,
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                            color: Color(0xFFFFEDD5),
+                            borderRadius: BorderRadius.circular(4),
+                          ),
+                          child: Text(
+                            '?',
+                            style: TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.bold,
+                              color: Color(0xFFEA580C),
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                   ),
@@ -2784,9 +3530,32 @@ class _EligibilityWarningMockup extends StatelessWidget {
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Expanded(child: Text('No outstanding dues or penalties', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w500, color: Color(0xFF374151), height: 1.4))),
+                        Expanded(
+                          child: Text(
+                            'No outstanding dues or penalties',
+                            style: TextStyle(
+                              fontSize: 13,
+                              fontWeight: FontWeight.w500,
+                              color: Color(0xFF374151),
+                              height: 1.4,
+                            ),
+                          ),
+                        ),
                         SizedBox(width: 12),
-                        Container(width: 20, height: 20, alignment: Alignment.center, decoration: BoxDecoration(color: Color(0xFFDCFCE7), borderRadius: BorderRadius.circular(4)), child: Icon(Icons.check, size: 16, color: Color(0xFF16A34A))),
+                        Container(
+                          width: 20,
+                          height: 20,
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                            color: Color(0xFFDCFCE7),
+                            borderRadius: BorderRadius.circular(4),
+                          ),
+                          child: Icon(
+                            Icons.check,
+                            size: 16,
+                            color: Color(0xFF16A34A),
+                          ),
+                        ),
                       ],
                     ),
                   ),
@@ -2794,7 +3563,7 @@ class _EligibilityWarningMockup extends StatelessWidget {
               ),
             ),
           ),
-          
+
           // Bottom actions
           Padding(
             padding: const EdgeInsets.fromLTRB(24, 16, 24, 0),
@@ -2805,7 +3574,7 @@ class _EligibilityWarningMockup extends StatelessWidget {
               width: double.infinity,
             ),
           ),
-          
+
           // Footer
           Padding(
             padding: const EdgeInsets.only(bottom: 20, top: 16),
@@ -2875,7 +3644,11 @@ class _EligibilityWarningCardMockup extends StatelessWidget {
                                 color: Color(0xFFFFEDD5),
                                 shape: BoxShape.circle,
                               ),
-                              child: const Icon(Icons.warning, color: Color(0xFFEA580C), size: 32),
+                              child: const Icon(
+                                Icons.warning,
+                                color: Color(0xFFEA580C),
+                                size: 32,
+                              ),
                             ),
                             const SizedBox(height: 16),
                             const Text(
@@ -2899,7 +3672,7 @@ class _EligibilityWarningCardMockup extends StatelessWidget {
                             const SizedBox(height: 24),
                             const Divider(color: _border),
                             const SizedBox(height: 20),
-                            
+
                             // Criteria list
                             const Align(
                               alignment: Alignment.centerLeft,
@@ -2918,9 +3691,32 @@ class _EligibilityWarningCardMockup extends StatelessWidget {
                               child: Row(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Expanded(child: Text('Age requirement met (18 years or above)', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w500, color: Color(0xFF374151), height: 1.4))),
+                                  Expanded(
+                                    child: Text(
+                                      'Age requirement met (18 years or above)',
+                                      style: TextStyle(
+                                        fontSize: 13,
+                                        fontWeight: FontWeight.w500,
+                                        color: Color(0xFF374151),
+                                        height: 1.4,
+                                      ),
+                                    ),
+                                  ),
                                   SizedBox(width: 12),
-                                  Container(width: 20, height: 20, alignment: Alignment.center, decoration: BoxDecoration(color: Color(0xFFDCFCE7), borderRadius: BorderRadius.circular(4)), child: Icon(Icons.check, size: 16, color: Color(0xFF16A34A))),
+                                  Container(
+                                    width: 20,
+                                    height: 20,
+                                    alignment: Alignment.center,
+                                    decoration: BoxDecoration(
+                                      color: Color(0xFFDCFCE7),
+                                      borderRadius: BorderRadius.circular(4),
+                                    ),
+                                    child: Icon(
+                                      Icons.check,
+                                      size: 16,
+                                      color: Color(0xFF16A34A),
+                                    ),
+                                  ),
                                 ],
                               ),
                             ),
@@ -2929,9 +3725,32 @@ class _EligibilityWarningCardMockup extends StatelessWidget {
                               child: Row(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Expanded(child: Text('Valid government-issued ID submitted', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w500, color: Color(0xFF374151), height: 1.4))),
+                                  Expanded(
+                                    child: Text(
+                                      'Valid government-issued ID submitted',
+                                      style: TextStyle(
+                                        fontSize: 13,
+                                        fontWeight: FontWeight.w500,
+                                        color: Color(0xFF374151),
+                                        height: 1.4,
+                                      ),
+                                    ),
+                                  ),
                                   SizedBox(width: 12),
-                                  Container(width: 20, height: 20, alignment: Alignment.center, decoration: BoxDecoration(color: Color(0xFFDCFCE7), borderRadius: BorderRadius.circular(4)), child: Icon(Icons.check, size: 16, color: Color(0xFF16A34A))),
+                                  Container(
+                                    width: 20,
+                                    height: 20,
+                                    alignment: Alignment.center,
+                                    decoration: BoxDecoration(
+                                      color: Color(0xFFDCFCE7),
+                                      borderRadius: BorderRadius.circular(4),
+                                    ),
+                                    child: Icon(
+                                      Icons.check,
+                                      size: 16,
+                                      color: Color(0xFF16A34A),
+                                    ),
+                                  ),
                                 ],
                               ),
                             ),
@@ -2940,9 +3759,32 @@ class _EligibilityWarningCardMockup extends StatelessWidget {
                               child: Row(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Expanded(child: Text('Residential address confirmed', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w500, color: Color(0xFF374151), height: 1.4))),
+                                  Expanded(
+                                    child: Text(
+                                      'Residential address confirmed',
+                                      style: TextStyle(
+                                        fontSize: 13,
+                                        fontWeight: FontWeight.w500,
+                                        color: Color(0xFF374151),
+                                        height: 1.4,
+                                      ),
+                                    ),
+                                  ),
                                   SizedBox(width: 12),
-                                  Container(width: 20, height: 20, alignment: Alignment.center, decoration: BoxDecoration(color: Color(0xFFDCFCE7), borderRadius: BorderRadius.circular(4)), child: Icon(Icons.check, size: 16, color: Color(0xFF16A34A))),
+                                  Container(
+                                    width: 20,
+                                    height: 20,
+                                    alignment: Alignment.center,
+                                    decoration: BoxDecoration(
+                                      color: Color(0xFFDCFCE7),
+                                      borderRadius: BorderRadius.circular(4),
+                                    ),
+                                    child: Icon(
+                                      Icons.check,
+                                      size: 16,
+                                      color: Color(0xFF16A34A),
+                                    ),
+                                  ),
                                 ],
                               ),
                             ),
@@ -2951,9 +3793,35 @@ class _EligibilityWarningCardMockup extends StatelessWidget {
                               child: Row(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Expanded(child: Text('Income within eligible range', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w500, color: Color(0xFF374151), height: 1.4))),
+                                  Expanded(
+                                    child: Text(
+                                      'Income within eligible range',
+                                      style: TextStyle(
+                                        fontSize: 13,
+                                        fontWeight: FontWeight.w500,
+                                        color: Color(0xFF374151),
+                                        height: 1.4,
+                                      ),
+                                    ),
+                                  ),
                                   SizedBox(width: 12),
-                                  Container(width: 20, height: 20, alignment: Alignment.center, decoration: BoxDecoration(color: Color(0xFFFFEDD5), borderRadius: BorderRadius.circular(4)), child: Text('?', style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: Color(0xFFEA580C)))),
+                                  Container(
+                                    width: 20,
+                                    height: 20,
+                                    alignment: Alignment.center,
+                                    decoration: BoxDecoration(
+                                      color: Color(0xFFFFEDD5),
+                                      borderRadius: BorderRadius.circular(4),
+                                    ),
+                                    child: Text(
+                                      '?',
+                                      style: TextStyle(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.bold,
+                                        color: Color(0xFFEA580C),
+                                      ),
+                                    ),
+                                  ),
                                 ],
                               ),
                             ),
@@ -2962,9 +3830,32 @@ class _EligibilityWarningCardMockup extends StatelessWidget {
                               child: Row(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Expanded(child: Text('No outstanding dues or penalties', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w500, color: Color(0xFF374151), height: 1.4))),
+                                  Expanded(
+                                    child: Text(
+                                      'No outstanding dues or penalties',
+                                      style: TextStyle(
+                                        fontSize: 13,
+                                        fontWeight: FontWeight.w500,
+                                        color: Color(0xFF374151),
+                                        height: 1.4,
+                                      ),
+                                    ),
+                                  ),
                                   SizedBox(width: 12),
-                                  Container(width: 20, height: 20, alignment: Alignment.center, decoration: BoxDecoration(color: Color(0xFFDCFCE7), borderRadius: BorderRadius.circular(4)), child: Icon(Icons.check, size: 16, color: Color(0xFF16A34A))),
+                                  Container(
+                                    width: 20,
+                                    height: 20,
+                                    alignment: Alignment.center,
+                                    decoration: BoxDecoration(
+                                      color: Color(0xFFDCFCE7),
+                                      borderRadius: BorderRadius.circular(4),
+                                    ),
+                                    child: Icon(
+                                      Icons.check,
+                                      size: 16,
+                                      color: Color(0xFF16A34A),
+                                    ),
+                                  ),
                                 ],
                               ),
                             ),
@@ -2973,7 +3864,7 @@ class _EligibilityWarningCardMockup extends StatelessWidget {
                       ),
                     ),
                   ),
-                  
+
                   // Bottom actions (outside card)
                   Padding(
                     padding: const EdgeInsets.fromLTRB(24, 8, 24, 0),
@@ -2984,7 +3875,7 @@ class _EligibilityWarningCardMockup extends StatelessWidget {
                       width: double.infinity,
                     ),
                   ),
-                  
+
                   // Footer
                   Padding(
                     padding: const EdgeInsets.only(bottom: 20, top: 12),
@@ -3154,7 +4045,8 @@ Column(
   ],
 )''';
 
-const _eligibilityWarningCardCode = r'''// Eligibility Warning Step – Card Style Layout
+const _eligibilityWarningCardCode =
+    r'''// Eligibility Warning Step – Card Style Layout
 Column(
   children: [
     // Header ...
@@ -3245,7 +4137,8 @@ final eligibilityFinalQuestionStepComponent = WidgetbookComponent(
           label: 'Variant',
           options: const ['Default', 'Card style'],
           initialOption: 'Default',
-          description: 'Switch between the standard flat layout and the card-style layout.',
+          description:
+              'Switch between the standard flat layout and the card-style layout.',
         );
 
         final code = variant == 'Card style'
@@ -3279,10 +4172,12 @@ class _EligibilityFinalQuestionMockup extends StatefulWidget {
   const _EligibilityFinalQuestionMockup();
 
   @override
-  State<_EligibilityFinalQuestionMockup> createState() => _EligibilityFinalQuestionMockupState();
+  State<_EligibilityFinalQuestionMockup> createState() =>
+      _EligibilityFinalQuestionMockupState();
 }
 
-class _EligibilityFinalQuestionMockupState extends State<_EligibilityFinalQuestionMockup> {
+class _EligibilityFinalQuestionMockupState
+    extends State<_EligibilityFinalQuestionMockup> {
   String? _selected = 'first_time';
 
   @override
@@ -3327,19 +4222,27 @@ class _EligibilityFinalQuestionMockupState extends State<_EligibilityFinalQuesti
                   GestureDetector(
                     onTap: () => setState(() => _selected = 'first_time'),
                     child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 14,
+                      ),
                       decoration: BoxDecoration(
-                        color: _selected == 'first_time' ? const Color(0xFFF5F3FF) : const Color(0xFFF9FAFB),
+                        color: _selected == 'first_time'
+                            ? const Color(0xFFF5F3FF)
+                            : const Color(0xFFF9FAFB),
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: Row(
                         children: [
                           Container(
-                            width: 22, height: 22,
+                            width: 22,
+                            height: 22,
                             decoration: BoxDecoration(
                               shape: BoxShape.circle,
                               border: Border.all(
-                                color: _selected == 'first_time' ? const Color(0xFF6A4EFF) : const Color(0xFFD1D5DB),
+                                color: _selected == 'first_time'
+                                    ? const Color(0xFF6A4EFF)
+                                    : const Color(0xFFD1D5DB),
                                 width: _selected == 'first_time' ? 6 : 2,
                               ),
                               color: Colors.white,
@@ -3355,13 +4258,19 @@ class _EligibilityFinalQuestionMockupState extends State<_EligibilityFinalQuesti
                                   style: TextStyle(
                                     fontSize: 16,
                                     fontWeight: FontWeight.w700,
-                                    color: _selected == 'first_time' ? const Color(0xFF6A4EFF) : const Color(0xFF111827),
+                                    color: _selected == 'first_time'
+                                        ? const Color(0xFF6A4EFF)
+                                        : const Color(0xFF111827),
                                   ),
                                 ),
                                 const SizedBox(height: 2),
                                 Text(
                                   'First-time applicant for this certificate',
-                                  style: const TextStyle(fontSize: 13, color: Color(0xFF6B7280), height: 1.3),
+                                  style: const TextStyle(
+                                    fontSize: 13,
+                                    color: Color(0xFF6B7280),
+                                    height: 1.3,
+                                  ),
                                 ),
                               ],
                             ),
@@ -3374,19 +4283,27 @@ class _EligibilityFinalQuestionMockupState extends State<_EligibilityFinalQuesti
                   GestureDetector(
                     onTap: () => setState(() => _selected = 'expired_rejected'),
                     child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 14,
+                      ),
                       decoration: BoxDecoration(
-                        color: _selected == 'expired_rejected' ? const Color(0xFFF5F3FF) : const Color(0xFFF9FAFB),
+                        color: _selected == 'expired_rejected'
+                            ? const Color(0xFFF5F3FF)
+                            : const Color(0xFFF9FAFB),
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: Row(
                         children: [
                           Container(
-                            width: 22, height: 22,
+                            width: 22,
+                            height: 22,
                             decoration: BoxDecoration(
                               shape: BoxShape.circle,
                               border: Border.all(
-                                color: _selected == 'expired_rejected' ? const Color(0xFF6A4EFF) : const Color(0xFFD1D5DB),
+                                color: _selected == 'expired_rejected'
+                                    ? const Color(0xFF6A4EFF)
+                                    : const Color(0xFFD1D5DB),
                                 width: _selected == 'expired_rejected' ? 6 : 2,
                               ),
                               color: Colors.white,
@@ -3402,13 +4319,19 @@ class _EligibilityFinalQuestionMockupState extends State<_EligibilityFinalQuesti
                                   style: TextStyle(
                                     fontSize: 16,
                                     fontWeight: FontWeight.w700,
-                                    color: _selected == 'expired_rejected' ? const Color(0xFF6A4EFF) : const Color(0xFF111827),
+                                    color: _selected == 'expired_rejected'
+                                        ? const Color(0xFF6A4EFF)
+                                        : const Color(0xFF111827),
                                   ),
                                 ),
                                 const SizedBox(height: 2),
                                 Text(
                                   'Previously held certificate has expired o...',
-                                  style: const TextStyle(fontSize: 13, color: Color(0xFF6B7280), height: 1.3),
+                                  style: const TextStyle(
+                                    fontSize: 13,
+                                    color: Color(0xFF6B7280),
+                                    height: 1.3,
+                                  ),
                                 ),
                               ],
                             ),
@@ -3421,19 +4344,27 @@ class _EligibilityFinalQuestionMockupState extends State<_EligibilityFinalQuesti
                   GestureDetector(
                     onTap: () => setState(() => _selected = 'currently_valid'),
                     child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 14,
+                      ),
                       decoration: BoxDecoration(
-                        color: _selected == 'currently_valid' ? const Color(0xFFF5F3FF) : const Color(0xFFF9FAFB),
+                        color: _selected == 'currently_valid'
+                            ? const Color(0xFFF5F3FF)
+                            : const Color(0xFFF9FAFB),
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: Row(
                         children: [
                           Container(
-                            width: 22, height: 22,
+                            width: 22,
+                            height: 22,
                             decoration: BoxDecoration(
                               shape: BoxShape.circle,
                               border: Border.all(
-                                color: _selected == 'currently_valid' ? const Color(0xFF6A4EFF) : const Color(0xFFD1D5DB),
+                                color: _selected == 'currently_valid'
+                                    ? const Color(0xFF6A4EFF)
+                                    : const Color(0xFFD1D5DB),
                                 width: _selected == 'currently_valid' ? 6 : 2,
                               ),
                               color: Colors.white,
@@ -3449,13 +4380,19 @@ class _EligibilityFinalQuestionMockupState extends State<_EligibilityFinalQuesti
                                   style: TextStyle(
                                     fontSize: 16,
                                     fontWeight: FontWeight.w700,
-                                    color: _selected == 'currently_valid' ? const Color(0xFF6A4EFF) : const Color(0xFF111827),
+                                    color: _selected == 'currently_valid'
+                                        ? const Color(0xFF6A4EFF)
+                                        : const Color(0xFF111827),
                                   ),
                                 ),
                                 const SizedBox(height: 2),
                                 Text(
                                   'Currently holding a valid certificate',
-                                  style: const TextStyle(fontSize: 13, color: Color(0xFF6B7280), height: 1.3),
+                                  style: const TextStyle(
+                                    fontSize: 13,
+                                    color: Color(0xFF6B7280),
+                                    height: 1.3,
+                                  ),
                                 ),
                               ],
                             ),
@@ -3513,10 +4450,12 @@ class _EligibilityFinalQuestionCardMockup extends StatefulWidget {
   const _EligibilityFinalQuestionCardMockup();
 
   @override
-  State<_EligibilityFinalQuestionCardMockup> createState() => _EligibilityFinalQuestionCardMockupState();
+  State<_EligibilityFinalQuestionCardMockup> createState() =>
+      _EligibilityFinalQuestionCardMockupState();
 }
 
-class _EligibilityFinalQuestionCardMockupState extends State<_EligibilityFinalQuestionCardMockup> {
+class _EligibilityFinalQuestionCardMockupState
+    extends State<_EligibilityFinalQuestionCardMockup> {
   String? _selected = 'first_time';
 
   @override
@@ -3577,22 +4516,33 @@ class _EligibilityFinalQuestionCardMockupState extends State<_EligibilityFinalQu
 
                             // Radio options
                             GestureDetector(
-                              onTap: () => setState(() => _selected = 'first_time'),
+                              onTap: () =>
+                                  setState(() => _selected = 'first_time'),
                               child: Container(
-                                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 16,
+                                  vertical: 14,
+                                ),
                                 decoration: BoxDecoration(
-                                  color: _selected == 'first_time' ? const Color(0xFFF5F3FF) : const Color(0xFFF9FAFB),
+                                  color: _selected == 'first_time'
+                                      ? const Color(0xFFF5F3FF)
+                                      : const Color(0xFFF9FAFB),
                                   borderRadius: BorderRadius.circular(12),
                                 ),
                                 child: Row(
                                   children: [
                                     Container(
-                                      width: 22, height: 22,
+                                      width: 22,
+                                      height: 22,
                                       decoration: BoxDecoration(
                                         shape: BoxShape.circle,
                                         border: Border.all(
-                                          color: _selected == 'first_time' ? const Color(0xFF6A4EFF) : const Color(0xFFD1D5DB),
-                                          width: _selected == 'first_time' ? 6 : 2,
+                                          color: _selected == 'first_time'
+                                              ? const Color(0xFF6A4EFF)
+                                              : const Color(0xFFD1D5DB),
+                                          width: _selected == 'first_time'
+                                              ? 6
+                                              : 2,
                                         ),
                                         color: Colors.white,
                                       ),
@@ -3600,20 +4550,27 @@ class _EligibilityFinalQuestionCardMockupState extends State<_EligibilityFinalQu
                                     const SizedBox(width: 14),
                                     Expanded(
                                       child: Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
                                         children: [
                                           Text(
                                             "No, I haven't applied before",
                                             style: TextStyle(
                                               fontSize: 16,
                                               fontWeight: FontWeight.w700,
-                                              color: _selected == 'first_time' ? const Color(0xFF6A4EFF) : const Color(0xFF111827),
+                                              color: _selected == 'first_time'
+                                                  ? const Color(0xFF6A4EFF)
+                                                  : const Color(0xFF111827),
                                             ),
                                           ),
                                           const SizedBox(height: 2),
                                           Text(
                                             'First-time applicant for this certificate',
-                                            style: const TextStyle(fontSize: 13, color: Color(0xFF6B7280), height: 1.3),
+                                            style: const TextStyle(
+                                              fontSize: 13,
+                                              color: Color(0xFF6B7280),
+                                              height: 1.3,
+                                            ),
                                           ),
                                         ],
                                       ),
@@ -3624,22 +4581,34 @@ class _EligibilityFinalQuestionCardMockupState extends State<_EligibilityFinalQu
                             ),
                             const SizedBox(height: 12),
                             GestureDetector(
-                              onTap: () => setState(() => _selected = 'expired_rejected'),
+                              onTap: () => setState(
+                                () => _selected = 'expired_rejected',
+                              ),
                               child: Container(
-                                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 16,
+                                  vertical: 14,
+                                ),
                                 decoration: BoxDecoration(
-                                  color: _selected == 'expired_rejected' ? const Color(0xFFF5F3FF) : const Color(0xFFF9FAFB),
+                                  color: _selected == 'expired_rejected'
+                                      ? const Color(0xFFF5F3FF)
+                                      : const Color(0xFFF9FAFB),
                                   borderRadius: BorderRadius.circular(12),
                                 ),
                                 child: Row(
                                   children: [
                                     Container(
-                                      width: 22, height: 22,
+                                      width: 22,
+                                      height: 22,
                                       decoration: BoxDecoration(
                                         shape: BoxShape.circle,
                                         border: Border.all(
-                                          color: _selected == 'expired_rejected' ? const Color(0xFF6A4EFF) : const Color(0xFFD1D5DB),
-                                          width: _selected == 'expired_rejected' ? 6 : 2,
+                                          color: _selected == 'expired_rejected'
+                                              ? const Color(0xFF6A4EFF)
+                                              : const Color(0xFFD1D5DB),
+                                          width: _selected == 'expired_rejected'
+                                              ? 6
+                                              : 2,
                                         ),
                                         color: Colors.white,
                                       ),
@@ -3647,20 +4616,29 @@ class _EligibilityFinalQuestionCardMockupState extends State<_EligibilityFinalQu
                                     const SizedBox(width: 14),
                                     Expanded(
                                       child: Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
                                         children: [
                                           Text(
                                             'Yes, but it expired or was rejected',
                                             style: TextStyle(
                                               fontSize: 16,
                                               fontWeight: FontWeight.w700,
-                                              color: _selected == 'expired_rejected' ? const Color(0xFF6A4EFF) : const Color(0xFF111827),
+                                              color:
+                                                  _selected ==
+                                                      'expired_rejected'
+                                                  ? const Color(0xFF6A4EFF)
+                                                  : const Color(0xFF111827),
                                             ),
                                           ),
                                           const SizedBox(height: 2),
                                           Text(
                                             'Previously held certificate has expired o...',
-                                            style: const TextStyle(fontSize: 13, color: Color(0xFF6B7280), height: 1.3),
+                                            style: const TextStyle(
+                                              fontSize: 13,
+                                              color: Color(0xFF6B7280),
+                                              height: 1.3,
+                                            ),
                                           ),
                                         ],
                                       ),
@@ -3671,22 +4649,33 @@ class _EligibilityFinalQuestionCardMockupState extends State<_EligibilityFinalQu
                             ),
                             const SizedBox(height: 12),
                             GestureDetector(
-                              onTap: () => setState(() => _selected = 'currently_valid'),
+                              onTap: () =>
+                                  setState(() => _selected = 'currently_valid'),
                               child: Container(
-                                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 16,
+                                  vertical: 14,
+                                ),
                                 decoration: BoxDecoration(
-                                  color: _selected == 'currently_valid' ? const Color(0xFFF5F3FF) : const Color(0xFFF9FAFB),
+                                  color: _selected == 'currently_valid'
+                                      ? const Color(0xFFF5F3FF)
+                                      : const Color(0xFFF9FAFB),
                                   borderRadius: BorderRadius.circular(12),
                                 ),
                                 child: Row(
                                   children: [
                                     Container(
-                                      width: 22, height: 22,
+                                      width: 22,
+                                      height: 22,
                                       decoration: BoxDecoration(
                                         shape: BoxShape.circle,
                                         border: Border.all(
-                                          color: _selected == 'currently_valid' ? const Color(0xFF6A4EFF) : const Color(0xFFD1D5DB),
-                                          width: _selected == 'currently_valid' ? 6 : 2,
+                                          color: _selected == 'currently_valid'
+                                              ? const Color(0xFF6A4EFF)
+                                              : const Color(0xFFD1D5DB),
+                                          width: _selected == 'currently_valid'
+                                              ? 6
+                                              : 2,
                                         ),
                                         color: Colors.white,
                                       ),
@@ -3694,20 +4683,28 @@ class _EligibilityFinalQuestionCardMockupState extends State<_EligibilityFinalQu
                                     const SizedBox(width: 14),
                                     Expanded(
                                       child: Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
                                         children: [
                                           Text(
                                             'Yes, I currently have a valid certificate',
                                             style: TextStyle(
                                               fontSize: 16,
                                               fontWeight: FontWeight.w700,
-                                              color: _selected == 'currently_valid' ? const Color(0xFF6A4EFF) : const Color(0xFF111827),
+                                              color:
+                                                  _selected == 'currently_valid'
+                                                  ? const Color(0xFF6A4EFF)
+                                                  : const Color(0xFF111827),
                                             ),
                                           ),
                                           const SizedBox(height: 2),
                                           Text(
                                             'Currently holding a valid certificate',
-                                            style: const TextStyle(fontSize: 13, color: Color(0xFF6B7280), height: 1.3),
+                                            style: const TextStyle(
+                                              fontSize: 13,
+                                              color: Color(0xFF6B7280),
+                                              height: 1.3,
+                                            ),
                                           ),
                                         ],
                                       ),
@@ -3762,7 +4759,8 @@ class _EligibilityFinalQuestionCardMockupState extends State<_EligibilityFinalQu
   }
 }
 
-const _eligibilityFinalQuestionCode = r'''// Eligibility Final Question Step – Flat Layout
+const _eligibilityFinalQuestionCode =
+    r'''// Eligibility Final Question Step – Flat Layout
 class FinalQuestionScreen extends StatefulWidget {
   @override
   State<FinalQuestionScreen> createState() => _FinalQuestionScreenState();
@@ -3951,8 +4949,8 @@ class _FinalQuestionScreenState extends State<FinalQuestionScreen> {
 }
 ''';
 
-const _eligibilityFinalQuestionCardCode = r'''// Eligibility Final Question Step – Card Style Layout
+const _eligibilityFinalQuestionCardCode =
+    r'''// Eligibility Final Question Step – Card Style Layout
 // Code similar to Flat Layout but wrapped in a Card inside a Purple Container
 // Follow the structure of EligibilityQuestionCardMockup
 ''';
-

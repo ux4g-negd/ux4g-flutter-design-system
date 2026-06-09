@@ -16,13 +16,7 @@ enum Ux4gOtpBoxStatus {
   disabled,
 }
 
-enum Ux4gOtpInputStatus {
-  defaultStatus,
-  error,
-  warning,
-  success,
-  locked,
-}
+enum Ux4gOtpInputStatus { defaultStatus, error, warning, success, locked }
 
 enum Ux4gOtpCaptionVariant {
   /// e.g. "Didn't receive OTP?  Resend in 00:17"
@@ -75,10 +69,19 @@ class Ux4gOtpBox extends StatelessWidget {
     final ux4gTypography = materialTheme.extension<Ux4gTypography>();
 
     final primary = ux4gColors?.primary ?? materialTheme.colorScheme.primary;
-    final onSurface = ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
+    final onSurface =
+        ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
 
-    final hsStrong = ux4gTypography?.hS_strong ?? materialTheme.textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.w700) ?? const TextStyle(fontWeight: FontWeight.w700, fontSize: 20);
-    final bmDefault = ux4gTypography?.bM_default ?? materialTheme.textTheme.bodyMedium ?? const TextStyle(fontSize: 16);
+    final hsStrong =
+        ux4gTypography?.hS_strong ??
+        materialTheme.textTheme.headlineSmall?.copyWith(
+          fontWeight: FontWeight.w700,
+        ) ??
+        const TextStyle(fontWeight: FontWeight.w700, fontSize: 20);
+    final bmDefault =
+        ux4gTypography?.bM_default ??
+        materialTheme.textTheme.bodyMedium ??
+        const TextStyle(fontSize: 16);
 
     final borderColor = _borderColor(materialTheme, ux4gColors);
     final bgColor = _bgColor(materialTheme, ux4gColors);
@@ -106,19 +109,20 @@ class Ux4gOtpBox extends StatelessWidget {
               ),
             )
           : status == Ux4gOtpBoxStatus.focused
-              ? _Cursor(color: primary)
-              : Text(
-                  '—',
-                  style: bmDefault.copyWith(
-                    color: onSurface.withValues(alpha: 0.3),
-                  ),
-                ),
+          ? _Cursor(color: primary)
+          : Text(
+              '—',
+              style: bmDefault.copyWith(
+                color: onSurface.withValues(alpha: 0.3),
+              ),
+            ),
     );
   }
 
   Color _borderColor(ThemeData materialTheme, Ux4gColors? ux4gColors) {
     final primary = ux4gColors?.primary ?? materialTheme.colorScheme.primary;
-    final onSurface = ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
+    final onSurface =
+        ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
     final error = ux4gColors?.error ?? materialTheme.colorScheme.error;
     final warning = ux4gColors?.warning ?? Colors.orange;
     final success = ux4gColors?.success ?? Colors.green;
@@ -134,7 +138,8 @@ class Ux4gOtpBox extends StatelessWidget {
   }
 
   Color _bgColor(ThemeData materialTheme, Ux4gColors? ux4gColors) {
-    final onSurface = ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
+    final onSurface =
+        ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
     final surface = ux4gColors?.surface ?? materialTheme.colorScheme.surface;
 
     if (status == Ux4gOtpBoxStatus.disabled) {
@@ -153,8 +158,7 @@ class _Cursor extends StatefulWidget {
   State<_Cursor> createState() => _CursorState();
 }
 
-class _CursorState extends State<_Cursor>
-    with SingleTickerProviderStateMixin {
+class _CursorState extends State<_Cursor> with SingleTickerProviderStateMixin {
   late AnimationController _ctrl;
 
   @override
@@ -219,14 +223,23 @@ class Ux4gOtpCaption extends StatelessWidget {
     final ux4gColors = materialTheme.extension<Ux4gColors>();
     final ux4gTypography = materialTheme.extension<Ux4gTypography>();
 
-    final onSurface = ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
+    final onSurface =
+        ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
     final primary = ux4gColors?.primary ?? materialTheme.colorScheme.primary;
     final error = ux4gColors?.error ?? materialTheme.colorScheme.error;
     final success = ux4gColors?.success ?? Colors.green;
     final warning = ux4gColors?.warning ?? Colors.orange;
 
-    final bxsDefault = ux4gTypography?.bXS_default ?? materialTheme.textTheme.bodySmall ?? const TextStyle(fontSize: 12);
-    final bxsStrong = ux4gTypography?.bXS_strong ?? materialTheme.textTheme.bodySmall?.copyWith(fontWeight: FontWeight.w700) ?? const TextStyle(fontWeight: FontWeight.w700, fontSize: 12);
+    final bxsDefault =
+        ux4gTypography?.bXS_default ??
+        materialTheme.textTheme.bodySmall ??
+        const TextStyle(fontSize: 12);
+    final bxsStrong =
+        ux4gTypography?.bXS_strong ??
+        materialTheme.textTheme.bodySmall?.copyWith(
+          fontWeight: FontWeight.w700,
+        ) ??
+        const TextStyle(fontWeight: FontWeight.w700, fontSize: 12);
 
     switch (variant) {
       // "Didn't receive OTP?  Resend in 00:17"
@@ -234,13 +247,11 @@ class Ux4gOtpCaption extends StatelessWidget {
         return _inline(
           leading: _text(
             leadingText ?? "Didn't receive OTP?",
-            bxsDefault.copyWith(
-                color: onSurface.withValues(alpha: 0.6)),
+            bxsDefault.copyWith(color: onSurface.withValues(alpha: 0.6)),
           ),
           trailing: _text(
             trailingText ?? '',
-            bxsDefault.copyWith(
-                color: onSurface.withValues(alpha: 0.6)),
+            bxsDefault.copyWith(color: onSurface.withValues(alpha: 0.6)),
           ),
         );
 
@@ -249,8 +260,7 @@ class Ux4gOtpCaption extends StatelessWidget {
         return _inline(
           leading: _text(
             leadingText ?? "Didn't receive OTP?",
-            bxsDefault.copyWith(
-                color: onSurface.withValues(alpha: 0.6)),
+            bxsDefault.copyWith(color: onSurface.withValues(alpha: 0.6)),
           ),
           trailing: GestureDetector(
             onTap: onTrailingTap,
@@ -269,16 +279,12 @@ class Ux4gOtpCaption extends StatelessWidget {
             children: [
               Icon(Icons.error, size: 14, color: error),
               const SizedBox(width: 4),
-              _text(
-                leadingText ?? '',
-                bxsStrong.copyWith(color: error),
-              ),
+              _text(leadingText ?? '', bxsStrong.copyWith(color: error)),
             ],
           ),
           trailing: _text(
             trailingText ?? '',
-            bxsDefault.copyWith(
-                color: onSurface.withValues(alpha: 0.6)),
+            bxsDefault.copyWith(color: onSurface.withValues(alpha: 0.6)),
           ),
         );
 
@@ -288,13 +294,15 @@ class Ux4gOtpCaption extends StatelessWidget {
           leading: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Icon(Icons.lock_outline, size: 14,
-                  color: onSurface.withValues(alpha: 0.6)),
+              Icon(
+                Icons.lock_outline,
+                size: 14,
+                color: onSurface.withValues(alpha: 0.6),
+              ),
               const SizedBox(width: 4),
               _text(
                 leadingText ?? '',
-                bxsDefault.copyWith(
-                    color: onSurface.withValues(alpha: 0.6)),
+                bxsDefault.copyWith(color: onSurface.withValues(alpha: 0.6)),
               ),
             ],
           ),
@@ -302,8 +310,7 @@ class Ux4gOtpCaption extends StatelessWidget {
             onTap: onTrailingTap,
             child: _text(
               trailingText ?? 'Resend OTP',
-              bxsDefault.copyWith(
-                  color: onSurface.withValues(alpha: 0.6)),
+              bxsDefault.copyWith(color: onSurface.withValues(alpha: 0.6)),
             ),
           ),
         );
@@ -327,8 +334,7 @@ class Ux4gOtpCaption extends StatelessWidget {
         return Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(Icons.warning_amber_rounded,
-                size: 14, color: warning),
+            Icon(Icons.warning_amber_rounded, size: 14, color: warning),
             const SizedBox(width: 6),
             _text(
               caption ?? 'Warning message',
@@ -341,8 +347,7 @@ class Ux4gOtpCaption extends StatelessWidget {
       case Ux4gOtpCaptionVariant.plain:
         return _text(
           caption ?? '',
-          bxsDefault.copyWith(
-              color: onSurface.withValues(alpha: 0.6)),
+          bxsDefault.copyWith(color: onSurface.withValues(alpha: 0.6)),
         );
     }
   }
@@ -352,10 +357,7 @@ class Ux4gOtpCaption extends StatelessWidget {
     return Wrap(
       crossAxisAlignment: WrapCrossAlignment.center,
       spacing: 4,
-      children: [
-        leading,
-        trailing,
-      ],
+      children: [leading, trailing],
     );
   }
 
@@ -367,10 +369,7 @@ class Ux4gOtpCaption extends StatelessWidget {
         alignment: WrapAlignment.spaceBetween,
         crossAxisAlignment: WrapCrossAlignment.center,
         runSpacing: 4,
-        children: [
-          leading,
-          trailing,
-        ],
+        children: [leading, trailing],
       ),
     );
   }
@@ -561,18 +560,16 @@ class _Ux4gOtpInputState extends State<Ux4gOtpInput> {
 
   List<String> _splitValue(String v) => v.characters.toList();
 
-  String get _currentValue =>
-      _controllers.map((c) => c.text).join();
+  String get _currentValue => _controllers.map((c) => c.text).join();
 
   void _onDigitChanged(int index, String val) {
     // Allow only single character
-    final sanitized =
-        val.isEmpty ? '' : val.characters.last;
+    final sanitized = val.isEmpty ? '' : val.characters.last;
 
     _controllers[index].text = sanitized;
-    _controllers[index].selection =
-        TextSelection.fromPosition(
-            TextPosition(offset: sanitized.length));
+    _controllers[index].selection = TextSelection.fromPosition(
+      TextPosition(offset: sanitized.length),
+    );
 
     final full = _currentValue;
     widget.onChanged(full);
@@ -642,11 +639,20 @@ class _Ux4gOtpInputState extends State<Ux4gOtpInput> {
     final ux4gColors = materialTheme.extension<Ux4gColors>();
     final ux4gTypography = materialTheme.extension<Ux4gTypography>();
 
-    final onSurface = ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
+    final onSurface =
+        ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
     final error = ux4gColors?.error ?? materialTheme.colorScheme.error;
 
-    final bsStrong = ux4gTypography?.bS_strong ?? materialTheme.textTheme.bodySmall?.copyWith(fontWeight: FontWeight.w700) ?? const TextStyle(fontWeight: FontWeight.w700, fontSize: 14);
-    final bmDefault = ux4gTypography?.bM_default ?? materialTheme.textTheme.bodyMedium ?? const TextStyle(fontSize: 16);
+    final bsStrong =
+        ux4gTypography?.bS_strong ??
+        materialTheme.textTheme.bodySmall?.copyWith(
+          fontWeight: FontWeight.w700,
+        ) ??
+        const TextStyle(fontWeight: FontWeight.w700, fontSize: 14);
+    final bmDefault =
+        ux4gTypography?.bM_default ??
+        materialTheme.textTheme.bodyMedium ??
+        const TextStyle(fontSize: 16);
 
     // Resolve effective caption variant
     Ux4gOtpCaptionVariant? effectiveVariant = widget.captionVariant;
@@ -683,13 +689,13 @@ class _Ux4gOtpInputState extends State<Ux4gOtpInput> {
                 ),
               ),
               if (widget.required)
-                Text('*',
-                    style: bsStrong
-                        .copyWith(color: error)),
+                Text('*', style: bsStrong.copyWith(color: error)),
               if (widget.labelTrailingIcon != null)
-                Icon(widget.labelTrailingIcon,
-                    size: 16,
-                    color: onSurface.withValues(alpha: 0.5)),
+                Icon(
+                  widget.labelTrailingIcon,
+                  size: 16,
+                  color: onSurface.withValues(alpha: 0.5),
+                ),
             ],
           ),
           const SizedBox(height: 10),
@@ -757,9 +763,13 @@ class _Ux4gOtpInputState extends State<Ux4gOtpInput> {
                                       border: InputBorder.none,
                                     ),
                                     inputFormatters: [
-                                      widget.keyboardType == TextInputType.number
-                                          ? FilteringTextInputFormatter.digitsOnly
-                                          : FilteringTextInputFormatter.allow(RegExp(r'.')),
+                                      widget.keyboardType ==
+                                              TextInputType.number
+                                          ? FilteringTextInputFormatter
+                                                .digitsOnly
+                                          : FilteringTextInputFormatter.allow(
+                                              RegExp(r'.'),
+                                            ),
                                     ],
                                     onChanged: (v) {
                                       if (v.length > 1) {

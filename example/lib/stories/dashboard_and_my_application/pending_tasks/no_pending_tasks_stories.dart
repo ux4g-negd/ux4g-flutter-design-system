@@ -139,19 +139,37 @@ class _NoPendingTasksMockup extends StatelessWidget {
                       SvgPicture.asset(
                         _nationalEmblemLogoPath,
                         height: 36,
-                        errorBuilder: (c, e, s) => const Icon(Icons.account_balance, size: 28, color: Colors.grey),
+                        errorBuilder: (c, e, s) => const Icon(
+                          Icons.account_balance,
+                          size: 28,
+                          color: Colors.grey,
+                        ),
                       ),
                       const SizedBox(width: 8),
                       SvgPicture.asset(
                         _unionLogoPath,
                         height: 28,
-                        errorBuilder: (c, e, s) => const Icon(Icons.blur_on, size: 28, color: Colors.blue),
+                        errorBuilder: (c, e, s) => const Icon(
+                          Icons.blur_on,
+                          size: 28,
+                          color: Colors.blue,
+                        ),
                       ),
                       const SizedBox(width: 8),
-                      const Text('Government of India', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: _titleColor)),
+                      const Text(
+                        'Government of India',
+                        style: TextStyle(
+                          fontSize: 13,
+                          fontWeight: FontWeight.w600,
+                          color: _titleColor,
+                        ),
+                      ),
                     ],
                     actions: [
-                      Ux4gAppHeaderAction(icon: Icons.notifications_outlined, onPressed: () {}),
+                      Ux4gAppHeaderAction(
+                        icon: Icons.notifications_outlined,
+                        onPressed: () {},
+                      ),
                     ],
                     showAvatar: true,
                     avatarInitials: 'R',
@@ -169,17 +187,38 @@ class _NoPendingTasksMockup extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     // Title
-                    const Text('Pending Tasks', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w800, color: _titleColor)),
+                    const Text(
+                      'Pending Tasks',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w800,
+                        color: _titleColor,
+                      ),
+                    ),
                     const SizedBox(height: 4),
-                    const Text("You're all caught up", style: TextStyle(fontSize: 13, color: _subtleText)),
+                    const Text(
+                      "You're all caught up",
+                      style: TextStyle(fontSize: 13, color: _subtleText),
+                    ),
                     const SizedBox(height: 12),
 
                     // Back to home link
                     Row(
                       children: [
-                        const Icon(Icons.arrow_back, size: 14, color: _primaryColor),
+                        const Icon(
+                          Icons.arrow_back,
+                          size: 14,
+                          color: _primaryColor,
+                        ),
                         const SizedBox(width: 4),
-                        const Text('Back to home', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w500, color: _primaryColor)),
+                        const Text(
+                          'Back to home',
+                          style: TextStyle(
+                            fontSize: 13,
+                            fontWeight: FontWeight.w500,
+                            color: _primaryColor,
+                          ),
+                        ),
                       ],
                     ),
 
@@ -188,9 +227,20 @@ class _NoPendingTasksMockup extends StatelessWidget {
                     Center(
                       child: Column(
                         children: [
-                          const Icon(Icons.check_circle, size: 64, color: _greenColor),
+                          const Icon(
+                            Icons.check_circle,
+                            size: 64,
+                            color: _greenColor,
+                          ),
                           const SizedBox(height: 20),
-                          const Text('No pending tasks', style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700, color: _titleColor)),
+                          const Text(
+                            'No pending tasks',
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.w700,
+                              color: _titleColor,
+                            ),
+                          ),
                           const SizedBox(height: 8),
                           const Text(
                             'You have no pending tasks right now. All\nyour applications are progressing\nsmoothly.',

@@ -229,7 +229,11 @@ class Ux4gStatusPipeline extends StatelessWidget {
 
   // ── State colors ──
 
-  Color _stepColor(Ux4gPipelineStepState state, Ux4gColors? ux4gColors, ThemeData materialTheme) {
+  Color _stepColor(
+    Ux4gPipelineStepState state,
+    Ux4gColors? ux4gColors,
+    ThemeData materialTheme,
+  ) {
     final colorScheme = materialTheme.colorScheme;
     final success = ux4gColors?.success ?? Colors.green;
     final primary = ux4gColors?.primary ?? colorScheme.primary;
@@ -247,10 +251,16 @@ class Ux4gStatusPipeline extends StatelessWidget {
     };
   }
 
-  Color _lineColor(Ux4gPipelineStepState fromState, Ux4gColors? ux4gColors, ThemeData materialTheme) {
+  Color _lineColor(
+    Ux4gPipelineStepState fromState,
+    Ux4gColors? ux4gColors,
+    ThemeData materialTheme,
+  ) {
     final isActive = fromState == Ux4gPipelineStepState.completed;
-    if (isActive) return completedLineColor ?? ux4gColors?.success ?? Colors.green;
-    final onSurface = ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
+    if (isActive)
+      return completedLineColor ?? ux4gColors?.success ?? Colors.green;
+    final onSurface =
+        ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
     return upcomingLineColor ?? onSurface.withValues(alpha: 0.15);
   }
 
@@ -317,7 +327,9 @@ class Ux4gStatusPipeline extends StatelessWidget {
                   size: _circleSize,
                   iconSize: _iconSize,
                   fontSize: _fontSize,
-                  color: step.customColor ?? _stepColor(state, ux4gColors, materialTheme),
+                  color:
+                      step.customColor ??
+                      _stepColor(state, ux4gColors, materialTheme),
                   customIcon: step.customIcon,
                 ),
                 if (!isLast)
@@ -354,7 +366,12 @@ class Ux4gStatusPipeline extends StatelessWidget {
                           alignment: Alignment.centerLeft,
                           child: Text(
                             step.label!,
-                            style: _labelStyle(state, ux4gTypography, ux4gColors, materialTheme),
+                            style: _labelStyle(
+                              state,
+                              ux4gTypography,
+                              ux4gColors,
+                              materialTheme,
+                            ),
                           ),
                         ),
                       ),
@@ -362,7 +379,12 @@ class Ux4gStatusPipeline extends StatelessWidget {
                       const SizedBox(height: Ux4gSpace.space2),
                       Text(
                         step.description!,
-                        style: _descStyle(state, ux4gTypography, ux4gColors, materialTheme),
+                        style: _descStyle(
+                          state,
+                          ux4gTypography,
+                          ux4gColors,
+                          materialTheme,
+                        ),
                       ),
                     ],
                   ],
@@ -406,7 +428,11 @@ class Ux4gStatusPipeline extends StatelessWidget {
                 Expanded(
                   child: Container(
                     height: _lineWidth(_resolveState(i)),
-                    color: _lineColor(_resolveState(i), ux4gColors, materialTheme),
+                    color: _lineColor(
+                      _resolveState(i),
+                      ux4gColors,
+                      materialTheme,
+                    ),
                   ),
                 ),
             ],
@@ -460,7 +486,8 @@ class Ux4gStatusPipeline extends StatelessWidget {
                             materialTheme,
                           ),
                           textAlign: TextAlign.center,
-                          overflow: TextOverflow.visible, softWrap: true,
+                          overflow: TextOverflow.visible,
+                          softWrap: true,
                         )
                       : const SizedBox.shrink(),
                 ),
@@ -484,19 +511,27 @@ class Ux4gStatusPipeline extends StatelessWidget {
     final isActive =
         state == Ux4gPipelineStepState.completed ||
         state == Ux4gPipelineStepState.current;
-    
-    final onSurface = ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
+
+    final onSurface =
+        ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
 
     final baseStyle = size == Ux4gPipelineSize.s
-        ? ux4gTypography?.bXS_strong ?? materialTheme.textTheme.bodySmall?.copyWith(fontWeight: FontWeight.bold)
+        ? ux4gTypography?.bXS_strong ??
+              materialTheme.textTheme.bodySmall?.copyWith(
+                fontWeight: FontWeight.bold,
+              )
         : size == Ux4gPipelineSize.m
-        ? ux4gTypography?.bS_strong ?? materialTheme.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold)
-        : ux4gTypography?.bM_strong ?? materialTheme.textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold);
-    
+        ? ux4gTypography?.bS_strong ??
+              materialTheme.textTheme.bodyMedium?.copyWith(
+                fontWeight: FontWeight.bold,
+              )
+        : ux4gTypography?.bM_strong ??
+              materialTheme.textTheme.bodyLarge?.copyWith(
+                fontWeight: FontWeight.bold,
+              );
+
     return (baseStyle ?? const TextStyle()).copyWith(
-      color: isActive
-          ? onSurface
-          : onSurface.withValues(alpha: 0.45),
+      color: isActive ? onSurface : onSurface.withValues(alpha: 0.45),
     );
   }
 
@@ -509,15 +544,16 @@ class Ux4gStatusPipeline extends StatelessWidget {
     final isActive =
         state == Ux4gPipelineStepState.completed ||
         state == Ux4gPipelineStepState.current;
-    
-    final onSurface = ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
+
+    final onSurface =
+        ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
 
     final baseStyle = size == Ux4gPipelineSize.s
         ? ux4gTypography?.bXS_default ?? materialTheme.textTheme.bodySmall
         : size == Ux4gPipelineSize.m
         ? ux4gTypography?.bXS_default ?? materialTheme.textTheme.bodySmall
         : ux4gTypography?.bS_default ?? materialTheme.textTheme.bodyMedium;
-    
+
     return (baseStyle ?? const TextStyle()).copyWith(
       color: isActive
           ? onSurface.withValues(alpha: 0.6)

@@ -64,7 +64,7 @@ class _Ux4gTextAreaState extends State<Ux4gTextArea> {
     super.initState();
     _controller = TextEditingController(text: widget.value);
     _focusNode = FocusNode();
-    
+
     // Listen to changes to notify parent
     _controller.addListener(_onTextChanged);
   }
@@ -81,16 +81,18 @@ class _Ux4gTextAreaState extends State<Ux4gTextArea> {
     if (widget.value != _controller.text) {
       // Remove listener to prevent circular calls
       _controller.removeListener(_onTextChanged);
-      
+
       final selection = _controller.selection;
       _controller.text = widget.value;
-      
+
       if (selection.isValid && selection.baseOffset <= widget.value.length) {
         _controller.selection = selection;
       } else {
-        _controller.selection = TextSelection.collapsed(offset: widget.value.length);
+        _controller.selection = TextSelection.collapsed(
+          offset: widget.value.length,
+        );
       }
-      
+
       // Re-add listener
       _controller.addListener(_onTextChanged);
     }
@@ -111,18 +113,38 @@ class _Ux4gTextAreaState extends State<Ux4gTextArea> {
     final ux4gTypography = materialTheme.extension<Ux4gTypography>();
 
     final surface = ux4gColors?.surface ?? materialTheme.colorScheme.surface;
-    final onSurface = ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
-    final onBackground = ux4gColors?.onBackground ?? materialTheme.colorScheme.onSurface;
+    final onSurface =
+        ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
+    final onBackground =
+        ux4gColors?.onBackground ?? materialTheme.colorScheme.onSurface;
     final errorColor = ux4gColors?.error ?? materialTheme.colorScheme.error;
 
-    final bmDefault = ux4gTypography?.bM_default ?? materialTheme.textTheme.bodyMedium ?? const TextStyle(fontSize: 16);
-    final bmStrong = ux4gTypography?.bM_strong ?? materialTheme.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w700) ?? const TextStyle(fontWeight: FontWeight.w700, fontSize: 16);
-    final bxsDefault = ux4gTypography?.bXS_default ?? materialTheme.textTheme.bodySmall ?? const TextStyle(fontSize: 12);
-    final bsDefault = ux4gTypography?.bS_default ?? materialTheme.textTheme.bodySmall ?? const TextStyle(fontSize: 14);
+    final bmDefault =
+        ux4gTypography?.bM_default ??
+        materialTheme.textTheme.bodyMedium ??
+        const TextStyle(fontSize: 16);
+    final bmStrong =
+        ux4gTypography?.bM_strong ??
+        materialTheme.textTheme.bodyMedium?.copyWith(
+          fontWeight: FontWeight.w700,
+        ) ??
+        const TextStyle(fontWeight: FontWeight.w700, fontSize: 16);
+    final bxsDefault =
+        ux4gTypography?.bXS_default ??
+        materialTheme.textTheme.bodySmall ??
+        const TextStyle(fontSize: 12);
+    final bsDefault =
+        ux4gTypography?.bS_default ??
+        materialTheme.textTheme.bodySmall ??
+        const TextStyle(fontSize: 14);
 
     final borderColor = _getBorderColor(materialTheme, ux4gColors);
-    final bgColor = widget.enabled ? surface : onSurface.withValues(alpha: 0.05);
-    final textColor = widget.enabled ? onBackground : onSurface.withValues(alpha: 0.4);
+    final bgColor = widget.enabled
+        ? surface
+        : onSurface.withValues(alpha: 0.05);
+    final textColor = widget.enabled
+        ? onBackground
+        : onSurface.withValues(alpha: 0.4);
     final labelColor = _getLabelColor(materialTheme, ux4gColors);
     final captionColor = _getCaptionColor(materialTheme, ux4gColors);
 
@@ -141,7 +163,11 @@ class _Ux4gTextAreaState extends State<Ux4gTextArea> {
               ],
               if (widget.trailingIconLabel != null) ...[
                 const SizedBox(width: 4),
-                Icon(widget.trailingIconLabel, size: 16, color: onSurface.withValues(alpha: 0.5)),
+                Icon(
+                  widget.trailingIconLabel,
+                  size: 16,
+                  color: onSurface.withValues(alpha: 0.5),
+                ),
               ],
             ],
           ),
@@ -174,7 +200,9 @@ class _Ux4gTextAreaState extends State<Ux4gTextArea> {
                   style: bmDefault.copyWith(color: textColor),
                   decoration: InputDecoration(
                     hintText: widget.placeholder,
-                    hintStyle: bmDefault.copyWith(color: onSurface.withValues(alpha: 0.4)),
+                    hintStyle: bmDefault.copyWith(
+                      color: onSurface.withValues(alpha: 0.4),
+                    ),
                     isDense: true,
                     border: InputBorder.none,
                     contentPadding: EdgeInsets.zero,
@@ -190,7 +218,9 @@ class _Ux4gTextAreaState extends State<Ux4gTextArea> {
                       if (widget.characterCountText != null)
                         Text(
                           widget.characterCountText!,
-                          style: bxsDefault.copyWith(color: onSurface.withValues(alpha: 0.5)),
+                          style: bxsDefault.copyWith(
+                            color: onSurface.withValues(alpha: 0.5),
+                          ),
                         ),
                       const SizedBox(width: 4),
                       Text(
@@ -206,15 +236,23 @@ class _Ux4gTextAreaState extends State<Ux4gTextArea> {
             ),
           ),
         ),
-        if (widget.caption != null || widget.status == Ux4gInputFieldStatus.error) ...[
+        if (widget.caption != null ||
+            widget.status == Ux4gInputFieldStatus.error) ...[
           const SizedBox(height: 4),
           Row(
             children: [
               if (widget.showCaptionIcon) ...[
-                Icon(_getStatusIcon() ?? Icons.info_outline, size: 14, color: captionColor),
+                Icon(
+                  _getStatusIcon() ?? Icons.info_outline,
+                  size: 14,
+                  color: captionColor,
+                ),
                 const SizedBox(width: 6),
               ],
-              Text(widget.caption ?? "", style: bxsDefault.copyWith(color: captionColor)),
+              Text(
+                widget.caption ?? "",
+                style: bxsDefault.copyWith(color: captionColor),
+              ),
             ],
           ),
         ],
@@ -223,7 +261,8 @@ class _Ux4gTextAreaState extends State<Ux4gTextArea> {
   }
 
   Color _getBorderColor(ThemeData materialTheme, Ux4gColors? ux4gColors) {
-    final onSurface = ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
+    final onSurface =
+        ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
     final error = ux4gColors?.error ?? materialTheme.colorScheme.error;
     final warning = ux4gColors?.warning ?? Colors.orange;
     final success = ux4gColors?.success ?? Colors.green;
@@ -238,8 +277,10 @@ class _Ux4gTextAreaState extends State<Ux4gTextArea> {
   }
 
   Color _getLabelColor(ThemeData materialTheme, Ux4gColors? ux4gColors) {
-    final onSurface = ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
-    final onBackground = ux4gColors?.onBackground ?? materialTheme.colorScheme.onSurface;
+    final onSurface =
+        ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
+    final onBackground =
+        ux4gColors?.onBackground ?? materialTheme.colorScheme.onSurface;
     final error = ux4gColors?.error ?? materialTheme.colorScheme.error;
     final warning = ux4gColors?.warning ?? Colors.orange;
     final success = ux4gColors?.success ?? Colors.green;
@@ -254,7 +295,8 @@ class _Ux4gTextAreaState extends State<Ux4gTextArea> {
   }
 
   Color _getCaptionColor(ThemeData materialTheme, Ux4gColors? ux4gColors) {
-    final onSurface = ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
+    final onSurface =
+        ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
     final error = ux4gColors?.error ?? materialTheme.colorScheme.error;
     final warning = ux4gColors?.warning ?? Colors.orange;
     final success = ux4gColors?.success ?? Colors.green;

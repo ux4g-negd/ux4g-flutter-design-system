@@ -34,9 +34,11 @@ final languageSwitcherComponent = WidgetbookComponent(
           name: 'Language Switcher ($variant)',
           description: isCard
               ? 'Interface language selection with dropdown inside a '
-                'card container with light purple background.'
+                    'card container with light purple background.'
               : 'Interface language selection with dropdown on white background.',
-          code: isCard ? _languageSwitcherCardCode : _languageSwitcherDefaultCode,
+          code: isCard
+              ? _languageSwitcherCardCode
+              : _languageSwitcherDefaultCode,
           center: true,
           child: _LanguageSwitcherMockup(isCard: isCard),
         );
@@ -280,7 +282,8 @@ class _LanguageSwitcherMockup extends StatefulWidget {
   const _LanguageSwitcherMockup({this.isCard = false});
 
   @override
-  State<_LanguageSwitcherMockup> createState() => _LanguageSwitcherMockupState();
+  State<_LanguageSwitcherMockup> createState() =>
+      _LanguageSwitcherMockupState();
 }
 
 class _LanguageSwitcherMockupState extends State<_LanguageSwitcherMockup> {
@@ -301,8 +304,11 @@ class _LanguageSwitcherMockupState extends State<_LanguageSwitcherMockup> {
                 title: '',
                 leadingSpacing: 2,
                 leadingWidgets: [
-                  SvgPicture.asset('assets/national_amblam_logo.svg', height: 40),
-                SizedBox(width: 3),
+                  SvgPicture.asset(
+                    'assets/national_amblam_logo.svg',
+                    height: 40,
+                  ),
+                  SizedBox(width: 3),
                   SizedBox(
                     height: 32,
                     child: Ux4gDivider(
@@ -310,7 +316,7 @@ class _LanguageSwitcherMockupState extends State<_LanguageSwitcherMockup> {
                       color: const Color(0xFFD1D5DB),
                     ),
                   ),
-                SizedBox(width: 3),
+                  SizedBox(width: 3),
                   SvgPicture.asset('assets/Union.svg', height: 32),
                 ],
               ),
@@ -318,19 +324,43 @@ class _LanguageSwitcherMockupState extends State<_LanguageSwitcherMockup> {
               // Gov bar
               Container(
                 width: double.infinity,
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 6,
+                ),
                 color: const Color(0xFF1E3A8A),
                 child: Row(
                   children: [
-                    Image.asset('assets/india_flag.png', height: 14, width: 22,
-                        errorBuilder: (_, __, ___) => const Text('\u{1f1ee}\u{1f1f3}', style: TextStyle(fontSize: 14))),
+                    Image.asset(
+                      'assets/india_flag.png',
+                      height: 14,
+                      width: 22,
+                      errorBuilder: (_, __, ___) => const Text(
+                        '\u{1f1ee}\u{1f1f3}',
+                        style: TextStyle(fontSize: 14),
+                      ),
+                    ),
                     const SizedBox(width: 8),
-                    const Text('Government of India',
-                        style: TextStyle(color: Colors.white, fontSize: 12, fontWeight: FontWeight.w500)),
+                    const Text(
+                      'Government of India',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 12,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
                     const SizedBox(width: 4),
-                    const Icon(Icons.open_in_new, size: 11, color: Colors.white),
+                    const Icon(
+                      Icons.open_in_new,
+                      size: 11,
+                      color: Colors.white,
+                    ),
                     const Spacer(),
-                    const Icon(Icons.accessibility_new, size: 16, color: Colors.white),
+                    const Icon(
+                      Icons.accessibility_new,
+                      size: 16,
+                      color: Colors.white,
+                    ),
                   ],
                 ),
               ),
@@ -358,12 +388,22 @@ class _LanguageSwitcherMockupState extends State<_LanguageSwitcherMockup> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text('Powered by -',
-                        style: TextStyle(fontSize: 11, color: Color(0xFF6B7280))),
+                    const Text(
+                      'Powered by -',
+                      style: TextStyle(fontSize: 11, color: Color(0xFF6B7280)),
+                    ),
                     const SizedBox(width: 4),
-                    Image.asset('assets/digital_india_logo.png', height: 20,
-                        errorBuilder: (_, __, ___) => const Text('Digital India',
-                            style: TextStyle(fontSize: 10, color: Color(0xFF432CBB)))),
+                    Image.asset(
+                      'assets/digital_india_logo.png',
+                      height: 20,
+                      errorBuilder: (_, __, ___) => const Text(
+                        'Digital India',
+                        style: TextStyle(
+                          fontSize: 10,
+                          color: Color(0xFF432CBB),
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -380,7 +420,11 @@ class _LanguageSwitcherMockupState extends State<_LanguageSwitcherMockup> {
       children: [
         const Text(
           'Choose your interface language',
-          style: TextStyle(fontSize: 22, fontWeight: FontWeight.w800, color: _titleColor),
+          style: TextStyle(
+            fontSize: 22,
+            fontWeight: FontWeight.w800,
+            color: _titleColor,
+          ),
         ),
         const SizedBox(height: 8),
         const Text(
@@ -390,8 +434,14 @@ class _LanguageSwitcherMockupState extends State<_LanguageSwitcherMockup> {
         const SizedBox(height: 24),
 
         // Interface Language label
-        const Text('Interface Language',
-            style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: _titleColor)),
+        const Text(
+          'Interface Language',
+          style: TextStyle(
+            fontSize: 13,
+            fontWeight: FontWeight.w600,
+            color: _titleColor,
+          ),
+        ),
         const SizedBox(height: 8),
 
         // Dropdown field
@@ -406,7 +456,10 @@ class _LanguageSwitcherMockupState extends State<_LanguageSwitcherMockup> {
           onSelectionChange: (ids) => setState(() => _selectedIds = ids),
           size: Ux4gDropdownSize.m,
           leadingIcon: Icons.language,
-          valueTextStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
+          valueTextStyle: const TextStyle(
+            fontSize: 14,
+            fontWeight: FontWeight.w400,
+          ),
         ),
         const SizedBox(height: 12),
 

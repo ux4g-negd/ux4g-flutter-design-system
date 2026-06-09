@@ -23,7 +23,8 @@ final applicationSubmittedComponent = WidgetbookComponent(
           label: 'Variant',
           options: const ['Default', 'Card style'],
           initialOption: 'Default',
-          description: 'Switch between the standard flat layout and the card-style layout.',
+          description:
+              'Switch between the standard flat layout and the card-style layout.',
         );
 
         final code = variant == 'Card style'
@@ -94,9 +95,17 @@ class _ReferenceCard extends StatelessWidget {
             children: [
               const Text(
                 'INC-2026-MH-04127',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700, color: _titleColor),
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w700,
+                  color: _titleColor,
+                ),
               ),
-              Icon(Icons.copy_outlined, color: Ux4gPalette.primary300, size: 22),
+              Icon(
+                Icons.copy_outlined,
+                color: Ux4gPalette.primary300,
+                size: 22,
+              ),
             ],
           ),
         ],
@@ -115,12 +124,29 @@ class _NextStepsTimeline extends StatelessWidget {
       children: [
         const Text(
           'What happens next',
-          style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: _titleColor),
+          style: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.w700,
+            color: _titleColor,
+          ),
         ),
         const SizedBox(height: 20),
-        _TimelineItem(number: '1', title: 'Document verification', subtitle: '3-5 working days'),
-        _TimelineItem(number: '2', title: 'Field inspection (if required)', subtitle: 'Inspector will contact you'),
-        _TimelineItem(number: '3', title: 'Certificate issued', subtitle: 'Within 30 days · Legal SLA', isLast: true),
+        _TimelineItem(
+          number: '1',
+          title: 'Document verification',
+          subtitle: '3-5 working days',
+        ),
+        _TimelineItem(
+          number: '2',
+          title: 'Field inspection (if required)',
+          subtitle: 'Inspector will contact you',
+        ),
+        _TimelineItem(
+          number: '3',
+          title: 'Certificate issued',
+          subtitle: 'Within 30 days · Legal SLA',
+          isLast: true,
+        ),
       ],
     );
   }
@@ -157,7 +183,11 @@ class _TimelineItem extends StatelessWidget {
                 child: Center(
                   child: Text(
                     number,
-                    style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: Colors.white),
+                    style: const TextStyle(
+                      fontSize: 13,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.white,
+                    ),
                   ),
                 ),
               ),
@@ -180,7 +210,11 @@ class _TimelineItem extends StatelessWidget {
                 children: [
                   Text(
                     title,
-                    style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w600, color: _titleColor),
+                    style: const TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.w600,
+                      color: _titleColor,
+                    ),
                   ),
                   const SizedBox(height: 2),
                   Text(
@@ -207,13 +241,19 @@ class _NotificationRow extends StatelessWidget {
         const Icon(Icons.phone_android, size: 16, color: _subtleText),
         const SizedBox(width: 6),
         const Expanded(
-          child: Text('SMS sent to +91\n98765 •••••', style: TextStyle(fontSize: 12, color: _subtleText)),
+          child: Text(
+            'SMS sent to +91\n98765 •••••',
+            style: TextStyle(fontSize: 12, color: _subtleText),
+          ),
         ),
         const SizedBox(width: 16),
         const Icon(Icons.email_outlined, size: 16, color: _subtleText),
         const SizedBox(width: 6),
         const Expanded(
-          child: Text('Email sent to\nr••••@gmail.com', style: TextStyle(fontSize: 12, color: _subtleText)),
+          child: Text(
+            'Email sent to\nr••••@gmail.com',
+            style: TextStyle(fontSize: 12, color: _subtleText),
+          ),
         ),
       ],
     );
@@ -262,7 +302,8 @@ class _ActionButtons extends StatelessWidget {
 // Source Code Strings
 // ───────────────────────────────────────────────────────────────────────
 
-const _applicationSubmittedDefaultCode = r"""import 'package:flutter/material.dart';
+const _applicationSubmittedDefaultCode =
+    r"""import 'package:flutter/material.dart';
 import 'package:ux4g_flutter_design_system/ux4g_flutter_design_system.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -443,7 +484,8 @@ class ApplicationSubmittedScreen extends StatelessWidget {
 }
 """;
 
-const _applicationSubmittedCardCode = r"""import 'package:flutter/material.dart';
+const _applicationSubmittedCardCode =
+    r"""import 'package:flutter/material.dart';
 import 'package:ux4g_flutter_design_system/ux4g_flutter_design_system.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -660,7 +702,11 @@ class _ApplicationSubmittedMockup extends StatelessWidget {
                 SvgPicture.asset(
                   _nationalEmblemLogoPath,
                   height: 40,
-                  errorBuilder: (c, e, s) => const Icon(Icons.account_balance, size: 32, color: Colors.grey),
+                  errorBuilder: (c, e, s) => const Icon(
+                    Icons.account_balance,
+                    size: 32,
+                    color: Colors.grey,
+                  ),
                 ),
                 const SizedBox(width: 1),
                 Container(height: 32, width: 1, color: const Color(0xFFD1D5DB)),
@@ -668,7 +714,8 @@ class _ApplicationSubmittedMockup extends StatelessWidget {
                 SvgPicture.asset(
                   _unionLogoPath,
                   height: 32,
-                  errorBuilder: (c, e, s) => const Icon(Icons.blur_on, size: 32, color: Colors.blue),
+                  errorBuilder: (c, e, s) =>
+                      const Icon(Icons.blur_on, size: 32, color: Colors.blue),
                 ),
               ],
             ),
@@ -677,16 +724,30 @@ class _ApplicationSubmittedMockup extends StatelessWidget {
             // Content
             Expanded(
               child: SingleChildScrollView(
-                padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 24,
+                  vertical: 24,
+                ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     // Back link
                     Row(
                       children: [
-                        const Icon(Icons.arrow_back, size: 18, color: _primaryColor),
+                        const Icon(
+                          Icons.arrow_back,
+                          size: 18,
+                          color: _primaryColor,
+                        ),
                         const SizedBox(width: 6),
-                        const Text('Return to services', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500, color: _primaryColor)),
+                        const Text(
+                          'Return to services',
+                          style: TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500,
+                            color: _primaryColor,
+                          ),
+                        ),
                       ],
                     ),
                     const SizedBox(height: 32),
@@ -700,7 +761,12 @@ class _ApplicationSubmittedMockup extends StatelessWidget {
                       child: Text(
                         'Application Submitted\nSuccessfully',
                         textAlign: TextAlign.center,
-                        style: TextStyle(fontSize: 24, fontWeight: FontWeight.w800, color: _titleColor, height: 1.2),
+                        style: TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.w800,
+                          color: _titleColor,
+                          height: 1.2,
+                        ),
                       ),
                     ),
                     const SizedBox(height: 12),
@@ -708,7 +774,11 @@ class _ApplicationSubmittedMockup extends StatelessWidget {
                       child: Text(
                         'Your Income Certificate application is now\nunder review by the Revenue Department.',
                         textAlign: TextAlign.center,
-                        style: TextStyle(fontSize: 14, color: _subtleText, height: 1.4),
+                        style: TextStyle(
+                          fontSize: 14,
+                          color: _subtleText,
+                          height: 1.4,
+                        ),
                       ),
                     ),
                     const SizedBox(height: 28),
@@ -740,12 +810,21 @@ class _ApplicationSubmittedMockup extends StatelessWidget {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  const Text('Powered by -', style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+                  const Text(
+                    'Powered by -',
+                    style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF)),
+                  ),
                   const SizedBox(height: 6),
                   Image.asset(
                     _digitalIndiaLogoPath,
                     height: 24,
-                    errorBuilder: (c, e, s) => const Text('Digital India', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12)),
+                    errorBuilder: (c, e, s) => const Text(
+                      'Digital India',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 12,
+                      ),
+                    ),
                   ),
                 ],
               ),
@@ -767,7 +846,11 @@ class _ApplicationSubmittedCardMockup extends StatelessWidget {
         color: _cardBg,
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
-          BoxShadow(color: Colors.black.withOpacity(0.08), blurRadius: 24, offset: const Offset(0, 6)),
+          BoxShadow(
+            color: Colors.black.withOpacity(0.08),
+            blurRadius: 24,
+            offset: const Offset(0, 6),
+          ),
         ],
       ),
       clipBehavior: Clip.antiAlias,
@@ -789,15 +872,27 @@ class _ApplicationSubmittedCardMockup extends StatelessWidget {
                         SvgPicture.asset(
                           _nationalEmblemLogoPath,
                           height: 40,
-                          errorBuilder: (c, e, s) => const Icon(Icons.account_balance, size: 32, color: Colors.grey),
+                          errorBuilder: (c, e, s) => const Icon(
+                            Icons.account_balance,
+                            size: 32,
+                            color: Colors.grey,
+                          ),
                         ),
                         const SizedBox(width: 1),
-                        Container(height: 32, width: 1, color: const Color(0xFFD1D5DB)),
+                        Container(
+                          height: 32,
+                          width: 1,
+                          color: const Color(0xFFD1D5DB),
+                        ),
                         const SizedBox(width: 1),
                         SvgPicture.asset(
                           _unionLogoPath,
                           height: 32,
-                          errorBuilder: (c, e, s) => const Icon(Icons.blur_on, size: 32, color: Colors.blue),
+                          errorBuilder: (c, e, s) => const Icon(
+                            Icons.blur_on,
+                            size: 32,
+                            color: Colors.blue,
+                          ),
                         ),
                       ],
                     ),
@@ -809,14 +904,22 @@ class _ApplicationSubmittedCardMockup extends StatelessWidget {
               // White card with all content inside
               Expanded(
                 child: SingleChildScrollView(
-                  padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 24,
+                    vertical: 32,
+                  ),
                   child: Container(
                     padding: const EdgeInsets.all(24),
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(16),
                       boxShadow: [
-                        BoxShadow(color: Colors.black.withOpacity(0.06), blurRadius: 20, spreadRadius: 2, offset: const Offset(0, 4)),
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.06),
+                          blurRadius: 20,
+                          spreadRadius: 2,
+                          offset: const Offset(0, 4),
+                        ),
                       ],
                     ),
                     child: Column(
@@ -825,9 +928,20 @@ class _ApplicationSubmittedCardMockup extends StatelessWidget {
                         // Back link
                         Row(
                           children: [
-                            const Icon(Icons.arrow_back, size: 18, color: _primaryColor),
+                            const Icon(
+                              Icons.arrow_back,
+                              size: 18,
+                              color: _primaryColor,
+                            ),
                             const SizedBox(width: 6),
-                            const Text('Return to services', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500, color: _primaryColor)),
+                            const Text(
+                              'Return to services',
+                              style: TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w500,
+                                color: _primaryColor,
+                              ),
+                            ),
                           ],
                         ),
                         const SizedBox(height: 32),
@@ -841,7 +955,12 @@ class _ApplicationSubmittedCardMockup extends StatelessWidget {
                           child: Text(
                             'Application Submitted\nSuccessfully',
                             textAlign: TextAlign.center,
-                            style: TextStyle(fontSize: 24, fontWeight: FontWeight.w800, color: _titleColor, height: 1.2),
+                            style: TextStyle(
+                              fontSize: 24,
+                              fontWeight: FontWeight.w800,
+                              color: _titleColor,
+                              height: 1.2,
+                            ),
                           ),
                         ),
                         const SizedBox(height: 12),
@@ -849,7 +968,11 @@ class _ApplicationSubmittedCardMockup extends StatelessWidget {
                           child: Text(
                             'Your Income Certificate application is now\nunder review by the Revenue Department.',
                             textAlign: TextAlign.center,
-                            style: TextStyle(fontSize: 14, color: _subtleText, height: 1.4),
+                            style: TextStyle(
+                              fontSize: 14,
+                              color: _subtleText,
+                              height: 1.4,
+                            ),
                           ),
                         ),
                         const SizedBox(height: 28),
@@ -872,7 +995,10 @@ class _ApplicationSubmittedCardMockup extends StatelessWidget {
 
               // Actions
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 24,
+                  vertical: 16,
+                ),
                 child: const _ActionButtons(),
               ),
 
@@ -882,12 +1008,21 @@ class _ApplicationSubmittedCardMockup extends StatelessWidget {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    const Text('Powered by -', style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+                    const Text(
+                      'Powered by -',
+                      style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF)),
+                    ),
                     const SizedBox(height: 6),
                     Image.asset(
                       _digitalIndiaLogoPath,
                       height: 24,
-                      errorBuilder: (c, e, s) => const Text('Digital India', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12)),
+                      errorBuilder: (c, e, s) => const Text(
+                        'Digital India',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 12,
+                        ),
+                      ),
                     ),
                   ],
                 ),

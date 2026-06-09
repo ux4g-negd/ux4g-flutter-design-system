@@ -54,7 +54,8 @@ final selectAppointmentTimeComponent = WidgetbookComponent(
 // Source Code String — Expanded View
 // ───────────────────────────────────────────────────────────────────────
 
-const _selectAppointmentTimeExpandedCode = r"""import 'package:flutter/material.dart';
+const _selectAppointmentTimeExpandedCode =
+    r"""import 'package:flutter/material.dart';
 import 'package:ux4g_flutter_design_system/ux4g_flutter_design_system.dart';
 
 class SelectAppointmentTimeScreen extends StatefulWidget {
@@ -229,7 +230,8 @@ class _SelectAppointmentTimeScreenState extends State<SelectAppointmentTimeScree
 // Source Code String — Compact View
 // ───────────────────────────────────────────────────────────────────────
 
-const _selectAppointmentTimeCompactCode = r"""import 'package:flutter/material.dart';
+const _selectAppointmentTimeCompactCode =
+    r"""import 'package:flutter/material.dart';
 import 'package:ux4g_flutter_design_system/ux4g_flutter_design_system.dart';
 
 /// Same as expanded view but with viewMode set to "compact".
@@ -448,41 +450,41 @@ class _SelectAppointmentTimeMockupState
         {
           "date":
               '${now.year}-${now.month.toString().padLeft(2, '0')}-${_pad(now.day + 2)}',
-          "status": "publicHoliday"
+          "status": "publicHoliday",
         },
         {
           "date":
               '${now.year}-${now.month.toString().padLeft(2, '0')}-${_pad(now.day + 4)}',
-          "status": "noSlots"
+          "status": "noSlots",
         },
         {
           "date":
               '${now.year}-${now.month.toString().padLeft(2, '0')}-${_pad(now.day + 6)}',
-          "status": "noSlots"
+          "status": "noSlots",
         },
       ],
       "timeSlots": {
         '${tomorrow.year}-${tomorrow.month.toString().padLeft(2, '0')}-${tomorrow.day.toString().padLeft(2, '0')}':
             [
-          {"time": "9:00 AM", "slotCount": 2, "status": "available"},
-          {"time": "10:00 AM", "slotCount": 1, "status": "limited"},
-          {"time": "11:00 AM", "slotCount": 0, "status": "noSlots"},
-          {"time": "2:00 PM", "slotCount": 3, "status": "available"},
-        ],
+              {"time": "9:00 AM", "slotCount": 2, "status": "available"},
+              {"time": "10:00 AM", "slotCount": 1, "status": "limited"},
+              {"time": "11:00 AM", "slotCount": 0, "status": "noSlots"},
+              {"time": "2:00 PM", "slotCount": 3, "status": "available"},
+            ],
         '${dayAfter.year}-${dayAfter.month.toString().padLeft(2, '0')}-${dayAfter.day.toString().padLeft(2, '0')}':
             [
-          {"time": "9:30 AM", "slotCount": 5, "status": "available"},
-          {"time": "10:30 AM", "slotCount": 2, "status": "available"},
-          {"time": "1:00 PM", "slotCount": 4, "status": "available"},
-          {"time": "3:00 PM", "slotCount": 1, "status": "limited"},
-        ],
+              {"time": "9:30 AM", "slotCount": 5, "status": "available"},
+              {"time": "10:30 AM", "slotCount": 2, "status": "available"},
+              {"time": "1:00 PM", "slotCount": 4, "status": "available"},
+              {"time": "3:00 PM", "slotCount": 1, "status": "limited"},
+            ],
         '${day4.year}-${day4.month.toString().padLeft(2, '0')}-${day4.day.toString().padLeft(2, '0')}':
             [
-          {"time": "11:00 AM", "slotCount": 8, "status": "available"},
-          {"time": "12:00 PM", "slotCount": 6, "status": "available"},
-          {"time": "1:00 PM", "slotCount": 3, "status": "available"},
-          {"time": "2:30 PM", "slotCount": 1, "status": "limited"},
-        ],
+              {"time": "11:00 AM", "slotCount": 8, "status": "available"},
+              {"time": "12:00 PM", "slotCount": 6, "status": "available"},
+              {"time": "1:00 PM", "slotCount": 3, "status": "available"},
+              {"time": "2:30 PM", "slotCount": 1, "status": "limited"},
+            ],
         "default": [
           {"time": "9:00 AM", "slotCount": 4, "status": "available"},
           {"time": "9:30 AM", "slotCount": 6, "status": "available"},
@@ -496,8 +498,8 @@ class _SelectAppointmentTimeMockupState
           {"time": "3:00 PM", "slotCount": 2, "status": "limited"},
           {"time": "3:30 PM", "slotCount": 1, "status": "limited"},
           {"time": "4:00 PM", "slotCount": 7, "status": "available"},
-        ]
-      }
+        ],
+      },
     };
   }
 
@@ -506,12 +508,14 @@ class _SelectAppointmentTimeMockupState
   Map<String, List<Map<String, dynamic>>> _buildMutableSlots() {
     final json = _getJsonInput();
     final raw = json['timeSlots'] as Map<String, dynamic>;
-    return raw.map((key, value) => MapEntry(
-          key,
-          (value as List)
-              .map((e) => Map<String, dynamic>.from(e as Map))
-              .toList(),
-        ));
+    return raw.map(
+      (key, value) => MapEntry(
+        key,
+        (value as List)
+            .map((e) => Map<String, dynamic>.from(e as Map))
+            .toList(),
+      ),
+    );
   }
 
   @override
@@ -526,8 +530,9 @@ class _SelectAppointmentTimeMockupState
         '${date.year}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}';
     if (!_mutableTimeSlots.containsKey(dateStr)) {
       final defaultSlots = _mutableTimeSlots['default'] ?? [];
-      _mutableTimeSlots[dateStr] =
-          defaultSlots.map((e) => Map<String, dynamic>.from(e)).toList();
+      _mutableTimeSlots[dateStr] = defaultSlots
+          .map((e) => Map<String, dynamic>.from(e))
+          .toList();
     }
     return _mutableTimeSlots[dateStr]!
         .map((e) => SlotTimeEntry.fromJson(e))
@@ -536,7 +541,20 @@ class _SelectAppointmentTimeMockupState
 
   String _formatDate(DateTime date) {
     const weekdays = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
-    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    const months = [
+      'Jan',
+      'Feb',
+      'Mar',
+      'Apr',
+      'May',
+      'Jun',
+      'Jul',
+      'Aug',
+      'Sep',
+      'Oct',
+      'Nov',
+      'Dec',
+    ];
     return '${weekdays[date.weekday - 1]}, ${date.day} ${months[date.month - 1]} ${date.year}';
   }
 
@@ -552,8 +570,10 @@ class _SelectAppointmentTimeMockupState
               // App Header
               Container(
                 width: double.infinity,
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 10,
+                ),
                 color: _primaryColor,
                 child: const Row(
                   children: [
@@ -562,9 +582,10 @@ class _SelectAppointmentTimeMockupState
                     Text(
                       'National Services Portal',
                       style: TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.white),
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.white,
+                      ),
                     ),
                   ],
                 ),
@@ -581,9 +602,10 @@ class _SelectAppointmentTimeMockupState
                       const Text(
                         'Select appointment time',
                         style: TextStyle(
-                            fontSize: 22,
-                            fontWeight: FontWeight.w800,
-                            color: _titleColor),
+                          fontSize: 22,
+                          fontWeight: FontWeight.w800,
+                          color: _titleColor,
+                        ),
                       ),
                       const SizedBox(height: 4),
                       const Text(
@@ -596,9 +618,10 @@ class _SelectAppointmentTimeMockupState
                       const Text(
                         'Appointment date & time',
                         style: TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w600,
-                            color: _titleColor),
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
+                          color: _titleColor,
+                        ),
                       ),
                       const SizedBox(height: 8),
 
@@ -606,7 +629,9 @@ class _SelectAppointmentTimeMockupState
                       Container(
                         width: double.infinity,
                         padding: const EdgeInsets.symmetric(
-                            horizontal: 16, vertical: 10),
+                          horizontal: 16,
+                          vertical: 10,
+                        ),
                         decoration: BoxDecoration(
                           border: Border.all(color: _borderColor),
                           borderRadius: BorderRadius.circular(4),
@@ -626,8 +651,10 @@ class _SelectAppointmentTimeMockupState
                                 ),
                               ),
                             ),
-                            const Icon(Icons.keyboard_arrow_down,
-                                color: Color(0xFF6B7280)),
+                            const Icon(
+                              Icons.keyboard_arrow_down,
+                              color: Color(0xFF6B7280),
+                            ),
                           ],
                         ),
                       ),

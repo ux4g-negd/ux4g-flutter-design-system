@@ -77,13 +77,15 @@ class Ux4gCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final materialTheme = Theme.of(context);
     final ux4gColors = materialTheme.extension<Ux4gColors>();
-    final resolvedBg = backgroundColor ?? (ux4gColors?.surface ?? materialTheme.colorScheme.surface);
+    final resolvedBg =
+        backgroundColor ??
+        (ux4gColors?.surface ?? materialTheme.colorScheme.surface);
     final hasBorder = borderWidth > 0 && borderColor != Colors.transparent;
-    
+
     // Determine the best content color based on background brightness
     final bgBrightness = ThemeData.estimateBrightnessForColor(resolvedBg);
-    final contentColor = bgBrightness == Brightness.dark 
-        ? Colors.white 
+    final contentColor = bgBrightness == Brightness.dark
+        ? Colors.white
         : (ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface);
 
     final content = child ?? _buildRichCard(context, contentColor);
@@ -188,11 +190,15 @@ class Ux4gCard extends StatelessWidget {
         fit: BoxFit.cover,
         errorBuilder: (context, error, stackTrace) {
           return Container(
-            color: (ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface).withValues(alpha: 0.08),
+            color:
+                (ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface)
+                    .withValues(alpha: 0.08),
             alignment: Alignment.center,
             child: Icon(
               Icons.image_outlined,
-              color: (ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface).withValues(alpha: 0.4),
+              color:
+                  (ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface)
+                      .withValues(alpha: 0.4),
             ),
           );
         },
@@ -209,8 +215,10 @@ class Ux4gCard extends StatelessWidget {
             left: Ux4gSpace.space8,
             child: Ux4gBadge.label(
               mediaLabelText!,
-              containerColor: ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface,
-              contentColor: ux4gColors?.surface ?? materialTheme.colorScheme.surface,
+              containerColor:
+                  ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface,
+              contentColor:
+                  ux4gColors?.surface ?? materialTheme.colorScheme.surface,
             ),
           ),
       ],
@@ -285,18 +293,27 @@ class _CardContentBlock extends StatelessWidget {
                     if (title != null)
                       Text(
                         title!,
-                        style: (ux4gTypography?.tS_strong ?? materialTheme.textTheme.titleSmall?.copyWith(fontWeight: FontWeight.bold) ?? const TextStyle()).copyWith(
-                          color: contentColor,
-                        ),
+                        style:
+                            (ux4gTypography?.tS_strong ??
+                                    materialTheme.textTheme.titleSmall
+                                        ?.copyWith(
+                                          fontWeight: FontWeight.bold,
+                                        ) ??
+                                    const TextStyle())
+                                .copyWith(color: contentColor),
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                       ),
                     if (subtitle != null)
                       Text(
                         subtitle!,
-                        style: (ux4gTypography?.bS_default ?? materialTheme.textTheme.bodySmall ?? const TextStyle()).copyWith(
-                          color: contentColor.withValues(alpha: 0.5),
-                        ),
+                        style:
+                            (ux4gTypography?.bS_default ??
+                                    materialTheme.textTheme.bodySmall ??
+                                    const TextStyle())
+                                .copyWith(
+                                  color: contentColor.withValues(alpha: 0.5),
+                                ),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                       ),
@@ -317,9 +334,11 @@ class _CardContentBlock extends StatelessWidget {
           const SizedBox(height: Ux4gSpace.space12),
           Text(
             body!,
-            style: (ux4gTypography?.bM_default ?? materialTheme.textTheme.bodyMedium ?? const TextStyle()).copyWith(
-              color: contentColor.withValues(alpha: 0.7),
-            ),
+            style:
+                (ux4gTypography?.bM_default ??
+                        materialTheme.textTheme.bodyMedium ??
+                        const TextStyle())
+                    .copyWith(color: contentColor.withValues(alpha: 0.7)),
             maxLines: 4,
             overflow: TextOverflow.ellipsis,
           ),
@@ -389,9 +408,11 @@ class _CardChipRow extends StatelessWidget {
                 ),
                 child: Text(
                   chip,
-                  style: (ux4gTypography?.lS_default ?? materialTheme.textTheme.labelSmall ?? const TextStyle()).copyWith(
-                    color: contentColor.withValues(alpha: 0.7),
-                  ),
+                  style:
+                      (ux4gTypography?.lS_default ??
+                              materialTheme.textTheme.labelSmall ??
+                              const TextStyle())
+                          .copyWith(color: contentColor.withValues(alpha: 0.7)),
                 ),
               ),
             ];
@@ -405,16 +426,20 @@ class _CardChipRow extends StatelessWidget {
                 ),
                 child: Text(
                   '│',
-                  style: (ux4gTypography?.bS_default ?? materialTheme.textTheme.bodySmall ?? const TextStyle()).copyWith(
-                    color: contentColor.withValues(alpha: 0.3),
-                  ),
+                  style:
+                      (ux4gTypography?.bS_default ??
+                              materialTheme.textTheme.bodySmall ??
+                              const TextStyle())
+                          .copyWith(color: contentColor.withValues(alpha: 0.3)),
                 ),
               ),
             Text(
               chip,
-              style: (ux4gTypography?.lS_default ?? materialTheme.textTheme.labelSmall ?? const TextStyle()).copyWith(
-                color: contentColor.withValues(alpha: 0.6),
-              ),
+              style:
+                  (ux4gTypography?.lS_default ??
+                          materialTheme.textTheme.labelSmall ??
+                          const TextStyle())
+                      .copyWith(color: contentColor.withValues(alpha: 0.6)),
             ),
           ];
         }).toList(),

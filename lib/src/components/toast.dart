@@ -99,9 +99,11 @@ class Ux4gToast extends StatelessWidget {
   Widget build(BuildContext context) {
     final materialTheme = Theme.of(context);
     final ux4gColors = materialTheme.extension<Ux4gColors>();
-    
+
     final screenWidth = MediaQuery.of(context).size.width;
-    final resolvedLayout = layout ?? (screenWidth < 600 ? Ux4gToastLayout.stacked : Ux4gToastLayout.full);
+    final resolvedLayout =
+        layout ??
+        (screenWidth < 600 ? Ux4gToastLayout.stacked : Ux4gToastLayout.full);
     final style = _getToastStyle(category, ux4gColors, materialTheme);
 
     return Material(
@@ -113,8 +115,12 @@ class Ux4gToast extends StatelessWidget {
           borderRadius: BorderRadius.circular(Ux4gRadius.radius4),
         ),
         padding: EdgeInsets.symmetric(
-          horizontal: resolvedLayout == Ux4gToastLayout.full ? Ux4gSpace.space16 : Ux4gSpace.space12,
-          vertical: resolvedLayout == Ux4gToastLayout.full ? Ux4gSpace.space8 : Ux4gSpace.space12,
+          horizontal: resolvedLayout == Ux4gToastLayout.full
+              ? Ux4gSpace.space16
+              : Ux4gSpace.space12,
+          vertical: resolvedLayout == Ux4gToastLayout.full
+              ? Ux4gSpace.space8
+              : Ux4gSpace.space12,
         ),
         child: resolvedLayout == Ux4gToastLayout.full
             ? _FullLayout(
@@ -139,7 +145,11 @@ class Ux4gToast extends StatelessWidget {
     );
   }
 
-  _ToastStyle _getToastStyle(Ux4gToastCategory category, Ux4gColors? ux4gColors, ThemeData materialTheme) {
+  _ToastStyle _getToastStyle(
+    Ux4gToastCategory category,
+    Ux4gColors? ux4gColors,
+    ThemeData materialTheme,
+  ) {
     final surface = ux4gColors?.surface ?? materialTheme.colorScheme.surface;
     final info = ux4gColors?.info ?? Colors.blue;
     final success = ux4gColors?.success ?? Colors.green;
@@ -212,7 +222,8 @@ class _FullLayout extends StatelessWidget {
     final ux4gColors = materialTheme.extension<Ux4gColors>();
     final ux4gTypography = materialTheme.extension<Ux4gTypography>();
 
-    final onSurface = ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
+    final onSurface =
+        ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
 
     return Row(
       children: [
@@ -223,7 +234,12 @@ class _FullLayout extends StatelessWidget {
             children: [
               Text(
                 title,
-                style: (ux4gTypography?.bS_strong ?? materialTheme.textTheme.bodySmall?.copyWith(fontWeight: FontWeight.bold))?.copyWith(color: onSurface),
+                style:
+                    (ux4gTypography?.bS_strong ??
+                            materialTheme.textTheme.bodySmall?.copyWith(
+                              fontWeight: FontWeight.bold,
+                            ))
+                        ?.copyWith(color: onSurface),
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
               ),
@@ -232,7 +248,10 @@ class _FullLayout extends StatelessWidget {
                 Expanded(
                   child: Text(
                     subtitle!,
-                    style: (ux4gTypography?.bS_default ?? materialTheme.textTheme.bodySmall)?.copyWith(color: onSurface.withValues(alpha: 0.6)),
+                    style:
+                        (ux4gTypography?.bS_default ??
+                                materialTheme.textTheme.bodySmall)
+                            ?.copyWith(color: onSurface.withValues(alpha: 0.6)),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
@@ -245,10 +264,17 @@ class _FullLayout extends StatelessWidget {
           GestureDetector(
             onTap: onActionClick,
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: Ux4gSpace.space16),
+              padding: const EdgeInsets.symmetric(
+                horizontal: Ux4gSpace.space16,
+              ),
               child: Text(
                 actionText!,
-                style: (ux4gTypography?.lM_strong ?? materialTheme.textTheme.labelMedium?.copyWith(fontWeight: FontWeight.bold))?.copyWith(color: style.actionColor),
+                style:
+                    (ux4gTypography?.lM_strong ??
+                            materialTheme.textTheme.labelMedium?.copyWith(
+                              fontWeight: FontWeight.bold,
+                            ))
+                        ?.copyWith(color: style.actionColor),
               ),
             ),
           ),
@@ -287,7 +313,8 @@ class _StackedLayout extends StatelessWidget {
     final ux4gColors = materialTheme.extension<Ux4gColors>();
     final ux4gTypography = materialTheme.extension<Ux4gTypography>();
 
-    final onSurface = ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
+    final onSurface =
+        ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
 
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -300,7 +327,12 @@ class _StackedLayout extends StatelessWidget {
             Expanded(
               child: Text(
                 title,
-                style: (ux4gTypography?.bS_strong ?? materialTheme.textTheme.bodySmall?.copyWith(fontWeight: FontWeight.bold))?.copyWith(color: onSurface),
+                style:
+                    (ux4gTypography?.bS_strong ??
+                            materialTheme.textTheme.bodySmall?.copyWith(
+                              fontWeight: FontWeight.bold,
+                            ))
+                        ?.copyWith(color: onSurface),
               ),
             ),
             if (showCloseButton && onCloseClick != null)
@@ -315,7 +347,10 @@ class _StackedLayout extends StatelessWidget {
             padding: const EdgeInsetsDirectional.only(start: 28, top: 2),
             child: Text(
               subtitle!,
-              style: (ux4gTypography?.bS_default ?? materialTheme.textTheme.bodySmall)?.copyWith(color: onSurface.withValues(alpha: 0.6)),
+              style:
+                  (ux4gTypography?.bS_default ??
+                          materialTheme.textTheme.bodySmall)
+                      ?.copyWith(color: onSurface.withValues(alpha: 0.6)),
             ),
           ),
         if (actionText != null && onActionClick != null)
@@ -325,7 +360,12 @@ class _StackedLayout extends StatelessWidget {
               padding: const EdgeInsetsDirectional.only(start: 28, top: 6),
               child: Text(
                 actionText!,
-                style: (ux4gTypography?.lM_strong ?? materialTheme.textTheme.labelMedium?.copyWith(fontWeight: FontWeight.bold))?.copyWith(color: style.actionColor),
+                style:
+                    (ux4gTypography?.lM_strong ??
+                            materialTheme.textTheme.labelMedium?.copyWith(
+                              fontWeight: FontWeight.bold,
+                            ))
+                        ?.copyWith(color: style.actionColor),
               ),
             ),
           ),
@@ -374,10 +414,7 @@ class Ux4gToastHost extends StatelessWidget {
 
             return FadeTransition(
               opacity: animation,
-              child: SlideTransition(
-                position: offsetAnimation,
-                child: child,
-              ),
+              child: SlideTransition(position: offsetAnimation, child: child),
             );
           },
           child: data == null

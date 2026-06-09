@@ -282,8 +282,10 @@ class _StepIcon extends StatelessWidget {
     final ux4gTypography = materialTheme.extension<Ux4gTypography>();
 
     final primary = ux4gColors?.primary ?? materialTheme.colorScheme.primary;
-    final onPrimary = ux4gColors?.onPrimary ?? materialTheme.colorScheme.onPrimary;
-    final onSurface = ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
+    final onPrimary =
+        ux4gColors?.onPrimary ?? materialTheme.colorScheme.onPrimary;
+    final onSurface =
+        ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
     final error = ux4gColors?.error ?? materialTheme.colorScheme.error;
 
     final backgroundColor = isError
@@ -308,19 +310,18 @@ class _StepIcon extends StatelessWidget {
       child = Container(
         width: size * 0.375,
         height: size * 0.375,
-        decoration: BoxDecoration(
-          color: primary,
-          shape: BoxShape.circle,
-        ),
+        decoration: BoxDecoration(color: primary, shape: BoxShape.circle),
       );
     } else {
       child = Text(
         '$stepIndex',
-        style: (ux4gTypography?.lM_default ?? materialTheme.textTheme.labelMedium)?.copyWith(
-          color: onSurface.withValues(alpha: 0.3),
-          fontWeight: FontWeight.bold,
-          fontSize: size * 0.375,
-        ),
+        style:
+            (ux4gTypography?.lM_default ?? materialTheme.textTheme.labelMedium)
+                ?.copyWith(
+                  color: onSurface.withValues(alpha: 0.3),
+                  fontWeight: FontWeight.bold,
+                  fontSize: size * 0.375,
+                ),
       );
     }
 
@@ -382,7 +383,8 @@ class _StepLabels extends StatelessWidget {
     final ux4gTypography = materialTheme.extension<Ux4gTypography>();
 
     final primary = ux4gColors?.primary ?? materialTheme.colorScheme.primary;
-    final onSurface = ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
+    final onSurface =
+        ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
     final error = ux4gColors?.error ?? materialTheme.colorScheme.error;
     final success = ux4gColors?.success ?? Colors.green;
 
@@ -410,21 +412,38 @@ class _StepLabels extends StatelessWidget {
       children: [
         Text(
           title,
-          style: (titleStyle ?? ux4gTypography?.lL_strong ?? materialTheme.textTheme.labelLarge?.copyWith(fontWeight: FontWeight.bold))?.copyWith(color: titleStyle?.color ?? titleColor),
+          style:
+              (titleStyle ??
+                      ux4gTypography?.lL_strong ??
+                      materialTheme.textTheme.labelLarge?.copyWith(
+                        fontWeight: FontWeight.bold,
+                      ))
+                  ?.copyWith(color: titleStyle?.color ?? titleColor),
           textAlign: textAlign,
         ),
         if (description != null)
           Text(
             description!,
-            style: (descriptionStyle ?? ux4gTypography?.lM_default ?? materialTheme.textTheme.labelMedium)?.copyWith(
-              color: descriptionStyle?.color ?? resolvedDescriptionColor,
-            ),
+            style:
+                (descriptionStyle ??
+                        ux4gTypography?.lM_default ??
+                        materialTheme.textTheme.labelMedium)
+                    ?.copyWith(
+                      color:
+                          descriptionStyle?.color ?? resolvedDescriptionColor,
+                    ),
             textAlign: textAlign,
           ),
         if (resolvedStatus != null)
           Text(
             resolvedStatus,
-            style: (statusStyle ?? ux4gTypography?.lS_strong ?? materialTheme.textTheme.labelSmall?.copyWith(fontWeight: FontWeight.bold))?.copyWith(color: statusStyle?.color ?? statusColor),
+            style:
+                (statusStyle ??
+                        ux4gTypography?.lS_strong ??
+                        materialTheme.textTheme.labelSmall?.copyWith(
+                          fontWeight: FontWeight.bold,
+                        ))
+                    ?.copyWith(color: statusStyle?.color ?? statusColor),
             textAlign: textAlign,
           ),
       ],
@@ -449,7 +468,8 @@ class _StepperLine extends StatelessWidget {
     final ux4gColors = materialTheme.extension<Ux4gColors>();
 
     final primary = ux4gColors?.primary ?? materialTheme.colorScheme.primary;
-    final onSurface = ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
+    final onSurface =
+        ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
 
     final targetColor = isCompleted
         ? primary
@@ -572,7 +592,8 @@ class Ux4gCapsuleStepper extends StatelessWidget {
     final ux4gColors = materialTheme.extension<Ux4gColors>();
 
     final primary = ux4gColors?.primary ?? materialTheme.colorScheme.primary;
-    final onSurface = ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
+    final onSurface =
+        ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
 
     final resolvedActiveColor = activeColor ?? primary;
     final resolvedInactiveColor =
@@ -713,12 +734,11 @@ class _StepperIconButton extends StatelessWidget {
     final ux4gColors = materialTheme.extension<Ux4gColors>();
 
     final primary = ux4gColors?.primary ?? materialTheme.colorScheme.primary;
-    final onSurface = ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
+    final onSurface =
+        ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
     final surface = ux4gColors?.surface ?? materialTheme.colorScheme.surface;
 
-    final contentColor = enabled
-        ? primary
-        : onSurface.withValues(alpha: 0.3);
+    final contentColor = enabled ? primary : onSurface.withValues(alpha: 0.3);
     final borderColor = enabled
         ? primary.withValues(alpha: 0.12)
         : onSurface.withValues(alpha: 0.2);
@@ -770,7 +790,8 @@ class _LinearCapsuleStepper extends StatelessWidget {
     final ux4gTypography = materialTheme.extension<Ux4gTypography>();
 
     final primary = ux4gColors?.primary ?? materialTheme.colorScheme.primary;
-    final onSurface = ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
+    final onSurface =
+        ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
 
     final centered = labelAlignment == CrossAxisAlignment.center;
 
@@ -810,20 +831,31 @@ class _LinearCapsuleStepper extends StatelessWidget {
           children: [
             Text(
               'Step $currentStep of $totalSteps',
-              style: (ux4gTypography?.lM_strong ?? materialTheme.textTheme.labelMedium?.copyWith(fontWeight: FontWeight.bold))?.copyWith(color: onSurface),
+              style:
+                  (ux4gTypography?.lM_strong ??
+                          materialTheme.textTheme.labelMedium?.copyWith(
+                            fontWeight: FontWeight.bold,
+                          ))
+                      ?.copyWith(color: onSurface),
               textAlign: centered ? TextAlign.center : TextAlign.start,
             ),
             Text(
               stepLabel,
-              style: (ux4gTypography?.lL_strong ?? materialTheme.textTheme.labelLarge?.copyWith(fontWeight: FontWeight.bold))?.copyWith(color: primary),
+              style:
+                  (ux4gTypography?.lL_strong ??
+                          materialTheme.textTheme.labelLarge?.copyWith(
+                            fontWeight: FontWeight.bold,
+                          ))
+                      ?.copyWith(color: primary),
               textAlign: centered ? TextAlign.center : TextAlign.start,
             ),
             if (description != null)
               Text(
                 description!,
-                style: (ux4gTypography?.lM_default ?? materialTheme.textTheme.labelMedium)?.copyWith(
-                  color: onSurface.withValues(alpha: 0.5),
-                ),
+                style:
+                    (ux4gTypography?.lM_default ??
+                            materialTheme.textTheme.labelMedium)
+                        ?.copyWith(color: onSurface.withValues(alpha: 0.5)),
                 textAlign: centered ? TextAlign.center : TextAlign.start,
               ),
           ],
@@ -861,7 +893,8 @@ class _RightAlignedCapsuleStepper extends StatelessWidget {
     final ux4gTypography = materialTheme.extension<Ux4gTypography>();
 
     final primary = ux4gColors?.primary ?? materialTheme.colorScheme.primary;
-    final onSurface = ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
+    final onSurface =
+        ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -900,21 +933,32 @@ class _RightAlignedCapsuleStepper extends StatelessWidget {
           children: [
             Text(
               'Step $currentStep of $totalSteps',
-              style: (ux4gTypography?.lM_strong ?? materialTheme.textTheme.labelMedium?.copyWith(fontWeight: FontWeight.bold))?.copyWith(color: onSurface),
+              style:
+                  (ux4gTypography?.lM_strong ??
+                          materialTheme.textTheme.labelMedium?.copyWith(
+                            fontWeight: FontWeight.bold,
+                          ))
+                      ?.copyWith(color: onSurface),
             ),
             Column(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 Text(
                   stepLabel,
-                  style: (ux4gTypography?.lL_strong ?? materialTheme.textTheme.labelLarge?.copyWith(fontWeight: FontWeight.bold))?.copyWith(color: primary),
+                  style:
+                      (ux4gTypography?.lL_strong ??
+                              materialTheme.textTheme.labelLarge?.copyWith(
+                                fontWeight: FontWeight.bold,
+                              ))
+                          ?.copyWith(color: primary),
                 ),
                 if (description != null)
                   Text(
                     description!,
-                    style: (ux4gTypography?.lM_default ?? materialTheme.textTheme.labelMedium)?.copyWith(
-                      color: onSurface.withValues(alpha: 0.5),
-                    ),
+                    style:
+                        (ux4gTypography?.lM_default ??
+                                materialTheme.textTheme.labelMedium)
+                            ?.copyWith(color: onSurface.withValues(alpha: 0.5)),
                   ),
               ],
             ),
@@ -953,7 +997,8 @@ class _CenteredCapsuleStepper extends StatelessWidget {
     final ux4gTypography = materialTheme.extension<Ux4gTypography>();
 
     final primary = ux4gColors?.primary ?? materialTheme.colorScheme.primary;
-    final onSurface = ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
+    final onSurface =
+        ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
 
     return Column(
       children: [
@@ -976,7 +1021,12 @@ class _CenteredCapsuleStepper extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Text(
                 'Step $currentStep of $totalSteps',
-                style: (ux4gTypography?.lM_strong ?? materialTheme.textTheme.labelMedium?.copyWith(fontWeight: FontWeight.bold))?.copyWith(color: onSurface),
+                style:
+                    (ux4gTypography?.lM_strong ??
+                            materialTheme.textTheme.labelMedium?.copyWith(
+                              fontWeight: FontWeight.bold,
+                            ))
+                        ?.copyWith(color: onSurface),
               ),
             ),
             _StepperIconButton(
@@ -989,15 +1039,21 @@ class _CenteredCapsuleStepper extends StatelessWidget {
         const SizedBox(height: 16),
         Text(
           stepLabel,
-          style: (ux4gTypography?.lL_strong ?? materialTheme.textTheme.labelLarge?.copyWith(fontWeight: FontWeight.bold))?.copyWith(color: primary),
+          style:
+              (ux4gTypography?.lL_strong ??
+                      materialTheme.textTheme.labelLarge?.copyWith(
+                        fontWeight: FontWeight.bold,
+                      ))
+                  ?.copyWith(color: primary),
           textAlign: TextAlign.center,
         ),
         if (description != null)
           Text(
             description!,
-            style: (ux4gTypography?.lM_default ?? materialTheme.textTheme.labelMedium)?.copyWith(
-              color: onSurface.withValues(alpha: 0.5),
-            ),
+            style:
+                (ux4gTypography?.lM_default ??
+                        materialTheme.textTheme.labelMedium)
+                    ?.copyWith(color: onSurface.withValues(alpha: 0.5)),
             textAlign: TextAlign.center,
           ),
       ],
@@ -1033,7 +1089,8 @@ class _SplitCapsuleStepper extends StatelessWidget {
     final ux4gTypography = materialTheme.extension<Ux4gTypography>();
 
     final primary = ux4gColors?.primary ?? materialTheme.colorScheme.primary;
-    final onSurface = ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
+    final onSurface =
+        ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -1051,11 +1108,21 @@ class _SplitCapsuleStepper extends StatelessWidget {
           children: [
             Text(
               stepLabel,
-              style: (ux4gTypography?.lL_strong ?? materialTheme.textTheme.labelLarge?.copyWith(fontWeight: FontWeight.bold))?.copyWith(color: primary),
+              style:
+                  (ux4gTypography?.lL_strong ??
+                          materialTheme.textTheme.labelLarge?.copyWith(
+                            fontWeight: FontWeight.bold,
+                          ))
+                      ?.copyWith(color: primary),
             ),
             Text(
               'Step $currentStep of $totalSteps',
-              style: (ux4gTypography?.lM_strong ?? materialTheme.textTheme.labelMedium?.copyWith(fontWeight: FontWeight.bold))?.copyWith(color: onSurface),
+              style:
+                  (ux4gTypography?.lM_strong ??
+                          materialTheme.textTheme.labelMedium?.copyWith(
+                            fontWeight: FontWeight.bold,
+                          ))
+                      ?.copyWith(color: onSurface),
             ),
           ],
         ),
@@ -1068,9 +1135,12 @@ class _SplitCapsuleStepper extends StatelessWidget {
                   ? const SizedBox()
                   : Text(
                       description!,
-                      style: (ux4gTypography?.lM_default ?? materialTheme.textTheme.labelMedium)?.copyWith(
-                        color: onSurface.withValues(alpha: 0.5),
-                      ),
+                      style:
+                          (ux4gTypography?.lM_default ??
+                                  materialTheme.textTheme.labelMedium)
+                              ?.copyWith(
+                                color: onSurface.withValues(alpha: 0.5),
+                              ),
                     ),
             ),
             const SizedBox(width: 12),

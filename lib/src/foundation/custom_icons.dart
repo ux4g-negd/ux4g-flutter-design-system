@@ -1,5 +1,5 @@
 /// Custom Icons Helper
-/// 
+///
 /// This file provides utilities for using custom icons from the assets/icons folder.
 ///
 /// ## Usage
@@ -33,7 +33,7 @@
 /// class Ux4gIcons {
 ///   // Material Icons
 ///   static const IconData arrowBack = Icons.arrow_back;
-///   
+///
 ///   // Custom SVG icons (use Image.asset or SvgPicture.asset)
 ///   static const String customIconPath = 'assets/icons/custom.svg';
 /// }

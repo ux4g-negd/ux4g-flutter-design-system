@@ -271,7 +271,10 @@ class _ServiceDetailMockupState extends State<_ServiceDetailMockup> {
               // App Header
               Container(
                 width: double.infinity,
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 10,
+                ),
                 color: _primaryColor,
                 child: const Row(
                   children: [
@@ -279,7 +282,11 @@ class _ServiceDetailMockupState extends State<_ServiceDetailMockup> {
                     SizedBox(width: 12),
                     Text(
                       'National Services Portal',
-                      style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: Colors.white),
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.white,
+                      ),
                     ),
                   ],
                 ),
@@ -294,18 +301,57 @@ class _ServiceDetailMockupState extends State<_ServiceDetailMockup> {
                       // Breadcrumb
                       Container(
                         width: double.infinity,
-                        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 16,
+                          vertical: 10,
+                        ),
                         color: Colors.white,
                         child: const Row(
                           children: [
-                            Icon(Icons.home_outlined, size: 14, color: _subtleText),
+                            Icon(
+                              Icons.home_outlined,
+                              size: 14,
+                              color: _subtleText,
+                            ),
                             SizedBox(width: 4),
-                            Text('Home', style: TextStyle(fontSize: 12, color: _subtleText)),
-                            Text('  ›  ', style: TextStyle(fontSize: 12, color: _subtleText)),
-                            Text('Certificates', style: TextStyle(fontSize: 12, color: _subtleText)),
-                            Text('  ›  ', style: TextStyle(fontSize: 12, color: _subtleText)),
+                            Text(
+                              'Home',
+                              style: TextStyle(
+                                fontSize: 12,
+                                color: _subtleText,
+                              ),
+                            ),
+                            Text(
+                              '  ›  ',
+                              style: TextStyle(
+                                fontSize: 12,
+                                color: _subtleText,
+                              ),
+                            ),
+                            Text(
+                              'Certificates',
+                              style: TextStyle(
+                                fontSize: 12,
+                                color: _subtleText,
+                              ),
+                            ),
+                            Text(
+                              '  ›  ',
+                              style: TextStyle(
+                                fontSize: 12,
+                                color: _subtleText,
+                              ),
+                            ),
                             Flexible(
-                              child: Text('Birth Certificate', style: TextStyle(fontSize: 12, color: _primaryColor, fontWeight: FontWeight.w600), overflow: TextOverflow.ellipsis),
+                              child: Text(
+                                'Birth Certificate',
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  color: _primaryColor,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                                overflow: TextOverflow.ellipsis,
+                              ),
                             ),
                           ],
                         ),
@@ -327,22 +373,46 @@ class _ServiceDetailMockupState extends State<_ServiceDetailMockup> {
                             children: [
                               const Text(
                                 'Birth Certificate',
-                                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w800, color: _titleColor),
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w800,
+                                  color: _titleColor,
+                                ),
                               ),
                               const SizedBox(height: 4),
                               const Text(
                                 'Municipal Corporation · Registration of Births & Deaths',
-                                style: TextStyle(fontSize: 12, color: _subtleText),
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  color: _subtleText,
+                                ),
                               ),
                               const SizedBox(height: 12),
                               Row(
                                 children: [
-                                  const Text('Free', style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: Color(0xFF00522C))),
-                                  const Text('  ·  20 mins online', style: TextStyle(fontSize: 12, color: _subtleText)),
+                                  const Text(
+                                    'Free',
+                                    style: TextStyle(
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w600,
+                                      color: Color(0xFF00522C),
+                                    ),
+                                  ),
+                                  const Text(
+                                    '  ·  20 mins online',
+                                    style: TextStyle(
+                                      fontSize: 12,
+                                      color: _subtleText,
+                                    ),
+                                  ),
                                   const Spacer(),
                                   const Text(
                                     'Government\nverified',
-                                    style: TextStyle(fontSize: 10, color: Color(0xFF00522C), fontWeight: FontWeight.w500),
+                                    style: TextStyle(
+                                      fontSize: 10,
+                                      color: Color(0xFF00522C),
+                                      fontWeight: FontWeight.w500,
+                                    ),
                                     textAlign: TextAlign.center,
                                   ),
                                 ],
@@ -365,7 +435,9 @@ class _ServiceDetailMockupState extends State<_ServiceDetailMockup> {
                       // Tabs
                       Container(
                         decoration: const BoxDecoration(
-                          border: Border(bottom: BorderSide(color: _borderColor)),
+                          border: Border(
+                            bottom: BorderSide(color: _borderColor),
+                          ),
                         ),
                         child: Row(
                           children: [
@@ -385,37 +457,80 @@ class _ServiceDetailMockupState extends State<_ServiceDetailMockup> {
                           children: [
                             const Text(
                               'About this service',
-                              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: _titleColor),
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w700,
+                                color: _titleColor,
+                              ),
                             ),
                             const SizedBox(height: 8),
                             const Text(
                               'A Birth Certificate is the official record of a child\'s birth, issued by the local municipal body. It is required for school admission, passport, Aadhaar enrolment and accessing welfare schemes. Apply online with hospital records, or visit your nearest municipal office.',
-                              style: TextStyle(fontSize: 13, color: _subtleText, height: 1.5),
+                              style: TextStyle(
+                                fontSize: 13,
+                                color: _subtleText,
+                                height: 1.5,
+                              ),
                             ),
                             const SizedBox(height: 20),
 
                             // Info sections with left border
-                            _buildInfoSection('Eligibility', 'Child born within municipal limits. Apply within 21 days of birth; late registration allowed with an affidavit.', _primaryColor),
+                            _buildInfoSection(
+                              'Eligibility',
+                              'Child born within municipal limits. Apply within 21 days of birth; late registration allowed with an affidavit.',
+                              _primaryColor,
+                            ),
                             const SizedBox(height: 16),
-                            _buildInfoSection('Required documents', 'Hospital discharge summary, both parents\' Aadhaar, and proof of address.', _primaryColor),
+                            _buildInfoSection(
+                              'Required documents',
+                              'Hospital discharge summary, both parents\' Aadhaar, and proof of address.',
+                              _primaryColor,
+                            ),
                             const SizedBox(height: 16),
-                            _buildInfoSection('Fee', 'Free within 21 days of birth. ₹20 late fee applies thereafter.', _primaryColor),
+                            _buildInfoSection(
+                              'Fee',
+                              'Free within 21 days of birth. ₹20 late fee applies thereafter.',
+                              _primaryColor,
+                            ),
                             const SizedBox(height: 16),
-                            _buildInfoSection('Processing time', '20 minutes online · up to 7 working days if applied offline.', _primaryColor),
+                            _buildInfoSection(
+                              'Processing time',
+                              '20 minutes online · up to 7 working days if applied offline.',
+                              _primaryColor,
+                            ),
 
                             const SizedBox(height: 24),
 
                             // Related services
                             const Text(
                               'Related services',
-                              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: _titleColor),
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w700,
+                                color: _titleColor,
+                              ),
                             ),
                             const SizedBox(height: 12),
-                            _buildRelatedCard('Death Certificate', 'Municipal Corporation', 'Free', '20 mins'),
+                            _buildRelatedCard(
+                              'Death Certificate',
+                              'Municipal Corporation',
+                              'Free',
+                              '20 mins',
+                            ),
                             const SizedBox(height: 12),
-                            _buildRelatedCard('Marriage Certificate', 'Registrar of Marriages', '₹100', '15 days'),
+                            _buildRelatedCard(
+                              'Marriage Certificate',
+                              'Registrar of Marriages',
+                              '₹100',
+                              '15 days',
+                            ),
                             const SizedBox(height: 12),
-                            _buildRelatedCard('Aadhaar Enrolment', 'UIDAI', 'Free', '90 days'),
+                            _buildRelatedCard(
+                              'Aadhaar Enrolment',
+                              'UIDAI',
+                              'Free',
+                              '90 days',
+                            ),
                           ],
                         ),
                       ),
@@ -456,7 +571,11 @@ class _ServiceDetailMockupState extends State<_ServiceDetailMockup> {
     );
   }
 
-  Widget _buildInfoSection(String title, String description, Color borderColor) {
+  Widget _buildInfoSection(
+    String title,
+    String description,
+    Color borderColor,
+  ) {
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
@@ -470,12 +589,20 @@ class _ServiceDetailMockupState extends State<_ServiceDetailMockup> {
         children: [
           Text(
             title,
-            style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: borderColor),
+            style: TextStyle(
+              fontSize: 13,
+              fontWeight: FontWeight.w600,
+              color: borderColor,
+            ),
           ),
           const SizedBox(height: 4),
           Text(
             description,
-            style: const TextStyle(fontSize: 13, color: _titleColor, height: 1.4),
+            style: const TextStyle(
+              fontSize: 13,
+              color: _titleColor,
+              height: 1.4,
+            ),
           ),
         ],
       ),
@@ -494,14 +621,31 @@ class _ServiceDetailMockupState extends State<_ServiceDetailMockup> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(title, style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: _titleColor)),
+          Text(
+            title,
+            style: const TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.w600,
+              color: _titleColor,
+            ),
+          ),
           const SizedBox(height: 2),
           Text(dept, style: const TextStyle(fontSize: 12, color: _subtleText)),
           const SizedBox(height: 8),
           Row(
             children: [
-              Text(fee, style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: _greenColor)),
-              Text('  ·  $time', style: const TextStyle(fontSize: 12, color: _subtleText)),
+              Text(
+                fee,
+                style: const TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.w600,
+                  color: _greenColor,
+                ),
+              ),
+              Text(
+                '  ·  $time',
+                style: const TextStyle(fontSize: 12, color: _subtleText),
+              ),
             ],
           ),
           const SizedBox(height: 10),

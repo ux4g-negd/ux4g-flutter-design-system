@@ -34,7 +34,7 @@ final fileComplaintComponent = WidgetbookComponent(
           name: 'File a Complaint ($variant)',
           description: isCard
               ? 'Complaint form with subject, category dropdown, and description '
-                'inside a card container with light purple background.'
+                    'inside a card container with light purple background.'
               : 'Complaint form with subject, category dropdown, and description on white background.',
           code: isCard ? _fileComplaintCardCode : _fileComplaintDefaultCode,
           center: true,
@@ -369,7 +369,10 @@ class _FileComplaintMockup extends StatelessWidget {
                 title: '',
                 leadingSpacing: 2,
                 leadingWidgets: [
-                  SvgPicture.asset('assets/national_amblam_logo.svg', height: 40),
+                  SvgPicture.asset(
+                    'assets/national_amblam_logo.svg',
+                    height: 40,
+                  ),
                   const SizedBox(width: 3),
                   SizedBox(
                     height: 32,
@@ -386,19 +389,43 @@ class _FileComplaintMockup extends StatelessWidget {
               // Gov bar
               Container(
                 width: double.infinity,
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 6,
+                ),
                 color: const Color(0xFF1E3A8A),
                 child: Row(
                   children: [
-                    Image.asset('assets/india_flag.png', height: 14, width: 22,
-                        errorBuilder: (_, __, ___) => const Text('\u{1f1ee}\u{1f1f3}', style: TextStyle(fontSize: 14))),
+                    Image.asset(
+                      'assets/india_flag.png',
+                      height: 14,
+                      width: 22,
+                      errorBuilder: (_, __, ___) => const Text(
+                        '\u{1f1ee}\u{1f1f3}',
+                        style: TextStyle(fontSize: 14),
+                      ),
+                    ),
                     const SizedBox(width: 8),
-                    const Text('Government of India',
-                        style: TextStyle(color: Colors.white, fontSize: 12, fontWeight: FontWeight.w500)),
+                    const Text(
+                      'Government of India',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 12,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
                     const SizedBox(width: 4),
-                    const Icon(Icons.open_in_new, size: 11, color: Colors.white),
+                    const Icon(
+                      Icons.open_in_new,
+                      size: 11,
+                      color: Colors.white,
+                    ),
                     const Spacer(),
-                    const Icon(Icons.accessibility_new, size: 16, color: Colors.white),
+                    const Icon(
+                      Icons.accessibility_new,
+                      size: 16,
+                      color: Colors.white,
+                    ),
                   ],
                 ),
               ),
@@ -457,12 +484,22 @@ class _FileComplaintMockup extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text('Powered by -',
-                        style: TextStyle(fontSize: 11, color: Color(0xFF6B7280))),
+                    const Text(
+                      'Powered by -',
+                      style: TextStyle(fontSize: 11, color: Color(0xFF6B7280)),
+                    ),
                     const SizedBox(width: 4),
-                    Image.asset('assets/digital_india_logo.png', height: 20,
-                        errorBuilder: (_, __, ___) => const Text('Digital India',
-                            style: TextStyle(fontSize: 10, color: Color(0xFF432CBB)))),
+                    Image.asset(
+                      'assets/digital_india_logo.png',
+                      height: 20,
+                      errorBuilder: (_, __, ___) => const Text(
+                        'Digital India',
+                        style: TextStyle(
+                          fontSize: 10,
+                          color: Color(0xFF432CBB),
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -479,7 +516,11 @@ class _FileComplaintMockup extends StatelessWidget {
       children: [
         const Text(
           'File a complaint',
-          style: TextStyle(fontSize: 22, fontWeight: FontWeight.w800, color: _titleColor),
+          style: TextStyle(
+            fontSize: 22,
+            fontWeight: FontWeight.w800,
+            color: _titleColor,
+          ),
         ),
         const SizedBox(height: 8),
         const Text(
@@ -489,40 +530,70 @@ class _FileComplaintMockup extends StatelessWidget {
         const SizedBox(height: 24),
 
         // Subject
-        const Text('Subject',
-            style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: _titleColor)),
+        const Text(
+          'Subject',
+          style: TextStyle(
+            fontSize: 13,
+            fontWeight: FontWeight.w600,
+            color: _titleColor,
+          ),
+        ),
         const SizedBox(height: 6),
         Ux4gInputField(
           value: '',
           onValueChange: (_) {},
           placeholder: 'Briefly describe the issue',
-          placeholderStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Color(0xFF9CA3AF)),
+          placeholderStyle: const TextStyle(
+            fontSize: 14,
+            fontWeight: FontWeight.w400,
+            color: Color(0xFF9CA3AF),
+          ),
         ),
         const SizedBox(height: 20),
 
         // Category
-        const Text('Category',
-            style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: _titleColor)),
+        const Text(
+          'Category',
+          style: TextStyle(
+            fontSize: 13,
+            fontWeight: FontWeight.w600,
+            color: _titleColor,
+          ),
+        ),
         const SizedBox(height: 6),
         Ux4gInputField(
           value: '',
           onValueChange: (_) {},
           placeholder: 'Select Category',
-          placeholderStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Color(0xFF9CA3AF)),
+          placeholderStyle: const TextStyle(
+            fontSize: 14,
+            fontWeight: FontWeight.w400,
+            color: Color(0xFF9CA3AF),
+          ),
           trailingIcon: Icons.keyboard_arrow_down,
           readOnly: true,
         ),
         const SizedBox(height: 20),
 
         // Description
-        const Text('Description',
-            style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: _titleColor)),
+        const Text(
+          'Description',
+          style: TextStyle(
+            fontSize: 13,
+            fontWeight: FontWeight.w600,
+            color: _titleColor,
+          ),
+        ),
         const SizedBox(height: 6),
         Ux4gInputField(
           value: '',
           onValueChange: (_) {},
           placeholder: 'Tell us what happened, when, and what you expect',
-          placeholderStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Color(0xFF9CA3AF)),
+          placeholderStyle: const TextStyle(
+            fontSize: 14,
+            fontWeight: FontWeight.w400,
+            color: Color(0xFF9CA3AF),
+          ),
           maxLines: 4,
         ),
       ],

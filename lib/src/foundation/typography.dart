@@ -106,7 +106,10 @@ class Ux4gTypography extends ThemeExtension<Ux4gTypography> {
   ThemeExtension<Ux4gTypography> copyWith() => this; // Simplified for brevity, usually you'd implement this properly
 
   @override
-  ThemeExtension<Ux4gTypography> lerp(ThemeExtension<Ux4gTypography>? other, double t) {
+  ThemeExtension<Ux4gTypography> lerp(
+    ThemeExtension<Ux4gTypography>? other,
+    double t,
+  ) {
     if (other is! Ux4gTypography) return this;
     return other; // Simplified
   }
@@ -114,52 +117,228 @@ class Ux4gTypography extends ThemeExtension<Ux4gTypography> {
 
 // Default Typography Implementation
 final defaultUx4gTypography = Ux4gTypography(
-  hXXS_default: const TextStyle(fontWeight: FontWeight.w600, fontSize: 14, height: 16/14),
-  hXXS_strong: const TextStyle(fontWeight: FontWeight.w700, fontSize: 14, height: 16/14),
-  hXS_default: const TextStyle(fontWeight: FontWeight.w600, fontSize: 16, height: 20/16),
-  hXS_strong: const TextStyle(fontWeight: FontWeight.w700, fontSize: 16, height: 20/16),
-  hS_default: const TextStyle(fontWeight: FontWeight.w600, fontSize: 20, height: 24/20),
-  hS_strong: const TextStyle(fontWeight: FontWeight.w700, fontSize: 20, height: 24/20),
-  hM_default: const TextStyle(fontWeight: FontWeight.w600, fontSize: 24, height: 28/24),
-  hM_strong: const TextStyle(fontWeight: FontWeight.w700, fontSize: 24, height: 28/24),
-  hL_default: const TextStyle(fontWeight: FontWeight.w600, fontSize: 28, height: 32/28),
-  hL_strong: const TextStyle(fontWeight: FontWeight.w700, fontSize: 28, height: 32/28),
-  hXL_default: const TextStyle(fontWeight: FontWeight.w600, fontSize: 32, height: 36/32),
-  hXL_strong: const TextStyle(fontWeight: FontWeight.w700, fontSize: 32, height: 36/32),
-  hXXL_default: const TextStyle(fontWeight: FontWeight.w600, fontSize: 40, height: 44/40),
-  hXXL_strong: const TextStyle(fontWeight: FontWeight.w700, fontSize: 40, height: 44/40),
-  
-  dXS_default: const TextStyle(fontWeight: FontWeight.w600, fontSize: 36, height: 44/36),
-  dXS_strong: const TextStyle(fontWeight: FontWeight.w700, fontSize: 36, height: 44/36),
-  dS_default: const TextStyle(fontWeight: FontWeight.w600, fontSize: 40, height: 52/40),
-  dS_strong: const TextStyle(fontWeight: FontWeight.w700, fontSize: 40, height: 52/40),
-  dM_default: const TextStyle(fontWeight: FontWeight.w600, fontSize: 52, height: 72/52),
-  dM_strong: const TextStyle(fontWeight: FontWeight.w700, fontSize: 52, height: 72/52),
-  dL_default: const TextStyle(fontWeight: FontWeight.w600, fontSize: 60, height: 80/60),
-  dL_strong: const TextStyle(fontWeight: FontWeight.w700, fontSize: 60, height: 80/60),
+  hXXS_default: const TextStyle(
+    fontWeight: FontWeight.w600,
+    fontSize: 14,
+    height: 16 / 14,
+  ),
+  hXXS_strong: const TextStyle(
+    fontWeight: FontWeight.w700,
+    fontSize: 14,
+    height: 16 / 14,
+  ),
+  hXS_default: const TextStyle(
+    fontWeight: FontWeight.w600,
+    fontSize: 16,
+    height: 20 / 16,
+  ),
+  hXS_strong: const TextStyle(
+    fontWeight: FontWeight.w700,
+    fontSize: 16,
+    height: 20 / 16,
+  ),
+  hS_default: const TextStyle(
+    fontWeight: FontWeight.w600,
+    fontSize: 20,
+    height: 24 / 20,
+  ),
+  hS_strong: const TextStyle(
+    fontWeight: FontWeight.w700,
+    fontSize: 20,
+    height: 24 / 20,
+  ),
+  hM_default: const TextStyle(
+    fontWeight: FontWeight.w600,
+    fontSize: 24,
+    height: 28 / 24,
+  ),
+  hM_strong: const TextStyle(
+    fontWeight: FontWeight.w700,
+    fontSize: 24,
+    height: 28 / 24,
+  ),
+  hL_default: const TextStyle(
+    fontWeight: FontWeight.w600,
+    fontSize: 28,
+    height: 32 / 28,
+  ),
+  hL_strong: const TextStyle(
+    fontWeight: FontWeight.w700,
+    fontSize: 28,
+    height: 32 / 28,
+  ),
+  hXL_default: const TextStyle(
+    fontWeight: FontWeight.w600,
+    fontSize: 32,
+    height: 36 / 32,
+  ),
+  hXL_strong: const TextStyle(
+    fontWeight: FontWeight.w700,
+    fontSize: 32,
+    height: 36 / 32,
+  ),
+  hXXL_default: const TextStyle(
+    fontWeight: FontWeight.w600,
+    fontSize: 40,
+    height: 44 / 40,
+  ),
+  hXXL_strong: const TextStyle(
+    fontWeight: FontWeight.w700,
+    fontSize: 40,
+    height: 44 / 40,
+  ),
 
-  bXS_default: const TextStyle(fontWeight: FontWeight.w600, fontSize: 12, height: 16/12),
-  bXS_strong: const TextStyle(fontWeight: FontWeight.w700, fontSize: 12, height: 16/12),
-  bS_default: const TextStyle(fontWeight: FontWeight.w600, fontSize: 14, height: 20/14),
-  bS_strong: const TextStyle(fontWeight: FontWeight.w700, fontSize: 14, height: 20/14),
-  bM_default: const TextStyle(fontWeight: FontWeight.w600, fontSize: 16, height: 24/16),
-  bM_strong: const TextStyle(fontWeight: FontWeight.w700, fontSize: 16, height: 24/16),
-  bL_default: const TextStyle(fontWeight: FontWeight.w600, fontSize: 18, height: 24/18),
-  bL_strong: const TextStyle(fontWeight: FontWeight.w700, fontSize: 18, height: 24/18),
+  dXS_default: const TextStyle(
+    fontWeight: FontWeight.w600,
+    fontSize: 36,
+    height: 44 / 36,
+  ),
+  dXS_strong: const TextStyle(
+    fontWeight: FontWeight.w700,
+    fontSize: 36,
+    height: 44 / 36,
+  ),
+  dS_default: const TextStyle(
+    fontWeight: FontWeight.w600,
+    fontSize: 40,
+    height: 52 / 40,
+  ),
+  dS_strong: const TextStyle(
+    fontWeight: FontWeight.w700,
+    fontSize: 40,
+    height: 52 / 40,
+  ),
+  dM_default: const TextStyle(
+    fontWeight: FontWeight.w600,
+    fontSize: 52,
+    height: 72 / 52,
+  ),
+  dM_strong: const TextStyle(
+    fontWeight: FontWeight.w700,
+    fontSize: 52,
+    height: 72 / 52,
+  ),
+  dL_default: const TextStyle(
+    fontWeight: FontWeight.w600,
+    fontSize: 60,
+    height: 80 / 60,
+  ),
+  dL_strong: const TextStyle(
+    fontWeight: FontWeight.w700,
+    fontSize: 60,
+    height: 80 / 60,
+  ),
 
-  lS_default: const TextStyle(fontWeight: FontWeight.w600, fontSize: 11, height: 14/11),
-  lS_strong: const TextStyle(fontWeight: FontWeight.w700, fontSize: 11, height: 14/11),
-  lM_default: const TextStyle(fontWeight: FontWeight.w600, fontSize: 12, height: 16/12),
-  lM_strong: const TextStyle(fontWeight: FontWeight.w700, fontSize: 12, height: 16/12),
-  lL_default: const TextStyle(fontWeight: FontWeight.w600, fontSize: 14, height: 18/14),
-  lL_strong: const TextStyle(fontWeight: FontWeight.w700, fontSize: 14, height: 18/14),
-  lXL_default: const TextStyle(fontWeight: FontWeight.w600, fontSize: 16, height: 20/16),
-  lXL_strong: const TextStyle(fontWeight: FontWeight.w700, fontSize: 16, height: 20/16),
+  bXS_default: const TextStyle(
+    fontWeight: FontWeight.w600,
+    fontSize: 12,
+    height: 16 / 12,
+  ),
+  bXS_strong: const TextStyle(
+    fontWeight: FontWeight.w700,
+    fontSize: 12,
+    height: 16 / 12,
+  ),
+  bS_default: const TextStyle(
+    fontWeight: FontWeight.w600,
+    fontSize: 14,
+    height: 20 / 14,
+  ),
+  bS_strong: const TextStyle(
+    fontWeight: FontWeight.w700,
+    fontSize: 14,
+    height: 20 / 14,
+  ),
+  bM_default: const TextStyle(
+    fontWeight: FontWeight.w600,
+    fontSize: 16,
+    height: 24 / 16,
+  ),
+  bM_strong: const TextStyle(
+    fontWeight: FontWeight.w700,
+    fontSize: 16,
+    height: 24 / 16,
+  ),
+  bL_default: const TextStyle(
+    fontWeight: FontWeight.w600,
+    fontSize: 18,
+    height: 24 / 18,
+  ),
+  bL_strong: const TextStyle(
+    fontWeight: FontWeight.w700,
+    fontSize: 18,
+    height: 24 / 18,
+  ),
 
-  tS_default: const TextStyle(fontWeight: FontWeight.w600, fontSize: 16, height: 20/16),
-  tS_strong: const TextStyle(fontWeight: FontWeight.w700, fontSize: 16, height: 20/16),
-  tM_default: const TextStyle(fontWeight: FontWeight.w600, fontSize: 20, height: 24/20),
-  tM_strong: const TextStyle(fontWeight: FontWeight.w700, fontSize: 20, height: 24/20),
-  tL_default: const TextStyle(fontWeight: FontWeight.w600, fontSize: 24, height: 28/24),
-  tL_strong: const TextStyle(fontWeight: FontWeight.w700, fontSize: 24, height: 28/24),
+  lS_default: const TextStyle(
+    fontWeight: FontWeight.w600,
+    fontSize: 11,
+    height: 14 / 11,
+  ),
+  lS_strong: const TextStyle(
+    fontWeight: FontWeight.w700,
+    fontSize: 11,
+    height: 14 / 11,
+  ),
+  lM_default: const TextStyle(
+    fontWeight: FontWeight.w600,
+    fontSize: 12,
+    height: 16 / 12,
+  ),
+  lM_strong: const TextStyle(
+    fontWeight: FontWeight.w700,
+    fontSize: 12,
+    height: 16 / 12,
+  ),
+  lL_default: const TextStyle(
+    fontWeight: FontWeight.w600,
+    fontSize: 14,
+    height: 18 / 14,
+  ),
+  lL_strong: const TextStyle(
+    fontWeight: FontWeight.w700,
+    fontSize: 14,
+    height: 18 / 14,
+  ),
+  lXL_default: const TextStyle(
+    fontWeight: FontWeight.w600,
+    fontSize: 16,
+    height: 20 / 16,
+  ),
+  lXL_strong: const TextStyle(
+    fontWeight: FontWeight.w700,
+    fontSize: 16,
+    height: 20 / 16,
+  ),
+
+  tS_default: const TextStyle(
+    fontWeight: FontWeight.w600,
+    fontSize: 16,
+    height: 20 / 16,
+  ),
+  tS_strong: const TextStyle(
+    fontWeight: FontWeight.w700,
+    fontSize: 16,
+    height: 20 / 16,
+  ),
+  tM_default: const TextStyle(
+    fontWeight: FontWeight.w600,
+    fontSize: 20,
+    height: 24 / 20,
+  ),
+  tM_strong: const TextStyle(
+    fontWeight: FontWeight.w700,
+    fontSize: 20,
+    height: 24 / 20,
+  ),
+  tL_default: const TextStyle(
+    fontWeight: FontWeight.w600,
+    fontSize: 24,
+    height: 28 / 24,
+  ),
+  tL_strong: const TextStyle(
+    fontWeight: FontWeight.w700,
+    fontSize: 24,
+    height: 28 / 24,
+  ),
 );

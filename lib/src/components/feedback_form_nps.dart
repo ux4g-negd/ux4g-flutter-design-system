@@ -10,7 +10,7 @@ class Ux4gFeedbackFormNps extends StatefulWidget {
   final int maxLength;
   final VoidCallback? onSkip;
   final VoidCallback? onCloseSuccess;
-  
+
   // Customization
   final String title;
   final String unlikelyLabel;
@@ -59,7 +59,8 @@ class Ux4gFeedbackFormNps extends StatefulWidget {
     this.submitButtonText = 'Submit',
     this.skipButtonText = 'Skip',
     this.successTitle = 'Feedback submitted',
-    this.successMessage = 'Thank you for your feedback. This helps improve government services.',
+    this.successMessage =
+        'Thank you for your feedback. This helps improve government services.',
     this.titleStyle,
     this.successTitleStyle,
     this.successMessageStyle,
@@ -92,7 +93,8 @@ class _Ux4gFeedbackFormNpsState extends State<Ux4gFeedbackFormNps> {
 
   bool get _isFormValid {
     if (_selectedScore == null) return false;
-    if (widget.minWords > 0 && _getWordCount(_comment) < widget.minWords) return false;
+    if (widget.minWords > 0 && _getWordCount(_comment) < widget.minWords)
+      return false;
     return true;
   }
 
@@ -112,7 +114,8 @@ class _Ux4gFeedbackFormNpsState extends State<Ux4gFeedbackFormNps> {
     final ux4gTypography = materialTheme.extension<Ux4gTypography>();
 
     final surface = ux4gColors?.surface ?? materialTheme.colorScheme.surface;
-    final onSurface = ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
+    final onSurface =
+        ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
 
     return Container(
       width: double.infinity,
@@ -130,20 +133,39 @@ class _Ux4gFeedbackFormNpsState extends State<Ux4gFeedbackFormNps> {
           ),
         ],
       ),
-      child: _isSubmitted 
-          ? _buildSuccessView(materialTheme, ux4gColors, ux4gTypography) 
+      child: _isSubmitted
+          ? _buildSuccessView(materialTheme, ux4gColors, ux4gTypography)
           : _buildFormView(materialTheme, ux4gColors, ux4gTypography),
     );
   }
 
-  Widget _buildFormView(ThemeData materialTheme, Ux4gColors? ux4gColors, Ux4gTypography? ux4gTypography) {
+  Widget _buildFormView(
+    ThemeData materialTheme,
+    Ux4gColors? ux4gColors,
+    Ux4gTypography? ux4gTypography,
+  ) {
     final surface = ux4gColors?.surface ?? materialTheme.colorScheme.surface;
-    final onSurface = ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
-    final onBackground = ux4gColors?.onBackground ?? materialTheme.colorScheme.onSurface;
+    final onSurface =
+        ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
+    final onBackground =
+        ux4gColors?.onBackground ?? materialTheme.colorScheme.onSurface;
 
-    final hmStrong = ux4gTypography?.hM_strong ?? materialTheme.textTheme.headlineMedium?.copyWith(fontWeight: FontWeight.w700) ?? const TextStyle(fontWeight: FontWeight.w700, fontSize: 24);
-    final bmStrong = ux4gTypography?.bM_strong ?? materialTheme.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w700) ?? const TextStyle(fontWeight: FontWeight.w700, fontSize: 16);
-    final bxsDefault = ux4gTypography?.bXS_default ?? materialTheme.textTheme.bodySmall ?? const TextStyle(fontSize: 12);
+    final hmStrong =
+        ux4gTypography?.hM_strong ??
+        materialTheme.textTheme.headlineMedium?.copyWith(
+          fontWeight: FontWeight.w700,
+        ) ??
+        const TextStyle(fontWeight: FontWeight.w700, fontSize: 24);
+    final bmStrong =
+        ux4gTypography?.bM_strong ??
+        materialTheme.textTheme.bodyMedium?.copyWith(
+          fontWeight: FontWeight.w700,
+        ) ??
+        const TextStyle(fontWeight: FontWeight.w700, fontSize: 16);
+    final bxsDefault =
+        ux4gTypography?.bXS_default ??
+        materialTheme.textTheme.bodySmall ??
+        const TextStyle(fontSize: 12);
 
     final highlightBg = widget.selectedScoreBackgroundColor;
     final highlightText = widget.selectedScoreTextColor;
@@ -155,7 +177,12 @@ class _Ux4gFeedbackFormNpsState extends State<Ux4gFeedbackFormNps> {
         Text(
           widget.title,
           textAlign: TextAlign.center,
-          style: widget.titleStyle ?? hmStrong.copyWith(color: onBackground, fontWeight: FontWeight.w700),
+          style:
+              widget.titleStyle ??
+              hmStrong.copyWith(
+                color: onBackground,
+                fontWeight: FontWeight.w700,
+              ),
         ),
         const SizedBox(height: 24),
 
@@ -165,7 +192,8 @@ class _Ux4gFeedbackFormNpsState extends State<Ux4gFeedbackFormNps> {
           spacing: 8,
           runSpacing: 8,
           children: List.generate(11, (index) {
-            final isHighlighted = _selectedScore != null && index <= _selectedScore!;
+            final isHighlighted =
+                _selectedScore != null && index <= _selectedScore!;
 
             // Determine colors based on selected score range
             Color scoreBg;
@@ -212,22 +240,26 @@ class _Ux4gFeedbackFormNpsState extends State<Ux4gFeedbackFormNps> {
           }),
         ),
         const SizedBox(height: 12),
-        
+
         // Scale Labels
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
               widget.unlikelyLabel,
-              style: bxsDefault.copyWith(color: onSurface.withValues(alpha: 0.6)),
+              style: bxsDefault.copyWith(
+                color: onSurface.withValues(alpha: 0.6),
+              ),
             ),
             Text(
               widget.likelyLabel,
-              style: bxsDefault.copyWith(color: onSurface.withValues(alpha: 0.6)),
+              style: bxsDefault.copyWith(
+                color: onSurface.withValues(alpha: 0.6),
+              ),
             ),
           ],
         ),
-        
+
         // Conditional Text Area
         if (_selectedScore != null) ...[
           const SizedBox(height: 24),
@@ -246,7 +278,7 @@ class _Ux4gFeedbackFormNpsState extends State<Ux4gFeedbackFormNps> {
         ],
 
         const SizedBox(height: 24),
-        
+
         // Buttons
         Ux4gButton(
           text: widget.submitButtonText,
@@ -258,9 +290,7 @@ class _Ux4gFeedbackFormNpsState extends State<Ux4gFeedbackFormNps> {
           const SizedBox(height: 8),
           TextButton(
             onPressed: widget.onSkip,
-            style: TextButton.styleFrom(
-              foregroundColor: onBackground,
-            ),
+            style: TextButton.styleFrom(foregroundColor: onBackground),
             child: Text(
               widget.skipButtonText,
               style: bmStrong.copyWith(color: onBackground),
@@ -271,13 +301,27 @@ class _Ux4gFeedbackFormNpsState extends State<Ux4gFeedbackFormNps> {
     );
   }
 
-  Widget _buildSuccessView(ThemeData materialTheme, Ux4gColors? ux4gColors, Ux4gTypography? ux4gTypography) {
+  Widget _buildSuccessView(
+    ThemeData materialTheme,
+    Ux4gColors? ux4gColors,
+    Ux4gTypography? ux4gTypography,
+  ) {
     final success = ux4gColors?.success ?? Colors.green;
-    final onBackground = ux4gColors?.onBackground ?? materialTheme.colorScheme.onSurface;
-    final onSurface = ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
+    final onBackground =
+        ux4gColors?.onBackground ?? materialTheme.colorScheme.onSurface;
+    final onSurface =
+        ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
 
-    final hlStrong = ux4gTypography?.hL_strong ?? materialTheme.textTheme.headlineLarge?.copyWith(fontWeight: FontWeight.w700) ?? const TextStyle(fontWeight: FontWeight.w700, fontSize: 28);
-    final bmDefault = ux4gTypography?.bM_default ?? materialTheme.textTheme.bodyMedium ?? const TextStyle(fontSize: 16);
+    final hlStrong =
+        ux4gTypography?.hL_strong ??
+        materialTheme.textTheme.headlineLarge?.copyWith(
+          fontWeight: FontWeight.w700,
+        ) ??
+        const TextStyle(fontWeight: FontWeight.w700, fontSize: 28);
+    final bmDefault =
+        ux4gTypography?.bM_default ??
+        materialTheme.textTheme.bodyMedium ??
+        const TextStyle(fontSize: 16);
 
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -286,7 +330,9 @@ class _Ux4gFeedbackFormNpsState extends State<Ux4gFeedbackFormNps> {
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
           decoration: BoxDecoration(
-            color: widget.successBackgroundColor ?? success.withValues(alpha: 0.12),
+            color:
+                widget.successBackgroundColor ??
+                success.withValues(alpha: 0.12),
             borderRadius: BorderRadius.circular(8),
           ),
           child: Column(
@@ -301,13 +347,20 @@ class _Ux4gFeedbackFormNpsState extends State<Ux4gFeedbackFormNps> {
               Text(
                 widget.successTitle,
                 textAlign: TextAlign.center,
-                style: widget.successTitleStyle ?? hlStrong.copyWith(color: onBackground, fontWeight: FontWeight.w700),
+                style:
+                    widget.successTitleStyle ??
+                    hlStrong.copyWith(
+                      color: onBackground,
+                      fontWeight: FontWeight.w700,
+                    ),
               ),
               const SizedBox(height: 8),
               Text(
                 widget.successMessage,
                 textAlign: TextAlign.center,
-                style: widget.successMessageStyle ?? bmDefault.copyWith(color: onSurface.withValues(alpha: 0.7)),
+                style:
+                    widget.successMessageStyle ??
+                    bmDefault.copyWith(color: onSurface.withValues(alpha: 0.7)),
               ),
             ],
           ),

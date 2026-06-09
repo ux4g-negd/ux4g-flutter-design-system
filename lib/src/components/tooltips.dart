@@ -544,11 +544,20 @@ class _TooltipBubble extends StatelessWidget {
     final ux4gColors = materialTheme.extension<Ux4gColors>();
     final ux4gTypography = materialTheme.extension<Ux4gTypography>();
 
-    final onSurface = ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
+    final onSurface =
+        ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
     final surface = ux4gColors?.surface ?? materialTheme.colorScheme.surface;
-    
-    final lSDefault = ux4gTypography?.lS_default ?? materialTheme.textTheme.labelSmall ?? const TextStyle();
-    final hXXSStrong = ux4gTypography?.hXXS_strong ?? materialTheme.textTheme.titleSmall?.copyWith(fontWeight: FontWeight.bold) ?? const TextStyle();
+
+    final lSDefault =
+        ux4gTypography?.lS_default ??
+        materialTheme.textTheme.labelSmall ??
+        const TextStyle();
+    final hXXSStrong =
+        ux4gTypography?.hXXS_strong ??
+        materialTheme.textTheme.titleSmall?.copyWith(
+          fontWeight: FontWeight.bold,
+        ) ??
+        const TextStyle();
 
     final bgColor = backgroundColor ?? onSurface;
     final fgColor = contentColor ?? surface;
@@ -580,9 +589,7 @@ class _TooltipBubble extends StatelessWidget {
                   Flexible(
                     child: Text(
                       text,
-                      style: (textStyle ?? lSDefault).copyWith(
-                        color: fgColor,
-                      ),
+                      style: (textStyle ?? lSDefault).copyWith(color: fgColor),
                     ),
                   ),
                 ],
@@ -600,9 +607,7 @@ class _TooltipBubble extends StatelessWidget {
                       Flexible(
                         child: Text(
                           title!,
-                          style: hXXSStrong.copyWith(
-                            color: fgColor,
-                          ),
+                          style: hXXSStrong.copyWith(color: fgColor),
                         ),
                       ),
                   ],

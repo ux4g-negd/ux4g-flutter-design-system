@@ -101,9 +101,20 @@ class _Ux4gResultRowState extends State<Ux4gResultRow>
                     children: [
                       Text(
                         widget.title,
-                        style: (ux4gTypography?.bL_strong ?? materialTheme.textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.w600) ?? const TextStyle(fontSize: 14, fontWeight: FontWeight.w600)).copyWith(
-                          color: ux4gColors?.onBackground ?? materialTheme.colorScheme.onSurface,
-                        ),
+                        style:
+                            (ux4gTypography?.bL_strong ??
+                                    materialTheme.textTheme.bodyLarge?.copyWith(
+                                      fontWeight: FontWeight.w600,
+                                    ) ??
+                                    const TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w600,
+                                    ))
+                                .copyWith(
+                                  color:
+                                      ux4gColors?.onBackground ??
+                                      materialTheme.colorScheme.onSurface,
+                                ),
                       ),
                       if (widget.statusTag != null) ...[
                         const SizedBox(height: Ux4gSpace.space8),
@@ -150,7 +161,10 @@ class _Ux4gResultRowState extends State<Ux4gResultRow>
                       duration: const Duration(milliseconds: 200),
                       child: Icon(
                         Icons.keyboard_arrow_down,
-                        color: (ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface).withValues(alpha: 0.8),
+                        color:
+                            (ux4gColors?.onSurface ??
+                                    materialTheme.colorScheme.onSurface)
+                                .withValues(alpha: 0.8),
                       ),
                     ),
                   ],
@@ -192,11 +206,20 @@ class _Ux4gResultRowState extends State<Ux4gResultRow>
                                 children: [
                                   Text(
                                     detail.label,
-                                    style: (ux4gTypography?.bS_default ?? materialTheme.textTheme.bodySmall ?? const TextStyle()).copyWith(
-                                      color: (ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface).withValues(
-                                        alpha: 0.5,
-                                      ),
-                                    ),
+                                    style:
+                                        (ux4gTypography?.bS_default ??
+                                                materialTheme
+                                                    .textTheme
+                                                    .bodySmall ??
+                                                const TextStyle())
+                                            .copyWith(
+                                              color:
+                                                  (ux4gColors?.onSurface ??
+                                                          materialTheme
+                                                              .colorScheme
+                                                              .onSurface)
+                                                      .withValues(alpha: 0.5),
+                                            ),
                                   ),
                                   const SizedBox(height: Ux4gSpace.space4),
                                   Row(
@@ -208,7 +231,10 @@ class _Ux4gResultRowState extends State<Ux4gResultRow>
                                           size: 16,
                                           color:
                                               detail.valueColor ??
-                                              (ux4gColors?.onBackground ?? materialTheme.colorScheme.onSurface),
+                                              (ux4gColors?.onBackground ??
+                                                  materialTheme
+                                                      .colorScheme
+                                                      .onSurface),
                                         ),
                                         const SizedBox(width: Ux4gSpace.space4),
                                       ],
@@ -217,12 +243,31 @@ class _Ux4gResultRowState extends State<Ux4gResultRow>
                                           detail.value,
                                           style:
                                               (detail.isBold
-                                                      ? (ux4gTypography?.bM_strong ?? materialTheme.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold) ?? const TextStyle())
-                                                      : (ux4gTypography?.bM_default ?? materialTheme.textTheme.bodyMedium ?? const TextStyle()))
+                                                      ? (ux4gTypography
+                                                                ?.bM_strong ??
+                                                            materialTheme
+                                                                .textTheme
+                                                                .bodyMedium
+                                                                ?.copyWith(
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold,
+                                                                ) ??
+                                                            const TextStyle())
+                                                      : (ux4gTypography
+                                                                ?.bM_default ??
+                                                            materialTheme
+                                                                .textTheme
+                                                                .bodyMedium ??
+                                                            const TextStyle()))
                                                   .copyWith(
                                                     color:
                                                         detail.valueColor ??
-                                                        (ux4gColors?.onBackground ?? materialTheme.colorScheme.onSurface),
+                                                        (ux4gColors
+                                                                ?.onBackground ??
+                                                            materialTheme
+                                                                .colorScheme
+                                                                .onSurface),
                                                   ),
                                         ),
                                       ),
@@ -242,7 +287,9 @@ class _Ux4gResultRowState extends State<Ux4gResultRow>
           Divider(
             height: 1,
             thickness: 1,
-            color: (ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface).withValues(alpha: 0.1),
+            color:
+                (ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface)
+                    .withValues(alpha: 0.1),
           ),
       ],
     );

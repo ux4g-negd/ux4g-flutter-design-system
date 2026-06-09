@@ -113,9 +113,7 @@ class EmptyStateShowcase extends StatelessWidget {
     return Container(
       width: width ?? 200,
       decoration: BoxDecoration(
-        border: Border.all(
-          color: colors.onSurface.withValues(alpha: 0.12),
-        ),
+        border: Border.all(color: colors.onSurface.withValues(alpha: 0.12)),
         borderRadius: BorderRadius.circular(12),
       ),
       child: child,
