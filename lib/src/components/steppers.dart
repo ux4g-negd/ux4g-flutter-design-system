@@ -13,12 +13,18 @@ class Ux4gStepItem {
   final String? description;
   final String? statusLabel;
   final bool isError;
+  final TextStyle? titleStyle;
+  final TextStyle? descriptionStyle;
+  final TextStyle? statusStyle;
 
   const Ux4gStepItem({
     required this.title,
     this.description,
     this.statusLabel,
     this.isError = false,
+    this.titleStyle,
+    this.descriptionStyle,
+    this.statusStyle,
   });
 }
 
@@ -28,6 +34,7 @@ class Ux4gStepper extends StatelessWidget {
   final StepperOrientation orientation;
   final StepperLineStyle lineStyle;
   final List<Ux4gStepItem> steps;
+  final double stepSize;
 
   const Ux4gStepper({
     super.key,
@@ -36,6 +43,7 @@ class Ux4gStepper extends StatelessWidget {
     this.orientation = StepperOrientation.horizontal,
     this.lineStyle = StepperLineStyle.solid,
     this.steps = const [],
+    this.stepSize = 32,
   });
 
   @override
@@ -46,6 +54,7 @@ class Ux4gStepper extends StatelessWidget {
         currentStep: currentStep,
         lineStyle: lineStyle,
         steps: steps,
+        stepSize: stepSize,
       );
     }
 
@@ -54,6 +63,7 @@ class Ux4gStepper extends StatelessWidget {
       currentStep: currentStep,
       lineStyle: lineStyle,
       steps: steps,
+      stepSize: stepSize,
     );
   }
 }
@@ -63,12 +73,14 @@ class _HorizontalStepper extends StatelessWidget {
   final int currentStep;
   final StepperLineStyle lineStyle;
   final List<Ux4gStepItem> steps;
+  final double stepSize;
 
   const _HorizontalStepper({
     required this.totalSteps,
     required this.currentStep,
     required this.lineStyle,
     required this.steps,
+    required this.stepSize,
   });
 
   @override
@@ -76,7 +88,7 @@ class _HorizontalStepper extends StatelessWidget {
     return Stack(
       children: [
         Padding(
-          padding: const EdgeInsets.only(top: 16),
+          padding: EdgeInsets.only(top: stepSize / 2),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: List.generate(totalSteps, (i) {
@@ -93,7 +105,7 @@ class _HorizontalStepper extends StatelessWidget {
                           lineStyle: lineStyle,
                         ),
                       ),
-                    const SizedBox(width: 32),
+                    SizedBox(width: stepSize),
                     if (i == totalSteps - 1)
                       const Expanded(child: SizedBox())
                     else
@@ -124,8 +136,8 @@ class _HorizontalStepper extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   SizedBox(
-                    width: 32,
-                    height: 32,
+                    width: stepSize,
+                    height: stepSize,
                     child: Center(
                       child: _StepIcon(
                         stepIndex: stepIndex,
@@ -133,6 +145,7 @@ class _HorizontalStepper extends StatelessWidget {
                         isActive: isActive,
                         isPending: isPending,
                         isError: stepData?.isError ?? false,
+                        size: stepSize,
                       ),
                     ),
                   ),
@@ -148,6 +161,9 @@ class _HorizontalStepper extends StatelessWidget {
                       isPending: isPending,
                       isError: stepData?.isError ?? false,
                       textAlign: TextAlign.center,
+                      titleStyle: stepData?.titleStyle,
+                      descriptionStyle: stepData?.descriptionStyle,
+                      statusStyle: stepData?.statusStyle,
                     ),
                   ),
                 ],
@@ -165,12 +181,14 @@ class _VerticalStepper extends StatelessWidget {
   final int currentStep;
   final StepperLineStyle lineStyle;
   final List<Ux4gStepItem> steps;
+  final double stepSize;
 
   const _VerticalStepper({
     required this.totalSteps,
     required this.currentStep,
     required this.lineStyle,
     required this.steps,
+    required this.stepSize,
   });
 
   @override
@@ -187,7 +205,7 @@ class _VerticalStepper extends StatelessWidget {
           child: Row(
             children: [
               SizedBox(
-                width: 32,
+                width: stepSize,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
@@ -197,6 +215,7 @@ class _VerticalStepper extends StatelessWidget {
                       isActive: isActive,
                       isPending: isPending,
                       isError: stepData?.isError ?? false,
+                      size: stepSize,
                     ),
                     if (i < totalSteps - 1)
                       Expanded(
@@ -225,6 +244,9 @@ class _VerticalStepper extends StatelessWidget {
                     isPending: isPending,
                     isError: stepData?.isError ?? false,
                     textAlign: TextAlign.start,
+                    titleStyle: stepData?.titleStyle,
+                    descriptionStyle: stepData?.descriptionStyle,
+                    statusStyle: stepData?.statusStyle,
                   ),
                 ),
               ),
@@ -242,6 +264,7 @@ class _StepIcon extends StatelessWidget {
   final bool isActive;
   final bool isPending;
   final bool isError;
+  final double size;
 
   const _StepIcon({
     required this.stepIndex,
@@ -249,6 +272,7 @@ class _StepIcon extends StatelessWidget {
     required this.isActive,
     required this.isPending,
     required this.isError,
+    required this.size,
   });
 
   @override
@@ -273,15 +297,17 @@ class _StepIcon extends StatelessWidget {
         ? primary
         : onSurface.withValues(alpha: 0.2);
 
+    final iconSize = size * 0.625;
+
     Widget child;
     if (isError) {
-      child = Icon(Ux4gIcons.error, size: 20, color: error);
+      child = Icon(Ux4gIcons.error, size: iconSize, color: error);
     } else if (isCompleted) {
-      child = Icon(Ux4gIcons.check, size: 20, color: onPrimary);
+      child = Icon(Ux4gIcons.check, size: iconSize, color: onPrimary);
     } else if (isActive) {
       child = Container(
-        width: 12,
-        height: 12,
+        width: size * 0.375,
+        height: size * 0.375,
         decoration: BoxDecoration(
           color: primary,
           shape: BoxShape.circle,
@@ -293,6 +319,7 @@ class _StepIcon extends StatelessWidget {
         style: (ux4gTypography?.lM_default ?? materialTheme.textTheme.labelMedium)?.copyWith(
           color: onSurface.withValues(alpha: 0.3),
           fontWeight: FontWeight.bold,
+          fontSize: size * 0.375,
         ),
       );
     }
@@ -303,8 +330,8 @@ class _StepIcon extends StatelessWidget {
       builder: (context, animatedBackground, _) {
         return AnimatedContainer(
           duration: const Duration(milliseconds: 300),
-          width: 32,
-          height: 32,
+          width: size,
+          height: size,
           decoration: BoxDecoration(
             color: animatedBackground,
             shape: BoxShape.circle,
@@ -330,6 +357,9 @@ class _StepLabels extends StatelessWidget {
   final bool isPending;
   final bool isError;
   final TextAlign textAlign;
+  final TextStyle? titleStyle;
+  final TextStyle? descriptionStyle;
+  final TextStyle? statusStyle;
 
   const _StepLabels({
     required this.title,
@@ -340,6 +370,9 @@ class _StepLabels extends StatelessWidget {
     required this.isPending,
     required this.isError,
     required this.textAlign,
+    this.titleStyle,
+    this.descriptionStyle,
+    this.statusStyle,
   });
 
   @override
@@ -361,15 +394,7 @@ class _StepLabels extends StatelessWidget {
     final resolvedDescriptionColor = isError
         ? error
         : onSurface.withValues(alpha: 0.4);
-    final resolvedStatus =
-        statusLabel ??
-        (isError
-            ? 'Error'
-            : isCompleted
-            ? 'Completed'
-            : isActive
-            ? 'In progress'
-            : null);
+    final resolvedStatus = statusLabel;
     final statusColor = isError
         ? error
         : isCompleted
@@ -385,21 +410,21 @@ class _StepLabels extends StatelessWidget {
       children: [
         Text(
           title,
-          style: (ux4gTypography?.lL_strong ?? materialTheme.textTheme.labelLarge?.copyWith(fontWeight: FontWeight.bold))?.copyWith(color: titleColor),
+          style: (titleStyle ?? ux4gTypography?.lL_strong ?? materialTheme.textTheme.labelLarge?.copyWith(fontWeight: FontWeight.bold))?.copyWith(color: titleStyle?.color ?? titleColor),
           textAlign: textAlign,
         ),
         if (description != null)
           Text(
             description!,
-            style: (ux4gTypography?.lM_default ?? materialTheme.textTheme.labelMedium)?.copyWith(
-              color: resolvedDescriptionColor,
+            style: (descriptionStyle ?? ux4gTypography?.lM_default ?? materialTheme.textTheme.labelMedium)?.copyWith(
+              color: descriptionStyle?.color ?? resolvedDescriptionColor,
             ),
             textAlign: textAlign,
           ),
         if (resolvedStatus != null)
           Text(
             resolvedStatus,
-            style: (ux4gTypography?.lS_strong ?? materialTheme.textTheme.labelSmall?.copyWith(fontWeight: FontWeight.bold))?.copyWith(color: statusColor),
+            style: (statusStyle ?? ux4gTypography?.lS_strong ?? materialTheme.textTheme.labelSmall?.copyWith(fontWeight: FontWeight.bold))?.copyWith(color: statusStyle?.color ?? statusColor),
             textAlign: textAlign,
           ),
       ],

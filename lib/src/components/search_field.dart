@@ -134,8 +134,8 @@ class _Ux4gSearchFieldState extends State<Ux4gSearchField> {
         final renderBox = _fieldKey.currentContext?.findRenderObject() as RenderBox?;
         final width = renderBox?.size.width ?? 0;
 
-        // Android logic: only visible if focused AND variant is Autocomplete AND value is not empty
-        final isVisible = _isFocused && widget.variant == Ux4gSearchFieldVariant.autocomplete && widget.value.isNotEmpty;
+        // Show dropdown when focused and has options
+        final isVisible = _isFocused && widget.variant == Ux4gSearchFieldVariant.autocomplete;
 
         if (!isVisible) return const SizedBox.shrink();
 
@@ -149,7 +149,7 @@ class _Ux4gSearchFieldState extends State<Ux4gSearchField> {
               elevation: 6,
               borderRadius: BorderRadius.circular(Ux4gRadius.radius8),
               clipBehavior: Clip.antiAlias,
-              color: surface,
+              color: Colors.white,
               child: _buildAutocompleteList(),
             ),
           ),
@@ -163,18 +163,17 @@ class _Ux4gSearchFieldState extends State<Ux4gSearchField> {
     final ux4gColors = materialTheme.extension<Ux4gColors>();
     final ux4gTypography = materialTheme.extension<Ux4gTypography>();
 
-    final onSurface = ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
+    // Always use light theme colors for dropdown
+    const onSurface = Color(0xFF111827);
+    final primary = ux4gColors?.primary ?? materialTheme.colorScheme.primary;
     final bM_default = ux4gTypography?.bM_default ?? materialTheme.textTheme.bodyMedium ?? const TextStyle(fontSize: 16);
 
     return Container(
-      constraints: const BoxConstraints(maxHeight: 300),
-      padding: const EdgeInsets.all(16),
+      constraints: const BoxConstraints(maxHeight: 350),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text("Searching for '${widget.value}'", style: bM_default.copyWith(color: onSurface)),
-          const SizedBox(height: 16),
           if (widget.isLoading)
             const Center(
               child: Padding(
@@ -194,29 +193,93 @@ class _Ux4gSearchFieldState extends State<Ux4gSearchField> {
             )
           else
             Flexible(
-              child: ListView.builder(
-                shrinkWrap: true,
-                padding: EdgeInsets.zero,
-                itemCount: widget.options.length,
-                itemBuilder: (context, index) {
-                  final option = widget.options[index];
+              child: Builder(
+                builder: (context) {
+                  final query = widget.value.toLowerCase();
+                  // Check if value matches any option's name exactly (means user selected it)
+                  final isExactSelection = widget.options.any((opt) {
+                    final parts = opt.split(' - ');
+                    final name = parts.isNotEmpty ? parts[0].trim() : opt;
+                    return name.toLowerCase() == query;
+                  });
+                  // If exact selection, show all options; otherwise filter
+                  final filteredOptions = isExactSelection || query.isEmpty
+                      ? widget.options
+                      : widget.options.where((option) {
+                          return option.toLowerCase().contains(query);
+                        }).toList();
+
+                  if (filteredOptions.isEmpty) {
+                    return Center(
+                      child: Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Text(
+                          "No results found",
+                          style: bM_default.copyWith(color: onSurface.withValues(alpha: 0.5)),
+                        ),
+                      ),
+                    );
+                  }
+
+                  return ListView.separated(
+                    shrinkWrap: true,
+                    padding: EdgeInsets.zero,
+                    itemCount: filteredOptions.length,
+                    separatorBuilder: (context, index) => const Divider(height: 1, color: Color(0xFFE5E7EB)),
+                    itemBuilder: (context, index) {
+                      final option = filteredOptions[index];
+                      final parts = option.split(' - ');
+                      final name = parts.isNotEmpty ? parts[0].trim() : option;
+                      final subtitle = parts.length > 1 ? parts[1].trim() : null;
+                      final isSelected = widget.value == name || widget.value == option;
+
                   return InkWell(
                     onTap: () {
                       widget.onOptionSelected?.call(option);
-                      widget.onValueChange(option);
+                      widget.onValueChange(name);
                       _focusNode.unfocus();
                     },
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 12),
-                      child: Text(
-                        option,
-                        style: bM_default.copyWith(color: onSurface.withValues(alpha: 0.8)),
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+                      color: isSelected ? const Color(0xFFF2EFFF) : null,
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  name,
+                                  style: TextStyle(
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w600,
+                                    color: isSelected ? const Color(0xFF4A2BC2) : onSurface,
+                                  ),
+                                ),
+                                if (subtitle != null) ...[
+                                  const SizedBox(height: 2),
+                                  Text(
+                                    subtitle,
+                                    style: TextStyle(
+                                      fontSize: 12,
+                                      color: isSelected ? const Color(0xFF4A2BC2) : onSurface.withValues(alpha: 0.5),
+                                    ),
+                                  ),
+                                ],
+                              ],
+                            ),
+                          ),
+                          if (isSelected)
+                            const Icon(Icons.check, color: Color(0xFF4A2BC2), size: 20),
+                        ],
                       ),
                     ),
                   );
                 },
-              ),
-            ),
+              );
+            },
+          ),
+        ),
         ],
       ),
     );
@@ -238,7 +301,8 @@ class _Ux4gSearchFieldState extends State<Ux4gSearchField> {
     final bXS_default = ux4gTypography?.bXS_default ?? materialTheme.textTheme.bodySmall ?? const TextStyle(fontSize: 12);
 
     final isSubmitVariant = widget.variant == Ux4gSearchFieldVariant.searchWithSubmit;
-    final inputShape = isSubmitVariant
+    final showSubmitButton = isSubmitVariant || (widget.variant == Ux4gSearchFieldVariant.autocomplete && widget.onSubmitClick != null);
+    final inputShape = showSubmitButton
         ? const BorderRadius.only(
             topLeft: Radius.circular(Ux4gRadius.radius8),
             bottomLeft: Radius.circular(Ux4gRadius.radius8),
@@ -283,7 +347,7 @@ class _Ux4gSearchFieldState extends State<Ux4gSearchField> {
                           style: bM_default.copyWith(color: widget.enabled ? onSurface : onSurface.withValues(alpha: 0.4)),
                           decoration: InputDecoration(
                             hintText: widget.placeholder,
-                            hintStyle: bM_default.copyWith(color: onSurface.withValues(alpha: 0.4)),
+                            hintStyle: bM_default.copyWith(color: onSurface.withValues(alpha: 0.4), fontWeight: FontWeight.w400),
                             isDense: true,
                             border: InputBorder.none,
                             contentPadding: EdgeInsets.zero,
@@ -313,7 +377,7 @@ class _Ux4gSearchFieldState extends State<Ux4gSearchField> {
                 ),
               ),
             ),
-            if (isSubmitVariant)
+            if (showSubmitButton)
               Container(
                 height: widget.size.height,
                 width: widget.size.height,

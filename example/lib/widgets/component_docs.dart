@@ -18,6 +18,7 @@ class ComponentDocs extends StatefulWidget {
     this.code,
     this.props = const [],
     this.center = true,
+    this.mobileMockup = false,
   });
 
   final String name;
@@ -26,6 +27,7 @@ class ComponentDocs extends StatefulWidget {
   final String? code;
   final List<PropRow> props;
   final bool center;
+  final bool mobileMockup;
 
   @override
   State<ComponentDocs> createState() => _ComponentDocsState();
@@ -39,10 +41,7 @@ class _ComponentDocsState extends State<ComponentDocs>
   @override
   void initState() {
     super.initState();
-    _tab = TabController(
-      length: _getTabCount(),
-      vsync: this,
-    );
+    _tab = TabController(length: _getTabCount(), vsync: this);
   }
 
   @override
@@ -83,7 +82,10 @@ class _ComponentDocsState extends State<ComponentDocs>
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
     final tabs = [
-      const Tab(icon: Icon(Icons.visibility_outlined, size: 16), text: 'Preview'),
+      const Tab(
+        icon: Icon(Icons.visibility_outlined, size: 16),
+        text: 'Preview',
+      ),
       if (widget.code != null)
         const Tab(icon: Icon(Icons.code_outlined, size: 16), text: 'Code'),
       if (widget.props.isNotEmpty)
@@ -91,7 +93,9 @@ class _ComponentDocsState extends State<ComponentDocs>
     ];
 
     return Scaffold(
-      backgroundColor: isDark ? const Color(0xFF0F1117) : const Color(0xFFF8F9FC),
+      backgroundColor: isDark
+          ? const Color(0xFF0F1117)
+          : const Color(0xFFF8F9FC),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(24),
         child: Column(
@@ -110,7 +114,9 @@ class _ComponentDocsState extends State<ComponentDocs>
                             widget.name,
                             style: textTheme.headlineSmall?.copyWith(
                               fontWeight: FontWeight.w700,
-                              color: isDark ? Colors.white : const Color(0xFF0F172A),
+                              color: isDark
+                                  ? Colors.white
+                                  : const Color(0xFF0F172A),
                             ),
                           ),
                           const SizedBox(width: 10),
@@ -158,15 +164,19 @@ class _ComponentDocsState extends State<ComponentDocs>
                             controller: _tab,
                             tabs: tabs,
                             labelColor: scheme.primary,
-                            unselectedLabelColor:
-                                isDark ? Colors.white38 : Colors.black38,
+                            unselectedLabelColor: isDark
+                                ? Colors.white38
+                                : Colors.black38,
                             labelStyle: const TextStyle(
-                                fontSize: 13, fontWeight: FontWeight.w600),
-                            unselectedLabelStyle:
-                                const TextStyle(fontSize: 13),
+                              fontSize: 13,
+                              fontWeight: FontWeight.w600,
+                            ),
+                            unselectedLabelStyle: const TextStyle(fontSize: 13),
                             indicator: UnderlineTabIndicator(
-                              borderSide:
-                                  BorderSide(color: scheme.primary, width: 2.5),
+                              borderSide: BorderSide(
+                                color: scheme.primary,
+                                width: 2.5,
+                              ),
                             ),
                             indicatorSize: TabBarIndicatorSize.label,
                             dividerColor: Colors.transparent,
@@ -181,27 +191,38 @@ class _ComponentDocsState extends State<ComponentDocs>
                                   ? Row(
                                       key: const ValueKey('copied'),
                                       children: [
-                                        Icon(Icons.check_circle,
-                                            size: 16,
-                                            color: Colors.green.shade400),
+                                        Icon(
+                                          Icons.check_circle,
+                                          size: 16,
+                                          color: Colors.green.shade400,
+                                        ),
                                         const SizedBox(width: 4),
-                                        Text('Copied!',
-                                            style: TextStyle(
-                                                fontSize: 12,
-                                                color: Colors.green.shade400,
-                                                fontWeight: FontWeight.w600)),
+                                        Text(
+                                          'Copied!',
+                                          style: TextStyle(
+                                            fontSize: 12,
+                                            color: Colors.green.shade400,
+                                            fontWeight: FontWeight.w600,
+                                          ),
+                                        ),
                                       ],
                                     )
                                   : TextButton.icon(
                                       key: const ValueKey('copy'),
                                       onPressed: _copy,
-                                      icon: const Icon(Icons.copy_outlined,
-                                          size: 14),
-                                      label: const Text('Copy',
-                                          style: TextStyle(fontSize: 12)),
+                                      icon: const Icon(
+                                        Icons.copy_outlined,
+                                        size: 14,
+                                      ),
+                                      label: const Text(
+                                        'Copy',
+                                        style: TextStyle(fontSize: 12),
+                                      ),
                                       style: TextButton.styleFrom(
                                         padding: const EdgeInsets.symmetric(
-                                            horizontal: 10, vertical: 6),
+                                          horizontal: 10,
+                                          vertical: 6,
+                                        ),
                                         minimumSize: Size.zero,
                                         tapTargetSize:
                                             MaterialTapTargetSize.shrinkWrap,
@@ -220,11 +241,23 @@ class _ComponentDocsState extends State<ComponentDocs>
                       controller: _tab,
                       children: [
                         // ── Preview ─────────────────────────────────────
-                        _PreviewPane(child: widget.child, center: widget.center, isDark: isDark),
+                        _PreviewPane(
+                          child: widget.child,
+                          center: widget.center,
+                          isDark: isDark,
+                          mobileMockup: widget.mobileMockup,
+                        ),
 
                         // ── Code ────────────────────────────────────────
                         if (widget.code != null)
-                          _CodePane(code: widget.code!, isDark: isDark),
+                          _CodePane(
+                            // Key tied to the code string forces a full
+                            // rebuild whenever the snippet changes (e.g.
+                            // when a knob switches the parent's code).
+                            key: ValueKey(widget.code),
+                            code: widget.code!,
+                            isDark: isDark,
+                          ),
 
                         // ── Props ────────────────────────────────────────
                         if (widget.props.isNotEmpty)
@@ -245,10 +278,16 @@ class _ComponentDocsState extends State<ComponentDocs>
 // ── Preview pane ──────────────────────────────────────────────────────────────
 
 class _PreviewPane extends StatelessWidget {
-  const _PreviewPane({required this.child, required this.center, required this.isDark});
+  const _PreviewPane({
+    required this.child,
+    required this.center,
+    required this.isDark,
+    required this.mobileMockup,
+  });
   final Widget child;
   final bool center;
   final bool isDark;
+  final bool mobileMockup;
 
   @override
   Widget build(BuildContext context) {
@@ -262,7 +301,15 @@ class _PreviewPane extends StatelessWidget {
       ),
       child: SingleChildScrollView(
         padding: const EdgeInsets.all(24),
-        child: center ? Center(child: child) : child,
+        child: center
+            ? Center(
+                child: mobileMockup
+                    ? SizedBox(width: 360, height: 760, child: child)
+                    : child,
+              )
+            : (mobileMockup
+                ? SizedBox(width: 360, height: 760, child: child)
+                : child),
       ),
     );
   }
@@ -271,7 +318,7 @@ class _PreviewPane extends StatelessWidget {
 // ── Code pane ─────────────────────────────────────────────────────────────────
 
 class _CodePane extends StatelessWidget {
-  const _CodePane({required this.code, required this.isDark});
+  const _CodePane({super.key, required this.code, required this.isDark});
   final String code;
   final bool isDark;
 
@@ -330,7 +377,9 @@ class _PropsPane extends StatelessWidget {
     final headerBg = isDark ? const Color(0xFF1E2130) : const Color(0xFFF1F5F9);
     final border = isDark ? const Color(0xFF2D3348) : const Color(0xFFE2E8F0);
     final textColor = isDark ? Colors.white70 : const Color(0xFF334155);
-    final monoColor = isDark ? const Color(0xFF7DD3FC) : const Color(0xFF0369A1);
+    final monoColor = isDark
+        ? const Color(0xFF7DD3FC)
+        : const Color(0xFF0369A1);
     final requiredColor = const Color(0xFFF87171);
 
     return Container(
@@ -361,73 +410,99 @@ class _PropsPane extends StatelessWidget {
                 TableRow(
                   decoration: BoxDecoration(color: headerBg),
                   children: ['Prop', 'Type', 'Description', 'Default']
-                      .map((h) => Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 14, vertical: 10),
-                            child: Text(h,
-                                style: TextStyle(
-                                    fontWeight: FontWeight.w700,
-                                    fontSize: 12,
-                                    color: textColor)),
-                          ))
-                      .toList(),
-                ),
-                ...props.map((p) => TableRow(
-                      children: [
-                        Padding(
+                      .map(
+                        (h) => Padding(
                           padding: const EdgeInsets.symmetric(
-                              horizontal: 14, vertical: 10),
-                          child: Text.rich(
-                            TextSpan(
-                              children: [
-                                TextSpan(
-                                  text: p.name,
-                                  style: TextStyle(
-                                      fontFamily: 'monospace',
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.w600,
-                                      color: monoColor),
-                                ),
-                                if (p.required)
-                                  TextSpan(
-                                    text: ' *',
-                                    style: TextStyle(
-                                        color: requiredColor,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                              ],
+                            horizontal: 14,
+                            vertical: 10,
+                          ),
+                          child: Text(
+                            h,
+                            style: TextStyle(
+                              fontWeight: FontWeight.w700,
+                              fontSize: 12,
+                              color: textColor,
                             ),
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 14, vertical: 10),
-                          child: Text(p.type,
-                              style: TextStyle(
+                      )
+                      .toList(),
+                ),
+                ...props.map(
+                  (p) => TableRow(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 14,
+                          vertical: 10,
+                        ),
+                        child: Text.rich(
+                          TextSpan(
+                            children: [
+                              TextSpan(
+                                text: p.name,
+                                style: TextStyle(
                                   fontFamily: 'monospace',
-                                  fontSize: 11,
-                                  color: isDark
-                                      ? const Color(0xFF86EFAC)
-                                      : const Color(0xFF15803D))),
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w600,
+                                  color: monoColor,
+                                ),
+                              ),
+                              if (p.required)
+                                TextSpan(
+                                  text: ' *',
+                                  style: TextStyle(
+                                    color: requiredColor,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                            ],
+                          ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 14, vertical: 10),
-                          child: Text(p.description,
-                              style: TextStyle(fontSize: 12, color: textColor)),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 14,
+                          vertical: 10,
                         ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 14, vertical: 10),
-                          child: Text(p.defaultValue,
-                              style: TextStyle(
-                                  fontFamily: 'monospace',
-                                  fontSize: 11,
-                                  color:
-                                      isDark ? Colors.white38 : Colors.black38)),
+                        child: Text(
+                          p.type,
+                          style: TextStyle(
+                            fontFamily: 'monospace',
+                            fontSize: 11,
+                            color: isDark
+                                ? const Color(0xFF86EFAC)
+                                : const Color(0xFF15803D),
+                          ),
                         ),
-                      ],
-                    )),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 14,
+                          vertical: 10,
+                        ),
+                        child: Text(
+                          p.description,
+                          style: TextStyle(fontSize: 12, color: textColor),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 14,
+                          vertical: 10,
+                        ),
+                        child: Text(
+                          p.defaultValue,
+                          style: TextStyle(
+                            fontFamily: 'monospace',
+                            fontSize: 11,
+                            color: isDark ? Colors.white38 : Colors.black38,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
               ],
             ),
           ),
@@ -451,9 +526,7 @@ class _Card extends StatelessWidget {
         color: isDark ? const Color(0xFF161925) : Colors.white,
         borderRadius: BorderRadius.circular(12),
         border: Border.all(
-          color: isDark
-              ? const Color(0xFF2D3348)
-              : const Color(0xFFE2E8F0),
+          color: isDark ? const Color(0xFF2D3348) : const Color(0xFFE2E8F0),
         ),
         boxShadow: [
           BoxShadow(

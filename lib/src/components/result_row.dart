@@ -101,7 +101,7 @@ class _Ux4gResultRowState extends State<Ux4gResultRow>
                     children: [
                       Text(
                         widget.title,
-                        style: (ux4gTypography?.hM_strong ?? materialTheme.textTheme.headlineMedium?.copyWith(fontWeight: FontWeight.bold) ?? const TextStyle()).copyWith(
+                        style: (ux4gTypography?.bL_strong ?? materialTheme.textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.w600) ?? const TextStyle(fontSize: 14, fontWeight: FontWeight.w600)).copyWith(
                           color: ux4gColors?.onBackground ?? materialTheme.colorScheme.onSurface,
                         ),
                       ),
@@ -119,12 +119,8 @@ class _Ux4gResultRowState extends State<Ux4gResultRow>
                         const SizedBox(height: Ux4gSpace.space8),
                         Ux4gUnifiedPillTag(
                           segments: widget.metadataSegments!,
-                          size: Ux4gTagSize.m,
-                          backgroundColor: Colors.transparent,
-                          borderColor: Colors.transparent,
-                          dividerColor: (ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface).withValues(
-                            alpha: 0.15,
-                          ),
+                          size: Ux4gTagSize.l,
+                          borderColor: const Color(0xFFD1D5DB),
                         ),
                       ],
                     ],
