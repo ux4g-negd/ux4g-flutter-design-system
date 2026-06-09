@@ -9,7 +9,7 @@ class Ux4gFeedbackForm extends StatefulWidget {
   final List<String> improvementOptions;
   final int minWords;
   final int maxLength;
-  final void Function(int rating, String selectedChip, String comment) onSubmit;
+  final void Function(int rating, List<String> selectedChips, String comment) onSubmit;
   final VoidCallback? onSkip;
   final VoidCallback? onCloseSuccess;
   final double chipBorderRadius;
@@ -33,9 +33,15 @@ class Ux4gFeedbackForm extends StatefulWidget {
   final IconData ratingIcon;
   final IconData successIcon;
   final Color? activeRatingColor;
+  final Color? lowRatingColor;
+  final Color? highRatingColor;
   final Color? inactiveRatingColor;
   final Color? successIconColor;
   final Color? successBackgroundColor;
+
+  /// Number of stars at or below which [lowRatingColor] is used.
+  /// Default is 2 (1-2 stars = lowRatingColor, 3-5 stars = highRatingColor).
+  final int lowRatingThreshold;
 
   const Ux4gFeedbackForm({
     super.key,
@@ -60,6 +66,9 @@ class Ux4gFeedbackForm extends StatefulWidget {
     this.ratingIcon = Icons.star,
     this.successIcon = Icons.thumb_up,
     this.activeRatingColor,
+    this.lowRatingColor = const Color(0xFFDB372D),
+    this.highRatingColor = const Color(0xFFFADB14),
+    this.lowRatingThreshold = 2,
     this.inactiveRatingColor,
     this.successIconColor,
     this.successBackgroundColor,
@@ -71,7 +80,7 @@ class Ux4gFeedbackForm extends StatefulWidget {
 
 class _Ux4gFeedbackFormState extends State<Ux4gFeedbackForm> {
   int _rating = 0;
-  String? _selectedChip;
+  final Set<String> _selectedChips = {};
   String _comment = '';
   bool _isSubmitted = false;
 
@@ -82,7 +91,7 @@ class _Ux4gFeedbackFormState extends State<Ux4gFeedbackForm> {
 
   bool get _isFormValid {
     if (_rating == 0) return false;
-    if (_selectedChip == null) return false;
+    if (_selectedChips.isEmpty) return false;
     if (_comment.trim().isEmpty) return false;
     if (widget.minWords > 0 && _getWordCount(_comment) < widget.minWords) return false;
     return true;
@@ -90,7 +99,7 @@ class _Ux4gFeedbackFormState extends State<Ux4gFeedbackForm> {
 
   void _handleSubmit() {
     if (_isFormValid) {
-      widget.onSubmit(_rating, _selectedChip!, _comment);
+      widget.onSubmit(_rating, _selectedChips.toList(), _comment);
       setState(() {
         _isSubmitted = true;
       });
@@ -152,6 +161,17 @@ class _Ux4gFeedbackFormState extends State<Ux4gFeedbackForm> {
           children: List.generate(5, (index) {
             final starIndex = index + 1;
             final isSelected = starIndex <= _rating;
+
+            // Determine active color based on rating level
+            Color activeColor;
+            if (widget.activeRatingColor != null) {
+              activeColor = widget.activeRatingColor!;
+            } else if (_rating <= widget.lowRatingThreshold) {
+              activeColor = widget.lowRatingColor ?? info;
+            } else {
+              activeColor = widget.highRatingColor ?? info;
+            }
+
             return GestureDetector(
               onTap: () {
                 setState(() {
@@ -164,8 +184,8 @@ class _Ux4gFeedbackFormState extends State<Ux4gFeedbackForm> {
                 child: Icon(
                   widget.ratingIcon,
                   size: 32,
-                  color: isSelected 
-                      ? (widget.activeRatingColor ?? info) 
+                  color: isSelected
+                      ? activeColor
                       : (widget.inactiveRatingColor ?? onSurface.withValues(alpha: 0.15)),
                 ),
               ),
@@ -186,11 +206,15 @@ class _Ux4gFeedbackFormState extends State<Ux4gFeedbackForm> {
           children: widget.improvementOptions.map((option) {
             return Ux4gChoiceChip(
               text: option,
-              selected: _selectedChip == option,
+              selected: _selectedChips.contains(option),
               borderRadius: widget.chipBorderRadius,
               onClick: () {
                 setState(() {
-                  _selectedChip = option;
+                  if (_selectedChips.contains(option)) {
+                    _selectedChips.remove(option);
+                  } else {
+                    _selectedChips.add(option);
+                  }
                 });
               },
               selectedBackgroundColor: primary.withValues(alpha: 0.1),
@@ -297,7 +321,7 @@ class _Ux4gFeedbackFormState extends State<Ux4gFeedbackForm> {
             } else {
               setState(() {
                 _rating = 0;
-                _selectedChip = null;
+                _selectedChips.clear();
                 _comment = '';
                 _isSubmitted = false;
               });

@@ -8,6 +8,9 @@ enum Ux4gBannerVariant {
   errorLight,
   successLight,
   savingLight,
+  infoLight,
+  neutralLight,
+  primaryLight,
 }
 
 class Ux4gStatusBanner extends StatelessWidget {
@@ -16,20 +19,43 @@ class Ux4gStatusBanner extends StatelessWidget {
   final Widget? trailingIcon;
   final String title;
   final String? subtitle;
+  final TextStyle? titleStyle;
+  final TextStyle? subtitleStyle;
   final Widget? badge;
   final List<Widget>? actions;
   final VoidCallback? onDismiss;
+  final Color? backgroundColor;
+  final Color? borderColor;
+  final WrapAlignment actionsAlignment;
+  final double? width;
+
+  /// Outer margin around the banner. Defaults to
+  /// `EdgeInsets.symmetric(horizontal: 16, vertical: 8)` to preserve
+  /// existing layouts. Set to [EdgeInsets.zero] when the banner sits
+  /// inside a parent that already provides its own padding.
+  final EdgeInsetsGeometry margin;
+
+  /// Inner padding inside the banner card.
+  final EdgeInsetsGeometry padding;
 
   const Ux4gStatusBanner({
     super.key,
     required this.variant,
     required this.title,
     this.subtitle,
+    this.titleStyle,
+    this.subtitleStyle,
     this.badge,
     this.leadingIcon,
     this.trailingIcon,
     this.actions,
     this.onDismiss,
+    this.backgroundColor,
+    this.borderColor,
+    this.actionsAlignment = WrapAlignment.start,
+    this.width,
+    this.margin = const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+    this.padding = const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
   });
 
   @override
@@ -38,50 +64,82 @@ class Ux4gStatusBanner extends StatelessWidget {
     final ux4gColors = materialTheme.extension<Ux4gColors>();
     final ux4gTypography = materialTheme.extension<Ux4gTypography>();
 
-    final onSurface = ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
+    final onSurface =
+        ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
     final surface = ux4gColors?.surface ?? materialTheme.colorScheme.surface;
     final warning = ux4gColors?.warning ?? materialTheme.colorScheme.tertiary;
-    final onWarning = ux4gColors?.onWarning ?? materialTheme.colorScheme.onTertiary;
+    final onWarning =
+        ux4gColors?.onWarning ?? materialTheme.colorScheme.onTertiary;
     final error = ux4gColors?.error ?? materialTheme.colorScheme.error;
     final success = ux4gColors?.success ?? materialTheme.colorScheme.primary;
     final primary = ux4gColors?.primary ?? materialTheme.colorScheme.primary;
-    final onBackground = ux4gColors?.onBackground ?? materialTheme.colorScheme.onSurface;
+    final info = ux4gColors?.info ?? materialTheme.colorScheme.secondary;
+    final onBackground =
+        ux4gColors?.onBackground ?? materialTheme.colorScheme.onSurface;
 
-    final bMStrong = ux4gTypography?.bM_strong ?? materialTheme.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold) ?? const TextStyle();
-    final bMDefault = ux4gTypography?.bM_default ?? materialTheme.textTheme.bodyMedium ?? const TextStyle();
+    final bMStrong =
+        ux4gTypography?.bM_strong ??
+        materialTheme.textTheme.bodyMedium?.copyWith(
+          fontWeight: FontWeight.bold,
+        ) ??
+        const TextStyle();
+    final bMDefault =
+        ux4gTypography?.bM_default ??
+        materialTheme.textTheme.bodyMedium ??
+        const TextStyle();
 
     // Determine colors based on variant
-    Color backgroundColor;
+    Color resolvedBackgroundColor;
+    Color resolvedBorderColor;
     Color textColor = onSurface;
     Color subtitleColor = onSurface.withValues(alpha: 0.6);
 
     switch (variant) {
       case Ux4gBannerVariant.warningLight:
-        backgroundColor = Color.lerp(surface, warning, 0.12)!;
+        resolvedBackgroundColor = Color.lerp(surface, warning, 0.12)!;
+        resolvedBorderColor = warning.withValues(alpha: 0.3);
         break;
       case Ux4gBannerVariant.warningSolid:
-        backgroundColor = warning;
+        resolvedBackgroundColor = warning;
+        resolvedBorderColor = warning;
         textColor = onWarning;
         subtitleColor = onWarning.withValues(alpha: 0.7);
         break;
       case Ux4gBannerVariant.errorLight:
-        backgroundColor = Color.lerp(surface, error, 0.12)!;
+        resolvedBackgroundColor = Color.lerp(surface, error, 0.12)!;
+        resolvedBorderColor = error.withValues(alpha: 0.3);
         break;
       case Ux4gBannerVariant.successLight:
-        backgroundColor = Color.lerp(surface, success, 0.12)!;
+        resolvedBackgroundColor = Color.lerp(surface, success, 0.12)!;
+        resolvedBorderColor = success.withValues(alpha: 0.3);
         break;
       case Ux4gBannerVariant.savingLight:
-        backgroundColor = Color.lerp(surface, primary, 0.12)!;
+      case Ux4gBannerVariant.primaryLight:
+        resolvedBackgroundColor = Color.lerp(surface, primary, 0.12)!;
+        resolvedBorderColor = primary.withValues(alpha: 0.3);
+        break;
+      case Ux4gBannerVariant.infoLight:
+        resolvedBackgroundColor = Color.lerp(surface, info, 0.12)!;
+        resolvedBorderColor = info.withValues(alpha: 0.3);
+        break;
+      case Ux4gBannerVariant.neutralLight:
+        resolvedBackgroundColor = onSurface.withValues(alpha: 0.05);
+        resolvedBorderColor = onSurface.withValues(alpha: 0.15);
         break;
     }
 
+    // Apply overrides
+    resolvedBackgroundColor = backgroundColor ?? resolvedBackgroundColor;
+    resolvedBorderColor = borderColor ?? resolvedBorderColor;
+
     return Container(
-      width: double.infinity,
-      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      width: width ?? double.infinity,
+      padding: padding,
+      margin: margin,
       decoration: BoxDecoration(
-        color: backgroundColor,
+        color: resolvedBackgroundColor,
         borderRadius: BorderRadius.circular(8),
+        border: Border.all(color: resolvedBorderColor),
         boxShadow: [
           BoxShadow(
             color: onBackground.withValues(alpha: 0.05),
@@ -118,8 +176,8 @@ class Ux4gStatusBanner extends StatelessWidget {
                           children: [
                             Text(
                               title,
-                              style: bMStrong.copyWith(
-                                color: textColor,
+                              style: (titleStyle ?? bMStrong).copyWith(
+                                color: titleStyle?.color ?? textColor,
                               ),
                             ),
                             ?badge,
@@ -129,8 +187,8 @@ class Ux4gStatusBanner extends StatelessWidget {
                           const SizedBox(height: 4),
                           Text(
                             subtitle!,
-                            style: bMDefault.copyWith(
-                              color: subtitleColor,
+                            style: (subtitleStyle ?? bMDefault).copyWith(
+                              color: subtitleStyle?.color ?? subtitleColor,
                             ),
                           ),
                         ],
@@ -156,9 +214,9 @@ class Ux4gStatusBanner extends StatelessWidget {
                 ],
               ),
               if (isMobile && actions != null && actions!.isNotEmpty) ...[
-                const SizedBox(height: 16),
+                const SizedBox(height: 4),
                 Wrap(
-                  alignment: WrapAlignment.end,
+                  alignment: actionsAlignment,
                   spacing: 12,
                   runSpacing: 12,
                   children: actions!,
@@ -182,6 +240,8 @@ class Ux4gBannerManager {
     required Ux4gBannerVariant variant,
     required String title,
     String? subtitle,
+    TextStyle? titleStyle,
+    TextStyle? subtitleStyle,
     Widget? badge,
     Widget? leadingIcon,
     Widget? trailingIcon,
@@ -222,6 +282,8 @@ class Ux4gBannerManager {
                 variant: variant,
                 title: title,
                 subtitle: subtitle,
+                titleStyle: titleStyle,
+                subtitleStyle: subtitleStyle,
                 badge: badge,
                 leadingIcon: leadingIcon,
                 trailingIcon: trailingIcon,

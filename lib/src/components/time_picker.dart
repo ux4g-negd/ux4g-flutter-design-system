@@ -95,7 +95,8 @@ class _Ux4gTimePickerState extends State<Ux4gTimePicker> {
             ),
           ),
           child: Row(
-            mainAxisSize: MainAxisSize.min,
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
                 _getFormattedValue(),
@@ -103,7 +104,6 @@ class _Ux4gTimePickerState extends State<Ux4gTimePicker> {
                   color: isSelected ? onSurface : onSurface.withValues(alpha: 0.38),
                 ),
               ),
-              const SizedBox(width: 12),
               Icon(
                 Icons.access_time,
                 size: 20,

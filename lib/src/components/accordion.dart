@@ -41,25 +41,42 @@ class Ux4gAccordion extends StatelessWidget {
     final materialTheme = Theme.of(context);
     final ux4gColors = materialTheme.extension<Ux4gColors>();
     final ux4gTypography = materialTheme.extension<Ux4gTypography>();
-    
-    final resolvedCollapsedBorderColor = collapsedBorderColor ?? (ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface).withValues(alpha: 0.12);
-    final resolvedExpandedBorderColor = expandedBorderColor ?? (ux4gColors?.primary ?? materialTheme.colorScheme.primary);
-    final resolvedTitleColor = titleColor ?? (ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface);
-    final resolvedDisabledTitleColor = disabledTitleColor ?? (ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface).withValues(alpha: 0.38);
-    final resolvedIconColor = iconColor ?? (ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface);
-    final resolvedDisabledIconColor = disabledIconColor ?? (ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface).withValues(alpha: 0.38);
+
+    final resolvedCollapsedBorderColor =
+        collapsedBorderColor ??
+        (ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface)
+            .withValues(alpha: 0.12);
+    final resolvedExpandedBorderColor =
+        expandedBorderColor ??
+        (ux4gColors?.primary ?? materialTheme.colorScheme.primary);
+    final resolvedTitleColor =
+        titleColor ??
+        (ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface);
+    final resolvedDisabledTitleColor =
+        disabledTitleColor ??
+        (ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface)
+            .withValues(alpha: 0.38);
+    final resolvedIconColor =
+        iconColor ??
+        (ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface);
+    final resolvedDisabledIconColor =
+        disabledIconColor ??
+        (ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface)
+            .withValues(alpha: 0.38);
 
     final borderColor = !enabled
         ? Colors.transparent
         : expanded
-        ? resolvedExpandedBorderColor
-        : resolvedCollapsedBorderColor;
+            ? resolvedExpandedBorderColor
+            : resolvedCollapsedBorderColor;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Material(
-          color: backgroundColor ?? (ux4gColors?.surface ?? materialTheme.colorScheme.surface),
+          color:
+              backgroundColor ??
+              (ux4gColors?.surface ?? materialTheme.colorScheme.surface),
           child: InkWell(
             onTap: enabled ? () => onExpandedChange?.call(!expanded) : null,
             child: Container(
@@ -79,9 +96,15 @@ class Ux4gAccordion extends StatelessWidget {
                   Expanded(
                     child: Text(
                       title,
-                      style: (ux4gTypography?.lL_default ?? materialTheme.textTheme.labelLarge ?? const TextStyle()).copyWith(
-                        color: enabled ? resolvedTitleColor : resolvedDisabledTitleColor,
-                      ),
+                      style: (ux4gTypography?.lL_default ??
+                              materialTheme.textTheme.labelLarge ??
+                              const TextStyle())
+                          .copyWith(
+                            color:
+                                enabled
+                                    ? resolvedTitleColor
+                                    : resolvedDisabledTitleColor,
+                          ),
                     ),
                   ),
                   const SizedBox(width: Ux4gSpace.space8),
@@ -91,7 +114,10 @@ class Ux4gAccordion extends StatelessWidget {
                     child: Icon(
                       Icons.keyboard_arrow_down_outlined,
                       size: Ux4gSpace.space16,
-                      color: enabled ? resolvedIconColor : resolvedDisabledIconColor,
+                      color:
+                          enabled
+                              ? resolvedIconColor
+                              : resolvedDisabledIconColor,
                     ),
                   ),
                 ],
@@ -104,18 +130,22 @@ class Ux4gAccordion extends StatelessWidget {
             duration: const Duration(milliseconds: 220),
             curve: Curves.easeInOut,
             alignment: Alignment.topCenter,
-            child: expanded && enabled
-                ? Container(
-                    width: double.infinity,
-                    padding: const EdgeInsets.only(
-                      top: Ux4gSpace.space12,
-                      left: Ux4gSpace.space12,
-                      right: Ux4gSpace.space12,
-                    ),
-                    color: contentBackgroundColor ?? (ux4gColors?.surface ?? materialTheme.colorScheme.surface),
-                    child: child,
-                  )
-                : const SizedBox.shrink(),
+            child:
+                expanded && enabled
+                    ? Container(
+                        width: double.infinity,
+                        padding: const EdgeInsets.only(
+                          top: Ux4gSpace.space12,
+                          left: Ux4gSpace.space12,
+                          right: Ux4gSpace.space12,
+                        ),
+                        color:
+                            contentBackgroundColor ??
+                            (ux4gColors?.surface ??
+                                materialTheme.colorScheme.surface),
+                        child: child,
+                      )
+                    : const SizedBox.shrink(),
           ),
         ),
       ],

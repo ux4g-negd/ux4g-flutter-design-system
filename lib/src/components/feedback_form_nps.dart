@@ -33,6 +33,18 @@ class Ux4gFeedbackFormNps extends StatefulWidget {
   final Color? selectedScoreBackgroundColor;
   final Color? selectedScoreTextColor;
 
+  /// Colors for low scores (0-3)
+  final Color lowScoreBackgroundColor;
+  final Color lowScoreTextColor;
+
+  /// Colors for medium scores (4-6)
+  final Color mediumScoreBackgroundColor;
+  final Color mediumScoreTextColor;
+
+  /// Colors for high scores (7-10)
+  final Color highScoreBackgroundColor;
+  final Color highScoreTextColor;
+
   const Ux4gFeedbackFormNps({
     super.key,
     required this.onSubmit,
@@ -56,6 +68,12 @@ class Ux4gFeedbackFormNps extends StatefulWidget {
     this.successBackgroundColor,
     this.selectedScoreBackgroundColor,
     this.selectedScoreTextColor,
+    this.lowScoreBackgroundColor = const Color(0xFFFFECEE),
+    this.lowScoreTextColor = const Color(0xFF8A1A16),
+    this.mediumScoreBackgroundColor = const Color(0xFFFFE7BF),
+    this.mediumScoreTextColor = const Color(0xFFAD4E00),
+    this.highScoreBackgroundColor = const Color(0xFFDDF8D8),
+    this.highScoreTextColor = const Color(0xFF00522C),
   });
 
   @override
@@ -119,7 +137,6 @@ class _Ux4gFeedbackFormNpsState extends State<Ux4gFeedbackFormNps> {
   }
 
   Widget _buildFormView(ThemeData materialTheme, Ux4gColors? ux4gColors, Ux4gTypography? ux4gTypography) {
-    final success = ux4gColors?.success ?? Colors.green;
     final surface = ux4gColors?.surface ?? materialTheme.colorScheme.surface;
     final onSurface = ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
     final onBackground = ux4gColors?.onBackground ?? materialTheme.colorScheme.onSurface;
@@ -128,8 +145,8 @@ class _Ux4gFeedbackFormNpsState extends State<Ux4gFeedbackFormNps> {
     final bmStrong = ux4gTypography?.bM_strong ?? materialTheme.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w700) ?? const TextStyle(fontWeight: FontWeight.w700, fontSize: 16);
     final bxsDefault = ux4gTypography?.bXS_default ?? materialTheme.textTheme.bodySmall ?? const TextStyle(fontSize: 12);
 
-    final highlightBg = widget.selectedScoreBackgroundColor ?? success.withValues(alpha: 0.12);
-    final highlightText = widget.selectedScoreTextColor ?? success;
+    final highlightBg = widget.selectedScoreBackgroundColor;
+    final highlightText = widget.selectedScoreTextColor;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -141,7 +158,7 @@ class _Ux4gFeedbackFormNpsState extends State<Ux4gFeedbackFormNps> {
           style: widget.titleStyle ?? hmStrong.copyWith(color: onBackground, fontWeight: FontWeight.w700),
         ),
         const SizedBox(height: 24),
-        
+
         // NPS Scale 0-10
         Wrap(
           alignment: WrapAlignment.center,
@@ -149,6 +166,24 @@ class _Ux4gFeedbackFormNpsState extends State<Ux4gFeedbackFormNps> {
           runSpacing: 8,
           children: List.generate(11, (index) {
             final isHighlighted = _selectedScore != null && index <= _selectedScore!;
+
+            // Determine colors based on selected score range
+            Color scoreBg;
+            Color scoreText;
+            if (highlightBg != null && highlightText != null) {
+              scoreBg = highlightBg;
+              scoreText = highlightText;
+            } else if (_selectedScore != null && _selectedScore! <= 3) {
+              scoreBg = widget.lowScoreBackgroundColor;
+              scoreText = widget.lowScoreTextColor;
+            } else if (_selectedScore != null && _selectedScore! <= 6) {
+              scoreBg = widget.mediumScoreBackgroundColor;
+              scoreText = widget.mediumScoreTextColor;
+            } else {
+              scoreBg = widget.highScoreBackgroundColor;
+              scoreText = widget.highScoreTextColor;
+            }
+
             return GestureDetector(
               onTap: () {
                 setState(() {
@@ -160,16 +195,16 @@ class _Ux4gFeedbackFormNpsState extends State<Ux4gFeedbackFormNps> {
                 height: 32,
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
-                  color: isHighlighted ? highlightBg : surface,
+                  color: isHighlighted ? scoreBg : surface,
                   borderRadius: BorderRadius.circular(4),
-                  border: isHighlighted 
-                      ? null 
+                  border: isHighlighted
+                      ? null
                       : Border.all(color: onSurface.withValues(alpha: 0.15)),
                 ),
                 child: Text(
                   '$index',
                   style: bmStrong.copyWith(
-                    color: isHighlighted ? highlightText : onBackground,
+                    color: isHighlighted ? scoreText : onBackground,
                   ),
                 ),
               ),

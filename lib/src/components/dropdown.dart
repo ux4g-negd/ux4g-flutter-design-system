@@ -163,6 +163,9 @@ class Ux4gSelectionDropdown extends StatefulWidget {
   final Ux4gDropdownStatus status;
   final bool searchEnabled;
   final Ux4gDropdownFilterType filterType;
+  final TextStyle? labelTextStyle;
+  final TextStyle? valueTextStyle;
+  final IconData? leadingIcon;
 
   const Ux4gSelectionDropdown({
     super.key,
@@ -177,6 +180,9 @@ class Ux4gSelectionDropdown extends StatefulWidget {
     this.status = Ux4gDropdownStatus.defaultStatus,
     this.searchEnabled = false,
     this.filterType = Ux4gDropdownFilterType.contains,
+    this.labelTextStyle,
+    this.valueTextStyle,
+    this.leadingIcon,
   });
 
   @override
@@ -428,7 +434,7 @@ class _Ux4gSelectionDropdownState extends State<Ux4gSelectionDropdown> {
         if (widget.label != null) ...[
           Text(
             widget.label!,
-            style: (uxTypography?.hS_default ?? materialTheme.textTheme.headlineSmall)?.copyWith(
+            style: widget.labelTextStyle ?? (uxTypography?.hS_default ?? materialTheme.textTheme.headlineSmall)?.copyWith(
               color: widget.status == Ux4gDropdownStatus.disabled
                   ? (uxColors?.onSurface ?? materialTheme.colorScheme.onSurface).withValues(alpha: 0.38)
                   : (uxColors?.onSurface ?? materialTheme.colorScheme.onSurface),
@@ -456,6 +462,10 @@ class _Ux4gSelectionDropdownState extends State<Ux4gSelectionDropdown> {
               ),
               child: Row(
                 children: [
+                  if (widget.leadingIcon != null) ...[
+                    Icon(widget.leadingIcon, size: 20, color: (uxColors?.onSurface ?? materialTheme.colorScheme.onSurface).withValues(alpha: 0.6)),
+                    const SizedBox(width: 8),
+                  ],
                   Expanded(
                     child: widget.selectedOptionIds.isEmpty
                         ? Text(
@@ -473,7 +483,7 @@ class _Ux4gSelectionDropdownState extends State<Ux4gSelectionDropdown> {
                                             widget.selectedOptionIds.first,
                                       )
                                       .label,
-                                  style: textStyle,
+                                  style: widget.valueTextStyle ?? textStyle,
                                 )
                               : Wrap(
                                   spacing: 4,

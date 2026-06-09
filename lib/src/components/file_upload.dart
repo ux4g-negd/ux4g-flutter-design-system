@@ -52,12 +52,22 @@ class UploadedFile {
 
 enum UploadStatus { idle, uploading, success, error }
 
+enum Ux4gFileUploadBorderStyle { solid, dashed }
+
+enum Ux4gFileUploadVariant { standard, dropzone }
+
 class Ux4gFileUpload extends StatefulWidget {
   final int maxFiles;
   final int maxFileSize; // in bytes, default 5MB
   final Function(List<UploadedFile>)? onFilesChanged;
   final Future<bool> Function(UploadedFile)? onUpload;
   final List<String> allowedExtensions;
+  final Ux4gFileUploadBorderStyle borderStyle;
+  final Ux4gFileUploadVariant variant;
+  final double buttonBorderRadius;
+  final Color? buttonColor;
+  final Color? buttonBorderColor;
+  final ButtonStyle? buttonStyle;
 
   const Ux4gFileUpload({
     super.key,
@@ -66,6 +76,12 @@ class Ux4gFileUpload extends StatefulWidget {
     this.onFilesChanged,
     this.onUpload,
     this.allowedExtensions = const ['jpg', 'jpeg', 'png', 'gif', 'pdf', 'doc', 'docx'],
+    this.borderStyle = Ux4gFileUploadBorderStyle.solid,
+    this.variant = Ux4gFileUploadVariant.standard,
+    this.buttonBorderRadius = 8,
+    this.buttonColor,
+    this.buttonBorderColor,
+    this.buttonStyle,
   });
 
   @override
@@ -235,90 +251,35 @@ class _Ux4gFileUploadState extends State<Ux4gFileUpload> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         // Upload area with icon and buttons
-        Container(
-          width: double.infinity,
-          decoration: BoxDecoration(
-            border: Border.all(
-              color: primary.withValues(alpha: 0.3),
-              width: 2,
-              strokeAlign: BorderSide.strokeAlignOutside,
-            ),
-            borderRadius: BorderRadius.circular(12),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.all(24),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                // Upload icon
-                Container(
-                  width: 60,
-                  height: 60,
-                  decoration: BoxDecoration(
-                    color: primary.withValues(alpha: 0.1),
-                    shape: BoxShape.circle,
-                  ),
-                  child: Icon(
-                    Icons.cloud_upload_outlined,
-                    size: 32,
-                    color: primary,
-                  ),
+        widget.borderStyle == Ux4gFileUploadBorderStyle.dashed
+            ? CustomPaint(
+                painter: _DashedBorderPainter(
+                  color: primary.withValues(alpha: 0.3),
+                  strokeWidth: 2,
+                  borderRadius: 12,
                 ),
-                const SizedBox(height: 16),
-
-                // Header
-                Text(
-                  'Upload Documents',
-                  style: lmStrong.copyWith(
-                    color: onBackground,
-                    fontSize: 24,
-                    fontWeight: FontWeight.w700,
+                child: Container(
+                  width: double.infinity,
+                  padding: const EdgeInsets.all(24),
+                  child: _buildUploadContent(primary, onPrimary, onBackground, onSurface, lmStrong, bsDefault),
+                ),
+              )
+            : Container(
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  border: Border.all(
+                    color: primary.withValues(alpha: 0.3),
+                    width: 2,
+                    strokeAlign: BorderSide.strokeAlignOutside,
                   ),
-                  textAlign: TextAlign.center,
+                  borderRadius: BorderRadius.circular(12),
                 ),
-                const SizedBox(height: 8),
-
-                // Description
-                Text(
-                  'File type: PDF JPG PNG Max size: 5 MB',
-                  style: bsDefault.copyWith(
-                    color: onSurface.withValues(alpha: 0.6),
-                  ),
-                  textAlign: TextAlign.center,
+                child: Padding(
+                  padding: const EdgeInsets.all(24),
+                  child: _buildUploadContent(primary, onPrimary, onBackground, onSurface, lmStrong, bsDefault),
                 ),
-                const SizedBox(height: 20),
-
-                // Buttons
-                Row(
-                  children: [
-                    Expanded(
-                      child: OutlinedButton.icon(
-                        onPressed: () => _pickFile(fromCamera: false),
-                        icon: Icon(Icons.cloud_upload_outlined, color: primary),
-                        label: Text('Upload', style: TextStyle(color: primary)),
-                        style: OutlinedButton.styleFrom(
-                          side: BorderSide(color: primary, width: 1.5),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(width: 12),
-                    Expanded(
-                      child: ElevatedButton.icon(
-                        onPressed: () => _pickFile(fromCamera: true),
-                        icon: Icon(Icons.camera_alt, color: onPrimary),
-                        label: Text('Scan', style: TextStyle(color: onPrimary)),
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: primary,
-                          foregroundColor: onPrimary,
-                        ),
-                      ),
-                    ),
-                  ],
                 ),
-              ],
-            ),
-          ),
-        ),
+              ),
 
         const SizedBox(height: 20),
 
@@ -328,6 +289,146 @@ class _Ux4gFileUploadState extends State<Ux4gFileUpload> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: _files.map((file) => _buildFileItem(file, materialTheme, ux4gColors, ux4gTypography)).toList(),
           ),
+      ],
+    );
+  }
+
+  Widget _buildUploadContent(Color primary, Color onPrimary, Color onBackground, Color onSurface, TextStyle lM_strong, TextStyle bS_default) {
+    if (widget.variant == Ux4gFileUploadVariant.dropzone) {
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          // Upload icon
+          Icon(
+            Icons.cloud_upload_outlined,
+            size: 36,
+            color: primary,
+          ),
+          const SizedBox(height: 12),
+
+          // Header
+          Text(
+            'Drop file here',
+            style: lM_strong.copyWith(
+              color: onBackground,
+              fontSize: 16,
+              fontWeight: FontWeight.w700,
+            ),
+            textAlign: TextAlign.center,
+          ),
+          const SizedBox(height: 6),
+
+          // Description
+          Text(
+            'File type: PDF JPG PNG Max size: ${(widget.maxFileSize / (1024 * 1024)).toStringAsFixed(0)} MB',
+            style: bS_default.copyWith(
+              color: onSurface.withValues(alpha: 0.6),
+            ),
+            textAlign: TextAlign.center,
+          ),
+          const SizedBox(height: 16),
+
+          // Or divider
+          Row(
+            children: [
+              Expanded(child: Divider(color: onSurface.withValues(alpha: 0.2))),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 12),
+                child: Text(
+                  'Or',
+                  style: bS_default.copyWith(color: onSurface.withValues(alpha: 0.5)),
+                ),
+              ),
+              Expanded(child: Divider(color: onSurface.withValues(alpha: 0.2))),
+            ],
+          ),
+          const SizedBox(height: 16),
+
+          // Single Upload button
+          OutlinedButton.icon(
+            onPressed: () => _pickFile(fromCamera: false),
+            icon: Icon(Icons.cloud_upload_outlined, color: widget.buttonColor ?? primary),
+            label: Text('Upload', style: TextStyle(color: widget.buttonColor ?? primary)),
+            style: widget.buttonStyle ?? OutlinedButton.styleFrom(
+              side: BorderSide(color: widget.buttonBorderColor ?? primary, width: 1.5),
+              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 10),
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(widget.buttonBorderRadius)),
+            ),
+          ),
+        ],
+      );
+    }
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        // Upload icon
+        Container(
+          width: 60,
+          height: 60,
+          decoration: BoxDecoration(
+            color: primary.withValues(alpha: 0.1),
+            shape: BoxShape.circle,
+          ),
+          child: Icon(
+            Icons.cloud_upload_outlined,
+            size: 32,
+            color: primary,
+          ),
+        ),
+        const SizedBox(height: 16),
+
+        // Header
+        Text(
+          'Upload Documents',
+          style: lM_strong.copyWith(
+            color: onBackground,
+            fontSize: 24,
+            fontWeight: FontWeight.w700,
+          ),
+          textAlign: TextAlign.center,
+        ),
+        const SizedBox(height: 8),
+
+        // Description
+        Text(
+          'File type: PDF JPG PNG Max size: ${(widget.maxFileSize / (1024 * 1024)).toStringAsFixed(0)} MB',
+          style: bS_default.copyWith(
+            color: onSurface.withValues(alpha: 0.6),
+          ),
+          textAlign: TextAlign.center,
+        ),
+        const SizedBox(height: 20),
+
+        // Buttons
+        Row(
+          children: [
+            Expanded(
+              child: OutlinedButton.icon(
+                onPressed: () => _pickFile(fromCamera: false),
+                icon: Icon(Icons.cloud_upload_outlined, color: widget.buttonColor ?? primary),
+                label: Text('Upload', style: TextStyle(color: widget.buttonColor ?? primary)),
+                style: OutlinedButton.styleFrom(
+                  side: BorderSide(color: widget.buttonBorderColor ?? primary, width: 1.5),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(widget.buttonBorderRadius)),
+                ),
+              ),
+            ),
+            const SizedBox(width: 12),
+            Expanded(
+              child: ElevatedButton.icon(
+                onPressed: () => _pickFile(fromCamera: true),
+                icon: Icon(Icons.camera_alt, color: onPrimary),
+                label: Text('Scan', style: TextStyle(color: onPrimary)),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: widget.buttonColor ?? primary,
+                  foregroundColor: onPrimary,
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(widget.buttonBorderRadius)),
+                ),
+              ),
+            ),
+          ],
+        ),
       ],
     );
   }
@@ -510,5 +611,58 @@ class _Ux4gFileUploadState extends State<Ux4gFileUpload> {
       ),
       child: Icon(icon, color: color, size: 20),
     );
+  }
+}
+
+class _DashedBorderPainter extends CustomPainter {
+  final Color color;
+  final double strokeWidth;
+  final double borderRadius;
+  final double dashWidth;
+  final double dashSpace;
+
+  _DashedBorderPainter({
+    required this.color,
+    required this.strokeWidth,
+    required this.borderRadius,
+    this.dashWidth = 8.0,
+    this.dashSpace = 5.0,
+  });
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final paint = Paint()
+      ..color = color
+      ..strokeWidth = strokeWidth
+      ..style = PaintingStyle.stroke;
+
+    final rrect = RRect.fromRectAndRadius(
+      Rect.fromLTWH(0, 0, size.width, size.height),
+      Radius.circular(borderRadius),
+    );
+
+    final path = Path()..addRRect(rrect);
+    final metrics = path.computeMetrics();
+
+    for (final metric in metrics) {
+      double distance = 0.0;
+      while (distance < metric.length) {
+        final nextDash = distance + dashWidth;
+        canvas.drawPath(
+          metric.extractPath(distance, nextDash.clamp(0, metric.length)),
+          paint,
+        );
+        distance = nextDash + dashSpace;
+      }
+    }
+  }
+
+  @override
+  bool shouldRepaint(covariant _DashedBorderPainter oldDelegate) {
+    return oldDelegate.color != color ||
+        oldDelegate.strokeWidth != strokeWidth ||
+        oldDelegate.borderRadius != borderRadius ||
+        oldDelegate.dashWidth != dashWidth ||
+        oldDelegate.dashSpace != dashSpace;
   }
 }

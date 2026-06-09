@@ -42,6 +42,10 @@ class Ux4gInputField extends StatefulWidget {
   final int? maxLength;
   final List<TextInputFormatter>? inputFormatters;
   final TextAlign textAlign;
+  final TextStyle? style;
+  final TextStyle? placeholderStyle;
+  final TextStyle? labelStyle;
+  final TextStyle? captionStyle;
 
   const Ux4gInputField({
     super.key,
@@ -68,6 +72,10 @@ class Ux4gInputField extends StatefulWidget {
     this.maxLength,
     this.inputFormatters,
     this.textAlign = TextAlign.start,
+    this.style,
+    this.placeholderStyle,
+    this.labelStyle,
+    this.captionStyle,
   });
 
   @override
@@ -132,8 +140,8 @@ class _Ux4gInputFieldState extends State<Ux4gInputField> {
             children: [
               Text(
                 widget.label!,
-                style: bsStrong.copyWith(
-                  color: widget.enabled ? _getLabelColor(materialTheme, ux4gColors) : onSurface.withValues(alpha: 0.4),
+                style: (widget.labelStyle ?? bsStrong).copyWith(
+                  color: widget.labelStyle?.color ?? (widget.enabled ? _getLabelColor(materialTheme, ux4gColors) : onSurface.withValues(alpha: 0.4)),
                 ),
               ),
               if (widget.required) ...[
@@ -198,12 +206,14 @@ class _Ux4gInputFieldState extends State<Ux4gInputField> {
                   maxLength: widget.maxLength,
                   inputFormatters: widget.inputFormatters,
                   textAlign: widget.textAlign,
-                  style: bmDefault.copyWith(
-                    color: widget.enabled ? onSurface : onSurface.withValues(alpha: 0.4),
+                  style: (widget.style ?? bmDefault).copyWith(
+                    color: widget.style?.color ?? (widget.enabled ? onSurface : onSurface.withValues(alpha: 0.4)),
                   ),
                   decoration: InputDecoration(
                     hintText: widget.placeholder,
-                    hintStyle: bmDefault.copyWith(color: onSurface.withValues(alpha: 0.4)),
+                    hintStyle: (widget.placeholderStyle ?? bmDefault).copyWith(
+                      color: widget.placeholderStyle?.color ?? onSurface.withValues(alpha: 0.4),
+                    ),
                     isDense: true,
                     contentPadding: EdgeInsets.zero,
                     border: InputBorder.none,
@@ -270,7 +280,9 @@ class _Ux4gInputFieldState extends State<Ux4gInputField> {
               Expanded(
                 child: Text(
                   widget.caption ?? "",
-                  style: bxsDefault.copyWith(color: _getStatusColor(materialTheme, ux4gColors)),
+                  style: (widget.captionStyle ?? bxsDefault).copyWith(
+                    color: widget.captionStyle?.color ?? _getStatusColor(materialTheme, ux4gColors),
+                  ),
                 ),
               ),
             ],
