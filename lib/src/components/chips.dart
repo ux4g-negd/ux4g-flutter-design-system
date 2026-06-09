@@ -16,6 +16,7 @@ class Ux4gChoiceChip extends StatelessWidget {
   final bool enabled;
   final Ux4gChoiceChipSize size;
   final Widget? leadingContent;
+  final Widget? trailingContent;
   final double borderRadius;
   final Color? selectedBackgroundColor;
   final Color? unselectedBackgroundColor;
@@ -34,6 +35,7 @@ class Ux4gChoiceChip extends StatelessWidget {
     this.enabled = true,
     this.size = Ux4gChoiceChipSize.m,
     this.leadingContent,
+    this.trailingContent,
     this.borderRadius = Ux4gRadius.radius4,
     this.selectedBackgroundColor,
     this.unselectedBackgroundColor,
@@ -94,6 +96,7 @@ class Ux4gChoiceChip extends StatelessWidget {
                 const SizedBox(width: 8),
               ],
               Text(text, style: textStyle.copyWith(color: textColor)),
+              if (trailingContent != null) ...[const SizedBox(width: 6), trailingContent!],
             ],
           ),
         ),

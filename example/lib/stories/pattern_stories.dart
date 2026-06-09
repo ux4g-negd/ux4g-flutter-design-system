@@ -1,4 +1,4 @@
-import 'dart:async';
+﻿import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -6,12 +6,12 @@ import 'package:ux4g_flutter_design_system/ux4g_flutter_design_system.dart';
 import 'package:widgetbook/widgetbook.dart';
 import '../widgets/component_docs.dart';
 
-// ── Asset paths (copied into example/assets/) ──────────────────────────
+// -- Asset paths (copied into example/assets/) --------------------------
 const _nationalEmblemPath = 'assets/national_amblam_logo.svg';
 const _unionLogoPath = 'assets/Union.svg';
 const _digitalIndiaLogoPath = 'assets/digital_india_logo.png';
 
-// ── Shared design tokens used across all SignIn patterns ───────────────
+// -- Shared design tokens used across all SignIn patterns ---------------
 const _bg = Color(0xFFFAFAFA);
 const _border = Color(0xFFE5E7EB);
 const _titleColor = Ux4gPalette.gray900;
@@ -25,22 +25,22 @@ const _placeholderStyle = TextStyle(
   height: 1.3,
 );
 
-// ───────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------
 // SignIn pattern variants
 //
 // Each screen lives in its own [WidgetbookComponent] so the SignIn folder
 // renders as a flat list of patterns:
 //
 //   SignIn
-//    ├── Sign in to your account
-//    ├── Enter OTP
-//    ├── Sign in with Aadhaar
-//    └── Signed in success
+//    +-- Sign in to your account
+//    +-- Enter OTP
+//    +-- Sign in with Aadhaar
+//    +-- Signed in success
 //
 // Each component keeps a single "Default" use case that renders the
 // mobile mockup. This also keeps each component's "Code" tab focused
 // on just that one screen's snippet.
-// ───────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------
 
 final signInDefaultComponent = WidgetbookComponent(
   name: 'Sign in to your account',
@@ -51,7 +51,7 @@ final signInDefaultComponent = WidgetbookComponent(
         // Right-side knob lets the user toggle layout variants without
         // cluttering the tree with multiple entries. Both variants share
         // the same intent ("sign in to your account") so they belong
-        // together — different actual patterns (OTP, Aadhaar, Success)
+        // together � different actual patterns (OTP, Aadhaar, Success)
         // remain separate components.
         final variant = context.knobs.list(
           label: 'Variant',
@@ -94,7 +94,7 @@ final signInWithMobileComponent = WidgetbookComponent(
     WidgetbookUseCase(
       name: 'Default',
       builder: (context) {
-        // Same knob pattern as the Username/Password component — toggles
+        // Same knob pattern as the Username/Password component � toggles
         // between the flat layout and the soft-purple card layout.
         final variant = context.knobs.list(
           label: 'Variant',
@@ -258,9 +258,9 @@ final signInSuccessComponent = WidgetbookComponent(
   ],
 );
 
-// ───────────────────────────────────────────────────────────────────────
-// OTP Verification — sibling folder of SignIn
-// ───────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------
+// OTP Verification � sibling folder of SignIn
+// -----------------------------------------------------------------------
 
 final otpVerifyMobileComponent = WidgetbookComponent(
   name: 'Verify your mobile number',
@@ -304,14 +304,14 @@ final otpVerifyMobileComponent = WidgetbookComponent(
   ],
 );
 
-// ─────────────────────────────────────────────────────────────────────
-// OTP verified — success state shown right after a correct OTP, before
+// ---------------------------------------------------------------------
+// OTP verified � success state shown right after a correct OTP, before
 // the auto-redirect kicks in. Filled OTP boxes are tinted green via
 // the design-system's success status, and a built-in
 // "Verification successful" caption appears below.
-// ─────────────────────────────────────────────────────────────────────
+// ---------------------------------------------------------------------
 final otpVerifiedSuccessComponent = WidgetbookComponent(
-  name: 'OTP verified — success',
+  name: 'OTP verified � success',
   useCases: [
     WidgetbookUseCase(
       name: 'Default',
@@ -336,10 +336,10 @@ final otpVerifiedSuccessComponent = WidgetbookComponent(
         };
 
         return ComponentDocs(
-          name: 'OTP verified — success',
+          name: 'OTP verified � success',
           description:
               'Success confirmation shown immediately after a correct '
-              'OTP — green check badge, filled OTP field tinted green '
+              'OTP � green check badge, filled OTP field tinted green '
               'via [Ux4gOtpInputStatus.success], and a built-in '
               '"Verification successful" caption. '
               'Use the [Variant] knob on the right to toggle between '
@@ -354,14 +354,14 @@ final otpVerifiedSuccessComponent = WidgetbookComponent(
   ],
 );
 
-// ─────────────────────────────────────────────────────────────────────
-// Verify mobile with account locked — terminal state after too many
+// ---------------------------------------------------------------------
+// Verify mobile with account locked � terminal state after too many
 // failed attempts. Shows a lock badge, disabled OTP boxes with a
 // live "Locked for mm:ss" caption, an inline error banner, and a
 // support phone number.
-// ─────────────────────────────────────────────────────────────────────
+// ---------------------------------------------------------------------
 final otpVerifyAccountLockedComponent = WidgetbookComponent(
-  name: 'Verify mobile — account locked',
+  name: 'Verify mobile � account locked',
   useCases: [
     WidgetbookUseCase(
       name: 'Default',
@@ -386,7 +386,7 @@ final otpVerifyAccountLockedComponent = WidgetbookComponent(
         };
 
         return ComponentDocs(
-          name: 'Verify mobile — account locked',
+          name: 'Verify mobile � account locked',
           description:
               'Terminal lockout state shown after the user exhausts all '
               'OTP attempts. Includes a disabled OTP field, a live '
@@ -404,10 +404,10 @@ final otpVerifyAccountLockedComponent = WidgetbookComponent(
   ],
 );
 
-// ─────────────────────────────────────────────────────────────────────
-// Verify mobile with last-attempt warning — like the attempt-warning
+// ---------------------------------------------------------------------
+// Verify mobile with last-attempt warning � like the attempt-warning
 // pattern but escalated to error styling for the *final* attempt.
-// ─────────────────────────────────────────────────────────────────────
+// ---------------------------------------------------------------------
 final otpVerifyLastAttemptComponent = WidgetbookComponent(
   name: 'Verify mobile with last-attempt warning',
   useCases: [
@@ -436,7 +436,7 @@ final otpVerifyLastAttemptComponent = WidgetbookComponent(
         return ComponentDocs(
           name: 'Verify mobile with last-attempt warning',
           description:
-              'Mobile-number OTP verification on the *final* attempt — '
+              'Mobile-number OTP verification on the *final* attempt � '
               'shows an error-styled banner warning the user that one '
               'more wrong entry will lock the account for 30 minutes. '
               'Use the [Variant] knob on the right to toggle between the '
@@ -451,10 +451,10 @@ final otpVerifyLastAttemptComponent = WidgetbookComponent(
   ],
 );
 
-// ─────────────────────────────────────────────────────────────────────
-// Verify mobile with attempt warning — adds an inline warning banner
+// ---------------------------------------------------------------------
+// Verify mobile with attempt warning � adds an inline warning banner
 // counting down failed attempts before a 30-minute lockout.
-// ─────────────────────────────────────────────────────────────────────
+// ---------------------------------------------------------------------
 final otpVerifyAttemptWarningComponent = WidgetbookComponent(
   name: 'Verify mobile with attempt warning',
   useCases: [
@@ -497,11 +497,11 @@ final otpVerifyAttemptWarningComponent = WidgetbookComponent(
   ],
 );
 
-// ─────────────────────────────────────────────────────────────────────
-// Verify mobile with voice-call fallback — adds a Back button at top,
+// ---------------------------------------------------------------------
+// Verify mobile with voice-call fallback � adds a Back button at top,
 // shows the resend timer in its expired state (active "Resend OTP"
 // link), and a secondary outlined "Get OTP via voice call" CTA.
-// ─────────────────────────────────────────────────────────────────────
+// ---------------------------------------------------------------------
 final otpVerifyVoiceComponent = WidgetbookComponent(
   name: 'Verify mobile with voice fallback',
   useCases: [
@@ -545,9 +545,9 @@ final otpVerifyVoiceComponent = WidgetbookComponent(
   ],
 );
 
-// ───────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------
 // Shared helpers
-// ───────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------
 
 /// Phone-frame container shared by every mobile mockup so each screen
 /// renders inside an identical 360x760 device frame with rounded corners.
@@ -578,7 +578,7 @@ class _PhoneFrame extends StatelessWidget {
   }
 }
 
-/// Government-style header used by every screen — national emblem, a thin
+/// Government-style header used by every screen � national emblem, a thin
 /// vertical divider, and the brand union logo.
 class _BrandHeader extends StatelessWidget {
   const _BrandHeader();
@@ -651,7 +651,7 @@ class _BackButton extends StatelessWidget {
 }
 
 /// Reusable "New user? Register here" link, styled to match the
-/// reference design — soft purple (primary @ 75% alpha), bold,
+/// reference design � soft purple (primary @ 75% alpha), bold,
 /// 16px with a slight negative letter-spacing.
 class _RegisterLink extends StatelessWidget {
   const _RegisterLink({this.fontSize = 16});
@@ -682,9 +682,9 @@ class _RegisterLink extends StatelessWidget {
   }
 }
 
-// ───────────────────────────────────────────────────────────────────────
-// 1. Sign in to your account — mobile mockup
-// ───────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------
+// 1. Sign in to your account � mobile mockup
+// -----------------------------------------------------------------------
 class _SignInMobileMockup extends StatefulWidget {
   const _SignInMobileMockup();
 
@@ -748,7 +748,7 @@ class _SignInMobileMockupState extends State<_SignInMobileMockup> {
                   ),
                   const SizedBox(height: 16),
 
-                  // Error banner — uses the design-system [Ux4gStatusBanner]
+                  // Error banner � uses the design-system [Ux4gStatusBanner]
                   // with [margin: EdgeInsets.zero] so it aligns flush with
                   // the inputs above. The Username-not-found message uses
                   // the regular [title], "Take action" the bold [subtitle],
@@ -847,9 +847,9 @@ class _SignInMobileMockupState extends State<_SignInMobileMockup> {
   }
 }
 
-// ───────────────────────────────────────────────────────────────────────
-// 2. Enter OTP — mobile mockup
-// ───────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------
+// 2. Enter OTP � mobile mockup
+// -----------------------------------------------------------------------
 class _EnterOtpMobileMockup extends StatefulWidget {
   const _EnterOtpMobileMockup();
 
@@ -860,7 +860,7 @@ class _EnterOtpMobileMockup extends StatefulWidget {
 class _EnterOtpMobileMockupState extends State<_EnterOtpMobileMockup> {
   String _otp = '';
 
-  // Bumped every time the user taps "Resend OTP" — used as a [ValueKey]
+  // Bumped every time the user taps "Resend OTP" � used as a [ValueKey]
   // for the OTP input so it remounts and restarts its built-in countdown.
   int _resendNonce = 0;
 
@@ -903,7 +903,7 @@ class _EnterOtpMobileMockupState extends State<_EnterOtpMobileMockup> {
                   // 6 OTP boxes via the design-system component.
                   // [autoCountdownSeconds] runs a built-in 60s reverse
                   // timer. When it hits 00:00 the caption flips from
-                  // resendTimer → resendAction, making "Resend OTP"
+                  // resendTimer ? resendAction, making "Resend OTP"
                   // tap-able. Tapping it bumps the key so the component
                   // re-mounts and restarts the timer.
                   Ux4gOtpInput(
@@ -952,9 +952,9 @@ class _EnterOtpMobileMockupState extends State<_EnterOtpMobileMockup> {
   }
 }
 
-// ───────────────────────────────────────────────────────────────────────
-// 3. Sign in with Aadhaar — mobile mockup
-// ───────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------
+// 3. Sign in with Aadhaar � mobile mockup
+// -----------------------------------------------------------------------
 class _SignInAadhaarMobileMockup extends StatefulWidget {
   const _SignInAadhaarMobileMockup();
 
@@ -966,10 +966,10 @@ class _SignInAadhaarMobileMockup extends StatefulWidget {
 class _SignInAadhaarMobileMockupState
     extends State<_SignInAadhaarMobileMockup> {
   String _aadhaar = '';
-  String _method = 'otp'; // 'otp' | 'face' — Send OTP selected by default
+  String _method = 'otp'; // 'otp' | 'face' � Send OTP selected by default
 
   /// Live validation state derived from the current Aadhaar value.
-  /// We only show an error once the user has typed all 12 digits — so
+  /// We only show an error once the user has typed all 12 digits � so
   /// they don't see a red error while they're still typing.
   ({Ux4gInputFieldStatus status, String? caption}) _validate() {
     final digits = _aadhaar.replaceAll(' ', '');
@@ -1078,7 +1078,7 @@ class _SignInAadhaarMobileMockupState
                     text: 'Continue',
                     onPressed: () {},
                     // Only enable Continue once we have a valid 12-digit
-                    // Aadhaar — the button automatically renders in its
+                    // Aadhaar � the button automatically renders in its
                     // disabled style otherwise.
                     enabled: validation.status == Ux4gInputFieldStatus.success,
                     size: Ux4gButtonSize.large,
@@ -1110,9 +1110,9 @@ class _SignInAadhaarMobileMockupState
   }
 }
 
-// ───────────────────────────────────────────────────────────────────────
-// 4. Signed in success — mobile mockup
-// ───────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------
+// 4. Signed in success � mobile mockup
+// -----------------------------------------------------------------------
 class _SignedInSuccessMobileMockup extends StatefulWidget {
   const _SignedInSuccessMobileMockup();
 
@@ -1123,7 +1123,7 @@ class _SignedInSuccessMobileMockup extends StatefulWidget {
 
 class _SignedInSuccessMobileMockupState
     extends State<_SignedInSuccessMobileMockup> {
-  // Brand greens — independent of theme so the success messaging always
+  // Brand greens � independent of theme so the success messaging always
   // reads as "success" regardless of how the host app is themed.
   static const _successDark = Ux4gPalette.green700;
   static const _successMid = Ux4gPalette.green;
@@ -1167,7 +1167,7 @@ class _SignedInSuccessMobileMockupState
               padding: const EdgeInsets.fromLTRB(20, 40, 20, 0),
               child: Column(
                 children: [
-                  // Success badge — concentric circles + check icon.
+                  // Success badge � concentric circles + check icon.
                   Container(
                     width: 64,
                     height: 64,
@@ -1247,9 +1247,9 @@ class _SignedInSuccessMobileMockupState
   }
 }
 
-// ───────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------
 // Code snippets (shown in the docs "Code" tab so users can copy-paste).
-// ───────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------
 
 const _signInDefaultCode = r'''// Mobile-sized sign-in screen (360 x 760)
 Container(
@@ -1299,7 +1299,7 @@ Container(
             ),
             SizedBox(height: 16),
 
-            // Error banner — design-system Ux4gStatusBanner.
+            // Error banner � design-system Ux4gStatusBanner.
             Ux4gStatusBanner(
               variant: Ux4gBannerVariant.errorLight,
               title: 'Username not found.',
@@ -1392,7 +1392,7 @@ Column(
             style: TextStyle(fontSize: 14, color: Color(0xFF6B7280))),
           SizedBox(height: 24),
 
-          // 6 OTP boxes — built-in 60s countdown + tap-to-resend.
+          // 6 OTP boxes � built-in 60s countdown + tap-to-resend.
           Ux4gOtpInput(
             key: ValueKey('otp_$resendNonce'),
             length: 6,
@@ -1460,7 +1460,7 @@ Column(
             style: TextStyle(fontSize: 14, color: Color(0xFF6B7280))),
           SizedBox(height: 24),
 
-          // Live Verhoeff validation — only flag errors once all
+          // Live Verhoeff validation � only flag errors once all
           // 12 digits are entered so the user isn't yelled at while
           // they're still typing.
           (() {
@@ -1546,7 +1546,7 @@ Column(
       padding: EdgeInsets.fromLTRB(20, 40, 20, 0),
       child: Column(
         children: [
-          // Success badge — concentric circles + check icon.
+          // Success badge � concentric circles + check icon.
           Container(
             width: 64, height: 64,
             decoration: BoxDecoration(color: Ux4gPalette.green100, shape: BoxShape.circle),
@@ -1592,9 +1592,9 @@ Column(
   ],
 )''';
 
-// ───────────────────────────────────────────────────────────────────────
-// 5. Sign in account with Mobile No — mobile mockup
-// ───────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------
+// 5. Sign in account with Mobile No � mobile mockup
+// -----------------------------------------------------------------------
 class _SignInWithMobileMockup extends StatefulWidget {
   const _SignInWithMobileMockup();
 
@@ -1639,7 +1639,7 @@ class _SignInWithMobileMockupState extends State<_SignInWithMobileMockup> {
                   ),
                   const SizedBox(height: 24),
 
-                  // ── Mobile input with +91 prefix ──
+                  // -- Mobile input with +91 prefix --
                   Ux4gInputField(
                     value: _mobile,
                     onValueChange: (v) => setState(() => _mobile = v),
@@ -1652,7 +1652,7 @@ class _SignInWithMobileMockupState extends State<_SignInWithMobileMockup> {
                   ),
                   const SizedBox(height: 16),
 
-                  // ── Status banner — same pattern as Sign In screen ──
+                  // -- Status banner � same pattern as Sign In screen --
                   Ux4gStatusBanner(
                     variant: Ux4gBannerVariant.errorLight,
                     title: 'Your status message goes here',
@@ -1785,7 +1785,7 @@ Column(
           ),
           SizedBox(height: 16),
 
-          // Error banner — design-system Ux4gStatusBanner.
+          // Error banner � design-system Ux4gStatusBanner.
           Ux4gStatusBanner(
             variant: Ux4gBannerVariant.errorLight,
             title: 'Your status message goes here',
@@ -1851,10 +1851,10 @@ Column(
   ],
 )''';
 
-// ───────────────────────────────────────────────────────────────────────
-// Sign in to your account — Card-style variant
+// -----------------------------------------------------------------------
+// Sign in to your account � Card-style variant
 // (toggled via the [Variant] knob on signInDefaultComponent)
-// ───────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------
 class _SignInCardMockup extends StatefulWidget {
   const _SignInCardMockup();
 
@@ -1866,7 +1866,7 @@ class _SignInCardMockupState extends State<_SignInCardMockup> {
   String _username = '';
   String _password = '';
 
-  // Card-variant background — soft purple tint behind the white card.
+  // Card-variant background � soft purple tint behind the white card.
   static const _cardBg = Color(0xFFE9E5FF);
 
   @override
@@ -2199,10 +2199,10 @@ Column(
   ],
 )''';
 
-// ───────────────────────────────────────────────────────────────────────
-// Sign in account with Mobile No — Card-style variant
+// -----------------------------------------------------------------------
+// Sign in account with Mobile No � Card-style variant
 // (toggled via the [Variant] knob on signInWithMobileComponent)
-// ───────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------
 class _SignInWithMobileCardMockup extends StatefulWidget {
   const _SignInWithMobileCardMockup();
 
@@ -2532,10 +2532,10 @@ Column(
   ],
 )''';
 
-// ───────────────────────────────────────────────────────────────────────
-// Enter OTP — Card-style variant
+// -----------------------------------------------------------------------
+// Enter OTP � Card-style variant
 // (toggled via the [Variant] knob on signInEnterOtpComponent)
-// ───────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------
 class _EnterOtpCardMockup extends StatefulWidget {
   const _EnterOtpCardMockup();
 
@@ -2562,7 +2562,7 @@ class _EnterOtpCardMockupState extends State<_EnterOtpCardMockup> {
                 children: [
                   // White card holds the OTP form. Sits at the top of the
                   // soft-purple area; the area below stays empty so the
-                  // footer can pin to the bottom — exactly like the
+                  // footer can pin to the bottom � exactly like the
                   // reference image.
                   Padding(
                     padding: const EdgeInsets.fromLTRB(16, 20, 16, 0),
@@ -2649,7 +2649,7 @@ class _EnterOtpCardMockupState extends State<_EnterOtpCardMockup> {
                     ),
                   ),
 
-                  // Empty soft-purple area between card and footer —
+                  // Empty soft-purple area between card and footer �
                   // matches the reference image where the card hugs
                   // the top and the footer sits at the bottom.
                   const Spacer(),
@@ -2773,10 +2773,10 @@ Column(
   ],
 )''';
 
-// ───────────────────────────────────────────────────────────────────────
-// Sign in with Aadhaar — Card-style variant
+// -----------------------------------------------------------------------
+// Sign in with Aadhaar � Card-style variant
 // (toggled via the [Variant] knob on signInAadhaarComponent)
-// ───────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------
 class _SignInAadhaarCardMockup extends StatefulWidget {
   const _SignInAadhaarCardMockup();
 
@@ -2926,7 +2926,7 @@ class _SignInAadhaarCardMockupState extends State<_SignInAadhaarCardMockup> {
                   ),
 
                   // Encrypted hint sits *outside* the card, on the
-                  // soft-purple area — exactly like the reference image.
+                  // soft-purple area � exactly like the reference image.
                   const SizedBox(height: 14),
                   Center(
                     child: Row(
@@ -3007,7 +3007,7 @@ Column(
                       style: TextStyle(fontSize: 14, color: Color(0xFF6B7280))),
                     SizedBox(height: 20),
 
-                    // Live Verhoeff validation — see Default variant for details.
+                    // Live Verhoeff validation � see Default variant for details.
                     Ux4gAadhaarInputField(
                       value: aadhaar,
                       onValueChange: (v) => setState(() => aadhaar = v),
@@ -3085,10 +3085,10 @@ Column(
   ],
 )''';
 
-// ───────────────────────────────────────────────────────────────────────
-// Signed in success — Card-style variant
+// -----------------------------------------------------------------------
+// Signed in success � Card-style variant
 // (toggled via the [Variant] knob on signInSuccessComponent)
-// ───────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------
 class _SignedInSuccessCardMockup extends StatefulWidget {
   const _SignedInSuccessCardMockup();
 
@@ -3145,7 +3145,7 @@ class _SignedInSuccessCardMockupState
               child: Column(
                 children: [
                   // White card hugs the top of the soft-purple area.
-                  // Full-bleed horizontally — only top spacing,
+                  // Full-bleed horizontally � only top spacing,
                   // no left/right outer padding.
                   Padding(
                     padding: const EdgeInsets.only(top: 20),
@@ -3164,7 +3164,7 @@ class _SignedInSuccessCardMockupState
                       ),
                       child: Column(
                         children: [
-                          // Success badge — concentric circles + check.
+                          // Success badge � concentric circles + check.
                           Container(
                             width: 64,
                             height: 64,
@@ -3287,7 +3287,7 @@ Column(
                 ),
                 child: Column(
                   children: [
-                    // Success badge — concentric circles + check.
+                    // Success badge � concentric circles + check.
                     Container(
                       width: 64, height: 64,
                       decoration: BoxDecoration(
@@ -3360,9 +3360,9 @@ Column(
   ],
 )''';
 
-// ───────────────────────────────────────────────────────────────────────
-// Verify your mobile number — mobile mockup (OTP Verification folder)
-// ───────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------
+// Verify your mobile number � mobile mockup (OTP Verification folder)
+// -----------------------------------------------------------------------
 class _VerifyMobileOtpMockup extends StatefulWidget {
   const _VerifyMobileOtpMockup();
 
@@ -3373,7 +3373,7 @@ class _VerifyMobileOtpMockup extends StatefulWidget {
 class _VerifyMobileOtpMockupState extends State<_VerifyMobileOtpMockup> {
   String _otp = '';
 
-  // Bumped every time the user taps "Resend OTP" — used as a [ValueKey]
+  // Bumped every time the user taps "Resend OTP" � used as a [ValueKey]
   // for the OTP input so it remounts and restarts its built-in countdown.
   int _resendNonce = 0;
 
@@ -3389,7 +3389,7 @@ class _VerifyMobileOtpMockupState extends State<_VerifyMobileOtpMockup> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // ── Title (wraps to 2 lines as per the reference) ──
+                  // -- Title (wraps to 2 lines as per the reference) --
                   const Text(
                     'Verify your mobile\nnumber',
                     style: TextStyle(
@@ -3442,7 +3442,7 @@ class _VerifyMobileOtpMockupState extends State<_VerifyMobileOtpMockup> {
                   ),
                   const SizedBox(height: 8),
 
-                  // "Change mobile number" — ghost-style link button.
+                  // "Change mobile number" � ghost-style link button.
                   Center(
                     child: Ux4gButton(
                       text: 'Change mobile number',
@@ -3518,7 +3518,7 @@ Column(
           ),
           SizedBox(height: 8),
 
-          // "Change mobile number" — ghost-style link button.
+          // "Change mobile number" � ghost-style link button.
           Center(child: Ux4gButton(
             text: 'Change mobile number',
             onPressed: () {},
@@ -3531,10 +3531,10 @@ Column(
   ],
 )''';
 
-// ───────────────────────────────────────────────────────────────────────
-// Verify your mobile number — Card-style variant
+// -----------------------------------------------------------------------
+// Verify your mobile number � Card-style variant
 // (toggled via the [Variant] knob on otpVerifyMobileComponent)
-// ───────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------
 class _VerifyMobileOtpCardMockup extends StatefulWidget {
   const _VerifyMobileOtpCardMockup();
 
@@ -3562,7 +3562,7 @@ class _VerifyMobileOtpCardMockupState
               color: _cardBg,
               child: Column(
                 children: [
-                  // Soft-purple gap above the card — image shows the
+                  // Soft-purple gap above the card � image shows the
                   // card sitting in the upper-middle of the body, not
                   // flush at the top.
                   const SizedBox(height: 56),
@@ -3771,9 +3771,9 @@ Column(
   ],
 )''';
 
-// ───────────────────────────────────────────────────────────────────────
-// Verify mobile with voice fallback — mobile mockup
-// ───────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------
+// Verify mobile with voice fallback � mobile mockup
+// -----------------------------------------------------------------------
 class _VerifyMobileVoiceMockup extends StatefulWidget {
   const _VerifyMobileVoiceMockup();
 
@@ -3800,7 +3800,7 @@ class _VerifyMobileVoiceMockupState extends State<_VerifyMobileVoiceMockup> {
                   const _BackButton(),
                   const SizedBox(height: 24),
 
-                  // ── 2-line title ──
+                  // -- 2-line title --
                   const Text(
                     'Verify your mobile\nnumber',
                     style: TextStyle(
@@ -3822,7 +3822,7 @@ class _VerifyMobileVoiceMockupState extends State<_VerifyMobileVoiceMockup> {
                   ),
                   const SizedBox(height: 24),
 
-                  // 6 OTP boxes — caption is in [resendAction] mode so
+                  // 6 OTP boxes � caption is in [resendAction] mode so
                   // "Resend OTP" appears as a tap-able link (the timer
                   // has already expired in this state).
                   Ux4gOtpInput(
@@ -3851,7 +3851,7 @@ class _VerifyMobileVoiceMockupState extends State<_VerifyMobileVoiceMockup> {
                   ),
                   const SizedBox(height: 12),
 
-                  // Secondary action — voice-call fallback for users
+                  // Secondary action � voice-call fallback for users
                   // who couldn't receive the SMS.
                   Ux4gButton(
                     text: 'Get OTP via voice call',
@@ -3947,10 +3947,10 @@ Column(
   ],
 )''';
 
-// ───────────────────────────────────────────────────────────────────────
-// Verify mobile with voice fallback — Card-style variant
+// -----------------------------------------------------------------------
+// Verify mobile with voice fallback � Card-style variant
 // (toggled via the [Variant] knob on otpVerifyVoiceComponent)
-// ───────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------
 class _VerifyMobileVoiceCardMockup extends StatefulWidget {
   const _VerifyMobileVoiceCardMockup();
 
@@ -4182,9 +4182,9 @@ Column(
   ],
 )''';
 
-// ───────────────────────────────────────────────────────────────────────
-// Verify mobile with attempt warning — mobile mockup
-// ───────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------
+// Verify mobile with attempt warning � mobile mockup
+// -----------------------------------------------------------------------
 class _VerifyMobileAttemptWarningMockup extends StatefulWidget {
   const _VerifyMobileAttemptWarningMockup();
 
@@ -4233,7 +4233,7 @@ class _VerifyMobileAttemptWarningMockupState
                   ),
                   const SizedBox(height: 24),
 
-                  // 6 OTP boxes — caption suppressed since the warning
+                  // 6 OTP boxes � caption suppressed since the warning
                   // banner below carries the resend message.
                   Ux4gOtpInput(
                     length: 6,
@@ -4245,7 +4245,7 @@ class _VerifyMobileAttemptWarningMockupState
                   ),
                   const SizedBox(height: 16),
 
-                  // Warning banner — uses the design-system component
+                  // Warning banner � uses the design-system component
                   // with warningLight variant and an Attempt pill on
                   // the trailing side.
                   Ux4gStatusBanner(
@@ -4355,7 +4355,7 @@ Column(
           ),
           SizedBox(height: 16),
 
-          // Warning banner — design-system Ux4gStatusBanner.
+          // Warning banner � design-system Ux4gStatusBanner.
           Ux4gStatusBanner(
             variant: Ux4gBannerVariant.warningLight,
             title: 'Incorrect OTP',
@@ -4398,10 +4398,10 @@ Column(
   ],
 )''';
 
-// ───────────────────────────────────────────────────────────────────────
-// Verify mobile with attempt warning — Card-style variant
+// -----------------------------------------------------------------------
+// Verify mobile with attempt warning � Card-style variant
 // (toggled via the [Variant] knob on otpVerifyAttemptWarningComponent)
-// ───────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------
 class _VerifyMobileAttemptWarningCardMockup extends StatefulWidget {
   const _VerifyMobileAttemptWarningCardMockup();
 
@@ -4676,9 +4676,9 @@ Column(
   ],
 )''';
 
-// ───────────────────────────────────────────────────────────────────────
-// Verify mobile with last-attempt warning — mobile mockup
-// ───────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------
+// Verify mobile with last-attempt warning � mobile mockup
+// -----------------------------------------------------------------------
 class _VerifyMobileLastAttemptMockup extends StatefulWidget {
   const _VerifyMobileLastAttemptMockup();
 
@@ -4737,7 +4737,7 @@ class _VerifyMobileLastAttemptMockupState
                   ),
                   const SizedBox(height: 16),
 
-                  // Error-styled banner — escalated from warning since
+                  // Error-styled banner � escalated from warning since
                   // this is the final attempt before lockout.
                   Ux4gStatusBanner(
                     variant: Ux4gBannerVariant.errorLight,
@@ -4847,7 +4847,7 @@ Column(
           ),
           SizedBox(height: 16),
 
-          // Error-styled banner — final attempt before lockout.
+          // Error-styled banner � final attempt before lockout.
           Ux4gStatusBanner(
             variant: Ux4gBannerVariant.errorLight,
             title: 'Incorrect OTP',
@@ -4890,9 +4890,9 @@ Column(
   ],
 )''';
 
-// ───────────────────────────────────────────────────────────────────────
-// Verify mobile with last-attempt warning — Card-style variant
-// ───────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------
+// Verify mobile with last-attempt warning � Card-style variant
+// -----------------------------------------------------------------------
 class _VerifyMobileLastAttemptCardMockup extends StatefulWidget {
   const _VerifyMobileLastAttemptCardMockup();
 
@@ -5166,9 +5166,9 @@ Column(
   ],
 )''';
 
-// ───────────────────────────────────────────────────────────────────────
-// Verify mobile — account locked (mobile mockup)
-// ───────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------
+// Verify mobile � account locked (mobile mockup)
+// -----------------------------------------------------------------------
 class _VerifyAccountLockedMockup extends StatefulWidget {
   const _VerifyAccountLockedMockup();
 
@@ -5198,7 +5198,7 @@ class _VerifyAccountLockedMockupState
                   const _BackButton(),
                   const SizedBox(height: 24),
 
-                  // ── Lock badge ──
+                  // -- Lock badge --
                   Center(
                     child: Container(
                       width: 64,
@@ -5232,8 +5232,8 @@ class _VerifyAccountLockedMockupState
                   ),
                   const SizedBox(height: 24),
 
-                  // 6 disabled OTP boxes with the [locked] caption — the
-                  // design-system component renders "🔒 Locked for mm:ss"
+                  // 6 disabled OTP boxes with the [locked] caption � the
+                  // design-system component renders "?? Locked for mm:ss"
                   // on the leading side and "Resend OTP" on the trailing
                   // side automatically.
                   Ux4gOtpInput(
@@ -5250,7 +5250,7 @@ class _VerifyAccountLockedMockupState
                   ),
                   const SizedBox(height: 12),
 
-                  // ── Error banner ──
+                  // -- Error banner --
                   Ux4gStatusBanner(
                     variant: Ux4gBannerVariant.errorLight,
                     title:
@@ -5272,7 +5272,7 @@ class _VerifyAccountLockedMockupState
                   ),
                   const SizedBox(height: 20),
 
-                  // ── Support link ──
+                  // -- Support link --
                   Center(
                     child: Wrap(
                       crossAxisAlignment: WrapCrossAlignment.center,
@@ -5402,9 +5402,9 @@ Column(
   ],
 )''';
 
-// ───────────────────────────────────────────────────────────────────────
-// Verify mobile — account locked (Card-style variant)
-// ───────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------
+// Verify mobile � account locked (Card-style variant)
+// -----------------------------------------------------------------------
 class _VerifyAccountLockedCardMockup extends StatefulWidget {
   const _VerifyAccountLockedCardMockup();
 
@@ -5596,13 +5596,13 @@ Column(
   ],
 )''';
 
-// ───────────────────────────────────────────────────────────────────────
-// OTP verified — success (mobile mockup)
-// ───────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------
+// OTP verified � success (mobile mockup)
+// -----------------------------------------------------------------------
 class _OtpVerifiedSuccessMockup extends StatelessWidget {
   const _OtpVerifiedSuccessMockup();
 
-  // Brand greens — independent of theme so the success messaging
+  // Brand greens � independent of theme so the success messaging
   // always reads as "success" regardless of how the host app is themed.
   static const _successMid = Ux4gPalette.green;
   static const _successLight = Ux4gPalette.green100;
@@ -5618,7 +5618,7 @@ class _OtpVerifiedSuccessMockup extends StatelessWidget {
               padding: const EdgeInsets.fromLTRB(20, 64, 20, 0),
               child: Column(
                 children: [
-                  // Success badge — same concentric-circles as the
+                  // Success badge � same concentric-circles as the
                   // "Signed in success" pattern.
                   Container(
                     width: 64,
@@ -5709,7 +5709,7 @@ Column(
       padding: EdgeInsets.fromLTRB(20, 64, 20, 0),
       child: Column(
         children: [
-          // Success badge — concentric circles + check.
+          // Success badge � concentric circles + check.
           Container(
             width: 64, height: 64,
             decoration: BoxDecoration(
@@ -5754,9 +5754,9 @@ Column(
   ],
 )''';
 
-// ───────────────────────────────────────────────────────────────────────
-// OTP verified — success (Card-style variant)
-// ───────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------
+// OTP verified � success (Card-style variant)
+// -----------------------------------------------------------------------
 class _OtpVerifiedSuccessCardMockup extends StatelessWidget {
   const _OtpVerifiedSuccessCardMockup();
 
@@ -5902,13 +5902,13 @@ Column(
   ],
 )''';
 
-// ═══════════════════════════════════════════════════════════════════════════
+// ---------------------------------------------------------------------------
 // SIGN UP PATTERN
 // 5 steps mirroring the SignIn card / default style.
-// Each component has a [Variant] knob: Default (flat) ↔ Card style (purple-bg).
-// ═══════════════════════════════════════════════════════════════════════════
+// Each component has a [Variant] knob: Default (flat) ? Card style (purple-bg).
+// ---------------------------------------------------------------------------
 
-/// "Already have an account? Sign in" link — mirror of [_RegisterLink].
+/// "Already have an account? Sign in" link � mirror of [_RegisterLink].
 class _SignInLink extends StatelessWidget {
   const _SignInLink({this.fontSize = 15});
   final double fontSize;
@@ -5988,9 +5988,9 @@ BoxDecoration _suCardDeco() => BoxDecoration(
 
 const _suCardBg = Color(0xFFE9E5FF);
 
-// ───────────────────────────────────────────────────────────────────────
-// STEP 1 — Create your account
-// ───────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------
+// STEP 1 � Create your account
+// -----------------------------------------------------------------------
 
 final signUpStep1Component = WidgetbookComponent(
   name: 'Create your account',
@@ -6144,56 +6144,182 @@ class _SignUpStep1CardMockupState extends State<_SignUpStep1CardMockup> {
   }
 }
 
-const _signUpStep1Code = r'''// Step 1 – Create your account
-Ux4gInputField(
-  label: 'Mobile Number',
-  placeholder: 'Enter mobile number',
-  prefixText: '+91',
-),
-SizedBox(height: 16),
-Ux4gStatusBanner(
-  variant: Ux4gBannerVariant.errorLight,
-  title: 'Your status message goes here',
-  subtitle: 'Take action',
-  margin: EdgeInsets.zero,
-  trailingIcon: Text('Attempt 1 of 5', ...),
-),
-SizedBox(height: 20),
-Ux4gButton(text: 'Send OTP', size: Ux4gButtonSize.large,
-  width: double.infinity, onPressed: () {})''';
-
-const _signUpStep1CardCode = r'''// Step 1 – Create your account (card style)
+const _signUpStep1Code = r'''// Step 1 � Create your account (360 � 760)
 Container(
-  color: Color(0xFFE9E5FF),
-  child: Column(
-    children: [
-      Expanded(
-        child: Container(
-          padding: EdgeInsets.fromLTRB(20, 24, 20, 24),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(16),
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text('Create your account', ...),
-              Ux4gInputField(label: 'Mobile Number', prefixText: '+91'),
-              Ux4gStatusBanner(variant: Ux4gBannerVariant.errorLight, ...),
-              Ux4gButton(text: 'Send OTP', ...),
-              // Already have an account? Sign in
-            ],
-          ),
+  width: 360, height: 760, color: Color(0xFFFAFAFA),
+  child: Column(children: [
+    Ux4gAppHeader(
+      variant: Ux4gAppHeaderVariant.light,
+      leadingWidgets: [
+        SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
+        Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
+        SvgPicture.asset('assets/Union.svg', height: 32),
+      ],
+      horizontalPadding: 16, leadingSpacing: 12,
+    ),
+    Divider(height: 1, color: Color(0xFFE5E7EB)),
+    Expanded(
+      child: SingleChildScrollView(
+        padding: EdgeInsets.fromLTRB(20, 24, 20, 0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text('Create your account',
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.w800,
+                color: Color(0xFF111827))),
+            SizedBox(height: 6),
+            Text('Register to access government services',
+              style: TextStyle(fontSize: 14, color: Color(0xFF6B7280))),
+            SizedBox(height: 24),
+            Ux4gInputField(
+              value: mobile, onValueChange: (v) => setState(() => mobile = v),
+              label: 'Mobile Number', placeholder: 'Enter mobile number',
+              prefixText: '+91',
+              type: Ux4gInputFieldType.number, maxLength: 10,
+            ),
+            SizedBox(height: 16),
+            Ux4gStatusBanner(
+              variant: Ux4gBannerVariant.errorLight,
+              title: 'Your status message goes here',
+              subtitle: 'Take action',
+              margin: EdgeInsets.zero,
+              padding: EdgeInsets.fromLTRB(12, 12, 10, 12),
+              leadingIcon: Icon(Icons.error_outline,
+                color: Ux4gPalette.red600, size: 20),
+              trailingIcon: Container(
+                padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                decoration: BoxDecoration(
+                  color: Ux4gPalette.red100,
+                  borderRadius: BorderRadius.circular(6),
+                ),
+                child: Text('Attempt 1 of 5',
+                  style: TextStyle(fontSize: 12,
+                    color: Ux4gPalette.red800, fontWeight: FontWeight.w500)),
+              ),
+            ),
+            SizedBox(height: 20),
+            Ux4gButton(
+              text: 'Send OTP', onPressed: () {},
+              size: Ux4gButtonSize.large, width: double.infinity,
+            ),
+            SizedBox(height: 20),
+            Center(child: TextButton(
+              onPressed: () {},
+              child: Text('Already have an account? Sign in'),
+            )),
+          ],
         ),
       ),
-      _BrandFooter(),
-    ],
-  ),
+    ),
+    Padding(
+      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 14),
+      child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+        Text('Powered by - ',
+          style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+        SvgPicture.asset('assets/Digital_India_logo.svg', height: 24),
+      ]),
+    ),
+  ]),
 )''';
 
-// ───────────────────────────────────────────────────────────────────────
-// STEP 2 — Verify your mobile
-// ───────────────────────────────────────────────────────────────────────
+const _signUpStep1CardCode = r'''// Step 1 � Create your account, card style (360 � 760)
+Container(
+  width: 360, height: 760, color: Colors.white,
+  child: Column(children: [
+    Ux4gAppHeader(
+      variant: Ux4gAppHeaderVariant.light,
+      leadingWidgets: [
+        SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
+        Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
+        SvgPicture.asset('assets/Union.svg', height: 32),
+      ],
+      horizontalPadding: 16, leadingSpacing: 12,
+    ),
+    Divider(height: 1, color: Color(0xFFE5E7EB)),
+    Expanded(
+      child: Container(
+        color: Color(0xFFE9E5FF),
+        child: Column(children: [
+          Expanded(
+            child: SingleChildScrollView(
+              padding: EdgeInsets.fromLTRB(16, 16, 16, 16),
+              child: Container(
+                padding: EdgeInsets.fromLTRB(20, 24, 20, 24),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(16),
+                  boxShadow: [BoxShadow(
+                    color: Colors.black.withValues(alpha: 0.04),
+                    blurRadius: 16, offset: Offset(0, 4),
+                  )],
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('Create your account',
+                      style: TextStyle(fontSize: 22, fontWeight: FontWeight.w800,
+                        color: Color(0xFF111827))),
+                    SizedBox(height: 6),
+                    Text('Register to access government services',
+                      style: TextStyle(fontSize: 13, color: Color(0xFF6B7280))),
+                    SizedBox(height: 20),
+                    Ux4gInputField(
+                      value: mobile, onValueChange: (v) => setState(() => mobile = v),
+                      label: 'Mobile Number', placeholder: 'Enter mobile number',
+                      prefixText: '+91',
+                      type: Ux4gInputFieldType.number, maxLength: 10,
+                    ),
+                    SizedBox(height: 14),
+                    Ux4gStatusBanner(
+                      variant: Ux4gBannerVariant.errorLight,
+                      title: 'Your status message goes here',
+                      subtitle: 'Take action',
+                      margin: EdgeInsets.zero,
+                      leadingIcon: Icon(Icons.error_outline,
+                        color: Ux4gPalette.red600, size: 20),
+                      trailingIcon: Container(
+                        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                        decoration: BoxDecoration(
+                          color: Ux4gPalette.red100,
+                          borderRadius: BorderRadius.circular(6),
+                        ),
+                        child: Text('Attempt 1 of 5',
+                          style: TextStyle(fontSize: 12,
+                            color: Ux4gPalette.red800, fontWeight: FontWeight.w500)),
+                      ),
+                    ),
+                    SizedBox(height: 16),
+                    Ux4gButton(
+                      text: 'Send OTP', onPressed: () {},
+                      size: Ux4gButtonSize.large, width: double.infinity,
+                    ),
+                    SizedBox(height: 14),
+                    Center(child: TextButton(
+                      onPressed: () {},
+                      child: Text('Already have an account? Sign in'),
+                    )),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 14),
+            child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+              Text('Powered by - ',
+                style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+              SvgPicture.asset('assets/Digital_India_logo.svg', height: 24),
+            ]),
+          ),
+        ]),
+      ),
+    ),
+  ]),
+)''';
+
+// -----------------------------------------------------------------------
+// STEP 2 � Verify your mobile
+// -----------------------------------------------------------------------
 
 final signUpStep2Component = WidgetbookComponent(
   name: 'Verify your mobile',
@@ -6351,49 +6477,143 @@ class _SignUpStep2CardMockupState extends State<_SignUpStep2CardMockup> {
   }
 }
 
-const _signUpStep2Code = r'''// Step 2 – Verify your mobile
-Ux4gOtpInput(
-  length: 6,
-  showSeparator: true,
-  captionVariant: Ux4gOtpCaptionVariant.resendTimer,
-  captionLeadingText: "Didn\'t receive OTP?",
-  autoCountdownSeconds: 60,
-  onCaptionTrailingTap: () { setState(() { _otp = ''; }); },
-),
-SizedBox(height: 28),
-Ux4gButton(text: 'Verify OTP', size: Ux4gButtonSize.large,
-  width: double.infinity, onPressed: () {})''';
-
-const _signUpStep2CardCode = r'''// Step 2 – Verify your mobile (card style)
+const _signUpStep2Code = r'''// Step 2 � Verify your mobile (360 � 760)
 Container(
-  color: Color(0xFFE9E5FF),
-  child: Column(
-    children: [
-      Expanded(
-        child: Container(
-          padding: EdgeInsets.fromLTRB(20, 24, 20, 24),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(16),
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text('Verify your mobile', ...),
-              Ux4gOtpInput(length: 6, showSeparator: true, ...),
-              Ux4gButton(text: 'Verify OTP', ...),
-            ],
-          ),
+  width: 360, height: 760, color: Color(0xFFFAFAFA),
+  child: Column(children: [
+    Ux4gAppHeader(
+      variant: Ux4gAppHeaderVariant.light,
+      leadingWidgets: [
+        SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
+        Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
+        SvgPicture.asset('assets/Union.svg', height: 32),
+      ],
+      horizontalPadding: 16, leadingSpacing: 12,
+    ),
+    Divider(height: 1, color: Color(0xFFE5E7EB)),
+    Expanded(
+      child: SingleChildScrollView(
+        padding: EdgeInsets.fromLTRB(20, 24, 20, 0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text('Verify your mobile',
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.w800,
+                color: Color(0xFF111827))),
+            SizedBox(height: 6),
+            Text('Enter the 6-digit OTP sent to +91 98765 XXXXX',
+              style: TextStyle(fontSize: 14, color: Color(0xFF6B7280))),
+            SizedBox(height: 28),
+            Ux4gOtpInput(
+              length: 6,
+              value: otp, onChanged: (v) => setState(() => otp = v),
+              boxSize: 44, gap: 8,
+              showSeparator: true,
+              captionVariant: Ux4gOtpCaptionVariant.resendTimer,
+              captionLeadingText: "Didn't receive OTP?",
+              captionTrailingText: 'Resend',
+              autoCountdownSeconds: 60,
+              onCaptionTrailingTap: () => setState(() => otp = ''),
+            ),
+            SizedBox(height: 28),
+            Ux4gButton(
+              text: 'Verify OTP', onPressed: () {},
+              size: Ux4gButtonSize.large, width: double.infinity,
+            ),
+          ],
         ),
       ),
-      _BrandFooter(),
-    ],
-  ),
+    ),
+    Padding(
+      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 14),
+      child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+        Text('Powered by - ',
+          style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+        SvgPicture.asset('assets/Digital_India_logo.svg', height: 24),
+      ]),
+    ),
+  ]),
 )''';
 
-// ───────────────────────────────────────────────────────────────────────
-// STEP 3 — Complete your profile
-// ───────────────────────────────────────────────────────────────────────
+const _signUpStep2CardCode = r'''// Step 2 � Verify your mobile, card style (360 � 760)
+Container(
+  width: 360, height: 760, color: Colors.white,
+  child: Column(children: [
+    Ux4gAppHeader(
+      variant: Ux4gAppHeaderVariant.light,
+      leadingWidgets: [
+        SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
+        Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
+        SvgPicture.asset('assets/Union.svg', height: 32),
+      ],
+      horizontalPadding: 16, leadingSpacing: 12,
+    ),
+    Divider(height: 1, color: Color(0xFFE5E7EB)),
+    Expanded(
+      child: Container(
+        color: Color(0xFFE9E5FF),
+        child: Column(children: [
+          Expanded(
+            child: SingleChildScrollView(
+              padding: EdgeInsets.fromLTRB(16, 16, 16, 16),
+              child: Container(
+                padding: EdgeInsets.fromLTRB(20, 24, 20, 24),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(16),
+                  boxShadow: [BoxShadow(
+                    color: Colors.black.withValues(alpha: 0.04),
+                    blurRadius: 16, offset: Offset(0, 4),
+                  )],
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('Verify your mobile',
+                      style: TextStyle(fontSize: 22, fontWeight: FontWeight.w800,
+                        color: Color(0xFF111827))),
+                    SizedBox(height: 6),
+                    Text('Enter the 6-digit OTP sent to +91 98765 XXXXX',
+                      style: TextStyle(fontSize: 13, color: Color(0xFF6B7280))),
+                    SizedBox(height: 24),
+                    Ux4gOtpInput(
+                      length: 6,
+                      value: otp, onChanged: (v) => setState(() => otp = v),
+                      boxSize: 44, gap: 8,
+                      showSeparator: true,
+                      captionVariant: Ux4gOtpCaptionVariant.resendTimer,
+                      captionLeadingText: "Didn't receive OTP?",
+                      captionTrailingText: 'Resend',
+                      autoCountdownSeconds: 60,
+                      onCaptionTrailingTap: () => setState(() => otp = ''),
+                    ),
+                    SizedBox(height: 24),
+                    Ux4gButton(
+                      text: 'Verify OTP', onPressed: () {},
+                      size: Ux4gButtonSize.large, width: double.infinity,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 14),
+            child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+              Text('Powered by - ',
+                style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+              SvgPicture.asset('assets/Digital_India_logo.svg', height: 24),
+            ]),
+          ),
+        ]),
+      ),
+    ),
+  ]),
+)''';
+
+// -----------------------------------------------------------------------
+// STEP 3 � Complete your profile
+// -----------------------------------------------------------------------
 
 final signUpStep3Component = WidgetbookComponent(
   name: 'Complete your profile',
@@ -6573,44 +6793,175 @@ class _SignUpStep3CardMockupState extends State<_SignUpStep3CardMockup> {
   }
 }
 
-const _signUpStep3Code = r'''// Step 3 – Complete your profile
-Ux4gInputField(label: 'Full name', placeholder: 'Enter your full name'),
-SizedBox(height: 16),
-Ux4gInputField(label: 'Email Address', placeholder: 'example@mail.com'),
-SizedBox(height: 16),
-Ux4gInputField(label: 'Mobile Number', prefixText: '+91'),
-SizedBox(height: 16),
-Ux4gSelectionDropdown(
-  label: 'Category',
-  options: [...],
-  placeholder: 'Please select..',
-  mode: Ux4gDropdownMode.single,
-),
-SizedBox(height: 28),
-Ux4gButton(text: 'Continue', size: Ux4gButtonSize.large,
-  width: double.infinity, onPressed: () {})''';
-
-const _signUpStep3CardCode = r'''// Step 3 – Complete your profile (card style)
+const _signUpStep3Code = r'''// Step 3 � Complete your profile (360 � 760)
 Container(
-  color: Color(0xFFE9E5FF),
-  child: Container(
-    padding: EdgeInsets.all(20),
-    decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(16)),
-    child: Column(
-      children: [
-        Ux4gInputField(label: 'Full name', ...),
-        Ux4gInputField(label: 'Email Address', ...),
-        Ux4gInputField(label: 'Mobile Number', prefixText: '+91'),
-        Ux4gSelectionDropdown(label: 'Category', ...),
-        Ux4gButton(text: 'Continue', ...),
+  width: 360, height: 760, color: Color(0xFFFAFAFA),
+  child: Column(children: [
+    Ux4gAppHeader(
+      variant: Ux4gAppHeaderVariant.light,
+      leadingWidgets: [
+        SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
+        Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
+        SvgPicture.asset('assets/Union.svg', height: 32),
       ],
+      horizontalPadding: 16, leadingSpacing: 12,
     ),
-  ),
+    Divider(height: 1, color: Color(0xFFE5E7EB)),
+    Expanded(
+      child: SingleChildScrollView(
+        padding: EdgeInsets.fromLTRB(20, 24, 20, 0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text('Complete your profile',
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.w800,
+                color: Color(0xFF111827))),
+            SizedBox(height: 6),
+            Text('Help us personalise your experience',
+              style: TextStyle(fontSize: 14, color: Color(0xFF6B7280))),
+            SizedBox(height: 24),
+            Ux4gInputField(
+              value: fullName, onValueChange: (v) => setState(() => fullName = v),
+              label: 'Full name', placeholder: 'Enter your full name',
+            ),
+            SizedBox(height: 16),
+            Ux4gInputField(
+              value: email, onValueChange: (v) => setState(() => email = v),
+              label: 'Email Address', placeholder: 'example@mail.com',
+              type: Ux4gInputFieldType.email,
+            ),
+            SizedBox(height: 16),
+            Ux4gInputField(
+              value: mobile, onValueChange: (v) => setState(() => mobile = v),
+              label: 'Mobile Number', prefixText: '+91',
+              type: Ux4gInputFieldType.number, maxLength: 10,
+            ),
+            SizedBox(height: 16),
+            Text('Category',
+              style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700,
+                color: Color(0xFF111827))),
+            SizedBox(height: 6),
+            Ux4gSelectionDropdown(
+              options: ['Citizen', 'Government Official', 'Business'],
+              placeholder: 'Please select..',
+              mode: Ux4gDropdownMode.single,
+              onChanged: (v) {},
+            ),
+            SizedBox(height: 28),
+            Ux4gButton(
+              text: 'Continue', onPressed: () {},
+              size: Ux4gButtonSize.large, width: double.infinity,
+            ),
+          ],
+        ),
+      ),
+    ),
+    Padding(
+      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 14),
+      child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+        Text('Powered by - ',
+          style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+        SvgPicture.asset('assets/Digital_India_logo.svg', height: 24),
+      ]),
+    ),
+  ]),
 )''';
 
-// ───────────────────────────────────────────────────────────────────────
-// STEP 4 — Password setup
-// ───────────────────────────────────────────────────────────────────────
+const _signUpStep3CardCode = r'''// Step 3 � Complete your profile, card style (360 � 760)
+Container(
+  width: 360, height: 760, color: Colors.white,
+  child: Column(children: [
+    Ux4gAppHeader(
+      variant: Ux4gAppHeaderVariant.light,
+      leadingWidgets: [
+        SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
+        Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
+        SvgPicture.asset('assets/Union.svg', height: 32),
+      ],
+      horizontalPadding: 16, leadingSpacing: 12,
+    ),
+    Divider(height: 1, color: Color(0xFFE5E7EB)),
+    Expanded(
+      child: Container(
+        color: Color(0xFFE9E5FF),
+        child: Column(children: [
+          Expanded(
+            child: SingleChildScrollView(
+              padding: EdgeInsets.fromLTRB(16, 16, 16, 16),
+              child: Container(
+                padding: EdgeInsets.fromLTRB(20, 24, 20, 24),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(16),
+                  boxShadow: [BoxShadow(
+                    color: Colors.black.withValues(alpha: 0.04),
+                    blurRadius: 16, offset: Offset(0, 4),
+                  )],
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('Complete your profile',
+                      style: TextStyle(fontSize: 22, fontWeight: FontWeight.w800,
+                        color: Color(0xFF111827))),
+                    SizedBox(height: 6),
+                    Text('Help us personalise your experience',
+                      style: TextStyle(fontSize: 13, color: Color(0xFF6B7280))),
+                    SizedBox(height: 20),
+                    Ux4gInputField(
+                      value: fullName, onValueChange: (v) => setState(() => fullName = v),
+                      label: 'Full name', placeholder: 'Enter your full name',
+                    ),
+                    SizedBox(height: 14),
+                    Ux4gInputField(
+                      value: email, onValueChange: (v) => setState(() => email = v),
+                      label: 'Email Address', placeholder: 'example@mail.com',
+                      type: Ux4gInputFieldType.email,
+                    ),
+                    SizedBox(height: 14),
+                    Ux4gInputField(
+                      value: mobile, onValueChange: (v) => setState(() => mobile = v),
+                      label: 'Mobile Number', prefixText: '+91',
+                      type: Ux4gInputFieldType.number, maxLength: 10,
+                    ),
+                    SizedBox(height: 14),
+                    Text('Category',
+                      style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700,
+                        color: Color(0xFF111827))),
+                    SizedBox(height: 6),
+                    Ux4gSelectionDropdown(
+                      options: ['Citizen', 'Government Official', 'Business'],
+                      placeholder: 'Please select..',
+                      mode: Ux4gDropdownMode.single,
+                      onChanged: (v) {},
+                    ),
+                    SizedBox(height: 24),
+                    Ux4gButton(
+                      text: 'Continue', onPressed: () {},
+                      size: Ux4gButtonSize.large, width: double.infinity,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 14),
+            child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+              Text('Powered by - ',
+                style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+              SvgPicture.asset('assets/Digital_India_logo.svg', height: 24),
+            ]),
+          ),
+        ]),
+      ),
+    ),
+  ]),
+)''';
+
+// -----------------------------------------------------------------------
+// STEP 4 � Password setup
+// -----------------------------------------------------------------------
 
 final signUpStep4Component = WidgetbookComponent(
   name: 'Password setup',
@@ -6752,41 +7103,143 @@ class _SignUpStep4CardMockupState extends State<_SignUpStep4CardMockup> {
   }
 }
 
-const _signUpStep4Code = r'''// Step 4 – Password setup
-Ux4gInputField(
-  label: 'Password',
-  placeholder: '...........',
-  type: Ux4gInputFieldType.password,
-),
-SizedBox(height: 16),
-Ux4gInputField(
-  label: 'Confirm password',
-  placeholder: '...........',
-  type: Ux4gInputFieldType.password,
-),
-SizedBox(height: 28),
-Ux4gButton(text: 'Create account', size: Ux4gButtonSize.large,
-  width: double.infinity, onPressed: () {})''';
-
-const _signUpStep4CardCode = r'''// Step 4 – Password setup (card style)
+const _signUpStep4Code = r'''// Step 4 � Password setup (360 � 760)
 Container(
-  color: Color(0xFFE9E5FF),
-  child: Container(
-    padding: EdgeInsets.all(20),
-    decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(16)),
-    child: Column(
-      children: [
-        Ux4gInputField(label: 'Password', type: Ux4gInputFieldType.password),
-        Ux4gInputField(label: 'Confirm password', type: Ux4gInputFieldType.password),
-        Ux4gButton(text: 'Create account', ...),
+  width: 360, height: 760, color: Color(0xFFFAFAFA),
+  child: Column(children: [
+    Ux4gAppHeader(
+      variant: Ux4gAppHeaderVariant.light,
+      leadingWidgets: [
+        SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
+        Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
+        SvgPicture.asset('assets/Union.svg', height: 32),
       ],
+      horizontalPadding: 16, leadingSpacing: 12,
     ),
-  ),
+    Divider(height: 1, color: Color(0xFFE5E7EB)),
+    Expanded(
+      child: SingleChildScrollView(
+        padding: EdgeInsets.fromLTRB(20, 24, 20, 0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text('Password setup',
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.w800,
+                color: Color(0xFF111827))),
+            SizedBox(height: 6),
+            Text('Create a strong password for your account',
+              style: TextStyle(fontSize: 14, color: Color(0xFF6B7280))),
+            SizedBox(height: 24),
+            Ux4gInputField(
+              value: password, onValueChange: (v) => setState(() => password = v),
+              label: 'Password', placeholder: '...........',
+              type: Ux4gInputFieldType.password,
+            ),
+            SizedBox(height: 16),
+            Ux4gInputField(
+              value: confirm, onValueChange: (v) => setState(() => confirm = v),
+              label: 'Confirm password', placeholder: '...........',
+              type: Ux4gInputFieldType.password,
+            ),
+            SizedBox(height: 28),
+            Ux4gButton(
+              text: 'Create account', onPressed: () {},
+              size: Ux4gButtonSize.large, width: double.infinity,
+            ),
+          ],
+        ),
+      ),
+    ),
+    Padding(
+      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 14),
+      child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+        Text('Powered by - ',
+          style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+        SvgPicture.asset('assets/Digital_India_logo.svg', height: 24),
+      ]),
+    ),
+  ]),
 )''';
 
-// ───────────────────────────────────────────────────────────────────────
-// STEP 5 — Account Created
-// ───────────────────────────────────────────────────────────────────────
+const _signUpStep4CardCode = r'''// Step 4 � Password setup, card style (360 � 760)
+Container(
+  width: 360, height: 760, color: Colors.white,
+  child: Column(children: [
+    Ux4gAppHeader(
+      variant: Ux4gAppHeaderVariant.light,
+      leadingWidgets: [
+        SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
+        Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
+        SvgPicture.asset('assets/Union.svg', height: 32),
+      ],
+      horizontalPadding: 16, leadingSpacing: 12,
+    ),
+    Divider(height: 1, color: Color(0xFFE5E7EB)),
+    Expanded(
+      child: Container(
+        color: Color(0xFFE9E5FF),
+        child: Column(children: [
+          Expanded(
+            child: SingleChildScrollView(
+              padding: EdgeInsets.fromLTRB(16, 16, 16, 16),
+              child: Container(
+                padding: EdgeInsets.fromLTRB(20, 24, 20, 24),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(16),
+                  boxShadow: [BoxShadow(
+                    color: Colors.black.withValues(alpha: 0.04),
+                    blurRadius: 16, offset: Offset(0, 4),
+                  )],
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('Password setup',
+                      style: TextStyle(fontSize: 22, fontWeight: FontWeight.w800,
+                        color: Color(0xFF111827))),
+                    SizedBox(height: 6),
+                    Text('Create a strong password for your account',
+                      style: TextStyle(fontSize: 13, color: Color(0xFF6B7280))),
+                    SizedBox(height: 20),
+                    Ux4gInputField(
+                      value: password, onValueChange: (v) => setState(() => password = v),
+                      label: 'Password', placeholder: '...........',
+                      type: Ux4gInputFieldType.password,
+                    ),
+                    SizedBox(height: 14),
+                    Ux4gInputField(
+                      value: confirm, onValueChange: (v) => setState(() => confirm = v),
+                      label: 'Confirm password', placeholder: '...........',
+                      type: Ux4gInputFieldType.password,
+                    ),
+                    SizedBox(height: 24),
+                    Ux4gButton(
+                      text: 'Create account', onPressed: () {},
+                      size: Ux4gButtonSize.large, width: double.infinity,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 14),
+            child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+              Text('Powered by - ',
+                style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+              SvgPicture.asset('assets/Digital_India_logo.svg', height: 24),
+            ]),
+          ),
+        ]),
+      ),
+    ),
+  ]),
+)''';
+
+// -----------------------------------------------------------------------
+// STEP 5 � Account Created
+// -----------------------------------------------------------------------
 
 final signUpStep5Component = WidgetbookComponent(
   name: 'Account Created',
@@ -6830,14 +7283,22 @@ class _SignUpStep5Mockup extends StatelessWidget {
               child: Column(
                 children: [
                   Container(
-                    width: 72, height: 72,
-                    decoration: BoxDecoration(
-                      color: const Color(0xFFDCFCE7),
+                    width: 64,
+                    height: 64,
+                    decoration: const BoxDecoration(
+                      color: Ux4gPalette.green100,
                       shape: BoxShape.circle,
-                      border: Border.all(color: const Color(0xFF86EFAC), width: 2),
                     ),
-                    child: const Icon(Icons.check_rounded,
-                        color: Color(0xFF16A34A), size: 40),
+                    alignment: Alignment.center,
+                    child: Container(
+                      width: 36,
+                      height: 36,
+                      decoration: const BoxDecoration(
+                        color: Ux4gPalette.green,
+                        shape: BoxShape.circle,
+                      ),
+                      child: const Icon(Icons.check, color: Colors.white, size: 22),
+                    ),
                   ),
                   const SizedBox(height: 24),
                   const Text('Account Created!',
@@ -6905,14 +7366,22 @@ class _SignUpStep5CardMockup extends StatelessWidget {
                         child: Column(
                           children: [
                             Container(
-                              width: 72, height: 72,
-                              decoration: BoxDecoration(
-                                color: const Color(0xFFDCFCE7),
+                              width: 64,
+                              height: 64,
+                              decoration: const BoxDecoration(
+                                color: Ux4gPalette.green100,
                                 shape: BoxShape.circle,
-                                border: Border.all(color: const Color(0xFF86EFAC), width: 2),
                               ),
-                              child: const Icon(Icons.check_rounded,
-                                  color: Color(0xFF16A34A), size: 40),
+                              alignment: Alignment.center,
+                              child: Container(
+                                width: 36,
+                                height: 36,
+                                decoration: const BoxDecoration(
+                                  color: Ux4gPalette.green,
+                                  shape: BoxShape.circle,
+                                ),
+                                child: const Icon(Icons.check, color: Colors.white, size: 22),
+                              ),
                             ),
                             const SizedBox(height: 20),
                             const Text('Account Created!',
@@ -6962,50 +7431,8346 @@ class _SignUpStep5CardMockup extends StatelessWidget {
   }
 }
 
-const _signUpStep5Code = r'''// Step 5 – Account Created
-Column(
-  children: [
-    Container(
-      width: 72, height: 72,
-      decoration: BoxDecoration(
-        color: Color(0xFFDCFCE7), shape: BoxShape.circle,
-        border: Border.all(color: Color(0xFF86EFAC), width: 2),
-      ),
-      child: Icon(Icons.check_rounded, color: Color(0xFF16A34A), size: 40),
-    ),
-    SizedBox(height: 24),
-    Text('Account Created!', ...),
-    Text('Welcome, Ramesh Kumar', ...),
-    SizedBox(height: 32),
-    Container(child: Text('RECOMMENDED', ...)),
-    SizedBox(height: 12),
-    Ux4gButton(text: 'Link Aadhaar Now', size: Ux4gButtonSize.large,
-      width: double.infinity, onPressed: () {}),
-    SizedBox(height: 12),
-    Ux4gButton(text: 'Skip and Browse Services',
-      variant: Ux4gButtonVariant.outline,
-      size: Ux4gButtonSize.large, width: double.infinity, onPressed: () {}),
-    SizedBox(height: 16),
-    Text('You can link Aadhaar later from your profile', ...),
-  ],
-)''';
-
-const _signUpStep5CardCode = r'''// Step 5 – Account Created (card style)
+const _signUpStep5Code = r'''// Step 5 � Account Created (360 � 760)
 Container(
-  color: Color(0xFFE9E5FF),
-  child: Column(
-    children: [
-      Expanded(
-        child: Container(
-          padding: EdgeInsets.fromLTRB(20, 32, 20, 24),
-          decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(16)),
-          child: Column(children: [
-            // green check icon, title, subtitle,
-            // RECOMMENDED badge, Link Aadhaar button, Skip button, note
-          ]),
+  width: 360, height: 760, color: Color(0xFFFAFAFA),
+  child: Column(children: [
+    Ux4gAppHeader(
+      variant: Ux4gAppHeaderVariant.light,
+      leadingWidgets: [
+        SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
+        Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
+        SvgPicture.asset('assets/Union.svg', height: 32),
+      ],
+      horizontalPadding: 16, leadingSpacing: 12,
+    ),
+    Divider(height: 1, color: Color(0xFFE5E7EB)),
+    Expanded(
+      child: SingleChildScrollView(
+        padding: EdgeInsets.fromLTRB(20, 40, 20, 0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Container(
+              width: 64, height: 64,
+              decoration: BoxDecoration(
+                color: Ux4gPalette.green100, shape: BoxShape.circle),
+              alignment: Alignment.center,
+              child: Container(
+                width: 36, height: 36,
+                decoration: BoxDecoration(
+                  color: Ux4gPalette.green, shape: BoxShape.circle),
+                child: Icon(Icons.check, color: Colors.white, size: 22),
+              ),
+            ),
+            SizedBox(height: 24),
+            Text('Account Created!',
+              style: TextStyle(fontSize: 22, fontWeight: FontWeight.w800,
+                color: Color(0xFF16A34A))),
+            SizedBox(height: 8),
+            Text('Welcome, Ramesh Kumar',
+              style: TextStyle(fontSize: 14, color: Color(0xFF6B7280))),
+            SizedBox(height: 32),
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+              decoration: BoxDecoration(
+                color: Color(0xFFEFF6FF),
+                borderRadius: BorderRadius.circular(4),
+              ),
+              child: Text('RECOMMENDED',
+                style: TextStyle(fontSize: 11, fontWeight: FontWeight.w700,
+                  color: Color(0xFF1D4ED8), letterSpacing: 0.5)),
+            ),
+            SizedBox(height: 12),
+            Ux4gButton(
+              text: 'Link Aadhaar Now', onPressed: () {},
+              size: Ux4gButtonSize.large, width: double.infinity,
+            ),
+            SizedBox(height: 12),
+            Ux4gButton(
+              text: 'Skip and Browse Services', onPressed: () {},
+              variant: Ux4gButtonVariant.outline,
+              size: Ux4gButtonSize.large, width: double.infinity,
+            ),
+            SizedBox(height: 16),
+            Text('You can link Aadhaar later from your profile',
+              style: TextStyle(fontSize: 12, color: Color(0xFF9CA3AF))),
+          ],
         ),
       ),
-      _BrandFooter(),
+    ),
+    Padding(
+      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 14),
+      child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+        Text('Powered by - ',
+          style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+        SvgPicture.asset('assets/Digital_India_logo.svg', height: 24),
+      ]),
+    ),
+  ]),
+)''';
+
+const _signUpStep5CardCode = r'''// Step 5 � Account Created, card style (360 � 760)
+Container(
+  width: 360, height: 760, color: Colors.white,
+  child: Column(children: [
+    Ux4gAppHeader(
+      variant: Ux4gAppHeaderVariant.light,
+      leadingWidgets: [
+        SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
+        Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
+        SvgPicture.asset('assets/Union.svg', height: 32),
+      ],
+      horizontalPadding: 16, leadingSpacing: 12,
+    ),
+    Divider(height: 1, color: Color(0xFFE5E7EB)),
+    Expanded(
+      child: Container(
+        color: Color(0xFFE9E5FF),
+        child: Column(children: [
+          Expanded(
+            child: SingleChildScrollView(
+              padding: EdgeInsets.fromLTRB(16, 16, 16, 16),
+              child: Container(
+                padding: EdgeInsets.fromLTRB(20, 32, 20, 24),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(16),
+                  boxShadow: [BoxShadow(
+                    color: Colors.black.withValues(alpha: 0.04),
+                    blurRadius: 16, offset: Offset(0, 4),
+                  )],
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Container(
+                      width: 64, height: 64,
+                      decoration: BoxDecoration(
+                        color: Ux4gPalette.green100, shape: BoxShape.circle),
+                      alignment: Alignment.center,
+                      child: Container(
+                        width: 36, height: 36,
+                        decoration: BoxDecoration(
+                          color: Ux4gPalette.green, shape: BoxShape.circle),
+                        child: Icon(Icons.check, color: Colors.white, size: 22),
+                      ),
+                    ),
+                    SizedBox(height: 20),
+                    Text('Account Created!',
+                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.w800,
+                        color: Color(0xFF16A34A))),
+                    SizedBox(height: 6),
+                    Text('Welcome, Ramesh Kumar',
+                      style: TextStyle(fontSize: 13, color: Color(0xFF6B7280))),
+                    SizedBox(height: 24),
+                    Container(
+                      padding: EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                      decoration: BoxDecoration(
+                        color: Color(0xFFEFF6FF),
+                        borderRadius: BorderRadius.circular(4),
+                      ),
+                      child: Text('RECOMMENDED',
+                        style: TextStyle(fontSize: 11, fontWeight: FontWeight.w700,
+                          color: Color(0xFF1D4ED8), letterSpacing: 0.5)),
+                    ),
+                    SizedBox(height: 12),
+                    Ux4gButton(
+                      text: 'Link Aadhaar Now', onPressed: () {},
+                      size: Ux4gButtonSize.large, width: double.infinity,
+                    ),
+                    SizedBox(height: 10),
+                    Ux4gButton(
+                      text: 'Skip and Browse Services', onPressed: () {},
+                      variant: Ux4gButtonVariant.outline,
+                      size: Ux4gButtonSize.large, width: double.infinity,
+                    ),
+                    SizedBox(height: 14),
+                    Text('You can link Aadhaar later from your profile',
+                      style: TextStyle(fontSize: 12, color: Color(0xFF9CA3AF))),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 14),
+            child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+              Text('Powered by - ',
+                style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+              SvgPicture.asset('assets/Digital_India_logo.svg', height: 24),
+            ]),
+          ),
+        ]),
+      ),
+    ),
+  ]),
+)''';
+
+// ---------------------------------------------------------------------------
+// FORGOT PASSWORD & ACCOUNT RECOVERY PATTERN
+// 5 screens: Reset Password ? Enter OTP ? Create new password ?
+//            Password reset successfully ? Account recovery
+// Each component has a [Variant] knob: Default ? Card style.
+// ---------------------------------------------------------------------------
+
+/// Reusable back-navigation button for FP screens.
+/// Uses the same ghost [Ux4gButton] style as the Sign In screen's back button.
+class _NavLink extends StatelessWidget {
+  const _NavLink({required this.label});
+  final String label;
+
+  @override
+  Widget build(BuildContext context) {
+    return Ux4gButton(
+      text: label,
+      onPressed: () {},
+      variant: Ux4gButtonVariant.ghost,
+      size: Ux4gButtonSize.small,
+      leadingIcon: Icons.arrow_back,
+      iconSize: 18,
+      padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 4),
+    );
+  }
+}
+
+/// Warning banner for "Most services use OTP login..." note.
+Widget _fpWarningBanner() => Ux4gStatusBanner(
+  variant: Ux4gBannerVariant.warningLight,
+  title: 'Most services use OTP login so you may not need a password.',
+  margin: EdgeInsets.zero,
+  padding: const EdgeInsets.fromLTRB(12, 10, 12, 10),
+  titleStyle: const TextStyle(
+    fontSize: 13, fontWeight: FontWeight.w400,
+    color: Color(0xFF92400E), height: 1.4,
+  ),
+  leadingIcon: const Icon(Icons.info_outline_rounded,
+      color: Color(0xFFD97706), size: 18),
+);
+
+/// Password strength row (Ux4gLinearProgress + checklist).
+Widget _passwordStrength() {
+  const greenCheck = Icon(Icons.check_circle_rounded,
+      color: Color(0xFF16A34A), size: 16);
+  const redX = Icon(Icons.error, color: Color(0xFFDC2626), size: 16);
+  const itemStyle = TextStyle(fontSize: 13, color: Color(0xFF374151));
+
+  return Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      Ux4gLinearProgress(
+        value: 0.85,
+        gradientColors: const [Color(0xFF86EFAC), Color(0xFF15803D)],
+        trackColor: const Color(0xFFE5E7EB),
+        shape: Ux4gProgressShape.rounded,
+        height: 8,
+      ),
+      const SizedBox(height: 6),
+      const Text('Password Strength: Strong',
+          style: TextStyle(fontSize: 12, color: Color(0xFF16A34A),
+              fontWeight: FontWeight.w700)),
+      const SizedBox(height: 10),
+      Row(children: [greenCheck, const SizedBox(width: 6),
+        const Text('8+ characters', style: itemStyle)]),
+      const SizedBox(height: 4),
+      Row(children: [greenCheck, const SizedBox(width: 6),
+        const Text('Uppercase letter', style: itemStyle)]),
+      const SizedBox(height: 4),
+      Row(children: [greenCheck, const SizedBox(width: 6),
+        const Text('Number', style: itemStyle)]),
+      const SizedBox(height: 4),
+      Row(children: [redX, const SizedBox(width: 6),
+        const Text('Special character', style: itemStyle)]),
+    ],
+  );
+}
+
+// -----------------------------------------------------------------------
+// STEP 1 � Reset Password
+// -----------------------------------------------------------------------
+
+final fpStep1Component = WidgetbookComponent(
+  name: 'Reset Password',
+  useCases: [
+    WidgetbookUseCase(
+      name: 'Default',
+      builder: (context) {
+        final variant = context.knobs.list(
+          label: 'Variant',
+          options: const ['Default', 'Card style'],
+          initialOption: 'Default',
+          description: 'Switch between the flat phone layout and the card-style layout.',
+        );
+        return ComponentDocs(
+          name: 'Reset Password',
+          description: 'Entry point for the forgot-password flow. User enters their '
+              'registered mobile number to receive an OTP.',
+          code: variant == 'Card style' ? _fpStep1CardCode : _fpStep1Code,
+          center: true,
+          child: variant == 'Card style'
+              ? const _FpStep1CardMockup()
+              : const _FpStep1Mockup(),
+        );
+      },
+    ),
+  ],
+);
+
+class _FpStep1Mockup extends StatefulWidget {
+  const _FpStep1Mockup();
+  @override
+  State<_FpStep1Mockup> createState() => _FpStep1MockupState();
+}
+
+class _FpStep1MockupState extends State<_FpStep1Mockup> {
+  String _mobile = '';
+
+  @override
+  Widget build(BuildContext context) {
+    return _PhoneFrame(
+      child: Column(
+        children: [
+          const _BrandHeader(),
+          Expanded(
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.fromLTRB(20, 16, 20, 0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const _NavLink(label: 'Back to Sign In'),
+                  const SizedBox(height: 20),
+                  const Text('Reset Password',
+                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.w800,
+                        color: _titleColor, height: 1.2, letterSpacing: -0.3)),
+                  const SizedBox(height: 6),
+                  const Text(
+                    'Enter your registered mobile number to receive a verification code',
+                    style: TextStyle(fontSize: 14, color: _subtleText, height: 1.4)),
+                  const SizedBox(height: 24),
+                  Ux4gInputField(
+                    value: _mobile,
+                    onValueChange: (v) => setState(() => _mobile = v),
+                    label: 'Mobile Number',
+                    placeholder: 'Enter mobile number',
+                    placeholderStyle: _placeholderStyle,
+                    prefixText: '+91',
+                    type: Ux4gInputFieldType.number,
+                    maxLength: 10,
+                  ),
+                  const SizedBox(height: 20),
+                  Ux4gButton(text: 'Send OTP', onPressed: () {},
+                      size: Ux4gButtonSize.large, width: double.infinity),
+                  const SizedBox(height: 14),
+                  Center(
+                    child: TextButton(
+                      onPressed: () {},
+                      style: TextButton.styleFrom(
+                          padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 4)),
+                      child: Text('Recover account using Aadhaar Number  ?',
+                        style: TextStyle(
+                          fontSize: 13,
+                          color: Theme.of(context).colorScheme.primary,
+                          fontWeight: FontWeight.w600,
+                        )),
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  Row(children: const [
+                    Expanded(child: Divider(color: _border, thickness: 1)),
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 16),
+                      child: Text('OR', style: TextStyle(fontSize: 12,
+                          color: _mutedText, fontWeight: FontWeight.w500, letterSpacing: 0.5)),
+                    ),
+                    Expanded(child: Divider(color: _border, thickness: 1)),
+                  ]),
+                  const SizedBox(height: 8),
+                  Ux4gButton(text: 'Sign in with OTP instead', onPressed: () {},
+                      variant: Ux4gButtonVariant.outline,
+                      size: Ux4gButtonSize.large, width: double.infinity),
+                  const SizedBox(height: 16),
+                  _fpWarningBanner(),
+                ],
+              ),
+            ),
+          ),
+          const _BrandFooter(),
+        ],
+      ),
+    );
+  }
+}
+
+class _FpStep1CardMockup extends StatefulWidget {
+  const _FpStep1CardMockup();
+  @override
+  State<_FpStep1CardMockup> createState() => _FpStep1CardMockupState();
+}
+
+class _FpStep1CardMockupState extends State<_FpStep1CardMockup> {
+  String _mobile = '';
+
+  @override
+  Widget build(BuildContext context) {
+    return _PhoneFrame(
+      child: Column(
+        children: [
+          const _BrandHeader(),
+          Expanded(
+            child: Container(
+              color: _suCardBg,
+              child: Column(
+                children: [
+                  Expanded(
+                    child: SingleChildScrollView(
+                      padding: const EdgeInsets.fromLTRB(16, 16, 16, 16),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const _NavLink(label: 'Back to Sign In'),
+                          const SizedBox(height: 12),
+                          Container(
+                            padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
+                            decoration: _suCardDeco(),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const Text('Reset Password',
+                                  style: TextStyle(fontSize: 22, fontWeight: FontWeight.w800,
+                                      color: _titleColor, height: 1.2, letterSpacing: -0.3)),
+                                const SizedBox(height: 6),
+                                const Text(
+                                  'Enter your registered mobile number to receive a verification code',
+                                  style: TextStyle(fontSize: 13, color: _subtleText, height: 1.4)),
+                                const SizedBox(height: 20),
+                                Ux4gInputField(
+                                  value: _mobile,
+                                  onValueChange: (v) => setState(() => _mobile = v),
+                                  label: 'Mobile Number',
+                                  placeholder: 'Enter mobile number',
+                                  placeholderStyle: _placeholderStyle,
+                                  prefixText: '+91',
+                                  type: Ux4gInputFieldType.number,
+                                  maxLength: 10,
+                                ),
+                                const SizedBox(height: 16),
+                                Ux4gButton(text: 'Send OTP', onPressed: () {},
+                                    size: Ux4gButtonSize.large, width: double.infinity),
+                                const SizedBox(height: 12),
+                                Center(
+                                  child: TextButton(
+                                    onPressed: () {},
+                                    style: TextButton.styleFrom(
+                                        padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 4)),
+                                    child: Text('Recover account using Aadhaar Number  ?',
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                        color: Theme.of(context).colorScheme.primary,
+                                        fontWeight: FontWeight.w600,
+                                      )),
+                                  ),
+                                ),
+                                const SizedBox(height: 6),
+                                Row(children: const [
+                                  Expanded(child: Divider(color: _border, thickness: 1)),
+                                  Padding(
+                                    padding: EdgeInsets.symmetric(horizontal: 12),
+                                    child: Text('OR', style: TextStyle(fontSize: 12,
+                                        color: _mutedText, fontWeight: FontWeight.w500)),
+                                  ),
+                                  Expanded(child: Divider(color: _border, thickness: 1)),
+                                ]),
+                                const SizedBox(height: 6),
+                                Ux4gButton(text: 'Sign in with OTP instead', onPressed: () {},
+                                    variant: Ux4gButtonVariant.outline,
+                                    size: Ux4gButtonSize.large, width: double.infinity),
+                                const SizedBox(height: 14),
+                                _fpWarningBanner(),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  const _BrandFooter(),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+const _fpStep1Code = r'''// FP Step 1 � Reset Password (360 � 760)
+Container(
+  width: 360, height: 760, color: Color(0xFFFAFAFA),
+  child: Column(children: [
+    Ux4gAppHeader(
+      variant: Ux4gAppHeaderVariant.light,
+      leadingWidgets: [
+        SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
+        Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
+        SvgPicture.asset('assets/Union.svg', height: 32),
+      ],
+      horizontalPadding: 16, leadingSpacing: 12,
+    ),
+    Divider(height: 1, color: Color(0xFFE5E7EB)),
+    Expanded(
+      child: SingleChildScrollView(
+        padding: EdgeInsets.fromLTRB(20, 16, 20, 0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Ux4gButton(
+              text: 'Back to Sign In', onPressed: () {},
+              variant: Ux4gButtonVariant.ghost,
+              size: Ux4gButtonSize.small,
+              leadingIcon: Icons.arrow_back, iconSize: 18,
+            ),
+            SizedBox(height: 16),
+            Text('Reset Password',
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.w800,
+                color: Color(0xFF111827))),
+            SizedBox(height: 6),
+            Text('Enter your registered mobile number',
+              style: TextStyle(fontSize: 14, color: Color(0xFF6B7280))),
+            SizedBox(height: 24),
+            Ux4gInputField(
+              value: mobile, onValueChange: (v) => setState(() => mobile = v),
+              label: 'Mobile Number', placeholder: 'Enter mobile number',
+              prefixText: '+91',
+              type: Ux4gInputFieldType.number, maxLength: 10,
+            ),
+            SizedBox(height: 20),
+            Ux4gButton(
+              text: 'Send OTP', onPressed: () {},
+              size: Ux4gButtonSize.large, width: double.infinity,
+            ),
+            SizedBox(height: 16),
+            Center(
+              child: TextButton(
+                onPressed: () {},
+                child: Text('Recover account using Aadhaar Number ?',
+                  style: TextStyle(fontSize: 13)),
+              ),
+            ),
+            SizedBox(height: 12),
+            Row(children: [
+              Expanded(child: Divider(color: Color(0xFFE5E7EB))),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 12),
+                child: Text('OR', style: TextStyle(fontSize: 12,
+                  color: Color(0xFF9CA3AF), fontWeight: FontWeight.w500)),
+              ),
+              Expanded(child: Divider(color: Color(0xFFE5E7EB))),
+            ]),
+            SizedBox(height: 12),
+            Ux4gButton(
+              text: 'Sign in with OTP instead', onPressed: () {},
+              variant: Ux4gButtonVariant.outline,
+              size: Ux4gButtonSize.large, width: double.infinity,
+            ),
+            SizedBox(height: 16),
+            Ux4gStatusBanner(
+              variant: Ux4gBannerVariant.warningLight,
+              title: 'Most services use OTP login so you may not need a password.',
+              margin: EdgeInsets.zero,
+            ),
+          ],
+        ),
+      ),
+    ),
+    Padding(
+      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 14),
+      child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+        Text('Powered by - ',
+          style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+        SvgPicture.asset('assets/Digital_India_logo.svg', height: 24),
+      ]),
+    ),
+  ]),
+)''';
+
+const _fpStep1CardCode = r'''// FP Step 1 � Reset Password, card style (360 � 760)
+Container(
+  width: 360, height: 760, color: Colors.white,
+  child: Column(children: [
+    Ux4gAppHeader(
+      variant: Ux4gAppHeaderVariant.light,
+      leadingWidgets: [
+        SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
+        Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
+        SvgPicture.asset('assets/Union.svg', height: 32),
+      ],
+      horizontalPadding: 16, leadingSpacing: 12,
+    ),
+    Divider(height: 1, color: Color(0xFFE5E7EB)),
+    Expanded(
+      child: Container(
+        color: Color(0xFFE9E5FF),
+        child: Column(children: [
+          Expanded(
+            child: SingleChildScrollView(
+              padding: EdgeInsets.fromLTRB(16, 16, 16, 16),
+              child: Container(
+                padding: EdgeInsets.fromLTRB(20, 16, 20, 24),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(16),
+                  boxShadow: [BoxShadow(
+                    color: Colors.black.withValues(alpha: 0.04),
+                    blurRadius: 16, offset: Offset(0, 4),
+                  )],
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Ux4gButton(
+                      text: 'Back to Sign In', onPressed: () {},
+                      variant: Ux4gButtonVariant.ghost,
+                      size: Ux4gButtonSize.small,
+                      leadingIcon: Icons.arrow_back, iconSize: 18,
+                    ),
+                    SizedBox(height: 12),
+                    Text('Reset Password',
+                      style: TextStyle(fontSize: 22, fontWeight: FontWeight.w800,
+                        color: Color(0xFF111827))),
+                    SizedBox(height: 6),
+                    Text('Enter your registered mobile number',
+                      style: TextStyle(fontSize: 13, color: Color(0xFF6B7280))),
+                    SizedBox(height: 18),
+                    Ux4gInputField(
+                      value: mobile, onValueChange: (v) => setState(() => mobile = v),
+                      label: 'Mobile Number', placeholder: 'Enter mobile number',
+                      prefixText: '+91',
+                      type: Ux4gInputFieldType.number, maxLength: 10,
+                    ),
+                    SizedBox(height: 16),
+                    Ux4gButton(
+                      text: 'Send OTP', onPressed: () {},
+                      size: Ux4gButtonSize.large, width: double.infinity,
+                    ),
+                    SizedBox(height: 12),
+                    Center(
+                      child: TextButton(
+                        onPressed: () {},
+                        child: Text('Recover account using Aadhaar Number ?',
+                          style: TextStyle(fontSize: 13)),
+                      ),
+                    ),
+                    SizedBox(height: 10),
+                    Row(children: [
+                      Expanded(child: Divider(color: Color(0xFFE5E7EB))),
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 12),
+                        child: Text('OR', style: TextStyle(fontSize: 12,
+                          color: Color(0xFF9CA3AF), fontWeight: FontWeight.w500)),
+                      ),
+                      Expanded(child: Divider(color: Color(0xFFE5E7EB))),
+                    ]),
+                    SizedBox(height: 10),
+                    Ux4gButton(
+                      text: 'Sign in with OTP instead', onPressed: () {},
+                      variant: Ux4gButtonVariant.outline,
+                      size: Ux4gButtonSize.large, width: double.infinity,
+                    ),
+                    SizedBox(height: 14),
+                    Ux4gStatusBanner(
+                      variant: Ux4gBannerVariant.warningLight,
+                      title: 'Most services use OTP login so you may not need a password.',
+                      margin: EdgeInsets.zero,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 14),
+            child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+              Text('Powered by - ',
+                style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+              SvgPicture.asset('assets/Digital_India_logo.svg', height: 24),
+            ]),
+          ),
+        ]),
+      ),
+    ),
+  ]),
+)''';
+
+// -----------------------------------------------------------------------
+// STEP 2 � Enter OTP
+// -----------------------------------------------------------------------
+
+final fpStep2Component = WidgetbookComponent(
+  name: 'Enter OTP',
+  useCases: [
+    WidgetbookUseCase(
+      name: 'Default',
+      builder: (context) {
+        final variant = context.knobs.list(
+          label: 'Variant',
+          options: const ['Default', 'Card style'],
+          initialOption: 'Default',
+          description: 'Switch between the flat phone layout and the card-style layout.',
+        );
+        return ComponentDocs(
+          name: 'Enter OTP',
+          description: 'OTP verification screen for the password reset flow.',
+          code: variant == 'Card style' ? _fpStep2CardCode : _fpStep2Code,
+          center: true,
+          child: variant == 'Card style'
+              ? const _FpStep2CardMockup()
+              : const _FpStep2Mockup(),
+        );
+      },
+    ),
+  ],
+);
+
+class _FpStep2Mockup extends StatefulWidget {
+  const _FpStep2Mockup();
+  @override
+  State<_FpStep2Mockup> createState() => _FpStep2MockupState();
+}
+
+class _FpStep2MockupState extends State<_FpStep2Mockup> {
+  String _otp = '';
+  int _resendNonce = 0;
+
+  @override
+  Widget build(BuildContext context) {
+    return _PhoneFrame(
+      child: Column(
+        children: [
+          const _BrandHeader(),
+          Expanded(
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.fromLTRB(20, 16, 20, 0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const _NavLink(label: 'Change mobile number'),
+                  const SizedBox(height: 20),
+                  const Text('Enter OTP',
+                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.w800,
+                        color: _titleColor, height: 1.2, letterSpacing: -0.3)),
+                  const SizedBox(height: 6),
+                  const Text('Sent to +91 98765 XXXXX',
+                    style: TextStyle(fontSize: 14, color: _subtleText, height: 1.3)),
+                  const SizedBox(height: 28),
+                  Ux4gOtpInput(
+                    key: ValueKey('fp2_$_resendNonce'),
+                    length: 6,
+                    value: _otp,
+                    onChanged: (v) => setState(() => _otp = v),
+                    boxSize: 44,
+                    gap: 8,
+                    showSeparator: true,
+                    captionVariant: Ux4gOtpCaptionVariant.resendTimer,
+                    captionLeadingText: "Didn't receive OTP?",
+                    captionTrailingText: 'Resend',
+                    autoCountdownSeconds: 60,
+                    onCaptionTrailingTap: () =>
+                        setState(() { _otp = ''; _resendNonce++; }),
+                  ),
+                  const SizedBox(height: 28),
+                  Ux4gButton(text: 'Verify OTP', onPressed: () {},
+                      size: Ux4gButtonSize.large, width: double.infinity),
+                ],
+              ),
+            ),
+          ),
+          const _BrandFooter(),
+        ],
+      ),
+    );
+  }
+}
+
+class _FpStep2CardMockup extends StatefulWidget {
+  const _FpStep2CardMockup();
+  @override
+  State<_FpStep2CardMockup> createState() => _FpStep2CardMockupState();
+}
+
+class _FpStep2CardMockupState extends State<_FpStep2CardMockup> {
+  String _otp = '';
+  int _resendNonce = 0;
+
+  @override
+  Widget build(BuildContext context) {
+    return _PhoneFrame(
+      child: Column(
+        children: [
+          const _BrandHeader(),
+          Expanded(
+            child: Container(
+              color: _suCardBg,
+              child: Column(
+                children: [
+                  Expanded(
+                    child: SingleChildScrollView(
+                      padding: const EdgeInsets.fromLTRB(16, 16, 16, 16),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const _NavLink(label: 'Change mobile number'),
+                          const SizedBox(height: 12),
+                          Container(
+                            padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
+                            decoration: _suCardDeco(),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const Text('Enter OTP',
+                                  style: TextStyle(fontSize: 22, fontWeight: FontWeight.w800,
+                                      color: _titleColor, height: 1.2, letterSpacing: -0.3)),
+                                const SizedBox(height: 6),
+                                const Text('Sent to +91 98765 XXXXX',
+                                  style: TextStyle(fontSize: 13, color: _subtleText, height: 1.3)),
+                                const SizedBox(height: 24),
+                                Ux4gOtpInput(
+                                  key: ValueKey('fp2c_$_resendNonce'),
+                                  length: 6,
+                                  value: _otp,
+                                  onChanged: (v) => setState(() => _otp = v),
+                                  boxSize: 44,
+                                  gap: 8,
+                                  showSeparator: true,
+                                  captionVariant: Ux4gOtpCaptionVariant.resendTimer,
+                                  captionLeadingText: "Didn't receive OTP?",
+                                  captionTrailingText: 'Resend',
+                                  autoCountdownSeconds: 60,
+                                  onCaptionTrailingTap: () =>
+                                      setState(() { _otp = ''; _resendNonce++; }),
+                                ),
+                                const SizedBox(height: 24),
+                                Ux4gButton(text: 'Verify OTP', onPressed: () {},
+                                    size: Ux4gButtonSize.large, width: double.infinity),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  const _BrandFooter(),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+const _fpStep2Code = r'''// FP Step 2 � Enter OTP (360 � 760)
+Container(
+  width: 360, height: 760, color: Color(0xFFFAFAFA),
+  child: Column(children: [
+    Ux4gAppHeader(
+      variant: Ux4gAppHeaderVariant.light,
+      leadingWidgets: [
+        SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
+        Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
+        SvgPicture.asset('assets/Union.svg', height: 32),
+      ],
+      horizontalPadding: 16, leadingSpacing: 12,
+    ),
+    Divider(height: 1, color: Color(0xFFE5E7EB)),
+    Expanded(
+      child: SingleChildScrollView(
+        padding: EdgeInsets.fromLTRB(20, 16, 20, 0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Ux4gButton(
+              text: 'Change mobile number', onPressed: () {},
+              variant: Ux4gButtonVariant.ghost,
+              size: Ux4gButtonSize.small,
+              leadingIcon: Icons.arrow_back, iconSize: 18,
+            ),
+            SizedBox(height: 16),
+            Text('Enter OTP',
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.w800,
+                color: Color(0xFF111827))),
+            SizedBox(height: 6),
+            Text('Sent to +91 98765 XXXXX',
+              style: TextStyle(fontSize: 14, color: Color(0xFF6B7280))),
+            SizedBox(height: 28),
+            Ux4gOtpInput(
+              length: 6,
+              value: otp, onChanged: (v) => setState(() => otp = v),
+              boxSize: 44, gap: 8,
+              showSeparator: true,
+              captionVariant: Ux4gOtpCaptionVariant.resendTimer,
+              captionLeadingText: "Didn't receive OTP?",
+              captionTrailingText: 'Resend',
+              autoCountdownSeconds: 60,
+              onCaptionTrailingTap: () => setState(() => otp = ''),
+            ),
+            SizedBox(height: 28),
+            Ux4gButton(
+              text: 'Verify OTP', onPressed: () {},
+              size: Ux4gButtonSize.large, width: double.infinity,
+            ),
+          ],
+        ),
+      ),
+    ),
+    Padding(
+      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 14),
+      child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+        Text('Powered by - ',
+          style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+        SvgPicture.asset('assets/Digital_India_logo.svg', height: 24),
+      ]),
+    ),
+  ]),
+)''';
+
+const _fpStep2CardCode = r'''// FP Step 2 � Enter OTP, card style (360 � 760)
+Container(
+  width: 360, height: 760, color: Colors.white,
+  child: Column(children: [
+    Ux4gAppHeader(
+      variant: Ux4gAppHeaderVariant.light,
+      leadingWidgets: [
+        SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
+        Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
+        SvgPicture.asset('assets/Union.svg', height: 32),
+      ],
+      horizontalPadding: 16, leadingSpacing: 12,
+    ),
+    Divider(height: 1, color: Color(0xFFE5E7EB)),
+    Expanded(
+      child: Container(
+        color: Color(0xFFE9E5FF),
+        child: Column(children: [
+          Expanded(
+            child: SingleChildScrollView(
+              padding: EdgeInsets.fromLTRB(16, 16, 16, 16),
+              child: Container(
+                padding: EdgeInsets.fromLTRB(20, 16, 20, 24),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(16),
+                  boxShadow: [BoxShadow(
+                    color: Colors.black.withValues(alpha: 0.04),
+                    blurRadius: 16, offset: Offset(0, 4),
+                  )],
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Ux4gButton(
+                      text: 'Change mobile number', onPressed: () {},
+                      variant: Ux4gButtonVariant.ghost,
+                      size: Ux4gButtonSize.small,
+                      leadingIcon: Icons.arrow_back, iconSize: 18,
+                    ),
+                    SizedBox(height: 12),
+                    Text('Enter OTP',
+                      style: TextStyle(fontSize: 22, fontWeight: FontWeight.w800,
+                        color: Color(0xFF111827))),
+                    SizedBox(height: 6),
+                    Text('Sent to +91 98765 XXXXX',
+                      style: TextStyle(fontSize: 13, color: Color(0xFF6B7280))),
+                    SizedBox(height: 24),
+                    Ux4gOtpInput(
+                      length: 6,
+                      value: otp, onChanged: (v) => setState(() => otp = v),
+                      boxSize: 44, gap: 8,
+                      showSeparator: true,
+                      captionVariant: Ux4gOtpCaptionVariant.resendTimer,
+                      captionLeadingText: "Didn't receive OTP?",
+                      captionTrailingText: 'Resend',
+                      autoCountdownSeconds: 60,
+                      onCaptionTrailingTap: () => setState(() => otp = ''),
+                    ),
+                    SizedBox(height: 24),
+                    Ux4gButton(
+                      text: 'Verify OTP', onPressed: () {},
+                      size: Ux4gButtonSize.large, width: double.infinity,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 14),
+            child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+              Text('Powered by - ',
+                style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+              SvgPicture.asset('assets/Digital_India_logo.svg', height: 24),
+            ]),
+          ),
+        ]),
+      ),
+    ),
+  ]),
+)''';
+
+// -----------------------------------------------------------------------
+// STEP 3 � Create new password
+// -----------------------------------------------------------------------
+
+final fpStep3Component = WidgetbookComponent(
+  name: 'Create new password',
+  useCases: [
+    WidgetbookUseCase(
+      name: 'Default',
+      builder: (context) {
+        final variant = context.knobs.list(
+          label: 'Variant',
+          options: const ['Default', 'Card style'],
+          initialOption: 'Default',
+          description: 'Switch between the flat phone layout and the card-style layout.',
+        );
+        return ComponentDocs(
+          name: 'Create new password',
+          description: 'Password creation screen with strength indicator and mismatch error state.',
+          code: variant == 'Card style' ? _fpStep3CardCode : _fpStep3Code,
+          center: true,
+          child: variant == 'Card style'
+              ? const _FpStep3CardMockup()
+              : const _FpStep3Mockup(),
+        );
+      },
+    ),
+  ],
+);
+
+class _FpStep3Mockup extends StatefulWidget {
+  const _FpStep3Mockup();
+  @override
+  State<_FpStep3Mockup> createState() => _FpStep3MockupState();
+}
+
+class _FpStep3MockupState extends State<_FpStep3Mockup> {
+  String _password = '';
+  String _confirm = '';
+
+  @override
+  Widget build(BuildContext context) {
+    return _PhoneFrame(
+      child: Column(
+        children: [
+          const _BrandHeader(),
+          Expanded(
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.fromLTRB(20, 24, 20, 0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text('Create new password',
+                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.w800,
+                        color: _titleColor, height: 1.2, letterSpacing: -0.3)),
+                  const SizedBox(height: 6),
+                  const Text('Choose a strong password to secure your account',
+                    style: TextStyle(fontSize: 14, color: _subtleText, height: 1.4)),
+                  const SizedBox(height: 24),
+                  Ux4gInputField(
+                    value: _password,
+                    onValueChange: (v) => setState(() => _password = v),
+                    label: 'Password',
+                    placeholder: '...........',
+                    placeholderStyle: _placeholderStyle,
+                    type: Ux4gInputFieldType.password,
+                  ),
+                  const SizedBox(height: 12),
+                  _passwordStrength(),
+                  const SizedBox(height: 16),
+                  Ux4gInputField(
+                    value: _confirm,
+                    onValueChange: (v) => setState(() => _confirm = v),
+                    label: 'Confirm password',
+                    placeholder: '...........',
+                    placeholderStyle: _placeholderStyle,
+                    labelStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w700, color: _titleColor),
+                    type: Ux4gInputFieldType.password,
+                    status: Ux4gInputFieldStatus.error,
+                    caption: 'Passwords do not match',
+                  ),
+                  const SizedBox(height: 24),
+                  Ux4gButton(text: 'Reset password', onPressed: () {},
+                      size: Ux4gButtonSize.large, width: double.infinity),
+                ],
+              ),
+            ),
+          ),
+          const _BrandFooter(),
+        ],
+      ),
+    );
+  }
+}
+
+class _FpStep3CardMockup extends StatefulWidget {
+  const _FpStep3CardMockup();
+  @override
+  State<_FpStep3CardMockup> createState() => _FpStep3CardMockupState();
+}
+
+class _FpStep3CardMockupState extends State<_FpStep3CardMockup> {
+  String _password = '';
+  String _confirm = '';
+
+  @override
+  Widget build(BuildContext context) {
+    return _PhoneFrame(
+      child: Column(
+        children: [
+          const _BrandHeader(),
+          Expanded(
+            child: Container(
+              color: _suCardBg,
+              child: Column(
+                children: [
+                  Expanded(
+                    child: SingleChildScrollView(
+                      padding: const EdgeInsets.fromLTRB(16, 20, 16, 16),
+                      child: Container(
+                        padding: const EdgeInsets.fromLTRB(20, 24, 20, 24),
+                        decoration: _suCardDeco(),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Text('Create new password',
+                              style: TextStyle(fontSize: 22, fontWeight: FontWeight.w800,
+                                  color: _titleColor, height: 1.2, letterSpacing: -0.3)),
+                            const SizedBox(height: 6),
+                            const Text('Choose a strong password to secure your account',
+                              style: TextStyle(fontSize: 13, color: _subtleText, height: 1.4)),
+                            const SizedBox(height: 20),
+                            Ux4gInputField(
+                              value: _password,
+                              onValueChange: (v) => setState(() => _password = v),
+                              label: 'Password',
+                              placeholder: '...........',
+                              placeholderStyle: _placeholderStyle,
+                              type: Ux4gInputFieldType.password,
+                            ),
+                            const SizedBox(height: 10),
+                            _passwordStrength(),
+                            const SizedBox(height: 14),
+                            Ux4gInputField(
+                              value: _confirm,
+                              onValueChange: (v) => setState(() => _confirm = v),
+                              label: 'Confirm password',
+                              placeholder: '...........',
+                              placeholderStyle: _placeholderStyle,
+                              labelStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w700, color: _titleColor),
+                              type: Ux4gInputFieldType.password,
+                              status: Ux4gInputFieldStatus.error,
+                              caption: 'Passwords do not match',
+                            ),
+                            const SizedBox(height: 20),
+                            Ux4gButton(text: 'Reset password', onPressed: () {},
+                                size: Ux4gButtonSize.large, width: double.infinity),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  const _BrandFooter(),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+const _fpStep3Code = r'''// FP Step 3 � Create new password (360 � 760)
+Container(
+  width: 360, height: 760, color: Color(0xFFFAFAFA),
+  child: Column(children: [
+    Ux4gAppHeader(
+      variant: Ux4gAppHeaderVariant.light,
+      leadingWidgets: [
+        SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
+        Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
+        SvgPicture.asset('assets/Union.svg', height: 32),
+      ],
+      horizontalPadding: 16, leadingSpacing: 12,
+    ),
+    Divider(height: 1, color: Color(0xFFE5E7EB)),
+    Expanded(
+      child: SingleChildScrollView(
+        padding: EdgeInsets.fromLTRB(20, 24, 20, 0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text('Create new password',
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.w800,
+                color: Color(0xFF111827))),
+            SizedBox(height: 6),
+            Text('Your new password must be different from your previous one.',
+              style: TextStyle(fontSize: 14, color: Color(0xFF6B7280))),
+            SizedBox(height: 24),
+            Ux4gInputField(
+              value: password, onValueChange: (v) => setState(() => password = v),
+              label: 'Password', placeholder: '...........',
+              type: Ux4gInputFieldType.password,
+            ),
+            SizedBox(height: 8),
+            Ux4gLinearProgress(
+              value: 0.85,
+              gradientColors: [Color(0xFF86EFAC), Color(0xFF15803D)],
+              trackColor: Color(0xFFE5E7EB),
+              shape: Ux4gProgressShape.rounded,
+              height: 8,
+            ),
+            SizedBox(height: 4),
+            Text('Password Strength: Strong',
+              style: TextStyle(fontSize: 12, fontWeight: FontWeight.w700,
+                color: Color(0xFF16A34A))),
+            SizedBox(height: 10),
+            Row(children: [
+              Icon(Icons.check_circle_rounded, color: Color(0xFF16A34A), size: 16),
+              SizedBox(width: 6),
+              Text('8+ characters',
+                style: TextStyle(fontSize: 13, color: Color(0xFF374151))),
+            ]),
+            SizedBox(height: 6),
+            Row(children: [
+              Icon(Icons.check_circle_rounded, color: Color(0xFF16A34A), size: 16),
+              SizedBox(width: 6),
+              Text('Uppercase letter',
+                style: TextStyle(fontSize: 13, color: Color(0xFF374151))),
+            ]),
+            SizedBox(height: 6),
+            Row(children: [
+              Icon(Icons.check_circle_rounded, color: Color(0xFF16A34A), size: 16),
+              SizedBox(width: 6),
+              Text('Number',
+                style: TextStyle(fontSize: 13, color: Color(0xFF374151))),
+            ]),
+            SizedBox(height: 6),
+            Row(children: [
+              Icon(Icons.error, color: Color(0xFFDC2626), size: 16),
+              SizedBox(width: 6),
+              Text('Special character',
+                style: TextStyle(fontSize: 13, color: Color(0xFF6B7280))),
+            ]),
+            SizedBox(height: 16),
+            Ux4gInputField(
+              value: confirm, onValueChange: (v) => setState(() => confirm = v),
+              label: 'Confirm password', placeholder: '...........',
+              type: Ux4gInputFieldType.password,
+              status: Ux4gInputFieldStatus.error,
+              caption: 'Passwords do not match',
+              labelStyle: TextStyle(color: Color(0xFF111827)),
+            ),
+            SizedBox(height: 24),
+            Ux4gButton(
+              text: 'Reset password', onPressed: () {},
+              size: Ux4gButtonSize.large, width: double.infinity,
+            ),
+          ],
+        ),
+      ),
+    ),
+    Padding(
+      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 14),
+      child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+        Text('Powered by - ',
+          style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+        SvgPicture.asset('assets/Digital_India_logo.svg', height: 24),
+      ]),
+    ),
+  ]),
+)''';
+
+const _fpStep3CardCode = r'''// FP Step 3 � Create new password, card style (360 � 760)
+Container(
+  width: 360, height: 760, color: Colors.white,
+  child: Column(children: [
+    Ux4gAppHeader(
+      variant: Ux4gAppHeaderVariant.light,
+      leadingWidgets: [
+        SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
+        Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
+        SvgPicture.asset('assets/Union.svg', height: 32),
+      ],
+      horizontalPadding: 16, leadingSpacing: 12,
+    ),
+    Divider(height: 1, color: Color(0xFFE5E7EB)),
+    Expanded(
+      child: Container(
+        color: Color(0xFFE9E5FF),
+        child: Column(children: [
+          Expanded(
+            child: SingleChildScrollView(
+              padding: EdgeInsets.fromLTRB(16, 16, 16, 16),
+              child: Container(
+                padding: EdgeInsets.fromLTRB(20, 24, 20, 24),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(16),
+                  boxShadow: [BoxShadow(
+                    color: Colors.black.withValues(alpha: 0.04),
+                    blurRadius: 16, offset: Offset(0, 4),
+                  )],
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('Create new password',
+                      style: TextStyle(fontSize: 22, fontWeight: FontWeight.w800,
+                        color: Color(0xFF111827))),
+                    SizedBox(height: 6),
+                    Text('Your new password must be different from your previous one.',
+                      style: TextStyle(fontSize: 13, color: Color(0xFF6B7280))),
+                    SizedBox(height: 20),
+                    Ux4gInputField(
+                      value: password, onValueChange: (v) => setState(() => password = v),
+                      label: 'Password', placeholder: '...........',
+                      type: Ux4gInputFieldType.password,
+                    ),
+                    SizedBox(height: 8),
+                    Ux4gLinearProgress(
+                      value: 0.85,
+                      gradientColors: [Color(0xFF86EFAC), Color(0xFF15803D)],
+                      trackColor: Color(0xFFE5E7EB),
+                      shape: Ux4gProgressShape.rounded,
+                      height: 8,
+                    ),
+                    SizedBox(height: 4),
+                    Text('Password Strength: Strong',
+                      style: TextStyle(fontSize: 12, fontWeight: FontWeight.w700,
+                        color: Color(0xFF16A34A))),
+                    SizedBox(height: 10),
+                    Row(children: [
+                      Icon(Icons.check_circle_rounded, color: Color(0xFF16A34A), size: 16),
+                      SizedBox(width: 6),
+                      Text('8+ characters',
+                        style: TextStyle(fontSize: 13, color: Color(0xFF374151))),
+                    ]),
+                    SizedBox(height: 6),
+                    Row(children: [
+                      Icon(Icons.check_circle_rounded, color: Color(0xFF16A34A), size: 16),
+                      SizedBox(width: 6),
+                      Text('Uppercase letter',
+                        style: TextStyle(fontSize: 13, color: Color(0xFF374151))),
+                    ]),
+                    SizedBox(height: 6),
+                    Row(children: [
+                      Icon(Icons.check_circle_rounded, color: Color(0xFF16A34A), size: 16),
+                      SizedBox(width: 6),
+                      Text('Number',
+                        style: TextStyle(fontSize: 13, color: Color(0xFF374151))),
+                    ]),
+                    SizedBox(height: 6),
+                    Row(children: [
+                      Icon(Icons.error, color: Color(0xFFDC2626), size: 16),
+                      SizedBox(width: 6),
+                      Text('Special character',
+                        style: TextStyle(fontSize: 13, color: Color(0xFF6B7280))),
+                    ]),
+                    SizedBox(height: 14),
+                    Ux4gInputField(
+                      value: confirm, onValueChange: (v) => setState(() => confirm = v),
+                      label: 'Confirm password', placeholder: '...........',
+                      type: Ux4gInputFieldType.password,
+                      status: Ux4gInputFieldStatus.error,
+                      caption: 'Passwords do not match',
+                      labelStyle: TextStyle(color: Color(0xFF111827)),
+                    ),
+                    SizedBox(height: 20),
+                    Ux4gButton(
+                      text: 'Reset password', onPressed: () {},
+                      size: Ux4gButtonSize.large, width: double.infinity,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 14),
+            child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+              Text('Powered by - ',
+                style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+              SvgPicture.asset('assets/Digital_India_logo.svg', height: 24),
+            ]),
+          ),
+        ]),
+      ),
+    ),
+  ]),
+)''';
+
+// -----------------------------------------------------------------------
+// STEP 4 � Password reset successfully
+// -----------------------------------------------------------------------
+
+final fpStep4Component = WidgetbookComponent(
+  name: 'Password reset successfully',
+  useCases: [
+    WidgetbookUseCase(
+      name: 'Default',
+      builder: (context) {
+        final variant = context.knobs.list(
+          label: 'Variant',
+          options: const ['Default', 'Card style'],
+          initialOption: 'Default',
+          description: 'Switch between the flat phone layout and the card-style layout.',
+        );
+        return ComponentDocs(
+          name: 'Password reset successfully',
+          description: 'Success confirmation after the new password has been saved.',
+          code: variant == 'Card style' ? _fpStep4CardCode : _fpStep4Code,
+          center: true,
+          child: variant == 'Card style'
+              ? const _FpStep4CardMockup()
+              : const _FpStep4Mockup(),
+        );
+      },
+    ),
+  ],
+);
+
+class _FpStep4Mockup extends StatelessWidget {
+  const _FpStep4Mockup();
+
+  @override
+  Widget build(BuildContext context) {
+    return _PhoneFrame(
+      child: Column(
+        children: [
+          const _BrandHeader(),
+          Expanded(
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.fromLTRB(20, 48, 20, 0),
+              child: Column(
+                children: [
+                  Container(
+                    width: 64,
+                    height: 64,
+                    decoration: const BoxDecoration(
+                      color: Ux4gPalette.green100,
+                      shape: BoxShape.circle,
+                    ),
+                    alignment: Alignment.center,
+                    child: Container(
+                      width: 36,
+                      height: 36,
+                      decoration: const BoxDecoration(
+                        color: Ux4gPalette.green,
+                        shape: BoxShape.circle,
+                      ),
+                      child: const Icon(Icons.check, color: Colors.white, size: 22),
+                    ),
+                  ),
+                  const SizedBox(height: 24),
+                  const Text('Password reset\nsuccessfully',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 26, fontWeight: FontWeight.w800,
+                        color: Color(0xFF16A34A), height: 1.25, letterSpacing: -0.3)),
+                  const SizedBox(height: 12),
+                  const Text(
+                    'Sign in with your new password to continue access to government services.',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 14, color: _subtleText, height: 1.5)),
+                  const SizedBox(height: 36),
+                  Ux4gButton(text: 'Sign in', onPressed: () {},
+                      size: Ux4gButtonSize.large, width: double.infinity),
+                ],
+              ),
+            ),
+          ),
+          const _BrandFooter(),
+        ],
+      ),
+    );
+  }
+}
+
+class _FpStep4CardMockup extends StatelessWidget {
+  const _FpStep4CardMockup();
+
+  @override
+  Widget build(BuildContext context) {
+    return _PhoneFrame(
+      child: Column(
+        children: [
+          const _BrandHeader(),
+          Expanded(
+            child: Container(
+              color: _suCardBg,
+              child: Column(
+                children: [
+                  Expanded(
+                    child: SingleChildScrollView(
+                      padding: const EdgeInsets.fromLTRB(16, 20, 16, 16),
+                      child: Container(
+                        padding: const EdgeInsets.fromLTRB(20, 36, 20, 28),
+                        decoration: _suCardDeco(),
+                        child: Column(
+                          children: [
+                            Container(
+                              width: 64,
+                              height: 64,
+                              decoration: const BoxDecoration(
+                                color: Ux4gPalette.green100,
+                                shape: BoxShape.circle,
+                              ),
+                              alignment: Alignment.center,
+                              child: Container(
+                                width: 36,
+                                height: 36,
+                                decoration: const BoxDecoration(
+                                  color: Ux4gPalette.green,
+                                  shape: BoxShape.circle,
+                                ),
+                                child: const Icon(Icons.check, color: Colors.white, size: 22),
+                              ),
+                            ),
+                            const SizedBox(height: 20),
+                            const Text('Password reset\nsuccessfully',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(fontSize: 22, fontWeight: FontWeight.w800,
+                                  color: Color(0xFF16A34A), height: 1.25, letterSpacing: -0.3)),
+                            const SizedBox(height: 10),
+                            const Text(
+                              'Sign in with your new password to continue access to government services.',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(fontSize: 13, color: _subtleText, height: 1.5)),
+                            const SizedBox(height: 28),
+                            Ux4gButton(text: 'Sign in', onPressed: () {},
+                                size: Ux4gButtonSize.large, width: double.infinity),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  const _BrandFooter(),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+const _fpStep4Code = r'''// FP Step 4 � Password reset successfully (360 � 760)
+Container(
+  width: 360, height: 760, color: Color(0xFFFAFAFA),
+  child: Column(children: [
+    Ux4gAppHeader(
+      variant: Ux4gAppHeaderVariant.light,
+      leadingWidgets: [
+        SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
+        Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
+        SvgPicture.asset('assets/Union.svg', height: 32),
+      ],
+      horizontalPadding: 16, leadingSpacing: 12,
+    ),
+    Divider(height: 1, color: Color(0xFFE5E7EB)),
+    Expanded(
+      child: SingleChildScrollView(
+        padding: EdgeInsets.fromLTRB(20, 48, 20, 0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Container(
+              width: 64, height: 64,
+              decoration: BoxDecoration(
+                color: Ux4gPalette.green100, shape: BoxShape.circle),
+              alignment: Alignment.center,
+              child: Container(
+                width: 36, height: 36,
+                decoration: BoxDecoration(
+                  color: Ux4gPalette.green, shape: BoxShape.circle),
+                child: Icon(Icons.check, color: Colors.white, size: 22),
+              ),
+            ),
+            SizedBox(height: 24),
+            Text('Password reset\nsuccessfully',
+              textAlign: TextAlign.center,
+              style: TextStyle(fontSize: 26, fontWeight: FontWeight.w800,
+                color: Color(0xFF16A34A), height: 1.25)),
+            SizedBox(height: 12),
+            Text(
+              'Sign in with your new password to continue\naccess to government services.',
+              textAlign: TextAlign.center,
+              style: TextStyle(fontSize: 14, color: Color(0xFF6B7280))),
+            SizedBox(height: 32),
+            Ux4gButton(
+              text: 'Sign in', onPressed: () {},
+              size: Ux4gButtonSize.large, width: double.infinity,
+            ),
+          ],
+        ),
+      ),
+    ),
+    Padding(
+      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 14),
+      child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+        Text('Powered by - ',
+          style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+        SvgPicture.asset('assets/Digital_India_logo.svg', height: 24),
+      ]),
+    ),
+  ]),
+)''';
+
+const _fpStep4CardCode = r'''// FP Step 4 � Password reset successfully, card style (360 � 760)
+Container(
+  width: 360, height: 760, color: Colors.white,
+  child: Column(children: [
+    Ux4gAppHeader(
+      variant: Ux4gAppHeaderVariant.light,
+      leadingWidgets: [
+        SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
+        Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
+        SvgPicture.asset('assets/Union.svg', height: 32),
+      ],
+      horizontalPadding: 16, leadingSpacing: 12,
+    ),
+    Divider(height: 1, color: Color(0xFFE5E7EB)),
+    Expanded(
+      child: Container(
+        color: Color(0xFFE9E5FF),
+        child: Column(children: [
+          Expanded(
+            child: SingleChildScrollView(
+              padding: EdgeInsets.fromLTRB(16, 16, 16, 16),
+              child: Container(
+                padding: EdgeInsets.fromLTRB(20, 36, 20, 28),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(16),
+                  boxShadow: [BoxShadow(
+                    color: Colors.black.withValues(alpha: 0.04),
+                    blurRadius: 16, offset: Offset(0, 4),
+                  )],
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Container(
+                      width: 64, height: 64,
+                      decoration: BoxDecoration(
+                        color: Ux4gPalette.green100, shape: BoxShape.circle),
+                      alignment: Alignment.center,
+                      child: Container(
+                        width: 36, height: 36,
+                        decoration: BoxDecoration(
+                          color: Ux4gPalette.green, shape: BoxShape.circle),
+                        child: Icon(Icons.check, color: Colors.white, size: 22),
+                      ),
+                    ),
+                    SizedBox(height: 20),
+                    Text('Password reset\nsuccessfully',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 22, fontWeight: FontWeight.w800,
+                        color: Color(0xFF16A34A), height: 1.25)),
+                    SizedBox(height: 10),
+                    Text(
+                      'Sign in with your new password to continue\naccess to government services.',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 13, color: Color(0xFF6B7280))),
+                    SizedBox(height: 28),
+                    Ux4gButton(
+                      text: 'Sign in', onPressed: () {},
+                      size: Ux4gButtonSize.large, width: double.infinity,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 14),
+            child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+              Text('Powered by - ',
+                style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+              SvgPicture.asset('assets/Digital_India_logo.svg', height: 24),
+            ]),
+          ),
+        ]),
+      ),
+    ),
+  ]),
+)''';
+
+// -----------------------------------------------------------------------
+// STEP 5 � Account recovery
+// -----------------------------------------------------------------------
+
+final fpStep5Component = WidgetbookComponent(
+  name: 'Account recovery',
+  useCases: [
+    WidgetbookUseCase(
+      name: 'Default',
+      builder: (context) {
+        final variant = context.knobs.list(
+          label: 'Variant',
+          options: const ['Default', 'Card style'],
+          initialOption: 'Default',
+          description: 'Switch between the flat phone layout and the card-style layout.',
+        );
+        return ComponentDocs(
+          name: 'Account recovery',
+          description: 'Aadhaar-based account recovery screen. Shows masked Aadhaar number '
+              'and consent text before sending OTP.',
+          code: variant == 'Card style' ? _fpStep5CardCode : _fpStep5Code,
+          center: true,
+          child: variant == 'Card style'
+              ? const _FpStep5CardMockup()
+              : const _FpStep5Mockup(),
+        );
+      },
+    ),
+  ],
+);
+
+class _FpStep5Mockup extends StatefulWidget {
+  const _FpStep5Mockup();
+  @override
+  State<_FpStep5Mockup> createState() => _FpStep5MockupState();
+}
+
+class _FpStep5MockupState extends State<_FpStep5Mockup> {
+  String _aadhaar = '';
+
+  @override
+  Widget build(BuildContext context) {
+    return _PhoneFrame(
+      child: Column(
+        children: [
+          const _BrandHeader(),
+          Expanded(
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.fromLTRB(20, 16, 20, 0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text('Account recovery',
+                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.w800,
+                        color: _titleColor, height: 1.2, letterSpacing: -0.3)),
+                  const SizedBox(height: 24),
+                  Ux4gAadhaarInputField(
+                    value: _aadhaar,
+                    onValueChange: (v) => setState(() => _aadhaar = v),
+                    label: 'Aadhaar Number',
+                    placeholder: 'XXXX XXXX XXXX',
+                    placeholderStyle: _placeholderStyle,
+                    caption: 'Enter your 12-digit Aadhaar number',
+                  ),
+                  const SizedBox(height: 16),
+                  Container(
+                    padding: const EdgeInsets.all(14),
+                    decoration: BoxDecoration(
+                      color: const Color(0xFFF3F4F6),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: const Text(
+                      'I agree to verify my identity via Aadhaar OTP for the purpose of password recovery.',
+                      style: TextStyle(fontSize: 13, color: _subtleText, height: 1.5)),
+                  ),
+                  const SizedBox(height: 24),
+                  Ux4gButton(text: 'Send OTP', onPressed: () {},
+                      size: Ux4gButtonSize.large, width: double.infinity),
+                ],
+              ),
+            ),
+          ),
+          const _BrandFooter(),
+        ],
+      ),
+    );
+  }
+}
+
+class _FpStep5CardMockup extends StatefulWidget {
+  const _FpStep5CardMockup();
+  @override
+  State<_FpStep5CardMockup> createState() => _FpStep5CardMockupState();
+}
+
+class _FpStep5CardMockupState extends State<_FpStep5CardMockup> {
+  String _aadhaar = '';
+
+  @override
+  Widget build(BuildContext context) {
+    return _PhoneFrame(
+      child: Column(
+        children: [
+          const _BrandHeader(),
+          Expanded(
+            child: Container(
+              color: _suCardBg,
+              child: Column(
+                children: [
+                  Expanded(
+                    child: SingleChildScrollView(
+                      padding: const EdgeInsets.fromLTRB(16, 16, 16, 16),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            padding: const EdgeInsets.fromLTRB(20, 20, 20, 24),
+                            decoration: _suCardDeco(),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const Text('Account recovery',
+                                  style: TextStyle(fontSize: 22, fontWeight: FontWeight.w800,
+                                      color: _titleColor, height: 1.2, letterSpacing: -0.3)),
+                                const SizedBox(height: 20),
+                                Ux4gAadhaarInputField(
+                                  value: _aadhaar,
+                                  onValueChange: (v) => setState(() => _aadhaar = v),
+                                  label: 'Aadhaar Number',
+                                  placeholder: 'XXXX XXXX XXXX',
+                                  placeholderStyle: _placeholderStyle,
+                                  caption: 'Enter your 12-digit Aadhaar number',
+                                ),
+                                const SizedBox(height: 16),
+                                Container(
+                                  padding: const EdgeInsets.all(12),
+                                  decoration: BoxDecoration(
+                                    color: const Color(0xFFF3F4F6),
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                  child: const Text(
+                                    'I agree to verify my identity via Aadhaar OTP for the purpose of password recovery.',
+                                    style: TextStyle(fontSize: 12, color: _subtleText, height: 1.5)),
+                                ),
+                                const SizedBox(height: 20),
+                                Ux4gButton(text: 'Send OTP', onPressed: () {},
+                                    size: Ux4gButtonSize.large, width: double.infinity),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  const _BrandFooter(),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+const _fpStep5Code = r'''// FP Step 5 � Account recovery (360 � 760)
+Container(
+  width: 360, height: 760, color: Color(0xFFFAFAFA),
+  child: Column(children: [
+    Ux4gAppHeader(
+      variant: Ux4gAppHeaderVariant.light,
+      leadingWidgets: [
+        SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
+        Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
+        SvgPicture.asset('assets/Union.svg', height: 32),
+      ],
+      horizontalPadding: 16, leadingSpacing: 12,
+    ),
+    Divider(height: 1, color: Color(0xFFE5E7EB)),
+    Expanded(
+      child: SingleChildScrollView(
+        padding: EdgeInsets.fromLTRB(20, 24, 20, 0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text('Account recovery',
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.w800,
+                color: Color(0xFF111827))),
+            SizedBox(height: 6),
+            Text('Verify your identity using Aadhaar',
+              style: TextStyle(fontSize: 14, color: Color(0xFF6B7280))),
+            SizedBox(height: 24),
+            Ux4gAadhaarInputField(
+              value: aadhaar,
+              onValueChange: (v) => setState(() => aadhaar = v),
+              label: 'Aadhaar Number',
+              placeholder: 'XXXX XXXX XXXX',
+              caption: 'Enter your 12-digit Aadhaar number',
+            ),
+            SizedBox(height: 16),
+            Container(
+              padding: EdgeInsets.all(14),
+              decoration: BoxDecoration(
+                color: Color(0xFFF3F4F6),
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Text(
+                'I agree to verify my identity via Aadhaar OTP '
+                'for the purpose of password recovery.',
+                style: TextStyle(fontSize: 13, color: Color(0xFF374151))),
+            ),
+            SizedBox(height: 24),
+            Ux4gButton(
+              text: 'Send OTP', onPressed: () {},
+              size: Ux4gButtonSize.large, width: double.infinity,
+            ),
+          ],
+        ),
+      ),
+    ),
+    Padding(
+      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 14),
+      child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+        Text('Powered by - ',
+          style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+        SvgPicture.asset('assets/Digital_India_logo.svg', height: 24),
+      ]),
+    ),
+  ]),
+)''';
+
+const _fpStep5CardCode = r'''// FP Step 5 � Account recovery, card style (360 � 760)
+Container(
+  width: 360, height: 760, color: Colors.white,
+  child: Column(children: [
+    Ux4gAppHeader(
+      variant: Ux4gAppHeaderVariant.light,
+      leadingWidgets: [
+        SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
+        Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
+        SvgPicture.asset('assets/Union.svg', height: 32),
+      ],
+      horizontalPadding: 16, leadingSpacing: 12,
+    ),
+    Divider(height: 1, color: Color(0xFFE5E7EB)),
+    Expanded(
+      child: Container(
+        color: Color(0xFFE9E5FF),
+        child: Column(children: [
+          Expanded(
+            child: SingleChildScrollView(
+              padding: EdgeInsets.fromLTRB(16, 16, 16, 16),
+              child: Container(
+                padding: EdgeInsets.fromLTRB(20, 20, 20, 24),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(16),
+                  boxShadow: [BoxShadow(
+                    color: Colors.black.withValues(alpha: 0.04),
+                    blurRadius: 16, offset: Offset(0, 4),
+                  )],
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('Account recovery',
+                      style: TextStyle(fontSize: 22, fontWeight: FontWeight.w800,
+                        color: Color(0xFF111827))),
+                    SizedBox(height: 6),
+                    Text('Verify your identity using Aadhaar',
+                      style: TextStyle(fontSize: 13, color: Color(0xFF6B7280))),
+                    SizedBox(height: 18),
+                    Ux4gAadhaarInputField(
+                      value: aadhaar,
+                      onValueChange: (v) => setState(() => aadhaar = v),
+                      label: 'Aadhaar Number',
+                      placeholder: 'XXXX XXXX XXXX',
+                      caption: 'Enter your 12-digit Aadhaar number',
+                    ),
+                    SizedBox(height: 14),
+                    Container(
+                      padding: EdgeInsets.all(12),
+                      decoration: BoxDecoration(
+                        color: Color(0xFFF3F4F6),
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: Text(
+                        'I agree to verify my identity via Aadhaar OTP '
+                        'for the purpose of password recovery.',
+                        style: TextStyle(fontSize: 13, color: Color(0xFF374151))),
+                    ),
+                    SizedBox(height: 20),
+                    Ux4gButton(
+                      text: 'Send OTP', onPressed: () {},
+                      size: Ux4gButtonSize.large, width: double.infinity,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 14),
+            child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+              Text('Powered by - ',
+                style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+              SvgPicture.asset('assets/Digital_India_logo.svg', height: 24),
+            ]),
+          ),
+        ]),
+      ),
+    ),
+  ]),
+)''';
+
+// =============================================================================
+// NOTIFICATION PATTERN
+// =============================================================================
+
+enum _NotifType { actionRequired, statusUpdate, reminder, info }
+
+extension _NotifTypeExt on _NotifType {
+  String get label {
+    switch (this) {
+      case _NotifType.actionRequired: return 'Action required';
+      case _NotifType.statusUpdate: return 'Status Update';
+      case _NotifType.reminder: return 'Reminder';
+      case _NotifType.info: return 'Info';
+    }
+  }
+  Color get dotColor {
+    switch (this) {
+      case _NotifType.actionRequired: return const Color(0xFFEF4444);
+      case _NotifType.statusUpdate: return const Color(0xFF3B82F6);
+      case _NotifType.reminder: return const Color(0xFFF59E0B);
+      case _NotifType.info: return const Color(0xFF14B8A6);
+    }
+  }
+}
+
+class _NotifData {
+  final _NotifType type;
+  final String title;
+  final String body;
+  final String time;
+  final String? actionLabel;
+  bool isRead;
+  _NotifData({required this.type, required this.title, required this.body,
+    required this.time, this.actionLabel, this.isRead = false});
+}
+
+class _NotifSection {
+  final String label;
+  final List<_NotifData> items;
+  _NotifSection({required this.label, required this.items});
+}
+
+List<_NotifSection> _buildDefaultNotifSections() => [
+  _NotifSection(label: 'TODAY', items: [
+    _NotifData(type: _NotifType.actionRequired,
+      title: 'Income Certificate . Action required',
+      body: 'Upload your income proof by 15 Apr to avoid rejection.',
+      time: '10:24 AM', actionLabel: 'Upload now', isRead: false),
+    _NotifData(type: _NotifType.actionRequired,
+      title: 'Income Certificate . Action required',
+      body: 'Upload your income proof by 15 Apr to avoid rejection.',
+      time: '8:03 AM', actionLabel: 'Upload now', isRead: false),
+  ]),
+  _NotifSection(label: 'YESTERDAY', items: [
+    _NotifData(type: _NotifType.reminder,
+      title: 'Draft expiring . Income Certificate',
+      body: 'Your draft expires in 5 days.',
+      time: '8:03 AM', isRead: true),
+    _NotifData(type: _NotifType.info,
+      title: 'PAN Correction . Status update',
+      body: 'Under review by Income Tax Dept.',
+      time: '8:03 AM', isRead: true),
+  ]),
+  _NotifSection(label: 'EARLIER THIS WEEK', items: [
+    _NotifData(type: _NotifType.info,
+      title: 'Birth Certificate . Submitted',
+      body: 'Reference: BC-2026-MH-001.',
+      time: '8:03 AM', isRead: true),
+  ]),
+];
+
+List<_NotifSection> _buildNotifTypesSections() => [
+  _NotifSection(label: 'NOTIFICATION TYPES', items: [
+    _NotifData(type: _NotifType.actionRequired,
+      title: 'Income Certificate . Action required',
+      body: 'Upload your income proof by 15 Apr to avoid rejection.',
+      time: '8:03 AM', actionLabel: 'Upload now', isRead: false),
+    _NotifData(type: _NotifType.statusUpdate,
+      title: 'Income Certificate . Action required',
+      body: 'Upload your income proof by 15 Apr to avoid rejection.',
+      time: '8:03 AM', isRead: false),
+    _NotifData(type: _NotifType.reminder,
+      title: 'Draft expiring . Income Certificate',
+      body: 'Your draft expires in 5 days.',
+      time: '8:03 AM', isRead: true),
+    _NotifData(type: _NotifType.info,
+      title: 'Birth Certificate . Submitted',
+      body: 'Reference: BC-2026-MH-001.',
+      time: '8:03 AM', isRead: true),
+  ]),
+];
+
+// -- Reminder alerts ---------------------------------------------------------
+
+class _ReminderAlert {
+  final String title;
+  final String body;
+  final Ux4gBannerVariant variant;
+  final IconData icon;
+  final Color iconColor;
+  final String? actionLabel;
+  bool dismissed = false;
+  _ReminderAlert({
+    required this.title,
+    required this.body,
+    required this.variant,
+    required this.icon,
+    required this.iconColor,
+    this.actionLabel,
+  });
+}
+
+List<_ReminderAlert> _buildReminderAlerts() => [
+  _ReminderAlert(
+    title: '30 days before expiry',
+    body: 'Your Income Certificate expires on 15 May 2026 (30 days away). '
+          'Renew early to avoid a service gap: bit.ly/renew-mh.',
+    variant: Ux4gBannerVariant.infoLight,
+    icon: Icons.info_outline_rounded,
+    iconColor: const Color(0xFF14B8A6),
+  ),
+  _ReminderAlert(
+    title: '5 days before expiry',
+    body: 'Your Income Certificate draft expires in 5 days (16 Apr). '
+          'Resume now: bit.ly/resume-mh.',
+    variant: Ux4gBannerVariant.warningLight,
+    icon: Icons.warning_amber_rounded,
+    iconColor: const Color(0xFFF59E0B),
+  ),
+  _ReminderAlert(
+    title: '2 days before expiry',
+    body: 'Only 2 days left. Submit your Income Certificate before 16 Apr '
+          'or your draft will be deleted. Resume: bit.ly/resume-mh.',
+    variant: Ux4gBannerVariant.errorLight,
+    icon: Icons.error_outline_rounded,
+    iconColor: const Color(0xFFEF4444),
+  ),
+  _ReminderAlert(
+    title: 'On expiry day',
+    body: 'Your Income Certificate draft expired on 16 Apr. Your saved data '
+          'has been removed. Start a new application: bit.ly/apply-mh.',
+    variant: Ux4gBannerVariant.errorLight,
+    icon: Icons.error_outline_rounded,
+    iconColor: const Color(0xFFEF4444),
+    actionLabel: 'Action',
+  ),
+  _ReminderAlert(
+    title: '1 hour before: Sent 10:13 AM',
+    body: 'In 1 hour: Your 11:00 AM field inspection. Revenue Inspector, '
+          'Sector 12 office. Directions: bit.ly/dir-mh.',
+    variant: Ux4gBannerVariant.successLight,
+    icon: Icons.check_circle_outline_rounded,
+    iconColor: const Color(0xFF22C55E),
+  ),
+];
+
+class _NotifRemindersMockup extends StatefulWidget {
+  const _NotifRemindersMockup();
+  @override
+  State<_NotifRemindersMockup> createState() => _NotifRemindersMockupState();
+}
+
+class _NotifRemindersMockupState extends State<_NotifRemindersMockup> {
+  late List<_ReminderAlert> _alerts;
+
+  @override
+  void initState() {
+    super.initState();
+    _alerts = _buildReminderAlerts();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final visible = _alerts.where((a) => !a.dismissed).toList();
+    return _PhoneFrame(
+      child: Column(
+        children: [
+          const _NotifPanelHeader(),
+          Expanded(
+            child: visible.isEmpty
+                ? Center(
+                    child: Padding(
+                      padding: const EdgeInsets.all(24),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Container(
+                            width: 64, height: 64,
+                            decoration: const BoxDecoration(
+                              color: Color(0xFFF3F4F6),
+                              shape: BoxShape.circle,
+                            ),
+                            alignment: Alignment.center,
+                            child: const Icon(Icons.notifications_none_outlined,
+                              size: 32, color: Color(0xFF9CA3AF)),
+                          ),
+                          const SizedBox(height: 16),
+                          const Text('No reminders',
+                            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700,
+                              color: Color(0xFF111827)),
+                            textAlign: TextAlign.center),
+                          const SizedBox(height: 8),
+                          const Text('All reminders have been dismissed.',
+                            style: TextStyle(fontSize: 13, color: Color(0xFF6B7280),
+                              height: 1.5),
+                            textAlign: TextAlign.center),
+                        ],
+                      ),
+                    ),
+                  )
+                : ListView(
+                    padding: const EdgeInsets.symmetric(vertical: 8),
+                    children: [
+                      const _NotifSectionLabel(label: 'REMINDERS'),
+                      ...visible.map((alert) => Ux4gStatusBanner(
+                        variant: alert.variant,
+                        title: alert.title,
+                        subtitle: alert.body,
+                        leadingIcon: Icon(alert.icon,
+                          color: alert.iconColor, size: 20),
+                        trailingIcon: IconButton(
+                          icon: const Icon(Icons.close, size: 18,
+                            color: Color(0xFF6B7280)),
+                          onPressed: () => setState(() => alert.dismissed = true),
+                          padding: EdgeInsets.zero,
+                          constraints: const BoxConstraints(),
+                        ),
+                        actions: alert.actionLabel != null ? [
+                          TextButton(
+                            onPressed: () {},
+                            style: TextButton.styleFrom(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 8, vertical: 4),
+                              minimumSize: Size.zero,
+                              tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                            ),
+                            child: Text(alert.actionLabel!,
+                              style: const TextStyle(fontSize: 12,
+                                color: Color(0xFF2563EB),
+                                fontWeight: FontWeight.w600)),
+                          ),
+                        ] : null,
+                        margin: const EdgeInsets.symmetric(
+                          horizontal: 12, vertical: 4),
+                        padding: const EdgeInsets.fromLTRB(12, 10, 4, 10),
+                      )),
+                    ],
+                  ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _NotifPanelHeader extends StatelessWidget {
+  final VoidCallback? onMarkAsRead;
+  final VoidCallback? onClose;
+  const _NotifPanelHeader({this.onMarkAsRead, this.onClose});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Container(
+          color: Colors.white,
+          padding: const EdgeInsets.fromLTRB(16, 14, 4, 14),
+          child: Row(children: [
+            const Text('Notification',
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700,
+                color: Color(0xFF111827))),
+            const Spacer(),
+            TextButton(
+              onPressed: onMarkAsRead,
+              style: TextButton.styleFrom(
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                minimumSize: Size.zero,
+                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+              ),
+              child: const Text('Mark as read',
+                style: TextStyle(fontSize: 13, color: Color(0xFF6B7280),
+                  fontWeight: FontWeight.w500)),
+            ),
+            IconButton(
+              icon: const Icon(Icons.close, size: 20, color: Color(0xFF6B7280)),
+              onPressed: onClose ?? () {},
+              padding: const EdgeInsets.all(8),
+              constraints: const BoxConstraints(),
+            ),
+          ]),
+        ),
+        const Divider(height: 1, thickness: 1, color: _border),
+      ],
+    );
+  }
+}
+
+class _NotifSectionLabel extends StatelessWidget {
+  final String label;
+  const _NotifSectionLabel({required this.label});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: Colors.white,
+      padding: const EdgeInsets.fromLTRB(16, 14, 16, 6),
+      child: Text(label,
+        style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w600,
+          color: Color(0xFF9CA3AF), letterSpacing: 0.6)),
+    );
+  }
+}
+
+class _NotifTile extends StatelessWidget {
+  final _NotifData item;
+  const _NotifTile({required this.item, super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final bg = item.isRead ? Colors.white : const Color(0xFFF3F4F6);
+    return Container(
+      color: bg,
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            margin: const EdgeInsets.only(top: 5),
+            width: 8, height: 8,
+            decoration: BoxDecoration(color: item.type.dotColor, shape: BoxShape.circle),
+          ),
+          const SizedBox(width: 10),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(item.type.label,
+                      style: TextStyle(fontSize: 11, color: item.type.dotColor,
+                        fontWeight: FontWeight.w600)),
+                    Text(item.time,
+                      style: const TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+                  ],
+                ),
+                const SizedBox(height: 4),
+                Text(item.title,
+                  style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w700,
+                    color: Color(0xFF111827), height: 1.3)),
+                const SizedBox(height: 3),
+                Text(item.body,
+                  style: const TextStyle(fontSize: 12, color: Color(0xFF6B7280),
+                    height: 1.45)),
+                if (item.actionLabel != null) ...[
+                  const SizedBox(height: 6),
+                  Text(item.actionLabel!,
+                    style: const TextStyle(fontSize: 12, color: Color(0xFF2563EB),
+                      fontWeight: FontWeight.w600)),
+                ],
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _NotifListMockup extends StatefulWidget {
+  final bool showTypes;
+  const _NotifListMockup({this.showTypes = false});
+  @override
+  State<_NotifListMockup> createState() => _NotifListMockupState();
+}
+
+class _NotifListMockupState extends State<_NotifListMockup> {
+  late List<_NotifSection> _sections;
+
+  @override
+  void initState() {
+    super.initState();
+    _sections = widget.showTypes ? _buildNotifTypesSections() : _buildDefaultNotifSections();
+  }
+
+  @override
+  void didUpdateWidget(covariant _NotifListMockup old) {
+    super.didUpdateWidget(old);
+    if (old.showTypes != widget.showTypes) {
+      setState(() {
+        _sections = widget.showTypes ? _buildNotifTypesSections() : _buildDefaultNotifSections();
+      });
+    }
+  }
+
+  void _markAllAsRead() {
+    setState(() {
+      for (final s in _sections) {
+        for (final item in s.items) { item.isRead = true; }
+      }
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final rows = <dynamic>[];
+    for (final section in _sections) {
+      rows.add(section.label);
+      rows.addAll(section.items);
+    }
+    return _PhoneFrame(
+      child: Column(
+        children: [
+          _NotifPanelHeader(onMarkAsRead: _markAllAsRead),
+          Expanded(
+            child: ListView.builder(
+              padding: EdgeInsets.zero,
+              itemCount: rows.length,
+              itemBuilder: (context, index) {
+                final row = rows[index];
+                if (row is String) return _NotifSectionLabel(label: row);
+                final item = row as _NotifData;
+                final nextIsItem = index + 1 < rows.length && rows[index + 1] is _NotifData;
+                return Column(mainAxisSize: MainAxisSize.min, children: [
+                  _NotifTile(item: item),
+                  if (nextIsItem) const Divider(height: 1, thickness: 1,
+                    color: Color(0xFFE5E7EB), indent: 34),
+                ]);
+              },
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _NotifEmptyMockup extends StatelessWidget {
+  const _NotifEmptyMockup();
+
+  // Icon container background varies by empty-state condition:
+  //   � allCaughtUp  (default) ? neutral gray  0xFFF3F4F6
+  //   � neverHadAny            ? soft blue tint 0xFFEFF6FF
+  static const Color _iconBgAllCaughtUp = Color(0xFFF3F4F6);
+  static const Color _iconColorAllCaughtUp = Color(0xFF9CA3AF);
+
+  @override
+  Widget build(BuildContext context) {
+    return _PhoneFrame(
+      child: Column(
+        children: [
+          const _NotifPanelHeader(),
+          Expanded(
+            child: Center(
+              child: Padding(
+                padding: const EdgeInsets.all(24),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    // -- Bell icon with conditional circular background ----
+                    Container(
+                      width: 64,
+                      height: 64,
+                      decoration: BoxDecoration(
+                        color: _iconBgAllCaughtUp,   // change to _iconBgNever for "never had" state
+                        shape: BoxShape.circle,
+                      ),
+                      alignment: Alignment.center,
+                      child: const Icon(
+                        Icons.notifications_none_outlined,
+                        size: 32,
+                        color: _iconColorAllCaughtUp,
+                      ),
+                    ),
+                    const SizedBox(height: 16),
+                    const Text(
+                      'You are all caught up',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w700,
+                        color: Color(0xFF111827),
+                        height: 1.3,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                    const SizedBox(height: 8),
+                    const Text(
+                      'No new notifications. We will let you know when\nsomething needs your attention.',
+                      style: TextStyle(
+                        fontSize: 13,
+                        color: Color(0xFF6B7280),
+                        height: 1.5,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+final notificationComponent = WidgetbookComponent(
+  name: 'Notification',
+  useCases: [
+    WidgetbookUseCase(
+      name: 'Default',
+      builder: (context) {
+        final variant = context.knobs.list(
+          label: 'Variant',
+          options: const ['With Notifications', 'Notification Types', 'Empty State'],
+          initialOption: 'With Notifications',
+          description: 'Switch between a populated list, type showcase, and empty state.\n\n'
+            'Unread ? gray bg (0xFFF3F4F6) | Read ? white bg. '
+            'Tap "Mark as read" to clear.',
+        );
+        final Widget child = switch (variant) {
+          'Notification Types' => const _NotifListMockup(showTypes: true),
+          'Empty State' => const _NotifEmptyMockup(),
+          _ => const _NotifListMockup(),
+        };
+        final String code = switch (variant) {
+          'Notification Types' => _notifTypesCode,
+          'Empty State' => _notifEmptyCode,
+          _ => _notifDefaultCode,
+        };
+        return ComponentDocs(
+          name: 'Notification',
+          description: 'Notification panel pattern. Unread items have a gray background '
+            '(Color(0xFFF3F4F6)); read items are white. '
+            '"Mark as read" clears all unread states. '
+            'Empty state: bell icon shown in a 64x64 rounded container '
+            '(0xFFF3F4F6 for all-caught-up; 0xFFEFF6FF for never-had-any).',
+          code: code,
+          center: true,
+          child: child,
+        );
+      },
+    ),
+  ],
+);
+
+const _notifDefaultCode = r'''// Notification panel . With Notifications (360 . 760)
+Container(
+  width: 360, height: 760, color: Colors.white,
+  child: Column(children: [
+    Container(
+      color: Colors.white,
+      padding: EdgeInsets.fromLTRB(16, 14, 4, 14),
+      child: Row(children: [
+        Text('Notification',
+          style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: Color(0xFF111827))),
+        Spacer(),
+        TextButton(onPressed: _markAllAsRead,
+          child: Text('Mark as read',
+            style: TextStyle(fontSize: 13, color: Color(0xFF6B7280), fontWeight: FontWeight.w500))),
+        IconButton(icon: Icon(Icons.close, size: 20, color: Color(0xFF6B7280)),
+          onPressed: () {}, padding: EdgeInsets.all(8)),
+      ]),
+    ),
+    Divider(height: 1, color: Color(0xFFE5E7EB)),
+    Expanded(
+      child: ListView(padding: EdgeInsets.zero, children: [
+        // Section label
+        Container(color: Colors.white, padding: EdgeInsets.fromLTRB(16, 14, 16, 6),
+          child: Text('TODAY',
+            style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600,
+              color: Color(0xFF9CA3AF), letterSpacing: 0.6))),
+
+        // Unread tile ? gray bg
+        Container(
+          color: Color(0xFFF3F4F6),
+          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+          child: Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            Container(margin: EdgeInsets.only(top: 5), width: 8, height: 8,
+              decoration: BoxDecoration(color: Color(0xFFEF4444), shape: BoxShape.circle)),
+            SizedBox(width: 10),
+            Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+                Text('Action required',
+                  style: TextStyle(fontSize: 11, color: Color(0xFFEF4444), fontWeight: FontWeight.w600)),
+                Text('10:24 AM', style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+              ]),
+              SizedBox(height: 4),
+              Text('Income Certificate . Action required',
+                style: TextStyle(fontSize: 13, fontWeight: FontWeight.w700, color: Color(0xFF111827))),
+              SizedBox(height: 3),
+              Text('Upload your income proof by 15 Apr to avoid rejection.',
+                style: TextStyle(fontSize: 12, color: Color(0xFF6B7280))),
+              SizedBox(height: 6),
+              Text('Upload now',
+                style: TextStyle(fontSize: 12, color: Color(0xFF2563EB), fontWeight: FontWeight.w600)),
+            ])),
+          ]),
+        ),
+        Divider(height: 1, color: Color(0xFFE5E7EB), indent: 34),
+
+        // Read tile ? white bg
+        Container(
+          color: Colors.white,
+          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+          child: Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            Container(margin: EdgeInsets.only(top: 5), width: 8, height: 8,
+              decoration: BoxDecoration(color: Color(0xFFF59E0B), shape: BoxShape.circle)),
+            SizedBox(width: 10),
+            Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+                Text('Reminder',
+                  style: TextStyle(fontSize: 11, color: Color(0xFFF59E0B), fontWeight: FontWeight.w600)),
+                Text('8:03 AM', style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+              ]),
+              SizedBox(height: 4),
+              Text('Draft expiring . Income Certificate',
+                style: TextStyle(fontSize: 13, fontWeight: FontWeight.w700, color: Color(0xFF111827))),
+              SizedBox(height: 3),
+              Text('Your draft expires in 5 days.',
+                style: TextStyle(fontSize: 12, color: Color(0xFF6B7280))),
+            ])),
+          ]),
+        ),
+      ]),
+    ),
+  ]),
+)''';
+
+const _notifTypesCode = r'''// Notification panel . Notification Types (360 . 760)
+// Dot + label color match the type. Unread = 0xFFF3F4F6 bg | Read = white bg.
+Container(
+  width: 360, height: 760, color: Colors.white,
+  child: Column(children: [
+    // Same header as default . omitted for brevity
+    Divider(height: 1, color: Color(0xFFE5E7EB)),
+    Container(color: Colors.white, padding: EdgeInsets.fromLTRB(16, 14, 16, 6),
+      child: Text('NOTIFICATION TYPES',
+        style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600,
+          color: Color(0xFF9CA3AF), letterSpacing: 0.6))),
+    Expanded(
+      child: ListView(padding: EdgeInsets.zero, children: [
+        _buildTile(bg: Color(0xFFF3F4F6), dot: Color(0xFFEF4444), label: 'Action required',
+          time: '8:03 AM', title: 'Income Certificate . Action required',
+          body: 'Upload your income proof by 15 Apr.', action: 'Upload now'),
+        Divider(height: 1, color: Color(0xFFE5E7EB), indent: 34),
+
+        _buildTile(bg: Color(0xFFF3F4F6), dot: Color(0xFF3B82F6), label: 'Status Update',
+          time: '8:03 AM', title: 'Income Certificate . Action required',
+          body: 'Upload your income proof by 15 Apr.'),
+        Divider(height: 1, color: Color(0xFFE5E7EB), indent: 34),
+
+        _buildTile(bg: Colors.white, dot: Color(0xFFF59E0B), label: 'Reminder',
+          time: '8:03 AM', title: 'Draft expiring . Income Certificate',
+          body: 'Your draft expires in 5 days.'),
+        Divider(height: 1, color: Color(0xFFE5E7EB), indent: 34),
+
+        _buildTile(bg: Colors.white, dot: Color(0xFF14B8A6), label: 'Info',
+          time: '8:03 AM', title: 'Birth Certificate . Submitted',
+          body: 'Reference: BC-2026-MH-001.'),
+      ]),
+    ),
+  ]),
+)''';
+
+const _notifEmptyCode = r'''// Notification panel . Empty State (360 . 760)
+// Icon container background varies by condition:
+//   allCaughtUp  ? 0xFFF3F4F6 (neutral gray)
+//   neverHadAny  ? 0xFFEFF6FF (soft blue tint)
+Container(
+  width: 360, height: 760, color: Colors.white,
+  child: Column(children: [
+    Container(
+      color: Colors.white,
+      padding: EdgeInsets.fromLTRB(16, 14, 4, 14),
+      child: Row(children: [
+        Text('Notification',
+          style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: Color(0xFF111827))),
+        Spacer(),
+        TextButton(onPressed: () {},
+          child: Text('Mark as read',
+            style: TextStyle(fontSize: 13, color: Color(0xFF6B7280)))),
+        IconButton(icon: Icon(Icons.close, size: 20, color: Color(0xFF6B7280)),
+          onPressed: () {}, padding: EdgeInsets.all(8)),
+      ]),
+    ),
+    Divider(height: 1, color: Color(0xFFE5E7EB)),
+    Expanded(
+      child: Center(
+        child: Padding(
+          padding: EdgeInsets.all(24),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              // Bell icon with conditional circular background
+              Container(
+                width: 64, height: 64,
+                decoration: BoxDecoration(
+                  // allCaughtUp state ? Color(0xFFF3F4F6)
+                  // neverHadAny state ? Color(0xFFEFF6FF)
+                  color: Color(0xFFF3F4F6),
+                  shape: BoxShape.circle,
+                ),
+                alignment: Alignment.center,
+                child: Icon(Icons.notifications_none_outlined,
+                  size: 32, color: Color(0xFF9CA3AF)),
+              ),
+              SizedBox(height: 16),
+              Text('You are all caught up',
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700,
+                  color: Color(0xFF111827), height: 1.3),
+                textAlign: TextAlign.center),
+              SizedBox(height: 8),
+              Text(
+                'No new notifications. We will let you know when\nsomething needs your attention.',
+                style: TextStyle(fontSize: 13, color: Color(0xFF6B7280), height: 1.5),
+                textAlign: TextAlign.center),
+            ],
+          ),
+        ),
+      ),
+    ),
+  ]),
+)''';
+
+// -- Single-alert reminder mockup ---------------------------------------------
+
+// -- Single-alert reminder mockup ---------------------------------------------
+
+class _ReminderAlertMockup extends StatefulWidget {
+  final _ReminderAlert alert;
+  const _ReminderAlertMockup({required this.alert, super.key});
+  @override
+  State<_ReminderAlertMockup> createState() => _ReminderAlertMockupState();
+}
+
+class _ReminderAlertMockupState extends State<_ReminderAlertMockup> {
+  bool _dismissed = false;
+
+  @override
+  void didUpdateWidget(covariant _ReminderAlertMockup old) {
+    super.didUpdateWidget(old);
+    if (old.alert.title != widget.alert.title) {
+      setState(() => _dismissed = false);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return _PhoneFrame(
+      child: _dismissed
+          ? const SizedBox.shrink()
+          : Stack(
+              children: [
+                // alert card pinned to the bottom
+                Positioned(
+                  left: 0, right: 0, bottom: 0,
+                  child: Container(
+                    margin: const EdgeInsets.fromLTRB(12, 0, 12, 12),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(12),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withValues(alpha: 0.12),
+                          blurRadius: 16,
+                          offset: const Offset(0, 4),
+                        ),
+                      ],
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(12, 12, 8, 12),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Icon(widget.alert.icon,
+                                color: widget.alert.iconColor, size: 20),
+                              const SizedBox(width: 10),
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(widget.alert.title,
+                                      style: const TextStyle(
+                                        fontSize: 13,
+                                        fontWeight: FontWeight.w700,
+                                        color: Color(0xFF111827))),
+                                    const SizedBox(height: 3),
+                                    Text(widget.alert.body,
+                                      style: const TextStyle(
+                                        fontSize: 12,
+                                        color: Color(0xFF6B7280))),
+                                  ],
+                                ),
+                              ),
+                              IconButton(
+                                icon: const Icon(Icons.close, size: 16,
+                                  color: Color(0xFF9CA3AF)),
+                                onPressed: () =>
+                                  setState(() => _dismissed = true),
+                                padding: EdgeInsets.zero,
+                                constraints: const BoxConstraints(),
+                              ),
+                            ],
+                          ),
+                          if (widget.alert.actionLabel != null) ...[
+                            const SizedBox(height: 6),
+                            TextButton(
+                              onPressed: () {},
+                              style: TextButton.styleFrom(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 4, vertical: 2),
+                                minimumSize: Size.zero,
+                                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                              ),
+                              child: Text(widget.alert.actionLabel!,
+                                style: const TextStyle(fontSize: 12,
+                                  color: Color(0xFF2563EB),
+                                  fontWeight: FontWeight.w600)),
+                            ),
+                          ],
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+    );
+  }
+}
+
+// -- Per-type code snippets ----------------------------------------------------
+
+const _reminder30DaysCode = r'''// Reminder Alert . 30 days before expiry (infoLight)
+Ux4gStatusBanner(
+  variant: Ux4gBannerVariant.infoLight,
+  title: '30 days before expiry',
+  subtitle: 'Your Income Certificate expires on 15 May 2026 (30 days away). '
+            'Renew early to avoid a service gap: bit.ly/renew-mh.',
+  leadingIcon: Icon(Icons.info_outline_rounded,
+    color: Color(0xFF14B8A6), size: 20),
+  trailingIcon: IconButton(
+    icon: Icon(Icons.close, size: 18, color: Color(0xFF6B7280)),
+    onPressed: _dismiss, padding: EdgeInsets.zero,
+    constraints: BoxConstraints()),
+  margin: EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+  padding: EdgeInsets.fromLTRB(12, 10, 4, 10),
+)''';
+
+const _reminder5DaysCode = r'''// Reminder Alert . 5 days before expiry (warningLight)
+Ux4gStatusBanner(
+  variant: Ux4gBannerVariant.warningLight,
+  title: '5 days before expiry',
+  subtitle: 'Your Income Certificate draft expires in 5 days (16 Apr). '
+            'Resume now: bit.ly/resume-mh.',
+  leadingIcon: Icon(Icons.warning_amber_rounded,
+    color: Color(0xFFF59E0B), size: 20),
+  trailingIcon: IconButton(
+    icon: Icon(Icons.close, size: 18, color: Color(0xFF6B7280)),
+    onPressed: _dismiss, padding: EdgeInsets.zero,
+    constraints: BoxConstraints()),
+  margin: EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+  padding: EdgeInsets.fromLTRB(12, 10, 4, 10),
+)''';
+
+const _reminder2DaysCode = r'''// Reminder Alert . 2 days before expiry (errorLight)
+Ux4gStatusBanner(
+  variant: Ux4gBannerVariant.errorLight,
+  title: '2 days before expiry',
+  subtitle: 'Only 2 days left. Submit your Income Certificate before 16 Apr '
+            'or your draft will be deleted. Resume: bit.ly/resume-mh.',
+  leadingIcon: Icon(Icons.error_outline_rounded,
+    color: Color(0xFFEF4444), size: 20),
+  trailingIcon: IconButton(
+    icon: Icon(Icons.close, size: 18, color: Color(0xFF6B7280)),
+    onPressed: _dismiss, padding: EdgeInsets.zero,
+    constraints: BoxConstraints()),
+  margin: EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+  padding: EdgeInsets.fromLTRB(12, 10, 4, 10),
+)''';
+
+const _reminderExpiryDayCode = r'''// Reminder Alert . On expiry day (errorLight + Action button)
+Ux4gStatusBanner(
+  variant: Ux4gBannerVariant.errorLight,
+  title: 'On expiry day',
+  subtitle: 'Your Income Certificate draft expired on 16 Apr. Your saved data '
+            'has been removed. Start a new application: bit.ly/apply-mh.',
+  leadingIcon: Icon(Icons.error_outline_rounded,
+    color: Color(0xFFEF4444), size: 20),
+  trailingIcon: IconButton(
+    icon: Icon(Icons.close, size: 18, color: Color(0xFF6B7280)),
+    onPressed: _dismiss, padding: EdgeInsets.zero,
+    constraints: BoxConstraints()),
+  actions: [
+    TextButton(
+      onPressed: () {},
+      style: TextButton.styleFrom(
+        padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+        minimumSize: Size.zero,
+        tapTargetSize: MaterialTapTargetSize.shrinkWrap),
+      child: Text('Action',
+        style: TextStyle(fontSize: 12, color: Color(0xFF2563EB),
+          fontWeight: FontWeight.w600)),
+    ),
+  ],
+  margin: EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+  padding: EdgeInsets.fromLTRB(12, 10, 4, 10),
+)''';
+
+const _reminder1HourCode = r'''// Reminder Alert . 1 hour before (successLight)
+Ux4gStatusBanner(
+  variant: Ux4gBannerVariant.successLight,
+  title: '1 hour before: Sent 10:13 AM',
+  subtitle: 'In 1 hour: Your 11:00 AM field inspection. Revenue Inspector, '
+            'Sector 12 office. Directions: bit.ly/dir-mh.',
+  leadingIcon: Icon(Icons.check_circle_outline_rounded,
+    color: Color(0xFF22C55E), size: 20),
+  trailingIcon: IconButton(
+    icon: Icon(Icons.close, size: 18, color: Color(0xFF6B7280)),
+    onPressed: _dismiss, padding: EdgeInsets.zero,
+    constraints: BoxConstraints()),
+  margin: EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+  padding: EdgeInsets.fromLTRB(12, 10, 4, 10),
+)''';
+
+const Map<String, String> _reminderCodeMap = {
+  '30 days before expiry': _reminder30DaysCode,
+  '5 days before expiry': _reminder5DaysCode,
+  '2 days before expiry': _reminder2DaysCode,
+  'On expiry day': _reminderExpiryDayCode,
+  '1 hour before': _reminder1HourCode,
+};
+
+final reminderAlertsComponent = WidgetbookComponent(
+  name: 'Reminder Alerts',
+  useCases: [
+    WidgetbookUseCase(
+      name: 'Default',
+      builder: (context) {
+        final scenario = context.knobs.list(
+          label: 'Alert Type',
+          options: const [
+            '30 days before expiry',
+            '5 days before expiry',
+            '2 days before expiry',
+            'On expiry day',
+            '1 hour before',
+          ],
+          initialOption: '30 days before expiry',
+          description: 'Each type maps to a Ux4gStatusBanner variant:\n'
+            'infoLight (30 days) . warningLight (5 days) . '
+            'errorLight (2 days / expiry day) . successLight (1 hour)',
+        );
+        final alert = _buildReminderAlerts().firstWhere(
+          (a) => scenario == '1 hour before'
+              ? a.title.startsWith('1 hour before')
+              : a.title == scenario,
+        );
+        return ComponentDocs(
+          name: 'Reminder Alert',
+          description: 'Deadline-aware reminder alerts using Ux4gStatusBanner. '
+            'Variant changes by urgency: infoLight . warningLight . '
+            'errorLight . successLight. Tap X to dismiss.',
+          code: _reminderCodeMap[scenario] ?? _reminder30DaysCode,
+          center: true,
+          child: _ReminderAlertMockup(key: ValueKey(scenario), alert: alert),
+        );
+      },
+    ),
+  ],
+);
+
+// ------------------------------------------------------------------------------
+// Notification Preferences
+// ------------------------------------------------------------------------------
+
+const _prefBg = Color(0xFFFAFAFA);
+const _prefBorder = Color(0xFFE5E7EB);
+const _prefPurple = Color(0xFF6B21A8);
+const _prefTitle = Color(0xFF111827);
+const _prefSub = Color(0xFF6B7280);
+const _prefMuted = Color(0xFF9CA3AF);
+
+// ── Chip model ────────────────────────────────────────────────────────────────
+
+class _PrefChipData {
+  final String label;
+  final int count;
+  const _PrefChipData(this.label, this.count);
+}
+
+const _defaultPrefChips = [
+  _PrefChipData('All', 62),
+  _PrefChipData('Pending', 3),
+  _PrefChipData('Under Review', 12),
+  _PrefChipData('Approved', 18),
+  _PrefChipData('Rejected', 5),
+];
+
+// ── Chip bar (stateful, dynamic) ──────────────────────────────────────────────
+
+class _PrefChipBar extends StatefulWidget {
+  final List<_PrefChipData> chips;
+  final int initialIndex;
+  const _PrefChipBar({
+    required this.chips,
+    this.initialIndex = 0,
+  });
+  @override
+  State<_PrefChipBar> createState() => _PrefChipBarState();
+}
+
+class _PrefChipBarState extends State<_PrefChipBar> {
+  late int _selected;
+
+  @override
+  void initState() {
+    super.initState();
+    _selected = widget.initialIndex;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 40,
+      child: ListView.separated(
+        scrollDirection: Axis.horizontal,
+        physics: const AlwaysScrollableScrollPhysics(),
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 2),
+        itemCount: widget.chips.length,
+        separatorBuilder: (_, __) => const SizedBox(width: 8),
+        itemBuilder: (_, i) {
+          final chip = widget.chips[i];
+          final sel = _selected == i;
+          return Ux4gChoiceChip(
+            text: chip.label,
+            selected: sel,
+            onClick: () => setState(() => _selected = i),
+            size: Ux4gChoiceChipSize.s,
+            borderRadius: 4,
+            unselectedBackgroundColor: Colors.white,
+            unselectedBorderColor: const Color(0xFFD1D5DB),
+            unselectedTextColor: const Color(0xFF374151),
+            trailingContent: sel
+                ? Text('${chip.count}',
+                    style: const TextStyle(
+                      fontSize: 9,
+                      fontWeight: FontWeight.w700,
+                      color: Colors.white,
+                    ))
+                : Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 1),
+                    decoration: BoxDecoration(
+                      color: const Color(0xFF2563EB),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Text('${chip.count}',
+                      style: const TextStyle(
+                        fontSize: 9,
+                        fontWeight: FontWeight.w700,
+                        color: Colors.white,
+                      )),
+                  ),
+          );
+        },
+      ),
+    );
+  }
+}
+
+// ── Shared page header: brand logos + title + chip bar ────────────────────────
+
+class _PrefPageHeader extends StatelessWidget {
+  final List<_PrefChipData> chips;
+  const _PrefPageHeader({this.chips = _defaultPrefChips});
+
+  @override
+  Widget build(BuildContext context) => Column(
+    mainAxisSize: MainAxisSize.min,
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      const _BrandHeader(),
+      Container(
+        color: Colors.white,
+        width: double.infinity,
+        padding: const EdgeInsets.fromLTRB(16, 12, 16, 4),
+        alignment: Alignment.centerLeft,
+        child: const Text('Notification Preferences',
+          textAlign: TextAlign.left,
+          style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700,
+            color: _prefTitle)),
+      ),
+      _PrefChipBar(chips: chips),
+    ],
+  );
+}
+
+// ── Placeholder content container ─────────────────────────────────────────────
+
+class _PrefPlaceholderContent extends StatelessWidget {
+  const _PrefPlaceholderContent();
+  @override
+  Widget build(BuildContext context) => Expanded(
+    child: Align(
+      alignment: Alignment.topCenter,
+      child: Padding(
+        padding: const EdgeInsets.all(20),
+        child: Container(
+          width: double.infinity,
+          height: 180,
+          decoration: BoxDecoration(
+            color: const Color(0xFFF9FAFB),
+            borderRadius: BorderRadius.circular(8),
+            border: Border.all(color: const Color(0xFFD1D5DB)),
+          ),
+          alignment: Alignment.center,
+          child: const Text(
+            'Content area',
+            style: TextStyle(
+              fontSize: 13,
+              color: Color(0xFF9CA3AF),
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+        ),
+      ),
+    ),
+  );
+}
+
+// ── Shared small widgets ──────────────────────────────────────────────────────
+
+class _PrefToggleRow extends StatelessWidget {
+  final IconData icon;
+  final Color iconColor;
+  final String label;
+  final String? sub;
+  final bool value;
+  final ValueChanged<bool>? onChanged;
+  const _PrefToggleRow({
+    required this.icon, required this.iconColor,
+    required this.label, this.sub,
+    required this.value, this.onChanged,
+  });
+  @override
+  Widget build(BuildContext context) => Padding(
+    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+    child: Row(
+      children: [
+        Container(
+          width: 32, height: 32,
+          decoration: BoxDecoration(
+            color: iconColor.withValues(alpha: 0.12),
+            borderRadius: BorderRadius.circular(8),
+          ),
+          alignment: Alignment.center,
+          child: Icon(icon, color: iconColor, size: 16),
+        ),
+        const SizedBox(width: 12),
+        Expanded(child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(label, style: const TextStyle(fontSize: 12,
+              fontWeight: FontWeight.w600, color: _prefTitle)),
+            if (sub != null)
+              Text(sub!, style: const TextStyle(fontSize: 10, color: _prefSub)),
+          ],
+        )),
+        Switch(
+          value: value,
+          onChanged: onChanged,
+          activeColor: _prefPurple,
+          materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+        ),
+      ],
+    ),
+  );
+}
+
+// -- Screen 1 � Channel Preferences -------------------------------------------
+
+class _PrefChannelScreen extends StatefulWidget {
+  const _PrefChannelScreen();
+  @override
+  State<_PrefChannelScreen> createState() => _PrefChannelScreenState();
+}
+
+class _PrefChannelScreenState extends State<_PrefChannelScreen> {
+  bool _push = true, _email = true, _app = true, _whatsapp = false;
+  @override
+  Widget build(BuildContext context) => _PhoneFrame(
+    child: Column(
+      children: [
+        const _PrefPageHeader(),
+        Expanded(child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                margin: const EdgeInsets.symmetric(horizontal: 12),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(10),
+                  border: Border.all(color: _prefBorder),
+                ),
+                child: Column(
+                  children: [
+                    _PrefToggleRow(
+                      icon: Icons.notifications_outlined,
+                      iconColor: _prefPurple,
+                      label: '+91 9696-XXXXX',
+                      sub: 'Push alerts on this device',
+                      value: _push,
+                      onChanged: (v) => setState(() => _push = v),
+                    ),
+                    Divider(height: 1, color: _prefBorder),
+                    _PrefToggleRow(
+                      icon: Icons.email_outlined,
+                      iconColor: const Color(0xFF2563EB),
+                      label: 'Email',
+                      sub: 'user@digimail.gov',
+                      value: _email,
+                      onChanged: (v) => setState(() => _email = v),
+                    ),
+                    Divider(height: 1, color: _prefBorder),
+                    _PrefToggleRow(
+                      icon: Icons.apps,
+                      iconColor: const Color(0xFF0891B2),
+                      label: 'App notifications',
+                      sub: 'Push alerts on this device',
+                      value: _app,
+                      onChanged: (v) => setState(() => _app = v),
+                    ),
+                    Divider(height: 1, color: _prefBorder),
+                    _PrefToggleRow(
+                      icon: Icons.chat_bubble_outline,
+                      iconColor: const Color(0xFF16A34A),
+                      label: 'WhatsApp',
+                      sub: 'Opted out',
+                      value: _whatsapp,
+                      onChanged: (v) => setState(() => _whatsapp = v),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 16),
+            ],
+          ),
+        )),
+      ],
+    ),
+  );
+}
+
+// -- Screen 2 � Frequency -----------------------------------------------------
+
+class _PrefFrequencyScreen extends StatefulWidget {
+  const _PrefFrequencyScreen();
+  @override
+  State<_PrefFrequencyScreen> createState() => _PrefFrequencyScreenState();
+}
+
+class _PrefFrequencyScreenState extends State<_PrefFrequencyScreen> {
+  String _selected = 'Immediately';
+  static const _options = [
+    _FreqOption('Immediately', 'Get each notification the moment it�',
+      Icons.flash_on_outlined),
+    _FreqOption('Daily Summary', 'One digest every day at 6:00 PM.',
+      Icons.today_outlined),
+    _FreqOption('Weekly Digest', 'A round-up every Monday morning.',
+      Icons.calendar_month_outlined),
+  ];
+  @override
+  Widget build(BuildContext context) => _PhoneFrame(
+    child: Column(
+      children: [
+        const _PrefPageHeader(),
+        Expanded(child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                margin: const EdgeInsets.symmetric(horizontal: 12),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(10),
+                  border: Border.all(color: _prefBorder),
+                ),
+                child: Column(
+                  children: _options.asMap().entries.map((e) {
+                    final opt = e.value;
+                    final isLast = e.key == _options.length - 1;
+                    final selected = _selected == opt.label;
+                    return Column(
+                      children: [
+                        InkWell(
+                          onTap: () => setState(() => _selected = opt.label),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 16, vertical: 12),
+                            child: Row(
+                              children: [
+                                Icon(opt.icon,
+                                  color: selected ? _prefPurple : _prefMuted,
+                                  size: 20),
+                                const SizedBox(width: 12),
+                                Expanded(child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(opt.label,
+                                      style: TextStyle(fontSize: 12,
+                                        fontWeight: FontWeight.w600,
+                                        color: selected
+                                          ? _prefPurple : _prefTitle)),
+                                    Text(opt.sub,
+                                      style: const TextStyle(fontSize: 10,
+                                        color: _prefSub)),
+                                  ],
+                                )),
+                                if (selected)
+                                  const Icon(Icons.check_circle,
+                                    color: _prefPurple, size: 18)
+                                else
+                                  const Icon(Icons.radio_button_unchecked,
+                                    color: _prefMuted, size: 18),
+                              ],
+                            ),
+                          ),
+                        ),
+                        if (!isLast) Divider(height: 1, color: _prefBorder),
+                      ],
+                    );
+                  }).toList(),
+                ),
+              ),
+              const SizedBox(height: 16),
+            ],
+          ),
+        )),
+      ],
+    ),
+  );
+}
+
+class _FreqOption {
+  final String label, sub;
+  final IconData icon;
+  const _FreqOption(this.label, this.sub, this.icon);
+}
+
+// -- Screen 3 � Categories ----------------------------------------------------
+
+class _PrefCategory {
+  final String name;
+  final String summary;
+  final List<_PrefNotifItem> items;
+  bool expanded;
+  _PrefCategory(this.name, this.summary, this.items,
+    {this.expanded = false});
+}
+
+class _PrefNotifItem {
+  final String label;
+  bool enabled;
+  final bool locked;
+  _PrefNotifItem(this.label, {this.enabled = true, this.locked = false});
+}
+
+List<_PrefCategory> _buildCategories() => [
+  _PrefCategory('Income Certificate', '3 of 3 notifications on', [
+    _PrefNotifItem('Status updates'),
+    _PrefNotifItem('Action reminders'),
+    _PrefNotifItem('Legal & payment\ndeadlines'),
+  ], expanded: true),
+  _PrefCategory('Ration Card Renewal', '1 of 3 notifications on', [
+    _PrefNotifItem('Status updates'),
+    _PrefNotifItem('Action reminders', enabled: false),
+    _PrefNotifItem('Certificate expiry', enabled: false),
+  ]),
+  _PrefCategory('PAN Correction', '3 of 3 notifications on', [
+    _PrefNotifItem('Status updates'),
+    _PrefNotifItem('Action reminders'),
+    _PrefNotifItem('Certificate expiry'),
+  ]),
+  _PrefCategory('Birth Certificate', 'All notifications off', [
+    _PrefNotifItem('Status updates', enabled: false),
+    _PrefNotifItem('Action reminders', enabled: false),
+    _PrefNotifItem('Certificate expiry', enabled: false),
+  ]),
+];
+
+class _PrefCategoryScreen extends StatefulWidget {
+  const _PrefCategoryScreen();
+  @override
+  State<_PrefCategoryScreen> createState() => _PrefCategoryScreenState();
+}
+
+class _PrefCategoryScreenState extends State<_PrefCategoryScreen> {
+  late List<_PrefCategory> _cats;
+  @override
+  void initState() {
+    super.initState();
+    _cats = _buildCategories();
+  }
+
+  @override
+  Widget build(BuildContext context) => _PhoneFrame(
+    child: Column(
+      children: [
+        const _PrefPageHeader(),
+        Expanded(child: ListView.builder(
+          padding: const EdgeInsets.fromLTRB(12, 8, 12, 12),
+          itemCount: _cats.length,
+          itemBuilder: (_, i) {
+            final cat = _cats[i];
+            return Container(
+              margin: const EdgeInsets.only(bottom: 8),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(10),
+                border: Border.all(color: _prefBorder),
+              ),
+              child: Column(
+                children: [
+                  InkWell(
+                    borderRadius: BorderRadius.circular(10),
+                    onTap: () => setState(
+                      () => cat.expanded = !cat.expanded),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 14, vertical: 12),
+                      child: Row(children: [
+                        Expanded(child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(cat.name, style: const TextStyle(
+                              fontSize: 12, fontWeight: FontWeight.w700,
+                              color: _prefTitle)),
+                            Text(cat.summary, style: const TextStyle(
+                              fontSize: 10, color: _prefSub)),
+                          ],
+                        )),
+                        Icon(cat.expanded
+                          ? Icons.keyboard_arrow_up
+                          : Icons.keyboard_arrow_down,
+                          color: _prefMuted, size: 18),
+                      ]),
+                    ),
+                  ),
+                  if (cat.expanded) ...[
+                    Divider(height: 1, color: _prefBorder),
+                    ...cat.items.map((item) => Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 14, vertical: 6),
+                      child: Row(children: [
+                        Expanded(child: Text(item.label,
+                          style: const TextStyle(fontSize: 11,
+                            color: _prefTitle))),
+                        if (item.locked)
+                          Container(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 6, vertical: 2),
+                            decoration: BoxDecoration(
+                              color: const Color(0xFFF3F4F6),
+                              borderRadius: BorderRadius.circular(4),
+                            ),
+                            child: const Text('Locked',
+                              style: TextStyle(fontSize: 9,
+                                color: _prefMuted)),
+                          )
+                        else
+                          Switch(
+                            value: item.enabled,
+                            onChanged: (v) =>
+                              setState(() => item.enabled = v),
+                            activeColor: _prefPurple,
+                            materialTapTargetSize:
+                              MaterialTapTargetSize.shrinkWrap,
+                          ),
+                      ]),
+                    )).toList(),
+                    const SizedBox(height: 4),
+                  ],
+                ],
+              ),
+            );
+          },
+        )),
+      ],
+    ),
+  );
+}
+
+// -- Screen 4 � Locked Notifications ------------------------------------------
+
+List<_PrefCategory> _buildLockedCategories() => [
+  _PrefCategory('Income Certificate', '3 of 3 notifications on', [
+    _PrefNotifItem('Status updates'),
+    _PrefNotifItem('Rejection notices', locked: true),
+    _PrefNotifItem('Legal & payment\ndeadlines', locked: true),
+  ], expanded: true),
+  _PrefCategory('Ration Card Renewal', '1 of 3 notifications on', [
+    _PrefNotifItem('Status updates'),
+    _PrefNotifItem('Action reminders', enabled: false),
+    _PrefNotifItem('Certificate expiry', enabled: false),
+  ]),
+];
+
+class _PrefLockedScreen extends StatefulWidget {
+  const _PrefLockedScreen();
+  @override
+  State<_PrefLockedScreen> createState() => _PrefLockedScreenState();
+}
+
+class _PrefLockedScreenState extends State<_PrefLockedScreen> {
+  late List<_PrefCategory> _cats;
+  @override
+  void initState() {
+    super.initState();
+    _cats = _buildLockedCategories();
+  }
+
+  @override
+  Widget build(BuildContext context) => _PhoneFrame(
+    child: Column(
+      children: [
+        const _PrefPageHeader(),
+        Container(
+          margin: const EdgeInsets.fromLTRB(12, 8, 12, 0),
+          padding: const EdgeInsets.all(10),
+          decoration: BoxDecoration(
+            color: const Color(0xFFFFF7ED),
+            borderRadius: BorderRadius.circular(8),
+            border: Border.all(color: const Color(0xFFFED7AA)),
+          ),
+          child: Row(children: const [
+            Icon(Icons.lock_outline, size: 14, color: Color(0xFFF59E0B)),
+            SizedBox(width: 8),
+            Expanded(child: Text(
+              'Some notifications are required and cannot be turned off.',
+              style: TextStyle(fontSize: 10, color: Color(0xFF92400E)))),
+          ]),
+        ),
+        Expanded(child: ListView.builder(
+          padding: const EdgeInsets.symmetric(horizontal: 12),
+          itemCount: _cats.length,
+          itemBuilder: (_, i) {
+            final cat = _cats[i];
+            return Container(
+              margin: const EdgeInsets.only(bottom: 8),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(10),
+                border: Border.all(color: _prefBorder),
+              ),
+              child: Column(children: [
+                InkWell(
+                  borderRadius: BorderRadius.circular(10),
+                  onTap: () => setState(
+                    () => cat.expanded = !cat.expanded),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 14, vertical: 12),
+                    child: Row(children: [
+                      Expanded(child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(cat.name, style: const TextStyle(
+                            fontSize: 12, fontWeight: FontWeight.w700,
+                            color: _prefTitle)),
+                          Text(cat.summary, style: const TextStyle(
+                            fontSize: 10, color: _prefSub)),
+                        ],
+                      )),
+                      Icon(cat.expanded
+                        ? Icons.keyboard_arrow_up
+                        : Icons.keyboard_arrow_down,
+                        color: _prefMuted, size: 18),
+                    ]),
+                  ),
+                ),
+                if (cat.expanded) ...[
+                  Divider(height: 1, color: _prefBorder),
+                  ...cat.items.map((item) => Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 14, vertical: 6),
+                    child: Row(children: [
+                      Expanded(child: Text(item.label,
+                        style: const TextStyle(fontSize: 11,
+                          color: _prefTitle))),
+                      if (item.locked)
+                        Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 6, vertical: 2),
+                          decoration: BoxDecoration(
+                            color: const Color(0xFFF3F4F6),
+                            borderRadius: BorderRadius.circular(4),
+                          ),
+                          child: const Text('Locked',
+                            style: TextStyle(fontSize: 9,
+                              color: _prefMuted)),
+                        )
+                      else
+                        Switch(
+                          value: item.enabled,
+                          onChanged: (v) =>
+                            setState(() => item.enabled = v),
+                          activeColor: _prefPurple,
+                          materialTapTargetSize:
+                            MaterialTapTargetSize.shrinkWrap,
+                        ),
+                    ]),
+                  )).toList(),
+                  const SizedBox(height: 4),
+                ],
+              ]),
+            );
+          },
+        )),
+      ],
+    ),
+  );
+}
+
+// -- Screen 5 � WhatsApp Consent -----------------------------------------------
+
+class _PrefWhatsAppScreen extends StatefulWidget {
+  const _PrefWhatsAppScreen();
+  @override
+  State<_PrefWhatsAppScreen> createState() => _PrefWhatsAppScreenState();
+}
+
+class _PrefWhatsAppScreenState extends State<_PrefWhatsAppScreen> {
+  bool _consented = false;
+  @override
+  Widget build(BuildContext context) => _PhoneFrame(
+    child: Column(
+      children: [
+        const _PrefPageHeader(),
+        Expanded(child: SingleChildScrollView(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text('What you will receive on WhatsApp',
+                style: TextStyle(fontSize: 13, fontWeight: FontWeight.w700,
+                  color: _prefTitle)),
+              const SizedBox(height: 12),
+              ...const [
+                'Application status changes',
+                'Appointment reminders (D-1 and H-1)',
+                'Action-required alerts with quick links',
+              ].map((s) => Padding(
+                padding: EdgeInsets.symmetric(vertical: 3),
+                child: Row(children: [
+                  Icon(Icons.check, color: Color(0xFF16A34A), size: 14),
+                  SizedBox(width: 8),
+                  Expanded(child: Text(s,
+                    style: TextStyle(fontSize: 11, color: _prefSub))),
+                ]),
+              )),
+              const SizedBox(height: 20),
+              Container(
+                padding: const EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  border: Border.all(color: _prefBorder),
+                  borderRadius: BorderRadius.circular(8),
+                  color: Colors.white,
+                ),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Checkbox(
+                      value: _consented,
+                      onChanged: (v) =>
+                        setState(() => _consented = v ?? false),
+                      activeColor: _prefPurple,
+                      materialTapTargetSize:
+                        MaterialTapTargetSize.shrinkWrap,
+                      visualDensity: VisualDensity.compact,
+                    ),
+                    const SizedBox(width: 8),
+                    const Expanded(child: Text(
+                      'I consent to receiving notifications on WhatsApp '
+                      'at +91 98765 43210.\nYou can withdraw this consent '
+                      'at any time. This checkbox is linked to DPDP Act 2023.',
+                      style: TextStyle(fontSize: 10, color: _prefSub))),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 16),
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: _consented ? () {} : null,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: _prefPurple,
+                    foregroundColor: Colors.white,
+                    disabledBackgroundColor: _prefBorder,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8)),
+                    padding: const EdgeInsets.symmetric(vertical: 12),
+                  ),
+                  child: const Text('Enable WhatsApp Notifications',
+                    style: TextStyle(fontSize: 12,
+                      fontWeight: FontWeight.w600)),
+                ),
+              ),
+            ],
+          ),
+        )),
+      ],
+    ),
+  );
+}
+
+// -- Screen 6 � Manage All ----------------------------------------------------
+
+class _PrefManageItem {
+  final String label;
+  final String? sub;
+  final bool alwaysOn;
+  bool enabled;
+  _PrefManageItem(this.label, {this.sub, this.alwaysOn = false,
+    this.enabled = true});
+}
+
+class _PrefManageAllScreen extends StatefulWidget {
+  const _PrefManageAllScreen();
+  @override
+  State<_PrefManageAllScreen> createState() => _PrefManageAllScreenState();
+}
+
+class _PrefManageAllScreenState extends State<_PrefManageAllScreen> {
+  final _optional = [
+    _PrefManageItem('Status updates',
+      sub: 'Track progress of your applications'),
+    _PrefManageItem('Action reminders',
+      sub: 'Upload and payment reminders'),
+    _PrefManageItem('Certificates expiry',
+      sub: 'Renewal reminders before documents expire'),
+    _PrefManageItem('Promotional updates',
+      sub: 'New services and announcements', enabled: false),
+  ];
+  final _mandatory = [
+    _PrefManageItem('SLA breach alerts',
+      sub: 'Mandatory statutory deadline notifications',
+      alwaysOn: true),
+    _PrefManageItem('Rejection notices',
+      sub: 'Application rejections with reasons',
+      alwaysOn: true),
+  ];
+
+  @override
+  Widget build(BuildContext context) => _PhoneFrame(
+    child: Column(
+      children: [
+        const _PrefPageHeader(),
+        Expanded(child: SingleChildScrollView(
+          padding: const EdgeInsets.all(12),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Padding(
+                padding: EdgeInsets.only(left: 4, bottom: 8),
+                child: Text('OPTIONAL � YOU CAN TURN OFF',
+                  style: TextStyle(fontSize: 9, fontWeight: FontWeight.w700,
+                    color: _prefMuted, letterSpacing: 0.6)),
+              ),
+              Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(10),
+                  border: Border.all(color: _prefBorder),
+                ),
+                child: Column(children: _optional.asMap().entries.map((e) {
+                  final item = e.value;
+                  final isLast = e.key == _optional.length - 1;
+                  return Column(children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 14, vertical: 8),
+                      child: Row(children: [
+                        Expanded(child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(item.label, style: const TextStyle(
+                              fontSize: 11, fontWeight: FontWeight.w600,
+                              color: _prefTitle)),
+                            if (item.sub != null)
+                              Text(item.sub!, style: const TextStyle(
+                                fontSize: 10, color: _prefSub)),
+                          ],
+                        )),
+                        Switch(
+                          value: item.enabled,
+                          onChanged: (v) =>
+                            setState(() => item.enabled = v),
+                          activeColor: _prefPurple,
+                          materialTapTargetSize:
+                            MaterialTapTargetSize.shrinkWrap,
+                        ),
+                      ]),
+                    ),
+                    if (!isLast) Divider(height: 1, color: _prefBorder),
+                  ]);
+                }).toList()),
+              ),
+              const SizedBox(height: 16),
+              const Padding(
+                padding: EdgeInsets.only(left: 4, bottom: 8),
+                child: Text('MANDATORY � REQUIRED IN SCREENSHOT POLICY',
+                  style: TextStyle(fontSize: 9, fontWeight: FontWeight.w700,
+                    color: _prefMuted, letterSpacing: 0.6)),
+              ),
+              Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(10),
+                  border: Border.all(color: _prefBorder),
+                ),
+                child: Column(children: _mandatory.asMap().entries.map((e) {
+                  final item = e.value;
+                  final isLast = e.key == _mandatory.length - 1;
+                  return Column(children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 14, vertical: 8),
+                      child: Row(children: [
+                        Expanded(child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(item.label, style: const TextStyle(
+                              fontSize: 11, fontWeight: FontWeight.w600,
+                              color: _prefTitle)),
+                            if (item.sub != null)
+                              Text(item.sub!, style: const TextStyle(
+                                fontSize: 10, color: _prefSub)),
+                          ],
+                        )),
+                        Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 8, vertical: 3),
+                          decoration: BoxDecoration(
+                            color: const Color(0xFFF3F4F6),
+                            borderRadius: BorderRadius.circular(4),
+                          ),
+                          child: const Text('Always on',
+                            style: TextStyle(fontSize: 9,
+                              color: _prefMuted)),
+                        ),
+                      ]),
+                    ),
+                    if (!isLast) Divider(height: 1, color: _prefBorder),
+                  ]);
+                }).toList()),
+              ),
+              const SizedBox(height: 16),
+              SizedBox(
+                width: double.infinity,
+                child: OutlinedButton(
+                  onPressed: () =>
+                    setState(() {
+                      for (final i in _optional) {
+                        i.enabled = false;
+                      }
+                    }),
+                  style: OutlinedButton.styleFrom(
+                    foregroundColor: const Color(0xFFDC2626),
+                    side: const BorderSide(color: Color(0xFFDC2626)),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8)),
+                    padding: const EdgeInsets.symmetric(vertical: 10),
+                  ),
+                  child: const Text('Turn off all optional notifications',
+                    style: TextStyle(fontSize: 11,
+                      fontWeight: FontWeight.w600)),
+                ),
+              ),
+              const SizedBox(height: 12),
+            ],
+          ),
+        )),
+      ],
+    ),
+  );
+}
+
+// -- WidgetbookComponent registration -----------------------------------------
+
+// ── Story mockup ──────────────────────────────────────────────────────────────
+
+class _NotifPrefMockup extends StatelessWidget {
+  const _NotifPrefMockup();
+  @override
+  Widget build(BuildContext context) => _PhoneFrame(
+    child: Column(
+      children: const [
+        _PrefPageHeader(),
+        _PrefPlaceholderContent(),
+      ],
+    ),
+  );
+}
+
+const _notifPrefCode = r'''
+// 1. Define your chip data
+final chips = [
+  _PrefChipData('All', 62),
+  _PrefChipData('Pending', 3),
+  _PrefChipData('Under Review', 12),
+  _PrefChipData('Approved', 18),
+  _PrefChipData('Rejected', 5),
+];
+
+// 2. Use _PrefPageHeader with dynamic chip list
+_PrefPageHeader(chips: chips)
+
+// 3. Each Ux4gChoiceChip inside _PrefChipBar uses:
+Ux4gChoiceChip(
+  text: 'Pending',
+  selected: isSelected,
+  onClick: () => setState(() => _selected = i),
+  size: Ux4gChoiceChipSize.s,
+  borderRadius: 4,
+  unselectedBackgroundColor: Colors.white,
+  unselectedBorderColor: Color(0xFFD1D5DB),
+  trailingContent: Container(
+    padding: EdgeInsets.symmetric(horizontal: 5, vertical: 1),
+    decoration: BoxDecoration(
+      color: Color(0xFF6B21A8),   // badge only when NOT selected
+      borderRadius: BorderRadius.circular(10),
+    ),
+    child: Text('3', style: TextStyle(fontSize: 9, color: Colors.white)),
+  ),
+)
+''';
+
+final notificationPreferencesComponent = WidgetbookComponent(
+  name: 'Notification Preferences',
+  useCases: [
+    WidgetbookUseCase(
+      name: 'Default',
+      builder: (context) => ComponentDocs(
+        name: 'Notification Preferences',
+        description:
+          'Filter chip bar with dynamic chip list. Each chip shows a label '
+          'and a count badge (purple bg when unselected, plain white text '
+          'when selected). Tap any chip to select it. '
+          'Replace the content area with your own widget.',
+        code: _notifPrefCode,
+        center: true,
+        child: const _NotifPrefMockup(),
+      ),
+    ),
+  ],
+);
+
+// ═══════════════════════════════════════════════════════════════════════
+// PAYMENT AND CONFIRMATION PATTERNS
+// ═══════════════════════════════════════════════════════════════════════
+
+// -----------------------------------------------------------------------
+// Shared helpers
+// -----------------------------------------------------------------------
+
+/// Horizontal 5-step progress bar — circles with no labels except the last
+/// step which shows "Payment". Lines have small gaps and don't touch circles.
+class _PmtStepBar extends StatelessWidget {
+  const _PmtStepBar({this.currentStep = 5});
+  final int currentStep;
+
+  @override
+  Widget build(BuildContext context) {
+    final materialTheme = Theme.of(context);
+    final ux4gColors = materialTheme.extension<Ux4gColors>();
+    final primary = ux4gColors?.primary ?? materialTheme.colorScheme.primary;
+    final onPrimary = ux4gColors?.onPrimary ?? materialTheme.colorScheme.onPrimary;
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(16, 10, 16, 10),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          for (int i = 0; i < 5; i++) ...[
+            if (i > 0) ...[
+              const SizedBox(width: 4),
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 15),
+                  child: Container(
+                    height: 2,
+                    color: i < currentStep ? primary : const Color(0xFFD1D5DB),
+                  ),
+                ),
+              ),
+              const SizedBox(width: 4),
+            ],
+            _PmtCircle(
+              stepIndex: i + 1,
+              isCompleted: currentStep > i + 1,
+              isActive: currentStep == i + 1,
+              primary: primary,
+              onPrimary: onPrimary,
+              label: i == 4 ? 'Payment' : null,
+            ),
+          ],
+        ],
+      ),
+    );
+  }
+}
+
+class _PmtCircle extends StatelessWidget {
+  const _PmtCircle({
+    required this.stepIndex,
+    required this.isCompleted,
+    required this.isActive,
+    required this.primary,
+    required this.onPrimary,
+    this.label,
+  });
+  final int stepIndex;
+  final bool isCompleted;
+  final bool isActive;
+  final Color primary;
+  final Color onPrimary;
+  final String? label;
+
+  @override
+  Widget build(BuildContext context) {
+    final circle = Container(
+      width: 32,
+      height: 32,
+      decoration: BoxDecoration(
+        color: isCompleted ? primary : Colors.transparent,
+        shape: BoxShape.circle,
+        border: Border.all(
+          color: (isCompleted || isActive) ? primary : const Color(0xFFD1D5DB),
+          width: 2,
+        ),
+      ),
+      alignment: Alignment.center,
+      child: isCompleted
+          ? Icon(Icons.check, size: 18, color: onPrimary)
+          : isActive
+              ? Container(
+                  width: 12,
+                  height: 12,
+                  decoration: BoxDecoration(
+                    color: primary,
+                    shape: BoxShape.circle,
+                  ),
+                )
+              : Text(
+                  '$stepIndex',
+                  style: const TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.bold,
+                    color: Color(0xFFD1D5DB),
+                  ),
+                ),
+    );
+    if (label == null) return circle;
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        circle,
+        const SizedBox(height: 3),
+        Text(
+          label!,
+          style: TextStyle(
+            fontSize: 10,
+            fontWeight: FontWeight.w500,
+            color: primary,
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+/// One row in the fee-breakdown table.
+class _FeeRow extends StatelessWidget {
+  const _FeeRow({
+    required this.label,
+    required this.amount,
+    this.bold = false,
+    this.redAmount = false,
+    this.bgColor,
+  });
+
+  final String label;
+  final String amount;
+  final bool bold;
+  final bool redAmount;
+  final Color? bgColor;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: bgColor,
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+      child: Row(
+        children: [
+          Expanded(
+            child: Text(
+              label,
+              style: TextStyle(
+                fontSize: 13,
+                fontWeight: bold ? FontWeight.w600 : FontWeight.w400,
+                color: bold ? const Color(0xFF111827) : _subtleText,
+                height: 1.3,
+              ),
+            ),
+          ),
+          Text(
+            amount,
+            style: TextStyle(
+              fontSize: 13,
+              fontWeight: bold ? FontWeight.w600 : FontWeight.w400,
+              color: redAmount
+                  ? Ux4gPalette.red600
+                  : (bold ? const Color(0xFF111827) : const Color(0xFF374151)),
+              height: 1.3,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+/// One row in a transaction-detail table (label left, value right).
+class _PayDetailRow extends StatelessWidget {
+  const _PayDetailRow({
+    required this.label,
+    required this.value,
+    this.valueBold = false,
+    this.valueColor,
+    this.bgColor,
+  });
+
+  final String label;
+  final String value;
+  final bool valueBold;
+  final Color? valueColor;
+  final Color? bgColor;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: bgColor,
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Expanded(
+            flex: 4,
+            child: Text(
+              label,
+              style: const TextStyle(fontSize: 13, color: _subtleText, height: 1.3),
+            ),
+          ),
+          Expanded(
+            flex: 5,
+            child: Text(
+              value,
+              textAlign: TextAlign.right,
+              style: TextStyle(
+                fontSize: 13,
+                fontWeight: valueBold ? FontWeight.w600 : FontWeight.w400,
+                color: valueColor ?? const Color(0xFF111827),
+                height: 1.3,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+/// Radio-style bordered payment-method tile.
+class _PmtOptionTile extends StatelessWidget {
+  const _PmtOptionTile({
+    required this.value,
+    required this.groupValue,
+    required this.onChanged,
+    required this.label,
+    required this.subtitle,
+  });
+
+  final String value;
+  final String groupValue;
+  final ValueChanged<String?> onChanged;
+  final String label;
+  final String subtitle;
+
+  @override
+  Widget build(BuildContext context) {
+    final selected = value == groupValue;
+    final primary = Theme.of(context).colorScheme.primary;
+    return GestureDetector(
+      onTap: () => onChanged(value),
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 150),
+        margin: const EdgeInsets.only(bottom: 10),
+        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+        decoration: BoxDecoration(
+          color: selected ? primary.withValues(alpha: 0.06) : Colors.white,
+          borderRadius: BorderRadius.circular(10),
+          border: Border.all(
+            color: selected ? primary : _border,
+            width: selected ? 2 : 1,
+          ),
+        ),
+        child: Row(
+          children: [
+            Container(
+              width: 20,
+              height: 20,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                border: Border.all(
+                  color: selected ? primary : const Color(0xFFD1D5DB),
+                  width: 2,
+                ),
+              ),
+              alignment: Alignment.center,
+              child: selected
+                  ? Container(
+                      width: 10,
+                      height: 10,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: primary,
+                      ),
+                    )
+                  : null,
+            ),
+            const SizedBox(width: 12),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    label,
+                    style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w600,
+                      color: selected ? primary : const Color(0xFF111827),
+                      height: 1.2,
+                    ),
+                  ),
+                  const SizedBox(height: 2),
+                  Text(
+                    subtitle,
+                    style: const TextStyle(
+                      fontSize: 12,
+                      color: _subtleText,
+                      height: 1.3,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+// -----------------------------------------------------------------------
+// PAYMENT SUMMARY — flat + card
+// -----------------------------------------------------------------------
+
+class _PaymentSummaryMockup extends StatelessWidget {
+  const _PaymentSummaryMockup();
+
+  @override
+  Widget build(BuildContext context) {
+    final primary = Theme.of(context).colorScheme.primary;
+    return _PhoneFrame(
+      child: Column(
+        children: [
+          const _BrandHeader(),
+          const _PmtStepBar(),
+          const Divider(height: 1, thickness: 1, color: _border),
+          Expanded(
+            child: Container(
+              color: _bg,
+              child: Column(
+                children: [
+                  Expanded(
+                    child: SingleChildScrollView(
+                      padding: const EdgeInsets.fromLTRB(16, 20, 16, 16),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text(
+                            'Payment',
+                            style: TextStyle(
+                              fontSize: 22,
+                              fontWeight: FontWeight.w800,
+                              color: _titleColor,
+                              height: 1.2,
+                              letterSpacing: -0.3,
+                            ),
+                          ),
+                          const SizedBox(height: 4),
+                          const Text(
+                            'Income Certificate — Application #INC-2024-00842',
+                            style: TextStyle(
+                              fontSize: 13,
+                              color: _subtleText,
+                              height: 1.4,
+                            ),
+                          ),
+                          const SizedBox(height: 20),
+                          Container(
+                            decoration: BoxDecoration(
+                              border: Border.all(color: _border),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            clipBehavior: Clip.hardEdge,
+                            child: Column(
+                              children: [
+                                const _FeeRow(
+                                  label: 'Application fee',
+                                  amount: 'Rs 30.00',
+                                ),
+                                Divider(height: 1, thickness: 1, color: _border),
+                                const _FeeRow(
+                                  label: 'Processing charge',
+                                  amount: 'Rs 5.00',
+                                ),
+                                Divider(height: 1, thickness: 1, color: _border),
+                                const _FeeRow(
+                                  label: 'GST 18%',
+                                  amount: 'Rs 6.30',
+                                ),
+                                Divider(height: 1, thickness: 1, color: _border),
+                                const _FeeRow(
+                                  label: 'Total',
+                                  amount: 'Rs 41.30',
+                                  bold: true,
+                                ),
+                              ],
+                            ),
+                          ),
+                          const SizedBox(height: 16),
+                          Ux4gStatusBanner(
+                            variant: Ux4gBannerVariant.infoLight,
+                            title:
+                                'Secure payment via PayGov. Your payment '
+                                'information is protected by 256-bit encryption.',
+                            margin: EdgeInsets.zero,
+                            padding: const EdgeInsets.fromLTRB(12, 10, 12, 10),
+                          ),
+                          const SizedBox(height: 20),
+                          Ux4gButton(
+                            text: 'Continue to payment',
+                            onPressed: () {},
+                            size: Ux4gButtonSize.large,
+                            width: double.infinity,
+                          ),
+                          const SizedBox(height: 12),
+                          Center(
+                            child: TextButton(
+                              onPressed: () {},
+                              child: Text(
+                                'Back to review',
+                                style: TextStyle(fontSize: 14, color: primary),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  const _BrandFooter(),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _PaymentSummaryCardMockup extends StatelessWidget {
+  const _PaymentSummaryCardMockup();
+
+  @override
+  Widget build(BuildContext context) {
+    final primary = Theme.of(context).colorScheme.primary;
+    return _PhoneFrame(
+      child: Column(
+        children: [
+          const _BrandHeader(),
+          const _PmtStepBar(),
+          const Divider(height: 1, thickness: 1, color: _border),
+          Expanded(
+            child: Container(
+              color: _suCardBg,
+              child: Column(
+                children: [
+                  Expanded(
+                    child: SingleChildScrollView(
+                      padding: const EdgeInsets.fromLTRB(16, 20, 16, 16),
+                      child: Container(
+                        padding: const EdgeInsets.fromLTRB(16, 24, 16, 20),
+                        decoration: _suCardDeco(),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Text(
+                              'Payment',
+                              style: TextStyle(
+                                fontSize: 22,
+                                fontWeight: FontWeight.w800,
+                                color: _titleColor,
+                                height: 1.2,
+                                letterSpacing: -0.3,
+                              ),
+                            ),
+                            const SizedBox(height: 4),
+                            const Text(
+                              'Income Certificate — Application #INC-2024-00842',
+                              style: TextStyle(
+                                fontSize: 13,
+                                color: _subtleText,
+                                height: 1.4,
+                              ),
+                            ),
+                            const SizedBox(height: 20),
+                            Container(
+                              decoration: BoxDecoration(
+                                border: Border.all(color: _border),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              clipBehavior: Clip.hardEdge,
+                              child: Column(
+                                children: [
+                                  const _FeeRow(
+                                    label: 'Application fee',
+                                    amount: 'Rs 30.00',
+                                  ),
+                                  Divider(height: 1, thickness: 1, color: _border),
+                                  const _FeeRow(
+                                    label: 'Processing charge',
+                                    amount: 'Rs 5.00',
+                                  ),
+                                  Divider(height: 1, thickness: 1, color: _border),
+                                  const _FeeRow(
+                                    label: 'GST 18%',
+                                    amount: 'Rs 6.30',
+                                  ),
+                                  Divider(height: 1, thickness: 1, color: _border),
+                                  const _FeeRow(
+                                    label: 'Total',
+                                    amount: 'Rs 41.30',
+                                    bold: true,
+                                  ),
+                                ],
+                              ),
+                            ),
+                            const SizedBox(height: 16),
+                            Ux4gStatusBanner(
+                              variant: Ux4gBannerVariant.infoLight,
+                              title:
+                                  'Secure payment via PayGov. Your payment '
+                                  'information is protected by 256-bit encryption.',
+                              margin: EdgeInsets.zero,
+                              padding: const EdgeInsets.fromLTRB(12, 10, 12, 10),
+                            ),
+                            const SizedBox(height: 20),
+                            Ux4gButton(
+                              text: 'Continue to payment',
+                              onPressed: () {},
+                              size: Ux4gButtonSize.large,
+                              width: double.infinity,
+                            ),
+                            const SizedBox(height: 12),
+                            Center(
+                              child: TextButton(
+                                onPressed: () {},
+                                child: Text(
+                                  'Back to review',
+                                  style: TextStyle(fontSize: 14, color: primary),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  const _BrandFooter(),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+const _paymentSummaryCode = r'''
+// Payment — fee breakdown (360 × 760)
+Column(children: [
+  Ux4gAppHeader(...),
+  Ux4gStepper(
+    totalSteps: 5, currentStep: 5,
+    orientation: StepperOrientation.horizontal,
+    steps: [
+      Ux4gStepItem(title: 'Review'), Ux4gStepItem(title: 'Details'),
+      Ux4gStepItem(title: 'Documents'), Ux4gStepItem(title: 'Preview'),
+      Ux4gStepItem(title: 'Payment'),
     ],
   ),
+  Divider(height: 1, color: Color(0xFFE5E7EB)),
+  Expanded(child: SingleChildScrollView(
+    padding: EdgeInsets.fromLTRB(16, 20, 16, 16),
+    child: Column(children: [
+      Text('Payment', style: TextStyle(fontSize: 22, fontWeight: FontWeight.w800)),
+      Text('Income Certificate — Application #INC-2024-00842'),
+      // Fee table (Application fee / Processing charge / GST 18% / Total)
+      Ux4gStatusBanner(
+        variant: Ux4gBannerVariant.infoLight,
+        title: 'Secure payment via PayGov...'),
+      Ux4gButton(text: 'Continue to payment',
+        size: Ux4gButtonSize.large, width: double.infinity, onPressed: () {}),
+      TextButton(onPressed: () {}, child: Text('Back to review')),
+    ]),
+  )),
+  _BrandFooter(),
+])''';
+
+const _paymentSummaryCardCode = r'''
+// Payment — card style
+Column(children: [
+  Ux4gAppHeader(...),
+  Ux4gStepper(totalSteps: 5, currentStep: 5, ...),
+  Divider(height: 1, color: Color(0xFFE5E7EB)),
+  Expanded(child: Container(color: Color(0xFFE9E5FF), child: Column(children: [
+    Expanded(child: SingleChildScrollView(
+      padding: EdgeInsets.fromLTRB(16, 20, 16, 16),
+      child: Container(
+        padding: EdgeInsets.fromLTRB(16, 24, 16, 20),
+        decoration: BoxDecoration(
+          color: Colors.white, borderRadius: BorderRadius.circular(16)),
+        child: Column(children: [ /* same content as flat */ ]),
+      ),
+    )),
+    _BrandFooter(),
+  ]))),
+])''';
+
+// -----------------------------------------------------------------------
+// PAYMENT METHOD — StatefulWidget (interactive radio selection)
+// -----------------------------------------------------------------------
+
+class _PaymentMethodMockup extends StatefulWidget {
+  const _PaymentMethodMockup();
+
+  @override
+  State<_PaymentMethodMockup> createState() => _PaymentMethodMockupState();
+}
+
+class _PaymentMethodMockupState extends State<_PaymentMethodMockup> {
+  String _method = 'upi';
+  String _upiId = '';
+
+  @override
+  Widget build(BuildContext context) {
+    final primary = Theme.of(context).colorScheme.primary;
+    return _PhoneFrame(
+      child: Column(
+        children: [
+          const _BrandHeader(),
+          const _PmtStepBar(),
+          const Divider(height: 1, thickness: 1, color: _border),
+          Expanded(
+            child: Container(
+              color: _bg,
+              child: Column(
+                children: [
+                  Expanded(
+                    child: SingleChildScrollView(
+                      padding: const EdgeInsets.fromLTRB(16, 20, 16, 16),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text(
+                            'Choose payment method',
+                            style: TextStyle(
+                              fontSize: 22,
+                              fontWeight: FontWeight.w800,
+                              color: _titleColor,
+                              height: 1.2,
+                              letterSpacing: -0.3,
+                            ),
+                          ),
+                          const SizedBox(height: 4),
+                          const Text(
+                            'Select how you would like to pay Rs 41.30.',
+                            style: TextStyle(
+                              fontSize: 13,
+                              color: _subtleText,
+                              height: 1.4,
+                            ),
+                          ),
+                          const SizedBox(height: 20),
+                          _PmtOptionTile(
+                            value: 'upi',
+                            groupValue: _method,
+                            onChanged: (v) =>
+                                setState(() => _method = v ?? _method),
+                            label: 'UPI',
+                            subtitle:
+                                'Pay using any UPI app (GPay, PhonePe, Paytm...)',
+                          ),
+                          _PmtOptionTile(
+                            value: 'netbanking',
+                            groupValue: _method,
+                            onChanged: (v) =>
+                                setState(() => _method = v ?? _method),
+                            label: 'Net Banking',
+                            subtitle: 'Pay directly from your bank account',
+                          ),
+                          _PmtOptionTile(
+                            value: 'card',
+                            groupValue: _method,
+                            onChanged: (v) =>
+                                setState(() => _method = v ?? _method),
+                            label: 'Debit / Credit Card',
+                            subtitle: 'Visa, Mastercard, RuPay accepted',
+                          ),
+                          _PmtOptionTile(
+                            value: 'csc',
+                            groupValue: _method,
+                            onChanged: (v) =>
+                                setState(() => _method = v ?? _method),
+                            label: 'Pay at CSC Centre',
+                            subtitle:
+                                'Visit your nearest Common Service Centre',
+                          ),
+                          if (_method == 'upi') ...[
+                            const SizedBox(height: 4),
+                            Ux4gInputField(
+                              value: _upiId,
+                              onValueChange: (v) =>
+                                  setState(() => _upiId = v),
+                              label: 'Enter UPI ID',
+                              placeholder: 'yourname@upi',
+                              placeholderStyle: _placeholderStyle,
+                            ),
+                          ],
+                          const SizedBox(height: 20),
+                          Ux4gButton(
+                            text: 'Pay Rs 41.30',
+                            onPressed: () {},
+                            size: Ux4gButtonSize.large,
+                            width: double.infinity,
+                          ),
+                          const SizedBox(height: 12),
+                          Center(
+                            child: TextButton(
+                              onPressed: () {},
+                              child: Text(
+                                'Back to summary',
+                                style: TextStyle(fontSize: 14, color: primary),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  const _BrandFooter(),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _PaymentMethodCardMockup extends StatefulWidget {
+  const _PaymentMethodCardMockup();
+
+  @override
+  State<_PaymentMethodCardMockup> createState() =>
+      _PaymentMethodCardMockupState();
+}
+
+class _PaymentMethodCardMockupState extends State<_PaymentMethodCardMockup> {
+  String _method = 'upi';
+  String _upiId = '';
+
+  @override
+  Widget build(BuildContext context) {
+    final primary = Theme.of(context).colorScheme.primary;
+    return _PhoneFrame(
+      child: Column(
+        children: [
+          const _BrandHeader(),
+          const _PmtStepBar(),
+          const Divider(height: 1, thickness: 1, color: _border),
+          Expanded(
+            child: Container(
+              color: _suCardBg,
+              child: Column(
+                children: [
+                  Expanded(
+                    child: SingleChildScrollView(
+                      padding: const EdgeInsets.fromLTRB(16, 20, 16, 16),
+                      child: Container(
+                        padding: const EdgeInsets.fromLTRB(16, 24, 16, 20),
+                        decoration: _suCardDeco(),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Text(
+                              'Choose payment method',
+                              style: TextStyle(
+                                fontSize: 22,
+                                fontWeight: FontWeight.w800,
+                                color: _titleColor,
+                                height: 1.2,
+                                letterSpacing: -0.3,
+                              ),
+                            ),
+                            const SizedBox(height: 4),
+                            const Text(
+                              'Select how you would like to pay Rs 41.30.',
+                              style: TextStyle(
+                                fontSize: 13,
+                                color: _subtleText,
+                                height: 1.4,
+                              ),
+                            ),
+                            const SizedBox(height: 20),
+                            _PmtOptionTile(
+                              value: 'upi',
+                              groupValue: _method,
+                              onChanged: (v) =>
+                                  setState(() => _method = v ?? _method),
+                              label: 'UPI',
+                              subtitle:
+                                  'Pay using any UPI app (GPay, PhonePe, Paytm...)',
+                            ),
+                            _PmtOptionTile(
+                              value: 'netbanking',
+                              groupValue: _method,
+                              onChanged: (v) =>
+                                  setState(() => _method = v ?? _method),
+                              label: 'Net Banking',
+                              subtitle: 'Pay directly from your bank account',
+                            ),
+                            _PmtOptionTile(
+                              value: 'card',
+                              groupValue: _method,
+                              onChanged: (v) =>
+                                  setState(() => _method = v ?? _method),
+                              label: 'Debit / Credit Card',
+                              subtitle: 'Visa, Mastercard, RuPay accepted',
+                            ),
+                            _PmtOptionTile(
+                              value: 'csc',
+                              groupValue: _method,
+                              onChanged: (v) =>
+                                  setState(() => _method = v ?? _method),
+                              label: 'Pay at CSC Centre',
+                              subtitle:
+                                  'Visit your nearest Common Service Centre',
+                            ),
+                            if (_method == 'upi') ...[
+                              const SizedBox(height: 4),
+                              Ux4gInputField(
+                                value: _upiId,
+                                onValueChange: (v) =>
+                                    setState(() => _upiId = v),
+                                label: 'Enter UPI ID',
+                                placeholder: 'yourname@upi',
+                                placeholderStyle: _placeholderStyle,
+                              ),
+                            ],
+                            const SizedBox(height: 20),
+                            Ux4gButton(
+                              text: 'Pay Rs 41.30',
+                              onPressed: () {},
+                              size: Ux4gButtonSize.large,
+                              width: double.infinity,
+                            ),
+                            const SizedBox(height: 12),
+                            Center(
+                              child: TextButton(
+                                onPressed: () {},
+                                child: Text(
+                                  'Back to summary',
+                                  style: TextStyle(fontSize: 14, color: primary),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  const _BrandFooter(),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+const _paymentMethodCode = r'''
+// Choose Payment Method — flat (360 × 760)
+Column(children: [
+  Ux4gAppHeader(...),
+  Ux4gStepper(totalSteps: 5, currentStep: 5, ...),
+  Divider(height: 1, color: Color(0xFFE5E7EB)),
+  Expanded(child: SingleChildScrollView(
+    padding: EdgeInsets.fromLTRB(16, 20, 16, 16),
+    child: Column(children: [
+      Text('Choose payment method'),
+      // 4 radio-style tiles: UPI / Net Banking / Debit+Credit Card / CSC Centre
+      // UPI selected → shows Ux4gInputField('Enter UPI ID')
+      Ux4gButton(text: 'Pay Rs 41.30',
+        size: Ux4gButtonSize.large, width: double.infinity, onPressed: () {}),
+      TextButton(onPressed: () {}, child: Text('Back to summary')),
+    ]),
+  )),
+  _BrandFooter(),
+])''';
+
+const _paymentMethodCardCode = r'''
+// Choose Payment Method — card style
+Column(children: [
+  Ux4gAppHeader(...),
+  Ux4gStepper(totalSteps: 5, currentStep: 5, ...),
+  Divider(height: 1, color: Color(0xFFE5E7EB)),
+  Expanded(child: Container(color: Color(0xFFE9E5FF), child: Column(children: [
+    Expanded(child: SingleChildScrollView(
+      padding: EdgeInsets.fromLTRB(16, 20, 16, 16),
+      child: Container(
+        padding: EdgeInsets.fromLTRB(16, 24, 16, 20),
+        decoration: BoxDecoration(
+          color: Colors.white, borderRadius: BorderRadius.circular(16)),
+        child: Column(children: [ /* same content as flat */ ]),
+      ),
+    )),
+    _BrandFooter(),
+  ]))),
+])''';
+
+// -----------------------------------------------------------------------
+// PAYMENT PROCESSING — overlay spinner on dimmed background
+// -----------------------------------------------------------------------
+
+class _PaymentProcessingMockup extends StatelessWidget {
+  const _PaymentProcessingMockup();
+
+  @override
+  Widget build(BuildContext context) {
+    final primary = Theme.of(context).colorScheme.primary;
+    return _PhoneFrame(
+      child: Stack(
+        children: [
+          // Background: previous screen layout
+          Column(
+            children: [
+              const _BrandHeader(),
+              const _PmtStepBar(),
+              const Divider(height: 1, thickness: 1, color: _border),
+              Expanded(
+                child: Container(
+                  color: _bg,
+                  padding: const EdgeInsets.fromLTRB(16, 20, 16, 16),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: const [
+                      Text(
+                        'Choose payment method',
+                        style: TextStyle(
+                          fontSize: 22,
+                          fontWeight: FontWeight.w800,
+                          color: _titleColor,
+                          height: 1.2,
+                        ),
+                      ),
+                      SizedBox(height: 4),
+                      Text(
+                        'Select how you would like to pay Rs 41.30.',
+                        style: TextStyle(fontSize: 13, color: _subtleText),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+          // Semi-transparent scrim
+          Positioned.fill(
+            child: Container(
+              color: Colors.black.withValues(alpha: 0.45),
+            ),
+          ),
+          // Centered modal card
+          Positioned.fill(
+            child: Center(
+              child: Container(
+                margin: const EdgeInsets.symmetric(horizontal: 32),
+                padding: const EdgeInsets.fromLTRB(24, 28, 24, 28),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(16),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withValues(alpha: 0.15),
+                      blurRadius: 24,
+                      offset: const Offset(0, 8),
+                    ),
+                  ],
+                ),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    SizedBox(
+                      width: 48,
+                      height: 48,
+                      child: CircularProgressIndicator(
+                        strokeWidth: 4,
+                        valueColor: AlwaysStoppedAnimation<Color>(primary),
+                      ),
+                    ),
+                    const SizedBox(height: 20),
+                    const Text(
+                      'Redirecting to PayGov...',
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w700,
+                        color: _titleColor,
+                        height: 1.2,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                    const SizedBox(height: 8),
+                    const Text(
+                      'Please do not press back or refresh.\n'
+                      'Your payment is being processed securely.',
+                      style: TextStyle(
+                        fontSize: 13,
+                        color: _subtleText,
+                        height: 1.4,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _PaymentProcessingCardMockup extends StatelessWidget {
+  const _PaymentProcessingCardMockup();
+
+  @override
+  Widget build(BuildContext context) {
+    final primary = Theme.of(context).colorScheme.primary;
+    return _PhoneFrame(
+      child: Stack(
+        children: [
+          Column(
+            children: [
+              const _BrandHeader(),
+              const _PmtStepBar(),
+              const Divider(height: 1, thickness: 1, color: _border),
+              Expanded(
+                child: Container(
+                  color: _suCardBg,
+                  padding: const EdgeInsets.fromLTRB(16, 20, 16, 16),
+                  child: Container(
+                    padding: const EdgeInsets.fromLTRB(16, 24, 16, 20),
+                    decoration: _suCardDeco(),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: const [
+                        Text(
+                          'Choose payment method',
+                          style: TextStyle(
+                            fontSize: 22,
+                            fontWeight: FontWeight.w800,
+                            color: _titleColor,
+                            height: 1.2,
+                          ),
+                        ),
+                        SizedBox(height: 4),
+                        Text(
+                          'Select how you would like to pay Rs 41.30.',
+                          style: TextStyle(fontSize: 13, color: _subtleText),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+          Positioned.fill(
+            child: Container(
+              color: Colors.black.withValues(alpha: 0.45),
+            ),
+          ),
+          Positioned.fill(
+            child: Center(
+              child: Container(
+                margin: const EdgeInsets.symmetric(horizontal: 32),
+                padding: const EdgeInsets.fromLTRB(24, 28, 24, 28),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(16),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withValues(alpha: 0.15),
+                      blurRadius: 24,
+                      offset: const Offset(0, 8),
+                    ),
+                  ],
+                ),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    SizedBox(
+                      width: 48,
+                      height: 48,
+                      child: CircularProgressIndicator(
+                        strokeWidth: 4,
+                        valueColor: AlwaysStoppedAnimation<Color>(primary),
+                      ),
+                    ),
+                    const SizedBox(height: 20),
+                    const Text(
+                      'Redirecting to PayGov...',
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w700,
+                        color: _titleColor,
+                        height: 1.2,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                    const SizedBox(height: 8),
+                    const Text(
+                      'Please do not press back or refresh.\n'
+                      'Your payment is being processed securely.',
+                      style: TextStyle(
+                        fontSize: 13,
+                        color: _subtleText,
+                        height: 1.4,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+const _paymentProcessingCode = r'''
+// Payment Processing — spinner overlay (360 × 760)
+Stack(children: [
+  Column(children: [
+    Ux4gAppHeader(...), Ux4gStepper(...), Divider(...), Expanded(...),
+  ]),
+  Positioned.fill(child: Container(
+    color: Colors.black.withValues(alpha: 0.45))),
+  Positioned.fill(child: Center(child: Container(
+    margin: EdgeInsets.symmetric(horizontal: 32),
+    padding: EdgeInsets.fromLTRB(24, 28, 24, 28),
+    decoration: BoxDecoration(
+      color: Colors.white, borderRadius: BorderRadius.circular(16)),
+    child: Column(mainAxisSize: MainAxisSize.min, children: [
+      SizedBox(width: 48, height: 48,
+        child: CircularProgressIndicator(strokeWidth: 4)),
+      SizedBox(height: 20),
+      Text('Redirecting to PayGov...'),
+      Text('Please do not press back or refresh.'),
+    ]),
+  ))),
+])''';
+
+const _paymentProcessingCardCode = r'''
+// Payment Processing — card style + spinner overlay
+Stack(children: [
+  Column(children: [
+    Ux4gAppHeader(...), Ux4gStepper(...), Divider(...),
+    Expanded(child: Container(color: Color(0xFFE9E5FF),
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.white, borderRadius: BorderRadius.circular(16)),
+        child: Column(...)))),
+  ]),
+  // Same scrim overlay + modal card as flat variant
+])''';
+
+// -----------------------------------------------------------------------
+// PAYMENT SUCCESS — flat + card
+// -----------------------------------------------------------------------
+
+class _PaymentSuccessMockup extends StatelessWidget {
+  const _PaymentSuccessMockup();
+
+  @override
+  Widget build(BuildContext context) {
+    final primary = Theme.of(context).colorScheme.primary;
+    return _PhoneFrame(
+      child: Column(
+        children: [
+          const _BrandHeader(),
+          const _PmtStepBar(),
+          const Divider(height: 1, thickness: 1, color: _border),
+          Expanded(
+            child: Container(
+              color: _bg,
+              child: Column(
+                children: [
+                  Expanded(
+                    child: SingleChildScrollView(
+                      padding: const EdgeInsets.fromLTRB(16, 20, 16, 16),
+                      child: Column(
+                        children: [
+                          Container(
+                            width: 64,
+                            height: 64,
+                            decoration: const BoxDecoration(
+                              color: Ux4gPalette.green100,
+                              shape: BoxShape.circle,
+                            ),
+                            alignment: Alignment.center,
+                            child: Container(
+                              width: 36,
+                              height: 36,
+                              decoration: const BoxDecoration(
+                                color: Ux4gPalette.green,
+                                shape: BoxShape.circle,
+                              ),
+                              child: const Icon(
+                                Icons.check,
+                                color: Colors.white,
+                                size: 22,
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 16),
+                          const Text(
+                            'Payment Successful',
+                            style: TextStyle(
+                              fontSize: 22,
+                              fontWeight: FontWeight.w800,
+                              color: Ux4gPalette.green700,
+                              height: 1.2,
+                              letterSpacing: -0.3,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                          const SizedBox(height: 6),
+                          const Text(
+                            'Rs 41.30 paid for Income Certificate '
+                            '(Application #INC-2024-00842).',
+                            style: TextStyle(
+                              fontSize: 13,
+                              color: _subtleText,
+                              height: 1.4,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                          const SizedBox(height: 20),
+                          Container(
+                            decoration: BoxDecoration(
+                              color: const Color(0xFFF0FDF4),
+                              border: Border.all(color: Ux4gPalette.green100),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: Column(
+                              children: [
+                                const _PayDetailRow(
+                                  label: 'Amount paid',
+                                  value: 'Rs 41.30',
+                                  valueBold: true,
+                                ),
+                                const _PayDetailRow(
+                                  label: 'Transaction ID',
+                                  value: 'PG2026MH04127TX',
+                                ),
+                                const _PayDetailRow(
+                                  label: 'Method',
+                                  value: 'UPI - ramesh@upi',
+                                ),
+                                const _PayDetailRow(
+                                  label: 'Date and time',
+                                  value: '12 Apr 2026, 2:34 PM IST',
+                                ),
+                              ],
+                            ),
+                          ),
+                          const SizedBox(height: 20),
+                          Ux4gButton(
+                            text: 'Track my application',
+                            onPressed: () {},
+                            size: Ux4gButtonSize.large,
+                            width: double.infinity,
+                          ),
+                          const SizedBox(height: 10),
+                          Ux4gButton(
+                            text: 'Download receipt (PDF)',
+                            onPressed: () {},
+                            variant: Ux4gButtonVariant.outline,
+                            size: Ux4gButtonSize.large,
+                            width: double.infinity,
+                          ),
+                          const SizedBox(height: 12),
+                          Center(
+                            child: TextButton(
+                              onPressed: () {},
+                              child: Text(
+                                'Return to services',
+                                style: TextStyle(fontSize: 14, color: primary),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  const _BrandFooter(),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _PaymentSuccessCardMockup extends StatelessWidget {
+  const _PaymentSuccessCardMockup();
+
+  @override
+  Widget build(BuildContext context) {
+    final primary = Theme.of(context).colorScheme.primary;
+    return _PhoneFrame(
+      child: Column(
+        children: [
+          const _BrandHeader(),
+          const _PmtStepBar(),
+          const Divider(height: 1, thickness: 1, color: _border),
+          Expanded(
+            child: Container(
+              color: _suCardBg,
+              child: Column(
+                children: [
+                  Expanded(
+                    child: SingleChildScrollView(
+                      padding: const EdgeInsets.fromLTRB(16, 20, 16, 16),
+                      child: Container(
+                        padding: const EdgeInsets.fromLTRB(16, 24, 16, 20),
+                        decoration: _suCardDeco(),
+                        child: Column(
+                          children: [
+                            Container(
+                              width: 64,
+                              height: 64,
+                              decoration: const BoxDecoration(
+                                color: Ux4gPalette.green100,
+                                shape: BoxShape.circle,
+                              ),
+                              alignment: Alignment.center,
+                              child: Container(
+                                width: 36,
+                                height: 36,
+                                decoration: const BoxDecoration(
+                                  color: Ux4gPalette.green,
+                                  shape: BoxShape.circle,
+                                ),
+                                child: const Icon(
+                                  Icons.check,
+                                  color: Colors.white,
+                                  size: 22,
+                                ),
+                              ),
+                            ),
+                            const SizedBox(height: 16),
+                            const Text(
+                              'Payment Successful',
+                              style: TextStyle(
+                                fontSize: 22,
+                                fontWeight: FontWeight.w800,
+                                color: Ux4gPalette.green700,
+                                height: 1.2,
+                                letterSpacing: -0.3,
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                            const SizedBox(height: 6),
+                            const Text(
+                              'Rs 41.30 paid for Income Certificate '
+                              '(Application #INC-2024-00842).',
+                              style: TextStyle(
+                                fontSize: 13,
+                                color: _subtleText,
+                                height: 1.4,
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                            const SizedBox(height: 20),
+                            Container(
+                              decoration: BoxDecoration(
+                                color: const Color(0xFFF0FDF4),
+                                border: Border.all(color: Ux4gPalette.green100),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: Column(
+                                children: [
+                                  const _PayDetailRow(
+                                    label: 'Amount paid',
+                                    value: 'Rs 41.30',
+                                    valueBold: true,
+                                  ),
+                                  const _PayDetailRow(
+                                    label: 'Transaction ID',
+                                    value: 'PG2026MH04127TX',
+                                  ),
+                                  const _PayDetailRow(
+                                    label: 'Method',
+                                    value: 'UPI - ramesh@upi',
+                                  ),
+                                  const _PayDetailRow(
+                                    label: 'Date and time',
+                                    value: '12 Apr 2026, 2:34 PM IST',
+                                  ),
+                                ],
+                              ),
+                            ),
+                            const SizedBox(height: 20),
+                            Ux4gButton(
+                              text: 'Track my application',
+                              onPressed: () {},
+                              size: Ux4gButtonSize.large,
+                              width: double.infinity,
+                            ),
+                            const SizedBox(height: 10),
+                            Ux4gButton(
+                              text: 'Download receipt (PDF)',
+                              onPressed: () {},
+                              variant: Ux4gButtonVariant.outline,
+                              size: Ux4gButtonSize.large,
+                              width: double.infinity,
+                            ),
+                            const SizedBox(height: 12),
+                            Center(
+                              child: TextButton(
+                                onPressed: () {},
+                                child: Text(
+                                  'Return to services',
+                                  style: TextStyle(fontSize: 14, color: primary),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  const _BrandFooter(),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+const _paymentSuccessCode = r'''
+// Payment Successful — flat (360 × 760)
+Column(children: [
+  Ux4gAppHeader(...),
+  Ux4gStepper(totalSteps: 5, currentStep: 5, ...),
+  Divider(height: 1, color: Color(0xFFE5E7EB)),
+  Expanded(child: SingleChildScrollView(
+    padding: EdgeInsets.fromLTRB(16, 20, 16, 16),
+    child: Column(children: [
+      // Green concentric badge
+      Container(width: 64, height: 64,
+        decoration: BoxDecoration(
+          color: Ux4gPalette.green100, shape: BoxShape.circle),
+        child: Container(width: 36, height: 36,
+          decoration: BoxDecoration(
+            color: Ux4gPalette.green, shape: BoxShape.circle),
+          child: Icon(Icons.check, color: Colors.white))),
+      Text('Payment Successful',
+        style: TextStyle(
+          color: Ux4gPalette.green700,
+          fontSize: 22, fontWeight: FontWeight.w800)),
+      // Details table — Amount paid row has Color(0xFFF0FDF4) bg
+      Ux4gButton(text: 'Track my application',
+        size: Ux4gButtonSize.large, width: double.infinity, onPressed: () {}),
+      Ux4gButton(text: 'Download receipt (PDF)',
+        variant: Ux4gButtonVariant.outline,
+        size: Ux4gButtonSize.large, width: double.infinity, onPressed: () {}),
+      TextButton(child: Text('Return to services'), onPressed: () {}),
+    ]),
+  )),
+  _BrandFooter(),
+])''';
+
+const _paymentSuccessCardCode = r'''
+// Payment Successful — card style
+Column(children: [
+  Ux4gAppHeader(...), Ux4gStepper(...), Divider(...),
+  Expanded(child: Container(color: Color(0xFFE9E5FF), child: Column(children: [
+    Expanded(child: SingleChildScrollView(
+      child: Container(
+        padding: EdgeInsets.fromLTRB(16, 24, 16, 20),
+        decoration: BoxDecoration(
+          color: Colors.white, borderRadius: BorderRadius.circular(16)),
+        child: Column(children: [ /* same content as flat */ ]),
+      ),
+    )),
+    _BrandFooter(),
+  ]))),
+])''';
+
+// -----------------------------------------------------------------------
+// PAYMENT FAILED — flat + card
+// -----------------------------------------------------------------------
+
+class _PaymentFailedMockup extends StatelessWidget {
+  const _PaymentFailedMockup();
+
+  @override
+  Widget build(BuildContext context) {
+    final primary = Theme.of(context).colorScheme.primary;
+    return _PhoneFrame(
+      child: Column(
+        children: [
+          const _BrandHeader(),
+          const _PmtStepBar(),
+          const Divider(height: 1, thickness: 1, color: _border),
+          Expanded(
+            child: Container(
+              color: _bg,
+              child: Column(
+                children: [
+                  Expanded(
+                    child: SingleChildScrollView(
+                      padding: const EdgeInsets.fromLTRB(16, 20, 16, 16),
+                      child: Column(
+                        children: [
+                          Container(
+                            width: 64,
+                            height: 64,
+                            decoration: const BoxDecoration(
+                              color: Ux4gPalette.red100,
+                              shape: BoxShape.circle,
+                            ),
+                            alignment: Alignment.center,
+                            child: const Icon(
+                              Icons.error_outline,
+                              color: Ux4gPalette.red600,
+                              size: 32,
+                            ),
+                          ),
+                          const SizedBox(height: 16),
+                          const Text(
+                            'Payment Failed',
+                            style: TextStyle(
+                              fontSize: 22,
+                              fontWeight: FontWeight.w800,
+                              color: Ux4gPalette.red800,
+                              height: 1.2,
+                              letterSpacing: -0.3,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                          const SizedBox(height: 6),
+                          const Text(
+                            'Your payment of Rs 41.30 could not be processed.',
+                            style: TextStyle(
+                              fontSize: 13,
+                              color: _subtleText,
+                              height: 1.4,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                          const SizedBox(height: 20),
+                          Container(
+                            decoration: BoxDecoration(
+                              color: const Color(0xFFFFF1F1),
+                              border: Border.all(color: Ux4gPalette.red100),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: Column(
+                              children: [
+                                const _PayDetailRow(
+                                  label: 'Reason',
+                                  value: 'Bank declined',
+                                  valueColor: Ux4gPalette.red600,
+                                ),
+                                const _PayDetailRow(
+                                  label: 'Attempted amount',
+                                  value: 'Rs 41.30',
+                                ),
+                                const _PayDetailRow(
+                                  label: 'Method',
+                                  value: 'UPI - ramesh@upi',
+                                ),
+                                const _PayDetailRow(
+                                  label: 'Date and time',
+                                  value: '12 Apr 2026, 2:34 PM IST',
+                                ),
+                              ],
+                            ),
+                          ),
+                          const SizedBox(height: 20),
+                          Ux4gButton(
+                            text: 'Try again with UPI',
+                            onPressed: () {},
+                            size: Ux4gButtonSize.large,
+                            width: double.infinity,
+                          ),
+                          const SizedBox(height: 10),
+                          Ux4gButton(
+                            text: 'Try a different method',
+                            onPressed: () {},
+                            variant: Ux4gButtonVariant.outline,
+                            size: Ux4gButtonSize.large,
+                            width: double.infinity,
+                          ),
+                          const SizedBox(height: 12),
+                          Center(
+                            child: TextButton(
+                              onPressed: () {},
+                              child: Text(
+                                'Pay at CSC centre',
+                                style: TextStyle(fontSize: 14, color: primary),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  const _BrandFooter(),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _PaymentFailedCardMockup extends StatelessWidget {
+  const _PaymentFailedCardMockup();
+
+  @override
+  Widget build(BuildContext context) {
+    final primary = Theme.of(context).colorScheme.primary;
+    return _PhoneFrame(
+      child: Column(
+        children: [
+          const _BrandHeader(),
+          const _PmtStepBar(),
+          const Divider(height: 1, thickness: 1, color: _border),
+          Expanded(
+            child: Container(
+              color: _suCardBg,
+              child: Column(
+                children: [
+                  Expanded(
+                    child: SingleChildScrollView(
+                      padding: const EdgeInsets.fromLTRB(16, 20, 16, 16),
+                      child: Container(
+                        padding: const EdgeInsets.fromLTRB(16, 24, 16, 20),
+                        decoration: _suCardDeco(),
+                        child: Column(
+                          children: [
+                            Container(
+                              width: 64,
+                              height: 64,
+                              decoration: const BoxDecoration(
+                                color: Ux4gPalette.red100,
+                                shape: BoxShape.circle,
+                              ),
+                              alignment: Alignment.center,
+                              child: const Icon(
+                                Icons.error_outline,
+                                color: Ux4gPalette.red600,
+                                size: 32,
+                              ),
+                            ),
+                            const SizedBox(height: 16),
+                            const Text(
+                              'Payment Failed',
+                              style: TextStyle(
+                                fontSize: 22,
+                                fontWeight: FontWeight.w800,
+                                color: Ux4gPalette.red800,
+                                height: 1.2,
+                                letterSpacing: -0.3,
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                            const SizedBox(height: 6),
+                            const Text(
+                              'Your payment of Rs 41.30 could not be processed.',
+                              style: TextStyle(
+                                fontSize: 13,
+                                color: _subtleText,
+                                height: 1.4,
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                            const SizedBox(height: 20),
+                            Container(
+                              decoration: BoxDecoration(
+                                color: const Color(0xFFFFF1F1),
+                                border: Border.all(color: Ux4gPalette.red100),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: Column(
+                                children: [
+                                  const _PayDetailRow(
+                                    label: 'Reason',
+                                    value: 'Bank declined',
+                                    valueColor: Ux4gPalette.red600,
+                                  ),
+                                  const _PayDetailRow(
+                                    label: 'Attempted amount',
+                                    value: 'Rs 41.30',
+                                  ),
+                                  const _PayDetailRow(
+                                    label: 'Method',
+                                    value: 'UPI - ramesh@upi',
+                                  ),
+                                  const _PayDetailRow(
+                                    label: 'Date and time',
+                                    value: '12 Apr 2026, 2:34 PM IST',
+                                  ),
+                                ],
+                              ),
+                            ),
+                            const SizedBox(height: 20),
+                            Ux4gButton(
+                              text: 'Try again with UPI',
+                              onPressed: () {},
+                              size: Ux4gButtonSize.large,
+                              width: double.infinity,
+                            ),
+                            const SizedBox(height: 10),
+                            Ux4gButton(
+                              text: 'Try a different method',
+                              onPressed: () {},
+                              variant: Ux4gButtonVariant.outline,
+                              size: Ux4gButtonSize.large,
+                              width: double.infinity,
+                            ),
+                            const SizedBox(height: 12),
+                            Center(
+                              child: TextButton(
+                                onPressed: () {},
+                                child: Text(
+                                  'Pay at CSC centre',
+                                  style: TextStyle(fontSize: 14, color: primary),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  const _BrandFooter(),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+const _paymentFailedCode = r'''
+// Payment Failed — flat (360 × 760)
+Column(children: [
+  Ux4gAppHeader(...),
+  Ux4gStepper(totalSteps: 5, currentStep: 5, ...),
+  Divider(height: 1, color: Color(0xFFE5E7EB)),
+  Expanded(child: SingleChildScrollView(
+    padding: EdgeInsets.fromLTRB(16, 20, 16, 16),
+    child: Column(children: [
+      Container(width: 64, height: 64,
+        decoration: BoxDecoration(
+          color: Ux4gPalette.red100, shape: BoxShape.circle),
+        child: Icon(Icons.error_outline,
+          color: Ux4gPalette.red600, size: 32)),
+      Text('Payment Failed',
+        style: TextStyle(
+          color: Ux4gPalette.red800,
+          fontSize: 22, fontWeight: FontWeight.w800)),
+      // Details table with Ux4gPalette.red100 border
+      // Reason row has Color(0xFFFFF1F1) bg, reason text in red600
+      Ux4gButton(text: 'Try again with UPI',
+        size: Ux4gButtonSize.large, width: double.infinity, onPressed: () {}),
+      Ux4gButton(text: 'Try a different method',
+        variant: Ux4gButtonVariant.outline,
+        size: Ux4gButtonSize.large, width: double.infinity, onPressed: () {}),
+      TextButton(child: Text('Pay at CSC centre'), onPressed: () {}),
+    ]),
+  )),
+  _BrandFooter(),
+])''';
+
+const _paymentFailedCardCode = r'''
+// Payment Failed — card style
+Column(children: [
+  Ux4gAppHeader(...), Ux4gStepper(...), Divider(...),
+  Expanded(child: Container(color: Color(0xFFE9E5FF), child: Column(children: [
+    Expanded(child: SingleChildScrollView(
+      child: Container(
+        padding: EdgeInsets.fromLTRB(16, 24, 16, 20),
+        decoration: BoxDecoration(
+          color: Colors.white, borderRadius: BorderRadius.circular(16)),
+        child: Column(children: [ /* same content as flat */ ]),
+      ),
+    )),
+    _BrandFooter(),
+  ]))),
+])''';
+
+// -----------------------------------------------------------------------
+// FEE WAIVED — flat + card
+// -----------------------------------------------------------------------
+
+class _FeeWaivedMockup extends StatelessWidget {
+  const _FeeWaivedMockup();
+
+  @override
+  Widget build(BuildContext context) {
+    final primary = Theme.of(context).colorScheme.primary;
+    return _PhoneFrame(
+      child: Column(
+        children: [
+          const _BrandHeader(),
+          const _PmtStepBar(),
+          const Divider(height: 1, thickness: 1, color: _border),
+          Expanded(
+            child: Container(
+              color: _bg,
+              child: Column(
+                children: [
+                  Expanded(
+                    child: SingleChildScrollView(
+                      padding: const EdgeInsets.fromLTRB(16, 20, 16, 16),
+                      child: Column(
+                        children: [
+                          Container(
+                            width: 64,
+                            height: 64,
+                            decoration: const BoxDecoration(
+                              color: Ux4gPalette.green100,
+                              shape: BoxShape.circle,
+                            ),
+                            alignment: Alignment.center,
+                            child: Container(
+                              width: 36,
+                              height: 36,
+                              decoration: const BoxDecoration(
+                                color: Ux4gPalette.green,
+                                shape: BoxShape.circle,
+                              ),
+                              child: const Icon(
+                                Icons.check,
+                                color: Colors.white,
+                                size: 22,
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 16),
+                          const Text(
+                            'Fee Waived',
+                            style: TextStyle(
+                              fontSize: 22,
+                              fontWeight: FontWeight.w800,
+                              color: Ux4gPalette.green700,
+                              height: 1.2,
+                              letterSpacing: -0.3,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                          const SizedBox(height: 6),
+                          const Text(
+                            'As an SC/ST applicant, you are eligible for '
+                            'a full fee waiver for this certificate.',
+                            style: TextStyle(
+                              fontSize: 13,
+                              color: _subtleText,
+                              height: 1.4,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                          const SizedBox(height: 20),
+                          Container(
+                            decoration: BoxDecoration(
+                              color: const Color(0xFFF0FDF4),
+                              border: Border.all(color: Ux4gPalette.green100),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: Column(
+                              children: [
+                                const _FeeRow(
+                                  label: 'Application fee',
+                                  amount: 'Rs 30.00',
+                                ),
+                                const _FeeRow(
+                                  label: 'Processing charge',
+                                  amount: 'Rs 5.00',
+                                ),
+                                const _FeeRow(
+                                  label: 'GST 18%',
+                                  amount: 'Rs 6.30',
+                                ),
+                                const _FeeRow(
+                                  label: 'Waiver applied',
+                                  amount: '− Rs 41.30',
+                                  redAmount: true,
+                                ),
+                                const _FeeRow(
+                                  label: 'Total payable',
+                                  amount: 'Rs 0.00',
+                                  bold: true,
+                                ),
+                              ],
+                            ),
+                          ),
+                          const SizedBox(height: 20),
+                          Ux4gButton(
+                            text: 'Proceed without payment',
+                            onPressed: () {},
+                            size: Ux4gButtonSize.large,
+                            width: double.infinity,
+                          ),
+                          const SizedBox(height: 12),
+                          Center(
+                            child: TextButton(
+                              onPressed: () {},
+                              child: Text(
+                                'Pay anyway',
+                                style: TextStyle(fontSize: 14, color: primary),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  const _BrandFooter(),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _FeeWaivedCardMockup extends StatelessWidget {
+  const _FeeWaivedCardMockup();
+
+  @override
+  Widget build(BuildContext context) {
+    final primary = Theme.of(context).colorScheme.primary;
+    return _PhoneFrame(
+      child: Column(
+        children: [
+          const _BrandHeader(),
+          const _PmtStepBar(),
+          const Divider(height: 1, thickness: 1, color: _border),
+          Expanded(
+            child: Container(
+              color: _suCardBg,
+              child: Column(
+                children: [
+                  Expanded(
+                    child: SingleChildScrollView(
+                      padding: const EdgeInsets.fromLTRB(16, 20, 16, 16),
+                      child: Container(
+                        padding: const EdgeInsets.fromLTRB(16, 24, 16, 20),
+                        decoration: _suCardDeco(),
+                        child: Column(
+                          children: [
+                            Container(
+                              width: 64,
+                              height: 64,
+                              decoration: const BoxDecoration(
+                                color: Ux4gPalette.green100,
+                                shape: BoxShape.circle,
+                              ),
+                              alignment: Alignment.center,
+                              child: Container(
+                                width: 36,
+                                height: 36,
+                                decoration: const BoxDecoration(
+                                  color: Ux4gPalette.green,
+                                  shape: BoxShape.circle,
+                                ),
+                                child: const Icon(
+                                  Icons.check,
+                                  color: Colors.white,
+                                  size: 22,
+                                ),
+                              ),
+                            ),
+                            const SizedBox(height: 16),
+                            const Text(
+                              'Fee Waived',
+                              style: TextStyle(
+                                fontSize: 22,
+                                fontWeight: FontWeight.w800,
+                                color: Ux4gPalette.green700,
+                                height: 1.2,
+                                letterSpacing: -0.3,
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                            const SizedBox(height: 6),
+                            const Text(
+                              'As an SC/ST applicant, you are eligible for '
+                              'a full fee waiver for this certificate.',
+                              style: TextStyle(
+                                fontSize: 13,
+                                color: _subtleText,
+                                height: 1.4,
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                            const SizedBox(height: 20),
+                            Container(
+                              decoration: BoxDecoration(
+                                color: const Color(0xFFF0FDF4),
+                                border: Border.all(color: Ux4gPalette.green100),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: Column(
+                                children: [
+                                  const _FeeRow(
+                                    label: 'Application fee',
+                                    amount: 'Rs 30.00',
+                                  ),
+                                  const _FeeRow(
+                                    label: 'Processing charge',
+                                    amount: 'Rs 5.00',
+                                  ),
+                                  const _FeeRow(
+                                    label: 'GST 18%',
+                                    amount: 'Rs 6.30',
+                                  ),
+                                  const _FeeRow(
+                                    label: 'Waiver applied',
+                                    amount: '− Rs 41.30',
+                                    redAmount: true,
+                                  ),
+                                  const _FeeRow(
+                                    label: 'Total payable',
+                                    amount: 'Rs 0.00',
+                                    bold: true,
+                                  ),
+                                ],
+                              ),
+                            ),
+                            const SizedBox(height: 20),
+                            Ux4gButton(
+                              text: 'Proceed without payment',
+                              onPressed: () {},
+                              size: Ux4gButtonSize.large,
+                              width: double.infinity,
+                            ),
+                            const SizedBox(height: 12),
+                            Center(
+                              child: TextButton(
+                                onPressed: () {},
+                                child: Text(
+                                  'Pay anyway',
+                                  style: TextStyle(fontSize: 14, color: primary),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  const _BrandFooter(),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+const _feeWaivedCode = r'''
+// Fee Waived — flat (360 × 760)
+Column(children: [
+  Ux4gAppHeader(...),
+  Ux4gStepper(totalSteps: 5, currentStep: 5, ...),
+  Divider(height: 1, color: Color(0xFFE5E7EB)),
+  Expanded(child: SingleChildScrollView(
+    padding: EdgeInsets.fromLTRB(16, 20, 16, 16),
+    child: Column(children: [
+      // Green concentric badge (same as Payment Successful)
+      Text('Fee Waived',
+        style: TextStyle(
+          color: Ux4gPalette.green700,
+          fontSize: 22, fontWeight: FontWeight.w800)),
+      // Waiver table:
+      //   Application fee  Rs 30.00
+      //   Processing charge Rs 5.00
+      //   GST 18%          Rs 6.30
+      //   Waiver applied   − Rs 41.30  (red text)
+      //   Total payable    Rs 0.00     (bold, Color(0xFFF0FDF4) bg)
+      Ux4gButton(text: 'Proceed without payment',
+        size: Ux4gButtonSize.large, width: double.infinity, onPressed: () {}),
+      TextButton(child: Text('Pay anyway'), onPressed: () {}),
+    ]),
+  )),
+  _BrandFooter(),
+])''';
+
+const _feeWaivedCardCode = r'''
+// Fee Waived — card style
+Column(children: [
+  Ux4gAppHeader(...), Ux4gStepper(...), Divider(...),
+  Expanded(child: Container(color: Color(0xFFE9E5FF), child: Column(children: [
+    Expanded(child: SingleChildScrollView(
+      child: Container(
+        padding: EdgeInsets.fromLTRB(16, 24, 16, 20),
+        decoration: BoxDecoration(
+          color: Colors.white, borderRadius: BorderRadius.circular(16)),
+        child: Column(children: [ /* same content as flat */ ]),
+      ),
+    )),
+    _BrandFooter(),
+  ]))),
+])''';
+
+// ═══════════════════════════════════════════════════════════════════════
+// WidgetbookComponent registrations — Payment and Confirmation
+// ═══════════════════════════════════════════════════════════════════════
+
+final paymentSummaryComponent = WidgetbookComponent(
+  name: 'Payment',
+  useCases: [
+    WidgetbookUseCase(
+      name: 'Default',
+      builder: (context) {
+        final variant = context.knobs.list(
+          label: 'Variant',
+          options: const ['Default', 'Card style'],
+          initialOption: 'Default',
+          description:
+              'Switch between the flat phone layout and the card-style layout.',
+        );
+        return ComponentDocs(
+          name: 'Payment',
+          description:
+              'Fee breakdown and payment gateway entry screen. Shows the '
+              'application fee table, a PayGov info banner, and a Continue '
+              'CTA. Use the [Variant] knob to toggle between flat and '
+              'card-style layouts.',
+          code: variant == 'Card style'
+              ? _paymentSummaryCardCode
+              : _paymentSummaryCode,
+          center: true,
+          child: variant == 'Card style'
+              ? const _PaymentSummaryCardMockup()
+              : const _PaymentSummaryMockup(),
+        );
+      },
+    ),
+  ],
+);
+
+final paymentMethodComponent = WidgetbookComponent(
+  name: 'Choose Payment Method',
+  useCases: [
+    WidgetbookUseCase(
+      name: 'Default',
+      builder: (context) {
+        final variant = context.knobs.list(
+          label: 'Variant',
+          options: const ['Default', 'Card style'],
+          initialOption: 'Default',
+          description:
+              'Switch between the flat phone layout and the card-style layout.',
+        );
+        return ComponentDocs(
+          name: 'Choose Payment Method',
+          description:
+              'Radio-tile payment method selector. Includes UPI, Net Banking, '
+              'Debit/Credit Card, and CSC Centre options. Selecting UPI '
+              'reveals an inline UPI ID input. Use the [Variant] knob to '
+              'toggle between flat and card-style layouts.',
+          code: variant == 'Card style'
+              ? _paymentMethodCardCode
+              : _paymentMethodCode,
+          center: true,
+          child: variant == 'Card style'
+              ? const _PaymentMethodCardMockup()
+              : const _PaymentMethodMockup(),
+        );
+      },
+    ),
+  ],
+);
+
+final paymentProcessingComponent = WidgetbookComponent(
+  name: 'Payment Processing',
+  useCases: [
+    WidgetbookUseCase(
+      name: 'Default',
+      builder: (context) {
+        final variant = context.knobs.list(
+          label: 'Variant',
+          options: const ['Default', 'Card style'],
+          initialOption: 'Default',
+          description:
+              'Switch between the flat phone layout and the card-style layout.',
+        );
+        return ComponentDocs(
+          name: 'Payment Processing',
+          description:
+              'Dimmed overlay with a centered modal card and a '
+              'CircularProgressIndicator shown while the app redirects to '
+              'PayGov. Use the [Variant] knob to toggle layouts.',
+          code: variant == 'Card style'
+              ? _paymentProcessingCardCode
+              : _paymentProcessingCode,
+          center: true,
+          child: variant == 'Card style'
+              ? const _PaymentProcessingCardMockup()
+              : const _PaymentProcessingMockup(),
+        );
+      },
+    ),
+  ],
+);
+
+final paymentSuccessComponent = WidgetbookComponent(
+  name: 'Payment Successful',
+  useCases: [
+    WidgetbookUseCase(
+      name: 'Default',
+      builder: (context) {
+        final variant = context.knobs.list(
+          label: 'Variant',
+          options: const ['Default', 'Card style'],
+          initialOption: 'Default',
+          description:
+              'Switch between the flat phone layout and the card-style layout.',
+        );
+        return ComponentDocs(
+          name: 'Payment Successful',
+          description:
+              'Confirmation screen after a successful payment. Displays a '
+              'green badge, transaction details table, and options to track '
+              'the application or download the receipt. Use the [Variant] '
+              'knob to toggle layouts.',
+          code: variant == 'Card style'
+              ? _paymentSuccessCardCode
+              : _paymentSuccessCode,
+          center: true,
+          child: variant == 'Card style'
+              ? const _PaymentSuccessCardMockup()
+              : const _PaymentSuccessMockup(),
+        );
+      },
+    ),
+  ],
+);
+
+final paymentFailedComponent = WidgetbookComponent(
+  name: 'Payment Failed',
+  useCases: [
+    WidgetbookUseCase(
+      name: 'Default',
+      builder: (context) {
+        final variant = context.knobs.list(
+          label: 'Variant',
+          options: const ['Default', 'Card style'],
+          initialOption: 'Default',
+          description:
+              'Switch between the flat phone layout and the card-style layout.',
+        );
+        return ComponentDocs(
+          name: 'Payment Failed',
+          description:
+              'Error screen when a payment is declined. Displays a red badge, '
+              'a red-tinted details table with the failure reason, and '
+              'retry/alternative-method CTAs. Use the [Variant] knob to '
+              'toggle layouts.',
+          code: variant == 'Card style'
+              ? _paymentFailedCardCode
+              : _paymentFailedCode,
+          center: true,
+          child: variant == 'Card style'
+              ? const _PaymentFailedCardMockup()
+              : const _PaymentFailedMockup(),
+        );
+      },
+    ),
+  ],
+);
+
+final feeWaivedComponent = WidgetbookComponent(
+  name: 'Fee Waived',
+  useCases: [
+    WidgetbookUseCase(
+      name: 'Default',
+      builder: (context) {
+        final variant = context.knobs.list(
+          label: 'Variant',
+          options: const ['Default', 'Card style'],
+          initialOption: 'Default',
+          description:
+              'Switch between the flat phone layout and the card-style layout.',
+        );
+        return ComponentDocs(
+          name: 'Fee Waived',
+          description:
+              'Screen shown for applicants eligible for a full fee waiver '
+              '(e.g. SC/ST category). Shows the waiver breakdown with a '
+              'negative row and Rs 0.00 total. Use the [Variant] knob to '
+              'toggle layouts.',
+          code: variant == 'Card style' ? _feeWaivedCardCode : _feeWaivedCode,
+          center: true,
+          child: variant == 'Card style'
+              ? const _FeeWaivedCardMockup()
+              : const _FeeWaivedMockup(),
+        );
+      },
+    ),
+  ],
+);
+
+// -----------------------------------------------------------------------
+// APPLICATION STATUS TRACKER
+// -----------------------------------------------------------------------
+
+// -- Status helpers ------------------------------------------------------
+
+Ux4gTagColor _astTagColor(String status) => switch (status) {
+      'Approved' => Ux4gTagColor.success,
+      'Rejected' => Ux4gTagColor.error,
+      'Delayed' || 'Action Required' => Ux4gTagColor.warning,
+      _ => Ux4gTagColor.neutral,
+    };
+
+// -- Alert banner --------------------------------------------------------
+
+class _AstBanner extends StatelessWidget {
+  const _AstBanner({required this.status, this.hPad = 16.0});
+  final String status;
+  final double hPad;
+
+  @override
+  Widget build(BuildContext context) {
+    return switch (status) {
+      'Action Required' => Container(
+          margin: EdgeInsets.fromLTRB(hPad, 12, hPad, 0),
+          padding: const EdgeInsets.all(12),
+          decoration: BoxDecoration(
+            color: Ux4gPalette.orange50,
+            border: Border.all(color: Ux4gPalette.orange500),
+            borderRadius: BorderRadius.circular(8),
+          ),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Icon(Icons.warning_amber_rounded,
+                  color: Ux4gPalette.orange500, size: 18),
+              const SizedBox(width: 8),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      'Action required upload your income proof document',
+                      style: TextStyle(
+                        fontSize: 12,
+                        color: Ux4gPalette.orange700,
+                        fontWeight: FontWeight.w500,
+                        height: 1.4,
+                      ),
+                    ),
+                    const SizedBox(height: 6),
+                    GestureDetector(
+                      onTap: () {},
+                      child: const Text(
+                        'Upload Document',
+                        style: TextStyle(
+                          fontSize: 12,
+                          color: Ux4gPalette.orange500,
+                          fontWeight: FontWeight.w600,
+                          decoration: TextDecoration.underline,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      'Rejected' => Container(
+          margin: EdgeInsets.fromLTRB(hPad, 12, hPad, 0),
+          padding: const EdgeInsets.all(12),
+          decoration: BoxDecoration(
+            color: const Color(0xFFFEF2F2),
+            border: Border.all(color: Ux4gPalette.red100),
+            borderRadius: BorderRadius.circular(8),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: const [
+                  Icon(Icons.cancel_outlined,
+                      color: Ux4gPalette.red600, size: 18),
+                  SizedBox(width: 6),
+                  Expanded(
+                    child: Text(
+                      'Why was this rejected?',
+                      style: TextStyle(
+                        fontSize: 13,
+                        color: Ux4gPalette.red600,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 6),
+              const Text(
+                'The income proof document submitted was not legible; '
+                'the scan was too blurry to read.',
+                style: TextStyle(
+                    fontSize: 11, color: Ux4gPalette.red600, height: 1.4),
+              ),
+              const SizedBox(height: 6),
+              const _AstBullet(
+                  text: 'Re-scan the document in good lighting',
+                  color: Ux4gPalette.red600),
+              const _AstBullet(
+                  text: 'Upload a clear JPG or PDF under 2 MB',
+                  color: Ux4gPalette.red600),
+              const _AstBullet(
+                  text: 'Reapply with the corrected document',
+                  color: Ux4gPalette.red600),
+            ],
+          ),
+        ),
+      'Delayed' => Container(
+          margin: EdgeInsets.fromLTRB(hPad, 12, hPad, 0),
+          padding: const EdgeInsets.all(12),
+          decoration: BoxDecoration(
+            color: Ux4gPalette.cyan50,
+            border: Border.all(color: Ux4gPalette.cyan500),
+            borderRadius: BorderRadius.circular(8),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: const [
+                  Icon(Icons.access_time_outlined,
+                      color: Ux4gPalette.cyan600, size: 18),
+                  SizedBox(width: 6),
+                  Expanded(
+                    child: Text(
+                      'Why is this delayed?',
+                      style: TextStyle(
+                        fontSize: 13,
+                        color: Ux4gPalette.cyan600,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 6),
+              const Text(
+                'Additional field verification is required due to an '
+                'address discrepancy in your application.',
+                style: TextStyle(
+                    fontSize: 11, color: Color(0xFF0E7490), height: 1.4),
+              ),
+              const SizedBox(height: 8),
+              const Text(
+                'Revised expected date',
+                style: TextStyle(
+                  fontSize: 11,
+                  color: Color(0xFF0E7490),
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+              const SizedBox(height: 2),
+              const Text(
+                '25 Apr 2026',
+                style: TextStyle(
+                  fontSize: 13,
+                  color: Ux4gPalette.cyan600,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+            ],
+          ),
+        ),
+      _ => const SizedBox.shrink(),
+    };
+  }
+}
+
+class _AstBullet extends StatelessWidget {
+  const _AstBullet({required this.text, required this.color});
+  final String text;
+  final Color color;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 2),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text('• ', style: TextStyle(fontSize: 11, color: color)),
+          Expanded(
+            child: Text(
+              text,
+              style: TextStyle(fontSize: 11, color: color, height: 1.4),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+// -- Timeline step -------------------------------------------------------
+
+class _AstTimelineStep extends StatelessWidget {
+  const _AstTimelineStep({
+    required this.date,
+    required this.title,
+    required this.isCompleted,
+    required this.isActive,
+    required this.isLast,
+    required this.primary,
+    this.pendingNote,
+    this.pendingBadge,
+  });
+
+  final String date;
+  final String title;
+  final bool isCompleted;
+  final bool isActive;
+  final bool isLast;
+  final Color primary;
+  final String? pendingNote;
+  final String? pendingBadge;
+
+  @override
+  Widget build(BuildContext context) {
+    final dotColor =
+        (isCompleted || isActive) ? primary : const Color(0xFFD1D5DB);
+
+    return IntrinsicHeight(
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SizedBox(
+            width: 20,
+            child: Column(
+              children: [
+                Container(
+                  width: 16,
+                  height: 16,
+                  margin: const EdgeInsets.only(top: 3),
+                  decoration: BoxDecoration(
+                    color: dotColor,
+                    shape: BoxShape.circle,
+                  ),
+                  child: isCompleted
+                      ? const Icon(Icons.check, color: Colors.white, size: 10)
+                      : isActive
+                          ? Center(
+                              child: Container(
+                                width: 6,
+                                height: 6,
+                                decoration: const BoxDecoration(
+                                  color: Colors.white,
+                                  shape: BoxShape.circle,
+                                ),
+                              ),
+                            )
+                          : null,
+                ),
+                if (!isLast)
+                  Expanded(
+                    child: Center(
+                      child: Container(
+                        width: 2,
+                        color: isCompleted
+                            ? primary
+                            : const Color(0xFFE5E7EB),
+                      ),
+                    ),
+                  ),
+              ],
+            ),
+          ),
+          const SizedBox(width: 10),
+          Expanded(
+            child: Padding(
+              padding: EdgeInsets.only(bottom: isLast ? 0 : 12),
+              child: Container(
+                padding: const EdgeInsets.fromLTRB(10, 6, 10, 8),
+                decoration: BoxDecoration(
+                  color: isActive
+                      ? primary.withValues(alpha: 0.07)
+                      : const Color(0xFFF9FAFB),
+                  borderRadius: BorderRadius.circular(8),
+                  border: Border.all(
+                    color: isActive
+                        ? primary.withValues(alpha: 0.2)
+                        : const Color(0xFFE5E7EB),
+                  ),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      date,
+                      style: TextStyle(
+                        fontSize: 11,
+                        color: isActive ? primary : _subtleText,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    const SizedBox(height: 2),
+                    Text(
+                      title,
+                      style: TextStyle(
+                        fontSize: 13,
+                        fontWeight: FontWeight.w600,
+                        color: isActive ? primary : _titleColor,
+                      ),
+                    ),
+                    if (pendingNote != null) ...[
+                      const SizedBox(height: 6),
+                      Row(
+                        children: [
+                          const Icon(Icons.schedule,
+                              size: 12, color: Ux4gPalette.orange500),
+                          const SizedBox(width: 4),
+                          Text(
+                            pendingNote!,
+                            style: const TextStyle(
+                              fontSize: 11,
+                              color: Ux4gPalette.orange500,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                          const SizedBox(width: 8),
+                          Ux4gTag(
+                            text: pendingBadge!,
+                            colorScheme: Ux4gTagColor.warning,
+                            style: Ux4gTagStyle.tonal,
+                            size: Ux4gTagSize.m,
+                          ),
+                        ],
+                      ),
+                    ],
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+// -- Journey widget -------------------------------------------------------
+
+class _AstJourney extends StatelessWidget {
+  const _AstJourney({required this.status, required this.primary});
+  final String status;
+  final Color primary;
+
+  @override
+  Widget build(BuildContext context) {
+    final isApproved = status == 'Approved';
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+        border: Border.all(color: _border),
+        borderRadius: BorderRadius.circular(10),
+      ),
+      padding: const EdgeInsets.all(14),
+      child: Ux4gJourneyTimeline(
+        activeColor: primary,
+        header: const Ux4gJourneyHeader(
+          title: 'Application journey',
+          description: 'Every step from submission to issuance',
+        ),
+        steps: [
+          const Ux4gJourneyStep(
+            state: Ux4gJourneyStepState.completed,
+            date: '07 Apr 2026, 10:24 AM',
+            title: 'Application Submitted',
+          ),
+          const Ux4gJourneyStep(
+            state: Ux4gJourneyStepState.completed,
+            date: '10 Apr 2026, 02:15 PM',
+            title: 'Documents Verified',
+          ),
+          Ux4gJourneyStep(
+            state: isApproved
+                ? Ux4gJourneyStepState.completed
+                : Ux4gJourneyStepState.current,
+            date: '11 Apr 2026, 09:03 AM',
+            title: 'Officer Review',
+          ),
+          Ux4gJourneyStep(
+            state: isApproved
+                ? Ux4gJourneyStepState.current
+                : Ux4gJourneyStepState.upcoming,
+            date: 'Est. 22 Apr 2026',
+            title: isApproved ? 'Certificate Issued' : 'Certificate Will Be Issued',
+            status: isApproved
+                ? null
+                : const Ux4gJourneyStepStatus(
+                    text: '11 days remaining',
+                    dotColor: Ux4gPalette.orange500,
+                    badgeText: 'Pending',
+                    badgeTextColor: Ux4gPalette.orange500,
+                  ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+// -- App info card --------------------------------------------------------
+
+class _AstInfoCard extends StatelessWidget {
+  const _AstInfoCard({
+    required this.status,
+    required this.tagColor,
+    required this.progressColor,
+    this.bgColor = Colors.white,
+  });
+  final String status;
+  final Ux4gTagColor tagColor;
+  final Color progressColor;
+  final Color bgColor;
+
+  @override
+  Widget build(BuildContext context) {
+    final isApproved = status == 'Approved';
+    return Container(
+      padding: const EdgeInsets.all(14),
+      decoration: BoxDecoration(
+        color: bgColor,
+        border: Border.all(color: _border),
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              const Expanded(
+                child: Text(
+                  'Income Certificate',
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w700,
+                    color: _titleColor,
+                  ),
+                ),
+              ),
+              Ux4gTag(
+                text: status,
+                colorScheme: tagColor,
+                style: Ux4gTagStyle.tonal,
+                size: Ux4gTagSize.m,
+              ),
+            ],
+          ),
+          const SizedBox(height: 4),
+          const Text(
+            'Application ID · INC-2026-MH-04127',
+            style: TextStyle(fontSize: 12, color: _subtleText),
+          ),
+          if (!isApproved) ...[
+            const SizedBox(height: 10),
+            Ux4gLinearProgress(
+              value: 0.6,
+              label: '8 days left',
+              gradientColors: [Colors.white, progressColor],
+              shape: Ux4gProgressShape.rounded,
+              height: 6,
+            ),
+          ],
+        ],
+      ),
+    );
+  }
+}
+
+// -- Bottom actions -------------------------------------------------------
+
+Widget _astActions(String status, Color primary) => switch (status) {
+      'Rejected' => Column(
+          children: [
+            Ux4gButton(
+              text: 'Reapply',
+              onPressed: () {},
+              size: Ux4gButtonSize.large,
+              width: double.infinity,
+            ),
+            const SizedBox(height: 10),
+            Center(
+              child: TextButton(
+                onPressed: () {},
+                child: Text(
+                  'Contact district office',
+                  style: TextStyle(fontSize: 14, color: primary),
+                ),
+              ),
+            ),
+          ],
+        ),
+      'Delayed' => Center(
+          child: TextButton(
+            onPressed: () {},
+            child: const Text(
+              'Escalate this application',
+              style: TextStyle(
+                fontSize: 14,
+                color: Ux4gPalette.red600,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          ),
+        ),
+      'Approved' => Column(
+          children: [
+            Ux4gButton(
+              text: 'Download Certificate (PDF)',
+              onPressed: () {},
+              size: Ux4gButtonSize.large,
+              width: double.infinity,
+            ),
+            const SizedBox(height: 10),
+            Ux4gButton(
+              text: 'Save to DigiLocker',
+              onPressed: () {},
+              variant: Ux4gButtonVariant.outline,
+              size: Ux4gButtonSize.large,
+              width: double.infinity,
+            ),
+          ],
+        ),
+      _ => const SizedBox.shrink(),
+    };
+
+// -- Flat mockup ----------------------------------------------------------
+
+class _AppStatusTrackerMockup extends StatelessWidget {
+  const _AppStatusTrackerMockup({required this.status});
+  final String status;
+
+  @override
+  Widget build(BuildContext context) {
+    final mt = Theme.of(context);
+    final primary =
+        mt.extension<Ux4gColors>()?.primary ?? mt.colorScheme.primary;
+    final tagColor = _astTagColor(status);
+    final progressColor = primary;
+    final hasActions =
+        status == 'Rejected' || status == 'Delayed' || status == 'Approved';
+
+    return _PhoneFrame(
+      child: Column(
+        children: [
+          const _BrandHeader(),
+          const Divider(height: 1, thickness: 1, color: _border),
+          Expanded(
+            child: Container(
+              color: _bg,
+              child: Column(
+                children: [
+                  Expanded(
+                    child: SingleChildScrollView(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding:
+                                const EdgeInsets.fromLTRB(16, 10, 16, 0),
+                            child: const _BackButton(),
+                          ),
+                          _AstBanner(status: status),
+                          Padding(
+                            padding:
+                                const EdgeInsets.fromLTRB(16, 12, 16, 0),
+                            child: _AstInfoCard(
+                              status: status,
+                              tagColor: tagColor,
+                              progressColor: progressColor,
+                            ),
+                          ),
+                          Padding(
+                            padding:
+                                const EdgeInsets.fromLTRB(16, 16, 16, 16),
+                            child: _AstJourney(
+                                status: status, primary: primary),
+                          ),
+                          if (hasActions)
+                            Padding(
+                              padding:
+                                  const EdgeInsets.fromLTRB(16, 0, 16, 8),
+                              child: _astActions(status, primary),
+                            ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  const _BrandFooter(),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+// -- Card-style mockup ----------------------------------------------------
+
+class _AppStatusTrackerCardMockup extends StatelessWidget {
+  const _AppStatusTrackerCardMockup({required this.status});
+  final String status;
+
+  @override
+  Widget build(BuildContext context) {
+    final mt = Theme.of(context);
+    final primary =
+        mt.extension<Ux4gColors>()?.primary ?? mt.colorScheme.primary;
+    final tagColor = _astTagColor(status);
+    final progressColor = primary;
+    final hasActions =
+        status == 'Rejected' || status == 'Delayed' || status == 'Approved';
+
+    return _PhoneFrame(
+      child: Column(
+        children: [
+          const _BrandHeader(),
+          const Divider(height: 1, thickness: 1, color: _border),
+          Expanded(
+            child: Container(
+              color: _bg,
+              child: Column(
+                children: [
+                  Expanded(
+                    child: SingleChildScrollView(
+                      padding: const EdgeInsets.fromLTRB(16, 16, 16, 16),
+                      child: Container(
+                        decoration: _suCardDeco(),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Padding(
+                              padding:
+                                  const EdgeInsets.fromLTRB(14, 10, 14, 0),
+                              child: const _BackButton(),
+                            ),
+                            _AstBanner(status: status, hPad: 14),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.fromLTRB(14, 12, 14, 0),
+                              child: _AstInfoCard(
+                                status: status,
+                                tagColor: tagColor,
+                                progressColor: progressColor,
+                                bgColor: _bg,
+                              ),
+                            ),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.fromLTRB(14, 16, 14, 16),
+                              child: _AstJourney(
+                                  status: status, primary: primary),
+                            ),
+                            if (hasActions)
+                              Padding(
+                                padding:
+                                    const EdgeInsets.fromLTRB(14, 0, 14, 14),
+                                child: _astActions(status, primary),
+                              ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  const _BrandFooter(),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+// -- Widgetbook component -------------------------------------------------
+
+const _astDefaultCode = r'''
+// Application Status Tracker — flat layout (360 × 760)
+// status: 'Under Review' | 'Action Required' | 'Rejected' | 'Delayed' | 'Approved'
+// primaryColor: Theme.of(context).extension<Ux4gColors>()?.primary
+// tagColor: neutral=UnderReview, warning=ActionRequired/Delayed, error=Rejected, success=Approved
+Container(
+  width: 360,
+  decoration: BoxDecoration(color: Colors.white),
+  child: Column(children: [
+    Ux4gAppHeader(
+      variant: Ux4gAppHeaderVariant.light,
+      title: '',
+      leadingWidgets: [
+        SvgPicture.asset('assets/national_emblem_logo.svg', height: 32),
+        Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
+        SvgPicture.asset('assets/Union.svg', height: 32),
+      ],
+      horizontalPadding: 16,
+      leadingSpacing: 12,
+    ),
+    Divider(height: 1, color: Color(0xFFE5E7EB)),
+    Expanded(child: Container(
+      color: Color(0xFFFAFAFA),
+      child: Column(children: [
+        Expanded(child: SingleChildScrollView(
+          child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+
+            // ← Back
+            Padding(
+              padding: EdgeInsets.fromLTRB(16, 10, 16, 0),
+              child: Ux4gButton(
+                text: 'Back',
+                variant: Ux4gButtonVariant.ghost,
+                size: Ux4gButtonSize.small,
+                leadingIcon: Icons.arrow_back,
+                iconSize: 18,
+                padding: EdgeInsets.symmetric(horizontal: 4, vertical: 4),
+                onPressed: () {},
+              ),
+            ),
+
+            // ── Alert banner (state-dependent) ───────────────────────────
+            // ▸ Action Required
+            Container(
+              margin: EdgeInsets.fromLTRB(16, 12, 16, 0),
+              padding: EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                color: Ux4gPalette.orange50,
+                border: Border.all(color: Ux4gPalette.orange500),
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                Icon(Icons.warning_amber_rounded,
+                    color: Ux4gPalette.orange500, size: 18),
+                SizedBox(width: 8),
+                Expanded(child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start, children: [
+                  Text(
+                    'Action required upload your income proof document',
+                    style: TextStyle(fontSize: 12, color: Ux4gPalette.orange700,
+                        fontWeight: FontWeight.w500, height: 1.4),
+                  ),
+                  SizedBox(height: 6),
+                  GestureDetector(
+                    onTap: () {},
+                    child: Text('Upload Document',
+                        style: TextStyle(fontSize: 12,
+                            color: Ux4gPalette.orange500,
+                            fontWeight: FontWeight.w600,
+                            decoration: TextDecoration.underline)),
+                  ),
+                ])),
+              ]),
+            ),
+            // ▸ Rejected: bg Color(0xFFFEF2F2), border Ux4gPalette.red100,
+            //             icon Icons.cancel_outlined, textColor Ux4gPalette.red600
+            // ▸ Delayed:  bg Ux4gPalette.cyan50, border Ux4gPalette.cyan500,
+            //             icon Icons.access_time_outlined, textColor Ux4gPalette.cyan600
+            // ▸ Under Review / Approved: SizedBox.shrink()
+
+            // ── Application info card ─────────────────────────────────────
+            Padding(
+              padding: EdgeInsets.fromLTRB(16, 12, 16, 0),
+              child: Container(
+                padding: EdgeInsets.all(14),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  border: Border.all(color: Color(0xFFE5E7EB)),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Column(crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                  Row(children: [
+                    Expanded(child: Text('Income Certificate',
+                        style: TextStyle(fontSize: 16,
+                            fontWeight: FontWeight.w700))),
+                    Ux4gTag(text: status, colorScheme: tagColor,
+                        style: Ux4gTagStyle.tonal, size: Ux4gTagSize.m),
+                  ]),
+                  SizedBox(height: 4),
+                  Text('Application ID · INC-2026-MH-04127',
+                      style: TextStyle(fontSize: 12, color: Color(0xFF6B7280))),
+                  // ▸ Progress bar hidden for Approved state
+                  if (!isApproved) ...[
+                    SizedBox(height: 10),
+                    Ux4gLinearProgress(
+                      value: 0.6,
+                      label: '8 days left',
+                      gradientColors: [Colors.white, primaryColor],
+                      shape: Ux4gProgressShape.rounded,
+                      height: 6,
+                    ),
+                  ],
+                ]),
+              ),
+            ),
+
+            // ── Application journey ───────────────────────────────────────
+            Padding(
+              padding: EdgeInsets.fromLTRB(16, 16, 16, 16),
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  border: Border.all(color: Color(0xFFE5E7EB)),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                padding: EdgeInsets.all(14),
+                child: Ux4gJourneyTimeline(
+                  activeColor: primaryColor,
+                  header: Ux4gJourneyHeader(
+                    title: 'Application journey',
+                    description: 'Every step from submission to issuance',
+                  ),
+                  steps: [
+                    Ux4gJourneyStep(
+                      state: Ux4gJourneyStepState.completed,
+                      date: '07 Apr 2026, 10:24 AM',
+                      title: 'Application Submitted',
+                    ),
+                    Ux4gJourneyStep(
+                      state: Ux4gJourneyStepState.completed,
+                      date: '10 Apr 2026, 02:15 PM',
+                      title: 'Documents Verified',
+                    ),
+                    // state: current=UnderReview/ActionRequired/Rejected/Delayed
+                    //        completed=Approved
+                    Ux4gJourneyStep(
+                      state: Ux4gJourneyStepState.current,
+                      date: '11 Apr 2026, 09:03 AM',
+                      title: 'Officer Review',
+                    ),
+                    // title: 'Certificate Issued' & state: current when Approved
+                    Ux4gJourneyStep(
+                      state: Ux4gJourneyStepState.upcoming,
+                      date: 'Est. 22 Apr 2026',
+                      title: 'Certificate Will Be Issued',
+                      status: Ux4gJourneyStepStatus(
+                        text: '11 days remaining',
+                        dotColor: Ux4gPalette.orange500,
+                        badgeText: 'Pending',
+                        badgeTextColor: Ux4gPalette.orange500,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+
+            // ── Bottom actions (state-dependent) ─────────────────────────
+            // ▸ Rejected:
+            Padding(padding: EdgeInsets.fromLTRB(16, 0, 16, 8), child: Column(children: [
+              Ux4gButton(text: 'Reapply', onPressed: () {},
+                  size: Ux4gButtonSize.large, width: double.infinity),
+              SizedBox(height: 10),
+              Center(child: TextButton(onPressed: () {},
+                  child: Text('Contact district office',
+                      style: TextStyle(fontSize: 14, color: primaryColor)))),
+            ])),
+            // ▸ Delayed:
+            // Center(child: TextButton(onPressed: () {},
+            //   child: Text('Escalate this application',
+            //     style: TextStyle(fontSize: 14, color: Ux4gPalette.red600,
+            //                      fontWeight: FontWeight.w600))))
+            // ▸ Approved:
+            // Padding(padding: EdgeInsets.fromLTRB(16, 0, 16, 8), child: Column(children: [
+            //   Ux4gButton(text: 'Download Certificate (PDF)', onPressed: () {},
+            //       size: Ux4gButtonSize.large, width: double.infinity),
+            //   SizedBox(height: 10),
+            //   Ux4gButton(text: 'Save to DigiLocker', onPressed: () {},
+            //       variant: Ux4gButtonVariant.outline,
+            //       size: Ux4gButtonSize.large, width: double.infinity),
+            // ]))
+          ]),
+        )),
+
+        // Powered by - Digital India
+        Padding(padding: EdgeInsets.only(bottom: 20, top: 8), child: Column(
+          mainAxisSize: MainAxisSize.min, children: [
+          Text('Powered by -',
+              style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF),
+                  fontWeight: FontWeight.w500)),
+          SizedBox(height: 6),
+          Image.asset('assets/digital_india_logo.png', height: 22),
+        ])),
+      ]),
+    )),
+  ]),
 )''';
+
+const _astCardCode = r'''
+// Application Status Tracker — card style (360 × 760)
+// Same inner content as flat layout but hPad=14; content sits inside a
+// white elevated card over a purple-tinted (Color(0xFFE9E5FF)) background.
+// primaryColor: Theme.of(context).extension<Ux4gColors>()?.primary
+// tagColor: neutral=UnderReview, warning=ActionRequired/Delayed, error=Rejected, success=Approved
+Container(
+  width: 360,
+  decoration: BoxDecoration(color: Colors.white),
+  child: Column(children: [
+    Ux4gAppHeader(
+      variant: Ux4gAppHeaderVariant.light,
+      title: '',
+      leadingWidgets: [
+        SvgPicture.asset('assets/national_emblem_logo.svg', height: 32),
+        Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
+        SvgPicture.asset('assets/Union.svg', height: 32),
+      ],
+      horizontalPadding: 16,
+      leadingSpacing: 12,
+    ),
+    Divider(height: 1, color: Color(0xFFE5E7EB)),
+    Expanded(child: Container(
+      color: Color(0xFFE9E5FF),
+      child: Column(children: [
+        Expanded(child: SingleChildScrollView(
+          padding: EdgeInsets.all(16),
+          child: Container(
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(16),
+              boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.04),
+                  blurRadius: 16, offset: Offset(0, 4))],
+            ),
+            child: Column(crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+
+              // ← Back
+              Padding(
+                padding: EdgeInsets.fromLTRB(14, 10, 14, 0),
+                child: Ux4gButton(
+                  text: 'Back',
+                  variant: Ux4gButtonVariant.ghost,
+                  size: Ux4gButtonSize.small,
+                  leadingIcon: Icons.arrow_back,
+                  iconSize: 18,
+                  padding: EdgeInsets.symmetric(horizontal: 4, vertical: 4),
+                  onPressed: () {},
+                ),
+              ),
+
+              // ── Alert banner (same colors/icons as flat layout) ──────────
+              // ▸ Action Required: bg Ux4gPalette.orange50, border Ux4gPalette.orange500
+              //   icon Icons.warning_amber_rounded, textColor Ux4gPalette.orange700
+              // ▸ Rejected: bg Color(0xFFFEF2F2), border Ux4gPalette.red100,
+              //   icon Icons.cancel_outlined, textColor Ux4gPalette.red600
+              // ▸ Delayed: bg Ux4gPalette.cyan50, border Ux4gPalette.cyan500,
+              //   icon Icons.access_time_outlined, textColor Ux4gPalette.cyan600
+              // ▸ Under Review / Approved: SizedBox.shrink()
+
+              // ── Application info card ──────────────────────────────────
+              Padding(
+                padding: EdgeInsets.fromLTRB(14, 12, 14, 0),
+                child: Container(
+                  padding: EdgeInsets.all(14),
+                  decoration: BoxDecoration(
+                    color: Color(0xFFFAFAFA),
+                    border: Border.all(color: Color(0xFFE5E7EB)),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Column(crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                    Row(children: [
+                      Expanded(child: Text('Income Certificate',
+                          style: TextStyle(fontSize: 16,
+                              fontWeight: FontWeight.w700))),
+                      Ux4gTag(text: status, colorScheme: tagColor,
+                          style: Ux4gTagStyle.tonal, size: Ux4gTagSize.m),
+                    ]),
+                    SizedBox(height: 4),
+                    Text('Application ID · INC-2026-MH-04127',
+                        style: TextStyle(fontSize: 12,
+                            color: Color(0xFF6B7280))),
+                    // ▸ Progress bar hidden for Approved state
+                    if (!isApproved) ...[
+                      SizedBox(height: 10),
+                      Ux4gLinearProgress(
+                        value: 0.6,
+                        label: '8 days left',
+                        gradientColors: [Colors.white, primaryColor],
+                        shape: Ux4gProgressShape.rounded,
+                        height: 6,
+                      ),
+                    ],
+                  ]),
+                ),
+              ),
+
+              // ── Application journey ───────────────────────────────────
+              Padding(
+                padding: EdgeInsets.fromLTRB(14, 16, 14, 16),
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    border: Border.all(color: Color(0xFFE5E7EB)),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  padding: EdgeInsets.all(14),
+                  child: Ux4gJourneyTimeline(
+                    activeColor: primaryColor,
+                    header: Ux4gJourneyHeader(
+                      title: 'Application journey',
+                      description: 'Every step from submission to issuance',
+                    ),
+                    steps: [
+                      Ux4gJourneyStep(
+                        state: Ux4gJourneyStepState.completed,
+                        date: '07 Apr 2026, 10:24 AM',
+                        title: 'Application Submitted',
+                      ),
+                      Ux4gJourneyStep(
+                        state: Ux4gJourneyStepState.completed,
+                        date: '10 Apr 2026, 02:15 PM',
+                        title: 'Documents Verified',
+                      ),
+                      // state: current=UnderReview/ActionRequired/Rejected/Delayed
+                      //        completed=Approved
+                      Ux4gJourneyStep(
+                        state: Ux4gJourneyStepState.current,
+                        date: '11 Apr 2026, 09:03 AM',
+                        title: 'Officer Review',
+                      ),
+                      // title: 'Certificate Issued' & state: current when Approved
+                      Ux4gJourneyStep(
+                        state: Ux4gJourneyStepState.upcoming,
+                        date: 'Est. 22 Apr 2026',
+                        title: 'Certificate Will Be Issued',
+                        status: Ux4gJourneyStepStatus(
+                          text: '11 days remaining',
+                          dotColor: Ux4gPalette.orange500,
+                          badgeText: 'Pending',
+                          badgeTextColor: Ux4gPalette.orange500,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+
+              // ── Bottom actions (state-dependent) ──────────────────────
+              // ▸ Rejected:
+              Padding(padding: EdgeInsets.fromLTRB(14, 0, 14, 14),
+                  child: Column(children: [
+                Ux4gButton(text: 'Reapply', onPressed: () {},
+                    size: Ux4gButtonSize.large, width: double.infinity),
+                SizedBox(height: 10),
+                Center(child: TextButton(onPressed: () {},
+                    child: Text('Contact district office',
+                        style: TextStyle(
+                            fontSize: 14, color: primaryColor)))),
+              ])),
+              // ▸ Delayed:
+              // Center(child: TextButton(onPressed: () {},
+              //   child: Text('Escalate this application',
+              //     style: TextStyle(fontSize: 14, color: Ux4gPalette.red600,
+              //                      fontWeight: FontWeight.w600))))
+              // ▸ Approved:
+              // Padding(padding: EdgeInsets.fromLTRB(14, 0, 14, 14),
+              //   child: Column(children: [
+              //     Ux4gButton(text: 'Download Certificate (PDF)',
+              //         onPressed: () {},
+              //         size: Ux4gButtonSize.large, width: double.infinity),
+              //     SizedBox(height: 10),
+              //     Ux4gButton(text: 'Save to DigiLocker', onPressed: () {},
+              //         variant: Ux4gButtonVariant.outline,
+              //         size: Ux4gButtonSize.large, width: double.infinity),
+              //   ]))
+            ]),
+          ),
+        )),
+
+        // Powered by - Digital India
+        Padding(padding: EdgeInsets.only(bottom: 20, top: 8), child: Column(
+          mainAxisSize: MainAxisSize.min, children: [
+          Text('Powered by -',
+              style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF),
+                  fontWeight: FontWeight.w500)),
+          SizedBox(height: 6),
+          Image.asset('assets/digital_india_logo.png', height: 22),
+        ])),
+      ]),
+    )),
+  ]),
+)''';
+
+final appStatusTrackerComponent = WidgetbookComponent(
+  name: 'Application Status Tracker',
+  useCases: [
+    WidgetbookUseCase(
+      name: 'Default',
+      builder: (context) {
+        final status = context.knobs.list(
+          label: 'Status',
+          options: const [
+            'Under Review',
+            'Action Required',
+            'Rejected',
+            'Delayed',
+            'Approved',
+          ],
+          initialOption: 'Under Review',
+          description: 'Switch between the 5 application states.',
+        );
+        final variant = context.knobs.list(
+          label: 'Variant',
+          options: const ['Default', 'Card style'],
+          initialOption: 'Default',
+          description: 'Toggle between flat and card-style layouts.',
+        );
+        return ComponentDocs(
+          name: 'Application Status Tracker',
+          description:
+              'Tracks the end-to-end lifecycle of a government service '
+              'application through five states: Under Review, Action '
+              'Required, Rejected, Delayed, and Approved. Use the '
+              '[Status] knob to preview each state and [Variant] for '
+              'card layout.',
+          code: variant == 'Card style'
+              ? _astCardCode
+              : _astDefaultCode,
+          center: true,
+          child: variant == 'Card style'
+              ? _AppStatusTrackerCardMockup(status: status)
+              : _AppStatusTrackerMockup(status: status),
+        );
+      },
+    ),
+  ],
+);
+
+// ============================================================
+// Grievance Status Tracker Pattern
+// ============================================================
+
+// Status → Ux4gTag colour mapping
+Ux4gTagColor _gstTagColor(String status) => switch (status) {
+      'Resolved' => Ux4gTagColor.success,
+      'Assigned' => Ux4gTagColor.brand,
+      'Escalated' => Ux4gTagColor.warning,
+      'Reopened' => Ux4gTagColor.warning,
+      _ => Ux4gTagColor.warning, // In Progress
+    };
+
+Widget _gstTagIcon(String status) {
+  final (icon, color) = switch (status) {
+    'Resolved' => (Icons.check_circle_outline, Ux4gPalette.green600),
+    'Assigned' => (Icons.assignment_ind_outlined, Ux4gPalette.primary600),
+    'Escalated' => (Icons.warning_amber_rounded, Ux4gPalette.orange700),
+    'Reopened' => (Icons.replay_rounded, Ux4gPalette.orange700),
+    _ => (Icons.assignment_outlined, Ux4gPalette.orange700), // In Progress
+  };
+  return Icon(icon, size: 13, color: color);
+}
+
+// ── Purple filled app-header with back button ───────────────────────────
+class _GstHeader extends StatelessWidget {
+  const _GstHeader();
+
+  @override
+  Widget build(BuildContext context) {
+    return Ux4gAppHeader(
+      variant: Ux4gAppHeaderVariant.filled,
+      title: 'Application Status',
+      showBackButton: true,
+      onBackPressed: () {},
+      horizontalPadding: 16,
+    );
+  }
+}
+
+// ── Top info card: title + status badge + grievance ID + progress bar ───
+class _GstInfoCard extends StatelessWidget {
+  const _GstInfoCard({
+    required this.status,
+    required this.tagColor,
+    required this.primary,
+  });
+
+  final String status;
+  final Ux4gTagColor tagColor;
+  final Color primary;
+
+  @override
+  Widget build(BuildContext context) {
+    final isResolved = status == 'Resolved';
+    return Container(
+      margin: const EdgeInsets.fromLTRB(16, 12, 16, 0),
+      padding: const EdgeInsets.all(14),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        border: Border.all(color: const Color(0xFFEEEEF0)),
+        borderRadius: BorderRadius.circular(10),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withValues(alpha: 0.06),
+            blurRadius: 14,
+            offset: const Offset(0, 4),
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Expanded(
+                child: Text(
+                  'Delay in certificate issuance',
+                  style: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.w700,
+                    color: _titleColor,
+                  ),
+                ),
+              ),
+              const SizedBox(width: 8),
+              Ux4gTag(
+                text: status,
+                colorScheme: tagColor,
+                style: Ux4gTagStyle.tonal,
+                size: Ux4gTagSize.m,
+                shape: Ux4gTagShape.rectangular,
+                leadingContent: _gstTagIcon(status),
+              ),
+            ],
+          ),
+          const SizedBox(height: 4),
+          const Text(
+            'Grievance ID · GRV-2026-MH-04127',
+            style: TextStyle(fontSize: 12, color: _subtleText),
+          ),
+          if (!isResolved) ...[
+            const SizedBox(height: 10),
+            const Text(
+              '8 days left',
+              style: TextStyle(
+                fontSize: 12,
+                fontWeight: FontWeight.w700,
+                color: _titleColor,
+              ),
+            ),
+            const SizedBox(height: 6),
+            Ux4gLinearProgress(
+              value: 0.55,
+              gradientColors: const [
+                Color(0xFFFFCC80), // light amber
+                Color(0xFFFF8F00), // deep orange
+              ],
+              trackColor: const Color(0xFFEEEEEE),
+              shape: Ux4gProgressShape.rounded,
+              height: 8,
+            ),
+          ],
+        ],
+      ),
+    );
+  }
+}
+
+// ── Grievance details table (In Progress state) ─────────────────────────
+class _GstDetailTable extends StatelessWidget {
+  const _GstDetailTable();
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.fromLTRB(16, 12, 16, 0),
+      padding: const EdgeInsets.all(14),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        border: Border.all(color: const Color(0xFFEEEEF0)),
+        borderRadius: BorderRadius.circular(10),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withValues(alpha: 0.06),
+            blurRadius: 14,
+            offset: const Offset(0, 4),
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Text(
+            'Grievance details',
+            style: TextStyle(
+              fontSize: 13,
+              fontWeight: FontWeight.w700,
+              color: _titleColor,
+            ),
+          ),
+          const SizedBox(height: 10),
+          const _GstDetailRow(
+              label: 'Category', value: 'Certificate Issuance'),
+          const _GstDetailRow(label: 'Lodged on', value: '02 Apr 2026'),
+          const _GstDetailRow(
+              label: 'Against', value: 'Revenue Dept, Pune'),
+          const _GstDetailRow(
+              label: 'Current stage',
+              value: 'District Officer',
+              isLast: true),
+        ],
+      ),
+    );
+  }
+}
+
+class _GstDetailRow extends StatelessWidget {
+  const _GstDetailRow({
+    required this.label,
+    required this.value,
+    this.isLast = false,
+  });
+
+  final String label;
+  final String value;
+  final bool isLast;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.only(bottom: isLast ? 0 : 8),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SizedBox(
+            width: 110,
+            child: Text(
+              label,
+              style: const TextStyle(fontSize: 12, color: _subtleText),
+            ),
+          ),
+          Expanded(
+            child: Text(
+              value,
+              textAlign: TextAlign.right,
+              style: const TextStyle(
+                fontSize: 12,
+                fontWeight: FontWeight.w600,
+                color: _titleColor,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+// ── Assigned officer card ────────────────────────────────────────────────
+class _GstAssignedOfficer extends StatelessWidget {
+  const _GstAssignedOfficer();
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.fromLTRB(16, 12, 16, 0),
+      padding: const EdgeInsets.all(14),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        border: Border.all(color: const Color(0xFFEEEEF0)),
+        borderRadius: BorderRadius.circular(10),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withValues(alpha: 0.06),
+            blurRadius: 14,
+            offset: const Offset(0, 4),
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Text(
+            'Assigned officer',
+            style: TextStyle(
+              fontSize: 13,
+              fontWeight: FontWeight.w700,
+              color: _titleColor,
+            ),
+          ),
+          const SizedBox(height: 8),
+          const Text(
+            'District Grievance Officer',
+            style: TextStyle(
+              fontSize: 15,
+              fontWeight: FontWeight.w700,
+              color: _titleColor,
+            ),
+          ),
+          const SizedBox(height: 2),
+          const Text(
+            'Revenue Department, Pune',
+            style: TextStyle(fontSize: 12, color: _subtleText),
+          ),
+          const SizedBox(height: 10),
+          Row(
+            children: [
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: const [
+                    Text('Office contact',
+                        style:
+                            TextStyle(fontSize: 11, color: _subtleText)),
+                    SizedBox(height: 2),
+                    Text(
+                      '020-2612-XXXX',
+                      style: TextStyle(
+                        fontSize: 13,
+                        fontWeight: FontWeight.w600,
+                        color: _titleColor,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: const [
+                    Text('Handling since',
+                        style:
+                            TextStyle(fontSize: 11, color: _subtleText)),
+                    SizedBox(height: 2),
+                    Text(
+                      '08 Apr 2026',
+                      style: TextStyle(
+                        fontSize: 13,
+                        fontWeight: FontWeight.w600,
+                        color: _titleColor,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 10),
+          const Text(
+            'Officers are identified by designation only — never by personal name.',
+            style: TextStyle(
+              fontSize: 11,
+              color: _mutedText,
+              fontStyle: FontStyle.italic,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+// ── Escalation path card (Escalated state) ──────────────────────────────
+class _GstEscalationPath extends StatelessWidget {
+  const _GstEscalationPath();
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.fromLTRB(16, 12, 16, 0),
+      padding: const EdgeInsets.all(14),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        border: Border.all(color: const Color(0xFFEEEEF0)),
+        borderRadius: BorderRadius.circular(10),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withValues(alpha: 0.06),
+            blurRadius: 14,
+            offset: const Offset(0, 4),
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Text(
+            'Escalation path',
+            style: TextStyle(
+              fontSize: 13,
+              fontWeight: FontWeight.w700,
+              color: _titleColor,
+            ),
+          ),
+          const SizedBox(height: 4),
+          const Text(
+            'Your grievance moves up a level if it is not resolved within the SLA.',
+            style: TextStyle(fontSize: 11, color: _subtleText, height: 1.4),
+          ),
+          const SizedBox(height: 12),
+          const _GstEscalationLevel(
+            level: 'Level 1 - District Grievance Officer',
+            subtitle: 'Revenue Dept, Pune · Active since 10 Apr 2026',
+            isActive: false,
+          ),
+          const SizedBox(height: 8),
+          const _GstEscalationLevel(
+            level: 'Level 2 - State Appellate Authority',
+            subtitle: 'Pending — escalates after SLA breach',
+            isActive: false,
+          ),
+          const SizedBox(height: 8),
+          const _GstEscalationLevel(
+            level: 'Level 3 · CPGRAMS (National portal)',
+            subtitle: 'Pending — final escalation level',
+            isActive: false,
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _GstEscalationLevel extends StatelessWidget {
+  const _GstEscalationLevel({
+    required this.level,
+    required this.subtitle,
+    required this.isActive,
+  });
+
+  final String level;
+  final String subtitle;
+  final bool isActive;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(10),
+      decoration: BoxDecoration(
+        color: isActive ? Ux4gPalette.orange50 : const Color(0xFFF9FAFB),
+        border: Border.all(
+          color:
+              isActive ? Ux4gPalette.orange500 : const Color(0xFFE5E7EB),
+        ),
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  level,
+                  style: TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w600,
+                    color: isActive ? Ux4gPalette.orange700 : _subtleText,
+                  ),
+                ),
+                const SizedBox(height: 3),
+                Text(
+                  subtitle,
+                  style: TextStyle(
+                    fontSize: 11,
+                    color: isActive ? Ux4gPalette.orange500 : _mutedText,
+                    height: 1.4,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          if (isActive)
+            const Icon(Icons.circle, size: 10, color: Ux4gPalette.orange500),
+        ],
+      ),
+    );
+  }
+}
+
+// ── Resolution + satisfaction survey (Resolved state) ───────────────────
+class _GstResolutionSection extends StatelessWidget {
+  const _GstResolutionSection();
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        // Green resolution banner
+        Container(
+          margin: const EdgeInsets.fromLTRB(16, 12, 16, 0),
+          padding:
+              const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+          decoration: BoxDecoration(
+            color: Ux4gPalette.green50,
+            border: Border.all(color: Ux4gPalette.green500),
+            borderRadius: BorderRadius.circular(10),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withValues(alpha: 0.06),
+                blurRadius: 14,
+                offset: const Offset(0, 4),
+              ),
+            ],
+          ),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: const [
+              Icon(Icons.check_circle_outline,
+                  color: Ux4gPalette.green600, size: 20),
+              SizedBox(width: 10),
+              Expanded(
+                child: Text(
+                  'Grievance resolved on 14 Apr 2026 – certificate issued',
+                  style: TextStyle(
+                    fontSize: 13,
+                    fontWeight: FontWeight.w600,
+                    color: Ux4gPalette.green700,
+                    height: 1.4,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+        // Satisfaction survey card
+        Container(
+          margin: const EdgeInsets.fromLTRB(16, 12, 16, 0),
+          padding: const EdgeInsets.all(14),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            border: Border.all(color: _border),
+            borderRadius: BorderRadius.circular(10),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text(
+                'Are you satisfied with the resolution?',
+                style: TextStyle(
+                  fontSize: 13,
+                  fontWeight: FontWeight.w600,
+                  color: _titleColor,
+                ),
+              ),
+              const SizedBox(height: 12),
+              Ux4gButton(
+                text: 'Yes, satisfied',
+                onPressed: () {},
+                variant: Ux4gButtonVariant.outline,
+                size: Ux4gButtonSize.medium,
+                width: double.infinity,
+              ),
+              const SizedBox(height: 8),
+              Ux4gButton(
+                text: 'No, reopen',
+                onPressed: () {},
+                variant: Ux4gButtonVariant.outline,
+                size: Ux4gButtonSize.medium,
+                width: double.infinity,
+              ),
+              const SizedBox(height: 10),
+              const Text(
+                'You have 30 days from the resolution date to reopen this complaint.',
+                style: TextStyle(
+                  fontSize: 11,
+                  color: _mutedText,
+                  height: 1.4,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+// ── Reopen complaint form (Reopened state) ───────────────────────────────
+class _GstReopenForm extends StatelessWidget {
+  const _GstReopenForm({required this.primary});
+
+  final Color primary;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.fromLTRB(16, 12, 16, 0),
+      padding: const EdgeInsets.all(14),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        border: Border.all(color: const Color(0xFFEEEEF0)),
+        borderRadius: BorderRadius.circular(10),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withValues(alpha: 0.06),
+            blurRadius: 14,
+            offset: const Offset(0, 4),
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Text(
+            'Reopen your complaint',
+            style: TextStyle(
+              fontSize: 15,
+              fontWeight: FontWeight.w700,
+              color: _titleColor,
+            ),
+          ),
+          const SizedBox(height: 14),
+          const Text(
+            'Why are you not satisfied?',
+            style: TextStyle(
+              fontSize: 13,
+              fontWeight: FontWeight.w600,
+              color: _titleColor,
+            ),
+          ),
+          const SizedBox(height: 6),
+          // Dropdown mock
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+            decoration: BoxDecoration(
+              border: Border.all(color: _border),
+              borderRadius: BorderRadius.circular(8),
+              color: Colors.white,
+            ),
+            child: Row(
+              children: const [
+                Expanded(
+                  child: Text(
+                    'Certificate still not issued',
+                    style: TextStyle(fontSize: 13, color: _titleColor),
+                  ),
+                ),
+                Icon(Icons.keyboard_arrow_down,
+                    size: 20, color: _subtleText),
+              ],
+            ),
+          ),
+          const SizedBox(height: 14),
+          const Text(
+            'Additional details',
+            style: TextStyle(
+              fontSize: 13,
+              fontWeight: FontWeight.w600,
+              color: _titleColor,
+            ),
+          ),
+          const SizedBox(height: 6),
+          Container(
+            height: 80,
+            padding: const EdgeInsets.all(12),
+            decoration: BoxDecoration(
+              border: Border.all(color: _border),
+              borderRadius: BorderRadius.circular(8),
+              color: Colors.white,
+            ),
+            child: const Align(
+              alignment: Alignment.topLeft,
+              child: Text(
+                'Add any details that will help us re-examine your grievance.',
+                style:
+                    TextStyle(fontSize: 12, color: _mutedText, height: 1.4),
+              ),
+            ),
+          ),
+          const SizedBox(height: 16),
+          Ux4gButton(
+            text: 'Reopen complaint',
+            onPressed: () {},
+            size: Ux4gButtonSize.large,
+            width: double.infinity,
+          ),
+          const SizedBox(height: 8),
+          Center(
+            child: TextButton(
+              onPressed: () {},
+              child: Text(
+                'Cancel',
+                style: TextStyle(fontSize: 14, color: primary),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+// ── Grievance journey timeline ───────────────────────────────────────────
+class _GstJourney extends StatelessWidget {
+  const _GstJourney({required this.status, required this.primary});
+
+  final String status;
+  final Color primary;
+
+  @override
+  Widget build(BuildContext context) {
+    final assignedOrLater = status == 'Assigned' ||
+        status == 'Escalated' ||
+        status == 'Resolved' ||
+        status == 'Reopened';
+    final underReviewOrLater = status == 'Escalated' ||
+        status == 'Resolved' ||
+        status == 'Reopened';
+    final escalatedOrLater =
+        status == 'Resolved' || status == 'Reopened' || status == 'Escalated';
+    final isResolved = status == 'Resolved' || status == 'Reopened';
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Text(
+          'Grievance journey',
+          style: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.w700,
+            color: _titleColor,
+          ),
+        ),
+        const SizedBox(height: 4),
+        const Text(
+          'Every update from lodging to resolution',
+          style: TextStyle(fontSize: 12, color: _subtleText, height: 1.4),
+        ),
+        const SizedBox(height: 16),
+        _AstTimelineStep(
+          date: '02 Apr 2026',
+          title: 'Grievance lodged',
+          isCompleted: true,
+          isActive: false,
+          isLast: false,
+          primary: primary,
+        ),
+        _AstTimelineStep(
+          date: '05 Apr 2026',
+          title: 'Assigned to grievance officer',
+          isCompleted: assignedOrLater,
+          isActive: !assignedOrLater,
+          isLast: false,
+          primary: primary,
+        ),
+        _AstTimelineStep(
+          date: assignedOrLater ? '08 Apr 2026' : 'Est. 08 Apr 2026',
+          title: 'Under review by officer',
+          isCompleted: underReviewOrLater,
+          isActive: assignedOrLater && !underReviewOrLater,
+          isLast: false,
+          primary: primary,
+        ),
+        _AstTimelineStep(
+          date: escalatedOrLater ? '10 Apr 2026' : 'Est. 10 Apr 2026',
+          title: 'Escalated to District Officer',
+          isCompleted: isResolved,
+          isActive: escalatedOrLater && !isResolved,
+          isLast: false,
+          primary: primary,
+        ),
+        _AstTimelineStep(
+          date: isResolved ? '14 Apr 2026' : 'Est. 14 Apr 2026',
+          title: 'Resolution issued',
+          isCompleted: isResolved,
+          isActive: false,
+          isLast: true,
+          primary: primary,
+        ),
+      ],
+    );
+  }
+}
+
+// ── Main phone mockup ────────────────────────────────────────────────────
+class _GstMockup extends StatelessWidget {
+  const _GstMockup({required this.status});
+
+  final String status;
+
+  @override
+  Widget build(BuildContext context) {
+    final mt = Theme.of(context);
+    final primary =
+        mt.extension<Ux4gColors>()?.primary ?? mt.colorScheme.primary;
+    final tagColor = _gstTagColor(status);
+    final isReopened = status == 'Reopened';
+
+    return _PhoneFrame(
+      child: Column(
+        children: [
+          const _GstHeader(),
+          Expanded(
+            child: Container(
+              color: _bg,
+              child: Column(
+                children: [
+                  Expanded(
+                    child: SingleChildScrollView(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          _GstInfoCard(
+                            status: status,
+                            tagColor: tagColor,
+                            primary: primary,
+                          ),
+                          if (status == 'In Progress')
+                            const _GstDetailTable(),
+                          if (status == 'Assigned')
+                            const _GstAssignedOfficer(),
+                          if (status == 'Escalated')
+                            const _GstEscalationPath(),
+                          if (status == 'Resolved')
+                            const _GstResolutionSection(),
+                          if (isReopened) _GstReopenForm(primary: primary),
+                          // Journey only shows from Assigned onwards
+                          if (!isReopened && status != 'In Progress')
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(
+                                  16, 16, 16, 16),
+                              child: _GstJourney(
+                                  status: status, primary: primary),
+                            ),
+                          const SizedBox(height: 16),
+                        ],
+                      ),
+                    ),
+                  ),
+                  const _BrandFooter(),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+// ── Code snippet ─────────────────────────────────────────────────────────
+const _gstCode = r'''
+// Grievance Status Tracker — mobile (360 × 760)
+// status: 'In Progress' | 'Assigned' | 'Escalated' | 'Resolved' | 'Reopened'
+Column(children: [
+  Ux4gAppHeader(
+    variant: Ux4gAppHeaderVariant.filled,   // purple header, white text
+    title: 'Application Status',
+    showBackButton: true,
+    onBackPressed: () {},
+    horizontalPadding: 16,
+  ),
+  Expanded(child: Container(
+    color: Color(0xFFFAFAFA),
+    child: SingleChildScrollView(child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        // ── Info card ────────────────────────────────────────────────
+        Container(
+          margin: EdgeInsets.fromLTRB(16, 12, 16, 0),
+          padding: EdgeInsets.all(14),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            border: Border.all(color: Color(0xFFE5E7EB)),
+            borderRadius: BorderRadius.circular(10),
+          ),
+          child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
+              Expanded(child: Text('Delay in certificate issuance',
+                style: TextStyle(fontSize: 15, fontWeight: FontWeight.w700))),
+              SizedBox(width: 8),
+              Ux4gTag(text: status, colorScheme: tagColor,
+                style: Ux4gTagStyle.tonal, size: Ux4gTagSize.m),
+            ]),
+            SizedBox(height: 4),
+            Text('Grievance ID · GRV-2026-MH-04127',
+              style: TextStyle(fontSize: 12, color: Color(0xFF6B7280))),
+            SizedBox(height: 10),
+            Ux4gLinearProgress(value: 0.55, label: '8 days left',
+              gradientColors: [Colors.white, primaryColor],
+              shape: Ux4gProgressShape.rounded, height: 6),
+          ]),
+        ),
+
+        // ── State-specific content ────────────────────────────────────
+        // In Progress  → Grievance details table
+        // Assigned     → Assigned officer card
+        // Escalated    → Escalation path (3 levels)
+        // Resolved     → Green banner + satisfaction survey
+        // Reopened     → Reopen complaint form
+
+        // ── Grievance journey timeline ────────────────────────────────
+        Padding(
+          padding: EdgeInsets.fromLTRB(16, 16, 16, 16),
+          child: Ux4gJourneyTimeline(
+            activeColor: primaryColor,
+            header: Ux4gJourneyHeader(
+              title: 'Grievance journey',
+              description: 'Every update from lodging to resolution',
+            ),
+            steps: [
+              Ux4gJourneyStep(state: Ux4gJourneyStepState.completed,
+                date: '02 Apr 2026', title: 'Grievance lodged'),
+              Ux4gJourneyStep(state: Ux4gJourneyStepState.current,
+                date: '05 Apr 2026', title: 'Assigned to grievance officer'),
+              Ux4gJourneyStep(state: Ux4gJourneyStepState.upcoming,
+                date: 'Est. 08 Apr 2026', title: 'Under review by officer'),
+              Ux4gJourneyStep(state: Ux4gJourneyStepState.upcoming,
+                date: 'Est. 10 Apr 2026', title: 'Escalated to District Officer'),
+              Ux4gJourneyStep(state: Ux4gJourneyStepState.upcoming,
+                date: 'Est. 14 Apr 2026', title: 'Resolution issued'),
+            ],
+          ),
+        ),
+      ],
+    )),
+  )),
+])
+''';
+
+// ── Widgetbook component ─────────────────────────────────────────────────
+final grievanceStatusTrackerComponent = WidgetbookComponent(
+  name: 'Grievance Status Tracker',
+  useCases: [
+    WidgetbookUseCase(
+      name: 'Default',
+      builder: (context) {
+        final status = context.knobs.list(
+          label: 'Status',
+          options: const [
+            'In Progress',
+            'Assigned',
+            'Escalated',
+            'Resolved',
+            'Reopened',
+          ],
+          initialOption: 'In Progress',
+          description: 'Switch between the 5 grievance lifecycle states.',
+        );
+        return ComponentDocs(
+          name: 'Grievance Status Tracker',
+          description:
+              'Tracks the end-to-end lifecycle of a citizen grievance '
+              'through five states: In Progress, Assigned, Escalated, '
+              'Resolved, and Reopened. Features a filled purple header, '
+              'Ux4gTag status badges, Ux4gLinearProgress SLA indicator, '
+              'and Ux4gJourneyTimeline. Use the [Status] knob to preview '
+              'each state. Mobile-sized layout (360 × 760).',
+          code: _gstCode,
+          center: true,
+          child: _GstMockup(status: status),
+        );
+      },
+    ),
+  ],
+);

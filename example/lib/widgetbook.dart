@@ -226,6 +226,47 @@ class UX4GWidgetbook extends StatelessWidget {
                     signUpStep5Component,
                   ],
                 ),
+                WidgetbookFolder(
+                  name: 'Forgot Password & Account Recovery',
+                  children: [
+                    fpStep1Component,
+                    fpStep2Component,
+                    fpStep3Component,
+                    fpStep4Component,
+                    fpStep5Component,
+                  ],
+                ),
+                WidgetbookFolder(
+                  name: 'Notifications',
+                  children: [
+                    notificationComponent,
+                    reminderAlertsComponent,
+                    notificationPreferencesComponent,
+                  ],
+                ),
+              ],
+            ),
+            WidgetbookFolder(
+              name: 'Payment and Confirmation',
+              children: [
+                paymentSummaryComponent,
+                paymentMethodComponent,
+                paymentProcessingComponent,
+                paymentSuccessComponent,
+                paymentFailedComponent,
+                feeWaivedComponent,
+              ],
+            ),
+            WidgetbookFolder(
+              name: 'Application Status Tracker',
+              children: [
+                appStatusTrackerComponent,
+              ],
+            ),
+            WidgetbookFolder(
+              name: 'Grievance Status Tracker',
+              children: [
+                grievanceStatusTrackerComponent,
               ],
             ),
           ],
