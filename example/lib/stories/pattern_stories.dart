@@ -1,4 +1,4 @@
-﻿import 'dart:async';
+import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -19265,55 +19265,341 @@ class _PaymentSummaryCardMockup extends StatelessWidget {
 }
 
 const _paymentSummaryCode = r'''
-// Payment — fee breakdown (360 × 760)
-Column(children: [
-  Ux4gAppHeader(...),
-  Ux4gStepper(
-    totalSteps: 5, currentStep: 5,
-    orientation: StepperOrientation.horizontal,
-    steps: [
-      Ux4gStepItem(title: 'Review'), Ux4gStepItem(title: 'Details'),
-      Ux4gStepItem(title: 'Documents'), Ux4gStepItem(title: 'Preview'),
-      Ux4gStepItem(title: 'Payment'),
+Scaffold(
+  backgroundColor: Color(0xFFFAFAFA),
+  body: Column(
+    children: [
+      // Government header
+      Ux4gAppHeader(
+        variant: Ux4gAppHeaderVariant.light,
+        title: '',
+        leadingWidgets: [
+          SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
+          Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
+          SvgPicture.asset('assets/Union.svg', height: 32),
+        ],
+        horizontalPadding: 16,
+        leadingSpacing: 12,
+      ),
+      Divider(height: 1, thickness: 1, color: Color(0xFFE5E7EB)),
+      // Step bar (5 steps, current = 5 "Payment")
+      Padding(
+        padding: EdgeInsets.fromLTRB(16, 10, 16, 10),
+        child: Ux4gStepper(
+          totalSteps: 5,
+          currentStep: 5,
+          orientation: StepperOrientation.horizontal,
+          steps: [
+            Ux4gStepItem(title: 'Review'),
+            Ux4gStepItem(title: 'Details'),
+            Ux4gStepItem(title: 'Documents'),
+            Ux4gStepItem(title: 'Preview'),
+            Ux4gStepItem(title: 'Payment'),
+          ],
+        ),
+      ),
+      Divider(height: 1, thickness: 1, color: Color(0xFFE5E7EB)),
+      Expanded(
+        child: Container(
+          color: Color(0xFFFAFAFA),
+          child: Column(
+            children: [
+              Expanded(
+                child: SingleChildScrollView(
+                  padding: EdgeInsets.fromLTRB(16, 20, 16, 16),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Payment',
+                        style: TextStyle(
+                          fontSize: 22,
+                          fontWeight: FontWeight.w800,
+                          color: Color(0xFF111827),
+                          height: 1.2,
+                          letterSpacing: -0.3,
+                        ),
+                      ),
+                      SizedBox(height: 4),
+                      Text(
+                        'Income Certificate — Application #INC-2024-00842',
+                        style: TextStyle(
+                          fontSize: 13,
+                          color: Color(0xFF6B7280),
+                          height: 1.4,
+                        ),
+                      ),
+                      SizedBox(height: 20),
+                      // Fee breakdown table
+                      Container(
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Color(0xFFE5E7EB)),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        clipBehavior: Clip.hardEdge,
+                        child: Column(
+                          children: [
+                            _feeRow('Application fee', 'Rs 30.00'),
+                            Divider(height: 1, thickness: 1, color: Color(0xFFE5E7EB)),
+                            _feeRow('Processing charge', 'Rs 5.00'),
+                            Divider(height: 1, thickness: 1, color: Color(0xFFE5E7EB)),
+                            _feeRow('GST 18%', 'Rs 6.30'),
+                            Divider(height: 1, thickness: 1, color: Color(0xFFE5E7EB)),
+                            _feeRow('Total', 'Rs 41.30', bold: true),
+                          ],
+                        ),
+                      ),
+                      SizedBox(height: 16),
+                      Ux4gStatusBanner(
+                        variant: Ux4gBannerVariant.infoLight,
+                        title:
+                            'Secure payment via PayGov. Your payment '
+                            'information is protected by 256-bit encryption.',
+                        margin: EdgeInsets.zero,
+                        padding: EdgeInsets.fromLTRB(12, 10, 12, 10),
+                      ),
+                      SizedBox(height: 20),
+                      Ux4gButton(
+                        text: 'Continue to payment',
+                        onPressed: () {},
+                        size: Ux4gButtonSize.large,
+                        width: double.infinity,
+                      ),
+                      SizedBox(height: 12),
+                      Center(
+                        child: TextButton(
+                          onPressed: () {},
+                          child: Text(
+                            'Back to review',
+                            style: TextStyle(fontSize: 14, color: primary),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              // Footer
+              Padding(
+                padding: EdgeInsets.only(bottom: 20, top: 8),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text('Powered by -',
+                        style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF),
+                            fontWeight: FontWeight.w500)),
+                    SizedBox(height: 6),
+                    Image.asset('assets/digital_india_logo.png', height: 22),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
     ],
   ),
-  Divider(height: 1, color: Color(0xFFE5E7EB)),
-  Expanded(child: SingleChildScrollView(
-    padding: EdgeInsets.fromLTRB(16, 20, 16, 16),
-    child: Column(children: [
-      Text('Payment', style: TextStyle(fontSize: 22, fontWeight: FontWeight.w800)),
-      Text('Income Certificate — Application #INC-2024-00842'),
-      // Fee table (Application fee / Processing charge / GST 18% / Total)
-      Ux4gStatusBanner(
-        variant: Ux4gBannerVariant.infoLight,
-        title: 'Secure payment via PayGov...'),
-      Ux4gButton(text: 'Continue to payment',
-        size: Ux4gButtonSize.large, width: double.infinity, onPressed: () {}),
-      TextButton(onPressed: () {}, child: Text('Back to review')),
-    ]),
-  )),
-  _BrandFooter(),
-])''';
+)
+
+// Helper: fee row
+Widget _feeRow(String label, String amount, {bool bold = false}) {
+  return Container(
+    padding: EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+    child: Row(
+      children: [
+        Expanded(
+          child: Text(label,
+              style: TextStyle(
+                fontSize: 13,
+                fontWeight: bold ? FontWeight.w600 : FontWeight.w400,
+                color: bold ? Color(0xFF111827) : Color(0xFF6B7280),
+              )),
+        ),
+        Text(amount,
+            style: TextStyle(
+              fontSize: 13,
+              fontWeight: bold ? FontWeight.w600 : FontWeight.w400,
+              color: bold ? Color(0xFF111827) : Color(0xFF374151),
+            )),
+      ],
+    ),
+  );
+}''';
 
 const _paymentSummaryCardCode = r'''
-// Payment — card style
-Column(children: [
-  Ux4gAppHeader(...),
-  Ux4gStepper(totalSteps: 5, currentStep: 5, ...),
-  Divider(height: 1, color: Color(0xFFE5E7EB)),
-  Expanded(child: Container(color: Color(0xFFE9E5FF), child: Column(children: [
-    Expanded(child: SingleChildScrollView(
-      padding: EdgeInsets.fromLTRB(16, 20, 16, 16),
-      child: Container(
-        padding: EdgeInsets.fromLTRB(16, 24, 16, 20),
-        decoration: BoxDecoration(
-          color: Colors.white, borderRadius: BorderRadius.circular(16)),
-        child: Column(children: [ /* same content as flat */ ]),
+Scaffold(
+  backgroundColor: Color(0xFFE9E5FF),
+  body: Column(
+    children: [
+      // Government header
+      Ux4gAppHeader(
+        variant: Ux4gAppHeaderVariant.light,
+        title: '',
+        leadingWidgets: [
+          SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
+          Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
+          SvgPicture.asset('assets/Union.svg', height: 32),
+        ],
+        horizontalPadding: 16,
+        leadingSpacing: 12,
       ),
-    )),
-    _BrandFooter(),
-  ]))),
-])''';
+      Divider(height: 1, thickness: 1, color: Color(0xFFE5E7EB)),
+      // Step bar
+      Padding(
+        padding: EdgeInsets.fromLTRB(16, 10, 16, 10),
+        child: Ux4gStepper(
+          totalSteps: 5,
+          currentStep: 5,
+          orientation: StepperOrientation.horizontal,
+          steps: [
+            Ux4gStepItem(title: 'Review'),
+            Ux4gStepItem(title: 'Details'),
+            Ux4gStepItem(title: 'Documents'),
+            Ux4gStepItem(title: 'Preview'),
+            Ux4gStepItem(title: 'Payment'),
+          ],
+        ),
+      ),
+      Divider(height: 1, thickness: 1, color: Color(0xFFE5E7EB)),
+      Expanded(
+        child: Container(
+          color: Color(0xFFE9E5FF),
+          child: Column(
+            children: [
+              Expanded(
+                child: SingleChildScrollView(
+                  padding: EdgeInsets.fromLTRB(16, 20, 16, 16),
+                  child: Container(
+                    padding: EdgeInsets.fromLTRB(16, 24, 16, 20),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(16),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.04),
+                          blurRadius: 16,
+                          offset: Offset(0, 4),
+                        ),
+                      ],
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Payment',
+                          style: TextStyle(
+                            fontSize: 22,
+                            fontWeight: FontWeight.w800,
+                            color: Color(0xFF111827),
+                            height: 1.2,
+                            letterSpacing: -0.3,
+                          ),
+                        ),
+                        SizedBox(height: 4),
+                        Text(
+                          'Income Certificate — Application #INC-2024-00842',
+                          style: TextStyle(
+                            fontSize: 13,
+                            color: Color(0xFF6B7280),
+                            height: 1.4,
+                          ),
+                        ),
+                        SizedBox(height: 20),
+                        Container(
+                          decoration: BoxDecoration(
+                            border: Border.all(color: Color(0xFFE5E7EB)),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          clipBehavior: Clip.hardEdge,
+                          child: Column(
+                            children: [
+                              _feeRow('Application fee', 'Rs 30.00'),
+                              Divider(height: 1, thickness: 1, color: Color(0xFFE5E7EB)),
+                              _feeRow('Processing charge', 'Rs 5.00'),
+                              Divider(height: 1, thickness: 1, color: Color(0xFFE5E7EB)),
+                              _feeRow('GST 18%', 'Rs 6.30'),
+                              Divider(height: 1, thickness: 1, color: Color(0xFFE5E7EB)),
+                              _feeRow('Total', 'Rs 41.30', bold: true),
+                            ],
+                          ),
+                        ),
+                        SizedBox(height: 16),
+                        Ux4gStatusBanner(
+                          variant: Ux4gBannerVariant.infoLight,
+                          title:
+                              'Secure payment via PayGov. Your payment '
+                              'information is protected by 256-bit encryption.',
+                          margin: EdgeInsets.zero,
+                          padding: EdgeInsets.fromLTRB(12, 10, 12, 10),
+                        ),
+                        SizedBox(height: 20),
+                        Ux4gButton(
+                          text: 'Continue to payment',
+                          onPressed: () {},
+                          size: Ux4gButtonSize.large,
+                          width: double.infinity,
+                        ),
+                        SizedBox(height: 12),
+                        Center(
+                          child: TextButton(
+                            onPressed: () {},
+                            child: Text(
+                              'Back to review',
+                              style: TextStyle(fontSize: 14, color: primary),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+              // Footer
+              Padding(
+                padding: EdgeInsets.only(bottom: 20, top: 8),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text('Powered by -',
+                        style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF),
+                            fontWeight: FontWeight.w500)),
+                    SizedBox(height: 6),
+                    Image.asset('assets/digital_india_logo.png', height: 22),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    ],
+  ),
+)
+
+// Helper: fee row (same as Default variant)
+Widget _feeRow(String label, String amount, {bool bold = false}) {
+  return Container(
+    padding: EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+    child: Row(
+      children: [
+        Expanded(
+          child: Text(label,
+              style: TextStyle(
+                fontSize: 13,
+                fontWeight: bold ? FontWeight.w600 : FontWeight.w400,
+                color: bold ? Color(0xFF111827) : Color(0xFF6B7280),
+              )),
+        ),
+        Text(amount,
+            style: TextStyle(
+              fontSize: 13,
+              fontWeight: bold ? FontWeight.w600 : FontWeight.w400,
+              color: bold ? Color(0xFF111827) : Color(0xFF374151),
+            )),
+      ],
+    ),
+  );
+}''';
 
 // -----------------------------------------------------------------------
 // PAYMENT METHOD — StatefulWidget (interactive radio selection)
@@ -19581,44 +19867,376 @@ class _PaymentMethodCardMockupState extends State<_PaymentMethodCardMockup> {
 }
 
 const _paymentMethodCode = r'''
-// Choose Payment Method — flat (360 × 760)
-Column(children: [
-  Ux4gAppHeader(...),
-  Ux4gStepper(totalSteps: 5, currentStep: 5, ...),
-  Divider(height: 1, color: Color(0xFFE5E7EB)),
-  Expanded(child: SingleChildScrollView(
-    padding: EdgeInsets.fromLTRB(16, 20, 16, 16),
-    child: Column(children: [
-      Text('Choose payment method'),
-      // 4 radio-style tiles: UPI / Net Banking / Debit+Credit Card / CSC Centre
-      // UPI selected → shows Ux4gInputField('Enter UPI ID')
-      Ux4gButton(text: 'Pay Rs 41.30',
-        size: Ux4gButtonSize.large, width: double.infinity, onPressed: () {}),
-      TextButton(onPressed: () {}, child: Text('Back to summary')),
-    ]),
-  )),
-  _BrandFooter(),
-])''';
+// StatefulWidget — tracks selected payment method
+String _method = 'upi';
+String _upiId = '';
+
+Scaffold(
+  backgroundColor: Color(0xFFFAFAFA),
+  body: Column(
+    children: [
+      Ux4gAppHeader(
+        variant: Ux4gAppHeaderVariant.light,
+        title: '',
+        leadingWidgets: [
+          SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
+          Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
+          SvgPicture.asset('assets/Union.svg', height: 32),
+        ],
+        horizontalPadding: 16,
+        leadingSpacing: 12,
+      ),
+      Divider(height: 1, thickness: 1, color: Color(0xFFE5E7EB)),
+      Padding(
+        padding: EdgeInsets.fromLTRB(16, 10, 16, 10),
+        child: Ux4gStepper(
+          totalSteps: 5,
+          currentStep: 5,
+          orientation: StepperOrientation.horizontal,
+          steps: [
+            Ux4gStepItem(title: 'Review'),
+            Ux4gStepItem(title: 'Details'),
+            Ux4gStepItem(title: 'Documents'),
+            Ux4gStepItem(title: 'Preview'),
+            Ux4gStepItem(title: 'Payment'),
+          ],
+        ),
+      ),
+      Divider(height: 1, thickness: 1, color: Color(0xFFE5E7EB)),
+      Expanded(
+        child: Container(
+          color: Color(0xFFFAFAFA),
+          child: Column(
+            children: [
+              Expanded(
+                child: SingleChildScrollView(
+                  padding: EdgeInsets.fromLTRB(16, 20, 16, 16),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Choose payment method',
+                        style: TextStyle(
+                          fontSize: 22,
+                          fontWeight: FontWeight.w800,
+                          color: Color(0xFF111827),
+                          height: 1.2,
+                          letterSpacing: -0.3,
+                        ),
+                      ),
+                      SizedBox(height: 4),
+                      Text(
+                        'Select how you would like to pay Rs 41.30.',
+                        style: TextStyle(
+                          fontSize: 13,
+                          color: Color(0xFF6B7280),
+                          height: 1.4,
+                        ),
+                      ),
+                      SizedBox(height: 20),
+                      // Radio-style payment method tiles
+                      _pmtOptionTile(
+                        value: 'upi',
+                        groupValue: _method,
+                        onChanged: (v) => setState(() => _method = v ?? _method),
+                        label: 'UPI',
+                        subtitle: 'Pay using any UPI app (GPay, PhonePe, Paytm...)',
+                      ),
+                      _pmtOptionTile(
+                        value: 'netbanking',
+                        groupValue: _method,
+                        onChanged: (v) => setState(() => _method = v ?? _method),
+                        label: 'Net Banking',
+                        subtitle: 'Pay directly from your bank account',
+                      ),
+                      _pmtOptionTile(
+                        value: 'card',
+                        groupValue: _method,
+                        onChanged: (v) => setState(() => _method = v ?? _method),
+                        label: 'Debit / Credit Card',
+                        subtitle: 'Visa, Mastercard, RuPay accepted',
+                      ),
+                      _pmtOptionTile(
+                        value: 'csc',
+                        groupValue: _method,
+                        onChanged: (v) => setState(() => _method = v ?? _method),
+                        label: 'Pay at CSC Centre',
+                        subtitle: 'Visit your nearest Common Service Centre',
+                      ),
+                      if (_method == 'upi') ...[
+                        SizedBox(height: 4),
+                        Ux4gInputField(
+                          value: _upiId,
+                          onValueChange: (v) => setState(() => _upiId = v),
+                          label: 'Enter UPI ID',
+                          placeholder: 'yourname@upi',
+                        ),
+                      ],
+                      SizedBox(height: 20),
+                      Ux4gButton(
+                        text: 'Pay Rs 41.30',
+                        onPressed: () {},
+                        size: Ux4gButtonSize.large,
+                        width: double.infinity,
+                      ),
+                      SizedBox(height: 12),
+                      Center(
+                        child: TextButton(
+                          onPressed: () {},
+                          child: Text(
+                            'Back to summary',
+                            style: TextStyle(fontSize: 14, color: primary),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.only(bottom: 20, top: 8),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text('Powered by -',
+                        style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF),
+                            fontWeight: FontWeight.w500)),
+                    SizedBox(height: 6),
+                    Image.asset('assets/digital_india_logo.png', height: 22),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    ],
+  ),
+)
+
+// Helper: radio-style bordered payment tile
+Widget _pmtOptionTile({
+  required String value,
+  required String groupValue,
+  required ValueChanged<String?> onChanged,
+  required String label,
+  required String subtitle,
+}) {
+  final selected = value == groupValue;
+  return GestureDetector(
+    onTap: () => onChanged(value),
+    child: AnimatedContainer(
+      duration: Duration(milliseconds: 150),
+      margin: EdgeInsets.only(bottom: 10),
+      padding: EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+      decoration: BoxDecoration(
+        color: selected ? primary.withOpacity(0.06) : Colors.white,
+        borderRadius: BorderRadius.circular(10),
+        border: Border.all(
+          color: selected ? primary : Color(0xFFE5E7EB),
+          width: selected ? 2 : 1,
+        ),
+      ),
+      child: Row(
+        children: [
+          Container(
+            width: 20, height: 20,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              border: Border.all(
+                color: selected ? primary : Color(0xFFD1D5DB), width: 2),
+            ),
+            alignment: Alignment.center,
+            child: selected
+                ? Container(width: 10, height: 10,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle, color: primary))
+                : null,
+          ),
+          SizedBox(width: 12),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(label,
+                    style: TextStyle(
+                      fontSize: 14, fontWeight: FontWeight.w600,
+                      color: selected ? primary : Color(0xFF111827))),
+                SizedBox(height: 2),
+                Text(subtitle,
+                    style: TextStyle(
+                      fontSize: 12, color: Color(0xFF6B7280), height: 1.3)),
+              ],
+            ),
+          ),
+        ],
+      ),
+    ),
+  );
+}''';
 
 const _paymentMethodCardCode = r'''
-// Choose Payment Method — card style
-Column(children: [
-  Ux4gAppHeader(...),
-  Ux4gStepper(totalSteps: 5, currentStep: 5, ...),
-  Divider(height: 1, color: Color(0xFFE5E7EB)),
-  Expanded(child: Container(color: Color(0xFFE9E5FF), child: Column(children: [
-    Expanded(child: SingleChildScrollView(
-      padding: EdgeInsets.fromLTRB(16, 20, 16, 16),
-      child: Container(
-        padding: EdgeInsets.fromLTRB(16, 24, 16, 20),
-        decoration: BoxDecoration(
-          color: Colors.white, borderRadius: BorderRadius.circular(16)),
-        child: Column(children: [ /* same content as flat */ ]),
+// StatefulWidget — tracks selected payment method (Card style)
+String _method = 'upi';
+String _upiId = '';
+
+Scaffold(
+  backgroundColor: Color(0xFFE9E5FF),
+  body: Column(
+    children: [
+      Ux4gAppHeader(
+        variant: Ux4gAppHeaderVariant.light,
+        title: '',
+        leadingWidgets: [
+          SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
+          Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
+          SvgPicture.asset('assets/Union.svg', height: 32),
+        ],
+        horizontalPadding: 16,
+        leadingSpacing: 12,
       ),
-    )),
-    _BrandFooter(),
-  ]))),
-])''';
+      Divider(height: 1, thickness: 1, color: Color(0xFFE5E7EB)),
+      Padding(
+        padding: EdgeInsets.fromLTRB(16, 10, 16, 10),
+        child: Ux4gStepper(
+          totalSteps: 5,
+          currentStep: 5,
+          orientation: StepperOrientation.horizontal,
+          steps: [
+            Ux4gStepItem(title: 'Review'),
+            Ux4gStepItem(title: 'Details'),
+            Ux4gStepItem(title: 'Documents'),
+            Ux4gStepItem(title: 'Preview'),
+            Ux4gStepItem(title: 'Payment'),
+          ],
+        ),
+      ),
+      Divider(height: 1, thickness: 1, color: Color(0xFFE5E7EB)),
+      Expanded(
+        child: Container(
+          color: Color(0xFFE9E5FF),
+          child: Column(
+            children: [
+              Expanded(
+                child: SingleChildScrollView(
+                  padding: EdgeInsets.fromLTRB(16, 20, 16, 16),
+                  child: Container(
+                    padding: EdgeInsets.fromLTRB(16, 24, 16, 20),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(16),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.04),
+                          blurRadius: 16,
+                          offset: Offset(0, 4),
+                        ),
+                      ],
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Choose payment method',
+                          style: TextStyle(
+                            fontSize: 22,
+                            fontWeight: FontWeight.w800,
+                            color: Color(0xFF111827),
+                            height: 1.2,
+                            letterSpacing: -0.3,
+                          ),
+                        ),
+                        SizedBox(height: 4),
+                        Text(
+                          'Select how you would like to pay Rs 41.30.',
+                          style: TextStyle(
+                            fontSize: 13,
+                            color: Color(0xFF6B7280),
+                            height: 1.4,
+                          ),
+                        ),
+                        SizedBox(height: 20),
+                        _pmtOptionTile(
+                          value: 'upi',
+                          groupValue: _method,
+                          onChanged: (v) => setState(() => _method = v ?? _method),
+                          label: 'UPI',
+                          subtitle: 'Pay using any UPI app (GPay, PhonePe, Paytm...)',
+                        ),
+                        _pmtOptionTile(
+                          value: 'netbanking',
+                          groupValue: _method,
+                          onChanged: (v) => setState(() => _method = v ?? _method),
+                          label: 'Net Banking',
+                          subtitle: 'Pay directly from your bank account',
+                        ),
+                        _pmtOptionTile(
+                          value: 'card',
+                          groupValue: _method,
+                          onChanged: (v) => setState(() => _method = v ?? _method),
+                          label: 'Debit / Credit Card',
+                          subtitle: 'Visa, Mastercard, RuPay accepted',
+                        ),
+                        _pmtOptionTile(
+                          value: 'csc',
+                          groupValue: _method,
+                          onChanged: (v) => setState(() => _method = v ?? _method),
+                          label: 'Pay at CSC Centre',
+                          subtitle: 'Visit your nearest Common Service Centre',
+                        ),
+                        if (_method == 'upi') ...[
+                          SizedBox(height: 4),
+                          Ux4gInputField(
+                            value: _upiId,
+                            onValueChange: (v) => setState(() => _upiId = v),
+                            label: 'Enter UPI ID',
+                            placeholder: 'yourname@upi',
+                          ),
+                        ],
+                        SizedBox(height: 20),
+                        Ux4gButton(
+                          text: 'Pay Rs 41.30',
+                          onPressed: () {},
+                          size: Ux4gButtonSize.large,
+                          width: double.infinity,
+                        ),
+                        SizedBox(height: 12),
+                        Center(
+                          child: TextButton(
+                            onPressed: () {},
+                            child: Text(
+                              'Back to summary',
+                              style: TextStyle(fontSize: 14, color: primary),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.only(bottom: 20, top: 8),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text('Powered by -',
+                        style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF),
+                            fontWeight: FontWeight.w500)),
+                    SizedBox(height: 6),
+                    Image.asset('assets/digital_india_logo.png', height: 22),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    ],
+  ),
+)
+
+// Helper: _pmtOptionTile — same as Default variant''';
 
 // -----------------------------------------------------------------------
 // PAYMENT PROCESSING — overlay spinner on dimmed background
@@ -19844,41 +20462,252 @@ class _PaymentProcessingCardMockup extends StatelessWidget {
 }
 
 const _paymentProcessingCode = r'''
-// Payment Processing — spinner overlay (360 × 760)
-Stack(children: [
-  Column(children: [
-    Ux4gAppHeader(...), Ux4gStepper(...), Divider(...), Expanded(...),
-  ]),
-  Positioned.fill(child: Container(
-    color: Colors.black.withValues(alpha: 0.45))),
-  Positioned.fill(child: Center(child: Container(
-    margin: EdgeInsets.symmetric(horizontal: 32),
-    padding: EdgeInsets.fromLTRB(24, 28, 24, 28),
-    decoration: BoxDecoration(
-      color: Colors.white, borderRadius: BorderRadius.circular(16)),
-    child: Column(mainAxisSize: MainAxisSize.min, children: [
-      SizedBox(width: 48, height: 48,
-        child: CircularProgressIndicator(strokeWidth: 4)),
-      SizedBox(height: 20),
-      Text('Redirecting to PayGov...'),
-      Text('Please do not press back or refresh.'),
-    ]),
-  ))),
-])''';
+Scaffold(
+  backgroundColor: Color(0xFFFAFAFA),
+  body: Stack(
+    children: [
+      // Background: previous screen layout (dimmed)
+      Column(
+        children: [
+          Ux4gAppHeader(
+            variant: Ux4gAppHeaderVariant.light,
+            title: '',
+            leadingWidgets: [
+              SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
+              Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
+              SvgPicture.asset('assets/Union.svg', height: 32),
+            ],
+            horizontalPadding: 16,
+            leadingSpacing: 12,
+          ),
+          Divider(height: 1, thickness: 1, color: Color(0xFFE5E7EB)),
+          Padding(
+            padding: EdgeInsets.fromLTRB(16, 10, 16, 10),
+            child: Ux4gStepper(
+              totalSteps: 5,
+              currentStep: 5,
+              orientation: StepperOrientation.horizontal,
+              steps: [
+                Ux4gStepItem(title: 'Review'),
+                Ux4gStepItem(title: 'Details'),
+                Ux4gStepItem(title: 'Documents'),
+                Ux4gStepItem(title: 'Preview'),
+                Ux4gStepItem(title: 'Payment'),
+              ],
+            ),
+          ),
+          Divider(height: 1, thickness: 1, color: Color(0xFFE5E7EB)),
+          Expanded(
+            child: Container(
+              color: Color(0xFFFAFAFA),
+              padding: EdgeInsets.fromLTRB(16, 20, 16, 16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('Choose payment method',
+                      style: TextStyle(fontSize: 22, fontWeight: FontWeight.w800,
+                          color: Color(0xFF111827), height: 1.2)),
+                  SizedBox(height: 4),
+                  Text('Select how you would like to pay Rs 41.30.',
+                      style: TextStyle(fontSize: 13, color: Color(0xFF6B7280))),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+      // Semi-transparent scrim
+      Positioned.fill(
+        child: Container(color: Colors.black.withOpacity(0.45)),
+      ),
+      // Centered modal card
+      Positioned.fill(
+        child: Center(
+          child: Container(
+            margin: EdgeInsets.symmetric(horizontal: 32),
+            padding: EdgeInsets.fromLTRB(24, 28, 24, 28),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(16),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.15),
+                  blurRadius: 24,
+                  offset: Offset(0, 8),
+                ),
+              ],
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                SizedBox(
+                  width: 48, height: 48,
+                  child: CircularProgressIndicator(
+                    strokeWidth: 4,
+                    valueColor: AlwaysStoppedAnimation<Color>(primary),
+                  ),
+                ),
+                SizedBox(height: 20),
+                Text(
+                  'Redirecting to PayGov...',
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w700,
+                    color: Color(0xFF111827),
+                    height: 1.2,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                SizedBox(height: 8),
+                Text(
+                  'Please do not press back or refresh.\n'
+                  'Your payment is being processed securely.',
+                  style: TextStyle(
+                    fontSize: 13,
+                    color: Color(0xFF6B7280),
+                    height: 1.4,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    ],
+  ),
+)''';
 
 const _paymentProcessingCardCode = r'''
-// Payment Processing — card style + spinner overlay
-Stack(children: [
-  Column(children: [
-    Ux4gAppHeader(...), Ux4gStepper(...), Divider(...),
-    Expanded(child: Container(color: Color(0xFFE9E5FF),
-      child: Container(
-        decoration: BoxDecoration(
-          color: Colors.white, borderRadius: BorderRadius.circular(16)),
-        child: Column(...)))),
-  ]),
-  // Same scrim overlay + modal card as flat variant
-])''';
+Scaffold(
+  backgroundColor: Color(0xFFE9E5FF),
+  body: Stack(
+    children: [
+      // Background: card-style previous screen (dimmed)
+      Column(
+        children: [
+          Ux4gAppHeader(
+            variant: Ux4gAppHeaderVariant.light,
+            title: '',
+            leadingWidgets: [
+              SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
+              Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
+              SvgPicture.asset('assets/Union.svg', height: 32),
+            ],
+            horizontalPadding: 16,
+            leadingSpacing: 12,
+          ),
+          Divider(height: 1, thickness: 1, color: Color(0xFFE5E7EB)),
+          Padding(
+            padding: EdgeInsets.fromLTRB(16, 10, 16, 10),
+            child: Ux4gStepper(
+              totalSteps: 5,
+              currentStep: 5,
+              orientation: StepperOrientation.horizontal,
+              steps: [
+                Ux4gStepItem(title: 'Review'),
+                Ux4gStepItem(title: 'Details'),
+                Ux4gStepItem(title: 'Documents'),
+                Ux4gStepItem(title: 'Preview'),
+                Ux4gStepItem(title: 'Payment'),
+              ],
+            ),
+          ),
+          Divider(height: 1, thickness: 1, color: Color(0xFFE5E7EB)),
+          Expanded(
+            child: Container(
+              color: Color(0xFFE9E5FF),
+              padding: EdgeInsets.fromLTRB(16, 20, 16, 16),
+              child: Container(
+                padding: EdgeInsets.fromLTRB(16, 24, 16, 20),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(16),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.04),
+                      blurRadius: 16,
+                      offset: Offset(0, 4),
+                    ),
+                  ],
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('Choose payment method',
+                        style: TextStyle(fontSize: 22, fontWeight: FontWeight.w800,
+                            color: Color(0xFF111827), height: 1.2)),
+                    SizedBox(height: 4),
+                    Text('Select how you would like to pay Rs 41.30.',
+                        style: TextStyle(fontSize: 13, color: Color(0xFF6B7280))),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+      // Semi-transparent scrim
+      Positioned.fill(
+        child: Container(color: Colors.black.withOpacity(0.45)),
+      ),
+      // Centered modal card
+      Positioned.fill(
+        child: Center(
+          child: Container(
+            margin: EdgeInsets.symmetric(horizontal: 32),
+            padding: EdgeInsets.fromLTRB(24, 28, 24, 28),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(16),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.15),
+                  blurRadius: 24,
+                  offset: Offset(0, 8),
+                ),
+              ],
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                SizedBox(
+                  width: 48, height: 48,
+                  child: CircularProgressIndicator(
+                    strokeWidth: 4,
+                    valueColor: AlwaysStoppedAnimation<Color>(primary),
+                  ),
+                ),
+                SizedBox(height: 20),
+                Text(
+                  'Redirecting to PayGov...',
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w700,
+                    color: Color(0xFF111827),
+                    height: 1.2,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                SizedBox(height: 8),
+                Text(
+                  'Please do not press back or refresh.\n'
+                  'Your payment is being processed securely.',
+                  style: TextStyle(
+                    fontSize: 13,
+                    color: Color(0xFF6B7280),
+                    height: 1.4,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    ],
+  ),
+)''';
 
 // -----------------------------------------------------------------------
 // PAYMENT SUCCESS — flat + card
@@ -20161,54 +20990,283 @@ class _PaymentSuccessCardMockup extends StatelessWidget {
 }
 
 const _paymentSuccessCode = r'''
-// Payment Successful — flat (360 × 760)
-Column(children: [
-  Ux4gAppHeader(...),
-  Ux4gStepper(totalSteps: 5, currentStep: 5, ...),
-  Divider(height: 1, color: Color(0xFFE5E7EB)),
-  Expanded(child: SingleChildScrollView(
-    padding: EdgeInsets.fromLTRB(16, 20, 16, 16),
-    child: Column(children: [
-      // Green concentric badge
-      Container(width: 64, height: 64,
-        decoration: BoxDecoration(
-          color: Ux4gPalette.green100, shape: BoxShape.circle),
-        child: Container(width: 36, height: 36,
-          decoration: BoxDecoration(
-            color: Ux4gPalette.green, shape: BoxShape.circle),
-          child: Icon(Icons.check, color: Colors.white))),
-      Text('Payment Successful',
-        style: TextStyle(
-          color: Ux4gPalette.green700,
-          fontSize: 22, fontWeight: FontWeight.w800)),
-      // Details table — Amount paid row has Color(0xFFF0FDF4) bg
-      Ux4gButton(text: 'Track my application',
-        size: Ux4gButtonSize.large, width: double.infinity, onPressed: () {}),
-      Ux4gButton(text: 'Download receipt (PDF)',
-        variant: Ux4gButtonVariant.outline,
-        size: Ux4gButtonSize.large, width: double.infinity, onPressed: () {}),
-      TextButton(child: Text('Return to services'), onPressed: () {}),
-    ]),
-  )),
-  _BrandFooter(),
-])''';
+Scaffold(
+  backgroundColor: Color(0xFFFAFAFA),
+  body: Column(
+    children: [
+      Ux4gAppHeader(
+        variant: Ux4gAppHeaderVariant.light,
+        title: '',
+        leadingWidgets: [
+          SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
+          Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
+          SvgPicture.asset('assets/Union.svg', height: 32),
+        ],
+        horizontalPadding: 16,
+        leadingSpacing: 12,
+      ),
+      Divider(height: 1, thickness: 1, color: Color(0xFFE5E7EB)),
+      Padding(
+        padding: EdgeInsets.fromLTRB(16, 10, 16, 10),
+        child: Ux4gStepper(
+          totalSteps: 5, currentStep: 5,
+          orientation: StepperOrientation.horizontal,
+          steps: [
+            Ux4gStepItem(title: 'Review'), Ux4gStepItem(title: 'Details'),
+            Ux4gStepItem(title: 'Documents'), Ux4gStepItem(title: 'Preview'),
+            Ux4gStepItem(title: 'Payment'),
+          ],
+        ),
+      ),
+      Divider(height: 1, thickness: 1, color: Color(0xFFE5E7EB)),
+      Expanded(
+        child: Container(
+          color: Color(0xFFFAFAFA),
+          child: Column(
+            children: [
+              Expanded(
+                child: SingleChildScrollView(
+                  padding: EdgeInsets.fromLTRB(16, 20, 16, 16),
+                  child: Column(
+                    children: [
+                      // Green concentric badge
+                      Container(
+                        width: 64, height: 64,
+                        decoration: BoxDecoration(
+                          color: Ux4gPalette.green100, shape: BoxShape.circle),
+                        alignment: Alignment.center,
+                        child: Container(
+                          width: 36, height: 36,
+                          decoration: BoxDecoration(
+                            color: Ux4gPalette.green, shape: BoxShape.circle),
+                          child: Icon(Icons.check, color: Colors.white, size: 22),
+                        ),
+                      ),
+                      SizedBox(height: 16),
+                      Text(
+                        'Payment Successful',
+                        style: TextStyle(
+                          fontSize: 22, fontWeight: FontWeight.w800,
+                          color: Ux4gPalette.green700,
+                          height: 1.2, letterSpacing: -0.3,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                      SizedBox(height: 6),
+                      Text(
+                        'Rs 41.30 paid for Income Certificate '
+                        '(Application #INC-2024-00842).',
+                        style: TextStyle(
+                          fontSize: 13, color: Color(0xFF6B7280), height: 1.4),
+                        textAlign: TextAlign.center,
+                      ),
+                      SizedBox(height: 20),
+                      // Transaction details table
+                      Container(
+                        decoration: BoxDecoration(
+                          color: Color(0xFFF0FDF4),
+                          border: Border.all(color: Ux4gPalette.green100),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Column(
+                          children: [
+                            _payDetailRow('Amount paid', 'Rs 41.30', valueBold: true),
+                            _payDetailRow('Transaction ID', 'PG2026MH04127TX'),
+                            _payDetailRow('Method', 'UPI - ramesh@upi'),
+                            _payDetailRow('Date and time', '12 Apr 2026, 2:34 PM IST'),
+                          ],
+                        ),
+                      ),
+                      SizedBox(height: 20),
+                      Ux4gButton(
+                        text: 'Track my application',
+                        onPressed: () {},
+                        size: Ux4gButtonSize.large,
+                        width: double.infinity,
+                      ),
+                      SizedBox(height: 10),
+                      Ux4gButton(
+                        text: 'Download receipt (PDF)',
+                        onPressed: () {},
+                        variant: Ux4gButtonVariant.outline,
+                        size: Ux4gButtonSize.large,
+                        width: double.infinity,
+                      ),
+                      SizedBox(height: 12),
+                      Center(
+                        child: TextButton(
+                          onPressed: () {},
+                          child: Text('Return to services',
+                              style: TextStyle(fontSize: 14, color: primary)),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.only(bottom: 20, top: 8),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text('Powered by -',
+                        style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF),
+                            fontWeight: FontWeight.w500)),
+                    SizedBox(height: 6),
+                    Image.asset('assets/digital_india_logo.png', height: 22),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    ],
+  ),
+)
+
+// Helper: detail row
+Widget _payDetailRow(String label, String value, {bool valueBold = false, Color? valueColor}) {
+  return Container(
+    padding: EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+    child: Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Expanded(flex: 4,
+          child: Text(label, style: TextStyle(fontSize: 13, color: Color(0xFF6B7280)))),
+        Expanded(flex: 5,
+          child: Text(value, textAlign: TextAlign.right,
+              style: TextStyle(fontSize: 13,
+                fontWeight: valueBold ? FontWeight.w600 : FontWeight.w400,
+                color: valueColor ?? Color(0xFF111827)))),
+      ],
+    ),
+  );
+}''';
 
 const _paymentSuccessCardCode = r'''
-// Payment Successful — card style
-Column(children: [
-  Ux4gAppHeader(...), Ux4gStepper(...), Divider(...),
-  Expanded(child: Container(color: Color(0xFFE9E5FF), child: Column(children: [
-    Expanded(child: SingleChildScrollView(
-      child: Container(
-        padding: EdgeInsets.fromLTRB(16, 24, 16, 20),
-        decoration: BoxDecoration(
-          color: Colors.white, borderRadius: BorderRadius.circular(16)),
-        child: Column(children: [ /* same content as flat */ ]),
+Scaffold(
+  backgroundColor: Color(0xFFE9E5FF),
+  body: Column(
+    children: [
+      Ux4gAppHeader(
+        variant: Ux4gAppHeaderVariant.light,
+        title: '',
+        leadingWidgets: [
+          SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
+          Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
+          SvgPicture.asset('assets/Union.svg', height: 32),
+        ],
+        horizontalPadding: 16,
+        leadingSpacing: 12,
       ),
-    )),
-    _BrandFooter(),
-  ]))),
-])''';
+      Divider(height: 1, thickness: 1, color: Color(0xFFE5E7EB)),
+      Padding(
+        padding: EdgeInsets.fromLTRB(16, 10, 16, 10),
+        child: Ux4gStepper(
+          totalSteps: 5, currentStep: 5,
+          orientation: StepperOrientation.horizontal,
+          steps: [
+            Ux4gStepItem(title: 'Review'), Ux4gStepItem(title: 'Details'),
+            Ux4gStepItem(title: 'Documents'), Ux4gStepItem(title: 'Preview'),
+            Ux4gStepItem(title: 'Payment'),
+          ],
+        ),
+      ),
+      Divider(height: 1, thickness: 1, color: Color(0xFFE5E7EB)),
+      Expanded(
+        child: Container(
+          color: Color(0xFFE9E5FF),
+          child: Column(
+            children: [
+              Expanded(
+                child: SingleChildScrollView(
+                  padding: EdgeInsets.fromLTRB(16, 20, 16, 16),
+                  child: Container(
+                    padding: EdgeInsets.fromLTRB(16, 24, 16, 20),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(16),
+                      boxShadow: [
+                        BoxShadow(color: Colors.black.withOpacity(0.04),
+                            blurRadius: 16, offset: Offset(0, 4)),
+                      ],
+                    ),
+                    child: Column(
+                      children: [
+                        Container(
+                          width: 64, height: 64,
+                          decoration: BoxDecoration(
+                            color: Ux4gPalette.green100, shape: BoxShape.circle),
+                          alignment: Alignment.center,
+                          child: Container(
+                            width: 36, height: 36,
+                            decoration: BoxDecoration(
+                              color: Ux4gPalette.green, shape: BoxShape.circle),
+                            child: Icon(Icons.check, color: Colors.white, size: 22),
+                          ),
+                        ),
+                        SizedBox(height: 16),
+                        Text('Payment Successful',
+                          style: TextStyle(fontSize: 22, fontWeight: FontWeight.w800,
+                              color: Ux4gPalette.green700, height: 1.2,
+                              letterSpacing: -0.3),
+                          textAlign: TextAlign.center),
+                        SizedBox(height: 6),
+                        Text('Rs 41.30 paid for Income Certificate '
+                            '(Application #INC-2024-00842).',
+                          style: TextStyle(fontSize: 13, color: Color(0xFF6B7280),
+                              height: 1.4),
+                          textAlign: TextAlign.center),
+                        SizedBox(height: 20),
+                        Container(
+                          decoration: BoxDecoration(
+                            color: Color(0xFFF0FDF4),
+                            border: Border.all(color: Ux4gPalette.green100),
+                            borderRadius: BorderRadius.circular(10)),
+                          child: Column(children: [
+                            _payDetailRow('Amount paid', 'Rs 41.30', valueBold: true),
+                            _payDetailRow('Transaction ID', 'PG2026MH04127TX'),
+                            _payDetailRow('Method', 'UPI - ramesh@upi'),
+                            _payDetailRow('Date and time', '12 Apr 2026, 2:34 PM IST'),
+                          ]),
+                        ),
+                        SizedBox(height: 20),
+                        Ux4gButton(text: 'Track my application', onPressed: () {},
+                            size: Ux4gButtonSize.large, width: double.infinity),
+                        SizedBox(height: 10),
+                        Ux4gButton(text: 'Download receipt (PDF)', onPressed: () {},
+                            variant: Ux4gButtonVariant.outline,
+                            size: Ux4gButtonSize.large, width: double.infinity),
+                        SizedBox(height: 12),
+                        Center(
+                          child: TextButton(onPressed: () {},
+                            child: Text('Return to services',
+                                style: TextStyle(fontSize: 14, color: primary))),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.only(bottom: 20, top: 8),
+                child: Column(mainAxisSize: MainAxisSize.min, children: [
+                  Text('Powered by -', style: TextStyle(fontSize: 11,
+                      color: Color(0xFF9CA3AF), fontWeight: FontWeight.w500)),
+                  SizedBox(height: 6),
+                  Image.asset('assets/digital_india_logo.png', height: 22),
+                ]),
+              ),
+            ],
+          ),
+        ),
+      ),
+    ],
+  ),
+)
+
+// Helper: _payDetailRow — same as Default variant''';
 
 // -----------------------------------------------------------------------
 // PAYMENT FAILED — flat + card
@@ -20473,52 +21531,258 @@ class _PaymentFailedCardMockup extends StatelessWidget {
 }
 
 const _paymentFailedCode = r'''
-// Payment Failed — flat (360 × 760)
-Column(children: [
-  Ux4gAppHeader(...),
-  Ux4gStepper(totalSteps: 5, currentStep: 5, ...),
-  Divider(height: 1, color: Color(0xFFE5E7EB)),
-  Expanded(child: SingleChildScrollView(
-    padding: EdgeInsets.fromLTRB(16, 20, 16, 16),
-    child: Column(children: [
-      Container(width: 64, height: 64,
-        decoration: BoxDecoration(
-          color: Ux4gPalette.red100, shape: BoxShape.circle),
-        child: Icon(Icons.error_outline,
-          color: Ux4gPalette.red600, size: 32)),
-      Text('Payment Failed',
-        style: TextStyle(
-          color: Ux4gPalette.red800,
-          fontSize: 22, fontWeight: FontWeight.w800)),
-      // Details table with Ux4gPalette.red100 border
-      // Reason row has Color(0xFFFFF1F1) bg, reason text in red600
-      Ux4gButton(text: 'Try again with UPI',
-        size: Ux4gButtonSize.large, width: double.infinity, onPressed: () {}),
-      Ux4gButton(text: 'Try a different method',
-        variant: Ux4gButtonVariant.outline,
-        size: Ux4gButtonSize.large, width: double.infinity, onPressed: () {}),
-      TextButton(child: Text('Pay at CSC centre'), onPressed: () {}),
-    ]),
-  )),
-  _BrandFooter(),
-])''';
+Scaffold(
+  backgroundColor: Color(0xFFFAFAFA),
+  body: Column(
+    children: [
+      Ux4gAppHeader(
+        variant: Ux4gAppHeaderVariant.light,
+        title: '',
+        leadingWidgets: [
+          SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
+          Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
+          SvgPicture.asset('assets/Union.svg', height: 32),
+        ],
+        horizontalPadding: 16,
+        leadingSpacing: 12,
+      ),
+      Divider(height: 1, thickness: 1, color: Color(0xFFE5E7EB)),
+      Padding(
+        padding: EdgeInsets.fromLTRB(16, 10, 16, 10),
+        child: Ux4gStepper(
+          totalSteps: 5, currentStep: 5,
+          orientation: StepperOrientation.horizontal,
+          steps: [
+            Ux4gStepItem(title: 'Review'), Ux4gStepItem(title: 'Details'),
+            Ux4gStepItem(title: 'Documents'), Ux4gStepItem(title: 'Preview'),
+            Ux4gStepItem(title: 'Payment'),
+          ],
+        ),
+      ),
+      Divider(height: 1, thickness: 1, color: Color(0xFFE5E7EB)),
+      Expanded(
+        child: Container(
+          color: Color(0xFFFAFAFA),
+          child: Column(
+            children: [
+              Expanded(
+                child: SingleChildScrollView(
+                  padding: EdgeInsets.fromLTRB(16, 20, 16, 16),
+                  child: Column(
+                    children: [
+                      // Red error badge
+                      Container(
+                        width: 64, height: 64,
+                        decoration: BoxDecoration(
+                          color: Ux4gPalette.red100, shape: BoxShape.circle),
+                        alignment: Alignment.center,
+                        child: Icon(Icons.error_outline,
+                            color: Ux4gPalette.red600, size: 32),
+                      ),
+                      SizedBox(height: 16),
+                      Text(
+                        'Payment Failed',
+                        style: TextStyle(
+                          fontSize: 22, fontWeight: FontWeight.w800,
+                          color: Ux4gPalette.red800,
+                          height: 1.2, letterSpacing: -0.3,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                      SizedBox(height: 6),
+                      Text(
+                        'Your payment of Rs 41.30 could not be processed.',
+                        style: TextStyle(
+                          fontSize: 13, color: Color(0xFF6B7280), height: 1.4),
+                        textAlign: TextAlign.center,
+                      ),
+                      SizedBox(height: 20),
+                      // Error details table
+                      Container(
+                        decoration: BoxDecoration(
+                          color: Color(0xFFFFF1F1),
+                          border: Border.all(color: Ux4gPalette.red100),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Column(
+                          children: [
+                            _payDetailRow('Reason', 'Bank declined',
+                                valueColor: Ux4gPalette.red600),
+                            _payDetailRow('Attempted amount', 'Rs 41.30'),
+                            _payDetailRow('Method', 'UPI - ramesh@upi'),
+                            _payDetailRow('Date and time', '12 Apr 2026, 2:34 PM IST'),
+                          ],
+                        ),
+                      ),
+                      SizedBox(height: 20),
+                      Ux4gButton(
+                        text: 'Try again with UPI',
+                        onPressed: () {},
+                        size: Ux4gButtonSize.large,
+                        width: double.infinity,
+                      ),
+                      SizedBox(height: 10),
+                      Ux4gButton(
+                        text: 'Try a different method',
+                        onPressed: () {},
+                        variant: Ux4gButtonVariant.outline,
+                        size: Ux4gButtonSize.large,
+                        width: double.infinity,
+                      ),
+                      SizedBox(height: 12),
+                      Center(
+                        child: TextButton(
+                          onPressed: () {},
+                          child: Text('Pay at CSC centre',
+                              style: TextStyle(fontSize: 14, color: primary)),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.only(bottom: 20, top: 8),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text('Powered by -',
+                        style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF),
+                            fontWeight: FontWeight.w500)),
+                    SizedBox(height: 6),
+                    Image.asset('assets/digital_india_logo.png', height: 22),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    ],
+  ),
+)
+
+// Helper: _payDetailRow — same as Payment Successful variant''';
 
 const _paymentFailedCardCode = r'''
-// Payment Failed — card style
-Column(children: [
-  Ux4gAppHeader(...), Ux4gStepper(...), Divider(...),
-  Expanded(child: Container(color: Color(0xFFE9E5FF), child: Column(children: [
-    Expanded(child: SingleChildScrollView(
-      child: Container(
-        padding: EdgeInsets.fromLTRB(16, 24, 16, 20),
-        decoration: BoxDecoration(
-          color: Colors.white, borderRadius: BorderRadius.circular(16)),
-        child: Column(children: [ /* same content as flat */ ]),
+Scaffold(
+  backgroundColor: Color(0xFFE9E5FF),
+  body: Column(
+    children: [
+      Ux4gAppHeader(
+        variant: Ux4gAppHeaderVariant.light,
+        title: '',
+        leadingWidgets: [
+          SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
+          Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
+          SvgPicture.asset('assets/Union.svg', height: 32),
+        ],
+        horizontalPadding: 16,
+        leadingSpacing: 12,
       ),
-    )),
-    _BrandFooter(),
-  ]))),
-])''';
+      Divider(height: 1, thickness: 1, color: Color(0xFFE5E7EB)),
+      Padding(
+        padding: EdgeInsets.fromLTRB(16, 10, 16, 10),
+        child: Ux4gStepper(
+          totalSteps: 5, currentStep: 5,
+          orientation: StepperOrientation.horizontal,
+          steps: [
+            Ux4gStepItem(title: 'Review'), Ux4gStepItem(title: 'Details'),
+            Ux4gStepItem(title: 'Documents'), Ux4gStepItem(title: 'Preview'),
+            Ux4gStepItem(title: 'Payment'),
+          ],
+        ),
+      ),
+      Divider(height: 1, thickness: 1, color: Color(0xFFE5E7EB)),
+      Expanded(
+        child: Container(
+          color: Color(0xFFE9E5FF),
+          child: Column(
+            children: [
+              Expanded(
+                child: SingleChildScrollView(
+                  padding: EdgeInsets.fromLTRB(16, 20, 16, 16),
+                  child: Container(
+                    padding: EdgeInsets.fromLTRB(16, 24, 16, 20),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(16),
+                      boxShadow: [
+                        BoxShadow(color: Colors.black.withOpacity(0.04),
+                            blurRadius: 16, offset: Offset(0, 4)),
+                      ],
+                    ),
+                    child: Column(
+                      children: [
+                        Container(
+                          width: 64, height: 64,
+                          decoration: BoxDecoration(
+                            color: Ux4gPalette.red100, shape: BoxShape.circle),
+                          alignment: Alignment.center,
+                          child: Icon(Icons.error_outline,
+                              color: Ux4gPalette.red600, size: 32),
+                        ),
+                        SizedBox(height: 16),
+                        Text('Payment Failed',
+                          style: TextStyle(fontSize: 22, fontWeight: FontWeight.w800,
+                              color: Ux4gPalette.red800, height: 1.2,
+                              letterSpacing: -0.3),
+                          textAlign: TextAlign.center),
+                        SizedBox(height: 6),
+                        Text('Your payment of Rs 41.30 could not be processed.',
+                          style: TextStyle(fontSize: 13, color: Color(0xFF6B7280),
+                              height: 1.4),
+                          textAlign: TextAlign.center),
+                        SizedBox(height: 20),
+                        Container(
+                          decoration: BoxDecoration(
+                            color: Color(0xFFFFF1F1),
+                            border: Border.all(color: Ux4gPalette.red100),
+                            borderRadius: BorderRadius.circular(10)),
+                          child: Column(children: [
+                            _payDetailRow('Reason', 'Bank declined',
+                                valueColor: Ux4gPalette.red600),
+                            _payDetailRow('Attempted amount', 'Rs 41.30'),
+                            _payDetailRow('Method', 'UPI - ramesh@upi'),
+                            _payDetailRow('Date and time', '12 Apr 2026, 2:34 PM IST'),
+                          ]),
+                        ),
+                        SizedBox(height: 20),
+                        Ux4gButton(text: 'Try again with UPI', onPressed: () {},
+                            size: Ux4gButtonSize.large, width: double.infinity),
+                        SizedBox(height: 10),
+                        Ux4gButton(text: 'Try a different method', onPressed: () {},
+                            variant: Ux4gButtonVariant.outline,
+                            size: Ux4gButtonSize.large, width: double.infinity),
+                        SizedBox(height: 12),
+                        Center(
+                          child: TextButton(onPressed: () {},
+                            child: Text('Pay at CSC centre',
+                                style: TextStyle(fontSize: 14, color: primary))),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.only(bottom: 20, top: 8),
+                child: Column(mainAxisSize: MainAxisSize.min, children: [
+                  Text('Powered by -', style: TextStyle(fontSize: 11,
+                      color: Color(0xFF9CA3AF), fontWeight: FontWeight.w500)),
+                  SizedBox(height: 6),
+                  Image.asset('assets/digital_india_logo.png', height: 22),
+                ]),
+              ),
+            ],
+          ),
+        ),
+      ),
+    ],
+  ),
+)
+
+// Helper: _payDetailRow — same as Payment Successful variant''';
 
 // -----------------------------------------------------------------------
 // FEE WAIVED — flat + card
@@ -20795,49 +22059,275 @@ class _FeeWaivedCardMockup extends StatelessWidget {
 }
 
 const _feeWaivedCode = r'''
-// Fee Waived — flat (360 × 760)
-Column(children: [
-  Ux4gAppHeader(...),
-  Ux4gStepper(totalSteps: 5, currentStep: 5, ...),
-  Divider(height: 1, color: Color(0xFFE5E7EB)),
-  Expanded(child: SingleChildScrollView(
-    padding: EdgeInsets.fromLTRB(16, 20, 16, 16),
-    child: Column(children: [
-      // Green concentric badge (same as Payment Successful)
-      Text('Fee Waived',
-        style: TextStyle(
-          color: Ux4gPalette.green700,
-          fontSize: 22, fontWeight: FontWeight.w800)),
-      // Waiver table:
-      //   Application fee  Rs 30.00
-      //   Processing charge Rs 5.00
-      //   GST 18%          Rs 6.30
-      //   Waiver applied   − Rs 41.30  (red text)
-      //   Total payable    Rs 0.00     (bold, Color(0xFFF0FDF4) bg)
-      Ux4gButton(text: 'Proceed without payment',
-        size: Ux4gButtonSize.large, width: double.infinity, onPressed: () {}),
-      TextButton(child: Text('Pay anyway'), onPressed: () {}),
-    ]),
-  )),
-  _BrandFooter(),
-])''';
+Scaffold(
+  backgroundColor: Color(0xFFFAFAFA),
+  body: Column(
+    children: [
+      Ux4gAppHeader(
+        variant: Ux4gAppHeaderVariant.light,
+        title: '',
+        leadingWidgets: [
+          SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
+          Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
+          SvgPicture.asset('assets/Union.svg', height: 32),
+        ],
+        horizontalPadding: 16,
+        leadingSpacing: 12,
+      ),
+      Divider(height: 1, thickness: 1, color: Color(0xFFE5E7EB)),
+      Padding(
+        padding: EdgeInsets.fromLTRB(16, 10, 16, 10),
+        child: Ux4gStepper(
+          totalSteps: 5, currentStep: 5,
+          orientation: StepperOrientation.horizontal,
+          steps: [
+            Ux4gStepItem(title: 'Review'), Ux4gStepItem(title: 'Details'),
+            Ux4gStepItem(title: 'Documents'), Ux4gStepItem(title: 'Preview'),
+            Ux4gStepItem(title: 'Payment'),
+          ],
+        ),
+      ),
+      Divider(height: 1, thickness: 1, color: Color(0xFFE5E7EB)),
+      Expanded(
+        child: Container(
+          color: Color(0xFFFAFAFA),
+          child: Column(
+            children: [
+              Expanded(
+                child: SingleChildScrollView(
+                  padding: EdgeInsets.fromLTRB(16, 20, 16, 16),
+                  child: Column(
+                    children: [
+                      // Green concentric badge
+                      Container(
+                        width: 64, height: 64,
+                        decoration: BoxDecoration(
+                          color: Ux4gPalette.green100, shape: BoxShape.circle),
+                        alignment: Alignment.center,
+                        child: Container(
+                          width: 36, height: 36,
+                          decoration: BoxDecoration(
+                            color: Ux4gPalette.green, shape: BoxShape.circle),
+                          child: Icon(Icons.check, color: Colors.white, size: 22),
+                        ),
+                      ),
+                      SizedBox(height: 16),
+                      Text(
+                        'Fee Waived',
+                        style: TextStyle(
+                          fontSize: 22, fontWeight: FontWeight.w800,
+                          color: Ux4gPalette.green700,
+                          height: 1.2, letterSpacing: -0.3,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                      SizedBox(height: 6),
+                      Text(
+                        'As an SC/ST applicant, you are eligible for '
+                        'a full fee waiver for this certificate.',
+                        style: TextStyle(
+                          fontSize: 13, color: Color(0xFF6B7280), height: 1.4),
+                        textAlign: TextAlign.center,
+                      ),
+                      SizedBox(height: 20),
+                      // Waiver breakdown table
+                      Container(
+                        decoration: BoxDecoration(
+                          color: Color(0xFFF0FDF4),
+                          border: Border.all(color: Ux4gPalette.green100),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Column(
+                          children: [
+                            _feeRow('Application fee', 'Rs 30.00'),
+                            _feeRow('Processing charge', 'Rs 5.00'),
+                            _feeRow('GST 18%', 'Rs 6.30'),
+                            _feeRow('Waiver applied', '\u2212 Rs 41.30', redAmount: true),
+                            _feeRow('Total payable', 'Rs 0.00', bold: true),
+                          ],
+                        ),
+                      ),
+                      SizedBox(height: 20),
+                      Ux4gButton(
+                        text: 'Proceed without payment',
+                        onPressed: () {},
+                        size: Ux4gButtonSize.large,
+                        width: double.infinity,
+                      ),
+                      SizedBox(height: 12),
+                      Center(
+                        child: TextButton(
+                          onPressed: () {},
+                          child: Text('Pay anyway',
+                              style: TextStyle(fontSize: 14, color: primary)),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.only(bottom: 20, top: 8),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text('Powered by -',
+                        style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF),
+                            fontWeight: FontWeight.w500)),
+                    SizedBox(height: 6),
+                    Image.asset('assets/digital_india_logo.png', height: 22),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    ],
+  ),
+)
+
+// Helper: fee row
+Widget _feeRow(String label, String amount, {bool bold = false, bool redAmount = false}) {
+  return Container(
+    padding: EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+    child: Row(
+      children: [
+        Expanded(
+          child: Text(label,
+              style: TextStyle(fontSize: 13,
+                fontWeight: bold ? FontWeight.w600 : FontWeight.w400,
+                color: bold ? Color(0xFF111827) : Color(0xFF6B7280)))),
+        Text(amount,
+            style: TextStyle(fontSize: 13,
+              fontWeight: bold ? FontWeight.w600 : FontWeight.w400,
+              color: redAmount ? Ux4gPalette.red600
+                  : (bold ? Color(0xFF111827) : Color(0xFF374151)))),
+      ],
+    ),
+  );
+}''';
 
 const _feeWaivedCardCode = r'''
-// Fee Waived — card style
-Column(children: [
-  Ux4gAppHeader(...), Ux4gStepper(...), Divider(...),
-  Expanded(child: Container(color: Color(0xFFE9E5FF), child: Column(children: [
-    Expanded(child: SingleChildScrollView(
-      child: Container(
-        padding: EdgeInsets.fromLTRB(16, 24, 16, 20),
-        decoration: BoxDecoration(
-          color: Colors.white, borderRadius: BorderRadius.circular(16)),
-        child: Column(children: [ /* same content as flat */ ]),
+Scaffold(
+  backgroundColor: Color(0xFFE9E5FF),
+  body: Column(
+    children: [
+      Ux4gAppHeader(
+        variant: Ux4gAppHeaderVariant.light,
+        title: '',
+        leadingWidgets: [
+          SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
+          Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
+          SvgPicture.asset('assets/Union.svg', height: 32),
+        ],
+        horizontalPadding: 16,
+        leadingSpacing: 12,
       ),
-    )),
-    _BrandFooter(),
-  ]))),
-])''';
+      Divider(height: 1, thickness: 1, color: Color(0xFFE5E7EB)),
+      Padding(
+        padding: EdgeInsets.fromLTRB(16, 10, 16, 10),
+        child: Ux4gStepper(
+          totalSteps: 5, currentStep: 5,
+          orientation: StepperOrientation.horizontal,
+          steps: [
+            Ux4gStepItem(title: 'Review'), Ux4gStepItem(title: 'Details'),
+            Ux4gStepItem(title: 'Documents'), Ux4gStepItem(title: 'Preview'),
+            Ux4gStepItem(title: 'Payment'),
+          ],
+        ),
+      ),
+      Divider(height: 1, thickness: 1, color: Color(0xFFE5E7EB)),
+      Expanded(
+        child: Container(
+          color: Color(0xFFE9E5FF),
+          child: Column(
+            children: [
+              Expanded(
+                child: SingleChildScrollView(
+                  padding: EdgeInsets.fromLTRB(16, 20, 16, 16),
+                  child: Container(
+                    padding: EdgeInsets.fromLTRB(16, 24, 16, 20),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(16),
+                      boxShadow: [
+                        BoxShadow(color: Colors.black.withOpacity(0.04),
+                            blurRadius: 16, offset: Offset(0, 4)),
+                      ],
+                    ),
+                    child: Column(
+                      children: [
+                        Container(
+                          width: 64, height: 64,
+                          decoration: BoxDecoration(
+                            color: Ux4gPalette.green100, shape: BoxShape.circle),
+                          alignment: Alignment.center,
+                          child: Container(
+                            width: 36, height: 36,
+                            decoration: BoxDecoration(
+                              color: Ux4gPalette.green, shape: BoxShape.circle),
+                            child: Icon(Icons.check, color: Colors.white, size: 22),
+                          ),
+                        ),
+                        SizedBox(height: 16),
+                        Text('Fee Waived',
+                          style: TextStyle(fontSize: 22, fontWeight: FontWeight.w800,
+                              color: Ux4gPalette.green700, height: 1.2,
+                              letterSpacing: -0.3),
+                          textAlign: TextAlign.center),
+                        SizedBox(height: 6),
+                        Text('As an SC/ST applicant, you are eligible for '
+                            'a full fee waiver for this certificate.',
+                          style: TextStyle(fontSize: 13, color: Color(0xFF6B7280),
+                              height: 1.4),
+                          textAlign: TextAlign.center),
+                        SizedBox(height: 20),
+                        Container(
+                          decoration: BoxDecoration(
+                            color: Color(0xFFF0FDF4),
+                            border: Border.all(color: Ux4gPalette.green100),
+                            borderRadius: BorderRadius.circular(10)),
+                          child: Column(children: [
+                            _feeRow('Application fee', 'Rs 30.00'),
+                            _feeRow('Processing charge', 'Rs 5.00'),
+                            _feeRow('GST 18%', 'Rs 6.30'),
+                            _feeRow('Waiver applied', '\u2212 Rs 41.30', redAmount: true),
+                            _feeRow('Total payable', 'Rs 0.00', bold: true),
+                          ]),
+                        ),
+                        SizedBox(height: 20),
+                        Ux4gButton(text: 'Proceed without payment', onPressed: () {},
+                            size: Ux4gButtonSize.large, width: double.infinity),
+                        SizedBox(height: 12),
+                        Center(
+                          child: TextButton(onPressed: () {},
+                            child: Text('Pay anyway',
+                                style: TextStyle(fontSize: 14, color: primary))),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.only(bottom: 20, top: 8),
+                child: Column(mainAxisSize: MainAxisSize.min, children: [
+                  Text('Powered by -', style: TextStyle(fontSize: 11,
+                      color: Color(0xFF9CA3AF), fontWeight: FontWeight.w500)),
+                  SizedBox(height: 6),
+                  Image.asset('assets/digital_india_logo.png', height: 22),
+                ]),
+              ),
+            ],
+          ),
+        ),
+      ),
+    ],
+  ),
+)
+
+// Helper: _feeRow — same as Default variant''';
 
 // ═══════════════════════════════════════════════════════════════════════
 // WidgetbookComponent registrations — Payment and Confirmation
