@@ -278,7 +278,6 @@ class _Ux4gFileUploadState extends State<Ux4gFileUpload> {
                   padding: const EdgeInsets.all(24),
                   child: _buildUploadContent(primary, onPrimary, onBackground, onSurface, lmStrong, bsDefault),
                 ),
-                ),
               ),
 
         const SizedBox(height: 20),

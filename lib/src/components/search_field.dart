@@ -216,7 +216,7 @@ class _Ux4gSearchFieldState extends State<Ux4gSearchField> {
                         padding: const EdgeInsets.all(16.0),
                         child: Text(
                           "No results found",
-                          style: bM_default.copyWith(color: onSurface.withValues(alpha: 0.5)),
+                          style: bmDefault.copyWith(color: onSurface.withValues(alpha: 0.5)),
                         ),
                       ),
                     );
