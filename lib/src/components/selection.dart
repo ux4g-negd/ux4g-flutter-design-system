@@ -64,6 +64,7 @@ class Ux4gRadioButton<T> extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final materialTheme = Theme.of(context);
+    final isDark = materialTheme.brightness == Brightness.dark;
     final ux4gColors = materialTheme.extension<Ux4gColors>();
     final ux4gTypography = materialTheme.extension<Ux4gTypography>();
 
@@ -166,9 +167,9 @@ class Ux4gRadioButton<T> extends StatelessWidget {
                       child: Container(
                         width: size.size - selectedRingThickness * 2,
                         height: size.size - selectedRingThickness * 2,
-                        decoration: const BoxDecoration(
+                        decoration: BoxDecoration(
                           shape: BoxShape.circle,
-                          color: Colors.white,
+                          color: isDark ? Colors.black : Colors.white,
                         ),
                       ),
                     )
