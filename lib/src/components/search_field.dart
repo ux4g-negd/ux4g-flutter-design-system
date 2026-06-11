@@ -168,7 +168,7 @@ class _Ux4gSearchFieldState extends State<Ux4gSearchField> {
     final ux4gTypography = materialTheme.extension<Ux4gTypography>();
 
     // Always use light theme colors for dropdown
-    const onSurface = Color(0xFF111827);
+    const onSurface = Ux4gPalette.neutral900;
     final primary = ux4gColors?.primary ?? materialTheme.colorScheme.primary;
     final bmDefault =
         ux4gTypography?.bM_default ??
@@ -237,7 +237,7 @@ class _Ux4gSearchFieldState extends State<Ux4gSearchField> {
                     padding: EdgeInsets.zero,
                     itemCount: filteredOptions.length,
                     separatorBuilder: (context, index) =>
-                        const Divider(height: 1, color: Color(0xFFE5E7EB)),
+                        const Divider(height: 1, color: Ux4gPalette.neutral200),
                     itemBuilder: (context, index) {
                       final option = filteredOptions[index];
                       final parts = option.split(' - ');
@@ -259,7 +259,7 @@ class _Ux4gSearchFieldState extends State<Ux4gSearchField> {
                             horizontal: 12,
                             vertical: 12,
                           ),
-                          color: isSelected ? const Color(0xFFF2EFFF) : null,
+                          color: isSelected ? Ux4gPalette.primary50 : null,
                           child: Row(
                             children: [
                               Expanded(
@@ -272,7 +272,7 @@ class _Ux4gSearchFieldState extends State<Ux4gSearchField> {
                                         fontSize: 15,
                                         fontWeight: FontWeight.w600,
                                         color: isSelected
-                                            ? const Color(0xFF4A2BC2)
+                                            ? Ux4gPalette.primary600
                                             : onSurface,
                                       ),
                                     ),
@@ -283,7 +283,7 @@ class _Ux4gSearchFieldState extends State<Ux4gSearchField> {
                                         style: TextStyle(
                                           fontSize: 12,
                                           color: isSelected
-                                              ? const Color(0xFF4A2BC2)
+                                              ? Ux4gPalette.primary600
                                               : onSurface.withValues(
                                                   alpha: 0.5,
                                                 ),
@@ -296,7 +296,7 @@ class _Ux4gSearchFieldState extends State<Ux4gSearchField> {
                               if (isSelected)
                                 const Icon(
                                   Icons.check,
-                                  color: Color(0xFF4A2BC2),
+                                  color: Ux4gPalette.primary600,
                                   size: 20,
                                 ),
                             ],

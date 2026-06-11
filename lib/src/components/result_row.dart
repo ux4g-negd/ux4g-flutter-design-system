@@ -131,7 +131,7 @@ class _Ux4gResultRowState extends State<Ux4gResultRow>
                         Ux4gUnifiedPillTag(
                           segments: widget.metadataSegments!,
                           size: Ux4gTagSize.l,
-                          borderColor: const Color(0xFFD1D5DB),
+                          borderColor: Ux4gPalette.neutral300,
                         ),
                       ],
                     ],

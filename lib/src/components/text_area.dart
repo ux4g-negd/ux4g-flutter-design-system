@@ -58,18 +58,23 @@ class Ux4gTextArea extends StatefulWidget {
 class _Ux4gTextAreaState extends State<Ux4gTextArea> {
   late final TextEditingController _controller;
   late final FocusNode _focusNode;
+  bool _isFocused = false;
 
   @override
   void initState() {
     super.initState();
     _controller = TextEditingController(text: widget.value);
     _focusNode = FocusNode();
+    _focusNode.addListener(() {
+      setState(() => _isFocused = _focusNode.hasFocus);
+    });
 
     // Listen to changes to notify parent
     _controller.addListener(_onTextChanged);
   }
 
   void _onTextChanged() {
+    setState(() {}); // Local rebuild to update character counter
     if (_controller.text != widget.value) {
       widget.onValueChange(_controller.text);
     }
@@ -129,6 +134,12 @@ class _Ux4gTextAreaState extends State<Ux4gTextArea> {
           fontWeight: FontWeight.w700,
         ) ??
         const TextStyle(fontWeight: FontWeight.w700, fontSize: 16);
+    final bsStrong =
+        ux4gTypography?.bS_strong ??
+        materialTheme.textTheme.bodySmall?.copyWith(
+          fontWeight: FontWeight.w700,
+        ) ??
+        const TextStyle(fontWeight: FontWeight.w700, fontSize: 14);
     final bxsDefault =
         ux4gTypography?.bXS_default ??
         materialTheme.textTheme.bodySmall ??
@@ -156,10 +167,10 @@ class _Ux4gTextAreaState extends State<Ux4gTextArea> {
         if (widget.label != null) ...[
           Row(
             children: [
-              Text(widget.label!, style: bmStrong.copyWith(color: labelColor)),
+              Text(widget.label!, style: bsStrong.copyWith(color: labelColor)),
               if (widget.required) ...[
                 const SizedBox(width: 4),
-                Text("*", style: bmStrong.copyWith(color: errorColor)),
+                Text("*", style: bsStrong.copyWith(color: errorColor)),
               ],
               if (widget.trailingIconLabel != null) ...[
                 const SizedBox(width: 4),
@@ -185,7 +196,7 @@ class _Ux4gTextAreaState extends State<Ux4gTextArea> {
             decoration: BoxDecoration(
               color: bgColor,
               borderRadius: BorderRadius.circular(Ux4gRadius.radius8),
-              border: Border.all(color: borderColor, width: 1),
+              border: Border.all(color: borderColor, width: _isFocused ? 2 : 1),
             ),
             padding: EdgeInsets.all(contentPadding),
             child: Stack(
@@ -196,6 +207,7 @@ class _Ux4gTextAreaState extends State<Ux4gTextArea> {
                   enabled: widget.enabled,
                   readOnly: widget.readOnly,
                   maxLines: null,
+                  cursorColor: ux4gColors?.primary ?? materialTheme.colorScheme.primary,
                   maxLength: widget.maxLength,
                   style: bmDefault.copyWith(color: textColor),
                   decoration: InputDecoration(
@@ -215,9 +227,9 @@ class _Ux4gTextAreaState extends State<Ux4gTextArea> {
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      if (widget.characterCountText != null)
+                      if (widget.characterCountText != null || widget.maxLength != null)
                         Text(
-                          widget.characterCountText!,
+                          widget.characterCountText ?? "${_controller.text.length}/${widget.maxLength}",
                           style: bxsDefault.copyWith(
                             color: onSurface.withValues(alpha: 0.5),
                           ),
@@ -266,13 +278,15 @@ class _Ux4gTextAreaState extends State<Ux4gTextArea> {
     final error = ux4gColors?.error ?? materialTheme.colorScheme.error;
     final warning = ux4gColors?.warning ?? Colors.orange;
     final success = ux4gColors?.success ?? Colors.green;
+    final primary = ux4gColors?.primary ?? materialTheme.colorScheme.primary;
 
     if (!widget.enabled) return onSurface.withValues(alpha: 0.3);
     return switch (widget.status) {
       Ux4gInputFieldStatus.error => error,
       Ux4gInputFieldStatus.warning => warning,
       Ux4gInputFieldStatus.success => success,
-      Ux4gInputFieldStatus.defaultStatus => onSurface.withValues(alpha: 0.3),
+      Ux4gInputFieldStatus.defaultStatus =>
+        _isFocused ? primary : onSurface.withValues(alpha: 0.3),
     };
   }
 

@@ -69,12 +69,12 @@ class Ux4gFeedbackFormNps extends StatefulWidget {
     this.successBackgroundColor,
     this.selectedScoreBackgroundColor,
     this.selectedScoreTextColor,
-    this.lowScoreBackgroundColor = const Color(0xFFFFECEE),
-    this.lowScoreTextColor = const Color(0xFF8A1A16),
-    this.mediumScoreBackgroundColor = const Color(0xFFFFE7BF),
-    this.mediumScoreTextColor = const Color(0xFFAD4E00),
-    this.highScoreBackgroundColor = const Color(0xFFDDF8D8),
-    this.highScoreTextColor = const Color(0xFF00522C),
+    this.lowScoreBackgroundColor = Ux4gPalette.red100,
+    this.lowScoreTextColor = Ux4gPalette.red800,
+    this.mediumScoreBackgroundColor = Ux4gPalette.orange100,
+    this.mediumScoreTextColor = Ux4gPalette.orange800,
+    this.highScoreBackgroundColor = Ux4gPalette.green100,
+    this.highScoreTextColor = Ux4gPalette.green800,
   });
 
   @override

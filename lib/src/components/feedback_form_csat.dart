@@ -91,21 +91,21 @@ class Ux4gFeedbackFormCsat extends StatefulWidget {
     this.successIconColor,
     this.successBackgroundColor,
     this.selectedBackgroundColors = const [
-      Color(0xFFFFECEE), // face_0
-      Color(0xFFFFF8F8), // face_1
-      Color(0xFFFFF7E6), // face_2
-      Color(0xFFF2FCEF), // face_3
-      Color(0xFFDDF8D8), // face_4
+      Ux4gPalette.red100, // face_0
+      Ux4gPalette.red50, // face_1
+      Ux4gPalette.orange50, // face_2
+      Ux4gPalette.green50, // face_3
+      Ux4gPalette.green100, // face_4
     ],
     this.selectedIconColors = const [
-      Color(0xFFDB372D), // face_0
-      Color(0xFFDB372D), // face_1
-      Color(0xFFFA8C16), // face_2
-      Color(0xFF128937), // face_3
-      Color(0xFF128937), // face_4
+      Ux4gPalette.red600, // face_0
+      Ux4gPalette.red600, // face_1
+      Ux4gPalette.orange600, // face_2
+      Ux4gPalette.green600, // face_3
+      Ux4gPalette.green600, // face_4
     ],
-    this.unselectedBackgroundColor = const Color(0xFFF5F5F5),
-    this.unselectedIconColor = const Color(0xFF737373),
+    this.unselectedBackgroundColor = Ux4gPalette.neutral100,
+    this.unselectedIconColor = Ux4gPalette.neutral500,
   });
 
   @override

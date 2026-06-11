@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../foundation/colors.dart';
 
 /// Colors used across the biometric verification flow.
 class BiometricColors {
@@ -23,21 +24,21 @@ class BiometricColors {
   final Color attemptLastBorder;
 
   const BiometricColors({
-    this.primary = const Color(0xFF6A4EFF),
-    this.success = const Color(0xFF1AA64A),
-    this.error = const Color(0xFFF55E57),
-    this.warning = const Color(0xFFFFA827),
-    this.surface = const Color(0xFFFFFFFF),
-    this.onSurface = const Color(0xFF121212),
+    this.primary = Ux4gPalette.primary500,
+    this.success = Ux4gPalette.green500,
+    this.error = Ux4gPalette.red500,
+    this.warning = Ux4gPalette.secondary500,
+    this.surface = Ux4gPalette.white,
+    this.onSurface = Ux4gPalette.gray900,
     this.overlay = const Color(0xCC000000),
-    this.ovalGuide = const Color(0xFFFFFFFF),
-    this.ovalActive = const Color(0xFF1AA64A),
-    this.ovalBlink = const Color(0xFF6A4EFF),
-    this.ovalError = const Color(0xFFF55E57),
+    this.ovalGuide = Ux4gPalette.white,
+    this.ovalActive = Ux4gPalette.green500,
+    this.ovalBlink = Ux4gPalette.primary500,
+    this.ovalError = Ux4gPalette.red500,
     this.cardBackground = const Color(0xFFF8F8F8),
-    this.instructionCardBg = const Color(0xFFFFFFFF),
+    this.instructionCardBg = Ux4gPalette.white,
     this.shimmer = const Color(0xFFE0E0E0),
-    this.statusBadgeBg = const Color(0xFF1AA64A),
+    this.statusBadgeBg = Ux4gPalette.green500,
     this.attemptWarningBg = const Color(0xFFFFF8E1),
     this.attemptWarningBorder = const Color(0xFFFFE082),
     this.attemptLastBg = const Color(0xFFFFEBEE),
