@@ -709,11 +709,11 @@ Ux4gCard(
                             size: Ux4gAvatarSize.m,
                           ),
                           const SizedBox(width: 12),
-                          const Expanded(
+                          Expanded(
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(
+                                const Text(
                                   'Title',
                                   style: TextStyle(
                                     fontWeight: FontWeight.w700,
@@ -723,7 +723,9 @@ Ux4gCard(
                                 Text(
                                   'Subtitle',
                                   style: TextStyle(
-                                    color: Colors.black54,
+                                    color: Theme.of(context).brightness == Brightness.dark
+                                        ? Colors.white70
+                                        : Colors.black54,
                                     fontSize: 13,
                                   ),
                                 ),
@@ -748,12 +750,14 @@ Ux4gCard(
                         ],
                       ),
                       const SizedBox(height: 16),
-                      const Text(
+                      Text(
                         'Lorem ipsum is a dummy or placeholder text commonly used in graphic design, '
                         'publishing, and web development.',
                         style: TextStyle(
                           fontSize: 14,
-                          color: Colors.black87,
+                          color: Theme.of(context).brightness == Brightness.dark
+                              ? Colors.white.withValues(alpha: 0.87)
+                              : Colors.black87,
                           height: 1.5,
                         ),
                       ),
@@ -823,12 +827,16 @@ class _IconLabel extends StatelessWidget {
   const _IconLabel({required this.text});
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
+    final color = isDark ? Colors.white70 : Colors.black54;
+    final iconColor = isDark ? Colors.white60 : Colors.black45;
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        const Icon(Icons.category_outlined, size: 14, color: Colors.black45),
+        Icon(Icons.category_outlined, size: 14, color: iconColor),
         const SizedBox(width: 4),
-        Text(text, style: const TextStyle(fontSize: 12, color: Colors.black54)),
+        Text(text, style: TextStyle(fontSize: 12, color: color)),
       ],
     );
   }
@@ -839,22 +847,26 @@ class _SmallTag extends StatelessWidget {
   const _SmallTag({required this.text});
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
+    final bgColor = isDark ? Colors.white.withValues(alpha: 0.1) : Colors.black.withValues(alpha: 0.05);
+    final color = isDark ? Colors.white70 : Colors.black54;
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
       decoration: BoxDecoration(
-        color: Colors.black.withValues(alpha: 0.05),
+        color: bgColor,
         borderRadius: BorderRadius.circular(4),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          const Icon(Icons.category, size: 12, color: Colors.black54),
+          Icon(Icons.category, size: 12, color: color),
           const SizedBox(width: 4),
           Text(
             text,
-            style: const TextStyle(
+            style: TextStyle(
               fontSize: 11,
-              color: Colors.black54,
+              color: color,
               fontWeight: FontWeight.w500,
             ),
           ),
