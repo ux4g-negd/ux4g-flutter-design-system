@@ -8,8 +8,8 @@ enum Ux4gButtonVariant { primary, secondary, outline, ghost }
 
 enum Ux4gButtonSize {
   small(Ux4gSpace.space12, Ux4gSpace.space8),
-  medium(Ux4gSpace.space24, Ux4gSpace.space16),
-  large(Ux4gSpace.space32, Ux4gSpace.space20);
+  medium(28.0, 18.0),
+  large(Ux4gSpace.space20, Ux4gSpace.space12);
 
   final double horizontalPadding;
   final double verticalPadding;
@@ -96,7 +96,11 @@ class Ux4gButton extends StatelessWidget {
         borderWidth ?? (variant == Ux4gButtonVariant.outline ? 1.0 : 0.0);
 
     final textStyle =
-        ux4gTypography?.lM_default ??
+        switch (size) {
+          Ux4gButtonSize.small => ux4gTypography?.lS_default,
+          Ux4gButtonSize.medium => ux4gTypography?.lM_default,
+          Ux4gButtonSize.large => ux4gTypography?.lL_default,
+        } ??
         materialTheme.textTheme.labelLarge ??
         const TextStyle();
 

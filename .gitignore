@@ -30,6 +30,9 @@ migrate_working_dir/
 /build/
 /coverage/
 
+# Gemini AI config (contains API tokens)
+.gemini/
+
 # Custom ignores
 analysis_report.txt
 example/macos/Flutter/GeneratedPluginRegistrant.swift

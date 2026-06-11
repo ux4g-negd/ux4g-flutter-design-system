@@ -233,7 +233,15 @@ class Ux4gCircularProgress extends StatelessWidget {
                   progressColor: resolvedProgressColor,
                   trackColor: resolvedTrackColor,
                   backgroundColor: backgroundColor,
-                  progressGradient: progressGradient,
+                  progressGradient: progressGradient ??
+                      (progressColor == null
+                          ? const LinearGradient(
+                              colors: [
+                                Ux4gPalette.primary600,
+                                Ux4gPalette.primary200,
+                              ],
+                            )
+                          : null),
                   strokeCap: strokeCap,
                   startAngle: startAngle,
                 ),

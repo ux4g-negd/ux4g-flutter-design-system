@@ -4,6 +4,7 @@ version: 0.3.1
 homepage: https://github.com/ux4g-negd/ux4g-flutter-design-system
 repository: https://github.com/ux4g-negd/ux4g-flutter-design-system
 issue_tracker: https://github.com/ux4g-negd/ux4g-flutter-design-system/issues
+documentation: https://ux4g-design.netlify.app/
 
 environment:
   sdk: ^3.10.1

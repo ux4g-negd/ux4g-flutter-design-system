@@ -250,8 +250,7 @@ class _ComponentShowcasePageState extends State<ComponentShowcasePage> {
                         colors: colors,
                         child: Ux4gButton(
                           onPressed: () {},
-                          text: 'Confirm Changes',
-                          leadingIcon: Icons.check,
+                          text: 'confirm changes',
                         ),
                       ),
 
