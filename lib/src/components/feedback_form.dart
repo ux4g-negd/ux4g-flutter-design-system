@@ -189,12 +189,17 @@ class _Ux4gFeedbackFormState extends State<Ux4gFeedbackForm> {
 
             // Determine active color based on rating level
             Color activeColor;
+            final isDark = materialTheme.brightness == Brightness.dark;
             if (widget.activeRatingColor != null) {
               activeColor = widget.activeRatingColor!;
             } else if (_rating <= widget.lowRatingThreshold) {
-              activeColor = widget.lowRatingColor ?? info;
+              activeColor = (widget.lowRatingColor == Ux4gPalette.red600 && isDark)
+                  ? (ux4gColors?.error ?? Ux4gPalette.red300)
+                  : (widget.lowRatingColor ?? info);
             } else {
-              activeColor = widget.highRatingColor ?? info;
+              activeColor = (widget.highRatingColor == Ux4gPalette.yellow600 && isDark)
+                  ? Ux4gPalette.yellow500
+                  : (widget.highRatingColor ?? info);
             }
 
             return GestureDetector(

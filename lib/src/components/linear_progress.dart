@@ -129,6 +129,7 @@ class Ux4gLinearProgress extends StatelessWidget {
     final materialTheme = Theme.of(context);
     final ux4gColors = materialTheme.extension<Ux4gColors>();
     final ux4gTypography = materialTheme.extension<Ux4gTypography>();
+    final isDark = materialTheme.brightness == Brightness.dark;
 
     final radius = _resolvedRadius();
     final clampedValue = value.clamp(0.0, 1.0);
@@ -245,7 +246,9 @@ class Ux4gLinearProgress extends StatelessWidget {
           resolvedColor: resolvedColor,
           gradientColors: gradientColors ??
               (color == null
-                  ? const [Ux4gPalette.primary600, Ux4gPalette.primary200]
+                  ? (isDark
+                      ? const [Ux4gPalette.primary300, Ux4gPalette.primary950]
+                      : const [Ux4gPalette.primary600, Ux4gPalette.primary200])
                   : null),
           trackColor: resolvedTrack,
           showPercentage:

@@ -83,6 +83,8 @@ class _Ux4gResultRowState extends State<Ux4gResultRow>
     final materialTheme = Theme.of(context);
     final ux4gColors = materialTheme.extension<Ux4gColors>();
     final ux4gTypography = materialTheme.extension<Ux4gTypography>();
+    final isDark = materialTheme.brightness == Brightness.dark;
+    final borderColor = isDark ? Ux4gPalette.neutral800 : Ux4gPalette.neutral300;
 
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -131,7 +133,7 @@ class _Ux4gResultRowState extends State<Ux4gResultRow>
                         Ux4gUnifiedPillTag(
                           segments: widget.metadataSegments!,
                           size: Ux4gTagSize.l,
-                          borderColor: Ux4gPalette.neutral300,
+                          borderColor: borderColor,
                         ),
                       ],
                     ],
