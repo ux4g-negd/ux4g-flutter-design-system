@@ -27,7 +27,7 @@ bool _isDark(BuildContext context) =>
     Theme.of(context).brightness == Brightness.dark;
 
 Color _getBg(BuildContext context) =>
-    _isDark(context) ? Ux4gPalette.neutral950 : Ux4gPalette.neutral50;
+    _isDark(context) ? Ux4gPalette.primary800 : Ux4gPalette.primary100;
 Color _getBorder(BuildContext context) =>
     _isDark(context) ? Ux4gPalette.neutral800 : Ux4gPalette.neutral200;
 Color _getTitleColor(BuildContext context) =>
@@ -1243,7 +1243,9 @@ class _PhoneFrame extends StatelessWidget {
       height: 760,
       clipBehavior: Clip.antiAlias,
       decoration: BoxDecoration(
-        color: _getBg(context),
+        color: _isDark(context)
+            ? Ux4gPalette.primary600
+            : Ux4gPalette.primary300,
         borderRadius: BorderRadius.circular(20),
         border: Border.all(color: _getBorder(context)),
         boxShadow: [
@@ -1276,9 +1278,11 @@ class _BrandHeader extends StatelessWidget {
           title: '',
           leadingWidgets: [
             SvgPicture.asset(
-              _nationalEmblemPath, 
+              _nationalEmblemPath,
               height: 32,
-              colorFilter: _isDark(context) ? const ColorFilter.mode(Colors.white, BlendMode.srcIn) : null,
+              colorFilter: _isDark(context)
+                  ? const ColorFilter.mode(Colors.white, BlendMode.srcIn)
+                  : null,
             ),
             SizedBox(
               height: 28,
@@ -1290,9 +1294,14 @@ class _BrandHeader extends StatelessWidget {
               ),
             ),
             SvgPicture.asset(
-              _unionLogoPath, 
+              _unionLogoPath,
               height: 32,
-              colorFilter: ColorFilter.mode(_isDark(context) ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn),
+              colorFilter: ColorFilter.mode(
+                _isDark(context)
+                    ? Ux4gPalette.primary300
+                    : Ux4gPalette.primary600,
+                BlendMode.srcIn,
+              ),
             ),
           ],
           horizontalPadding: 16,
@@ -1323,7 +1332,11 @@ class _BrandFooter extends StatelessWidget {
                 .copyWith(color: _getMutedText(context)),
           ),
           const SizedBox(height: 6),
-          Image.asset(_digitalIndiaLogoPath, height: 22, color: _isDark(context) ? Colors.white : null),
+          Image.asset(
+            _digitalIndiaLogoPath,
+            height: 22,
+            color: _isDark(context) ? Colors.white : null,
+          ),
         ],
       ),
     );
@@ -1478,8 +1491,8 @@ class _SignInMobileMockupState extends State<_SignInMobileMockup> {
                     text: 'Send OTP',
                     onPressed: () {},
                     size: Ux4gButtonSize.large,
-              height: 48,
-              width: 326,
+                    height: 48,
+                    width: 326,
                   ),
                   const SizedBox(height: 16),
 
@@ -1504,8 +1517,8 @@ class _SignInMobileMockupState extends State<_SignInMobileMockup> {
                     onPressed: () {},
                     variant: Ux4gButtonVariant.outline,
                     size: Ux4gButtonSize.large,
-              height: 48,
-              width: 326,
+                    height: 48,
+                    width: 326,
                   ),
                   const SizedBox(height: 28),
 
@@ -1605,8 +1618,8 @@ class _EnterOtpMobileMockupState extends State<_EnterOtpMobileMockup> {
                     text: 'Verify OTP',
                     onPressed: () {},
                     size: Ux4gButtonSize.large,
-              height: 48,
-              width: 326,
+                    height: 48,
+                    width: 326,
                   ),
                   const SizedBox(height: 12),
 
@@ -1757,8 +1770,8 @@ class _SignInAadhaarMobileMockupState
                     // disabled style otherwise.
                     enabled: validation.status == Ux4gInputFieldStatus.success,
                     size: Ux4gButtonSize.large,
-              height: 48,
-              width: 326,
+                    height: 48,
+                    width: 326,
                   ),
                   const SizedBox(height: 12),
 
@@ -2073,7 +2086,7 @@ Column(
       leadingWidgets: [
         SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
         Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
-        SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
+        SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.red500, BlendMode.srcIn)),
       ],
     ),
     Divider(height: 1, color: Color(0xFFE5E7EB)),
@@ -2154,7 +2167,7 @@ Column(
       leadingWidgets: [
         SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
         Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
-        SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
+        SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.red500, BlendMode.srcIn)),
       ],
     ),
     Divider(height: 1, color: Color(0xFFE5E7EB)),
@@ -2270,7 +2283,7 @@ Column(
       leadingWidgets: [
         SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
         Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
-        SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
+        SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.red500, BlendMode.srcIn)),
       ],
     ),
     Divider(height: 1, color: Color(0xFFE5E7EB)),
@@ -2390,7 +2403,14 @@ class _SignInWithMobileMockupState extends State<_SignInWithMobileMockup> {
                     onValueChange: (v) => setState(() => _mobile = v),
                     label: 'Mobile Number',
                     placeholder: 'Enter mobile number',
-                    placeholderStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.neutral500 : Ux4gPalette.neutral400, height: 1.3),
+                    placeholderStyle: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400,
+                      color: Theme.of(context).brightness == Brightness.dark
+                          ? Ux4gPalette.neutral500
+                          : Ux4gPalette.neutral400,
+                      height: 1.3,
+                    ),
                     type: Ux4gInputFieldType.number,
                     prefixText: '+91',
                     maxLength: 10,
@@ -2447,8 +2467,8 @@ class _SignInWithMobileMockupState extends State<_SignInWithMobileMockup> {
                     text: 'Send OTP',
                     onPressed: () {},
                     size: Ux4gButtonSize.large,
-              height: 48,
-              width: 326,
+                    height: 48,
+                    width: 326,
                   ),
                   const SizedBox(height: 16),
 
@@ -2477,8 +2497,8 @@ class _SignInWithMobileMockupState extends State<_SignInWithMobileMockup> {
                     onPressed: () {},
                     variant: Ux4gButtonVariant.outline,
                     size: Ux4gButtonSize.large,
-              height: 48,
-              width: 326,
+                    height: 48,
+                    width: 326,
                   ),
                   const SizedBox(height: 28),
 
@@ -2628,7 +2648,8 @@ class _SignInCardMockupState extends State<_SignInCardMockup> {
   String _password = '';
 
   // Card-variant background � soft purple tint behind the white card.
-  Color _getCardBg(BuildContext context) => _isDark(context) ? Ux4gPalette.primary900 : Ux4gPalette.primary100;
+  Color _getCardBg(BuildContext context) =>
+      _isDark(context) ? Ux4gPalette.red900 : Ux4gPalette.red50;
 
   @override
   Widget build(BuildContext context) {
@@ -2643,7 +2664,7 @@ class _SignInCardMockupState extends State<_SignInCardMockup> {
           // scrolls if its content overflows on smaller frames.
           Expanded(
             child: Container(
-              color: _getCardBg(context),
+              color: _getBg(context),
               child: Column(
                 children: [
                   Expanded(
@@ -2652,7 +2673,9 @@ class _SignInCardMockupState extends State<_SignInCardMockup> {
                       child: Container(
                         padding: const EdgeInsets.fromLTRB(20, 24, 20, 24),
                         decoration: BoxDecoration(
-                          color: _isDark(context) ? Ux4gPalette.gray900 : Colors.white,
+                          color: _isDark(context)
+                              ? Ux4gPalette.gray900
+                              : Colors.white,
                           borderRadius: BorderRadius.circular(16),
                           boxShadow: [
                             BoxShadow(
@@ -2693,7 +2716,16 @@ class _SignInCardMockupState extends State<_SignInCardMockup> {
                                   setState(() => _username = v),
                               label: 'Username',
                               placeholder: 'Enter your username',
-                              placeholderStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.neutral500 : Ux4gPalette.neutral400, height: 1.3),
+                              placeholderStyle: TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w400,
+                                color:
+                                    Theme.of(context).brightness ==
+                                        Brightness.dark
+                                    ? Ux4gPalette.neutral500
+                                    : Ux4gPalette.neutral400,
+                                height: 1.3,
+                              ),
                             ),
                             const SizedBox(height: 16),
 
@@ -2704,7 +2736,16 @@ class _SignInCardMockupState extends State<_SignInCardMockup> {
                                   setState(() => _password = v),
                               label: 'Password',
                               placeholder: '...........',
-                              placeholderStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.neutral500 : Ux4gPalette.neutral400, height: 1.3),
+                              placeholderStyle: TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w400,
+                                color:
+                                    Theme.of(context).brightness ==
+                                        Brightness.dark
+                                    ? Ux4gPalette.neutral500
+                                    : Ux4gPalette.neutral400,
+                                height: 1.3,
+                              ),
                               type: Ux4gInputFieldType.password,
                             ),
                             const SizedBox(height: 12),
@@ -2720,35 +2761,65 @@ class _SignInCardMockupState extends State<_SignInCardMockup> {
                                     style: TextStyle(
                                       fontSize: 14,
                                       fontWeight: FontWeight.w700,
-                                      color: _isDark(context) ? Ux4gPalette.primary300 : Ux4gPalette.primary800,
+                                      color: _isDark(context)
+                                          ? Ux4gPalette.red300
+                                          : Ux4gPalette.red800,
                                       height: 1.3,
                                     ),
                                   ),
                                   const Spacer(),
                                   Container(
-                                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 10,
+                                      vertical: 5,
+                                    ),
                                     decoration: BoxDecoration(
-                                      color: _isDark(context) ? Ux4gPalette.primary800 : Ux4gPalette.primary200,
+                                      color: _isDark(context)
+                                          ? Ux4gPalette.red800
+                                          : Ux4gPalette.red100,
                                       borderRadius: BorderRadius.circular(6),
                                     ),
-                                    child: Text('Attempt 1 of 5',
-                                      style: TextStyle(fontSize: 12,
-                                        color: _isDark(context) ? Ux4gPalette.primary300 : Ux4gPalette.primary800,
-                                        fontWeight: FontWeight.w500)),
+                                    child: Text(
+                                      'Attempt 1 of 5',
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                        color: _isDark(context)
+                                            ? Ux4gPalette.red300
+                                            : Ux4gPalette.red800,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                    ),
                                   ),
                                 ],
                               ),
                               margin: EdgeInsets.zero,
-                              backgroundColor: _isDark(context) ? Ux4gPalette.primary900 : Ux4gPalette.primary100,
-                              borderColor: _isDark(context) ? Ux4gPalette.primary600 : Ux4gPalette.primary300,
-                              padding: const EdgeInsets.fromLTRB(12, 12, 10, 12),
+                              backgroundColor: _isDark(context)
+                                  ? Ux4gPalette.red900
+                                  : Ux4gPalette.red50,
+                              borderColor: _isDark(context)
+                                  ? Ux4gPalette.red600
+                                  : Ux4gPalette.red300,
+                              padding: const EdgeInsets.fromLTRB(
+                                12,
+                                12,
+                                10,
+                                12,
+                              ),
                               titleStyle: TextStyle(
-                                fontSize: 14, fontWeight: FontWeight.w400,
-                                color: _isDark(context) ? Ux4gPalette.red300 : Ux4gPalette.red800,
+                                fontSize: 14,
+                                fontWeight: FontWeight.w400,
+                                color: _isDark(context)
+                                    ? Ux4gPalette.red300
+                                    : Ux4gPalette.red800,
                                 height: 1.3,
                               ),
-                              leadingIcon: Icon(Icons.error,
-                                color: _isDark(context) ? Ux4gPalette.red500 : Ux4gPalette.red600, size: 20),
+                              leadingIcon: Icon(
+                                Icons.error,
+                                color: _isDark(context)
+                                    ? Ux4gPalette.red500
+                                    : Ux4gPalette.red600,
+                                size: 20,
+                              ),
                             ),
                             const SizedBox(height: 16),
 
@@ -2756,8 +2827,8 @@ class _SignInCardMockupState extends State<_SignInCardMockup> {
                               text: 'Send OTP',
                               onPressed: () {},
                               size: Ux4gButtonSize.large,
-              height: 48,
-              width: 326,
+                              height: 48,
+                              width: 326,
                             ),
                             const SizedBox(height: 12),
 
@@ -2790,8 +2861,8 @@ class _SignInCardMockupState extends State<_SignInCardMockup> {
                               onPressed: () {},
                               variant: Ux4gButtonVariant.outline,
                               size: Ux4gButtonSize.large,
-              height: 48,
-              width: 326,
+                              height: 48,
+                              width: 326,
                             ),
                             const SizedBox(height: 16),
 
@@ -2974,7 +3045,8 @@ class _SignInWithMobileCardMockupState
 
   // Same soft-purple background tint used by the username/password
   // card variant so both feel like the same family.
-  Color _getCardBg(BuildContext context) => _isDark(context) ? Ux4gPalette.primary900 : Ux4gPalette.primary100;
+  Color _getCardBg(BuildContext context) =>
+      _isDark(context) ? Ux4gPalette.red900 : Ux4gPalette.red50;
 
   @override
   Widget build(BuildContext context) {
@@ -2996,7 +3068,9 @@ class _SignInWithMobileCardMockupState
                       child: Container(
                         padding: const EdgeInsets.fromLTRB(20, 24, 20, 24),
                         decoration: BoxDecoration(
-                          color: _isDark(context) ? Ux4gPalette.gray900 : Colors.white,
+                          color: _isDark(context)
+                              ? Ux4gPalette.gray900
+                              : Colors.white,
                           borderRadius: BorderRadius.circular(16),
                           boxShadow: [
                             BoxShadow(
@@ -3036,7 +3110,16 @@ class _SignInWithMobileCardMockupState
                               onValueChange: (v) => setState(() => _mobile = v),
                               label: 'Mobile Number',
                               placeholder: 'Enter mobile number',
-                              placeholderStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.neutral500 : Ux4gPalette.neutral400, height: 1.3),
+                              placeholderStyle: TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w400,
+                                color:
+                                    Theme.of(context).brightness ==
+                                        Brightness.dark
+                                    ? Ux4gPalette.neutral500
+                                    : Ux4gPalette.neutral400,
+                                height: 1.3,
+                              ),
                               type: Ux4gInputFieldType.number,
                               prefixText: '+91',
                               maxLength: 10,
@@ -3098,8 +3181,8 @@ class _SignInWithMobileCardMockupState
                               text: 'Send OTP',
                               onPressed: () {},
                               size: Ux4gButtonSize.large,
-              height: 48,
-              width: 326,
+                              height: 48,
+                              width: 326,
                             ),
                             const SizedBox(height: 12),
 
@@ -3132,8 +3215,8 @@ class _SignInWithMobileCardMockupState
                               onPressed: () {},
                               variant: Ux4gButtonVariant.outline,
                               size: Ux4gButtonSize.large,
-              height: 48,
-              width: 326,
+                              height: 48,
+                              width: 326,
                             ),
                             const SizedBox(height: 16),
 
@@ -3308,7 +3391,8 @@ class _EnterOtpCardMockupState extends State<_EnterOtpCardMockup> {
   String _otp = '';
   int _resendNonce = 0;
 
-  Color _getCardBg(BuildContext context) => _isDark(context) ? Ux4gPalette.primary900 : Ux4gPalette.primary100;
+  Color _getCardBg(BuildContext context) =>
+      _isDark(context) ? Ux4gPalette.red900 : Ux4gPalette.red50;
 
   @override
   Widget build(BuildContext context) {
@@ -3392,8 +3476,8 @@ class _EnterOtpCardMockupState extends State<_EnterOtpCardMockup> {
                             text: 'Verify OTP',
                             onPressed: () {},
                             size: Ux4gButtonSize.large,
-              height: 48,
-              width: 326,
+                            height: 48,
+                            width: 326,
                           ),
                           const SizedBox(height: 12),
 
@@ -3552,7 +3636,8 @@ class _SignInAadhaarCardMockupState extends State<_SignInAadhaarCardMockup> {
   String _aadhaar = '';
   String _method = 'otp';
 
-  Color _getCardBg(BuildContext context) => _isDark(context) ? Ux4gPalette.primary900 : Ux4gPalette.primary100;
+  Color _getCardBg(BuildContext context) =>
+      _isDark(context) ? Ux4gPalette.primary900 : Ux4gPalette.primary100;
 
   ({Ux4gInputFieldStatus status, String? caption}) _validate() {
     final digits = _aadhaar.replaceAll(' ', '');
@@ -3632,7 +3717,16 @@ class _SignInAadhaarCardMockupState extends State<_SignInAadhaarCardMockup> {
                             onValueChange: (v) => setState(() => _aadhaar = v),
                             label: 'Aadhaar Number',
                             placeholder: 'XXXX XXXX 1234',
-                            placeholderStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.neutral500 : Ux4gPalette.neutral400, height: 1.3),
+                            placeholderStyle: TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w400,
+                              color:
+                                  Theme.of(context).brightness ==
+                                      Brightness.dark
+                                  ? Ux4gPalette.neutral500
+                                  : Ux4gPalette.neutral400,
+                              height: 1.3,
+                            ),
                             status: validation.status,
                             caption: validation.caption,
                           ),
@@ -3681,8 +3775,8 @@ class _SignInAadhaarCardMockupState extends State<_SignInAadhaarCardMockup> {
                                 validation.status ==
                                 Ux4gInputFieldStatus.success,
                             size: Ux4gButtonSize.large,
-              height: 48,
-              width: 326,
+                            height: 48,
+                            width: 326,
                           ),
                         ],
                       ),
@@ -3869,7 +3963,8 @@ class _SignedInSuccessCardMockupState
   static const _successLight = Ux4gPalette.green100;
   static const _successDark = Ux4gPalette.green700;
 
-  Color _getCardBg(BuildContext context) => _isDark(context) ? Ux4gPalette.primary900 : Ux4gPalette.primary100;
+  Color _getCardBg(BuildContext context) =>
+      _isDark(context) ? Ux4gPalette.primary900 : Ux4gPalette.primary100;
 
   Timer? _countdownTimer;
   int _secondsLeft = 3;
@@ -4203,8 +4298,8 @@ class _VerifyMobileOtpMockupState extends State<_VerifyMobileOtpMockup> {
                     text: 'Verify OTP',
                     onPressed: () {},
                     size: Ux4gButtonSize.large,
-              height: 48,
-              width: 326,
+                    height: 48,
+                    width: 326,
                   ),
                   const SizedBox(height: 8),
 
@@ -4327,7 +4422,8 @@ class _VerifyMobileOtpCardMockupState
   String _otp = '';
   int _resendNonce = 0;
 
-  Color _getCardBg(BuildContext context) => _isDark(context) ? Ux4gPalette.primary900 : Ux4gPalette.primary100;
+  Color _getCardBg(BuildContext context) =>
+      _isDark(context) ? Ux4gPalette.primary900 : Ux4gPalette.primary100;
 
   @override
   Widget build(BuildContext context) {
@@ -4413,8 +4509,8 @@ class _VerifyMobileOtpCardMockupState
                             text: 'Verify OTP',
                             onPressed: () {},
                             size: Ux4gButtonSize.large,
-              height: 48,
-              width: 326,
+                            height: 48,
+                            width: 326,
                           ),
                           const SizedBox(height: 4),
 
@@ -4628,8 +4724,8 @@ class _VerifyMobileVoiceMockupState extends State<_VerifyMobileVoiceMockup> {
                     text: 'Verify OTP',
                     onPressed: () {},
                     size: Ux4gButtonSize.large,
-              height: 48,
-              width: 326,
+                    height: 48,
+                    width: 326,
                   ),
                   const SizedBox(height: 12),
 
@@ -4758,7 +4854,8 @@ class _VerifyMobileVoiceCardMockupState
     extends State<_VerifyMobileVoiceCardMockup> {
   String _otp = '';
 
-  Color _getCardBg(BuildContext context) => _isDark(context) ? Ux4gPalette.primary900 : Ux4gPalette.primary100;
+  Color _getCardBg(BuildContext context) =>
+      _isDark(context) ? Ux4gPalette.primary900 : Ux4gPalette.primary100;
 
   @override
   Widget build(BuildContext context) {
@@ -4837,8 +4934,8 @@ class _VerifyMobileVoiceCardMockupState
                             text: 'Verify OTP',
                             onPressed: () {},
                             size: Ux4gButtonSize.large,
-              height: 48,
-              width: 326,
+                            height: 48,
+                            width: 326,
                           ),
                           const SizedBox(height: 12),
 
@@ -5094,8 +5191,8 @@ class _VerifyMobileAttemptWarningMockupState
                     text: 'Verify OTP',
                     onPressed: () {},
                     size: Ux4gButtonSize.large,
-              height: 48,
-              width: 326,
+                    height: 48,
+                    width: 326,
                   ),
                 ],
               ),
@@ -5225,7 +5322,8 @@ class _VerifyMobileAttemptWarningCardMockupState
     extends State<_VerifyMobileAttemptWarningCardMockup> {
   String _otp = '';
 
-  Color _getCardBg(BuildContext context) => _isDark(context) ? Ux4gPalette.primary900 : Ux4gPalette.primary100;
+  Color _getCardBg(BuildContext context) =>
+      _isDark(context) ? Ux4gPalette.red900 : Ux4gPalette.red50;
 
   @override
   Widget build(BuildContext context) {
@@ -5342,8 +5440,8 @@ class _VerifyMobileAttemptWarningCardMockupState
                             text: 'Verify OTP',
                             onPressed: () {},
                             size: Ux4gButtonSize.large,
-              height: 48,
-              width: 326,
+                            height: 48,
+                            width: 326,
                           ),
                         ],
                       ),
@@ -5602,8 +5700,8 @@ class _VerifyMobileLastAttemptMockupState
                     text: 'Verify OTP',
                     onPressed: () {},
                     size: Ux4gButtonSize.large,
-              height: 48,
-              width: 326,
+                    height: 48,
+                    width: 326,
                   ),
                 ],
               ),
@@ -5732,7 +5830,8 @@ class _VerifyMobileLastAttemptCardMockupState
     extends State<_VerifyMobileLastAttemptCardMockup> {
   String _otp = '';
 
-  Color _getCardBg(BuildContext context) => _isDark(context) ? Ux4gPalette.primary900 : Ux4gPalette.primary100;
+  Color _getCardBg(BuildContext context) =>
+      _isDark(context) ? Ux4gPalette.red900 : Ux4gPalette.red50;
 
   @override
   Widget build(BuildContext context) {
@@ -5848,8 +5947,8 @@ class _VerifyMobileLastAttemptCardMockupState
                             text: 'Verify OTP',
                             onPressed: () {},
                             size: Ux4gButtonSize.large,
-              height: 48,
-              width: 326,
+                            height: 48,
+                            width: 326,
                           ),
                         ],
                       ),
@@ -6256,7 +6355,8 @@ class _VerifyAccountLockedCardMockup extends StatefulWidget {
 
 class _VerifyAccountLockedCardMockupState
     extends State<_VerifyAccountLockedCardMockup> {
-  Color _getCardBg(BuildContext context) => _isDark(context) ? Ux4gPalette.primary900 : Ux4gPalette.primary100;
+  Color _getCardBg(BuildContext context) =>
+      _isDark(context) ? Ux4gPalette.red900 : Ux4gPalette.red50;
   static const _lockBadgeBg = Ux4gPalette.red100;
   static const _lockIconColor = Ux4gPalette.red600;
 
@@ -6613,7 +6713,8 @@ Column(
 class _OtpVerifiedSuccessCardMockup extends StatelessWidget {
   const _OtpVerifiedSuccessCardMockup();
 
-  Color _getCardBg(BuildContext context) => _isDark(context) ? Ux4gPalette.primary900 : Ux4gPalette.primary100;
+  Color _getCardBg(BuildContext context) =>
+      _isDark(context) ? Ux4gPalette.primary900 : Ux4gPalette.primary100;
   static const _successMid = Ux4gPalette.green;
   static const _successLight = Ux4gPalette.green100;
 
@@ -7149,8 +7250,8 @@ class _AuthIncorrectOtpMockup extends StatelessWidget {
                     text: 'Verify OTP',
                     onPressed: () {},
                     size: Ux4gButtonSize.large,
-              height: 48,
-              width: 326,
+                    height: 48,
+                    width: 326,
                   ),
                 ],
               ),
@@ -7261,7 +7362,8 @@ class _AuthIncorrectOtpCardMockupState
   String _otp = '';
   int _resendNonce = 0;
 
-  Color _getCardBg(BuildContext context) => _isDark(context) ? Ux4gPalette.primary900 : Ux4gPalette.primary100;
+  Color _getCardBg(BuildContext context) =>
+      _isDark(context) ? Ux4gPalette.primary900 : Ux4gPalette.primary100;
 
   @override
   Widget build(BuildContext context) {
@@ -7347,8 +7449,8 @@ class _AuthIncorrectOtpCardMockupState
                             text: 'Verify OTP',
                             onPressed: () {},
                             size: Ux4gButtonSize.large,
-              height: 48,
-              width: 326,
+                            height: 48,
+                            width: 326,
                           ),
                           const SizedBox(height: 4),
 
@@ -7601,8 +7703,8 @@ class _AuthOtpAttemptWarningMockup extends StatelessWidget {
                     text: 'Verify OTP',
                     onPressed: () {},
                     size: Ux4gButtonSize.large,
-              height: 48,
-              width: 326,
+                    height: 48,
+                    width: 326,
                   ),
                 ],
               ),
@@ -7731,7 +7833,8 @@ Column(
 class _AuthOtpAttemptWarningCardMockup extends StatelessWidget {
   const _AuthOtpAttemptWarningCardMockup();
 
-  Color _getCardBg(BuildContext context) => _isDark(context) ? Ux4gPalette.primary900 : Ux4gPalette.primary100;
+  Color _getCardBg(BuildContext context) =>
+      _isDark(context) ? Ux4gPalette.red900 : Ux4gPalette.red50;
 
   @override
   Widget build(BuildContext context) {
@@ -7856,8 +7959,8 @@ class _AuthOtpAttemptWarningCardMockup extends StatelessWidget {
                             text: 'Verify OTP',
                             onPressed: () {},
                             size: Ux4gButtonSize.large,
-              height: 48,
-              width: 326,
+                            height: 48,
+                            width: 326,
                           ),
                         ],
                       ),
@@ -8121,8 +8224,8 @@ class _AuthOtpLastAttemptMockup extends StatelessWidget {
                     text: 'Verify OTP',
                     onPressed: () {},
                     size: Ux4gButtonSize.large,
-              height: 48,
-              width: 326,
+                    height: 48,
+                    width: 326,
                   ),
                 ],
               ),
@@ -8142,7 +8245,8 @@ class _AuthOtpLastAttemptMockup extends StatelessWidget {
 class _AuthOtpLastAttemptCardMockup extends StatelessWidget {
   const _AuthOtpLastAttemptCardMockup();
 
-  Color _getCardBg(BuildContext context) => _isDark(context) ? Ux4gPalette.primary900 : Ux4gPalette.primary100;
+  Color _getCardBg(BuildContext context) =>
+      _isDark(context) ? Ux4gPalette.primary900 : Ux4gPalette.primary100;
 
   @override
   Widget build(BuildContext context) {
@@ -8266,8 +8370,8 @@ class _AuthOtpLastAttemptCardMockup extends StatelessWidget {
                             text: 'Verify OTP',
                             onPressed: () {},
                             size: Ux4gButtonSize.large,
-              height: 48,
-              width: 326,
+                            height: 48,
+                            width: 326,
                           ),
                         ],
                       ),
@@ -8629,8 +8733,8 @@ class _AuthOtpRetryUnlockedMockupState
                     text: 'Verify OTP',
                     onPressed: () {},
                     size: Ux4gButtonSize.large,
-              height: 48,
-              width: 326,
+                    height: 48,
+                    width: 326,
                   ),
                 ],
               ),
@@ -8659,7 +8763,8 @@ class _AuthOtpRetryUnlockedCardMockupState
   String _otp = '';
   int _resendNonce = 0;
 
-  Color _getCardBg(BuildContext context) => _isDark(context) ? Ux4gPalette.primary900 : Ux4gPalette.primary100;
+  Color _getCardBg(BuildContext context) =>
+      _isDark(context) ? Ux4gPalette.primary900 : Ux4gPalette.primary100;
 
   @override
   Widget build(BuildContext context) {
@@ -8762,8 +8867,8 @@ class _AuthOtpRetryUnlockedCardMockupState
                             text: 'Verify OTP',
                             onPressed: () {},
                             size: Ux4gButtonSize.large,
-              height: 48,
-              width: 326,
+                            height: 48,
+                            width: 326,
                           ),
                         ],
                       ),
@@ -9115,8 +9220,8 @@ class _AuthOtpSuspiciousActivityMockupState
                     text: 'Verify OTP',
                     onPressed: () {},
                     size: Ux4gButtonSize.large,
-              height: 48,
-              width: 326,
+                    height: 48,
+                    width: 326,
                   ),
                 ],
               ),
@@ -9145,7 +9250,8 @@ class _AuthOtpSuspiciousActivityCardMockupState
   String _otp = '';
   int _resendNonce = 0;
 
-  Color _getCardBg(BuildContext context) => _isDark(context) ? Ux4gPalette.primary900 : Ux4gPalette.primary100;
+  Color _getCardBg(BuildContext context) =>
+      _isDark(context) ? Ux4gPalette.primary900 : Ux4gPalette.primary100;
 
   @override
   Widget build(BuildContext context) {
@@ -9258,8 +9364,8 @@ class _AuthOtpSuspiciousActivityCardMockupState
                             text: 'Verify OTP',
                             onPressed: () {},
                             size: Ux4gButtonSize.large,
-              height: 48,
-              width: 326,
+                            height: 48,
+                            width: 326,
                           ),
                         ],
                       ),
@@ -9624,7 +9730,8 @@ class _AadhaarVerifyMethodCardMockupState
     extends State<_AadhaarVerifyMethodCardMockup> {
   String _method = 'otp';
 
-  Color _getCardBg(BuildContext context) => _isDark(context) ? Ux4gPalette.primary900 : Ux4gPalette.primary100;
+  Color _getCardBg(BuildContext context) =>
+      _isDark(context) ? Ux4gPalette.primary900 : Ux4gPalette.primary100;
 
   @override
   Widget build(BuildContext context) {
@@ -10283,7 +10390,8 @@ class _AadhaarOtpEnterCardMockupState
   String _otp = '';
   int _resendNonce = 0;
 
-  Color _getCardBg(BuildContext context) => _isDark(context) ? Ux4gPalette.primary900 : Ux4gPalette.primary100;
+  Color _getCardBg(BuildContext context) =>
+      _isDark(context) ? Ux4gPalette.primary900 : Ux4gPalette.primary100;
 
   @override
   Widget build(BuildContext context) {
@@ -10756,7 +10864,8 @@ class _AadhaarFaceAuthPermissionMockup extends StatelessWidget {
 class _AadhaarFaceAuthPermissionCardMockup extends StatelessWidget {
   const _AadhaarFaceAuthPermissionCardMockup();
 
-  Color _getCardBg(BuildContext context) => _isDark(context) ? Ux4gPalette.primary900 : Ux4gPalette.primary100;
+  Color _getCardBg(BuildContext context) =>
+      _isDark(context) ? Ux4gPalette.primary900 : Ux4gPalette.primary100;
 
   @override
   Widget build(BuildContext context) {
@@ -11229,8 +11338,8 @@ class _AadhaarVerifiedSuccessMockup extends StatelessWidget {
                   text: 'Continue to Service',
                   onPressed: () {},
                   size: Ux4gButtonSize.large,
-              height: 48,
-              width: 326,
+                  height: 48,
+                  width: 326,
                 ),
               ],
             ),
@@ -11248,7 +11357,8 @@ class _AadhaarVerifiedSuccessMockup extends StatelessWidget {
 class _AadhaarVerifiedSuccessCardMockup extends StatelessWidget {
   const _AadhaarVerifiedSuccessCardMockup();
 
-  Color _getCardBg(BuildContext context) => _isDark(context) ? Ux4gPalette.primary900 : Ux4gPalette.primary100;
+  Color _getCardBg(BuildContext context) =>
+      _isDark(context) ? Ux4gPalette.primary900 : Ux4gPalette.primary100;
 
   @override
   Widget build(BuildContext context) {
@@ -11341,8 +11451,8 @@ class _AadhaarVerifiedSuccessCardMockup extends StatelessWidget {
                       text: 'Continue to Service',
                       onPressed: () {},
                       size: Ux4gButtonSize.large,
-              height: 48,
-              width: 326,
+                      height: 48,
+                      width: 326,
                     ),
                   ),
                   const _BrandFooter(),
@@ -11742,7 +11852,8 @@ class _AadhaarVerificationFailedMockup extends StatelessWidget {
 class _AadhaarVerificationFailedCardMockup extends StatelessWidget {
   const _AadhaarVerificationFailedCardMockup();
 
-  Color _getCardBg(BuildContext context) => _isDark(context) ? Ux4gPalette.primary900 : Ux4gPalette.primary100;
+  Color _getCardBg(BuildContext context) =>
+      _isDark(context) ? Ux4gPalette.red900 : Ux4gPalette.red50;
 
   @override
   Widget build(BuildContext context) {
@@ -12279,7 +12390,8 @@ class _AadhaarAccountLockedMockup extends StatelessWidget {
 class _AadhaarAccountLockedCardMockup extends StatelessWidget {
   const _AadhaarAccountLockedCardMockup();
 
-  Color _getCardBg(BuildContext context) => _isDark(context) ? Ux4gPalette.primary900 : Ux4gPalette.primary100;
+  Color _getCardBg(BuildContext context) =>
+      _isDark(context) ? Ux4gPalette.primary900 : Ux4gPalette.primary100;
 
   @override
   Widget build(BuildContext context) {
@@ -12415,8 +12527,8 @@ class _AadhaarAccountLockedCardMockup extends StatelessWidget {
                       onPressed: () {},
                       variant: Ux4gButtonVariant.outline,
                       size: Ux4gButtonSize.large,
-              height: 48,
-              width: 326,
+                      height: 48,
+                      width: 326,
                       leadingIcon: Icons.support,
                     ),
                   ),
@@ -12867,7 +12979,8 @@ class _OperatorAssistedAuthCardMockup extends StatefulWidget {
 class _OperatorAssistedAuthCardMockupState
     extends State<_OperatorAssistedAuthCardMockup> {
   bool _consent = false;
-  Color _getCardBg(BuildContext context) => _isDark(context) ? Ux4gPalette.primary900 : Ux4gPalette.primary100;
+  Color _getCardBg(BuildContext context) =>
+      _isDark(context) ? Ux4gPalette.primary900 : Ux4gPalette.primary100;
 
   @override
   Widget build(BuildContext context) {
@@ -13494,7 +13607,14 @@ class _SignUpStep1MockupState extends State<_SignUpStep1Mockup> {
                     onValueChange: (v) => setState(() => _mobile = v),
                     label: 'Mobile Number',
                     placeholder: 'Enter mobile number',
-                    placeholderStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.neutral500 : Ux4gPalette.neutral400, height: 1.3),
+                    placeholderStyle: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400,
+                      color: Theme.of(context).brightness == Brightness.dark
+                          ? Ux4gPalette.neutral500
+                          : Ux4gPalette.neutral400,
+                      height: 1.3,
+                    ),
                     prefixText: '+91',
                     type: Ux4gInputFieldType.number,
                     maxLength: 10,
@@ -13506,8 +13626,8 @@ class _SignUpStep1MockupState extends State<_SignUpStep1Mockup> {
                     text: 'Send OTP',
                     onPressed: () {},
                     size: Ux4gButtonSize.large,
-              height: 48,
-              width: 326,
+                    height: 48,
+                    width: 326,
                   ),
                   const SizedBox(height: 20),
                   const _SignInLink(),
@@ -13576,7 +13696,16 @@ class _SignUpStep1CardMockupState extends State<_SignUpStep1CardMockup> {
                               onValueChange: (v) => setState(() => _mobile = v),
                               label: 'Mobile Number',
                               placeholder: 'Enter mobile number',
-                              placeholderStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.neutral500 : Ux4gPalette.neutral400, height: 1.3),
+                              placeholderStyle: TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w400,
+                                color:
+                                    Theme.of(context).brightness ==
+                                        Brightness.dark
+                                    ? Ux4gPalette.neutral500
+                                    : Ux4gPalette.neutral400,
+                                height: 1.3,
+                              ),
                               prefixText: '+91',
                               type: Ux4gInputFieldType.number,
                               maxLength: 10,
@@ -13588,8 +13717,8 @@ class _SignUpStep1CardMockupState extends State<_SignUpStep1CardMockup> {
                               text: 'Send OTP',
                               onPressed: () {},
                               size: Ux4gButtonSize.large,
-              height: 48,
-              width: 326,
+                              height: 48,
+                              width: 326,
                             ),
                             const SizedBox(height: 16),
                             const _SignInLink(fontSize: 14),
@@ -13886,8 +14015,8 @@ class _SignUpStep2MockupState extends State<_SignUpStep2Mockup> {
                     text: 'Verify OTP',
                     onPressed: () {},
                     size: Ux4gButtonSize.large,
-              height: 48,
-              width: 326,
+                    height: 48,
+                    width: 326,
                   ),
                 ],
               ),
@@ -13972,8 +14101,8 @@ class _SignUpStep2CardMockupState extends State<_SignUpStep2CardMockup> {
                               text: 'Verify OTP',
                               onPressed: () {},
                               size: Ux4gButtonSize.large,
-              height: 48,
-              width: 326,
+                              height: 48,
+                              width: 326,
                             ),
                           ],
                         ),
@@ -14198,7 +14327,14 @@ class _SignUpStep3MockupState extends State<_SignUpStep3Mockup> {
                     onValueChange: (v) => setState(() => _fullName = v),
                     label: 'Full name',
                     placeholder: 'Enter your full name',
-                    placeholderStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.neutral500 : Ux4gPalette.neutral400, height: 1.3),
+                    placeholderStyle: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400,
+                      color: Theme.of(context).brightness == Brightness.dark
+                          ? Ux4gPalette.neutral500
+                          : Ux4gPalette.neutral400,
+                      height: 1.3,
+                    ),
                   ),
                   const SizedBox(height: 16),
                   Ux4gInputField(
@@ -14206,7 +14342,14 @@ class _SignUpStep3MockupState extends State<_SignUpStep3Mockup> {
                     onValueChange: (v) => setState(() => _email = v),
                     label: 'Email Address',
                     placeholder: 'example@mail.com',
-                    placeholderStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.neutral500 : Ux4gPalette.neutral400, height: 1.3),
+                    placeholderStyle: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400,
+                      color: Theme.of(context).brightness == Brightness.dark
+                          ? Ux4gPalette.neutral500
+                          : Ux4gPalette.neutral400,
+                      height: 1.3,
+                    ),
                     type: Ux4gInputFieldType.email,
                   ),
                   const SizedBox(height: 16),
@@ -14215,7 +14358,14 @@ class _SignUpStep3MockupState extends State<_SignUpStep3Mockup> {
                     onValueChange: (v) => setState(() => _mobile = v),
                     label: 'Mobile Number',
                     placeholder: 'Enter mobile number',
-                    placeholderStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.neutral500 : Ux4gPalette.neutral400, height: 1.3),
+                    placeholderStyle: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400,
+                      color: Theme.of(context).brightness == Brightness.dark
+                          ? Ux4gPalette.neutral500
+                          : Ux4gPalette.neutral400,
+                      height: 1.3,
+                    ),
                     prefixText: '+91',
                     type: Ux4gInputFieldType.number,
                     maxLength: 10,
@@ -14242,8 +14392,8 @@ class _SignUpStep3MockupState extends State<_SignUpStep3Mockup> {
                     text: 'Continue',
                     onPressed: () {},
                     size: Ux4gButtonSize.large,
-              height: 48,
-              width: 326,
+                    height: 48,
+                    width: 326,
                   ),
                 ],
               ),
@@ -14298,7 +14448,16 @@ class _SignUpStep3CardMockupState extends State<_SignUpStep3CardMockup> {
                                   setState(() => _fullName = v),
                               label: 'Full name',
                               placeholder: 'Enter your full name',
-                              placeholderStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.neutral500 : Ux4gPalette.neutral400, height: 1.3),
+                              placeholderStyle: TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w400,
+                                color:
+                                    Theme.of(context).brightness ==
+                                        Brightness.dark
+                                    ? Ux4gPalette.neutral500
+                                    : Ux4gPalette.neutral400,
+                                height: 1.3,
+                              ),
                             ),
                             const SizedBox(height: 14),
                             Ux4gInputField(
@@ -14306,7 +14465,16 @@ class _SignUpStep3CardMockupState extends State<_SignUpStep3CardMockup> {
                               onValueChange: (v) => setState(() => _email = v),
                               label: 'Email Address',
                               placeholder: 'example@mail.com',
-                              placeholderStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.neutral500 : Ux4gPalette.neutral400, height: 1.3),
+                              placeholderStyle: TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w400,
+                                color:
+                                    Theme.of(context).brightness ==
+                                        Brightness.dark
+                                    ? Ux4gPalette.neutral500
+                                    : Ux4gPalette.neutral400,
+                                height: 1.3,
+                              ),
                               type: Ux4gInputFieldType.email,
                             ),
                             const SizedBox(height: 14),
@@ -14315,7 +14483,16 @@ class _SignUpStep3CardMockupState extends State<_SignUpStep3CardMockup> {
                               onValueChange: (v) => setState(() => _mobile = v),
                               label: 'Mobile Number',
                               placeholder: 'Enter mobile number',
-                              placeholderStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.neutral500 : Ux4gPalette.neutral400, height: 1.3),
+                              placeholderStyle: TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w400,
+                                color:
+                                    Theme.of(context).brightness ==
+                                        Brightness.dark
+                                    ? Ux4gPalette.neutral500
+                                    : Ux4gPalette.neutral400,
+                                height: 1.3,
+                              ),
                               prefixText: '+91',
                               type: Ux4gInputFieldType.number,
                               maxLength: 10,
@@ -14343,8 +14520,8 @@ class _SignUpStep3CardMockupState extends State<_SignUpStep3CardMockup> {
                               text: 'Continue',
                               onPressed: () {},
                               size: Ux4gButtonSize.large,
-              height: 48,
-              width: 326,
+                              height: 48,
+                              width: 326,
                             ),
                           ],
                         ),
@@ -14605,7 +14782,14 @@ class _SignUpStep4MockupState extends State<_SignUpStep4Mockup> {
                     onValueChange: (v) => setState(() => _password = v),
                     label: 'Password',
                     placeholder: '...........',
-                    placeholderStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.neutral500 : Ux4gPalette.neutral400, height: 1.3),
+                    placeholderStyle: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400,
+                      color: Theme.of(context).brightness == Brightness.dark
+                          ? Ux4gPalette.neutral500
+                          : Ux4gPalette.neutral400,
+                      height: 1.3,
+                    ),
                     type: Ux4gInputFieldType.password,
                   ),
                   const SizedBox(height: 16),
@@ -14614,7 +14798,14 @@ class _SignUpStep4MockupState extends State<_SignUpStep4Mockup> {
                     onValueChange: (v) => setState(() => _confirm = v),
                     label: 'Confirm password',
                     placeholder: '...........',
-                    placeholderStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.neutral500 : Ux4gPalette.neutral400, height: 1.3),
+                    placeholderStyle: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400,
+                      color: Theme.of(context).brightness == Brightness.dark
+                          ? Ux4gPalette.neutral500
+                          : Ux4gPalette.neutral400,
+                      height: 1.3,
+                    ),
                     type: Ux4gInputFieldType.password,
                   ),
                   const SizedBox(height: 28),
@@ -14622,8 +14813,8 @@ class _SignUpStep4MockupState extends State<_SignUpStep4Mockup> {
                     text: 'Create account',
                     onPressed: () {},
                     size: Ux4gButtonSize.large,
-              height: 48,
-              width: 326,
+                    height: 48,
+                    width: 326,
                   ),
                 ],
               ),
@@ -14682,7 +14873,16 @@ class _SignUpStep4CardMockupState extends State<_SignUpStep4CardMockup> {
                                   setState(() => _password = v),
                               label: 'Password',
                               placeholder: '...........',
-                              placeholderStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.neutral500 : Ux4gPalette.neutral400, height: 1.3),
+                              placeholderStyle: TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w400,
+                                color:
+                                    Theme.of(context).brightness ==
+                                        Brightness.dark
+                                    ? Ux4gPalette.neutral500
+                                    : Ux4gPalette.neutral400,
+                                height: 1.3,
+                              ),
                               type: Ux4gInputFieldType.password,
                             ),
                             const SizedBox(height: 16),
@@ -14692,7 +14892,16 @@ class _SignUpStep4CardMockupState extends State<_SignUpStep4CardMockup> {
                                   setState(() => _confirm = v),
                               label: 'Confirm password',
                               placeholder: '...........',
-                              placeholderStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.neutral500 : Ux4gPalette.neutral400, height: 1.3),
+                              placeholderStyle: TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w400,
+                                color:
+                                    Theme.of(context).brightness ==
+                                        Brightness.dark
+                                    ? Ux4gPalette.neutral500
+                                    : Ux4gPalette.neutral400,
+                                height: 1.3,
+                              ),
                               type: Ux4gInputFieldType.password,
                             ),
                             const SizedBox(height: 24),
@@ -14700,8 +14909,8 @@ class _SignUpStep4CardMockupState extends State<_SignUpStep4CardMockup> {
                               text: 'Create account',
                               onPressed: () {},
                               size: Ux4gButtonSize.large,
-              height: 48,
-              width: 326,
+                              height: 48,
+                              width: 326,
                             ),
                           ],
                         ),
@@ -14977,8 +15186,8 @@ class _SignUpStep5Mockup extends StatelessWidget {
                     text: 'Link Aadhaar Now',
                     onPressed: () {},
                     size: Ux4gButtonSize.large,
-              height: 48,
-              width: 326,
+                    height: 48,
+                    width: 326,
                   ),
                   const SizedBox(height: 12),
                   Ux4gButton(
@@ -14986,8 +15195,8 @@ class _SignUpStep5Mockup extends StatelessWidget {
                     onPressed: () {},
                     variant: Ux4gButtonVariant.outline,
                     size: Ux4gButtonSize.large,
-              height: 48,
-              width: 326,
+                    height: 48,
+                    width: 326,
                   ),
                   const SizedBox(height: 16),
                   const Text(
@@ -15104,8 +15313,8 @@ class _SignUpStep5CardMockup extends StatelessWidget {
                               text: 'Link Aadhaar Now',
                               onPressed: () {},
                               size: Ux4gButtonSize.large,
-              height: 48,
-              width: 326,
+                              height: 48,
+                              width: 326,
                             ),
                             const SizedBox(height: 12),
                             Ux4gButton(
@@ -15113,8 +15322,8 @@ class _SignUpStep5CardMockup extends StatelessWidget {
                               onPressed: () {},
                               variant: Ux4gButtonVariant.outline,
                               size: Ux4gButtonSize.large,
-              height: 48,
-              width: 326,
+                              height: 48,
+                              width: 326,
                             ),
                             const SizedBox(height: 12),
                             const Text(
@@ -15519,7 +15728,14 @@ class _FpStep1MockupState extends State<_FpStep1Mockup> {
                     onValueChange: (v) => setState(() => _mobile = v),
                     label: 'Mobile Number',
                     placeholder: 'Enter mobile number',
-                    placeholderStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.neutral500 : Ux4gPalette.neutral400, height: 1.3),
+                    placeholderStyle: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400,
+                      color: Theme.of(context).brightness == Brightness.dark
+                          ? Ux4gPalette.neutral500
+                          : Ux4gPalette.neutral400,
+                      height: 1.3,
+                    ),
                     prefixText: '+91',
                     type: Ux4gInputFieldType.number,
                     maxLength: 10,
@@ -15529,8 +15745,8 @@ class _FpStep1MockupState extends State<_FpStep1Mockup> {
                     text: 'Send OTP',
                     onPressed: () {},
                     size: Ux4gButtonSize.large,
-              height: 48,
-              width: 326,
+                    height: 48,
+                    width: 326,
                   ),
                   const SizedBox(height: 14),
                   Center(
@@ -15577,8 +15793,8 @@ class _FpStep1MockupState extends State<_FpStep1Mockup> {
                     onPressed: () {},
                     variant: Ux4gButtonVariant.outline,
                     size: Ux4gButtonSize.large,
-              height: 48,
-              width: 326,
+                    height: 48,
+                    width: 326,
                   ),
                   const SizedBox(height: 16),
                   _fpWarningBanner(),
@@ -15653,7 +15869,16 @@ class _FpStep1CardMockupState extends State<_FpStep1CardMockup> {
                                       setState(() => _mobile = v),
                                   label: 'Mobile Number',
                                   placeholder: 'Enter mobile number',
-                                  placeholderStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.neutral500 : Ux4gPalette.neutral400, height: 1.3),
+                                  placeholderStyle: TextStyle(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w400,
+                                    color:
+                                        Theme.of(context).brightness ==
+                                            Brightness.dark
+                                        ? Ux4gPalette.neutral500
+                                        : Ux4gPalette.neutral400,
+                                    height: 1.3,
+                                  ),
                                   prefixText: '+91',
                                   type: Ux4gInputFieldType.number,
                                   maxLength: 10,
@@ -15663,8 +15888,8 @@ class _FpStep1CardMockupState extends State<_FpStep1CardMockup> {
                                   text: 'Send OTP',
                                   onPressed: () {},
                                   size: Ux4gButtonSize.large,
-              height: 48,
-              width: 326,
+                                  height: 48,
+                                  width: 326,
                                 ),
                                 const SizedBox(height: 12),
                                 Center(
@@ -15724,8 +15949,8 @@ class _FpStep1CardMockupState extends State<_FpStep1CardMockup> {
                                   onPressed: () {},
                                   variant: Ux4gButtonVariant.outline,
                                   size: Ux4gButtonSize.large,
-              height: 48,
-              width: 326,
+                                  height: 48,
+                                  width: 326,
                                 ),
                                 const SizedBox(height: 14),
                                 _fpWarningBanner(),
@@ -15851,7 +16076,7 @@ Container(
       leadingWidgets: [
         SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
         Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
-        SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
+        SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.red500, BlendMode.srcIn)),
       ],
       horizontalPadding: 16, leadingSpacing: 12,
     ),
@@ -16051,8 +16276,8 @@ class _FpStep2MockupState extends State<_FpStep2Mockup> {
                     text: 'Verify OTP',
                     onPressed: () {},
                     size: Ux4gButtonSize.large,
-              height: 48,
-              width: 326,
+                    height: 48,
+                    width: 326,
                   ),
                 ],
               ),
@@ -16143,8 +16368,8 @@ class _FpStep2CardMockupState extends State<_FpStep2CardMockup> {
                                   text: 'Verify OTP',
                                   onPressed: () {},
                                   size: Ux4gButtonSize.large,
-              height: 48,
-              width: 326,
+                                  height: 48,
+                                  width: 326,
                                 ),
                               ],
                             ),
@@ -16395,7 +16620,14 @@ class _FpStep3MockupState extends State<_FpStep3Mockup> {
                     onValueChange: (v) => setState(() => _password = v),
                     label: 'Password',
                     placeholder: '...........',
-                    placeholderStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.neutral500 : Ux4gPalette.neutral400, height: 1.3),
+                    placeholderStyle: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400,
+                      color: Theme.of(context).brightness == Brightness.dark
+                          ? Ux4gPalette.neutral500
+                          : Ux4gPalette.neutral400,
+                      height: 1.3,
+                    ),
                     type: Ux4gInputFieldType.password,
                   ),
                   const SizedBox(height: 12),
@@ -16406,7 +16638,14 @@ class _FpStep3MockupState extends State<_FpStep3Mockup> {
                     onValueChange: (v) => setState(() => _confirm = v),
                     label: 'Confirm password',
                     placeholder: '...........',
-                    placeholderStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.neutral500 : Ux4gPalette.neutral400, height: 1.3),
+                    placeholderStyle: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400,
+                      color: Theme.of(context).brightness == Brightness.dark
+                          ? Ux4gPalette.neutral500
+                          : Ux4gPalette.neutral400,
+                      height: 1.3,
+                    ),
                     labelStyle: const TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w700,
@@ -16421,8 +16660,8 @@ class _FpStep3MockupState extends State<_FpStep3Mockup> {
                     text: 'Reset password',
                     onPressed: () {},
                     size: Ux4gButtonSize.large,
-              height: 48,
-              width: 326,
+                    height: 48,
+                    width: 326,
                   ),
                 ],
               ),
@@ -16491,7 +16730,16 @@ class _FpStep3CardMockupState extends State<_FpStep3CardMockup> {
                                   setState(() => _password = v),
                               label: 'Password',
                               placeholder: '...........',
-                              placeholderStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.neutral500 : Ux4gPalette.neutral400, height: 1.3),
+                              placeholderStyle: TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w400,
+                                color:
+                                    Theme.of(context).brightness ==
+                                        Brightness.dark
+                                    ? Ux4gPalette.neutral500
+                                    : Ux4gPalette.neutral400,
+                                height: 1.3,
+                              ),
                               type: Ux4gInputFieldType.password,
                             ),
                             const SizedBox(height: 10),
@@ -16503,7 +16751,16 @@ class _FpStep3CardMockupState extends State<_FpStep3CardMockup> {
                                   setState(() => _confirm = v),
                               label: 'Confirm password',
                               placeholder: '...........',
-                              placeholderStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.neutral500 : Ux4gPalette.neutral400, height: 1.3),
+                              placeholderStyle: TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w400,
+                                color:
+                                    Theme.of(context).brightness ==
+                                        Brightness.dark
+                                    ? Ux4gPalette.neutral500
+                                    : Ux4gPalette.neutral400,
+                                height: 1.3,
+                              ),
                               labelStyle: const TextStyle(
                                 fontSize: 14,
                                 fontWeight: FontWeight.w700,
@@ -16518,8 +16775,8 @@ class _FpStep3CardMockupState extends State<_FpStep3CardMockup> {
                               text: 'Reset password',
                               onPressed: () {},
                               size: Ux4gButtonSize.large,
-              height: 48,
-              width: 326,
+                              height: 48,
+                              width: 326,
                             ),
                           ],
                         ),
@@ -16857,8 +17114,8 @@ class _FpStep4Mockup extends StatelessWidget {
                     text: 'Sign in',
                     onPressed: () {},
                     size: Ux4gButtonSize.large,
-              height: 48,
-              width: 326,
+                    height: 48,
+                    width: 326,
                   ),
                 ],
               ),
@@ -16942,8 +17199,8 @@ class _FpStep4CardMockup extends StatelessWidget {
                               text: 'Sign in',
                               onPressed: () {},
                               size: Ux4gButtonSize.large,
-              height: 48,
-              width: 326,
+                              height: 48,
+                              width: 326,
                             ),
                           ],
                         ),
@@ -17178,7 +17435,14 @@ class _FpStep5MockupState extends State<_FpStep5Mockup> {
                     onValueChange: (v) => setState(() => _aadhaar = v),
                     label: 'Aadhaar Number',
                     placeholder: 'XXXX XXXX XXXX',
-                    placeholderStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.neutral500 : Ux4gPalette.neutral400, height: 1.3),
+                    placeholderStyle: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400,
+                      color: Theme.of(context).brightness == Brightness.dark
+                          ? Ux4gPalette.neutral500
+                          : Ux4gPalette.neutral400,
+                      height: 1.3,
+                    ),
                     caption: 'Enter your 12-digit Aadhaar number',
                   ),
                   const SizedBox(height: 16),
@@ -17202,8 +17466,8 @@ class _FpStep5MockupState extends State<_FpStep5Mockup> {
                     text: 'Send OTP',
                     onPressed: () {},
                     size: Ux4gButtonSize.large,
-              height: 48,
-              width: 326,
+                    height: 48,
+                    width: 326,
                   ),
                 ],
               ),
@@ -17265,7 +17529,16 @@ class _FpStep5CardMockupState extends State<_FpStep5CardMockup> {
                                       setState(() => _aadhaar = v),
                                   label: 'Aadhaar Number',
                                   placeholder: 'XXXX XXXX XXXX',
-                                  placeholderStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.neutral500 : Ux4gPalette.neutral400, height: 1.3),
+                                  placeholderStyle: TextStyle(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w400,
+                                    color:
+                                        Theme.of(context).brightness ==
+                                            Brightness.dark
+                                        ? Ux4gPalette.neutral500
+                                        : Ux4gPalette.neutral400,
+                                    height: 1.3,
+                                  ),
                                   caption: 'Enter your 12-digit Aadhaar number',
                                 ),
                                 const SizedBox(height: 16),
@@ -17289,8 +17562,8 @@ class _FpStep5CardMockupState extends State<_FpStep5CardMockup> {
                                   text: 'Send OTP',
                                   onPressed: () {},
                                   size: Ux4gButtonSize.large,
-              height: 48,
-              width: 326,
+                                  height: 48,
+                                  width: 326,
                                 ),
                               ],
                             ),
@@ -20297,8 +20570,8 @@ class _PaymentSummaryMockup extends StatelessWidget {
                             text: 'Continue to payment',
                             onPressed: () {},
                             size: Ux4gButtonSize.large,
-              height: 48,
-              width: 326,
+                            height: 48,
+                            width: 326,
                           ),
                           const SizedBox(height: 12),
                           Center(
@@ -20433,8 +20706,8 @@ class _PaymentSummaryCardMockup extends StatelessWidget {
                               text: 'Continue to payment',
                               onPressed: () {},
                               size: Ux4gButtonSize.large,
-              height: 48,
-              width: 326,
+                              height: 48,
+                              width: 326,
                             ),
                             const SizedBox(height: 12),
                             Center(
@@ -20900,7 +21173,16 @@ class _PaymentMethodMockupState extends State<_PaymentMethodMockup> {
                               onValueChange: (v) => setState(() => _upiId = v),
                               label: 'Enter UPI ID',
                               placeholder: 'yourname@upi',
-                              placeholderStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.neutral500 : Ux4gPalette.neutral400, height: 1.3),
+                              placeholderStyle: TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w400,
+                                color:
+                                    Theme.of(context).brightness ==
+                                        Brightness.dark
+                                    ? Ux4gPalette.neutral500
+                                    : Ux4gPalette.neutral400,
+                                height: 1.3,
+                              ),
                             ),
                           ],
                           const SizedBox(height: 20),
@@ -20908,8 +21190,8 @@ class _PaymentMethodMockupState extends State<_PaymentMethodMockup> {
                             text: 'Pay Rs 41.30',
                             onPressed: () {},
                             size: Ux4gButtonSize.large,
-              height: 48,
-              width: 326,
+                            height: 48,
+                            width: 326,
                           ),
                           const SizedBox(height: 12),
                           Center(
@@ -21033,7 +21315,16 @@ class _PaymentMethodCardMockupState extends State<_PaymentMethodCardMockup> {
                                     setState(() => _upiId = v),
                                 label: 'Enter UPI ID',
                                 placeholder: 'yourname@upi',
-                                placeholderStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.neutral500 : Ux4gPalette.neutral400, height: 1.3),
+                                placeholderStyle: TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w400,
+                                  color:
+                                      Theme.of(context).brightness ==
+                                          Brightness.dark
+                                      ? Ux4gPalette.neutral500
+                                      : Ux4gPalette.neutral400,
+                                  height: 1.3,
+                                ),
                               ),
                             ],
                             const SizedBox(height: 20),
@@ -21041,8 +21332,8 @@ class _PaymentMethodCardMockupState extends State<_PaymentMethodCardMockup> {
                               text: 'Pay Rs 41.30',
                               onPressed: () {},
                               size: Ux4gButtonSize.large,
-              height: 48,
-              width: 326,
+                              height: 48,
+                              width: 326,
                             ),
                             const SizedBox(height: 12),
                             Center(
@@ -22019,8 +22310,8 @@ class _PaymentSuccessMockup extends StatelessWidget {
                             text: 'Track my application',
                             onPressed: () {},
                             size: Ux4gButtonSize.large,
-              height: 48,
-              width: 326,
+                            height: 48,
+                            width: 326,
                           ),
                           const SizedBox(height: 10),
                           Ux4gButton(
@@ -22028,8 +22319,8 @@ class _PaymentSuccessMockup extends StatelessWidget {
                             onPressed: () {},
                             variant: Ux4gButtonVariant.outline,
                             size: Ux4gButtonSize.large,
-              height: 48,
-              width: 326,
+                            height: 48,
+                            width: 326,
                           ),
                           const SizedBox(height: 12),
                           Center(
@@ -22160,8 +22451,8 @@ class _PaymentSuccessCardMockup extends StatelessWidget {
                               text: 'Track my application',
                               onPressed: () {},
                               size: Ux4gButtonSize.large,
-              height: 48,
-              width: 326,
+                              height: 48,
+                              width: 326,
                             ),
                             const SizedBox(height: 10),
                             Ux4gButton(
@@ -22169,8 +22460,8 @@ class _PaymentSuccessCardMockup extends StatelessWidget {
                               onPressed: () {},
                               variant: Ux4gButtonVariant.outline,
                               size: Ux4gButtonSize.large,
-              height: 48,
-              width: 326,
+                              height: 48,
+                              width: 326,
                             ),
                             const SizedBox(height: 12),
                             Center(
@@ -22584,8 +22875,8 @@ class _PaymentFailedMockup extends StatelessWidget {
                             text: 'Try again with UPI',
                             onPressed: () {},
                             size: Ux4gButtonSize.large,
-              height: 48,
-              width: 326,
+                            height: 48,
+                            width: 326,
                           ),
                           const SizedBox(height: 10),
                           Ux4gButton(
@@ -22593,8 +22884,8 @@ class _PaymentFailedMockup extends StatelessWidget {
                             onPressed: () {},
                             variant: Ux4gButtonVariant.outline,
                             size: Ux4gButtonSize.large,
-              height: 48,
-              width: 326,
+                            height: 48,
+                            width: 326,
                           ),
                           const SizedBox(height: 12),
                           Center(
@@ -22716,8 +23007,8 @@ class _PaymentFailedCardMockup extends StatelessWidget {
                               text: 'Try again with UPI',
                               onPressed: () {},
                               size: Ux4gButtonSize.large,
-              height: 48,
-              width: 326,
+                              height: 48,
+                              width: 326,
                             ),
                             const SizedBox(height: 10),
                             Ux4gButton(
@@ -22725,8 +23016,8 @@ class _PaymentFailedCardMockup extends StatelessWidget {
                               onPressed: () {},
                               variant: Ux4gButtonVariant.outline,
                               size: Ux4gButtonSize.large,
-              height: 48,
-              width: 326,
+                              height: 48,
+                              width: 326,
                             ),
                             const SizedBox(height: 12),
                             Center(
@@ -23129,8 +23420,8 @@ class _FeeWaivedMockup extends StatelessWidget {
                             text: 'Proceed without payment',
                             onPressed: () {},
                             size: Ux4gButtonSize.large,
-              height: 48,
-              width: 326,
+                            height: 48,
+                            width: 326,
                           ),
                           const SizedBox(height: 12),
                           Center(
@@ -23266,8 +23557,8 @@ class _FeeWaivedCardMockup extends StatelessWidget {
                               text: 'Proceed without payment',
                               onPressed: () {},
                               size: Ux4gButtonSize.large,
-              height: 48,
-              width: 326,
+                              height: 48,
+                              width: 326,
                             ),
                             const SizedBox(height: 12),
                             Center(
@@ -24282,8 +24573,8 @@ Widget _astActions(String status, Color primary) => switch (status) {
         text: 'Reapply',
         onPressed: () {},
         size: Ux4gButtonSize.large,
-              height: 48,
-              width: 326,
+        height: 48,
+        width: 326,
       ),
       const SizedBox(height: 10),
       Center(
@@ -24316,8 +24607,8 @@ Widget _astActions(String status, Color primary) => switch (status) {
         text: 'Download Certificate (PDF)',
         onPressed: () {},
         size: Ux4gButtonSize.large,
-              height: 48,
-              width: 326,
+        height: 48,
+        width: 326,
       ),
       const SizedBox(height: 10),
       Ux4gButton(
@@ -24325,8 +24616,8 @@ Widget _astActions(String status, Color primary) => switch (status) {
         onPressed: () {},
         variant: Ux4gButtonVariant.outline,
         size: Ux4gButtonSize.large,
-              height: 48,
-              width: 326,
+        height: 48,
+        width: 326,
       ),
     ],
   ),
@@ -25591,8 +25882,8 @@ class _GstReopenForm extends StatelessWidget {
             text: 'Reopen complaint',
             onPressed: () {},
             size: Ux4gButtonSize.large,
-              height: 48,
-              width: 326,
+            height: 48,
+            width: 326,
           ),
           const SizedBox(height: 8),
           Center(
