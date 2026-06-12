@@ -2756,22 +2756,22 @@ class _SignInCardMockupState extends State<_SignInCardMockup> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Text(
+                            Text(
                               'Sign in to your account',
                               style: TextStyle(
                                 fontSize: 22,
                                 fontWeight: FontWeight.w800,
-                                color: _titleColor,
+                                color: _getTitleColor(context),
                                 height: 1.2,
                                 letterSpacing: -0.3,
                               ),
                             ),
                             const SizedBox(height: 6),
-                            const Text(
+                            Text(
                               'Access your government services securely',
                               style: TextStyle(
                                 fontSize: 13,
-                                color: _subtleText,
+                                color: _getSubtleText(context),
                                 height: 1.3,
                               ),
                             ),
