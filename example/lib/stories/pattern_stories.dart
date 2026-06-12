@@ -17,11 +17,30 @@ const _border = Color(0xFFE5E7EB);
 const _titleColor = Ux4gPalette.gray900;
 const _subtleText = Color(0xFF6B7280);
 const _mutedText = Color(0xFF9CA3AF);
-
 const _placeholderStyle = TextStyle(
   fontSize: 14,
   fontWeight: FontWeight.w400,
   color: Color(0xFF9CA3AF),
+  height: 1.3,
+);
+bool _isDark(BuildContext context) =>
+    Theme.of(context).brightness == Brightness.dark;
+
+Color _getBg(BuildContext context) =>
+    _isDark(context) ? Ux4gPalette.neutral950 : Ux4gPalette.neutral50;
+Color _getBorder(BuildContext context) =>
+    _isDark(context) ? Ux4gPalette.neutral800 : Ux4gPalette.neutral200;
+Color _getTitleColor(BuildContext context) =>
+    _isDark(context) ? Ux4gPalette.neutral50 : Ux4gPalette.gray900;
+Color _getSubtleText(BuildContext context) =>
+    _isDark(context) ? Ux4gPalette.neutral400 : Ux4gPalette.neutral500;
+Color _getMutedText(BuildContext context) =>
+    _isDark(context) ? Ux4gPalette.neutral500 : Ux4gPalette.neutral400;
+
+TextStyle _getPlaceholderStyle(BuildContext context) => TextStyle(
+  fontSize: 14,
+  fontWeight: FontWeight.w400,
+  color: _getMutedText(context),
   height: 1.3,
 );
 
@@ -1224,9 +1243,9 @@ class _PhoneFrame extends StatelessWidget {
       height: 760,
       clipBehavior: Clip.antiAlias,
       decoration: BoxDecoration(
-        color: _bg,
+        color: _getBg(context),
         borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: _border),
+        border: Border.all(color: _getBorder(context)),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withValues(alpha: 0.08),
@@ -1251,17 +1270,35 @@ class _BrandHeader extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         Ux4gAppHeader(
-          variant: Ux4gAppHeaderVariant.light,
+          variant: _isDark(context)
+              ? Ux4gAppHeaderVariant.light
+              : Ux4gAppHeaderVariant.light,
           title: '',
           leadingWidgets: [
-            SvgPicture.asset(_nationalEmblemPath, height: 32),
-            Container(width: 1, height: 28, color: const Color(0xFFD1D5DB)),
-            SvgPicture.asset(_unionLogoPath, height: 32),
+            SvgPicture.asset(
+              _nationalEmblemPath, 
+              height: 32,
+              colorFilter: _isDark(context) ? const ColorFilter.mode(Colors.white, BlendMode.srcIn) : null,
+            ),
+            SizedBox(
+              height: 28,
+              child: Ux4gDivider(
+                orientation: Ux4gDividerOrientation.vertical,
+                color: _isDark(context)
+                    ? Ux4gPalette.neutral700
+                    : Ux4gPalette.neutral300,
+              ),
+            ),
+            SvgPicture.asset(
+              _unionLogoPath, 
+              height: 32,
+              colorFilter: ColorFilter.mode(_isDark(context) ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn),
+            ),
           ],
           horizontalPadding: 16,
           leadingSpacing: 12,
         ),
-        const Divider(height: 1, thickness: 1, color: _border),
+        Ux4gDivider(color: _getBorder(context)),
       ],
     );
   }
@@ -1278,16 +1315,15 @@ class _BrandFooter extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          const Text(
+          Text(
             'Powered by -',
-            style: TextStyle(
-              fontSize: 11,
-              color: _mutedText,
-              fontWeight: FontWeight.w500,
-            ),
+            style: Theme.of(context)
+                .extension<Ux4gTypography>()!
+                .lS_default
+                .copyWith(color: _getMutedText(context)),
           ),
           const SizedBox(height: 6),
-          Image.asset(_digitalIndiaLogoPath, height: 22),
+          Image.asset(_digitalIndiaLogoPath, height: 22, color: _isDark(context) ? Colors.white : null),
         ],
       ),
     );
@@ -1316,29 +1352,16 @@ class _BackButton extends StatelessWidget {
 /// reference design � soft purple (primary @ 75% alpha), bold,
 /// 16px with a slight negative letter-spacing.
 class _RegisterLink extends StatelessWidget {
-  const _RegisterLink({this.fontSize = 16});
-
-  final double fontSize;
+  const _RegisterLink();
 
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: TextButton(
+      child: Ux4gButton(
+        text: 'New user? Register here',
         onPressed: () {},
-        style: TextButton.styleFrom(
-          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-        ),
-        child: Text(
-          'New user? Register here',
-          style: TextStyle(
-            color: Theme.of(
-              context,
-            ).colorScheme.primary.withValues(alpha: 0.75),
-            fontWeight: FontWeight.w700,
-            fontSize: fontSize,
-            letterSpacing: -0.1,
-          ),
-        ),
+        variant: Ux4gButtonVariant.ghost,
+        size: Ux4gButtonSize.medium,
       ),
     );
   }
@@ -1370,24 +1393,23 @@ class _SignInMobileMockupState extends State<_SignInMobileMockup> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
+                  Text(
                     'Sign in to your account',
-                    style: TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.w800,
-                      color: _titleColor,
-                      height: 1.2,
-                      letterSpacing: -0.3,
-                    ),
+                    style: Theme.of(context)
+                        .extension<Ux4gTypography>()!
+                        .hM_strong
+                        .copyWith(
+                          color: _getTitleColor(context),
+                          letterSpacing: -0.3,
+                        ),
                   ),
                   const SizedBox(height: 6),
-                  const Text(
+                  Text(
                     'Access your government services securely',
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: _subtleText,
-                      height: 1.3,
-                    ),
+                    style: Theme.of(context)
+                        .extension<Ux4gTypography>()!
+                        .bM_default
+                        .copyWith(color: _getSubtleText(context)),
                   ),
                   const SizedBox(height: 24),
 
@@ -1396,7 +1418,7 @@ class _SignInMobileMockupState extends State<_SignInMobileMockup> {
                     onValueChange: (v) => setState(() => _username = v),
                     label: 'Username',
                     placeholder: 'Enter your username',
-                    placeholderStyle: _placeholderStyle,
+                    placeholderStyle: _getPlaceholderStyle(context),
                   ),
                   const SizedBox(height: 16),
 
@@ -1405,7 +1427,7 @@ class _SignInMobileMockupState extends State<_SignInMobileMockup> {
                     onValueChange: (v) => setState(() => _password = v),
                     label: 'Password',
                     placeholder: '...........',
-                    placeholderStyle: _placeholderStyle,
+                    placeholderStyle: _getPlaceholderStyle(context),
                     type: Ux4gInputFieldType.password,
                   ),
                   const SizedBox(height: 16),
@@ -1421,21 +1443,9 @@ class _SignInMobileMockupState extends State<_SignInMobileMockup> {
                     subtitle: 'Take action',
                     margin: EdgeInsets.zero,
                     padding: const EdgeInsets.fromLTRB(12, 12, 10, 12),
-                    titleStyle: const TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w400,
-                      color: Ux4gPalette.red800,
-                      height: 1.3,
-                    ),
-                    subtitleStyle: const TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w700,
-                      color: Ux4gPalette.red800,
-                      height: 1.3,
-                    ),
-                    leadingIcon: const Icon(
+                    leadingIcon: Icon(
                       Icons.error_outline,
-                      color: Ux4gPalette.red600,
+                      color: Theme.of(context).extension<Ux4gColors>()!.error,
                       size: 20,
                     ),
                     trailingIcon: Container(
@@ -1444,14 +1454,18 @@ class _SignInMobileMockupState extends State<_SignInMobileMockup> {
                         vertical: 5,
                       ),
                       decoration: BoxDecoration(
-                        color: Ux4gPalette.red200,
+                        color: _isDark(context)
+                            ? Ux4gPalette.red900
+                            : Ux4gPalette.red200,
                         borderRadius: BorderRadius.circular(6),
                       ),
-                      child: const Text(
+                      child: Text(
                         'Attempt 1 of 5',
                         style: TextStyle(
                           fontSize: 12,
-                          color: Ux4gPalette.red800,
+                          color: _isDark(context)
+                              ? Ux4gPalette.red100
+                              : Ux4gPalette.red800,
                           fontWeight: FontWeight.w500,
                           height: 1.2,
                         ),
@@ -1464,27 +1478,24 @@ class _SignInMobileMockupState extends State<_SignInMobileMockup> {
                     text: 'Send OTP',
                     onPressed: () {},
                     size: Ux4gButtonSize.large,
-                    width: double.infinity,
+              height: 48,
+              width: 326,
                   ),
                   const SizedBox(height: 16),
 
-                  Row(
-                    children: const [
-                      Expanded(child: Divider(color: _border, thickness: 1)),
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 16),
-                        child: Text(
-                          'OR',
-                          style: TextStyle(
-                            fontSize: 12,
-                            color: _mutedText,
-                            fontWeight: FontWeight.w500,
+                  Ux4gDivider(
+                    color: _getBorder(context),
+                    label: Text(
+                      'OR',
+                      style: Theme.of(context)
+                          .extension<Ux4gTypography>()!
+                          .lM_default
+                          .copyWith(
+                            color: _getMutedText(context),
                             letterSpacing: 0.5,
                           ),
-                        ),
-                      ),
-                      Expanded(child: Divider(color: _border, thickness: 1)),
-                    ],
+                    ),
+                    labelSpacing: 16,
                   ),
                   const SizedBox(height: 16),
 
@@ -1493,7 +1504,8 @@ class _SignInMobileMockupState extends State<_SignInMobileMockup> {
                     onPressed: () {},
                     variant: Ux4gButtonVariant.outline,
                     size: Ux4gButtonSize.large,
-                    width: double.infinity,
+              height: 48,
+              width: 326,
                   ),
                   const SizedBox(height: 28),
 
@@ -1593,7 +1605,8 @@ class _EnterOtpMobileMockupState extends State<_EnterOtpMobileMockup> {
                     text: 'Verify OTP',
                     onPressed: () {},
                     size: Ux4gButtonSize.large,
-                    width: double.infinity,
+              height: 48,
+              width: 326,
                   ),
                   const SizedBox(height: 12),
 
@@ -1744,7 +1757,8 @@ class _SignInAadhaarMobileMockupState
                     // disabled style otherwise.
                     enabled: validation.status == Ux4gInputFieldStatus.success,
                     size: Ux4gButtonSize.large,
-                    width: double.infinity,
+              height: 48,
+              width: 326,
                   ),
                   const SizedBox(height: 12),
 
@@ -1911,6 +1925,7 @@ class _SignedInSuccessMobileMockupState
 
 // -----------------------------------------------------------------------
 // Code snippets (shown in the docs "Code" tab so users can copy-paste).
+
 // -----------------------------------------------------------------------
 
 const _signInDefaultCode = r'''// Mobile-sized sign-in screen (360 x 760)
@@ -1924,13 +1939,19 @@ Container(
         title: '',
         leadingWidgets: [
           SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
-          Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
-          SvgPicture.asset('assets/Union.svg', height: 32),
+          SizedBox(
+            height: 28,
+            child: Ux4gDivider(
+              orientation: Ux4gDividerOrientation.vertical,
+              color: Ux4gPalette.neutral300,
+            ),
+          ),
+          SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
         ],
         horizontalPadding: 16,
         leadingSpacing: 12,
       ),
-      Divider(height: 1, color: Color(0xFFE5E7EB)),
+      Ux4gDivider(color: Ux4gPalette.neutral200),
 
       Padding(
         padding: EdgeInsets.fromLTRB(20, 24, 20, 0),
@@ -1938,10 +1959,10 @@ Container(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text('Sign in to your account',
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.w800)),
+              style: Theme.of(context).extension<Ux4gTypography>()!.hM_strong.copyWith(color: Ux4gPalette.gray900)),
             SizedBox(height: 6),
             Text('Access your government services securely',
-              style: TextStyle(fontSize: 14, color: Color(0xFF6B7280))),
+              style: Theme.of(context).extension<Ux4gTypography>()!.bM_default.copyWith(color: Ux4gPalette.neutral500)),
             SizedBox(height: 24),
 
             Ux4gInputField(
@@ -1995,15 +2016,16 @@ Container(
               text: 'Send OTP',
               onPressed: () {},
               size: Ux4gButtonSize.large,
-              width: double.infinity,
+              height: 48,
+              width: 326,
             ),
             SizedBox(height: 16),
 
-            Row(children: [
-              Expanded(child: Divider()),
-              Padding(padding: EdgeInsets.symmetric(horizontal: 16), child: Text('OR')),
-              Expanded(child: Divider()),
-            ]),
+            Ux4gDivider(
+              color: Ux4gPalette.neutral200,
+              label: Text('OR', style: Theme.of(context).extension<Ux4gTypography>()!.lM_default.copyWith(color: Ux4gPalette.neutral400, letterSpacing: 0.5)),
+              labelSpacing: 16,
+            ),
             SizedBox(height: 16),
 
             Ux4gButton(
@@ -2011,7 +2033,18 @@ Container(
               onPressed: () {},
               variant: Ux4gButtonVariant.outline,
               size: Ux4gButtonSize.large,
-              width: double.infinity,
+              height: 48,
+              width: 326,
+            ),
+            SizedBox(height: 28),
+
+            Center(
+              child: Ux4gButton(
+                text: 'New user? Register here',
+                onPressed: () {},
+                variant: Ux4gButtonVariant.ghost,
+                size: Ux4gButtonSize.medium,
+              ),
             ),
           ],
         ),
@@ -2023,9 +2056,9 @@ Container(
             mainAxisSize: MainAxisSize.min,
             children: [
               Text('Powered by -',
-                style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+                style: Theme.of(context).extension<Ux4gTypography>()!.lS_default.copyWith(color: Ux4gPalette.neutral400)),
               SizedBox(height: 6),
-              Image.asset('assets/digital_india_logo.png', height: 22),
+              Image.asset('assets/digital_india_logo.png', height: 22, color: Theme.of(context).brightness == Brightness.dark ? Colors.white : null),
             ],
           ),
         ),    ],
@@ -2040,7 +2073,7 @@ Column(
       leadingWidgets: [
         SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
         Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
-        SvgPicture.asset('assets/Union.svg', height: 32),
+        SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
       ],
     ),
     Divider(height: 1, color: Color(0xFFE5E7EB)),
@@ -2092,7 +2125,8 @@ Column(
             text: 'Verify OTP',
             onPressed: () {},
             size: Ux4gButtonSize.large,
-            width: double.infinity,
+              height: 48,
+              width: 326,
           ),
         ],
       ),
@@ -2106,7 +2140,7 @@ Column(
           Text('Powered by -',
             style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
           SizedBox(height: 6),
-          Image.asset('assets/digital_india_logo.png', height: 22),
+          Image.asset('assets/digital_india_logo.png', height: 22, color: Theme.of(context).brightness == Brightness.dark ? Colors.white : null),
         ],
       ),
     ),  ],
@@ -2120,7 +2154,7 @@ Column(
       leadingWidgets: [
         SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
         Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
-        SvgPicture.asset('assets/Union.svg', height: 32),
+        SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
       ],
     ),
     Divider(height: 1, color: Color(0xFFE5E7EB)),
@@ -2207,7 +2241,8 @@ Column(
             text: 'Continue',
             onPressed: () {},
             size: Ux4gButtonSize.large,
-            width: double.infinity,
+              height: 48,
+              width: 326,
           ),
         ],
       ),
@@ -2221,7 +2256,7 @@ Column(
           Text('Powered by -',
             style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
           SizedBox(height: 6),
-          Image.asset('assets/digital_india_logo.png', height: 22),
+          Image.asset('assets/digital_india_logo.png', height: 22, color: Theme.of(context).brightness == Brightness.dark ? Colors.white : null),
         ],
       ),
     ),  ],
@@ -2235,7 +2270,7 @@ Column(
       leadingWidgets: [
         SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
         Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
-        SvgPicture.asset('assets/Union.svg', height: 32),
+        SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
       ],
     ),
     Divider(height: 1, color: Color(0xFFE5E7EB)),
@@ -2296,7 +2331,7 @@ Column(
           Text('Powered by -',
             style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
           SizedBox(height: 6),
-          Image.asset('assets/digital_india_logo.png', height: 22),
+          Image.asset('assets/digital_india_logo.png', height: 22, color: Theme.of(context).brightness == Brightness.dark ? Colors.white : null),
         ],
       ),
     ),  ],
@@ -2355,7 +2390,7 @@ class _SignInWithMobileMockupState extends State<_SignInWithMobileMockup> {
                     onValueChange: (v) => setState(() => _mobile = v),
                     label: 'Mobile Number',
                     placeholder: 'Enter mobile number',
-                    placeholderStyle: _placeholderStyle,
+                    placeholderStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.neutral500 : Ux4gPalette.neutral400, height: 1.3),
                     type: Ux4gInputFieldType.number,
                     prefixText: '+91',
                     maxLength: 10,
@@ -2412,7 +2447,8 @@ class _SignInWithMobileMockupState extends State<_SignInWithMobileMockup> {
                     text: 'Send OTP',
                     onPressed: () {},
                     size: Ux4gButtonSize.large,
-                    width: double.infinity,
+              height: 48,
+              width: 326,
                   ),
                   const SizedBox(height: 16),
 
@@ -2441,7 +2477,8 @@ class _SignInWithMobileMockupState extends State<_SignInWithMobileMockup> {
                     onPressed: () {},
                     variant: Ux4gButtonVariant.outline,
                     size: Ux4gButtonSize.large,
-                    width: double.infinity,
+              height: 48,
+              width: 326,
                   ),
                   const SizedBox(height: 28),
 
@@ -2466,7 +2503,7 @@ Column(
       leadingWidgets: [
         SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
         Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
-        SvgPicture.asset('assets/Union.svg', height: 32),
+        SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
       ],
     ),
     Divider(height: 1, color: Color(0xFFE5E7EB)),
@@ -2530,7 +2567,8 @@ Column(
             text: 'Send OTP',
             onPressed: () {},
             size: Ux4gButtonSize.large,
-            width: double.infinity,
+              height: 48,
+              width: 326,
           ),
           SizedBox(height: 16),
 
@@ -2547,7 +2585,8 @@ Column(
             onPressed: () {},
             variant: Ux4gButtonVariant.outline,
             size: Ux4gButtonSize.large,
-            width: double.infinity,
+              height: 48,
+              width: 326,
           ),
           SizedBox(height: 28),
 
@@ -2567,7 +2606,7 @@ Column(
           Text('Powered by -',
             style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
           SizedBox(height: 6),
-          Image.asset('assets/digital_india_logo.png', height: 22),
+          Image.asset('assets/digital_india_logo.png', height: 22, color: Theme.of(context).brightness == Brightness.dark ? Colors.white : null),
         ],
       ),
     ),  ],
@@ -2589,7 +2628,7 @@ class _SignInCardMockupState extends State<_SignInCardMockup> {
   String _password = '';
 
   // Card-variant background � soft purple tint behind the white card.
-  static const _cardBg = Color(0xFFE9E5FF);
+  Color _getCardBg(BuildContext context) => _isDark(context) ? Ux4gPalette.primary900 : Ux4gPalette.primary100;
 
   @override
   Widget build(BuildContext context) {
@@ -2604,7 +2643,7 @@ class _SignInCardMockupState extends State<_SignInCardMockup> {
           // scrolls if its content overflows on smaller frames.
           Expanded(
             child: Container(
-              color: _cardBg,
+              color: _getCardBg(context),
               child: Column(
                 children: [
                   Expanded(
@@ -2613,7 +2652,7 @@ class _SignInCardMockupState extends State<_SignInCardMockup> {
                       child: Container(
                         padding: const EdgeInsets.fromLTRB(20, 24, 20, 24),
                         decoration: BoxDecoration(
-                          color: Colors.white,
+                          color: _isDark(context) ? Ux4gPalette.gray900 : Colors.white,
                           borderRadius: BorderRadius.circular(16),
                           boxShadow: [
                             BoxShadow(
@@ -2654,7 +2693,7 @@ class _SignInCardMockupState extends State<_SignInCardMockup> {
                                   setState(() => _username = v),
                               label: 'Username',
                               placeholder: 'Enter your username',
-                              placeholderStyle: _placeholderStyle,
+                              placeholderStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.neutral500 : Ux4gPalette.neutral400, height: 1.3),
                             ),
                             const SizedBox(height: 16),
 
@@ -2665,7 +2704,7 @@ class _SignInCardMockupState extends State<_SignInCardMockup> {
                                   setState(() => _password = v),
                               label: 'Password',
                               placeholder: '...........',
-                              placeholderStyle: _placeholderStyle,
+                              placeholderStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.neutral500 : Ux4gPalette.neutral400, height: 1.3),
                               type: Ux4gInputFieldType.password,
                             ),
                             const SizedBox(height: 12),
@@ -2674,50 +2713,42 @@ class _SignInCardMockupState extends State<_SignInCardMockup> {
                             Ux4gStatusBanner(
                               variant: Ux4gBannerVariant.errorLight,
                               title: 'Username not found.',
-                              subtitle: 'Take action',
-                              margin: EdgeInsets.zero,
-                              padding: const EdgeInsets.fromLTRB(
-                                12,
-                                12,
-                                10,
-                                12,
-                              ),
-                              titleStyle: const TextStyle(
-                                fontSize: 14,
-                                fontWeight: FontWeight.w400,
-                                color: Ux4gPalette.red800,
-                                height: 1.3,
-                              ),
-                              subtitleStyle: const TextStyle(
-                                fontSize: 14,
-                                fontWeight: FontWeight.w700,
-                                color: Ux4gPalette.red800,
-                                height: 1.3,
-                              ),
-                              leadingIcon: const Icon(
-                                Icons.error_outline,
-                                color: Ux4gPalette.red600,
-                                size: 20,
-                              ),
-                              trailingIcon: Container(
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 10,
-                                  vertical: 5,
-                                ),
-                                decoration: BoxDecoration(
-                                  color: Ux4gPalette.red200,
-                                  borderRadius: BorderRadius.circular(6),
-                                ),
-                                child: const Text(
-                                  'Attempt 1 of 5',
-                                  style: TextStyle(
-                                    fontSize: 12,
-                                    color: Ux4gPalette.red800,
-                                    fontWeight: FontWeight.w500,
-                                    height: 1.2,
+                              subtitleWidget: Row(
+                                children: [
+                                  Text(
+                                    'Take action',
+                                    style: TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w700,
+                                      color: _isDark(context) ? Ux4gPalette.primary300 : Ux4gPalette.primary800,
+                                      height: 1.3,
+                                    ),
                                   ),
-                                ),
+                                  const Spacer(),
+                                  Container(
+                                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                                    decoration: BoxDecoration(
+                                      color: _isDark(context) ? Ux4gPalette.primary800 : Ux4gPalette.primary200,
+                                      borderRadius: BorderRadius.circular(6),
+                                    ),
+                                    child: Text('Attempt 1 of 5',
+                                      style: TextStyle(fontSize: 12,
+                                        color: _isDark(context) ? Ux4gPalette.primary300 : Ux4gPalette.primary800,
+                                        fontWeight: FontWeight.w500)),
+                                  ),
+                                ],
                               ),
+                              margin: EdgeInsets.zero,
+                              backgroundColor: _isDark(context) ? Ux4gPalette.primary900 : Ux4gPalette.primary100,
+                              borderColor: _isDark(context) ? Ux4gPalette.primary600 : Ux4gPalette.primary300,
+                              padding: const EdgeInsets.fromLTRB(12, 12, 10, 12),
+                              titleStyle: TextStyle(
+                                fontSize: 14, fontWeight: FontWeight.w400,
+                                color: _isDark(context) ? Ux4gPalette.red300 : Ux4gPalette.red800,
+                                height: 1.3,
+                              ),
+                              leadingIcon: Icon(Icons.error,
+                                color: _isDark(context) ? Ux4gPalette.red500 : Ux4gPalette.red600, size: 20),
                             ),
                             const SizedBox(height: 16),
 
@@ -2725,7 +2756,8 @@ class _SignInCardMockupState extends State<_SignInCardMockup> {
                               text: 'Send OTP',
                               onPressed: () {},
                               size: Ux4gButtonSize.large,
-                              width: double.infinity,
+              height: 48,
+              width: 326,
                             ),
                             const SizedBox(height: 12),
 
@@ -2758,11 +2790,12 @@ class _SignInCardMockupState extends State<_SignInCardMockup> {
                               onPressed: () {},
                               variant: Ux4gButtonVariant.outline,
                               size: Ux4gButtonSize.large,
-                              width: double.infinity,
+              height: 48,
+              width: 326,
                             ),
                             const SizedBox(height: 16),
 
-                            const _RegisterLink(fontSize: 15),
+                            const _RegisterLink(),
                           ],
                         ),
                       ),
@@ -2790,7 +2823,7 @@ Column(
       leadingWidgets: [
         SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
         Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
-        SvgPicture.asset('assets/Union.svg', height: 32),
+        SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
       ],
     ),
     Divider(height: 1, color: Color(0xFFE5E7EB)),
@@ -2870,7 +2903,8 @@ Column(
                         text: 'Send OTP',
                         onPressed: () {},
                         size: Ux4gButtonSize.large,
-                        width: double.infinity,
+              height: 48,
+              width: 326,
                       ),
                       SizedBox(height: 12),
 
@@ -2887,7 +2921,8 @@ Column(
                         onPressed: () {},
                         variant: Ux4gButtonVariant.outline,
                         size: Ux4gButtonSize.large,
-                        width: double.infinity,
+              height: 48,
+              width: 326,
                       ),
                       SizedBox(height: 16),
 
@@ -2910,7 +2945,7 @@ Column(
                   Text('Powered by -',
                     style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
                   SizedBox(height: 6),
-                  Image.asset('assets/digital_india_logo.png', height: 22),
+                  Image.asset('assets/digital_india_logo.png', height: 22, color: Theme.of(context).brightness == Brightness.dark ? Colors.white : null),
                 ],
               ),
             ),
@@ -2939,7 +2974,7 @@ class _SignInWithMobileCardMockupState
 
   // Same soft-purple background tint used by the username/password
   // card variant so both feel like the same family.
-  static const _cardBg = Color(0xFFE9E5FF);
+  Color _getCardBg(BuildContext context) => _isDark(context) ? Ux4gPalette.primary900 : Ux4gPalette.primary100;
 
   @override
   Widget build(BuildContext context) {
@@ -2952,7 +2987,7 @@ class _SignInWithMobileCardMockupState
           // the bottom of the purple area.
           Expanded(
             child: Container(
-              color: _cardBg,
+              color: _getCardBg(context),
               child: Column(
                 children: [
                   Expanded(
@@ -2961,7 +2996,7 @@ class _SignInWithMobileCardMockupState
                       child: Container(
                         padding: const EdgeInsets.fromLTRB(20, 24, 20, 24),
                         decoration: BoxDecoration(
-                          color: Colors.white,
+                          color: _isDark(context) ? Ux4gPalette.gray900 : Colors.white,
                           borderRadius: BorderRadius.circular(16),
                           boxShadow: [
                             BoxShadow(
@@ -3001,7 +3036,7 @@ class _SignInWithMobileCardMockupState
                               onValueChange: (v) => setState(() => _mobile = v),
                               label: 'Mobile Number',
                               placeholder: 'Enter mobile number',
-                              placeholderStyle: _placeholderStyle,
+                              placeholderStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.neutral500 : Ux4gPalette.neutral400, height: 1.3),
                               type: Ux4gInputFieldType.number,
                               prefixText: '+91',
                               maxLength: 10,
@@ -3063,7 +3098,8 @@ class _SignInWithMobileCardMockupState
                               text: 'Send OTP',
                               onPressed: () {},
                               size: Ux4gButtonSize.large,
-                              width: double.infinity,
+              height: 48,
+              width: 326,
                             ),
                             const SizedBox(height: 12),
 
@@ -3096,11 +3132,12 @@ class _SignInWithMobileCardMockupState
                               onPressed: () {},
                               variant: Ux4gButtonVariant.outline,
                               size: Ux4gButtonSize.large,
-                              width: double.infinity,
+              height: 48,
+              width: 326,
                             ),
                             const SizedBox(height: 16),
 
-                            const _RegisterLink(fontSize: 15),
+                            const _RegisterLink(),
                           ],
                         ),
                       ),
@@ -3128,7 +3165,7 @@ Column(
       leadingWidgets: [
         SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
         Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
-        SvgPicture.asset('assets/Union.svg', height: 32),
+        SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
       ],
     ),
     Divider(height: 1, color: Color(0xFFE5E7EB)),
@@ -3203,7 +3240,8 @@ Column(
                         text: 'Send OTP',
                         onPressed: () {},
                         size: Ux4gButtonSize.large,
-                        width: double.infinity,
+              height: 48,
+              width: 326,
                       ),
                       SizedBox(height: 12),
 
@@ -3220,7 +3258,8 @@ Column(
                         onPressed: () {},
                         variant: Ux4gButtonVariant.outline,
                         size: Ux4gButtonSize.large,
-                        width: double.infinity,
+              height: 48,
+              width: 326,
                       ),
                       SizedBox(height: 16),
 
@@ -3243,7 +3282,7 @@ Column(
                   Text('Powered by -',
                     style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
                   SizedBox(height: 6),
-                  Image.asset('assets/digital_india_logo.png', height: 22),
+                  Image.asset('assets/digital_india_logo.png', height: 22, color: Theme.of(context).brightness == Brightness.dark ? Colors.white : null),
                 ],
               ),
             ),
@@ -3269,7 +3308,7 @@ class _EnterOtpCardMockupState extends State<_EnterOtpCardMockup> {
   String _otp = '';
   int _resendNonce = 0;
 
-  static const _cardBg = Color(0xFFE9E5FF);
+  Color _getCardBg(BuildContext context) => _isDark(context) ? Ux4gPalette.primary900 : Ux4gPalette.primary100;
 
   @override
   Widget build(BuildContext context) {
@@ -3279,7 +3318,7 @@ class _EnterOtpCardMockupState extends State<_EnterOtpCardMockup> {
           const _BrandHeader(),
           Expanded(
             child: Container(
-              color: _cardBg,
+              color: _getCardBg(context),
               child: Column(
                 children: [
                   // White card holds the OTP form. Sits at the top of the
@@ -3353,7 +3392,8 @@ class _EnterOtpCardMockupState extends State<_EnterOtpCardMockup> {
                             text: 'Verify OTP',
                             onPressed: () {},
                             size: Ux4gButtonSize.large,
-                            width: double.infinity,
+              height: 48,
+              width: 326,
                           ),
                           const SizedBox(height: 12),
 
@@ -3394,7 +3434,7 @@ Column(
       leadingWidgets: [
         SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
         Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
-        SvgPicture.asset('assets/Union.svg', height: 32),
+        SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
       ],
     ),
     Divider(height: 1, color: Color(0xFFE5E7EB)),
@@ -3463,7 +3503,8 @@ Column(
                       text: 'Verify OTP',
                       onPressed: () {},
                       size: Ux4gButtonSize.large,
-                      width: double.infinity,
+              height: 48,
+              width: 326,
                     ),
                     SizedBox(height: 12),
 
@@ -3484,7 +3525,7 @@ Column(
                   Text('Powered by -',
                     style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
                   SizedBox(height: 6),
-                  Image.asset('assets/digital_india_logo.png', height: 22),
+                  Image.asset('assets/digital_india_logo.png', height: 22, color: Theme.of(context).brightness == Brightness.dark ? Colors.white : null),
                 ],
               ),
             ),
@@ -3511,7 +3552,7 @@ class _SignInAadhaarCardMockupState extends State<_SignInAadhaarCardMockup> {
   String _aadhaar = '';
   String _method = 'otp';
 
-  static const _cardBg = Color(0xFFE9E5FF);
+  Color _getCardBg(BuildContext context) => _isDark(context) ? Ux4gPalette.primary900 : Ux4gPalette.primary100;
 
   ({Ux4gInputFieldStatus status, String? caption}) _validate() {
     final digits = _aadhaar.replaceAll(' ', '');
@@ -3540,7 +3581,7 @@ class _SignInAadhaarCardMockupState extends State<_SignInAadhaarCardMockup> {
           const _BrandHeader(),
           Expanded(
             child: Container(
-              color: _cardBg,
+              color: _getCardBg(context),
               child: Column(
                 children: [
                   // White card hugs the top of the soft-purple area.
@@ -3591,7 +3632,7 @@ class _SignInAadhaarCardMockupState extends State<_SignInAadhaarCardMockup> {
                             onValueChange: (v) => setState(() => _aadhaar = v),
                             label: 'Aadhaar Number',
                             placeholder: 'XXXX XXXX 1234',
-                            placeholderStyle: _placeholderStyle,
+                            placeholderStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.neutral500 : Ux4gPalette.neutral400, height: 1.3),
                             status: validation.status,
                             caption: validation.caption,
                           ),
@@ -3640,7 +3681,8 @@ class _SignInAadhaarCardMockupState extends State<_SignInAadhaarCardMockup> {
                                 validation.status ==
                                 Ux4gInputFieldStatus.success,
                             size: Ux4gButtonSize.large,
-                            width: double.infinity,
+              height: 48,
+              width: 326,
                           ),
                         ],
                       ),
@@ -3685,7 +3727,7 @@ Column(
       leadingWidgets: [
         SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
         Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
-        SvgPicture.asset('assets/Union.svg', height: 32),
+        SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
       ],
     ),
     Divider(height: 1, color: Color(0xFFE5E7EB)),
@@ -3767,7 +3809,8 @@ Column(
                       text: 'Continue',
                       onPressed: () {},
                       size: Ux4gButtonSize.large,
-                      width: double.infinity,
+              height: 48,
+              width: 326,
                     ),
                   ],
                 ),
@@ -3796,7 +3839,7 @@ Column(
                   Text('Powered by -',
                     style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
                   SizedBox(height: 6),
-                  Image.asset('assets/digital_india_logo.png', height: 22),
+                  Image.asset('assets/digital_india_logo.png', height: 22, color: Theme.of(context).brightness == Brightness.dark ? Colors.white : null),
                 ],
               ),
             ),
@@ -3826,7 +3869,7 @@ class _SignedInSuccessCardMockupState
   static const _successLight = Ux4gPalette.green100;
   static const _successDark = Ux4gPalette.green700;
 
-  static const _cardBg = Color(0xFFE9E5FF);
+  Color _getCardBg(BuildContext context) => _isDark(context) ? Ux4gPalette.primary900 : Ux4gPalette.primary100;
 
   Timer? _countdownTimer;
   int _secondsLeft = 3;
@@ -3863,7 +3906,7 @@ class _SignedInSuccessCardMockupState
           Expanded(
             child: Container(
               width: double.infinity,
-              color: _cardBg,
+              color: _getCardBg(context),
               child: Column(
                 children: [
                   // White card hugs the top of the soft-purple area.
@@ -3982,7 +4025,7 @@ Column(
       leadingWidgets: [
         SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
         Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
-        SvgPicture.asset('assets/Union.svg', height: 32),
+        SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
       ],
     ),
     Divider(height: 1, color: Color(0xFFE5E7EB)),
@@ -4071,7 +4114,7 @@ Column(
                   Text('Powered by -',
                     style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
                   SizedBox(height: 6),
-                  Image.asset('assets/digital_india_logo.png', height: 22),
+                  Image.asset('assets/digital_india_logo.png', height: 22, color: Theme.of(context).brightness == Brightness.dark ? Colors.white : null),
                 ],
               ),
             ),
@@ -4160,7 +4203,8 @@ class _VerifyMobileOtpMockupState extends State<_VerifyMobileOtpMockup> {
                     text: 'Verify OTP',
                     onPressed: () {},
                     size: Ux4gButtonSize.large,
-                    width: double.infinity,
+              height: 48,
+              width: 326,
                   ),
                   const SizedBox(height: 8),
 
@@ -4193,7 +4237,7 @@ Column(
       leadingWidgets: [
         SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
         Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
-        SvgPicture.asset('assets/Union.svg', height: 32),
+        SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
       ],
     ),
     Divider(height: 1, color: Color(0xFFE5E7EB)),
@@ -4236,7 +4280,8 @@ Column(
             text: 'Verify OTP',
             onPressed: () {},
             size: Ux4gButtonSize.large,
-            width: double.infinity,
+              height: 48,
+              width: 326,
           ),
           SizedBox(height: 8),
 
@@ -4259,7 +4304,7 @@ Column(
           Text('Powered by -',
             style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
           SizedBox(height: 6),
-          Image.asset('assets/digital_india_logo.png', height: 22),
+          Image.asset('assets/digital_india_logo.png', height: 22, color: Theme.of(context).brightness == Brightness.dark ? Colors.white : null),
         ],
       ),
     ),  ],
@@ -4282,7 +4327,7 @@ class _VerifyMobileOtpCardMockupState
   String _otp = '';
   int _resendNonce = 0;
 
-  static const _cardBg = Color(0xFFE9E5FF);
+  Color _getCardBg(BuildContext context) => _isDark(context) ? Ux4gPalette.primary900 : Ux4gPalette.primary100;
 
   @override
   Widget build(BuildContext context) {
@@ -4293,7 +4338,7 @@ class _VerifyMobileOtpCardMockupState
           Expanded(
             child: Container(
               width: double.infinity,
-              color: _cardBg,
+              color: _getCardBg(context),
               child: Column(
                 children: [
                   // Soft-purple gap above the card � image shows the
@@ -4368,7 +4413,8 @@ class _VerifyMobileOtpCardMockupState
                             text: 'Verify OTP',
                             onPressed: () {},
                             size: Ux4gButtonSize.large,
-                            width: double.infinity,
+              height: 48,
+              width: 326,
                           ),
                           const SizedBox(height: 4),
 
@@ -4406,7 +4452,7 @@ Column(
       leadingWidgets: [
         SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
         Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
-        SvgPicture.asset('assets/Union.svg', height: 32),
+        SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
       ],
     ),
     Divider(height: 1, color: Color(0xFFE5E7EB)),
@@ -4469,7 +4515,8 @@ Column(
                       text: 'Verify OTP',
                       onPressed: () {},
                       size: Ux4gButtonSize.large,
-                      width: double.infinity,
+              height: 48,
+              width: 326,
                     ),
                     SizedBox(height: 4),
 
@@ -4494,7 +4541,7 @@ Column(
                   Text('Powered by -',
                     style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
                   SizedBox(height: 6),
-                  Image.asset('assets/digital_india_logo.png', height: 22),
+                  Image.asset('assets/digital_india_logo.png', height: 22, color: Theme.of(context).brightness == Brightness.dark ? Colors.white : null),
                 ],
               ),
             ),
@@ -4581,7 +4628,8 @@ class _VerifyMobileVoiceMockupState extends State<_VerifyMobileVoiceMockup> {
                     text: 'Verify OTP',
                     onPressed: () {},
                     size: Ux4gButtonSize.large,
-                    width: double.infinity,
+              height: 48,
+              width: 326,
                   ),
                   const SizedBox(height: 12),
 
@@ -4616,7 +4664,7 @@ Column(
       leadingWidgets: [
         SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
         Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
-        SvgPicture.asset('assets/Union.svg', height: 32),
+        SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
       ],
     ),
     Divider(height: 1, color: Color(0xFFE5E7EB)),
@@ -4662,7 +4710,8 @@ Column(
             text: 'Verify OTP',
             onPressed: () {},
             size: Ux4gButtonSize.large,
-            width: double.infinity,
+              height: 48,
+              width: 326,
           ),
           SizedBox(height: 12),
 
@@ -4687,7 +4736,7 @@ Column(
           Text('Powered by -',
             style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
           SizedBox(height: 6),
-          Image.asset('assets/digital_india_logo.png', height: 22),
+          Image.asset('assets/digital_india_logo.png', height: 22, color: Theme.of(context).brightness == Brightness.dark ? Colors.white : null),
         ],
       ),
     ),  ],
@@ -4709,7 +4758,7 @@ class _VerifyMobileVoiceCardMockupState
     extends State<_VerifyMobileVoiceCardMockup> {
   String _otp = '';
 
-  static const _cardBg = Color(0xFFE9E5FF);
+  Color _getCardBg(BuildContext context) => _isDark(context) ? Ux4gPalette.primary900 : Ux4gPalette.primary100;
 
   @override
   Widget build(BuildContext context) {
@@ -4720,7 +4769,7 @@ class _VerifyMobileVoiceCardMockupState
           Expanded(
             child: Container(
               width: double.infinity,
-              color: _cardBg,
+              color: _getCardBg(context),
               child: Column(
                 children: [
                   // White card hugs the top of the soft-purple area.
@@ -4788,7 +4837,8 @@ class _VerifyMobileVoiceCardMockupState
                             text: 'Verify OTP',
                             onPressed: () {},
                             size: Ux4gButtonSize.large,
-                            width: double.infinity,
+              height: 48,
+              width: 326,
                           ),
                           const SizedBox(height: 12),
 
@@ -4827,7 +4877,7 @@ Column(
       leadingWidgets: [
         SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
         Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
-        SvgPicture.asset('assets/Union.svg', height: 32),
+        SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
       ],
     ),
     Divider(height: 1, color: Color(0xFFE5E7EB)),
@@ -4890,7 +4940,8 @@ Column(
                       text: 'Verify OTP',
                       onPressed: () {},
                       size: Ux4gButtonSize.large,
-                      width: double.infinity,
+              height: 48,
+              width: 326,
                     ),
                     SizedBox(height: 12),
 
@@ -4917,7 +4968,7 @@ Column(
                   Text('Powered by -',
                     style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
                   SizedBox(height: 6),
-                  Image.asset('assets/digital_india_logo.png', height: 22),
+                  Image.asset('assets/digital_india_logo.png', height: 22, color: Theme.of(context).brightness == Brightness.dark ? Colors.white : null),
                 ],
               ),
             ),
@@ -5043,7 +5094,8 @@ class _VerifyMobileAttemptWarningMockupState
                     text: 'Verify OTP',
                     onPressed: () {},
                     size: Ux4gButtonSize.large,
-                    width: double.infinity,
+              height: 48,
+              width: 326,
                   ),
                 ],
               ),
@@ -5065,7 +5117,7 @@ Column(
       leadingWidgets: [
         SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
         Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
-        SvgPicture.asset('assets/Union.svg', height: 32),
+        SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
       ],
     ),
     Divider(height: 1, color: Color(0xFFE5E7EB)),
@@ -5136,7 +5188,8 @@ Column(
             text: 'Verify OTP',
             onPressed: () {},
             size: Ux4gButtonSize.large,
-            width: double.infinity,
+              height: 48,
+              width: 326,
           ),
         ],
       ),
@@ -5150,7 +5203,7 @@ Column(
           Text('Powered by -',
             style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
           SizedBox(height: 6),
-          Image.asset('assets/digital_india_logo.png', height: 22),
+          Image.asset('assets/digital_india_logo.png', height: 22, color: Theme.of(context).brightness == Brightness.dark ? Colors.white : null),
         ],
       ),
     ),  ],
@@ -5172,7 +5225,7 @@ class _VerifyMobileAttemptWarningCardMockupState
     extends State<_VerifyMobileAttemptWarningCardMockup> {
   String _otp = '';
 
-  static const _cardBg = Color(0xFFE9E5FF);
+  Color _getCardBg(BuildContext context) => _isDark(context) ? Ux4gPalette.primary900 : Ux4gPalette.primary100;
 
   @override
   Widget build(BuildContext context) {
@@ -5183,7 +5236,7 @@ class _VerifyMobileAttemptWarningCardMockupState
           Expanded(
             child: Container(
               width: double.infinity,
-              color: _cardBg,
+              color: _getCardBg(context),
               child: Column(
                 children: [
                   // White card hugs the top of the soft-purple area.
@@ -5289,7 +5342,8 @@ class _VerifyMobileAttemptWarningCardMockupState
                             text: 'Verify OTP',
                             onPressed: () {},
                             size: Ux4gButtonSize.large,
-                            width: double.infinity,
+              height: 48,
+              width: 326,
                           ),
                         ],
                       ),
@@ -5317,7 +5371,7 @@ Column(
       leadingWidgets: [
         SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
         Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
-        SvgPicture.asset('assets/Union.svg', height: 32),
+        SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
       ],
     ),
     Divider(height: 1, color: Color(0xFFE5E7EB)),
@@ -5406,7 +5460,8 @@ Column(
                       text: 'Verify OTP',
                       onPressed: () {},
                       size: Ux4gButtonSize.large,
-                      width: double.infinity,
+              height: 48,
+              width: 326,
                     ),
                   ],
                 ),
@@ -5423,7 +5478,7 @@ Column(
                   Text('Powered by -',
                     style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
                   SizedBox(height: 6),
-                  Image.asset('assets/digital_india_logo.png', height: 22),
+                  Image.asset('assets/digital_india_logo.png', height: 22, color: Theme.of(context).brightness == Brightness.dark ? Colors.white : null),
                 ],
               ),
             ),
@@ -5547,7 +5602,8 @@ class _VerifyMobileLastAttemptMockupState
                     text: 'Verify OTP',
                     onPressed: () {},
                     size: Ux4gButtonSize.large,
-                    width: double.infinity,
+              height: 48,
+              width: 326,
                   ),
                 ],
               ),
@@ -5569,7 +5625,7 @@ Column(
       leadingWidgets: [
         SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
         Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
-        SvgPicture.asset('assets/Union.svg', height: 32),
+        SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
       ],
     ),
     Divider(height: 1, color: Color(0xFFE5E7EB)),
@@ -5640,7 +5696,8 @@ Column(
             text: 'Verify OTP',
             onPressed: () {},
             size: Ux4gButtonSize.large,
-            width: double.infinity,
+              height: 48,
+              width: 326,
           ),
         ],
       ),
@@ -5654,7 +5711,7 @@ Column(
           Text('Powered by -',
             style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
           SizedBox(height: 6),
-          Image.asset('assets/digital_india_logo.png', height: 22),
+          Image.asset('assets/digital_india_logo.png', height: 22, color: Theme.of(context).brightness == Brightness.dark ? Colors.white : null),
         ],
       ),
     ),  ],
@@ -5675,7 +5732,7 @@ class _VerifyMobileLastAttemptCardMockupState
     extends State<_VerifyMobileLastAttemptCardMockup> {
   String _otp = '';
 
-  static const _cardBg = Color(0xFFE9E5FF);
+  Color _getCardBg(BuildContext context) => _isDark(context) ? Ux4gPalette.primary900 : Ux4gPalette.primary100;
 
   @override
   Widget build(BuildContext context) {
@@ -5686,7 +5743,7 @@ class _VerifyMobileLastAttemptCardMockupState
           Expanded(
             child: Container(
               width: double.infinity,
-              color: _cardBg,
+              color: _getCardBg(context),
               child: Column(
                 children: [
                   Padding(
@@ -5791,7 +5848,8 @@ class _VerifyMobileLastAttemptCardMockupState
                             text: 'Verify OTP',
                             onPressed: () {},
                             size: Ux4gButtonSize.large,
-                            width: double.infinity,
+              height: 48,
+              width: 326,
                           ),
                         ],
                       ),
@@ -5819,7 +5877,7 @@ Column(
       leadingWidgets: [
         SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
         Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
-        SvgPicture.asset('assets/Union.svg', height: 32),
+        SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
       ],
     ),
     Divider(height: 1, color: Color(0xFFE5E7EB)),
@@ -5908,7 +5966,8 @@ Column(
                       text: 'Verify OTP',
                       onPressed: () {},
                       size: Ux4gButtonSize.large,
-                      width: double.infinity,
+              height: 48,
+              width: 326,
                     ),
                   ],
                 ),
@@ -5925,7 +5984,7 @@ Column(
                   Text('Powered by -',
                     style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
                   SizedBox(height: 6),
-                  Image.asset('assets/digital_india_logo.png', height: 22),
+                  Image.asset('assets/digital_india_logo.png', height: 22, color: Theme.of(context).brightness == Brightness.dark ? Colors.white : null),
                 ],
               ),
             ),
@@ -6088,7 +6147,7 @@ Column(
       leadingWidgets: [
         SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
         Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
-        SvgPicture.asset('assets/Union.svg', height: 32),
+        SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
       ],
     ),
     Divider(height: 1, color: Color(0xFFE5E7EB)),
@@ -6178,7 +6237,7 @@ Column(
           Text('Powered by -',
             style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
           SizedBox(height: 6),
-          Image.asset('assets/digital_india_logo.png', height: 22),
+          Image.asset('assets/digital_india_logo.png', height: 22, color: Theme.of(context).brightness == Brightness.dark ? Colors.white : null),
         ],
       ),
     ),  ],
@@ -6197,7 +6256,7 @@ class _VerifyAccountLockedCardMockup extends StatefulWidget {
 
 class _VerifyAccountLockedCardMockupState
     extends State<_VerifyAccountLockedCardMockup> {
-  static const _cardBg = Color(0xFFE9E5FF);
+  Color _getCardBg(BuildContext context) => _isDark(context) ? Ux4gPalette.primary900 : Ux4gPalette.primary100;
   static const _lockBadgeBg = Ux4gPalette.red100;
   static const _lockIconColor = Ux4gPalette.red600;
 
@@ -6210,7 +6269,7 @@ class _VerifyAccountLockedCardMockupState
           Expanded(
             child: Container(
               width: double.infinity,
-              color: _cardBg,
+              color: _getCardBg(context),
               child: Column(
                 children: [
                   Padding(
@@ -6482,7 +6541,7 @@ Column(
       leadingWidgets: [
         SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
         Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
-        SvgPicture.asset('assets/Union.svg', height: 32),
+        SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
       ],
     ),
     Divider(height: 1, color: Color(0xFFE5E7EB)),
@@ -6542,7 +6601,7 @@ Column(
           Text('Powered by -',
             style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
           SizedBox(height: 6),
-          Image.asset('assets/digital_india_logo.png', height: 22),
+          Image.asset('assets/digital_india_logo.png', height: 22, color: Theme.of(context).brightness == Brightness.dark ? Colors.white : null),
         ],
       ),
     ),  ],
@@ -6554,7 +6613,7 @@ Column(
 class _OtpVerifiedSuccessCardMockup extends StatelessWidget {
   const _OtpVerifiedSuccessCardMockup();
 
-  static const _cardBg = Color(0xFFE9E5FF);
+  Color _getCardBg(BuildContext context) => _isDark(context) ? Ux4gPalette.primary900 : Ux4gPalette.primary100;
   static const _successMid = Ux4gPalette.green;
   static const _successLight = Ux4gPalette.green100;
 
@@ -6567,7 +6626,7 @@ class _OtpVerifiedSuccessCardMockup extends StatelessWidget {
           Expanded(
             child: Container(
               width: double.infinity,
-              color: _cardBg,
+              color: _getCardBg(context),
               child: Column(
                 children: [
                   Padding(
@@ -7090,7 +7149,8 @@ class _AuthIncorrectOtpMockup extends StatelessWidget {
                     text: 'Verify OTP',
                     onPressed: () {},
                     size: Ux4gButtonSize.large,
-                    width: double.infinity,
+              height: 48,
+              width: 326,
                   ),
                 ],
               ),
@@ -7112,7 +7172,7 @@ Column(
       leadingWidgets: [
         SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
         Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
-        SvgPicture.asset('assets/Union.svg', height: 32),
+        SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
       ],
     ),
     Divider(height: 1, color: Color(0xFFE5E7EB)),
@@ -7164,7 +7224,8 @@ Column(
         text: 'Verify OTP',
         onPressed: () {},
         size: Ux4gButtonSize.large,
-        width: double.infinity,
+              height: 48,
+              width: 326,
       ),
     ),
     // Powered by - Digital India footer pinned to the bottom.
@@ -7176,7 +7237,7 @@ Column(
           Text('Powered by -',
             style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
           SizedBox(height: 6),
-          Image.asset('assets/digital_india_logo.png', height: 22),
+          Image.asset('assets/digital_india_logo.png', height: 22, color: Theme.of(context).brightness == Brightness.dark ? Colors.white : null),
         ],
       ),
     ),  ],
@@ -7200,7 +7261,7 @@ class _AuthIncorrectOtpCardMockupState
   String _otp = '';
   int _resendNonce = 0;
 
-  static const _cardBg = Color(0xFFE9E5FF);
+  Color _getCardBg(BuildContext context) => _isDark(context) ? Ux4gPalette.primary900 : Ux4gPalette.primary100;
 
   @override
   Widget build(BuildContext context) {
@@ -7211,7 +7272,7 @@ class _AuthIncorrectOtpCardMockupState
           Expanded(
             child: Container(
               width: double.infinity,
-              color: _cardBg,
+              color: _getCardBg(context),
               child: Column(
                 children: [
                   // Soft-purple gap between the header and the card.
@@ -7286,7 +7347,8 @@ class _AuthIncorrectOtpCardMockupState
                             text: 'Verify OTP',
                             onPressed: () {},
                             size: Ux4gButtonSize.large,
-                            width: double.infinity,
+              height: 48,
+              width: 326,
                           ),
                           const SizedBox(height: 4),
 
@@ -7326,7 +7388,7 @@ Column(
       leadingWidgets: [
         SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
         Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
-        SvgPicture.asset('assets/Union.svg', height: 32),
+        SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
       ],
     ),
     Divider(height: 1, color: Color(0xFFE5E7EB)),
@@ -7390,7 +7452,8 @@ Column(
                       text: 'Verify OTP',
                       onPressed: () {},
                       size: Ux4gButtonSize.large,
-                      width: double.infinity,
+              height: 48,
+              width: 326,
                     ),
                     SizedBox(height: 4),
 
@@ -7415,7 +7478,7 @@ Column(
                   Text('Powered by -',
                     style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
                   SizedBox(height: 6),
-                  Image.asset('assets/digital_india_logo.png', height: 22),
+                  Image.asset('assets/digital_india_logo.png', height: 22, color: Theme.of(context).brightness == Brightness.dark ? Colors.white : null),
                 ],
               ),
             ),
@@ -7538,7 +7601,8 @@ class _AuthOtpAttemptWarningMockup extends StatelessWidget {
                     text: 'Verify OTP',
                     onPressed: () {},
                     size: Ux4gButtonSize.large,
-                    width: double.infinity,
+              height: 48,
+              width: 326,
                   ),
                 ],
               ),
@@ -7561,7 +7625,7 @@ Column(
       leadingWidgets: [
         SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
         Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
-        SvgPicture.asset('assets/Union.svg', height: 32),
+        SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
       ],
     ),
     Divider(height: 1, color: Color(0xFFE5E7EB)),
@@ -7642,7 +7706,8 @@ Column(
         text: 'Verify OTP',
         onPressed: () {},
         size: Ux4gButtonSize.large,
-        width: double.infinity,
+              height: 48,
+              width: 326,
       ),
     ),
     // Powered by - Digital India footer pinned to the bottom.
@@ -7654,7 +7719,7 @@ Column(
           Text('Powered by -',
             style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
           SizedBox(height: 6),
-          Image.asset('assets/digital_india_logo.png', height: 22),
+          Image.asset('assets/digital_india_logo.png', height: 22, color: Theme.of(context).brightness == Brightness.dark ? Colors.white : null),
         ],
       ),
     ),  ],
@@ -7666,7 +7731,7 @@ Column(
 class _AuthOtpAttemptWarningCardMockup extends StatelessWidget {
   const _AuthOtpAttemptWarningCardMockup();
 
-  static const _cardBg = Color(0xFFE9E5FF);
+  Color _getCardBg(BuildContext context) => _isDark(context) ? Ux4gPalette.primary900 : Ux4gPalette.primary100;
 
   @override
   Widget build(BuildContext context) {
@@ -7677,7 +7742,7 @@ class _AuthOtpAttemptWarningCardMockup extends StatelessWidget {
           Expanded(
             child: Container(
               width: double.infinity,
-              color: _cardBg,
+              color: _getCardBg(context),
               child: Column(
                 children: [
                   const SizedBox(height: 16),
@@ -7791,7 +7856,8 @@ class _AuthOtpAttemptWarningCardMockup extends StatelessWidget {
                             text: 'Verify OTP',
                             onPressed: () {},
                             size: Ux4gButtonSize.large,
-                            width: double.infinity,
+              height: 48,
+              width: 326,
                           ),
                         ],
                       ),
@@ -7819,7 +7885,7 @@ Column(
       leadingWidgets: [
         SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
         Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
-        SvgPicture.asset('assets/Union.svg', height: 32),
+        SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
       ],
     ),
     Divider(height: 1, color: Color(0xFFE5E7EB)),
@@ -7915,7 +7981,8 @@ Column(
                       text: 'Verify OTP',
                       onPressed: () {},
                       size: Ux4gButtonSize.large,
-                      width: double.infinity,
+              height: 48,
+              width: 326,
                     ),
                   ],
                 ),
@@ -7932,7 +7999,7 @@ Column(
                   Text('Powered by -',
                     style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
                   SizedBox(height: 6),
-                  Image.asset('assets/digital_india_logo.png', height: 22),
+                  Image.asset('assets/digital_india_logo.png', height: 22, color: Theme.of(context).brightness == Brightness.dark ? Colors.white : null),
                 ],
               ),
             ),
@@ -8054,7 +8121,8 @@ class _AuthOtpLastAttemptMockup extends StatelessWidget {
                     text: 'Verify OTP',
                     onPressed: () {},
                     size: Ux4gButtonSize.large,
-                    width: double.infinity,
+              height: 48,
+              width: 326,
                   ),
                 ],
               ),
@@ -8074,7 +8142,7 @@ class _AuthOtpLastAttemptMockup extends StatelessWidget {
 class _AuthOtpLastAttemptCardMockup extends StatelessWidget {
   const _AuthOtpLastAttemptCardMockup();
 
-  static const _cardBg = Color(0xFFE9E5FF);
+  Color _getCardBg(BuildContext context) => _isDark(context) ? Ux4gPalette.primary900 : Ux4gPalette.primary100;
 
   @override
   Widget build(BuildContext context) {
@@ -8085,7 +8153,7 @@ class _AuthOtpLastAttemptCardMockup extends StatelessWidget {
           Expanded(
             child: Container(
               width: double.infinity,
-              color: _cardBg,
+              color: _getCardBg(context),
               child: Column(
                 children: [
                   const SizedBox(height: 16),
@@ -8198,7 +8266,8 @@ class _AuthOtpLastAttemptCardMockup extends StatelessWidget {
                             text: 'Verify OTP',
                             onPressed: () {},
                             size: Ux4gButtonSize.large,
-                            width: double.infinity,
+              height: 48,
+              width: 326,
                           ),
                         ],
                       ),
@@ -8226,7 +8295,7 @@ Column(
       leadingWidgets: [
         SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
         Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
-        SvgPicture.asset('assets/Union.svg', height: 32),
+        SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
       ],
     ),
     Divider(height: 1, color: Color(0xFFE5E7EB)),
@@ -8305,7 +8374,8 @@ Column(
         text: 'Verify OTP',
         onPressed: () {},
         size: Ux4gButtonSize.large,
-        width: double.infinity,
+              height: 48,
+              width: 326,
       ),
     ),
 
@@ -8318,7 +8388,7 @@ Column(
           Text('Powered by -',
             style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
           SizedBox(height: 6),
-          Image.asset('assets/digital_india_logo.png', height: 22),
+          Image.asset('assets/digital_india_logo.png', height: 22, color: Theme.of(context).brightness == Brightness.dark ? Colors.white : null),
         ],
       ),
     ),
@@ -8334,7 +8404,7 @@ Column(
       leadingWidgets: [
         SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
         Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
-        SvgPicture.asset('assets/Union.svg', height: 32),
+        SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
       ],
     ),
     Divider(height: 1, color: Color(0xFFE5E7EB)),
@@ -8430,7 +8500,8 @@ Column(
                       text: 'Verify OTP',
                       onPressed: () {},
                       size: Ux4gButtonSize.large,
-                      width: double.infinity,
+              height: 48,
+              width: 326,
                     ),
                   ],
                 ),
@@ -8447,7 +8518,7 @@ Column(
                   Text('Powered by -',
                     style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
                   SizedBox(height: 6),
-                  Image.asset('assets/digital_india_logo.png', height: 22),
+                  Image.asset('assets/digital_india_logo.png', height: 22, color: Theme.of(context).brightness == Brightness.dark ? Colors.white : null),
                 ],
               ),
             ),
@@ -8558,7 +8629,8 @@ class _AuthOtpRetryUnlockedMockupState
                     text: 'Verify OTP',
                     onPressed: () {},
                     size: Ux4gButtonSize.large,
-                    width: double.infinity,
+              height: 48,
+              width: 326,
                   ),
                 ],
               ),
@@ -8587,7 +8659,7 @@ class _AuthOtpRetryUnlockedCardMockupState
   String _otp = '';
   int _resendNonce = 0;
 
-  static const _cardBg = Color(0xFFE9E5FF);
+  Color _getCardBg(BuildContext context) => _isDark(context) ? Ux4gPalette.primary900 : Ux4gPalette.primary100;
 
   @override
   Widget build(BuildContext context) {
@@ -8598,7 +8670,7 @@ class _AuthOtpRetryUnlockedCardMockupState
           Expanded(
             child: Container(
               width: double.infinity,
-              color: _cardBg,
+              color: _getCardBg(context),
               child: Column(
                 children: [
                   const SizedBox(height: 16),
@@ -8690,7 +8762,8 @@ class _AuthOtpRetryUnlockedCardMockupState
                             text: 'Verify OTP',
                             onPressed: () {},
                             size: Ux4gButtonSize.large,
-                            width: double.infinity,
+              height: 48,
+              width: 326,
                           ),
                         ],
                       ),
@@ -8718,7 +8791,7 @@ Column(
       leadingWidgets: [
         SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
         Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
-        SvgPicture.asset('assets/Union.svg', height: 32),
+        SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
       ],
     ),
     Divider(height: 1, color: Color(0xFFE5E7EB)),
@@ -8784,7 +8857,8 @@ Column(
             text: 'Verify OTP',
             onPressed: () {},
             size: Ux4gButtonSize.large,
-            width: double.infinity,
+              height: 48,
+              width: 326,
           ),
         ],
       ),
@@ -8799,7 +8873,7 @@ Column(
           Text('Powered by -',
             style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
           SizedBox(height: 6),
-          Image.asset('assets/digital_india_logo.png', height: 22),
+          Image.asset('assets/digital_india_logo.png', height: 22, color: Theme.of(context).brightness == Brightness.dark ? Colors.white : null),
         ],
       ),
     ),
@@ -8815,7 +8889,7 @@ Column(
       leadingWidgets: [
         SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
         Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
-        SvgPicture.asset('assets/Union.svg', height: 32),
+        SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
       ],
     ),
     Divider(height: 1, color: Color(0xFFE5E7EB)),
@@ -8902,7 +8976,8 @@ Column(
                       text: 'Verify OTP',
                       onPressed: () {},
                       size: Ux4gButtonSize.large,
-                      width: double.infinity,
+              height: 48,
+              width: 326,
                     ),
                   ],
                 ),
@@ -8919,7 +8994,7 @@ Column(
                   Text('Powered by -',
                     style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
                   SizedBox(height: 6),
-                  Image.asset('assets/digital_india_logo.png', height: 22),
+                  Image.asset('assets/digital_india_logo.png', height: 22, color: Theme.of(context).brightness == Brightness.dark ? Colors.white : null),
                 ],
               ),
             ),
@@ -9040,7 +9115,8 @@ class _AuthOtpSuspiciousActivityMockupState
                     text: 'Verify OTP',
                     onPressed: () {},
                     size: Ux4gButtonSize.large,
-                    width: double.infinity,
+              height: 48,
+              width: 326,
                   ),
                 ],
               ),
@@ -9069,7 +9145,7 @@ class _AuthOtpSuspiciousActivityCardMockupState
   String _otp = '';
   int _resendNonce = 0;
 
-  static const _cardBg = Color(0xFFE9E5FF);
+  Color _getCardBg(BuildContext context) => _isDark(context) ? Ux4gPalette.primary900 : Ux4gPalette.primary100;
 
   @override
   Widget build(BuildContext context) {
@@ -9080,7 +9156,7 @@ class _AuthOtpSuspiciousActivityCardMockupState
           Expanded(
             child: Container(
               width: double.infinity,
-              color: _cardBg,
+              color: _getCardBg(context),
               child: Column(
                 children: [
                   const SizedBox(height: 16),
@@ -9182,7 +9258,8 @@ class _AuthOtpSuspiciousActivityCardMockupState
                             text: 'Verify OTP',
                             onPressed: () {},
                             size: Ux4gButtonSize.large,
-                            width: double.infinity,
+              height: 48,
+              width: 326,
                           ),
                         ],
                       ),
@@ -9210,7 +9287,7 @@ Column(
       leadingWidgets: [
         SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
         Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
-        SvgPicture.asset('assets/Union.svg', height: 32),
+        SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
       ],
     ),
     Divider(height: 1, color: Color(0xFFE5E7EB)),
@@ -9283,7 +9360,8 @@ Column(
             text: 'Verify OTP',
             onPressed: () {},
             size: Ux4gButtonSize.large,
-            width: double.infinity,
+              height: 48,
+              width: 326,
           ),
         ],
       ),
@@ -9298,7 +9376,7 @@ Column(
           Text('Powered by -',
             style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
           SizedBox(height: 6),
-          Image.asset('assets/digital_india_logo.png', height: 22),
+          Image.asset('assets/digital_india_logo.png', height: 22, color: Theme.of(context).brightness == Brightness.dark ? Colors.white : null),
         ],
       ),
     ),
@@ -9314,7 +9392,7 @@ Column(
       leadingWidgets: [
         SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
         Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
-        SvgPicture.asset('assets/Union.svg', height: 32),
+        SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
       ],
     ),
     Divider(height: 1, color: Color(0xFFE5E7EB)),
@@ -9408,7 +9486,8 @@ Column(
                       text: 'Verify OTP',
                       onPressed: () {},
                       size: Ux4gButtonSize.large,
-                      width: double.infinity,
+              height: 48,
+              width: 326,
                     ),
                   ],
                 ),
@@ -9425,7 +9504,7 @@ Column(
                   Text('Powered by -',
                     style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
                   SizedBox(height: 6),
-                  Image.asset('assets/digital_india_logo.png', height: 22),
+                  Image.asset('assets/digital_india_logo.png', height: 22, color: Theme.of(context).brightness == Brightness.dark ? Colors.white : null),
                 ],
               ),
             ),
@@ -9545,7 +9624,7 @@ class _AadhaarVerifyMethodCardMockupState
     extends State<_AadhaarVerifyMethodCardMockup> {
   String _method = 'otp';
 
-  static const _cardBg = Color(0xFFE9E5FF);
+  Color _getCardBg(BuildContext context) => _isDark(context) ? Ux4gPalette.primary900 : Ux4gPalette.primary100;
 
   @override
   Widget build(BuildContext context) {
@@ -9556,7 +9635,7 @@ class _AadhaarVerifyMethodCardMockupState
           Expanded(
             child: Container(
               width: double.infinity,
-              color: _cardBg,
+              color: _getCardBg(context),
               child: Column(
                 children: [
                   const SizedBox(height: 16),
@@ -9865,7 +9944,7 @@ Column(
       leadingWidgets: [
         SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
         Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
-        SvgPicture.asset('assets/Union.svg', height: 32),
+        SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
       ],
       actions: [
         Ux4gAppHeaderAction(icon: Icons.menu, onPressed: () {}),
@@ -9964,7 +10043,7 @@ Column(
           Text('Powered by -',
             style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
           SizedBox(height: 6),
-          Image.asset('assets/digital_india_logo.png', height: 22),
+          Image.asset('assets/digital_india_logo.png', height: 22, color: Theme.of(context).brightness == Brightness.dark ? Colors.white : null),
         ],
       ),
     ),
@@ -9981,7 +10060,7 @@ Column(
       leadingWidgets: [
         SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
         Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
-        SvgPicture.asset('assets/Union.svg', height: 32),
+        SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
       ],
       actions: [
         Ux4gAppHeaderAction(icon: Icons.menu, onPressed: () {}),
@@ -10070,7 +10149,7 @@ Column(
                   Text('Powered by -',
                     style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
                   SizedBox(height: 6),
-                  Image.asset('assets/digital_india_logo.png', height: 22),
+                  Image.asset('assets/digital_india_logo.png', height: 22, color: Theme.of(context).brightness == Brightness.dark ? Colors.white : null),
                 ],
               ),
             ),
@@ -10204,7 +10283,7 @@ class _AadhaarOtpEnterCardMockupState
   String _otp = '';
   int _resendNonce = 0;
 
-  static const _cardBg = Color(0xFFE9E5FF);
+  Color _getCardBg(BuildContext context) => _isDark(context) ? Ux4gPalette.primary900 : Ux4gPalette.primary100;
 
   @override
   Widget build(BuildContext context) {
@@ -10215,7 +10294,7 @@ class _AadhaarOtpEnterCardMockupState
           Expanded(
             child: Container(
               width: double.infinity,
-              color: _cardBg,
+              color: _getCardBg(context),
               child: Column(
                 children: [
                   const SizedBox(height: 16),
@@ -10328,7 +10407,7 @@ Column(
       leadingWidgets: [
         SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
         Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
-        SvgPicture.asset('assets/Union.svg', height: 32),
+        SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
       ],
       actions: [
         Ux4gAppHeaderAction(
@@ -10435,7 +10514,7 @@ Column(
           Text('Powered by -',
             style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
           SizedBox(height: 6),
-          Image.asset('assets/digital_india_logo.png', height: 22),
+          Image.asset('assets/digital_india_logo.png', height: 22, color: Theme.of(context).brightness == Brightness.dark ? Colors.white : null),
         ],
       ),
     ),
@@ -10451,7 +10530,7 @@ Column(
       leadingWidgets: [
         SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
         Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
-        SvgPicture.asset('assets/Union.svg', height: 32),
+        SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
       ],
       actions: [
         Ux4gAppHeaderAction(
@@ -10582,7 +10661,7 @@ Column(
                   Text('Powered by -',
                     style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
                   SizedBox(height: 6),
-                  Image.asset('assets/digital_india_logo.png', height: 22),
+                  Image.asset('assets/digital_india_logo.png', height: 22, color: Theme.of(context).brightness == Brightness.dark ? Colors.white : null),
                 ],
               ),
             ),
@@ -10677,7 +10756,7 @@ class _AadhaarFaceAuthPermissionMockup extends StatelessWidget {
 class _AadhaarFaceAuthPermissionCardMockup extends StatelessWidget {
   const _AadhaarFaceAuthPermissionCardMockup();
 
-  static const _cardBg = Color(0xFFE9E5FF);
+  Color _getCardBg(BuildContext context) => _isDark(context) ? Ux4gPalette.primary900 : Ux4gPalette.primary100;
 
   @override
   Widget build(BuildContext context) {
@@ -10688,7 +10767,7 @@ class _AadhaarFaceAuthPermissionCardMockup extends StatelessWidget {
           Expanded(
             child: Container(
               width: double.infinity,
-              color: _cardBg,
+              color: _getCardBg(context),
               child: Column(
                 children: [
                   const SizedBox(height: 16),
@@ -10825,7 +10904,7 @@ Column(
       leadingWidgets: [
         SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
         Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
-        SvgPicture.asset('assets/Union.svg', height: 32),
+        SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
       ],
       actions: [
         // Bordered hamburger tile — see _BrandHeaderWithMenu for the
@@ -10921,7 +11000,7 @@ Column(
           Text('Powered by -',
             style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
           SizedBox(height: 6),
-          Image.asset('assets/digital_india_logo.png', height: 22),
+          Image.asset('assets/digital_india_logo.png', height: 22, color: Theme.of(context).brightness == Brightness.dark ? Colors.white : null),
         ],
       ),
     ),
@@ -10937,7 +11016,7 @@ Column(
       leadingWidgets: [
         SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
         Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
-        SvgPicture.asset('assets/Union.svg', height: 32),
+        SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
       ],
       actions: [
         // Bordered hamburger tile — see _BrandHeaderWithMenu.
@@ -11054,7 +11133,7 @@ Column(
                   Text('Powered by -',
                     style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
                   SizedBox(height: 6),
-                  Image.asset('assets/digital_india_logo.png', height: 22),
+                  Image.asset('assets/digital_india_logo.png', height: 22, color: Theme.of(context).brightness == Brightness.dark ? Colors.white : null),
                 ],
               ),
             ),
@@ -11150,7 +11229,8 @@ class _AadhaarVerifiedSuccessMockup extends StatelessWidget {
                   text: 'Continue to Service',
                   onPressed: () {},
                   size: Ux4gButtonSize.large,
-                  width: double.infinity,
+              height: 48,
+              width: 326,
                 ),
               ],
             ),
@@ -11168,7 +11248,7 @@ class _AadhaarVerifiedSuccessMockup extends StatelessWidget {
 class _AadhaarVerifiedSuccessCardMockup extends StatelessWidget {
   const _AadhaarVerifiedSuccessCardMockup();
 
-  static const _cardBg = Color(0xFFE9E5FF);
+  Color _getCardBg(BuildContext context) => _isDark(context) ? Ux4gPalette.primary900 : Ux4gPalette.primary100;
 
   @override
   Widget build(BuildContext context) {
@@ -11179,7 +11259,7 @@ class _AadhaarVerifiedSuccessCardMockup extends StatelessWidget {
           Expanded(
             child: Container(
               width: double.infinity,
-              color: _cardBg,
+              color: _getCardBg(context),
               child: Column(
                 children: [
                   const SizedBox(height: 16),
@@ -11261,7 +11341,8 @@ class _AadhaarVerifiedSuccessCardMockup extends StatelessWidget {
                       text: 'Continue to Service',
                       onPressed: () {},
                       size: Ux4gButtonSize.large,
-                      width: double.infinity,
+              height: 48,
+              width: 326,
                     ),
                   ),
                   const _BrandFooter(),
@@ -11393,7 +11474,8 @@ Column(
             text: 'Continue to Service',
             onPressed: () {},
             size: Ux4gButtonSize.large,
-            width: double.infinity,
+              height: 48,
+              width: 326,
           ),
         ],
       ),
@@ -11408,7 +11490,7 @@ Column(
           Text('Powered by -',
             style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
           SizedBox(height: 6),
-          Image.asset('assets/digital_india_logo.png', height: 22),
+          Image.asset('assets/digital_india_logo.png', height: 22, color: Theme.of(context).brightness == Brightness.dark ? Colors.white : null),
         ],
       ),
     ),
@@ -11503,7 +11585,8 @@ Column(
                 text: 'Continue to Service',
                 onPressed: () {},
                 size: Ux4gButtonSize.large,
-                width: double.infinity,
+              height: 48,
+              width: 326,
               ),
             ),
 
@@ -11515,7 +11598,7 @@ Column(
                   Text('Powered by -',
                     style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
                   SizedBox(height: 6),
-                  Image.asset('assets/digital_india_logo.png', height: 22),
+                  Image.asset('assets/digital_india_logo.png', height: 22, color: Theme.of(context).brightness == Brightness.dark ? Colors.white : null),
                 ],
               ),
             ),
@@ -11659,7 +11742,7 @@ class _AadhaarVerificationFailedMockup extends StatelessWidget {
 class _AadhaarVerificationFailedCardMockup extends StatelessWidget {
   const _AadhaarVerificationFailedCardMockup();
 
-  static const _cardBg = Color(0xFFE9E5FF);
+  Color _getCardBg(BuildContext context) => _isDark(context) ? Ux4gPalette.primary900 : Ux4gPalette.primary100;
 
   @override
   Widget build(BuildContext context) {
@@ -11670,7 +11753,7 @@ class _AadhaarVerificationFailedCardMockup extends StatelessWidget {
           Expanded(
             child: Container(
               width: double.infinity,
-              color: _cardBg,
+              color: _getCardBg(context),
               child: Column(
                 children: [
                   const SizedBox(height: 16),
@@ -11916,7 +11999,7 @@ Column(
           Text('Powered by -',
             style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
           SizedBox(height: 6),
-          Image.asset('assets/digital_india_logo.png', height: 22),
+          Image.asset('assets/digital_india_logo.png', height: 22, color: Theme.of(context).brightness == Brightness.dark ? Colors.white : null),
         ],
       ),
     ),
@@ -12049,7 +12132,7 @@ Column(
                   Text('Powered by -',
                     style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
                   SizedBox(height: 6),
-                  Image.asset('assets/digital_india_logo.png', height: 22),
+                  Image.asset('assets/digital_india_logo.png', height: 22, color: Theme.of(context).brightness == Brightness.dark ? Colors.white : null),
                 ],
               ),
             ),
@@ -12178,7 +12261,8 @@ class _AadhaarAccountLockedMockup extends StatelessWidget {
               onPressed: () {},
               variant: Ux4gButtonVariant.outline,
               size: Ux4gButtonSize.large,
-              width: double.infinity,
+              height: 48,
+              width: 326,
               leadingIcon: Icons.support,
             ),
           ),
@@ -12195,7 +12279,7 @@ class _AadhaarAccountLockedMockup extends StatelessWidget {
 class _AadhaarAccountLockedCardMockup extends StatelessWidget {
   const _AadhaarAccountLockedCardMockup();
 
-  static const _cardBg = Color(0xFFE9E5FF);
+  Color _getCardBg(BuildContext context) => _isDark(context) ? Ux4gPalette.primary900 : Ux4gPalette.primary100;
 
   @override
   Widget build(BuildContext context) {
@@ -12206,7 +12290,7 @@ class _AadhaarAccountLockedCardMockup extends StatelessWidget {
           Expanded(
             child: Container(
               width: double.infinity,
-              color: _cardBg,
+              color: _getCardBg(context),
               child: Column(
                 children: [
                   const SizedBox(height: 16),
@@ -12331,7 +12415,8 @@ class _AadhaarAccountLockedCardMockup extends StatelessWidget {
                       onPressed: () {},
                       variant: Ux4gButtonVariant.outline,
                       size: Ux4gButtonSize.large,
-                      width: double.infinity,
+              height: 48,
+              width: 326,
                       leadingIcon: Icons.support,
                     ),
                   ),
@@ -12467,7 +12552,8 @@ Container(
           onPressed: () {},
           variant: Ux4gButtonVariant.outline,
           size: Ux4gButtonSize.large,
-          width: double.infinity,
+              height: 48,
+              width: 326,
           leadingIcon: Icons.support,
         ),
       ),
@@ -12479,7 +12565,7 @@ Container(
           children: [
             Text('Powered by -', style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
             SizedBox(height: 6),
-            Image.asset('assets/digital_india_logo.png', height: 22),
+            Image.asset('assets/digital_india_logo.png', height: 22, color: Theme.of(context).brightness == Brightness.dark ? Colors.white : null),
           ],
         ),
       ),
@@ -12631,7 +12717,8 @@ Container(
                   onPressed: () {},
                   variant: Ux4gButtonVariant.outline,
                   size: Ux4gButtonSize.large,
-                  width: double.infinity,
+              height: 48,
+              width: 326,
                   leadingIcon: Icons.support,
                 ),
               ),
@@ -12643,7 +12730,7 @@ Container(
                   children: [
                     Text('Powered by -', style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
                     SizedBox(height: 6),
-                    Image.asset('assets/digital_india_logo.png', height: 22),
+                    Image.asset('assets/digital_india_logo.png', height: 22, color: Theme.of(context).brightness == Brightness.dark ? Colors.white : null),
                   ],
                 ),
               ),
@@ -12780,7 +12867,7 @@ class _OperatorAssistedAuthCardMockup extends StatefulWidget {
 class _OperatorAssistedAuthCardMockupState
     extends State<_OperatorAssistedAuthCardMockup> {
   bool _consent = false;
-  static const _cardBg = Color(0xFFE9E5FF);
+  Color _getCardBg(BuildContext context) => _isDark(context) ? Ux4gPalette.primary900 : Ux4gPalette.primary100;
 
   @override
   Widget build(BuildContext context) {
@@ -12791,7 +12878,7 @@ class _OperatorAssistedAuthCardMockupState
           Expanded(
             child: Container(
               width: double.infinity,
-              color: _cardBg,
+              color: _getCardBg(context),
               child: Column(
                 children: [
                   const SizedBox(height: 16),
@@ -13045,7 +13132,7 @@ Container(
           children: [
             Text('Powered by -', style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
             SizedBox(height: 6),
-            Image.asset('assets/digital_india_logo.png', height: 22),
+            Image.asset('assets/digital_india_logo.png', height: 22, color: Theme.of(context).brightness == Brightness.dark ? Colors.white : null),
           ],
         ),
       ),
@@ -13216,7 +13303,7 @@ Container(
                   children: [
                     Text('Powered by -', style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
                     SizedBox(height: 6),
-                    Image.asset('assets/digital_india_logo.png', height: 22),
+                    Image.asset('assets/digital_india_logo.png', height: 22, color: Theme.of(context).brightness == Brightness.dark ? Colors.white : null),
                   ],
                 ),
               ),
@@ -13407,7 +13494,7 @@ class _SignUpStep1MockupState extends State<_SignUpStep1Mockup> {
                     onValueChange: (v) => setState(() => _mobile = v),
                     label: 'Mobile Number',
                     placeholder: 'Enter mobile number',
-                    placeholderStyle: _placeholderStyle,
+                    placeholderStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.neutral500 : Ux4gPalette.neutral400, height: 1.3),
                     prefixText: '+91',
                     type: Ux4gInputFieldType.number,
                     maxLength: 10,
@@ -13419,7 +13506,8 @@ class _SignUpStep1MockupState extends State<_SignUpStep1Mockup> {
                     text: 'Send OTP',
                     onPressed: () {},
                     size: Ux4gButtonSize.large,
-                    width: double.infinity,
+              height: 48,
+              width: 326,
                   ),
                   const SizedBox(height: 20),
                   const _SignInLink(),
@@ -13488,7 +13576,7 @@ class _SignUpStep1CardMockupState extends State<_SignUpStep1CardMockup> {
                               onValueChange: (v) => setState(() => _mobile = v),
                               label: 'Mobile Number',
                               placeholder: 'Enter mobile number',
-                              placeholderStyle: _placeholderStyle,
+                              placeholderStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.neutral500 : Ux4gPalette.neutral400, height: 1.3),
                               prefixText: '+91',
                               type: Ux4gInputFieldType.number,
                               maxLength: 10,
@@ -13500,7 +13588,8 @@ class _SignUpStep1CardMockupState extends State<_SignUpStep1CardMockup> {
                               text: 'Send OTP',
                               onPressed: () {},
                               size: Ux4gButtonSize.large,
-                              width: double.infinity,
+              height: 48,
+              width: 326,
                             ),
                             const SizedBox(height: 16),
                             const _SignInLink(fontSize: 14),
@@ -13529,7 +13618,7 @@ Container(
       leadingWidgets: [
         SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
         Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
-        SvgPicture.asset('assets/Union.svg', height: 32),
+        SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
       ],
       horizontalPadding: 16, leadingSpacing: 12,
     ),
@@ -13576,7 +13665,9 @@ Container(
             SizedBox(height: 20),
             Ux4gButton(
               text: 'Send OTP', onPressed: () {},
-              size: Ux4gButtonSize.large, width: double.infinity,
+              size: Ux4gButtonSize.large,
+              height: 48,
+              width: 326,
             ),
             SizedBox(height: 20),
             Center(child: TextButton(
@@ -13608,7 +13699,7 @@ Container(
       leadingWidgets: [
         SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
         Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
-        SvgPicture.asset('assets/Union.svg', height: 32),
+        SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
       ],
       horizontalPadding: 16, leadingSpacing: 12,
     ),
@@ -13668,7 +13759,9 @@ Container(
                     SizedBox(height: 16),
                     Ux4gButton(
                       text: 'Send OTP', onPressed: () {},
-                      size: Ux4gButtonSize.large, width: double.infinity,
+                      size: Ux4gButtonSize.large,
+              height: 48,
+              width: 326,
                     ),
                     SizedBox(height: 14),
                     Center(child: TextButton(
@@ -13793,7 +13886,8 @@ class _SignUpStep2MockupState extends State<_SignUpStep2Mockup> {
                     text: 'Verify OTP',
                     onPressed: () {},
                     size: Ux4gButtonSize.large,
-                    width: double.infinity,
+              height: 48,
+              width: 326,
                   ),
                 ],
               ),
@@ -13878,7 +13972,8 @@ class _SignUpStep2CardMockupState extends State<_SignUpStep2CardMockup> {
                               text: 'Verify OTP',
                               onPressed: () {},
                               size: Ux4gButtonSize.large,
-                              width: double.infinity,
+              height: 48,
+              width: 326,
                             ),
                           ],
                         ),
@@ -13905,7 +14000,7 @@ Container(
       leadingWidgets: [
         SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
         Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
-        SvgPicture.asset('assets/Union.svg', height: 32),
+        SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
       ],
       horizontalPadding: 16, leadingSpacing: 12,
     ),
@@ -13937,7 +14032,9 @@ Container(
             SizedBox(height: 28),
             Ux4gButton(
               text: 'Verify OTP', onPressed: () {},
-              size: Ux4gButtonSize.large, width: double.infinity,
+              size: Ux4gButtonSize.large,
+              height: 48,
+              width: 326,
             ),
           ],
         ),
@@ -13964,7 +14061,7 @@ Container(
       leadingWidgets: [
         SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
         Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
-        SvgPicture.asset('assets/Union.svg', height: 32),
+        SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
       ],
       horizontalPadding: 16, leadingSpacing: 12,
     ),
@@ -14010,7 +14107,9 @@ Container(
                     SizedBox(height: 24),
                     Ux4gButton(
                       text: 'Verify OTP', onPressed: () {},
-                      size: Ux4gButtonSize.large, width: double.infinity,
+                      size: Ux4gButtonSize.large,
+              height: 48,
+              width: 326,
                     ),
                   ],
                 ),
@@ -14099,7 +14198,7 @@ class _SignUpStep3MockupState extends State<_SignUpStep3Mockup> {
                     onValueChange: (v) => setState(() => _fullName = v),
                     label: 'Full name',
                     placeholder: 'Enter your full name',
-                    placeholderStyle: _placeholderStyle,
+                    placeholderStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.neutral500 : Ux4gPalette.neutral400, height: 1.3),
                   ),
                   const SizedBox(height: 16),
                   Ux4gInputField(
@@ -14107,7 +14206,7 @@ class _SignUpStep3MockupState extends State<_SignUpStep3Mockup> {
                     onValueChange: (v) => setState(() => _email = v),
                     label: 'Email Address',
                     placeholder: 'example@mail.com',
-                    placeholderStyle: _placeholderStyle,
+                    placeholderStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.neutral500 : Ux4gPalette.neutral400, height: 1.3),
                     type: Ux4gInputFieldType.email,
                   ),
                   const SizedBox(height: 16),
@@ -14116,7 +14215,7 @@ class _SignUpStep3MockupState extends State<_SignUpStep3Mockup> {
                     onValueChange: (v) => setState(() => _mobile = v),
                     label: 'Mobile Number',
                     placeholder: 'Enter mobile number',
-                    placeholderStyle: _placeholderStyle,
+                    placeholderStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.neutral500 : Ux4gPalette.neutral400, height: 1.3),
                     prefixText: '+91',
                     type: Ux4gInputFieldType.number,
                     maxLength: 10,
@@ -14143,7 +14242,8 @@ class _SignUpStep3MockupState extends State<_SignUpStep3Mockup> {
                     text: 'Continue',
                     onPressed: () {},
                     size: Ux4gButtonSize.large,
-                    width: double.infinity,
+              height: 48,
+              width: 326,
                   ),
                 ],
               ),
@@ -14198,7 +14298,7 @@ class _SignUpStep3CardMockupState extends State<_SignUpStep3CardMockup> {
                                   setState(() => _fullName = v),
                               label: 'Full name',
                               placeholder: 'Enter your full name',
-                              placeholderStyle: _placeholderStyle,
+                              placeholderStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.neutral500 : Ux4gPalette.neutral400, height: 1.3),
                             ),
                             const SizedBox(height: 14),
                             Ux4gInputField(
@@ -14206,7 +14306,7 @@ class _SignUpStep3CardMockupState extends State<_SignUpStep3CardMockup> {
                               onValueChange: (v) => setState(() => _email = v),
                               label: 'Email Address',
                               placeholder: 'example@mail.com',
-                              placeholderStyle: _placeholderStyle,
+                              placeholderStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.neutral500 : Ux4gPalette.neutral400, height: 1.3),
                               type: Ux4gInputFieldType.email,
                             ),
                             const SizedBox(height: 14),
@@ -14215,7 +14315,7 @@ class _SignUpStep3CardMockupState extends State<_SignUpStep3CardMockup> {
                               onValueChange: (v) => setState(() => _mobile = v),
                               label: 'Mobile Number',
                               placeholder: 'Enter mobile number',
-                              placeholderStyle: _placeholderStyle,
+                              placeholderStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.neutral500 : Ux4gPalette.neutral400, height: 1.3),
                               prefixText: '+91',
                               type: Ux4gInputFieldType.number,
                               maxLength: 10,
@@ -14243,7 +14343,8 @@ class _SignUpStep3CardMockupState extends State<_SignUpStep3CardMockup> {
                               text: 'Continue',
                               onPressed: () {},
                               size: Ux4gButtonSize.large,
-                              width: double.infinity,
+              height: 48,
+              width: 326,
                             ),
                           ],
                         ),
@@ -14270,7 +14371,7 @@ Container(
       leadingWidgets: [
         SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
         Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
-        SvgPicture.asset('assets/Union.svg', height: 32),
+        SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
       ],
       horizontalPadding: 16, leadingSpacing: 12,
     ),
@@ -14318,7 +14419,9 @@ Container(
             SizedBox(height: 28),
             Ux4gButton(
               text: 'Continue', onPressed: () {},
-              size: Ux4gButtonSize.large, width: double.infinity,
+              size: Ux4gButtonSize.large,
+              height: 48,
+              width: 326,
             ),
           ],
         ),
@@ -14345,7 +14448,7 @@ Container(
       leadingWidgets: [
         SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
         Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
-        SvgPicture.asset('assets/Union.svg', height: 32),
+        SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
       ],
       horizontalPadding: 16, leadingSpacing: 12,
     ),
@@ -14407,7 +14510,9 @@ Container(
                     SizedBox(height: 24),
                     Ux4gButton(
                       text: 'Continue', onPressed: () {},
-                      size: Ux4gButtonSize.large, width: double.infinity,
+                      size: Ux4gButtonSize.large,
+              height: 48,
+              width: 326,
                     ),
                   ],
                 ),
@@ -14500,7 +14605,7 @@ class _SignUpStep4MockupState extends State<_SignUpStep4Mockup> {
                     onValueChange: (v) => setState(() => _password = v),
                     label: 'Password',
                     placeholder: '...........',
-                    placeholderStyle: _placeholderStyle,
+                    placeholderStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.neutral500 : Ux4gPalette.neutral400, height: 1.3),
                     type: Ux4gInputFieldType.password,
                   ),
                   const SizedBox(height: 16),
@@ -14509,7 +14614,7 @@ class _SignUpStep4MockupState extends State<_SignUpStep4Mockup> {
                     onValueChange: (v) => setState(() => _confirm = v),
                     label: 'Confirm password',
                     placeholder: '...........',
-                    placeholderStyle: _placeholderStyle,
+                    placeholderStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.neutral500 : Ux4gPalette.neutral400, height: 1.3),
                     type: Ux4gInputFieldType.password,
                   ),
                   const SizedBox(height: 28),
@@ -14517,7 +14622,8 @@ class _SignUpStep4MockupState extends State<_SignUpStep4Mockup> {
                     text: 'Create account',
                     onPressed: () {},
                     size: Ux4gButtonSize.large,
-                    width: double.infinity,
+              height: 48,
+              width: 326,
                   ),
                 ],
               ),
@@ -14576,7 +14682,7 @@ class _SignUpStep4CardMockupState extends State<_SignUpStep4CardMockup> {
                                   setState(() => _password = v),
                               label: 'Password',
                               placeholder: '...........',
-                              placeholderStyle: _placeholderStyle,
+                              placeholderStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.neutral500 : Ux4gPalette.neutral400, height: 1.3),
                               type: Ux4gInputFieldType.password,
                             ),
                             const SizedBox(height: 16),
@@ -14586,7 +14692,7 @@ class _SignUpStep4CardMockupState extends State<_SignUpStep4CardMockup> {
                                   setState(() => _confirm = v),
                               label: 'Confirm password',
                               placeholder: '...........',
-                              placeholderStyle: _placeholderStyle,
+                              placeholderStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.neutral500 : Ux4gPalette.neutral400, height: 1.3),
                               type: Ux4gInputFieldType.password,
                             ),
                             const SizedBox(height: 24),
@@ -14594,7 +14700,8 @@ class _SignUpStep4CardMockupState extends State<_SignUpStep4CardMockup> {
                               text: 'Create account',
                               onPressed: () {},
                               size: Ux4gButtonSize.large,
-                              width: double.infinity,
+              height: 48,
+              width: 326,
                             ),
                           ],
                         ),
@@ -14621,7 +14728,7 @@ Container(
       leadingWidgets: [
         SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
         Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
-        SvgPicture.asset('assets/Union.svg', height: 32),
+        SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
       ],
       horizontalPadding: 16, leadingSpacing: 12,
     ),
@@ -14653,7 +14760,9 @@ Container(
             SizedBox(height: 28),
             Ux4gButton(
               text: 'Create account', onPressed: () {},
-              size: Ux4gButtonSize.large, width: double.infinity,
+              size: Ux4gButtonSize.large,
+              height: 48,
+              width: 326,
             ),
           ],
         ),
@@ -14680,7 +14789,7 @@ Container(
       leadingWidgets: [
         SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
         Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
-        SvgPicture.asset('assets/Union.svg', height: 32),
+        SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
       ],
       horizontalPadding: 16, leadingSpacing: 12,
     ),
@@ -14726,7 +14835,9 @@ Container(
                     SizedBox(height: 24),
                     Ux4gButton(
                       text: 'Create account', onPressed: () {},
-                      size: Ux4gButtonSize.large, width: double.infinity,
+                      size: Ux4gButtonSize.large,
+              height: 48,
+              width: 326,
                     ),
                   ],
                 ),
@@ -14866,7 +14977,8 @@ class _SignUpStep5Mockup extends StatelessWidget {
                     text: 'Link Aadhaar Now',
                     onPressed: () {},
                     size: Ux4gButtonSize.large,
-                    width: double.infinity,
+              height: 48,
+              width: 326,
                   ),
                   const SizedBox(height: 12),
                   Ux4gButton(
@@ -14874,7 +14986,8 @@ class _SignUpStep5Mockup extends StatelessWidget {
                     onPressed: () {},
                     variant: Ux4gButtonVariant.outline,
                     size: Ux4gButtonSize.large,
-                    width: double.infinity,
+              height: 48,
+              width: 326,
                   ),
                   const SizedBox(height: 16),
                   const Text(
@@ -14991,7 +15104,8 @@ class _SignUpStep5CardMockup extends StatelessWidget {
                               text: 'Link Aadhaar Now',
                               onPressed: () {},
                               size: Ux4gButtonSize.large,
-                              width: double.infinity,
+              height: 48,
+              width: 326,
                             ),
                             const SizedBox(height: 12),
                             Ux4gButton(
@@ -14999,7 +15113,8 @@ class _SignUpStep5CardMockup extends StatelessWidget {
                               onPressed: () {},
                               variant: Ux4gButtonVariant.outline,
                               size: Ux4gButtonSize.large,
-                              width: double.infinity,
+              height: 48,
+              width: 326,
                             ),
                             const SizedBox(height: 12),
                             const Text(
@@ -15036,7 +15151,7 @@ Container(
       leadingWidgets: [
         SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
         Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
-        SvgPicture.asset('assets/Union.svg', height: 32),
+        SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
       ],
       horizontalPadding: 16, leadingSpacing: 12,
     ),
@@ -15080,13 +15195,17 @@ Container(
             SizedBox(height: 12),
             Ux4gButton(
               text: 'Link Aadhaar Now', onPressed: () {},
-              size: Ux4gButtonSize.large, width: double.infinity,
+              size: Ux4gButtonSize.large,
+              height: 48,
+              width: 326,
             ),
             SizedBox(height: 12),
             Ux4gButton(
               text: 'Skip and Browse Services', onPressed: () {},
               variant: Ux4gButtonVariant.outline,
-              size: Ux4gButtonSize.large, width: double.infinity,
+              size: Ux4gButtonSize.large,
+              height: 48,
+              width: 326,
             ),
             SizedBox(height: 16),
             Text('You can link Aadhaar later from your profile',
@@ -15116,7 +15235,7 @@ Container(
       leadingWidgets: [
         SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
         Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
-        SvgPicture.asset('assets/Union.svg', height: 32),
+        SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
       ],
       horizontalPadding: 16, leadingSpacing: 12,
     ),
@@ -15174,13 +15293,17 @@ Container(
                     SizedBox(height: 12),
                     Ux4gButton(
                       text: 'Link Aadhaar Now', onPressed: () {},
-                      size: Ux4gButtonSize.large, width: double.infinity,
+                      size: Ux4gButtonSize.large,
+              height: 48,
+              width: 326,
                     ),
                     SizedBox(height: 10),
                     Ux4gButton(
                       text: 'Skip and Browse Services', onPressed: () {},
                       variant: Ux4gButtonVariant.outline,
-                      size: Ux4gButtonSize.large, width: double.infinity,
+                      size: Ux4gButtonSize.large,
+              height: 48,
+              width: 326,
                     ),
                     SizedBox(height: 14),
                     Text('You can link Aadhaar later from your profile',
@@ -15396,7 +15519,7 @@ class _FpStep1MockupState extends State<_FpStep1Mockup> {
                     onValueChange: (v) => setState(() => _mobile = v),
                     label: 'Mobile Number',
                     placeholder: 'Enter mobile number',
-                    placeholderStyle: _placeholderStyle,
+                    placeholderStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.neutral500 : Ux4gPalette.neutral400, height: 1.3),
                     prefixText: '+91',
                     type: Ux4gInputFieldType.number,
                     maxLength: 10,
@@ -15406,7 +15529,8 @@ class _FpStep1MockupState extends State<_FpStep1Mockup> {
                     text: 'Send OTP',
                     onPressed: () {},
                     size: Ux4gButtonSize.large,
-                    width: double.infinity,
+              height: 48,
+              width: 326,
                   ),
                   const SizedBox(height: 14),
                   Center(
@@ -15453,7 +15577,8 @@ class _FpStep1MockupState extends State<_FpStep1Mockup> {
                     onPressed: () {},
                     variant: Ux4gButtonVariant.outline,
                     size: Ux4gButtonSize.large,
-                    width: double.infinity,
+              height: 48,
+              width: 326,
                   ),
                   const SizedBox(height: 16),
                   _fpWarningBanner(),
@@ -15528,7 +15653,7 @@ class _FpStep1CardMockupState extends State<_FpStep1CardMockup> {
                                       setState(() => _mobile = v),
                                   label: 'Mobile Number',
                                   placeholder: 'Enter mobile number',
-                                  placeholderStyle: _placeholderStyle,
+                                  placeholderStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.neutral500 : Ux4gPalette.neutral400, height: 1.3),
                                   prefixText: '+91',
                                   type: Ux4gInputFieldType.number,
                                   maxLength: 10,
@@ -15538,7 +15663,8 @@ class _FpStep1CardMockupState extends State<_FpStep1CardMockup> {
                                   text: 'Send OTP',
                                   onPressed: () {},
                                   size: Ux4gButtonSize.large,
-                                  width: double.infinity,
+              height: 48,
+              width: 326,
                                 ),
                                 const SizedBox(height: 12),
                                 Center(
@@ -15598,7 +15724,8 @@ class _FpStep1CardMockupState extends State<_FpStep1CardMockup> {
                                   onPressed: () {},
                                   variant: Ux4gButtonVariant.outline,
                                   size: Ux4gButtonSize.large,
-                                  width: double.infinity,
+              height: 48,
+              width: 326,
                                 ),
                                 const SizedBox(height: 14),
                                 _fpWarningBanner(),
@@ -15629,7 +15756,7 @@ Container(
       leadingWidgets: [
         SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
         Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
-        SvgPicture.asset('assets/Union.svg', height: 32),
+        SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
       ],
       horizontalPadding: 16, leadingSpacing: 12,
     ),
@@ -15663,7 +15790,9 @@ Container(
             SizedBox(height: 20),
             Ux4gButton(
               text: 'Send OTP', onPressed: () {},
-              size: Ux4gButtonSize.large, width: double.infinity,
+              size: Ux4gButtonSize.large,
+              height: 48,
+              width: 326,
             ),
             SizedBox(height: 16),
             Center(
@@ -15687,7 +15816,9 @@ Container(
             Ux4gButton(
               text: 'Sign in with OTP instead', onPressed: () {},
               variant: Ux4gButtonVariant.outline,
-              size: Ux4gButtonSize.large, width: double.infinity,
+              size: Ux4gButtonSize.large,
+              height: 48,
+              width: 326,
             ),
             SizedBox(height: 16),
             Ux4gStatusBanner(
@@ -15720,7 +15851,7 @@ Container(
       leadingWidgets: [
         SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
         Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
-        SvgPicture.asset('assets/Union.svg', height: 32),
+        SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
       ],
       horizontalPadding: 16, leadingSpacing: 12,
     ),
@@ -15768,7 +15899,9 @@ Container(
                     SizedBox(height: 16),
                     Ux4gButton(
                       text: 'Send OTP', onPressed: () {},
-                      size: Ux4gButtonSize.large, width: double.infinity,
+                      size: Ux4gButtonSize.large,
+              height: 48,
+              width: 326,
                     ),
                     SizedBox(height: 12),
                     Center(
@@ -15792,7 +15925,9 @@ Container(
                     Ux4gButton(
                       text: 'Sign in with OTP instead', onPressed: () {},
                       variant: Ux4gButtonVariant.outline,
-                      size: Ux4gButtonSize.large, width: double.infinity,
+                      size: Ux4gButtonSize.large,
+              height: 48,
+              width: 326,
                     ),
                     SizedBox(height: 14),
                     Ux4gStatusBanner(
@@ -15916,7 +16051,8 @@ class _FpStep2MockupState extends State<_FpStep2Mockup> {
                     text: 'Verify OTP',
                     onPressed: () {},
                     size: Ux4gButtonSize.large,
-                    width: double.infinity,
+              height: 48,
+              width: 326,
                   ),
                 ],
               ),
@@ -16007,7 +16143,8 @@ class _FpStep2CardMockupState extends State<_FpStep2CardMockup> {
                                   text: 'Verify OTP',
                                   onPressed: () {},
                                   size: Ux4gButtonSize.large,
-                                  width: double.infinity,
+              height: 48,
+              width: 326,
                                 ),
                               ],
                             ),
@@ -16036,7 +16173,7 @@ Container(
       leadingWidgets: [
         SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
         Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
-        SvgPicture.asset('assets/Union.svg', height: 32),
+        SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
       ],
       horizontalPadding: 16, leadingSpacing: 12,
     ),
@@ -16075,7 +16212,9 @@ Container(
             SizedBox(height: 28),
             Ux4gButton(
               text: 'Verify OTP', onPressed: () {},
-              size: Ux4gButtonSize.large, width: double.infinity,
+              size: Ux4gButtonSize.large,
+              height: 48,
+              width: 326,
             ),
           ],
         ),
@@ -16101,7 +16240,7 @@ Container(
       leadingWidgets: [
         SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
         Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
-        SvgPicture.asset('assets/Union.svg', height: 32),
+        SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
       ],
       horizontalPadding: 16, leadingSpacing: 12,
     ),
@@ -16154,7 +16293,9 @@ Container(
                     SizedBox(height: 24),
                     Ux4gButton(
                       text: 'Verify OTP', onPressed: () {},
-                      size: Ux4gButtonSize.large, width: double.infinity,
+                      size: Ux4gButtonSize.large,
+              height: 48,
+              width: 326,
                     ),
                   ],
                 ),
@@ -16254,7 +16395,7 @@ class _FpStep3MockupState extends State<_FpStep3Mockup> {
                     onValueChange: (v) => setState(() => _password = v),
                     label: 'Password',
                     placeholder: '...........',
-                    placeholderStyle: _placeholderStyle,
+                    placeholderStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.neutral500 : Ux4gPalette.neutral400, height: 1.3),
                     type: Ux4gInputFieldType.password,
                   ),
                   const SizedBox(height: 12),
@@ -16265,7 +16406,7 @@ class _FpStep3MockupState extends State<_FpStep3Mockup> {
                     onValueChange: (v) => setState(() => _confirm = v),
                     label: 'Confirm password',
                     placeholder: '...........',
-                    placeholderStyle: _placeholderStyle,
+                    placeholderStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.neutral500 : Ux4gPalette.neutral400, height: 1.3),
                     labelStyle: const TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w700,
@@ -16280,7 +16421,8 @@ class _FpStep3MockupState extends State<_FpStep3Mockup> {
                     text: 'Reset password',
                     onPressed: () {},
                     size: Ux4gButtonSize.large,
-                    width: double.infinity,
+              height: 48,
+              width: 326,
                   ),
                 ],
               ),
@@ -16349,7 +16491,7 @@ class _FpStep3CardMockupState extends State<_FpStep3CardMockup> {
                                   setState(() => _password = v),
                               label: 'Password',
                               placeholder: '...........',
-                              placeholderStyle: _placeholderStyle,
+                              placeholderStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.neutral500 : Ux4gPalette.neutral400, height: 1.3),
                               type: Ux4gInputFieldType.password,
                             ),
                             const SizedBox(height: 10),
@@ -16361,7 +16503,7 @@ class _FpStep3CardMockupState extends State<_FpStep3CardMockup> {
                                   setState(() => _confirm = v),
                               label: 'Confirm password',
                               placeholder: '...........',
-                              placeholderStyle: _placeholderStyle,
+                              placeholderStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.neutral500 : Ux4gPalette.neutral400, height: 1.3),
                               labelStyle: const TextStyle(
                                 fontSize: 14,
                                 fontWeight: FontWeight.w700,
@@ -16376,7 +16518,8 @@ class _FpStep3CardMockupState extends State<_FpStep3CardMockup> {
                               text: 'Reset password',
                               onPressed: () {},
                               size: Ux4gButtonSize.large,
-                              width: double.infinity,
+              height: 48,
+              width: 326,
                             ),
                           ],
                         ),
@@ -16403,7 +16546,7 @@ Container(
       leadingWidgets: [
         SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
         Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
-        SvgPicture.asset('assets/Union.svg', height: 32),
+        SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
       ],
       horizontalPadding: 16, leadingSpacing: 12,
     ),
@@ -16478,7 +16621,9 @@ Container(
             SizedBox(height: 24),
             Ux4gButton(
               text: 'Reset password', onPressed: () {},
-              size: Ux4gButtonSize.large, width: double.infinity,
+              size: Ux4gButtonSize.large,
+              height: 48,
+              width: 326,
             ),
           ],
         ),
@@ -16505,7 +16650,7 @@ Container(
       leadingWidgets: [
         SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
         Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
-        SvgPicture.asset('assets/Union.svg', height: 32),
+        SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
       ],
       horizontalPadding: 16, leadingSpacing: 12,
     ),
@@ -16594,7 +16739,9 @@ Container(
                     SizedBox(height: 20),
                     Ux4gButton(
                       text: 'Reset password', onPressed: () {},
-                      size: Ux4gButtonSize.large, width: double.infinity,
+                      size: Ux4gButtonSize.large,
+              height: 48,
+              width: 326,
                     ),
                   ],
                 ),
@@ -16710,7 +16857,8 @@ class _FpStep4Mockup extends StatelessWidget {
                     text: 'Sign in',
                     onPressed: () {},
                     size: Ux4gButtonSize.large,
-                    width: double.infinity,
+              height: 48,
+              width: 326,
                   ),
                 ],
               ),
@@ -16794,7 +16942,8 @@ class _FpStep4CardMockup extends StatelessWidget {
                               text: 'Sign in',
                               onPressed: () {},
                               size: Ux4gButtonSize.large,
-                              width: double.infinity,
+              height: 48,
+              width: 326,
                             ),
                           ],
                         ),
@@ -16821,7 +16970,7 @@ Container(
       leadingWidgets: [
         SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
         Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
-        SvgPicture.asset('assets/Union.svg', height: 32),
+        SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
       ],
       horizontalPadding: 16, leadingSpacing: 12,
     ),
@@ -16857,7 +17006,9 @@ Container(
             SizedBox(height: 32),
             Ux4gButton(
               text: 'Sign in', onPressed: () {},
-              size: Ux4gButtonSize.large, width: double.infinity,
+              size: Ux4gButtonSize.large,
+              height: 48,
+              width: 326,
             ),
           ],
         ),
@@ -16884,7 +17035,7 @@ Container(
       leadingWidgets: [
         SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
         Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
-        SvgPicture.asset('assets/Union.svg', height: 32),
+        SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
       ],
       horizontalPadding: 16, leadingSpacing: 12,
     ),
@@ -16934,7 +17085,9 @@ Container(
                     SizedBox(height: 28),
                     Ux4gButton(
                       text: 'Sign in', onPressed: () {},
-                      size: Ux4gButtonSize.large, width: double.infinity,
+                      size: Ux4gButtonSize.large,
+              height: 48,
+              width: 326,
                     ),
                   ],
                 ),
@@ -17025,7 +17178,7 @@ class _FpStep5MockupState extends State<_FpStep5Mockup> {
                     onValueChange: (v) => setState(() => _aadhaar = v),
                     label: 'Aadhaar Number',
                     placeholder: 'XXXX XXXX XXXX',
-                    placeholderStyle: _placeholderStyle,
+                    placeholderStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.neutral500 : Ux4gPalette.neutral400, height: 1.3),
                     caption: 'Enter your 12-digit Aadhaar number',
                   ),
                   const SizedBox(height: 16),
@@ -17049,7 +17202,8 @@ class _FpStep5MockupState extends State<_FpStep5Mockup> {
                     text: 'Send OTP',
                     onPressed: () {},
                     size: Ux4gButtonSize.large,
-                    width: double.infinity,
+              height: 48,
+              width: 326,
                   ),
                 ],
               ),
@@ -17111,7 +17265,7 @@ class _FpStep5CardMockupState extends State<_FpStep5CardMockup> {
                                       setState(() => _aadhaar = v),
                                   label: 'Aadhaar Number',
                                   placeholder: 'XXXX XXXX XXXX',
-                                  placeholderStyle: _placeholderStyle,
+                                  placeholderStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.neutral500 : Ux4gPalette.neutral400, height: 1.3),
                                   caption: 'Enter your 12-digit Aadhaar number',
                                 ),
                                 const SizedBox(height: 16),
@@ -17135,7 +17289,8 @@ class _FpStep5CardMockupState extends State<_FpStep5CardMockup> {
                                   text: 'Send OTP',
                                   onPressed: () {},
                                   size: Ux4gButtonSize.large,
-                                  width: double.infinity,
+              height: 48,
+              width: 326,
                                 ),
                               ],
                             ),
@@ -17164,7 +17319,7 @@ Container(
       leadingWidgets: [
         SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
         Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
-        SvgPicture.asset('assets/Union.svg', height: 32),
+        SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
       ],
       horizontalPadding: 16, leadingSpacing: 12,
     ),
@@ -17204,7 +17359,9 @@ Container(
             SizedBox(height: 24),
             Ux4gButton(
               text: 'Send OTP', onPressed: () {},
-              size: Ux4gButtonSize.large, width: double.infinity,
+              size: Ux4gButtonSize.large,
+              height: 48,
+              width: 326,
             ),
           ],
         ),
@@ -17231,7 +17388,7 @@ Container(
       leadingWidgets: [
         SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
         Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
-        SvgPicture.asset('assets/Union.svg', height: 32),
+        SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
       ],
       horizontalPadding: 16, leadingSpacing: 12,
     ),
@@ -17285,7 +17442,9 @@ Container(
                     SizedBox(height: 20),
                     Ux4gButton(
                       text: 'Send OTP', onPressed: () {},
-                      size: Ux4gButtonSize.large, width: double.infinity,
+                      size: Ux4gButtonSize.large,
+              height: 48,
+              width: 326,
                     ),
                   ],
                 ),
@@ -20138,7 +20297,8 @@ class _PaymentSummaryMockup extends StatelessWidget {
                             text: 'Continue to payment',
                             onPressed: () {},
                             size: Ux4gButtonSize.large,
-                            width: double.infinity,
+              height: 48,
+              width: 326,
                           ),
                           const SizedBox(height: 12),
                           Center(
@@ -20273,7 +20433,8 @@ class _PaymentSummaryCardMockup extends StatelessWidget {
                               text: 'Continue to payment',
                               onPressed: () {},
                               size: Ux4gButtonSize.large,
-                              width: double.infinity,
+              height: 48,
+              width: 326,
                             ),
                             const SizedBox(height: 12),
                             Center(
@@ -20316,7 +20477,7 @@ Scaffold(
         leadingWidgets: [
           SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
           Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
-          SvgPicture.asset('assets/Union.svg', height: 32),
+          SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
         ],
         horizontalPadding: 16,
         leadingSpacing: 12,
@@ -20403,7 +20564,8 @@ Scaffold(
                         text: 'Continue to payment',
                         onPressed: () {},
                         size: Ux4gButtonSize.large,
-                        width: double.infinity,
+              height: 48,
+              width: 326,
                       ),
                       SizedBox(height: 12),
                       Center(
@@ -20429,7 +20591,7 @@ Scaffold(
                         style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF),
                             fontWeight: FontWeight.w500)),
                     SizedBox(height: 6),
-                    Image.asset('assets/digital_india_logo.png', height: 22),
+                    Image.asset('assets/digital_india_logo.png', height: 22, color: Theme.of(context).brightness == Brightness.dark ? Colors.white : null),
                   ],
                 ),
               ),
@@ -20478,7 +20640,7 @@ Scaffold(
         leadingWidgets: [
           SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
           Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
-          SvgPicture.asset('assets/Union.svg', height: 32),
+          SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
         ],
         horizontalPadding: 16,
         leadingSpacing: 12,
@@ -20577,7 +20739,8 @@ Scaffold(
                           text: 'Continue to payment',
                           onPressed: () {},
                           size: Ux4gButtonSize.large,
-                          width: double.infinity,
+              height: 48,
+              width: 326,
                         ),
                         SizedBox(height: 12),
                         Center(
@@ -20604,7 +20767,7 @@ Scaffold(
                         style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF),
                             fontWeight: FontWeight.w500)),
                     SizedBox(height: 6),
-                    Image.asset('assets/digital_india_logo.png', height: 22),
+                    Image.asset('assets/digital_india_logo.png', height: 22, color: Theme.of(context).brightness == Brightness.dark ? Colors.white : null),
                   ],
                 ),
               ),
@@ -20737,7 +20900,7 @@ class _PaymentMethodMockupState extends State<_PaymentMethodMockup> {
                               onValueChange: (v) => setState(() => _upiId = v),
                               label: 'Enter UPI ID',
                               placeholder: 'yourname@upi',
-                              placeholderStyle: _placeholderStyle,
+                              placeholderStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.neutral500 : Ux4gPalette.neutral400, height: 1.3),
                             ),
                           ],
                           const SizedBox(height: 20),
@@ -20745,7 +20908,8 @@ class _PaymentMethodMockupState extends State<_PaymentMethodMockup> {
                             text: 'Pay Rs 41.30',
                             onPressed: () {},
                             size: Ux4gButtonSize.large,
-                            width: double.infinity,
+              height: 48,
+              width: 326,
                           ),
                           const SizedBox(height: 12),
                           Center(
@@ -20869,7 +21033,7 @@ class _PaymentMethodCardMockupState extends State<_PaymentMethodCardMockup> {
                                     setState(() => _upiId = v),
                                 label: 'Enter UPI ID',
                                 placeholder: 'yourname@upi',
-                                placeholderStyle: _placeholderStyle,
+                                placeholderStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.neutral500 : Ux4gPalette.neutral400, height: 1.3),
                               ),
                             ],
                             const SizedBox(height: 20),
@@ -20877,7 +21041,8 @@ class _PaymentMethodCardMockupState extends State<_PaymentMethodCardMockup> {
                               text: 'Pay Rs 41.30',
                               onPressed: () {},
                               size: Ux4gButtonSize.large,
-                              width: double.infinity,
+              height: 48,
+              width: 326,
                             ),
                             const SizedBox(height: 12),
                             Center(
@@ -20923,7 +21088,7 @@ Scaffold(
         leadingWidgets: [
           SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
           Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
-          SvgPicture.asset('assets/Union.svg', height: 32),
+          SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
         ],
         horizontalPadding: 16,
         leadingSpacing: 12,
@@ -21019,7 +21184,8 @@ Scaffold(
                         text: 'Pay Rs 41.30',
                         onPressed: () {},
                         size: Ux4gButtonSize.large,
-                        width: double.infinity,
+              height: 48,
+              width: 326,
                       ),
                       SizedBox(height: 12),
                       Center(
@@ -21044,7 +21210,7 @@ Scaffold(
                         style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF),
                             fontWeight: FontWeight.w500)),
                     SizedBox(height: 6),
-                    Image.asset('assets/digital_india_logo.png', height: 22),
+                    Image.asset('assets/digital_india_logo.png', height: 22, color: Theme.of(context).brightness == Brightness.dark ? Colors.white : null),
                   ],
                 ),
               ),
@@ -21132,7 +21298,7 @@ Scaffold(
         leadingWidgets: [
           SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
           Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
-          SvgPicture.asset('assets/Union.svg', height: 32),
+          SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
         ],
         horizontalPadding: 16,
         leadingSpacing: 12,
@@ -21240,7 +21406,8 @@ Scaffold(
                           text: 'Pay Rs 41.30',
                           onPressed: () {},
                           size: Ux4gButtonSize.large,
-                          width: double.infinity,
+              height: 48,
+              width: 326,
                         ),
                         SizedBox(height: 12),
                         Center(
@@ -21266,7 +21433,7 @@ Scaffold(
                         style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF),
                             fontWeight: FontWeight.w500)),
                     SizedBox(height: 6),
-                    Image.asset('assets/digital_india_logo.png', height: 22),
+                    Image.asset('assets/digital_india_logo.png', height: 22, color: Theme.of(context).brightness == Brightness.dark ? Colors.white : null),
                   ],
                 ),
               ),
@@ -21513,7 +21680,7 @@ Scaffold(
             leadingWidgets: [
               SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
               Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
-              SvgPicture.asset('assets/Union.svg', height: 32),
+              SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
             ],
             horizontalPadding: 16,
             leadingSpacing: 12,
@@ -21630,7 +21797,7 @@ Scaffold(
             leadingWidgets: [
               SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
               Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
-              SvgPicture.asset('assets/Union.svg', height: 32),
+              SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
             ],
             horizontalPadding: 16,
             leadingSpacing: 12,
@@ -21852,7 +22019,8 @@ class _PaymentSuccessMockup extends StatelessWidget {
                             text: 'Track my application',
                             onPressed: () {},
                             size: Ux4gButtonSize.large,
-                            width: double.infinity,
+              height: 48,
+              width: 326,
                           ),
                           const SizedBox(height: 10),
                           Ux4gButton(
@@ -21860,7 +22028,8 @@ class _PaymentSuccessMockup extends StatelessWidget {
                             onPressed: () {},
                             variant: Ux4gButtonVariant.outline,
                             size: Ux4gButtonSize.large,
-                            width: double.infinity,
+              height: 48,
+              width: 326,
                           ),
                           const SizedBox(height: 12),
                           Center(
@@ -21991,7 +22160,8 @@ class _PaymentSuccessCardMockup extends StatelessWidget {
                               text: 'Track my application',
                               onPressed: () {},
                               size: Ux4gButtonSize.large,
-                              width: double.infinity,
+              height: 48,
+              width: 326,
                             ),
                             const SizedBox(height: 10),
                             Ux4gButton(
@@ -21999,7 +22169,8 @@ class _PaymentSuccessCardMockup extends StatelessWidget {
                               onPressed: () {},
                               variant: Ux4gButtonVariant.outline,
                               size: Ux4gButtonSize.large,
-                              width: double.infinity,
+              height: 48,
+              width: 326,
                             ),
                             const SizedBox(height: 12),
                             Center(
@@ -22041,7 +22212,7 @@ Scaffold(
         leadingWidgets: [
           SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
           Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
-          SvgPicture.asset('assets/Union.svg', height: 32),
+          SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
         ],
         horizontalPadding: 16,
         leadingSpacing: 12,
@@ -22123,7 +22294,8 @@ Scaffold(
                         text: 'Track my application',
                         onPressed: () {},
                         size: Ux4gButtonSize.large,
-                        width: double.infinity,
+              height: 48,
+              width: 326,
                       ),
                       SizedBox(height: 10),
                       Ux4gButton(
@@ -22131,7 +22303,8 @@ Scaffold(
                         onPressed: () {},
                         variant: Ux4gButtonVariant.outline,
                         size: Ux4gButtonSize.large,
-                        width: double.infinity,
+              height: 48,
+              width: 326,
                       ),
                       SizedBox(height: 12),
                       Center(
@@ -22154,7 +22327,7 @@ Scaffold(
                         style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF),
                             fontWeight: FontWeight.w500)),
                     SizedBox(height: 6),
-                    Image.asset('assets/digital_india_logo.png', height: 22),
+                    Image.asset('assets/digital_india_logo.png', height: 22, color: Theme.of(context).brightness == Brightness.dark ? Colors.white : null),
                   ],
                 ),
               ),
@@ -22196,7 +22369,7 @@ Scaffold(
         leadingWidgets: [
           SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
           Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
-          SvgPicture.asset('assets/Union.svg', height: 32),
+          SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
         ],
         horizontalPadding: 16,
         leadingSpacing: 12,
@@ -22274,11 +22447,17 @@ Scaffold(
                         ),
                         SizedBox(height: 20),
                         Ux4gButton(text: 'Track my application', onPressed: () {},
-                            size: Ux4gButtonSize.large, width: double.infinity),
+                            size: Ux4gButtonSize.large,
+              height: 48,
+              width: 326,
+            ),
                         SizedBox(height: 10),
                         Ux4gButton(text: 'Download receipt (PDF)', onPressed: () {},
                             variant: Ux4gButtonVariant.outline,
-                            size: Ux4gButtonSize.large, width: double.infinity),
+                            size: Ux4gButtonSize.large,
+              height: 48,
+              width: 326,
+            ),
                         SizedBox(height: 12),
                         Center(
                           child: TextButton(onPressed: () {},
@@ -22296,7 +22475,7 @@ Scaffold(
                   Text('Powered by -', style: TextStyle(fontSize: 11,
                       color: Color(0xFF9CA3AF), fontWeight: FontWeight.w500)),
                   SizedBox(height: 6),
-                  Image.asset('assets/digital_india_logo.png', height: 22),
+                  Image.asset('assets/digital_india_logo.png', height: 22, color: Theme.of(context).brightness == Brightness.dark ? Colors.white : null),
                 ]),
               ),
             ],
@@ -22405,7 +22584,8 @@ class _PaymentFailedMockup extends StatelessWidget {
                             text: 'Try again with UPI',
                             onPressed: () {},
                             size: Ux4gButtonSize.large,
-                            width: double.infinity,
+              height: 48,
+              width: 326,
                           ),
                           const SizedBox(height: 10),
                           Ux4gButton(
@@ -22413,7 +22593,8 @@ class _PaymentFailedMockup extends StatelessWidget {
                             onPressed: () {},
                             variant: Ux4gButtonVariant.outline,
                             size: Ux4gButtonSize.large,
-                            width: double.infinity,
+              height: 48,
+              width: 326,
                           ),
                           const SizedBox(height: 12),
                           Center(
@@ -22535,7 +22716,8 @@ class _PaymentFailedCardMockup extends StatelessWidget {
                               text: 'Try again with UPI',
                               onPressed: () {},
                               size: Ux4gButtonSize.large,
-                              width: double.infinity,
+              height: 48,
+              width: 326,
                             ),
                             const SizedBox(height: 10),
                             Ux4gButton(
@@ -22543,7 +22725,8 @@ class _PaymentFailedCardMockup extends StatelessWidget {
                               onPressed: () {},
                               variant: Ux4gButtonVariant.outline,
                               size: Ux4gButtonSize.large,
-                              width: double.infinity,
+              height: 48,
+              width: 326,
                             ),
                             const SizedBox(height: 12),
                             Center(
@@ -22585,7 +22768,7 @@ Scaffold(
         leadingWidgets: [
           SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
           Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
-          SvgPicture.asset('assets/Union.svg', height: 32),
+          SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
         ],
         horizontalPadding: 16,
         leadingSpacing: 12,
@@ -22663,7 +22846,8 @@ Scaffold(
                         text: 'Try again with UPI',
                         onPressed: () {},
                         size: Ux4gButtonSize.large,
-                        width: double.infinity,
+              height: 48,
+              width: 326,
                       ),
                       SizedBox(height: 10),
                       Ux4gButton(
@@ -22671,7 +22855,8 @@ Scaffold(
                         onPressed: () {},
                         variant: Ux4gButtonVariant.outline,
                         size: Ux4gButtonSize.large,
-                        width: double.infinity,
+              height: 48,
+              width: 326,
                       ),
                       SizedBox(height: 12),
                       Center(
@@ -22694,7 +22879,7 @@ Scaffold(
                         style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF),
                             fontWeight: FontWeight.w500)),
                     SizedBox(height: 6),
-                    Image.asset('assets/digital_india_logo.png', height: 22),
+                    Image.asset('assets/digital_india_logo.png', height: 22, color: Theme.of(context).brightness == Brightness.dark ? Colors.white : null),
                   ],
                 ),
               ),
@@ -22719,7 +22904,7 @@ Scaffold(
         leadingWidgets: [
           SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
           Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
-          SvgPicture.asset('assets/Union.svg', height: 32),
+          SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
         ],
         horizontalPadding: 16,
         leadingSpacing: 12,
@@ -22793,11 +22978,17 @@ Scaffold(
                         ),
                         SizedBox(height: 20),
                         Ux4gButton(text: 'Try again with UPI', onPressed: () {},
-                            size: Ux4gButtonSize.large, width: double.infinity),
+                            size: Ux4gButtonSize.large,
+              height: 48,
+              width: 326,
+            ),
                         SizedBox(height: 10),
                         Ux4gButton(text: 'Try a different method', onPressed: () {},
                             variant: Ux4gButtonVariant.outline,
-                            size: Ux4gButtonSize.large, width: double.infinity),
+                            size: Ux4gButtonSize.large,
+              height: 48,
+              width: 326,
+            ),
                         SizedBox(height: 12),
                         Center(
                           child: TextButton(onPressed: () {},
@@ -22815,7 +23006,7 @@ Scaffold(
                   Text('Powered by -', style: TextStyle(fontSize: 11,
                       color: Color(0xFF9CA3AF), fontWeight: FontWeight.w500)),
                   SizedBox(height: 6),
-                  Image.asset('assets/digital_india_logo.png', height: 22),
+                  Image.asset('assets/digital_india_logo.png', height: 22, color: Theme.of(context).brightness == Brightness.dark ? Colors.white : null),
                 ]),
               ),
             ],
@@ -22938,7 +23129,8 @@ class _FeeWaivedMockup extends StatelessWidget {
                             text: 'Proceed without payment',
                             onPressed: () {},
                             size: Ux4gButtonSize.large,
-                            width: double.infinity,
+              height: 48,
+              width: 326,
                           ),
                           const SizedBox(height: 12),
                           Center(
@@ -23074,7 +23266,8 @@ class _FeeWaivedCardMockup extends StatelessWidget {
                               text: 'Proceed without payment',
                               onPressed: () {},
                               size: Ux4gButtonSize.large,
-                              width: double.infinity,
+              height: 48,
+              width: 326,
                             ),
                             const SizedBox(height: 12),
                             Center(
@@ -23116,7 +23309,7 @@ Scaffold(
         leadingWidgets: [
           SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
           Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
-          SvgPicture.asset('assets/Union.svg', height: 32),
+          SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
         ],
         horizontalPadding: 16,
         leadingSpacing: 12,
@@ -23199,7 +23392,8 @@ Scaffold(
                         text: 'Proceed without payment',
                         onPressed: () {},
                         size: Ux4gButtonSize.large,
-                        width: double.infinity,
+              height: 48,
+              width: 326,
                       ),
                       SizedBox(height: 12),
                       Center(
@@ -23222,7 +23416,7 @@ Scaffold(
                         style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF),
                             fontWeight: FontWeight.w500)),
                     SizedBox(height: 6),
-                    Image.asset('assets/digital_india_logo.png', height: 22),
+                    Image.asset('assets/digital_india_logo.png', height: 22, color: Theme.of(context).brightness == Brightness.dark ? Colors.white : null),
                   ],
                 ),
               ),
@@ -23266,7 +23460,7 @@ Scaffold(
         leadingWidgets: [
           SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
           Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
-          SvgPicture.asset('assets/Union.svg', height: 32),
+          SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
         ],
         horizontalPadding: 16,
         leadingSpacing: 12,
@@ -23345,7 +23539,10 @@ Scaffold(
                         ),
                         SizedBox(height: 20),
                         Ux4gButton(text: 'Proceed without payment', onPressed: () {},
-                            size: Ux4gButtonSize.large, width: double.infinity),
+                            size: Ux4gButtonSize.large,
+              height: 48,
+              width: 326,
+            ),
                         SizedBox(height: 12),
                         Center(
                           child: TextButton(onPressed: () {},
@@ -23363,7 +23560,7 @@ Scaffold(
                   Text('Powered by -', style: TextStyle(fontSize: 11,
                       color: Color(0xFF9CA3AF), fontWeight: FontWeight.w500)),
                   SizedBox(height: 6),
-                  Image.asset('assets/digital_india_logo.png', height: 22),
+                  Image.asset('assets/digital_india_logo.png', height: 22, color: Theme.of(context).brightness == Brightness.dark ? Colors.white : null),
                 ]),
               ),
             ],
@@ -24085,7 +24282,8 @@ Widget _astActions(String status, Color primary) => switch (status) {
         text: 'Reapply',
         onPressed: () {},
         size: Ux4gButtonSize.large,
-        width: double.infinity,
+              height: 48,
+              width: 326,
       ),
       const SizedBox(height: 10),
       Center(
@@ -24118,7 +24316,8 @@ Widget _astActions(String status, Color primary) => switch (status) {
         text: 'Download Certificate (PDF)',
         onPressed: () {},
         size: Ux4gButtonSize.large,
-        width: double.infinity,
+              height: 48,
+              width: 326,
       ),
       const SizedBox(height: 10),
       Ux4gButton(
@@ -24126,7 +24325,8 @@ Widget _astActions(String status, Color primary) => switch (status) {
         onPressed: () {},
         variant: Ux4gButtonVariant.outline,
         size: Ux4gButtonSize.large,
-        width: double.infinity,
+              height: 48,
+              width: 326,
       ),
     ],
   ),
@@ -24307,7 +24507,7 @@ Container(
       leadingWidgets: [
         SvgPicture.asset('assets/national_emblem_logo.svg', height: 32),
         Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
-        SvgPicture.asset('assets/Union.svg', height: 32),
+        SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
       ],
       horizontalPadding: 16,
       leadingSpacing: 12,
@@ -24464,7 +24664,10 @@ Container(
             // ▸ Rejected:
             Padding(padding: EdgeInsets.fromLTRB(16, 0, 16, 8), child: Column(children: [
               Ux4gButton(text: 'Reapply', onPressed: () {},
-                  size: Ux4gButtonSize.large, width: double.infinity),
+                  size: Ux4gButtonSize.large,
+              height: 48,
+              width: 326,
+            ),
               SizedBox(height: 10),
               Center(child: TextButton(onPressed: () {},
                   child: Text('Contact district office',
@@ -24478,11 +24681,17 @@ Container(
             // ▸ Approved:
             // Padding(padding: EdgeInsets.fromLTRB(16, 0, 16, 8), child: Column(children: [
             //   Ux4gButton(text: 'Download Certificate (PDF)', onPressed: () {},
-            //       size: Ux4gButtonSize.large, width: double.infinity),
+            //       size: Ux4gButtonSize.large,
+              height: 48,
+              width: 326,
+            ),
             //   SizedBox(height: 10),
             //   Ux4gButton(text: 'Save to DigiLocker', onPressed: () {},
             //       variant: Ux4gButtonVariant.outline,
-            //       size: Ux4gButtonSize.large, width: double.infinity),
+            //       size: Ux4gButtonSize.large,
+              height: 48,
+              width: 326,
+            ),
             // ]))
           ]),
         )),
@@ -24494,7 +24703,7 @@ Container(
               style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF),
                   fontWeight: FontWeight.w500)),
           SizedBox(height: 6),
-          Image.asset('assets/digital_india_logo.png', height: 22),
+          Image.asset('assets/digital_india_logo.png', height: 22, color: Theme.of(context).brightness == Brightness.dark ? Colors.white : null),
         ])),
       ]),
     )),
@@ -24517,7 +24726,7 @@ Container(
       leadingWidgets: [
         SvgPicture.asset('assets/national_emblem_logo.svg', height: 32),
         Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
-        SvgPicture.asset('assets/Union.svg', height: 32),
+        SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
       ],
       horizontalPadding: 16,
       leadingSpacing: 12,
@@ -24655,7 +24864,10 @@ Container(
               Padding(padding: EdgeInsets.fromLTRB(14, 0, 14, 14),
                   child: Column(children: [
                 Ux4gButton(text: 'Reapply', onPressed: () {},
-                    size: Ux4gButtonSize.large, width: double.infinity),
+                    size: Ux4gButtonSize.large,
+              height: 48,
+              width: 326,
+            ),
                 SizedBox(height: 10),
                 Center(child: TextButton(onPressed: () {},
                     child: Text('Contact district office',
@@ -24672,11 +24884,17 @@ Container(
               //   child: Column(children: [
               //     Ux4gButton(text: 'Download Certificate (PDF)',
               //         onPressed: () {},
-              //         size: Ux4gButtonSize.large, width: double.infinity),
+              //         size: Ux4gButtonSize.large,
+              height: 48,
+              width: 326,
+            ),
               //     SizedBox(height: 10),
               //     Ux4gButton(text: 'Save to DigiLocker', onPressed: () {},
               //         variant: Ux4gButtonVariant.outline,
-              //         size: Ux4gButtonSize.large, width: double.infinity),
+              //         size: Ux4gButtonSize.large,
+              height: 48,
+              width: 326,
+            ),
               //   ]))
             ]),
           ),
@@ -24689,7 +24907,7 @@ Container(
               style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF),
                   fontWeight: FontWeight.w500)),
           SizedBox(height: 6),
-          Image.asset('assets/digital_india_logo.png', height: 22),
+          Image.asset('assets/digital_india_logo.png', height: 22, color: Theme.of(context).brightness == Brightness.dark ? Colors.white : null),
         ])),
       ]),
     )),
@@ -25373,7 +25591,8 @@ class _GstReopenForm extends StatelessWidget {
             text: 'Reopen complaint',
             onPressed: () {},
             size: Ux4gButtonSize.large,
-            width: double.infinity,
+              height: 48,
+              width: 326,
           ),
           const SizedBox(height: 8),
           Center(

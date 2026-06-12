@@ -19,6 +19,7 @@ class Ux4gStatusBanner extends StatelessWidget {
   final Widget? trailingIcon;
   final String title;
   final String? subtitle;
+  final Widget? subtitleWidget;
   final TextStyle? titleStyle;
   final TextStyle? subtitleStyle;
   final Widget? badge;
@@ -43,6 +44,7 @@ class Ux4gStatusBanner extends StatelessWidget {
     required this.variant,
     required this.title,
     this.subtitle,
+    this.subtitleWidget,
     this.titleStyle,
     this.subtitleStyle,
     this.badge,
@@ -156,7 +158,7 @@ class Ux4gStatusBanner extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Row(
-                crossAxisAlignment: subtitle != null
+                crossAxisAlignment: (subtitle != null || subtitleWidget != null)
                     ? CrossAxisAlignment.start
                     : CrossAxisAlignment.center,
                 children: [
@@ -183,7 +185,10 @@ class Ux4gStatusBanner extends StatelessWidget {
                             ?badge,
                           ],
                         ),
-                        if (subtitle != null) ...[
+                        if (subtitleWidget != null) ...[
+                          const SizedBox(height: 4),
+                          subtitleWidget!,
+                        ] else if (subtitle != null) ...[
                           const SizedBox(height: 4),
                           Text(
                             subtitle!,
@@ -240,6 +245,7 @@ class Ux4gBannerManager {
     required Ux4gBannerVariant variant,
     required String title,
     String? subtitle,
+    Widget? subtitleWidget,
     TextStyle? titleStyle,
     TextStyle? subtitleStyle,
     Widget? badge,
@@ -282,6 +288,7 @@ class Ux4gBannerManager {
                 variant: variant,
                 title: title,
                 subtitle: subtitle,
+                subtitleWidget: subtitleWidget,
                 titleStyle: titleStyle,
                 subtitleStyle: subtitleStyle,
                 badge: badge,
