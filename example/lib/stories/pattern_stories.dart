@@ -1244,8 +1244,8 @@ class _PhoneFrame extends StatelessWidget {
       clipBehavior: Clip.antiAlias,
       decoration: BoxDecoration(
         color: _isDark(context)
-            ? Ux4gPalette.primary600
-            : Ux4gPalette.primary300,
+            ? Ux4gPalette.neutral950
+            : Ux4gPalette.neutral50,
         borderRadius: BorderRadius.circular(20),
         border: Border.all(color: _getBorder(context)),
         boxShadow: [
