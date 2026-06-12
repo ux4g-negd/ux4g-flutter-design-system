@@ -1326,8 +1326,7 @@ class _BrandFooter extends StatelessWidget {
         children: [
           Text(
             'Powered by -',
-            style: Theme.of(context)
-                .extension<Ux4gTypography>()!
+            style: (Theme.of(context).extension<Ux4gTypography>() ?? defaultUx4gTypography)
                 .lS_default
                 .copyWith(color: _getMutedText(context)),
           ),
@@ -1408,8 +1407,7 @@ class _SignInMobileMockupState extends State<_SignInMobileMockup> {
                 children: [
                   Text(
                     'Sign in to your account',
-                    style: Theme.of(context)
-                        .extension<Ux4gTypography>()!
+                    style: (Theme.of(context).extension<Ux4gTypography>() ?? defaultUx4gTypography)
                         .hM_strong
                         .copyWith(
                           color: _getTitleColor(context),
@@ -1419,8 +1417,7 @@ class _SignInMobileMockupState extends State<_SignInMobileMockup> {
                   const SizedBox(height: 6),
                   Text(
                     'Access your government services securely',
-                    style: Theme.of(context)
-                        .extension<Ux4gTypography>()!
+                    style: (Theme.of(context).extension<Ux4gTypography>() ?? defaultUx4gTypography)
                         .bM_default
                         .copyWith(color: _getSubtleText(context)),
                   ),
@@ -1535,8 +1532,7 @@ class _SignInMobileMockupState extends State<_SignInMobileMockup> {
                     color: _getBorder(context),
                     label: Text(
                       'OR',
-                      style: Theme.of(context)
-                          .extension<Ux4gTypography>()!
+                      style: (Theme.of(context).extension<Ux4gTypography>() ?? defaultUx4gTypography)
                           .lM_default
                           .copyWith(
                             color: _getMutedText(context),
@@ -2007,10 +2003,10 @@ Container(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text('Sign in to your account',
-              style: Theme.of(context).extension<Ux4gTypography>()!.hM_strong.copyWith(color: Ux4gPalette.gray900)),
+              style: (Theme.of(context).extension<Ux4gTypography>() ?? defaultUx4gTypography).hM_strong.copyWith(color: Ux4gPalette.gray900)),
             SizedBox(height: 6),
             Text('Access your government services securely',
-              style: Theme.of(context).extension<Ux4gTypography>()!.bM_default.copyWith(color: Ux4gPalette.neutral500)),
+              style: (Theme.of(context).extension<Ux4gTypography>() ?? defaultUx4gTypography).bM_default.copyWith(color: Ux4gPalette.neutral500)),
             SizedBox(height: 24),
 
             Ux4gInputField(
@@ -2034,29 +2030,66 @@ Container(
             Ux4gStatusBanner(
               variant: Ux4gBannerVariant.errorLight,
               title: 'Username not found.',
-              subtitle: 'Take action',
+              subtitleWidget: Row(
+                children: [
+                  Text(
+                    'Take action',
+                    style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w700,
+                      color: Theme.of(context).brightness == Brightness.dark
+                          ? Ux4gPalette.red300
+                          : Ux4gPalette.red800,
+                      height: 1.3,
+                    ),
+                  ),
+                  const Spacer(),
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 10,
+                      vertical: 5,
+                    ),
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).brightness == Brightness.dark
+                          ? Ux4gPalette.red800
+                          : Ux4gPalette.red100,
+                      borderRadius: BorderRadius.circular(6),
+                    ),
+                    child: Text(
+                      'Attempt 1 of 5',
+                      style: TextStyle(
+                        fontSize: 12,
+                        color: Theme.of(context).brightness == Brightness.dark
+                            ? Ux4gPalette.red300
+                            : Ux4gPalette.red800,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
               margin: EdgeInsets.zero,
-              padding: EdgeInsets.fromLTRB(12, 12, 10, 12),
+              backgroundColor: Theme.of(context).brightness == Brightness.dark
+                  ? Ux4gPalette.red900
+                  : Ux4gPalette.red50,
+              borderColor: Theme.of(context).brightness == Brightness.dark
+                  ? Ux4gPalette.red600
+                  : Ux4gPalette.red300,
+              padding: const EdgeInsets.fromLTRB(12, 12, 10, 12),
               titleStyle: TextStyle(
-                fontSize: 14, fontWeight: FontWeight.w400,
-                color: Ux4gPalette.red800,
+                fontSize: 14,
+                fontWeight: FontWeight.w400,
+                color: Theme.of(context).brightness == Brightness.dark
+                    ? Ux4gPalette.red300
+                    : Ux4gPalette.red800,
+                height: 1.3,
               ),
-              subtitleStyle: TextStyle(
-                fontSize: 14, fontWeight: FontWeight.w700,
-                color: Ux4gPalette.red800,
-              ),
-              leadingIcon: Icon(Icons.error_outline,
-                color: Ux4gPalette.red600, size: 20),
-              trailingIcon: Container(
-                padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                decoration: BoxDecoration(
-                  color: Ux4gPalette.red200,
-                  borderRadius: BorderRadius.circular(6),
-                ),
-                child: Text('Attempt 1 of 5',
-                  style: TextStyle(fontSize: 12,
-                    color: Ux4gPalette.red800,
-                    fontWeight: FontWeight.w500)),
+              leadingIcon: Icon(
+                Icons.error,
+                color: Theme.of(context).brightness == Brightness.dark
+                    ? Ux4gPalette.red500
+                    : Ux4gPalette.red600,
+                size: 20,
               ),
             ),
 
@@ -2071,7 +2104,7 @@ Container(
 
             Ux4gDivider(
               color: Ux4gPalette.neutral200,
-              label: Text('OR', style: Theme.of(context).extension<Ux4gTypography>()!.lM_default.copyWith(color: Ux4gPalette.neutral400, letterSpacing: 0.5)),
+              label: Text('OR', style: (Theme.of(context).extension<Ux4gTypography>() ?? defaultUx4gTypography).lM_default.copyWith(color: Ux4gPalette.neutral400, letterSpacing: 0.5)),
               labelSpacing: 16,
             ),
             SizedBox(height: 16),
@@ -2104,7 +2137,7 @@ Container(
             mainAxisSize: MainAxisSize.min,
             children: [
               Text('Powered by -',
-                style: Theme.of(context).extension<Ux4gTypography>()!.lS_default.copyWith(color: Ux4gPalette.neutral400)),
+                style: (Theme.of(context).extension<Ux4gTypography>() ?? defaultUx4gTypography).lS_default.copyWith(color: Ux4gPalette.neutral400)),
               SizedBox(height: 6),
               Image.asset('assets/digital_india_logo.png', height: 22, color: Theme.of(context).brightness == Brightness.dark ? Colors.white : null),
             ],
@@ -2986,21 +3019,66 @@ Column(
                       Ux4gStatusBanner(
                         variant: Ux4gBannerVariant.errorLight,
                         title: 'Username not found.',
-                        subtitle: 'Take action',
+                        subtitleWidget: Row(
+                          children: [
+                            Text(
+                              'Take action',
+                              style: TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w700,
+                                color: Theme.of(context).brightness == Brightness.dark
+                                    ? Ux4gPalette.red300
+                                    : Ux4gPalette.red800,
+                                height: 1.3,
+                              ),
+                            ),
+                            const Spacer(),
+                            Container(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 10,
+                                vertical: 5,
+                              ),
+                              decoration: BoxDecoration(
+                                color: Theme.of(context).brightness == Brightness.dark
+                                    ? Ux4gPalette.red800
+                                    : Ux4gPalette.red100,
+                                borderRadius: BorderRadius.circular(6),
+                              ),
+                              child: Text(
+                                'Attempt 1 of 5',
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  color: Theme.of(context).brightness == Brightness.dark
+                                      ? Ux4gPalette.red300
+                                      : Ux4gPalette.red800,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
                         margin: EdgeInsets.zero,
-                        padding: EdgeInsets.fromLTRB(12, 12, 10, 12),
-                        leadingIcon: Icon(Icons.error_outline,
-                          color: Ux4gPalette.red600, size: 20),
-                        trailingIcon: Container(
-                          padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                          decoration: BoxDecoration(
-                            color: Ux4gPalette.red200,
-                            borderRadius: BorderRadius.circular(6),
-                          ),
-                          child: Text('Attempt 1 of 5',
-                            style: TextStyle(fontSize: 12,
-                              color: Ux4gPalette.red800,
-                              fontWeight: FontWeight.w500)),
+                        backgroundColor: Theme.of(context).brightness == Brightness.dark
+                            ? Ux4gPalette.red900
+                            : Ux4gPalette.red50,
+                        borderColor: Theme.of(context).brightness == Brightness.dark
+                            ? Ux4gPalette.red600
+                            : Ux4gPalette.red300,
+                        padding: const EdgeInsets.fromLTRB(12, 12, 10, 12),
+                        titleStyle: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w400,
+                          color: Theme.of(context).brightness == Brightness.dark
+                              ? Ux4gPalette.red300
+                              : Ux4gPalette.red800,
+                          height: 1.3,
+                        ),
+                        leadingIcon: Icon(
+                          Icons.error,
+                          color: Theme.of(context).brightness == Brightness.dark
+                              ? Ux4gPalette.red500
+                              : Ux4gPalette.red600,
+                          size: 20,
                         ),
                       ),
                       SizedBox(height: 16),
