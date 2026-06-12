@@ -1453,36 +1453,71 @@ class _SignInMobileMockupState extends State<_SignInMobileMockup> {
                   Ux4gStatusBanner(
                     variant: Ux4gBannerVariant.errorLight,
                     title: 'Username not found.',
-                    subtitle: 'Take action',
-                    margin: EdgeInsets.zero,
-                    padding: const EdgeInsets.fromLTRB(12, 12, 10, 12),
-                    leadingIcon: Icon(
-                      Icons.error_outline,
-                      color: Theme.of(context).extension<Ux4gColors>()!.error,
-                      size: 20,
-                    ),
-                    trailingIcon: Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 10,
-                        vertical: 5,
-                      ),
-                      decoration: BoxDecoration(
-                        color: _isDark(context)
-                            ? Ux4gPalette.red900
-                            : Ux4gPalette.red200,
-                        borderRadius: BorderRadius.circular(6),
-                      ),
-                      child: Text(
-                        'Attempt 1 of 5',
-                        style: TextStyle(
-                          fontSize: 12,
-                          color: _isDark(context)
-                              ? Ux4gPalette.red100
-                              : Ux4gPalette.red800,
-                          fontWeight: FontWeight.w500,
-                          height: 1.2,
+                    subtitleWidget: Row(
+                      children: [
+                        Text(
+                          'Take action',
+                          style: TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w700,
+                            color: _isDark(context)
+                                ? Ux4gPalette.red300
+                                : Ux4gPalette.red800,
+                            height: 1.3,
+                          ),
                         ),
-                      ),
+                        const Spacer(),
+                        Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 10,
+                            vertical: 5,
+                          ),
+                          decoration: BoxDecoration(
+                            color: _isDark(context)
+                                ? Ux4gPalette.red800
+                                : Ux4gPalette.red100,
+                            borderRadius: BorderRadius.circular(6),
+                          ),
+                          child: Text(
+                            'Attempt 1 of 5',
+                            style: TextStyle(
+                              fontSize: 12,
+                              color: _isDark(context)
+                                  ? Ux4gPalette.red300
+                                  : Ux4gPalette.red800,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    margin: EdgeInsets.zero,
+                    backgroundColor: _isDark(context)
+                        ? Ux4gPalette.red900
+                        : Ux4gPalette.red50,
+                    borderColor: _isDark(context)
+                        ? Ux4gPalette.red600
+                        : Ux4gPalette.red300,
+                    padding: const EdgeInsets.fromLTRB(
+                      12,
+                      12,
+                      10,
+                      12,
+                    ),
+                    titleStyle: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400,
+                      color: _isDark(context)
+                          ? Ux4gPalette.red300
+                          : Ux4gPalette.red800,
+                      height: 1.3,
+                    ),
+                    leadingIcon: Icon(
+                      Icons.error,
+                      color: _isDark(context)
+                          ? Ux4gPalette.red500
+                          : Ux4gPalette.red600,
+                      size: 20,
                     ),
                   ),
                   const SizedBox(height: 20),
