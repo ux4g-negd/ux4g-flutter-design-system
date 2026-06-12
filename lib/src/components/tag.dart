@@ -45,24 +45,20 @@ class Ux4gTag extends StatelessWidget {
     final ux4gColors = materialTheme.extension<Ux4gColors>();
     final ux4gTypography = materialTheme.extension<Ux4gTypography>();
 
-    final defaultColors = _getTagColors(ux4gColors, materialTheme.colorScheme);
+    final defaultColors = _getTagColors(ux4gColors, materialTheme.brightness);
     final bgColor = customBackgroundColor ?? defaultColors.backgroundColor;
     final contentColor = customContentColor ?? defaultColors.contentColor;
     final borderColor = customBorderColor ?? defaultColors.borderColor;
 
     final height = size == Ux4gTagSize.m ? 20.0 : 24.0;
-    final horizontalPadding = size == Ux4gTagSize.m ? 8.0 : 12.0;
+    final horizontalPadding = 8.0;
 
-    final lSDefault =
-        ux4gTypography?.lS_default ??
-        materialTheme.textTheme.labelSmall ??
-        const TextStyle();
     final lMDefault =
         ux4gTypography?.lM_default ??
         materialTheme.textTheme.labelMedium ??
         const TextStyle();
 
-    final textStyle = size == Ux4gTagSize.m ? lSDefault : lMDefault;
+    final textStyle = lMDefault;
 
     final borderRadius =
         customBorderRadius ??
@@ -104,60 +100,152 @@ class Ux4gTag extends StatelessWidget {
     );
   }
 
-  _TagColors _getTagColors(Ux4gColors? ux4gColors, ColorScheme colorScheme) {
-    final onSurface = ux4gColors?.onSurface ?? colorScheme.onSurface;
-    final primary = ux4gColors?.primary ?? colorScheme.primary;
-    final success = ux4gColors?.success ?? colorScheme.primary;
-    final warning = ux4gColors?.warning ?? colorScheme.tertiary;
-    final error = ux4gColors?.error ?? colorScheme.error;
-    final info = ux4gColors?.info ?? colorScheme.secondary;
-    final surface = ux4gColors?.surface ?? colorScheme.surface;
-    final onPrimary = ux4gColors?.onPrimary ?? colorScheme.onPrimary;
+  _TagColors _getTagColors(Ux4gColors? colors, Brightness brightness) {
+    final isDark = brightness == Brightness.dark;
 
-    final (baseLight, baseNormal, baseDark) = switch (this.colorScheme) {
-      Ux4gTagColor.neutral => (
-        onSurface.withValues(alpha: 0.1),
-        onSurface.withValues(alpha: 0.5),
-        onSurface.withValues(alpha: 0.8),
-      ),
-      Ux4gTagColor.brand => (primary.withValues(alpha: 0.12), primary, primary),
-      Ux4gTagColor.success => (
-        success.withValues(alpha: 0.12),
-        success,
-        success,
-      ),
-      Ux4gTagColor.warning => (
-        warning.withValues(alpha: 0.12),
-        warning,
-        warning,
-      ),
-      Ux4gTagColor.error => (error.withValues(alpha: 0.12), error, error),
-      Ux4gTagColor.info => (info.withValues(alpha: 0.12), info, info),
-    };
+    final brand = colors?.primary ?? Ux4gPalette.primary600;
+    final onBrand = colors?.onPrimary ?? Ux4gPalette.neutral50;
+    final success = colors?.success ?? Ux4gPalette.green600;
+    final onSuccess = colors?.onSuccess ?? Ux4gPalette.neutral50;
+    final warning = colors?.warning ?? Ux4gPalette.orange600;
+    final onWarning = colors?.onWarning ?? Ux4gPalette.neutral900;
+    final error = colors?.error ?? Ux4gPalette.red600;
+    final onError = colors?.onError ?? Ux4gPalette.neutral50;
+    final info = colors?.info ?? Ux4gPalette.cyan600;
+    final onInfo = colors?.onInfo ?? Ux4gPalette.neutral50;
+    final onSurface = colors?.onSurface ?? Ux4gPalette.neutral900;
 
     return switch (style) {
-      Ux4gTagStyle.tonal => _TagColors(
-        backgroundColor: baseLight,
-        contentColor: baseDark,
-        borderColor: Colors.transparent,
-      ),
-      Ux4gTagStyle.filled => _TagColors(
-        backgroundColor: baseNormal,
-        contentColor: (this.colorScheme == Ux4gTagColor.neutral)
-            ? surface
-            : onPrimary, // Usually onPrimary works for brand/error/success/warning
-        borderColor: Colors.transparent,
-      ),
-      Ux4gTagStyle.outline => _TagColors(
-        backgroundColor: Colors.transparent,
-        contentColor: baseNormal,
-        borderColor: baseNormal,
-      ),
-      Ux4gTagStyle.text => _TagColors(
-        backgroundColor: Colors.transparent,
-        contentColor: baseNormal,
-        borderColor: Colors.transparent,
-      ),
+      Ux4gTagStyle.tonal => switch (colorScheme) {
+        Ux4gTagColor.neutral => _TagColors(
+          backgroundColor: isDark
+              ? onSurface.withValues(alpha: 0.16)
+              : Ux4gPalette.neutral200,
+          contentColor: isDark ? Ux4gPalette.neutral50 : Ux4gPalette.neutral900,
+          borderColor: Colors.transparent,
+        ),
+        Ux4gTagColor.brand => _TagColors(
+          backgroundColor: isDark ? brand.withValues(alpha: 0.24) : Ux4gPalette.primary100,
+          contentColor: isDark ? brand : Ux4gPalette.primary600,
+          borderColor: Colors.transparent,
+        ),
+        Ux4gTagColor.success => _TagColors(
+          backgroundColor: isDark ? success.withValues(alpha: 0.24) : Ux4gPalette.green100,
+          contentColor: isDark ? success : Ux4gPalette.green800,
+          borderColor: Colors.transparent,
+        ),
+        Ux4gTagColor.warning => _TagColors(
+          backgroundColor: isDark ? warning.withValues(alpha: 0.24) : Ux4gPalette.orange100,
+          contentColor: isDark ? warning : Ux4gPalette.orange800,
+          borderColor: Colors.transparent,
+        ),
+        Ux4gTagColor.error => _TagColors(
+          backgroundColor: isDark ? error.withValues(alpha: 0.24) : Ux4gPalette.red100,
+          contentColor: isDark ? error : Ux4gPalette.red800,
+          borderColor: Colors.transparent,
+        ),
+        Ux4gTagColor.info => _TagColors(
+          backgroundColor: isDark ? info.withValues(alpha: 0.24) : Ux4gPalette.cyan100,
+          contentColor: isDark ? info : Ux4gPalette.cyan800,
+          borderColor: Colors.transparent,
+        ),
+      },
+      Ux4gTagStyle.filled => switch (colorScheme) {
+        Ux4gTagColor.neutral => _TagColors(
+          backgroundColor: isDark ? Ux4gPalette.neutral50 : Ux4gPalette.neutral900,
+          contentColor: isDark ? Ux4gPalette.neutral900 : Ux4gPalette.neutral50,
+          borderColor: Colors.transparent,
+        ),
+        Ux4gTagColor.brand => _TagColors(
+          backgroundColor: brand,
+          contentColor: onBrand,
+          borderColor: Colors.transparent,
+        ),
+        Ux4gTagColor.success => _TagColors(
+          backgroundColor: success,
+          contentColor: onSuccess,
+          borderColor: Colors.transparent,
+        ),
+        Ux4gTagColor.warning => _TagColors(
+          backgroundColor: warning,
+          contentColor: onWarning,
+          borderColor: Colors.transparent,
+        ),
+        Ux4gTagColor.error => _TagColors(
+          backgroundColor: error,
+          contentColor: onError,
+          borderColor: Colors.transparent,
+        ),
+        Ux4gTagColor.info => _TagColors(
+          backgroundColor: info,
+          contentColor: onInfo,
+          borderColor: Colors.transparent,
+        ),
+      },
+      Ux4gTagStyle.outline => switch (colorScheme) {
+        Ux4gTagColor.neutral => _TagColors(
+          backgroundColor: Colors.transparent,
+          contentColor: isDark ? Ux4gPalette.neutral50 : Ux4gPalette.neutral900,
+          borderColor: isDark ? Ux4gPalette.neutral600 : Ux4gPalette.neutral300,
+        ),
+        Ux4gTagColor.brand => _TagColors(
+          backgroundColor: Colors.transparent,
+          contentColor: brand,
+          borderColor: isDark ? brand.withValues(alpha: 0.55) : Ux4gPalette.primary300,
+        ),
+        Ux4gTagColor.success => _TagColors(
+          backgroundColor: Colors.transparent,
+          contentColor: isDark ? success : Ux4gPalette.green800,
+          borderColor: isDark ? success.withValues(alpha: 0.55) : Ux4gPalette.green300,
+        ),
+        Ux4gTagColor.warning => _TagColors(
+          backgroundColor: Colors.transparent,
+          contentColor: isDark ? warning : Ux4gPalette.orange800,
+          borderColor: isDark ? warning.withValues(alpha: 0.55) : Ux4gPalette.orange300,
+        ),
+        Ux4gTagColor.error => _TagColors(
+          backgroundColor: Colors.transparent,
+          contentColor: isDark ? error : Ux4gPalette.red800,
+          borderColor: isDark ? error.withValues(alpha: 0.55) : Ux4gPalette.red300,
+        ),
+        Ux4gTagColor.info => _TagColors(
+          backgroundColor: Colors.transparent,
+          contentColor: isDark ? info : Ux4gPalette.cyan800,
+          borderColor: isDark ? info.withValues(alpha: 0.55) : Ux4gPalette.cyan300,
+        ),
+      },
+      Ux4gTagStyle.text => switch (colorScheme) {
+        Ux4gTagColor.neutral => _TagColors(
+          backgroundColor: Colors.transparent,
+          contentColor: isDark ? Ux4gPalette.neutral50 : Ux4gPalette.neutral900,
+          borderColor: Colors.transparent,
+        ),
+        Ux4gTagColor.brand => _TagColors(
+          backgroundColor: Colors.transparent,
+          contentColor: brand,
+          borderColor: Colors.transparent,
+        ),
+        Ux4gTagColor.success => _TagColors(
+          backgroundColor: Colors.transparent,
+          contentColor: isDark ? success : Ux4gPalette.green800,
+          borderColor: Colors.transparent,
+        ),
+        Ux4gTagColor.warning => _TagColors(
+          backgroundColor: Colors.transparent,
+          contentColor: isDark ? warning : Ux4gPalette.orange800,
+          borderColor: Colors.transparent,
+        ),
+        Ux4gTagColor.error => _TagColors(
+          backgroundColor: Colors.transparent,
+          contentColor: isDark ? error : Ux4gPalette.red800,
+          borderColor: Colors.transparent,
+        ),
+        Ux4gTagColor.info => _TagColors(
+          backgroundColor: Colors.transparent,
+          contentColor: isDark ? info : Ux4gPalette.cyan800,
+          borderColor: Colors.transparent,
+        ),
+      },
     };
   }
 }
@@ -275,7 +363,6 @@ class Ux4gUnifiedPillTag extends StatelessWidget {
         ) ??
         const TextStyle();
 
-    final height = size == Ux4gTagSize.m ? 20.0 : 24.0;
     final horizontalPadding = size == Ux4gTagSize.m ? 8.0 : 12.0;
     final textStyleDefault = size == Ux4gTagSize.m ? lSDefault : lMDefault;
     final textStyleBold = size == Ux4gTagSize.m ? lSStrong : lMStrong;

@@ -82,11 +82,8 @@ class Ux4gCard extends StatelessWidget {
         (ux4gColors?.surface ?? materialTheme.colorScheme.surface);
     final hasBorder = borderWidth > 0 && borderColor != Colors.transparent;
 
-    // Determine the best content color based on background brightness
-    final bgBrightness = ThemeData.estimateBrightnessForColor(resolvedBg);
-    final contentColor = bgBrightness == Brightness.dark
-        ? Colors.white
-        : (ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface);
+    final contentColor =
+      ux4gColors?.onSurface ?? materialTheme.colorScheme.onSurface;
 
     final content = child ?? _buildRichCard(context, contentColor);
 
@@ -270,8 +267,15 @@ class _CardContentBlock extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final materialTheme = Theme.of(context);
+    final ux4gColors = materialTheme.extension<Ux4gColors>();
     final ux4gTypography = materialTheme.extension<Ux4gTypography>();
     final hasHeader = avatar != null || title != null || subtitle != null;
+    final isDark = materialTheme.brightness == Brightness.dark;
+    final primaryTextColor =
+      isDark ? contentColor : (ux4gColors?.onSurface ?? Ux4gPalette.neutral900);
+    final secondaryTextColor = isDark
+      ? contentColor.withValues(alpha: 0.72)
+      : Ux4gPalette.neutral700;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -294,13 +298,16 @@ class _CardContentBlock extends StatelessWidget {
                       Text(
                         title!,
                         style:
-                            (ux4gTypography?.tS_strong ??
+                            (ux4gTypography?.tM_strong ??
                                     materialTheme.textTheme.titleSmall
                                         ?.copyWith(
-                                          fontWeight: FontWeight.bold,
+                                          fontWeight: FontWeight.w600,
                                         ) ??
                                     const TextStyle())
-                                .copyWith(color: contentColor),
+                                .copyWith(
+                                  color: primaryTextColor,
+                                  height: 20 / 16,
+                                ),
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                       ),
@@ -308,12 +315,10 @@ class _CardContentBlock extends StatelessWidget {
                       Text(
                         subtitle!,
                         style:
-                            (ux4gTypography?.bS_default ??
-                                    materialTheme.textTheme.bodySmall ??
+                            (ux4gTypography?.tM_default ??
+                                    materialTheme.textTheme.bodyMedium ??
                                     const TextStyle())
-                                .copyWith(
-                                  color: contentColor.withValues(alpha: 0.5),
-                                ),
+                                .copyWith(color: secondaryTextColor),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                       ),
@@ -327,7 +332,7 @@ class _CardContentBlock extends StatelessWidget {
           _CardChipRow(
             chips: statusChips,
             pillStyle: false,
-            contentColor: contentColor,
+            secondaryTextColor: secondaryTextColor,
           ),
         ],
         if (body != null) ...[
@@ -335,10 +340,10 @@ class _CardContentBlock extends StatelessWidget {
           Text(
             body!,
             style:
-                (ux4gTypography?.bM_default ??
+                (ux4gTypography?.tS_default ??
                         materialTheme.textTheme.bodyMedium ??
                         const TextStyle())
-                    .copyWith(color: contentColor.withValues(alpha: 0.7)),
+                    .copyWith(color: primaryTextColor),
             maxLines: 4,
             overflow: TextOverflow.ellipsis,
           ),
@@ -348,7 +353,7 @@ class _CardContentBlock extends StatelessWidget {
           _CardChipRow(
             chips: bottomChips,
             pillStyle: true,
-            contentColor: contentColor,
+            secondaryTextColor: secondaryTextColor,
           ),
         ],
         if (footerType != Ux4gCardFooterType.none) ...[
@@ -370,12 +375,12 @@ class _CardContentBlock extends StatelessWidget {
 class _CardChipRow extends StatelessWidget {
   final List<String> chips;
   final bool pillStyle;
-  final Color contentColor;
+  final Color secondaryTextColor;
 
   const _CardChipRow({
     required this.chips,
     required this.pillStyle,
-    required this.contentColor,
+    required this.secondaryTextColor,
   });
 
   @override
@@ -402,17 +407,15 @@ class _CardChipRow extends StatelessWidget {
                 ),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(Ux4gRadius.radius999),
-                  border: Border.all(
-                    color: contentColor.withValues(alpha: 0.3),
-                  ),
+                  border: Border.all(color: secondaryTextColor.withValues(alpha: 0.35)),
                 ),
                 child: Text(
                   chip,
                   style:
-                      (ux4gTypography?.lS_default ??
+                      (ux4gTypography?.lM_default ??
                               materialTheme.textTheme.labelSmall ??
                               const TextStyle())
-                          .copyWith(color: contentColor.withValues(alpha: 0.7)),
+                          .copyWith(color: secondaryTextColor),
                 ),
               ),
             ];
@@ -430,16 +433,16 @@ class _CardChipRow extends StatelessWidget {
                       (ux4gTypography?.bS_default ??
                               materialTheme.textTheme.bodySmall ??
                               const TextStyle())
-                          .copyWith(color: contentColor.withValues(alpha: 0.3)),
+                          .copyWith(color: secondaryTextColor.withValues(alpha: 0.45)),
                 ),
               ),
             Text(
               chip,
               style:
-                  (ux4gTypography?.lS_default ??
+                  (ux4gTypography?.lM_default ??
                           materialTheme.textTheme.labelSmall ??
                           const TextStyle())
-                      .copyWith(color: contentColor.withValues(alpha: 0.6)),
+                      .copyWith(color: secondaryTextColor),
             ),
           ];
         }).toList(),

@@ -25,9 +25,15 @@ Ux4gTag(text: 'Brand',   colorScheme: Ux4gTagColor.brand);
 Ux4gTag(text: 'Success', colorScheme: Ux4gTagColor.success);
 Ux4gTag(text: 'Warning', colorScheme: Ux4gTagColor.warning);
 Ux4gTag(text: 'Error',   colorScheme: Ux4gTagColor.error);
+    Ux4gTag(text: 'Info',    colorScheme: Ux4gTagColor.info);
 
 // Dismissible
-Ux4gTag(text: 'Close me', onDismiss: () {});''',
+    Ux4gTag(text: 'Close me', onDismiss: () {});
+
+    // Size tokens (Figma):
+    // m = small tag (20px), l = medium tag (24px)
+    Ux4gTag(text: '20px', size: Ux4gTagSize.m);
+    Ux4gTag(text: '24px', size: Ux4gTagSize.l);''',
         props: const [
           PropRow(
             name: 'text',
@@ -50,7 +56,7 @@ Ux4gTag(text: 'Close me', onDismiss: () {});''',
           PropRow(
             name: 'size',
             type: 'Ux4gTagSize',
-            description: 'm / l.',
+            description: 'm (20px) / l (24px).',
             defaultValue: 'm',
           ),
           PropRow(
@@ -241,20 +247,21 @@ Ux4gTag(text: 'Circular',    shape: Ux4gTagShape.circular);''',
       name: 'Sizes',
       builder: (context) => ComponentDocs(
         name: 'Ux4gTag — Sizes',
-        description: 'Medium (m) and Large (l) size variants side-by-side.',
-        code: '''Ux4gTag(text: 'Medium', size: Ux4gTagSize.m);
-Ux4gTag(text: 'Large',  size: Ux4gTagSize.l);''',
+        description:
+            'Small (m, 20px) and Medium (l, 24px) size variants side-by-side.',
+        code: '''Ux4gTag(text: 'Small',  size: Ux4gTagSize.m);
+Ux4gTag(text: 'Medium', size: Ux4gTagSize.l);''',
         child: Wrap(
           spacing: 8,
           runSpacing: 8,
           children: [
             Ux4gTag(
-              text: 'Medium',
+              text: 'Small',
               size: Ux4gTagSize.m,
               colorScheme: Ux4gTagColor.brand,
             ),
             Ux4gTag(
-              text: 'Large',
+              text: 'Medium',
               size: Ux4gTagSize.l,
               colorScheme: Ux4gTagColor.brand,
             ),
@@ -274,11 +281,14 @@ final cardComponent = WidgetbookComponent(
         name: 'Ux4gCard',
         description:
             'A surface container with optional title, subtitle, body text, '
-            'media image, and footer action buttons.',
+            'media image, and footer action buttons. '
+            'Title/subtitle/body typography and text colors are mapped to UX4G theme tokens.',
         code: '''Ux4gCard(
   title: 'Card Title',
   subtitle: 'Subtitle',
   body: 'Card body content here.',
+  // Uses UX4G token mapping internally:
+  // title -> 16/20 semibold, subtitle -> 16/24 regular, body -> 14/20 regular
 );
 
 // With footer buttons
@@ -723,7 +733,9 @@ Ux4gCard(
                                 Text(
                                   'Subtitle',
                                   style: TextStyle(
-                                    color: Theme.of(context).brightness == Brightness.dark
+                                    color:
+                                        Theme.of(context).brightness ==
+                                            Brightness.dark
                                         ? Colors.white70
                                         : Colors.black54,
                                     fontSize: 13,
@@ -849,7 +861,9 @@ class _SmallTag extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final isDark = theme.brightness == Brightness.dark;
-    final bgColor = isDark ? Colors.white.withValues(alpha: 0.1) : Colors.black.withValues(alpha: 0.05);
+    final bgColor = isDark
+        ? Colors.white.withValues(alpha: 0.1)
+        : Colors.black.withValues(alpha: 0.05);
     final color = isDark ? Colors.white70 : Colors.black54;
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),

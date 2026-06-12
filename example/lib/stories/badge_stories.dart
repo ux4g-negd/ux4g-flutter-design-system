@@ -16,17 +16,34 @@ final badgeComponent = WidgetbookComponent(
             'Use the named constructors: .dot(), .count(), .label(), .icon().',
         code: '''// Dot badge – simple presence indicator
 Ux4gBadge.dot(
+  badgeColor: Ux4gBadgeColor.information,
+  borderWidth: 1,
+  borderColor: Colors.white,
   child: Icon(Icons.notifications, size: 32),
 );
 
 // Count badge
-Ux4gBadge.count(5, child: Icon(Icons.mail, size: 32));
+Ux4gBadge.count(
+  5,
+  badgeColor: Ux4gBadgeColor.brand,
+  child: Icon(Icons.mail, size: 32),
+);
 
 // Label badge
-Ux4gBadge.label('NEW', child: Icon(Icons.star, size: 32));
+Ux4gBadge.label(
+  'NEW',
+  badgeColor: Ux4gBadgeColor.success,
+  child: Icon(Icons.star, size: 32),
+);
 
 // Icon badge
-Ux4gBadge.icon(Icons.check, child: Icon(Icons.person, size: 32));''',
+Ux4gBadge.icon(
+  Icons.check,
+  badgeColor: Ux4gBadgeColor.warning,
+  borderWidth: 2,
+  borderColor: Colors.black,
+  child: Icon(Icons.person, size: 32),
+);''',
         props: const [
           PropRow(
             name: 'child',
@@ -48,6 +65,28 @@ Ux4gBadge.icon(Icons.check, child: Icon(Icons.person, size: 32));''',
             type: 'AlignmentGeometry',
             description: 'Position of the badge relative to child.',
             defaultValue: 'Alignment.topRight',
+          ),
+          PropRow(
+            name: 'badgeColor',
+            type: 'Ux4gBadgeColor?',
+            description: 'Semantic badge color variant.',
+          ),
+          PropRow(
+            name: 'borderWidth',
+            type: 'double',
+            description: 'Border width in logical pixels. 0 disables border.',
+            defaultValue: '0',
+          ),
+          PropRow(
+            name: 'borderColor',
+            type: 'Color?',
+            description: 'Border color when borderWidth is greater than 0.',
+          ),
+          PropRow(
+            name: 'hideWhenZero',
+            type: 'bool',
+            description: 'For count badge, hides when count is 0 or less.',
+            defaultValue: 'false',
           ),
           PropRow(
             name: 'count (factory)',
@@ -92,6 +131,8 @@ Ux4gBadge.icon(Icons.check, child: Icon(Icons.person, size: 32));''',
         code: '''Ux4gBadge.count(
   5,
   limit: Ux4gBadgeLimit.singleDigit,   // shows "9+" when > 9
+  hideWhenZero: true,
+  borderWidth: 1,
   child: Icon(Icons.mail, size: 32),
 );''',
         child: Ux4gBadge.count(
@@ -111,7 +152,12 @@ Ux4gBadge.icon(Icons.check, child: Icon(Icons.person, size: 32));''',
       builder: (context) => ComponentDocs(
         name: 'Ux4gBadge — Label',
         description: 'Displays a short text string as a badge.',
-        code: '''Ux4gBadge.label('NEW', child: Icon(Icons.star, size: 32));''',
+        code: '''Ux4gBadge.label(
+        'NEW',
+        badgeColor: Ux4gBadgeColor.success,
+        borderWidth: 1,
+        child: Icon(Icons.star, size: 32),
+      );''',
         child: Ux4gBadge.label(
           context.knobs.string(label: 'Label', initialValue: 'NEW'),
           child: const Icon(Icons.star, size: 32),
@@ -126,9 +172,9 @@ Ux4gBadge.icon(Icons.check, child: Icon(Icons.person, size: 32));''',
             'Badges can be used without a child widget as standalone indicators.',
         code: '''Row(children: [
   Ux4gBadge.dot(),
-  Ux4gBadge.count(7),
-  Ux4gBadge.label('BETA'),
-  Ux4gBadge.icon(Icons.check),
+  Ux4gBadge.count(7, badgeColor: Ux4gBadgeColor.brand),
+  Ux4gBadge.label('BETA', badgeColor: Ux4gBadgeColor.information),
+  Ux4gBadge.icon(Icons.check, borderWidth: 2),
 ]);''',
         child: Row(
           mainAxisSize: MainAxisSize.min,

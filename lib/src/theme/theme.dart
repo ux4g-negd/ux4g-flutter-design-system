@@ -11,6 +11,7 @@ class Ux4gTheme extends StatelessWidget {
   static ThemeData themeData({bool isDark = false}) {
     return ThemeData(
       useMaterial3: true,
+      fontFamily: 'Noto Sans',
       brightness: isDark ? Brightness.dark : Brightness.light,
       extensions: [
         isDark ? darkUx4gColors : lightUx4gColors,
