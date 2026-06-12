@@ -2444,22 +2444,22 @@ class _SignInWithMobileMockupState extends State<_SignInWithMobileMockup> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
+                  Text(
                     'Sign in to your account',
                     style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.w800,
-                      color: _titleColor,
+                      color: _getTitleColor(context),
                       height: 1.2,
                       letterSpacing: -0.3,
                     ),
                   ),
                   const SizedBox(height: 6),
-                  const Text(
+                  Text(
                     'Access your government services securely',
                     style: TextStyle(
                       fontSize: 14,
-                      color: _subtleText,
+                      color: _getSubtleText(context),
                       height: 1.3,
                     ),
                   ),
@@ -2485,48 +2485,75 @@ class _SignInWithMobileMockupState extends State<_SignInWithMobileMockup> {
                   ),
                   const SizedBox(height: 16),
 
-                  // -- Status banner � same pattern as Sign In screen --
+                  // -- Status banner  same pattern as Sign In screen --
                   Ux4gStatusBanner(
                     variant: Ux4gBannerVariant.errorLight,
                     title: 'Your status message goes here',
-                    subtitle: 'Take action',
+                    subtitleWidget: Row(
+                      children: [
+                        Text(
+                          'Take action',
+                          style: TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w700,
+                            color: _isDark(context)
+                                ? Ux4gPalette.red300
+                                : Ux4gPalette.red800,
+                            height: 1.3,
+                          ),
+                        ),
+                        const Spacer(),
+                        Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 10,
+                            vertical: 5,
+                          ),
+                          decoration: BoxDecoration(
+                            color: _isDark(context)
+                                ? Ux4gPalette.red800
+                                : Ux4gPalette.red100,
+                            borderRadius: BorderRadius.circular(6),
+                          ),
+                          child: Text(
+                            'Attempt 1 of 5',
+                            style: TextStyle(
+                              fontSize: 12,
+                              color: _isDark(context)
+                                  ? Ux4gPalette.red300
+                                  : Ux4gPalette.red800,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                     margin: EdgeInsets.zero,
-                    padding: const EdgeInsets.fromLTRB(12, 12, 10, 12),
-                    titleStyle: const TextStyle(
+                    backgroundColor: _isDark(context)
+                        ? Ux4gPalette.red900
+                        : Ux4gPalette.red50,
+                    borderColor: _isDark(context)
+                        ? Ux4gPalette.red600
+                        : Ux4gPalette.red300,
+                    padding: const EdgeInsets.fromLTRB(
+                      12,
+                      12,
+                      10,
+                      12,
+                    ),
+                    titleStyle: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w400,
-                      color: Ux4gPalette.red800,
+                      color: _isDark(context)
+                          ? Ux4gPalette.red300
+                          : Ux4gPalette.red800,
                       height: 1.3,
                     ),
-                    subtitleStyle: const TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w700,
-                      color: Ux4gPalette.red800,
-                      height: 1.3,
-                    ),
-                    leadingIcon: const Icon(
-                      Icons.error_outline,
-                      color: Ux4gPalette.red600,
+                    leadingIcon: Icon(
+                      Icons.error,
+                      color: _isDark(context)
+                          ? Ux4gPalette.red500
+                          : Ux4gPalette.red600,
                       size: 20,
-                    ),
-                    trailingIcon: Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 10,
-                        vertical: 5,
-                      ),
-                      decoration: BoxDecoration(
-                        color: Ux4gPalette.red200,
-                        borderRadius: BorderRadius.circular(6),
-                      ),
-                      child: const Text(
-                        'Attempt 1 of 5',
-                        style: TextStyle(
-                          fontSize: 12,
-                          color: Ux4gPalette.red800,
-                          fontWeight: FontWeight.w500,
-                          height: 1.2,
-                        ),
-                      ),
                     ),
                   ),
                   const SizedBox(height: 20),
@@ -2602,10 +2629,10 @@ Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text('Sign in to your account',
-            style: TextStyle(fontSize: 24, fontWeight: FontWeight.w800)),
+            style: TextStyle(fontSize: 24, fontWeight: FontWeight.w800, color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.neutral50 : Ux4gPalette.gray900)),
           SizedBox(height: 6),
           Text('Access your government services securely',
-            style: TextStyle(fontSize: 14, color: Color(0xFF6B7280))),
+            style: TextStyle(fontSize: 14, color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.neutral400 : Color(0xFF6B7280))),
           SizedBox(height: 24),
 
           // Mobile input with +91 prefix
@@ -2624,29 +2651,66 @@ Column(
           Ux4gStatusBanner(
             variant: Ux4gBannerVariant.errorLight,
             title: 'Your status message goes here',
-            subtitle: 'Take action',
+            subtitleWidget: Row(
+              children: [
+                Text(
+                  'Take action',
+                  style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w700,
+                    color: Theme.of(context).brightness == Brightness.dark
+                        ? Ux4gPalette.red300
+                        : Ux4gPalette.red800,
+                    height: 1.3,
+                  ),
+                ),
+                Spacer(),
+                Container(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 10,
+                    vertical: 5,
+                  ),
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).brightness == Brightness.dark
+                        ? Ux4gPalette.red800
+                        : Ux4gPalette.red100,
+                    borderRadius: BorderRadius.circular(6),
+                  ),
+                  child: Text(
+                    'Attempt 1 of 5',
+                    style: TextStyle(
+                      fontSize: 12,
+                      color: Theme.of(context).brightness == Brightness.dark
+                          ? Ux4gPalette.red300
+                          : Ux4gPalette.red800,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ),
+              ],
+            ),
             margin: EdgeInsets.zero,
+            backgroundColor: Theme.of(context).brightness == Brightness.dark
+                ? Ux4gPalette.red900
+                : Ux4gPalette.red50,
+            borderColor: Theme.of(context).brightness == Brightness.dark
+                ? Ux4gPalette.red600
+                : Ux4gPalette.red300,
             padding: EdgeInsets.fromLTRB(12, 12, 10, 12),
             titleStyle: TextStyle(
-              fontSize: 14, fontWeight: FontWeight.w400,
-              color: Ux4gPalette.red800,
+              fontSize: 14,
+              fontWeight: FontWeight.w400,
+              color: Theme.of(context).brightness == Brightness.dark
+                  ? Ux4gPalette.red300
+                  : Ux4gPalette.red800,
+              height: 1.3,
             ),
-            subtitleStyle: TextStyle(
-              fontSize: 14, fontWeight: FontWeight.w700,
-              color: Ux4gPalette.red800,
-            ),
-            leadingIcon: Icon(Icons.error_outline,
-              color: Ux4gPalette.red600, size: 20),
-            trailingIcon: Container(
-              padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-              decoration: BoxDecoration(
-                color: Ux4gPalette.red200,
-                borderRadius: BorderRadius.circular(6),
-              ),
-              child: Text('Attempt 1 of 5',
-                style: TextStyle(fontSize: 12,
-                  color: Ux4gPalette.red800,
-                  fontWeight: FontWeight.w500)),
+            leadingIcon: Icon(
+              Icons.error,
+              color: Theme.of(context).brightness == Brightness.dark
+                  ? Ux4gPalette.red500
+                  : Ux4gPalette.red600,
+              size: 20,
             ),
           ),
           SizedBox(height: 20),
@@ -3158,8 +3222,7 @@ class _SignInWithMobileCardMockupState
 
   // Same soft-purple background tint used by the username/password
   // card variant so both feel like the same family.
-  Color _getCardBg(BuildContext context) =>
-      _isDark(context) ? Ux4gPalette.red900 : Ux4gPalette.red50;
+  Color _getCardBg(BuildContext context) => _getBg(context);
 
   @override
   Widget build(BuildContext context) {
@@ -3196,22 +3259,22 @@ class _SignInWithMobileCardMockupState
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Text(
+                            Text(
                               'Sign in to your account',
                               style: TextStyle(
                                 fontSize: 22,
                                 fontWeight: FontWeight.w800,
-                                color: _titleColor,
+                                color: _getTitleColor(context),
                                 height: 1.2,
                                 letterSpacing: -0.3,
                               ),
                             ),
                             const SizedBox(height: 6),
-                            const Text(
+                            Text(
                               'Access your government services securely',
                               style: TextStyle(
                                 fontSize: 13,
-                                color: _subtleText,
+                                color: _getSubtleText(context),
                                 height: 1.3,
                               ),
                             ),
@@ -3243,49 +3306,71 @@ class _SignInWithMobileCardMockupState
                             Ux4gStatusBanner(
                               variant: Ux4gBannerVariant.errorLight,
                               title: 'Your status message goes here',
-                              subtitle: 'Take action',
+                              subtitleWidget: Row(
+                                children: [
+                                  Text(
+                                    'Take action',
+                                    style: TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w700,
+                                      color: _isDark(context)
+                                          ? Ux4gPalette.red300
+                                          : Ux4gPalette.red800,
+                                      height: 1.3,
+                                    ),
+                                  ),
+                                  const Spacer(),
+                                  Container(
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 10,
+                                      vertical: 5,
+                                    ),
+                                    decoration: BoxDecoration(
+                                      color: _isDark(context)
+                                          ? Ux4gPalette.red800
+                                          : Ux4gPalette.red100,
+                                      borderRadius: BorderRadius.circular(6),
+                                    ),
+                                    child: Text(
+                                      'Attempt 1 of 5',
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                        color: _isDark(context)
+                                            ? Ux4gPalette.red300
+                                            : Ux4gPalette.red800,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
                               margin: EdgeInsets.zero,
+                              backgroundColor: _isDark(context)
+                                  ? Ux4gPalette.red900
+                                  : Ux4gPalette.red50,
+                              borderColor: _isDark(context)
+                                  ? Ux4gPalette.red600
+                                  : Ux4gPalette.red300,
                               padding: const EdgeInsets.fromLTRB(
                                 12,
                                 12,
                                 10,
                                 12,
                               ),
-                              titleStyle: const TextStyle(
+                              titleStyle: TextStyle(
                                 fontSize: 14,
                                 fontWeight: FontWeight.w400,
-                                color: Ux4gPalette.red800,
+                                color: _isDark(context)
+                                    ? Ux4gPalette.red300
+                                    : Ux4gPalette.red800,
                                 height: 1.3,
                               ),
-                              subtitleStyle: const TextStyle(
-                                fontSize: 14,
-                                fontWeight: FontWeight.w700,
-                                color: Ux4gPalette.red800,
-                                height: 1.3,
-                              ),
-                              leadingIcon: const Icon(
-                                Icons.error_outline,
-                                color: Ux4gPalette.red600,
+                              leadingIcon: Icon(
+                                Icons.error,
+                                color: _isDark(context)
+                                    ? Ux4gPalette.red500
+                                    : Ux4gPalette.red600,
                                 size: 20,
-                              ),
-                              trailingIcon: Container(
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 10,
-                                  vertical: 5,
-                                ),
-                                decoration: BoxDecoration(
-                                  color: Ux4gPalette.red200,
-                                  borderRadius: BorderRadius.circular(6),
-                                ),
-                                child: const Text(
-                                  'Attempt 1 of 5',
-                                  style: TextStyle(
-                                    fontSize: 12,
-                                    color: Ux4gPalette.red800,
-                                    fontWeight: FontWeight.w500,
-                                    height: 1.2,
-                                  ),
-                                ),
                               ),
                             ),
                             const SizedBox(height: 16),
@@ -3392,10 +3477,10 @@ Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text('Sign in to your account',
-                        style: TextStyle(fontSize: 22, fontWeight: FontWeight.w800)),
+                        style: TextStyle(fontSize: 22, fontWeight: FontWeight.w800, color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.neutral50 : Ux4gPalette.gray900)),
                       SizedBox(height: 6),
                       Text('Access your government services securely',
-                        style: TextStyle(fontSize: 13, color: Color(0xFF6B7280))),
+                        style: TextStyle(fontSize: 13, color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.neutral400 : Color(0xFF6B7280))),
                       SizedBox(height: 20),
 
                       // Mobile input with +91 prefix.
@@ -3413,21 +3498,66 @@ Column(
                       Ux4gStatusBanner(
                         variant: Ux4gBannerVariant.errorLight,
                         title: 'Your status message goes here',
-                        subtitle: 'Take action',
+                        subtitleWidget: Row(
+                          children: [
+                            Text(
+                              'Take action',
+                              style: TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w700,
+                                color: Theme.of(context).brightness == Brightness.dark
+                                    ? Ux4gPalette.red300
+                                    : Ux4gPalette.red800,
+                                height: 1.3,
+                              ),
+                            ),
+                            Spacer(),
+                            Container(
+                              padding: EdgeInsets.symmetric(
+                                horizontal: 10,
+                                vertical: 5,
+                              ),
+                              decoration: BoxDecoration(
+                                color: Theme.of(context).brightness == Brightness.dark
+                                    ? Ux4gPalette.red800
+                                    : Ux4gPalette.red100,
+                                borderRadius: BorderRadius.circular(6),
+                              ),
+                              child: Text(
+                                'Attempt 1 of 5',
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  color: Theme.of(context).brightness == Brightness.dark
+                                      ? Ux4gPalette.red300
+                                      : Ux4gPalette.red800,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
                         margin: EdgeInsets.zero,
+                        backgroundColor: Theme.of(context).brightness == Brightness.dark
+                            ? Ux4gPalette.red900
+                            : Ux4gPalette.red50,
+                        borderColor: Theme.of(context).brightness == Brightness.dark
+                            ? Ux4gPalette.red600
+                            : Ux4gPalette.red300,
                         padding: EdgeInsets.fromLTRB(12, 12, 10, 12),
-                        leadingIcon: Icon(Icons.error_outline,
-                          color: Ux4gPalette.red600, size: 20),
-                        trailingIcon: Container(
-                          padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                          decoration: BoxDecoration(
-                            color: Ux4gPalette.red200,
-                            borderRadius: BorderRadius.circular(6),
-                          ),
-                          child: Text('Attempt 1 of 5',
-                            style: TextStyle(fontSize: 12,
-                              color: Ux4gPalette.red800,
-                              fontWeight: FontWeight.w500)),
+                        titleStyle: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w400,
+                          color: Theme.of(context).brightness == Brightness.dark
+                              ? Ux4gPalette.red300
+                              : Ux4gPalette.red800,
+                          height: 1.3,
+                        ),
+                        leadingIcon: Icon(
+                          Icons.error,
+                          color: Theme.of(context).brightness == Brightness.dark
+                              ? Ux4gPalette.red500
+                              : Ux4gPalette.red600,
+                          size: 20,
                         ),
                       ),
                       SizedBox(height: 16),
