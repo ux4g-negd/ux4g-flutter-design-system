@@ -312,7 +312,7 @@ final authIncorrectOtpComponent = WidgetbookComponent(
           name: 'OTP error — incorrect entry',
           description:
               'OTP verification screen showing the error state — '
-              '6 boxes filled with the user\'s wrong code rendered '
+              "6 boxes filled with the user's wrong code rendered "
               'with red borders via [Ux4gOtpInputStatus.error], plus '
               'an inline "Incorrect OTP" caption with a live resend '
               'countdown via [Ux4gOtpCaptionVariant.attemptWithTimer]. '
@@ -596,7 +596,7 @@ final aadhaarVerifyMethodComponent = WidgetbookComponent(
               'Method-picker shown after the user enters their Aadhaar '
               'number. Three selectable option cards (Aadhaar OTP, Face '
               'Authentication, mAadhaar TOTP) built with the design '
-              'system\'s [Ux4gCard] (selection state) and [Ux4gRadioButton]. '
+              "system's [Ux4gCard] (selection state) and [Ux4gRadioButton]. "
               'A Cancel + Continue footer pinned above the standard '
               'brand footer. Use the [Variant] knob on the right to '
               'toggle between the flat layout and the card-style layout. '
@@ -1326,9 +1326,11 @@ class _BrandFooter extends StatelessWidget {
         children: [
           Text(
             'Powered by -',
-            style: (Theme.of(context).extension<Ux4gTypography>() ?? defaultUx4gTypography)
-                .lS_default
-                .copyWith(color: _getMutedText(context)),
+            style:
+                (Theme.of(context).extension<Ux4gTypography>() ??
+                        defaultUx4gTypography)
+                    .lS_default
+                    .copyWith(color: _getMutedText(context)),
           ),
           const SizedBox(height: 6),
           Image.asset(
@@ -1407,19 +1409,23 @@ class _SignInMobileMockupState extends State<_SignInMobileMockup> {
                 children: [
                   Text(
                     'Sign in to your account',
-                    style: (Theme.of(context).extension<Ux4gTypography>() ?? defaultUx4gTypography)
-                        .hM_strong
-                        .copyWith(
-                          color: _getTitleColor(context),
-                          letterSpacing: -0.3,
-                        ),
+                    style:
+                        (Theme.of(context).extension<Ux4gTypography>() ??
+                                defaultUx4gTypography)
+                            .hM_strong
+                            .copyWith(
+                              color: _getTitleColor(context),
+                              letterSpacing: -0.3,
+                            ),
                   ),
                   const SizedBox(height: 6),
                   Text(
                     'Access your government services securely',
-                    style: (Theme.of(context).extension<Ux4gTypography>() ?? defaultUx4gTypography)
-                        .bM_default
-                        .copyWith(color: _getSubtleText(context)),
+                    style:
+                        (Theme.of(context).extension<Ux4gTypography>() ??
+                                defaultUx4gTypography)
+                            .bM_default
+                            .copyWith(color: _getSubtleText(context)),
                   ),
                   const SizedBox(height: 24),
 
@@ -1495,12 +1501,7 @@ class _SignInMobileMockupState extends State<_SignInMobileMockup> {
                     borderColor: _isDark(context)
                         ? Ux4gPalette.red600
                         : Ux4gPalette.red300,
-                    padding: const EdgeInsets.fromLTRB(
-                      12,
-                      12,
-                      10,
-                      12,
-                    ),
+                    padding: const EdgeInsets.fromLTRB(12, 12, 10, 12),
                     titleStyle: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w400,
@@ -1532,12 +1533,14 @@ class _SignInMobileMockupState extends State<_SignInMobileMockup> {
                     color: _getBorder(context),
                     label: Text(
                       'OR',
-                      style: (Theme.of(context).extension<Ux4gTypography>() ?? defaultUx4gTypography)
-                          .lM_default
-                          .copyWith(
-                            color: _getMutedText(context),
-                            letterSpacing: 0.5,
-                          ),
+                      style:
+                          (Theme.of(context).extension<Ux4gTypography>() ??
+                                  defaultUx4gTypography)
+                              .lM_default
+                              .copyWith(
+                                color: _getMutedText(context),
+                                letterSpacing: 0.5,
+                              ),
                     ),
                     labelSpacing: 16,
                   ),
@@ -1657,7 +1660,10 @@ class _EnterOtpMobileMockupState extends State<_EnterOtpMobileMockup> {
                   Center(
                     child: Text(
                       'OTP is valid for 10 minutes',
-                      style: TextStyle(fontSize: 13, color: _getSubtleText(context)),
+                      style: TextStyle(
+                        fontSize: 13,
+                        color: _getSubtleText(context),
+                      ),
                     ),
                   ),
                 ],
@@ -1810,11 +1816,18 @@ class _SignInAadhaarMobileMockupState
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Icon(Icons.lock_outline, size: 14, color: _getMutedText(context)),
+                        Icon(
+                          Icons.lock_outline,
+                          size: 14,
+                          color: _getMutedText(context),
+                        ),
                         const SizedBox(width: 6),
                         Text(
                           'Your Aadhaar details are encrypted and secure',
-                          style: TextStyle(fontSize: 12, color: _getSubtleText(context)),
+                          style: TextStyle(
+                            fontSize: 12,
+                            color: _getSubtleText(context),
+                          ),
                         ),
                       ],
                     ),
@@ -2534,12 +2547,7 @@ class _SignInWithMobileMockupState extends State<_SignInWithMobileMockup> {
                     borderColor: _isDark(context)
                         ? Ux4gPalette.red600
                         : Ux4gPalette.red300,
-                    padding: const EdgeInsets.fromLTRB(
-                      12,
-                      12,
-                      10,
-                      12,
-                    ),
+                    padding: const EdgeInsets.fromLTRB(12, 12, 10, 12),
                     titleStyle: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w400,
@@ -4033,11 +4041,18 @@ class _SignInAadhaarCardMockupState extends State<_SignInAadhaarCardMockup> {
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Icon(Icons.lock_outline, size: 14, color: _getMutedText(context)),
+                        Icon(
+                          Icons.lock_outline,
+                          size: 14,
+                          color: _getMutedText(context),
+                        ),
                         const SizedBox(width: 6),
                         Text(
                           'Your Aadhaar details are encrypted and secure',
-                          style: TextStyle(fontSize: 12, color: _getSubtleText(context)),
+                          style: TextStyle(
+                            fontSize: 12,
+                            color: _getSubtleText(context),
+                          ),
                         ),
                       ],
                     ),
@@ -4697,7 +4712,9 @@ class _VerifyMobileOtpCardMockupState
                     child: Container(
                       padding: const EdgeInsets.fromLTRB(20, 24, 20, 24),
                       decoration: BoxDecoration(
-                        color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.gray900 : Colors.white,
+                        color: Theme.of(context).brightness == Brightness.dark
+                            ? Ux4gPalette.gray900
+                            : Colors.white,
                         borderRadius: BorderRadius.circular(16),
                         boxShadow: [
                           BoxShadow(
@@ -5124,7 +5141,9 @@ class _VerifyMobileVoiceCardMockupState
                     child: Container(
                       padding: const EdgeInsets.fromLTRB(20, 16, 20, 24),
                       decoration: BoxDecoration(
-                        color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.gray900 : Colors.white,
+                        color: Theme.of(context).brightness == Brightness.dark
+                            ? Ux4gPalette.gray900
+                            : Colors.white,
                         borderRadius: BorderRadius.circular(16),
                         boxShadow: [
                           BoxShadow(
@@ -5393,20 +5412,29 @@ class _VerifyMobileAttemptWarningMockupState
                   // the trailing side.
                   Ux4gStatusBanner(
                     variant: Ux4gBannerVariant.warningLight,
-                    backgroundColor: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.orange900 : Ux4gPalette.orange50,
-                    borderColor: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.orange600 : Ux4gPalette.orange300,
+                    backgroundColor:
+                        Theme.of(context).brightness == Brightness.dark
+                        ? Ux4gPalette.orange900
+                        : Ux4gPalette.orange50,
+                    borderColor: Theme.of(context).brightness == Brightness.dark
+                        ? Ux4gPalette.orange600
+                        : Ux4gPalette.orange300,
                     title: 'Incorrect OTP',
                     margin: EdgeInsets.zero,
                     padding: const EdgeInsets.fromLTRB(12, 12, 10, 12),
                     titleStyle: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w400,
-                      color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.orange300 : Ux4gPalette.orange800,
+                      color: Theme.of(context).brightness == Brightness.dark
+                          ? Ux4gPalette.orange300
+                          : Ux4gPalette.orange800,
                       height: 1.3,
                     ),
                     leadingIcon: Icon(
                       Icons.error_outline,
-                      color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.orange500 : Ux4gPalette.orange600,
+                      color: Theme.of(context).brightness == Brightness.dark
+                          ? Ux4gPalette.orange500
+                          : Ux4gPalette.orange600,
                       size: 20,
                     ),
                     subtitleWidget: Row(
@@ -5418,7 +5446,11 @@ class _VerifyMobileAttemptWarningMockupState
                             style: TextStyle(
                               fontSize: 14,
                               fontWeight: FontWeight.w700,
-                              color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.orange300 : Ux4gPalette.orange800,
+                              color:
+                                  Theme.of(context).brightness ==
+                                      Brightness.dark
+                                  ? Ux4gPalette.orange300
+                                  : Ux4gPalette.orange800,
                               height: 1.3,
                             ),
                           ),
@@ -5430,14 +5462,21 @@ class _VerifyMobileAttemptWarningMockupState
                             vertical: 5,
                           ),
                           decoration: BoxDecoration(
-                            color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.orange800 : Ux4gPalette.orange100,
+                            color:
+                                Theme.of(context).brightness == Brightness.dark
+                                ? Ux4gPalette.orange800
+                                : Ux4gPalette.orange100,
                             borderRadius: BorderRadius.circular(6),
                           ),
                           child: Text(
                             'Attempt 1 of 3',
                             style: TextStyle(
                               fontSize: 12,
-                              color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.orange300 : Ux4gPalette.orange800,
+                              color:
+                                  Theme.of(context).brightness ==
+                                      Brightness.dark
+                                  ? Ux4gPalette.orange300
+                                  : Ux4gPalette.orange800,
                               fontWeight: FontWeight.w500,
                               height: 1.2,
                             ),
@@ -5630,7 +5669,9 @@ class _VerifyMobileAttemptWarningCardMockupState
                     child: Container(
                       padding: const EdgeInsets.fromLTRB(20, 16, 20, 24),
                       decoration: BoxDecoration(
-                        color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.gray900 : Colors.white,
+                        color: Theme.of(context).brightness == Brightness.dark
+                            ? Ux4gPalette.gray900
+                            : Colors.white,
                         borderRadius: BorderRadius.circular(16),
                         boxShadow: [
                           BoxShadow(
@@ -5679,46 +5720,83 @@ class _VerifyMobileAttemptWarningCardMockupState
 
                           Ux4gStatusBanner(
                             variant: Ux4gBannerVariant.warningLight,
+                            backgroundColor:
+                                Theme.of(context).brightness == Brightness.dark
+                                ? Ux4gPalette.orange900
+                                : Ux4gPalette.orange50,
+                            borderColor:
+                                Theme.of(context).brightness == Brightness.dark
+                                ? Ux4gPalette.orange600
+                                : Ux4gPalette.orange300,
                             title: 'Incorrect OTP',
-                            subtitle:
-                                '1 more incorrect entry\nbefore 30-min lockout',
                             margin: EdgeInsets.zero,
                             padding: const EdgeInsets.fromLTRB(12, 12, 10, 12),
-                            titleStyle: const TextStyle(
+                            titleStyle: TextStyle(
                               fontSize: 14,
                               fontWeight: FontWeight.w400,
-                              color: Ux4gPalette.secondary800,
+                              color:
+                                  Theme.of(context).brightness ==
+                                      Brightness.dark
+                                  ? Ux4gPalette.orange300
+                                  : Ux4gPalette.orange800,
                               height: 1.3,
                             ),
-                            subtitleStyle: const TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w700,
-                              color: Ux4gPalette.secondary800,
-                              height: 1.3,
-                            ),
-                            leadingIcon: const Icon(
+                            leadingIcon: Icon(
                               Icons.error_outline,
-                              color: Ux4gPalette.secondary600,
+                              color:
+                                  Theme.of(context).brightness ==
+                                      Brightness.dark
+                                  ? Ux4gPalette.orange500
+                                  : Ux4gPalette.orange600,
                               size: 20,
                             ),
-                            trailingIcon: Container(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 10,
-                                vertical: 5,
-                              ),
-                              decoration: BoxDecoration(
-                                color: Ux4gPalette.secondary100,
-                                borderRadius: BorderRadius.circular(6),
-                              ),
-                              child: const Text(
-                                'Attempt 1 of 3',
-                                style: TextStyle(
-                                  fontSize: 12,
-                                  color: Ux4gPalette.secondary800,
-                                  fontWeight: FontWeight.w500,
-                                  height: 1.2,
+                            subtitleWidget: Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Expanded(
+                                  child: Text(
+                                    '1 more incorrect entry\nbefore 30-min lockout',
+                                    style: TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w700,
+                                      color:
+                                          Theme.of(context).brightness ==
+                                              Brightness.dark
+                                          ? Ux4gPalette.orange300
+                                          : Ux4gPalette.orange800,
+                                      height: 1.3,
+                                    ),
+                                  ),
                                 ),
-                              ),
+                                const SizedBox(width: 8),
+                                Container(
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 10,
+                                    vertical: 5,
+                                  ),
+                                  decoration: BoxDecoration(
+                                    color:
+                                        Theme.of(context).brightness ==
+                                            Brightness.dark
+                                        ? Ux4gPalette.orange800
+                                        : Ux4gPalette.orange100,
+                                    borderRadius: BorderRadius.circular(6),
+                                  ),
+                                  child: Text(
+                                    'Attempt 1 of 3',
+                                    style: TextStyle(
+                                      fontSize: 12,
+                                      color:
+                                          Theme.of(context).brightness ==
+                                              Brightness.dark
+                                          ? Ux4gPalette.orange300
+                                          : Ux4gPalette.orange800,
+                                      fontWeight: FontWeight.w500,
+                                      height: 1.2,
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                           const SizedBox(height: 20),
@@ -5966,46 +6044,77 @@ class _VerifyMobileLastAttemptMockupState
                   // this is the final attempt before lockout.
                   Ux4gStatusBanner(
                     variant: Ux4gBannerVariant.errorLight,
+                    backgroundColor:
+                        Theme.of(context).brightness == Brightness.dark
+                        ? Ux4gPalette.red900
+                        : Ux4gPalette.red50,
+                    borderColor: Theme.of(context).brightness == Brightness.dark
+                        ? Ux4gPalette.red600
+                        : Ux4gPalette.red300,
                     title: 'Incorrect OTP',
-                    subtitle:
-                        'This is your last attempt\nbefore a 30-min lockout',
                     margin: EdgeInsets.zero,
                     padding: const EdgeInsets.fromLTRB(12, 12, 10, 12),
                     titleStyle: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w400,
-                      color: Ux4gPalette.red800,
-                      height: 1.3,
-                    ),
-                    subtitleStyle: TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w700,
-                      color: Ux4gPalette.red800,
+                      color: Theme.of(context).brightness == Brightness.dark
+                          ? Ux4gPalette.red300
+                          : Ux4gPalette.red800,
                       height: 1.3,
                     ),
                     leadingIcon: Icon(
                       Icons.error_outline,
-                      color: Ux4gPalette.red600,
+                      color: Theme.of(context).brightness == Brightness.dark
+                          ? Ux4gPalette.red500
+                          : Ux4gPalette.red600,
                       size: 20,
                     ),
-                    trailingIcon: Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 10,
-                        vertical: 5,
-                      ),
-                      decoration: BoxDecoration(
-                        color: Ux4gPalette.red200,
-                        borderRadius: BorderRadius.circular(6),
-                      ),
-                      child: Text(
-                        'Attempt 2 of 3',
-                        style: TextStyle(
-                          fontSize: 12,
-                          color: Ux4gPalette.red800,
-                          fontWeight: FontWeight.w500,
-                          height: 1.2,
+                    subtitleWidget: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Expanded(
+                          child: Text(
+                            'This is your last attempt\nbefore a 30-min lockout',
+                            style: TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w700,
+                              color:
+                                  Theme.of(context).brightness ==
+                                      Brightness.dark
+                                  ? Ux4gPalette.red300
+                                  : Ux4gPalette.red800,
+                              height: 1.3,
+                            ),
+                          ),
                         ),
-                      ),
+                        const SizedBox(width: 8),
+                        Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 10,
+                            vertical: 5,
+                          ),
+                          decoration: BoxDecoration(
+                            color:
+                                Theme.of(context).brightness == Brightness.dark
+                                ? Ux4gPalette.red800
+                                : Ux4gPalette.red100,
+                            borderRadius: BorderRadius.circular(6),
+                          ),
+                          child: Text(
+                            'Attempt 2 of 3',
+                            style: TextStyle(
+                              fontSize: 12,
+                              color:
+                                  Theme.of(context).brightness ==
+                                      Brightness.dark
+                                  ? Ux4gPalette.red300
+                                  : Ux4gPalette.red800,
+                              fontWeight: FontWeight.w500,
+                              height: 1.2,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                   SizedBox(height: 20),
@@ -6076,30 +6185,57 @@ Column(
           // Error-styled banner � final attempt before lockout.
           Ux4gStatusBanner(
             variant: Ux4gBannerVariant.errorLight,
+            backgroundColor: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.red900 : Ux4gPalette.red50,
+            borderColor: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.red600 : Ux4gPalette.red300,
             title: 'Incorrect OTP',
-            subtitle: 'This is your last attempt\nbefore a 30-min lockout',
             margin: EdgeInsets.zero,
-            padding: EdgeInsets.fromLTRB(12, 12, 10, 12),
+            padding: const EdgeInsets.fromLTRB(12, 12, 10, 12),
             titleStyle: TextStyle(
-              fontSize: 14, fontWeight: FontWeight.w400,
-              color: Ux4gPalette.red800,
+              fontSize: 14,
+              fontWeight: FontWeight.w400,
+              color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.red300 : Ux4gPalette.red800,
+              height: 1.3,
             ),
-            subtitleStyle: TextStyle(
-              fontSize: 14, fontWeight: FontWeight.w700,
-              color: Ux4gPalette.red800,
+            leadingIcon: Icon(
+              Icons.error_outline,
+              color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.red500 : Ux4gPalette.red600,
+              size: 20,
             ),
-            leadingIcon: Icon(Icons.error_outline,
-              color: Ux4gPalette.red600, size: 20),
-            trailingIcon: Container(
-              padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-              decoration: BoxDecoration(
-                color: Ux4gPalette.red200,
-                borderRadius: BorderRadius.circular(6),
-              ),
-              child: Text('Attempt 2 of 3',
-                style: TextStyle(fontSize: 12,
-                  color: Ux4gPalette.red800,
-                  fontWeight: FontWeight.w500)),
+            subtitleWidget: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Expanded(
+                  child: Text(
+                    'This is your last attempt\nbefore a 30-min lockout',
+                    style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w700,
+                      color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.red300 : Ux4gPalette.red800,
+                      height: 1.3,
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 8),
+                Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 10,
+                    vertical: 5,
+                  ),
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.red800 : Ux4gPalette.red100,
+                    borderRadius: BorderRadius.circular(6),
+                  ),
+                  child: Text(
+                    'Attempt 2 of 3',
+                    style: TextStyle(
+                      fontSize: 12,
+                      color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.red300 : Ux4gPalette.red800,
+                      fontWeight: FontWeight.w500,
+                      height: 1.2,
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
           SizedBox(height: 20),
@@ -6163,7 +6299,9 @@ class _VerifyMobileLastAttemptCardMockupState
                     child: Container(
                       padding: const EdgeInsets.fromLTRB(20, 16, 20, 24),
                       decoration: BoxDecoration(
-                        color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.gray900 : Colors.white,
+                        color: Theme.of(context).brightness == Brightness.dark
+                            ? Ux4gPalette.gray900
+                            : Colors.white,
                         borderRadius: BorderRadius.circular(16),
                         boxShadow: [
                           BoxShadow(
@@ -6212,46 +6350,83 @@ class _VerifyMobileLastAttemptCardMockupState
 
                           Ux4gStatusBanner(
                             variant: Ux4gBannerVariant.errorLight,
+                            backgroundColor:
+                                Theme.of(context).brightness == Brightness.dark
+                                ? Ux4gPalette.red900
+                                : Ux4gPalette.red50,
+                            borderColor:
+                                Theme.of(context).brightness == Brightness.dark
+                                ? Ux4gPalette.red600
+                                : Ux4gPalette.red300,
                             title: 'Incorrect OTP',
-                            subtitle:
-                                'This is your last attempt\nbefore a 30-min lockout',
                             margin: EdgeInsets.zero,
                             padding: const EdgeInsets.fromLTRB(12, 12, 10, 12),
                             titleStyle: TextStyle(
                               fontSize: 14,
                               fontWeight: FontWeight.w400,
-                              color: Ux4gPalette.red800,
-                              height: 1.3,
-                            ),
-                            subtitleStyle: TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w700,
-                              color: Ux4gPalette.red800,
+                              color:
+                                  Theme.of(context).brightness ==
+                                      Brightness.dark
+                                  ? Ux4gPalette.red300
+                                  : Ux4gPalette.red800,
                               height: 1.3,
                             ),
                             leadingIcon: Icon(
                               Icons.error_outline,
-                              color: Ux4gPalette.red600,
+                              color:
+                                  Theme.of(context).brightness ==
+                                      Brightness.dark
+                                  ? Ux4gPalette.red500
+                                  : Ux4gPalette.red600,
                               size: 20,
                             ),
-                            trailingIcon: Container(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 10,
-                                vertical: 5,
-                              ),
-                              decoration: BoxDecoration(
-                                color: Ux4gPalette.red200,
-                                borderRadius: BorderRadius.circular(6),
-                              ),
-                              child: Text(
-                                'Attempt 2 of 3',
-                                style: TextStyle(
-                                  fontSize: 12,
-                                  color: Ux4gPalette.red800,
-                                  fontWeight: FontWeight.w500,
-                                  height: 1.2,
+                            subtitleWidget: Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Expanded(
+                                  child: Text(
+                                    'This is your last attempt\nbefore a 30-min lockout',
+                                    style: TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w700,
+                                      color:
+                                          Theme.of(context).brightness ==
+                                              Brightness.dark
+                                          ? Ux4gPalette.red300
+                                          : Ux4gPalette.red800,
+                                      height: 1.3,
+                                    ),
+                                  ),
                                 ),
-                              ),
+                                const SizedBox(width: 8),
+                                Container(
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 10,
+                                    vertical: 5,
+                                  ),
+                                  decoration: BoxDecoration(
+                                    color:
+                                        Theme.of(context).brightness ==
+                                            Brightness.dark
+                                        ? Ux4gPalette.red800
+                                        : Ux4gPalette.red100,
+                                    borderRadius: BorderRadius.circular(6),
+                                  ),
+                                  child: Text(
+                                    'Attempt 2 of 3',
+                                    style: TextStyle(
+                                      fontSize: 12,
+                                      color:
+                                          Theme.of(context).brightness ==
+                                              Brightness.dark
+                                          ? Ux4gPalette.red300
+                                          : Ux4gPalette.red800,
+                                      fontWeight: FontWeight.w500,
+                                      height: 1.2,
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                           SizedBox(height: 20),
@@ -6346,30 +6521,57 @@ Column(
 
                     Ux4gStatusBanner(
                       variant: Ux4gBannerVariant.errorLight,
+                      backgroundColor: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.red900 : Ux4gPalette.red50,
+                      borderColor: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.red600 : Ux4gPalette.red300,
                       title: 'Incorrect OTP',
-                      subtitle: 'This is your last attempt\nbefore a 30-min lockout',
                       margin: EdgeInsets.zero,
-                      padding: EdgeInsets.fromLTRB(12, 12, 10, 12),
+                      padding: const EdgeInsets.fromLTRB(12, 12, 10, 12),
                       titleStyle: TextStyle(
-                        fontSize: 14, fontWeight: FontWeight.w400,
-                        color: Ux4gPalette.red800,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w400,
+                        color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.red300 : Ux4gPalette.red800,
+                        height: 1.3,
                       ),
-                      subtitleStyle: TextStyle(
-                        fontSize: 14, fontWeight: FontWeight.w700,
-                        color: Ux4gPalette.red800,
+                      leadingIcon: Icon(
+                        Icons.error_outline,
+                        color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.red500 : Ux4gPalette.red600,
+                        size: 20,
                       ),
-                      leadingIcon: Icon(Icons.error_outline,
-                        color: Ux4gPalette.red600, size: 20),
-                      trailingIcon: Container(
-                        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                        decoration: BoxDecoration(
-                          color: Ux4gPalette.red200,
-                          borderRadius: BorderRadius.circular(6),
-                        ),
-                        child: Text('Attempt 2 of 3',
-                          style: TextStyle(fontSize: 12,
-                            color: Ux4gPalette.red800,
-                            fontWeight: FontWeight.w500)),
+                      subtitleWidget: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Expanded(
+                            child: Text(
+                              'This is your last attempt\nbefore a 30-min lockout',
+                              style: TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w700,
+                                color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.red300 : Ux4gPalette.red800,
+                                height: 1.3,
+                              ),
+                            ),
+                          ),
+                          const SizedBox(width: 8),
+                          Container(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 10,
+                              vertical: 5,
+                            ),
+                            decoration: BoxDecoration(
+                              color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.red800 : Ux4gPalette.red100,
+                              borderRadius: BorderRadius.circular(6),
+                            ),
+                            child: Text(
+                              'Attempt 2 of 3',
+                              style: TextStyle(
+                                fontSize: 12,
+                                color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.red300 : Ux4gPalette.red800,
+                                fontWeight: FontWeight.w500,
+                                height: 1.2,
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                     SizedBox(height: 20),
@@ -6420,12 +6622,15 @@ class _VerifyAccountLockedMockup extends StatefulWidget {
 
 class _VerifyAccountLockedMockupState
     extends State<_VerifyAccountLockedMockup> {
-  // Lock-state palette.
-  static const _lockBadgeBg = Ux4gPalette.red100;
-  static const _lockIconColor = Ux4gPalette.red600;
-
   @override
   Widget build(BuildContext context) {
+    final _lockBadgeBg = Theme.of(context).brightness == Brightness.dark
+        ? Ux4gPalette.red800
+        : Ux4gPalette.red100;
+    final _lockIconColor = Theme.of(context).brightness == Brightness.dark
+        ? Ux4gPalette.red500
+        : Ux4gPalette.red600;
+
     return _PhoneFrame(
       child: Column(
         children: [
@@ -6444,16 +6649,12 @@ class _VerifyAccountLockedMockupState
                     child: Container(
                       width: 64,
                       height: 64,
-                      decoration: const BoxDecoration(
+                      decoration: BoxDecoration(
                         color: _lockBadgeBg,
                         shape: BoxShape.circle,
                       ),
                       alignment: Alignment.center,
-                      child: Icon(
-                        Icons.lock,
-                        color: _lockIconColor,
-                        size: 28,
-                      ),
+                      child: Icon(Icons.lock, color: _lockIconColor, size: 28),
                     ),
                   ),
                   SizedBox(height: 16),
@@ -6494,6 +6695,13 @@ class _VerifyAccountLockedMockupState
                   // -- Error banner --
                   Ux4gStatusBanner(
                     variant: Ux4gBannerVariant.errorLight,
+                    backgroundColor:
+                        Theme.of(context).brightness == Brightness.dark
+                        ? Ux4gPalette.red900
+                        : Ux4gPalette.red50,
+                    borderColor: Theme.of(context).brightness == Brightness.dark
+                        ? Ux4gPalette.red600
+                        : Ux4gPalette.red300,
                     title:
                         'Account locked. Please wait for the\n'
                         'countdown to complete',
@@ -6502,12 +6710,16 @@ class _VerifyAccountLockedMockupState
                     titleStyle: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w400,
-                      color: Ux4gPalette.red800,
+                      color: Theme.of(context).brightness == Brightness.dark
+                          ? Ux4gPalette.red300
+                          : Ux4gPalette.red800,
                       height: 1.35,
                     ),
                     leadingIcon: Icon(
                       Icons.error_outline,
-                      color: Ux4gPalette.red600,
+                      color: Theme.of(context).brightness == Brightness.dark
+                          ? Ux4gPalette.red500
+                          : Ux4gPalette.red600,
                       size: 20,
                     ),
                   ),
@@ -6582,11 +6794,11 @@ Column(
           Center(child: Container(
             width: 64, height: 64,
             decoration: BoxDecoration(
-              color: Ux4gPalette.red100,
+              color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.red800 : Ux4gPalette.red100,
               shape: BoxShape.circle,
             ),
             alignment: Alignment.center,
-            child: Icon(Icons.lock, color: Ux4gPalette.red600, size: 28),
+            child: Icon(Icons.lock, color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.red500 : Ux4gPalette.red600, size: 28),
           )),
           SizedBox(height: 16),
 
@@ -6612,15 +6824,17 @@ Column(
 
           Ux4gStatusBanner(
             variant: Ux4gBannerVariant.errorLight,
+            backgroundColor: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.red900 : Ux4gPalette.red50,
+            borderColor: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.red600 : Ux4gPalette.red300,
             title: 'Account locked. Please wait for the\\ncountdown to complete',
             margin: EdgeInsets.zero,
             padding: EdgeInsets.fromLTRB(12, 12, 12, 12),
             titleStyle: TextStyle(
               fontSize: 14, fontWeight: FontWeight.w400,
-              color: Ux4gPalette.red800,
+              color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.red300 : Ux4gPalette.red800,
             ),
             leadingIcon: Icon(Icons.error_outline,
-              color: Ux4gPalette.red600, size: 20),
+              color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.red500 : Ux4gPalette.red600, size: 20),
           ),
           SizedBox(height: 20),
 
@@ -6669,11 +6883,16 @@ class _VerifyAccountLockedCardMockup extends StatefulWidget {
 class _VerifyAccountLockedCardMockupState
     extends State<_VerifyAccountLockedCardMockup> {
   Color _getCardBg(BuildContext context) => _getBg(context);
-  static const _lockBadgeBg = Ux4gPalette.red100;
-  static const _lockIconColor = Ux4gPalette.red600;
 
   @override
   Widget build(BuildContext context) {
+    final _lockBadgeBg = Theme.of(context).brightness == Brightness.dark
+        ? Ux4gPalette.red800
+        : Ux4gPalette.red100;
+    final _lockIconColor = Theme.of(context).brightness == Brightness.dark
+        ? Ux4gPalette.red500
+        : Ux4gPalette.red600;
+
     return _PhoneFrame(
       child: Column(
         children: [
@@ -6689,7 +6908,9 @@ class _VerifyAccountLockedCardMockupState
                     child: Container(
                       padding: const EdgeInsets.fromLTRB(20, 16, 20, 24),
                       decoration: BoxDecoration(
-                        color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.gray900 : Colors.white,
+                        color: Theme.of(context).brightness == Brightness.dark
+                            ? Ux4gPalette.gray900
+                            : Colors.white,
                         borderRadius: BorderRadius.circular(16),
                         boxShadow: [
                           BoxShadow(
@@ -6709,7 +6930,7 @@ class _VerifyAccountLockedCardMockupState
                             child: Container(
                               width: 64,
                               height: 64,
-                              decoration: const BoxDecoration(
+                              decoration: BoxDecoration(
                                 color: _lockBadgeBg,
                                 shape: BoxShape.circle,
                               ),
@@ -6754,6 +6975,14 @@ class _VerifyAccountLockedCardMockupState
 
                           Ux4gStatusBanner(
                             variant: Ux4gBannerVariant.errorLight,
+                            backgroundColor:
+                                Theme.of(context).brightness == Brightness.dark
+                                ? Ux4gPalette.red900
+                                : Ux4gPalette.red50,
+                            borderColor:
+                                Theme.of(context).brightness == Brightness.dark
+                                ? Ux4gPalette.red600
+                                : Ux4gPalette.red300,
                             title:
                                 'Account locked. Please wait for the\ncountdown to complete',
                             margin: EdgeInsets.zero,
@@ -6761,12 +6990,20 @@ class _VerifyAccountLockedCardMockupState
                             titleStyle: TextStyle(
                               fontSize: 14,
                               fontWeight: FontWeight.w400,
-                              color: Ux4gPalette.red800,
+                              color:
+                                  Theme.of(context).brightness ==
+                                      Brightness.dark
+                                  ? Ux4gPalette.red300
+                                  : Ux4gPalette.red800,
                               height: 1.35,
                             ),
                             leadingIcon: Icon(
                               Icons.error_outline,
-                              color: Ux4gPalette.red600,
+                              color:
+                                  Theme.of(context).brightness ==
+                                      Brightness.dark
+                                  ? Ux4gPalette.red500
+                                  : Ux4gPalette.red600,
                               size: 20,
                             ),
                           ),
@@ -6888,11 +7125,7 @@ class _OtpVerifiedSuccessMockup extends StatelessWidget {
                         color: _successMid,
                         shape: BoxShape.circle,
                       ),
-                      child: Icon(
-                        Icons.check,
-                        color: Colors.white,
-                        size: 22,
-                      ),
+                      child: Icon(Icons.check, color: Colors.white, size: 22),
                     ),
                   ),
                   SizedBox(height: 20),
@@ -7047,7 +7280,9 @@ class _OtpVerifiedSuccessCardMockup extends StatelessWidget {
                     child: Container(
                       padding: const EdgeInsets.fromLTRB(20, 28, 20, 28),
                       decoration: BoxDecoration(
-                        color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.gray900 : Colors.white,
+                        color: Theme.of(context).brightness == Brightness.dark
+                            ? Ux4gPalette.gray900
+                            : Colors.white,
                         borderRadius: BorderRadius.circular(16),
                         boxShadow: [
                           BoxShadow(
@@ -7967,20 +8202,29 @@ class _AuthOtpAttemptWarningMockup extends StatelessWidget {
                   // the trailing side.
                   Ux4gStatusBanner(
                     variant: Ux4gBannerVariant.warningLight,
-                    backgroundColor: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.orange900 : Ux4gPalette.orange50,
-                    borderColor: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.orange600 : Ux4gPalette.orange300,
+                    backgroundColor:
+                        Theme.of(context).brightness == Brightness.dark
+                        ? Ux4gPalette.orange900
+                        : Ux4gPalette.orange50,
+                    borderColor: Theme.of(context).brightness == Brightness.dark
+                        ? Ux4gPalette.orange600
+                        : Ux4gPalette.orange300,
                     title: 'Incorrect OTP',
                     margin: EdgeInsets.zero,
                     padding: const EdgeInsets.fromLTRB(12, 12, 10, 12),
                     titleStyle: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w400,
-                      color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.orange300 : Ux4gPalette.orange800,
+                      color: Theme.of(context).brightness == Brightness.dark
+                          ? Ux4gPalette.orange300
+                          : Ux4gPalette.orange800,
                       height: 1.3,
                     ),
                     leadingIcon: Icon(
                       Icons.error_outline,
-                      color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.orange500 : Ux4gPalette.orange600,
+                      color: Theme.of(context).brightness == Brightness.dark
+                          ? Ux4gPalette.orange500
+                          : Ux4gPalette.orange600,
                       size: 20,
                     ),
                     subtitleWidget: Row(
@@ -7992,7 +8236,11 @@ class _AuthOtpAttemptWarningMockup extends StatelessWidget {
                             style: TextStyle(
                               fontSize: 14,
                               fontWeight: FontWeight.w700,
-                              color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.orange300 : Ux4gPalette.orange800,
+                              color:
+                                  Theme.of(context).brightness ==
+                                      Brightness.dark
+                                  ? Ux4gPalette.orange300
+                                  : Ux4gPalette.orange800,
                               height: 1.3,
                             ),
                           ),
@@ -8004,14 +8252,21 @@ class _AuthOtpAttemptWarningMockup extends StatelessWidget {
                             vertical: 5,
                           ),
                           decoration: BoxDecoration(
-                            color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.orange800 : Ux4gPalette.orange100,
+                            color:
+                                Theme.of(context).brightness == Brightness.dark
+                                ? Ux4gPalette.orange800
+                                : Ux4gPalette.orange100,
                             borderRadius: BorderRadius.circular(6),
                           ),
                           child: Text(
                             'Attempt 1 of 3',
                             style: TextStyle(
                               fontSize: 12,
-                              color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.orange300 : Ux4gPalette.orange800,
+                              color:
+                                  Theme.of(context).brightness ==
+                                      Brightness.dark
+                                  ? Ux4gPalette.orange300
+                                  : Ux4gPalette.orange800,
                               fontWeight: FontWeight.w500,
                               height: 1.2,
                             ),
@@ -10235,7 +10490,13 @@ class _BrandHeaderWithMenu extends StatelessWidget {
           title: '',
           leadingWidgets: [
             SvgPicture.asset(_nationalEmblemPath, height: 32),
-            SizedBox(height: 28, child: Ux4gDivider(orientation: Ux4gDividerOrientation.vertical, color: Ux4gPalette.neutral300)),
+            SizedBox(
+              height: 28,
+              child: Ux4gDivider(
+                orientation: Ux4gDividerOrientation.vertical,
+                color: Ux4gPalette.neutral300,
+              ),
+            ),
             SvgPicture.asset(_unionLogoPath, height: 32),
           ],
           horizontalPadding: 16,
@@ -26544,17 +26805,3 @@ final grievanceStatusTrackerComponent = WidgetbookComponent(
     ),
   ],
 );
-
-
-
-
-
-
-
-
-
-
-
-
-
-
