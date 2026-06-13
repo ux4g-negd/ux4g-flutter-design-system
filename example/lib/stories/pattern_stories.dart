@@ -12,15 +12,15 @@ const _unionLogoPath = 'assets/Union.svg';
 const _digitalIndiaLogoPath = 'assets/digital_india_logo.png';
 
 // -- Shared design tokens used across all SignIn patterns ---------------
-const _bg = Color(0xFFFAFAFA);
-const _border = Color(0xFFE5E7EB);
+const _bg = Ux4gPalette.neutral50;
+const _border = Ux4gPalette.neutral200;
 const _titleColor = Ux4gPalette.gray900;
-const _subtleText = Color(0xFF6B7280);
-const _mutedText = Color(0xFF9CA3AF);
+const _subtleText = Ux4gPalette.neutral500;
+const _mutedText = Ux4gPalette.neutral400;
 const _placeholderStyle = TextStyle(
   fontSize: 14,
   fontWeight: FontWeight.w400,
-  color: Color(0xFF9CA3AF),
+  color: Ux4gPalette.neutral400,
   height: 1.3,
 );
 bool _isDark(BuildContext context) =>
@@ -2003,10 +2003,10 @@ Container(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text('Sign in to your account',
-              style: (Theme.of(context).extension<Ux4gTypography>() ?? defaultUx4gTypography).hM_strong.copyWith(color: Ux4gPalette.gray900)),
+              style: (Theme.of(context).extension<Ux4gTypography>() ?? defaultUx4gTypography).hM_strong.copyWith(color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.neutral50 : Ux4gPalette.gray900)),
             SizedBox(height: 6),
             Text('Access your government services securely',
-              style: (Theme.of(context).extension<Ux4gTypography>() ?? defaultUx4gTypography).bM_default.copyWith(color: Ux4gPalette.neutral500)),
+              style: (Theme.of(context).extension<Ux4gTypography>() ?? defaultUx4gTypography).bM_default.copyWith(color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.neutral400 : Ux4gPalette.neutral500)),
             SizedBox(height: 24),
 
             Ux4gInputField(
@@ -2153,11 +2153,11 @@ Column(
       variant: Ux4gAppHeaderVariant.light,
       leadingWidgets: [
         SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
-        Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
+        SizedBox(height: 28, child: Ux4gDivider(orientation: Ux4gDividerOrientation.vertical, color: Ux4gPalette.neutral300)),
         SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.red500, BlendMode.srcIn)),
       ],
     ),
-    Divider(height: 1, color: Color(0xFFE5E7EB)),
+    Ux4gDivider(color: Ux4gPalette.neutral200),
 
     Padding(
       padding: EdgeInsets.fromLTRB(20, 12, 20, 0),
@@ -2177,7 +2177,7 @@ Column(
             style: TextStyle(fontSize: 26, fontWeight: FontWeight.w800, color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.neutral50 : Ux4gPalette.gray900)),
           SizedBox(height: 6),
           Text('Sent to +91 98765 XXXXX',
-            style: TextStyle(fontSize: 14, color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.neutral400 : Color(0xFF6B7280))),
+            style: TextStyle(fontSize: 14, color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.neutral400 : Ux4gPalette.neutral500)),
           SizedBox(height: 24),
 
           // 6 OTP boxes � built-in 60s countdown + tap-to-resend.
@@ -2219,7 +2219,7 @@ Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           Text('Powered by -',
-            style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+            style: TextStyle(fontSize: 11, color: Ux4gPalette.neutral400)),
           SizedBox(height: 6),
           Image.asset('assets/digital_india_logo.png', height: 22, color: Theme.of(context).brightness == Brightness.dark ? Colors.white : null),
         ],
@@ -2234,11 +2234,11 @@ Column(
       variant: Ux4gAppHeaderVariant.light,
       leadingWidgets: [
         SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
-        Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
+        SizedBox(height: 28, child: Ux4gDivider(orientation: Ux4gDividerOrientation.vertical, color: Ux4gPalette.neutral300)),
         SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.red500, BlendMode.srcIn)),
       ],
     ),
-    Divider(height: 1, color: Color(0xFFE5E7EB)),
+    Ux4gDivider(color: Ux4gPalette.neutral200),
 
     Padding(
       padding: EdgeInsets.fromLTRB(20, 12, 20, 0),
@@ -2258,7 +2258,7 @@ Column(
             style: TextStyle(fontSize: 24, fontWeight: FontWeight.w800, color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.neutral50 : Ux4gPalette.gray900)),
           SizedBox(height: 6),
           Text('Enter your 12-digit Aadhaar number',
-            style: TextStyle(fontSize: 14, color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.neutral400 : Color(0xFF6B7280))),
+            style: TextStyle(fontSize: 14, color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.neutral400 : Ux4gPalette.neutral500)),
           SizedBox(height: 24),
 
           // Live Verhoeff validation � only flag errors once all
@@ -2277,7 +2277,7 @@ Column(
               placeholderStyle: TextStyle(
                 fontSize: 14,
                 fontWeight: FontWeight.w400,
-                color: Color(0xFF9CA3AF),
+                color: Ux4gPalette.neutral400,
               ),
               status: !showResult
                   ? Ux4gInputFieldStatus.defaultStatus
@@ -2294,7 +2294,7 @@ Column(
           SizedBox(height: 20),
 
           Text('Choose Authentication Method',
-            style: TextStyle(fontSize: 14, color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.neutral400 : Color(0xFF6B7280))),
+            style: TextStyle(fontSize: 14, color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.neutral400 : Ux4gPalette.neutral500)),
           SizedBox(height: 10),
           Row(children: [
             Expanded(
@@ -2335,7 +2335,7 @@ Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           Text('Powered by -',
-            style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+            style: TextStyle(fontSize: 11, color: Ux4gPalette.neutral400)),
           SizedBox(height: 6),
           Image.asset('assets/digital_india_logo.png', height: 22, color: Theme.of(context).brightness == Brightness.dark ? Colors.white : null),
         ],
@@ -2350,11 +2350,11 @@ Column(
       variant: Ux4gAppHeaderVariant.light,
       leadingWidgets: [
         SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
-        Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
+        SizedBox(height: 28, child: Ux4gDivider(orientation: Ux4gDividerOrientation.vertical, color: Ux4gPalette.neutral300)),
         SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.red500, BlendMode.srcIn)),
       ],
     ),
-    Divider(height: 1, color: Color(0xFFE5E7EB)),
+    Ux4gDivider(color: Ux4gPalette.neutral200),
 
     Padding(
       padding: EdgeInsets.fromLTRB(20, 40, 20, 0),
@@ -2380,7 +2380,7 @@ Column(
             )),
           SizedBox(height: 8),
           Text('You are being redirected to your service',
-            style: TextStyle(fontSize: 14, color: Color(0xFF6B7280))),
+            style: TextStyle(fontSize: 14, color: Ux4gPalette.neutral500)),
           SizedBox(height: 28),
 
           // 3-dot status using the design-system [Ux4gBadge.dot].
@@ -2399,7 +2399,7 @@ Column(
           SizedBox(height: 14),
 
           Text('Redirecting in 3 seconds...',
-            style: TextStyle(fontSize: 13, color: Color(0xFF9CA3AF))),
+            style: TextStyle(fontSize: 13, color: Ux4gPalette.neutral400)),
         ],
       ),
     ),
@@ -2410,7 +2410,7 @@ Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           Text('Powered by -',
-            style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+            style: TextStyle(fontSize: 11, color: Ux4gPalette.neutral400)),
           SizedBox(height: 6),
           Image.asset('assets/digital_india_logo.png', height: 22, color: Theme.of(context).brightness == Brightness.dark ? Colors.white : null),
         ],
@@ -2617,11 +2617,11 @@ Column(
       variant: Ux4gAppHeaderVariant.light,
       leadingWidgets: [
         SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
-        Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
+        SizedBox(height: 28, child: Ux4gDivider(orientation: Ux4gDividerOrientation.vertical, color: Ux4gPalette.neutral300)),
         SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
       ],
     ),
-    Divider(height: 1, color: Color(0xFFE5E7EB)),
+    Ux4gDivider(color: Ux4gPalette.neutral200),
 
     Padding(
       padding: EdgeInsets.fromLTRB(20, 24, 20, 0),
@@ -2632,7 +2632,7 @@ Column(
             style: TextStyle(fontSize: 24, fontWeight: FontWeight.w800, color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.neutral50 : Ux4gPalette.gray900)),
           SizedBox(height: 6),
           Text('Access your government services securely',
-            style: TextStyle(fontSize: 14, color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.neutral400 : Color(0xFF6B7280))),
+            style: TextStyle(fontSize: 14, color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.neutral400 : Ux4gPalette.neutral500)),
           SizedBox(height: 24),
 
           // Mobile input with +91 prefix
@@ -2724,12 +2724,11 @@ Column(
           ),
           SizedBox(height: 16),
 
-          Row(children: [
-            Expanded(child: Divider()),
-            Padding(padding: EdgeInsets.symmetric(horizontal: 16),
-              child: Text('OR')),
-            Expanded(child: Divider()),
-          ]),
+          Ux4gDivider(
+            color: Ux4gPalette.neutral200,
+            label: Text('OR', style: (Theme.of(context).extension<Ux4gTypography>() ?? defaultUx4gTypography).lM_default.copyWith(color: Ux4gPalette.neutral400, letterSpacing: 0.5)),
+            labelSpacing: 16,
+          ),
           SizedBox(height: 16),
 
           Ux4gButton(
@@ -2756,7 +2755,7 @@ Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           Text('Powered by -',
-            style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+            style: TextStyle(fontSize: 11, color: Ux4gPalette.neutral400)),
           SizedBox(height: 6),
           Image.asset('assets/digital_india_logo.png', height: 22, color: Theme.of(context).brightness == Brightness.dark ? Colors.white : null),
         ],
@@ -3025,16 +3024,16 @@ Column(
       variant: Ux4gAppHeaderVariant.light,
       leadingWidgets: [
         SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
-        Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
+        SizedBox(height: 28, child: Ux4gDivider(orientation: Ux4gDividerOrientation.vertical, color: Ux4gPalette.neutral300)),
         SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
       ],
     ),
-    Divider(height: 1, color: Color(0xFFE5E7EB)),
+    Ux4gDivider(color: Ux4gPalette.neutral200),
 
     // Soft-purple section. Card scrolls; footer stays pinned at the bottom.
     Expanded(
       child: Container(
-        color: Color(0xFFE9E5FF),
+        color: Ux4gPalette.primary100,
         child: Column(
           children: [
             Expanded(
@@ -3057,10 +3056,10 @@ Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text('Sign in to your account',
-                        style: TextStyle(fontSize: 22, fontWeight: FontWeight.w800)),
+                        style: TextStyle(fontSize: 22, fontWeight: FontWeight.w800, color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.neutral50 : Ux4gPalette.gray900)),
                       SizedBox(height: 6),
                       Text('Access your government services securely',
-                        style: TextStyle(fontSize: 13, color: Color(0xFF6B7280))),
+                        style: TextStyle(fontSize: 13, color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.neutral400 : Ux4gPalette.neutral500)),
                       SizedBox(height: 20),
 
                       Ux4gInputField(
@@ -3156,12 +3155,11 @@ Column(
                       ),
                       SizedBox(height: 12),
 
-                      Row(children: [
-                        Expanded(child: Divider()),
-                        Padding(padding: EdgeInsets.symmetric(horizontal: 16),
-                          child: Text('OR')),
-                        Expanded(child: Divider()),
-                      ]),
+                      Ux4gDivider(
+                        color: Ux4gPalette.neutral200,
+                        label: Text('OR', style: (Theme.of(context).extension<Ux4gTypography>() ?? defaultUx4gTypography).lM_default.copyWith(color: Ux4gPalette.neutral400, letterSpacing: 0.5)),
+                        labelSpacing: 16,
+                      ),
                       SizedBox(height: 12),
 
                       Ux4gButton(
@@ -3191,7 +3189,7 @@ Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text('Powered by -',
-                    style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+                    style: TextStyle(fontSize: 11, color: Ux4gPalette.neutral400)),
                   SizedBox(height: 6),
                   Image.asset('assets/digital_india_logo.png', height: 22, color: Theme.of(context).brightness == Brightness.dark ? Colors.white : null),
                 ],
@@ -3445,16 +3443,16 @@ Column(
       variant: Ux4gAppHeaderVariant.light,
       leadingWidgets: [
         SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
-        Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
+        SizedBox(height: 28, child: Ux4gDivider(orientation: Ux4gDividerOrientation.vertical, color: Ux4gPalette.neutral300)),
         SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
       ],
     ),
-    Divider(height: 1, color: Color(0xFFE5E7EB)),
+    Ux4gDivider(color: Ux4gPalette.neutral200),
 
     // Soft-purple section. Card scrolls; footer stays pinned at the bottom.
     Expanded(
       child: Container(
-        color: Color(0xFFE9E5FF),
+        color: Ux4gPalette.primary100,
         child: Column(
           children: [
             Expanded(
@@ -3480,7 +3478,7 @@ Column(
                         style: TextStyle(fontSize: 22, fontWeight: FontWeight.w800, color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.neutral50 : Ux4gPalette.gray900)),
                       SizedBox(height: 6),
                       Text('Access your government services securely',
-                        style: TextStyle(fontSize: 13, color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.neutral400 : Color(0xFF6B7280))),
+                        style: TextStyle(fontSize: 13, color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.neutral400 : Ux4gPalette.neutral500)),
                       SizedBox(height: 20),
 
                       // Mobile input with +91 prefix.
@@ -3571,12 +3569,11 @@ Column(
                       ),
                       SizedBox(height: 12),
 
-                      Row(children: [
-                        Expanded(child: Divider()),
-                        Padding(padding: EdgeInsets.symmetric(horizontal: 16),
-                          child: Text('OR')),
-                        Expanded(child: Divider()),
-                      ]),
+                      Ux4gDivider(
+                        color: Ux4gPalette.neutral200,
+                        label: Text('OR', style: (Theme.of(context).extension<Ux4gTypography>() ?? defaultUx4gTypography).lM_default.copyWith(color: Ux4gPalette.neutral400, letterSpacing: 0.5)),
+                        labelSpacing: 16,
+                      ),
                       SizedBox(height: 12),
 
                       Ux4gButton(
@@ -3606,7 +3603,7 @@ Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text('Powered by -',
-                    style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+                    style: TextStyle(fontSize: 11, color: Ux4gPalette.neutral400)),
                   SizedBox(height: 6),
                   Image.asset('assets/digital_india_logo.png', height: 22, color: Theme.of(context).brightness == Brightness.dark ? Colors.white : null),
                 ],
@@ -3761,15 +3758,15 @@ Column(
       variant: Ux4gAppHeaderVariant.light,
       leadingWidgets: [
         SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
-        Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
+        SizedBox(height: 28, child: Ux4gDivider(orientation: Ux4gDividerOrientation.vertical, color: Ux4gPalette.neutral300)),
         SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
       ],
     ),
-    Divider(height: 1, color: Color(0xFFE5E7EB)),
+    Ux4gDivider(color: Ux4gPalette.neutral200),
 
     Expanded(
       child: Container(
-        color: Color(0xFFE9E5FF),
+        color: Ux4gPalette.primary100,
         child: Column(
           children: [
             Padding(
@@ -3803,7 +3800,7 @@ Column(
                       style: TextStyle(fontSize: 26, fontWeight: FontWeight.w800, color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.neutral50 : Ux4gPalette.gray900)),
                     SizedBox(height: 6),
                     Text('Sent to +91 98765 XXXXX',
-                      style: TextStyle(fontSize: 14, color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.neutral400 : Color(0xFF6B7280))),
+                      style: TextStyle(fontSize: 14, color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.neutral400 : Ux4gPalette.neutral500)),
                     SizedBox(height: 20),
 
                     Ux4gOtpInput(
@@ -3837,7 +3834,7 @@ Column(
                     SizedBox(height: 12),
 
                     Center(child: Text('OTP is valid for 10 minutes',
-                      style: TextStyle(fontSize: 13, color: Color(0xFF6B7280)))),
+                      style: TextStyle(fontSize: 13, color: Ux4gPalette.neutral500))),
                   ],
                 ),
               ),
@@ -3851,7 +3848,7 @@ Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text('Powered by -',
-                    style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+                    style: TextStyle(fontSize: 11, color: Ux4gPalette.neutral400)),
                   SizedBox(height: 6),
                   Image.asset('assets/digital_india_logo.png', height: 22, color: Theme.of(context).brightness == Brightness.dark ? Colors.white : null),
                 ],
@@ -4066,15 +4063,15 @@ Column(
       variant: Ux4gAppHeaderVariant.light,
       leadingWidgets: [
         SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
-        Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
+        SizedBox(height: 28, child: Ux4gDivider(orientation: Ux4gDividerOrientation.vertical, color: Ux4gPalette.neutral300)),
         SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
       ],
     ),
-    Divider(height: 1, color: Color(0xFFE5E7EB)),
+    Ux4gDivider(color: Ux4gPalette.neutral200),
 
     Expanded(
       child: Container(
-        color: Color(0xFFE9E5FF),
+        color: Ux4gPalette.primary100,
         child: Column(
           children: [
             Padding(
@@ -4108,7 +4105,7 @@ Column(
                       style: TextStyle(fontSize: 24, fontWeight: FontWeight.w800, color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.neutral50 : Ux4gPalette.gray900)),
                     SizedBox(height: 6),
                     Text('Enter your 12-digit Aadhaar number',
-                      style: TextStyle(fontSize: 14, color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.neutral400 : Color(0xFF6B7280))),
+                      style: TextStyle(fontSize: 14, color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.neutral400 : Ux4gPalette.neutral500)),
                     SizedBox(height: 20),
 
                     // Live Verhoeff validation � see Default variant for details.
@@ -4121,7 +4118,7 @@ Column(
                     SizedBox(height: 16),
 
                     Text('Choose Authentication Method',
-                      style: TextStyle(fontSize: 14, color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.neutral400 : Color(0xFF6B7280))),
+                      style: TextStyle(fontSize: 14, color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.neutral400 : Ux4gPalette.neutral500)),
                     SizedBox(height: 10),
                     Row(children: [
                       Expanded(
@@ -4162,10 +4159,10 @@ Column(
             Center(child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Icon(Icons.lock_outline, size: 14, color: Color(0xFF9CA3AF)),
+                Icon(Icons.lock_outline, size: 14, color: Ux4gPalette.neutral400),
                 SizedBox(width: 6),
                 Text('Your Aadhaar details are encrypted and secure',
-                  style: TextStyle(fontSize: 12, color: Color(0xFF6B7280))),
+                  style: TextStyle(fontSize: 12, color: Ux4gPalette.neutral500)),
               ],
             )),
 
@@ -4177,7 +4174,7 @@ Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text('Powered by -',
-                    style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+                    style: TextStyle(fontSize: 11, color: Ux4gPalette.neutral400)),
                   SizedBox(height: 6),
                   Image.asset('assets/digital_india_logo.png', height: 22, color: Theme.of(context).brightness == Brightness.dark ? Colors.white : null),
                 ],
@@ -4371,15 +4368,15 @@ Column(
       variant: Ux4gAppHeaderVariant.light,
       leadingWidgets: [
         SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
-        Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
+        SizedBox(height: 28, child: Ux4gDivider(orientation: Ux4gDividerOrientation.vertical, color: Ux4gPalette.neutral300)),
         SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
       ],
     ),
-    Divider(height: 1, color: Color(0xFFE5E7EB)),
+    Ux4gDivider(color: Ux4gPalette.neutral200),
 
     Expanded(
       child: Container(
-        color: Color(0xFFE9E5FF),
+        color: Ux4gPalette.primary100,
         child: Column(
           children: [
             Padding(
@@ -4425,7 +4422,7 @@ Column(
                       )),
                     SizedBox(height: 8),
                     Text('You are being redirected to your service',
-                      style: TextStyle(fontSize: 14, color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.neutral400 : Color(0xFF6B7280)),
+                      style: TextStyle(fontSize: 14, color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.neutral400 : Ux4gPalette.neutral500),
                       textAlign: TextAlign.center),
                     SizedBox(height: 24),
 
@@ -4445,7 +4442,7 @@ Column(
                     SizedBox(height: 18),
 
                     Text('Redirecting in 3 seconds...',
-                      style: TextStyle(fontSize: 13, color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.neutral500 : Color(0xFF9CA3AF))),
+                      style: TextStyle(fontSize: 13, color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.neutral500 : Ux4gPalette.neutral400)),
                   ],
                 ),
               ),
@@ -4459,7 +4456,7 @@ Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text('Powered by -',
-                    style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+                    style: TextStyle(fontSize: 11, color: Ux4gPalette.neutral400)),
                   SizedBox(height: 6),
                   Image.asset('assets/digital_india_logo.png', height: 22, color: Theme.of(context).brightness == Brightness.dark ? Colors.white : null),
                 ],
@@ -4583,11 +4580,11 @@ Column(
       variant: Ux4gAppHeaderVariant.light,
       leadingWidgets: [
         SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
-        Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
+        SizedBox(height: 28, child: Ux4gDivider(orientation: Ux4gDividerOrientation.vertical, color: Ux4gPalette.neutral300)),
         SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
       ],
     ),
-    Divider(height: 1, color: Color(0xFFE5E7EB)),
+    Ux4gDivider(color: Ux4gPalette.neutral200),
 
     Padding(
       padding: EdgeInsets.fromLTRB(20, 56, 20, 0),
@@ -4598,7 +4595,7 @@ Column(
             style: TextStyle(fontSize: 26, fontWeight: FontWeight.w800)),
           SizedBox(height: 8),
           Text('OTP sent to +91 98765 XXXXX',
-            style: TextStyle(fontSize: 14, color: Color(0xFF6B7280))),
+            style: TextStyle(fontSize: 14, color: Ux4gPalette.neutral500)),
           SizedBox(height: 24),
 
           // 6 OTP boxes via the design-system component.
@@ -4649,7 +4646,7 @@ Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           Text('Powered by -',
-            style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+            style: TextStyle(fontSize: 11, color: Ux4gPalette.neutral400)),
           SizedBox(height: 6),
           Image.asset('assets/digital_india_logo.png', height: 22, color: Theme.of(context).brightness == Brightness.dark ? Colors.white : null),
         ],
@@ -4799,16 +4796,16 @@ Column(
       variant: Ux4gAppHeaderVariant.light,
       leadingWidgets: [
         SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
-        Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
+        SizedBox(height: 28, child: Ux4gDivider(orientation: Ux4gDividerOrientation.vertical, color: Ux4gPalette.neutral300)),
         SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
       ],
     ),
-    Divider(height: 1, color: Color(0xFFE5E7EB)),
+    Ux4gDivider(color: Ux4gPalette.neutral200),
 
     Expanded(
       child: Container(
         width: double.infinity,
-        color: Color(0xFFE9E5FF),
+        color: Ux4gPalette.primary100,
         child: Column(
           children: [
             SizedBox(height: 56),
@@ -4835,7 +4832,7 @@ Column(
                       style: TextStyle(fontSize: 26, fontWeight: FontWeight.w800)),
                     SizedBox(height: 8),
                     Text('OTP sent to +91 98765 XXXXX',
-                      style: TextStyle(fontSize: 14, color: Color(0xFF6B7280))),
+                      style: TextStyle(fontSize: 14, color: Ux4gPalette.neutral500)),
                     SizedBox(height: 20),
 
                     Ux4gOtpInput(
@@ -4887,7 +4884,7 @@ Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text('Powered by -',
-                    style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+                    style: TextStyle(fontSize: 11, color: Ux4gPalette.neutral400)),
                   SizedBox(height: 6),
                   Image.asset('assets/digital_india_logo.png', height: 22, color: Theme.of(context).brightness == Brightness.dark ? Colors.white : null),
                 ],
@@ -5011,11 +5008,11 @@ Column(
       variant: Ux4gAppHeaderVariant.light,
       leadingWidgets: [
         SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
-        Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
+        SizedBox(height: 28, child: Ux4gDivider(orientation: Ux4gDividerOrientation.vertical, color: Ux4gPalette.neutral300)),
         SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
       ],
     ),
-    Divider(height: 1, color: Color(0xFFE5E7EB)),
+    Ux4gDivider(color: Ux4gPalette.neutral200),
 
     Padding(
       padding: EdgeInsets.fromLTRB(20, 32, 20, 0),
@@ -5035,7 +5032,7 @@ Column(
             style: TextStyle(fontSize: 26, fontWeight: FontWeight.w800)),
           SizedBox(height: 8),
           Text('OTP sent to +91 98765 XXXXX',
-            style: TextStyle(fontSize: 14, color: Color(0xFF6B7280))),
+            style: TextStyle(fontSize: 14, color: Ux4gPalette.neutral500)),
           SizedBox(height: 24),
 
           // 6 OTP boxes with the resend caption in its expired
@@ -5082,7 +5079,7 @@ Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           Text('Powered by -',
-            style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+            style: TextStyle(fontSize: 11, color: Ux4gPalette.neutral400)),
           SizedBox(height: 6),
           Image.asset('assets/digital_india_logo.png', height: 22, color: Theme.of(context).brightness == Brightness.dark ? Colors.white : null),
         ],
@@ -5225,16 +5222,16 @@ Column(
       variant: Ux4gAppHeaderVariant.light,
       leadingWidgets: [
         SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
-        Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
+        SizedBox(height: 28, child: Ux4gDivider(orientation: Ux4gDividerOrientation.vertical, color: Ux4gPalette.neutral300)),
         SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
       ],
     ),
-    Divider(height: 1, color: Color(0xFFE5E7EB)),
+    Ux4gDivider(color: Ux4gPalette.neutral200),
 
     Expanded(
       child: Container(
         width: double.infinity,
-        color: Color(0xFFE9E5FF),
+        color: Ux4gPalette.primary100,
         child: Column(
           children: [
             Padding(
@@ -5268,7 +5265,7 @@ Column(
                       style: TextStyle(fontSize: 26, fontWeight: FontWeight.w800)),
                     SizedBox(height: 8),
                     Text('OTP sent to +91 98765 XXXXX',
-                      style: TextStyle(fontSize: 14, color: Color(0xFF6B7280))),
+                      style: TextStyle(fontSize: 14, color: Ux4gPalette.neutral500)),
                     SizedBox(height: 20),
 
                     Ux4gOtpInput(
@@ -5315,7 +5312,7 @@ Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text('Powered by -',
-                    style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+                    style: TextStyle(fontSize: 11, color: Ux4gPalette.neutral400)),
                   SizedBox(height: 6),
                   Image.asset('assets/digital_india_logo.png', height: 22, color: Theme.of(context).brightness == Brightness.dark ? Colors.white : null),
                 ],
@@ -5465,11 +5462,11 @@ Column(
       variant: Ux4gAppHeaderVariant.light,
       leadingWidgets: [
         SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
-        Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
+        SizedBox(height: 28, child: Ux4gDivider(orientation: Ux4gDividerOrientation.vertical, color: Ux4gPalette.neutral300)),
         SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
       ],
     ),
-    Divider(height: 1, color: Color(0xFFE5E7EB)),
+    Ux4gDivider(color: Ux4gPalette.neutral200),
 
     Padding(
       padding: EdgeInsets.fromLTRB(20, 32, 20, 0),
@@ -5489,7 +5486,7 @@ Column(
             style: TextStyle(fontSize: 26, fontWeight: FontWeight.w800)),
           SizedBox(height: 8),
           Text('OTP sent to +91 98765 XXXXX',
-            style: TextStyle(fontSize: 14, color: Color(0xFF6B7280))),
+            style: TextStyle(fontSize: 14, color: Ux4gPalette.neutral500)),
           SizedBox(height: 24),
 
           Ux4gOtpInput(
@@ -5550,7 +5547,7 @@ Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           Text('Powered by -',
-            style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+            style: TextStyle(fontSize: 11, color: Ux4gPalette.neutral400)),
           SizedBox(height: 6),
           Image.asset('assets/digital_india_logo.png', height: 22, color: Theme.of(context).brightness == Brightness.dark ? Colors.white : null),
         ],
@@ -5720,16 +5717,16 @@ Column(
       variant: Ux4gAppHeaderVariant.light,
       leadingWidgets: [
         SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
-        Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
+        SizedBox(height: 28, child: Ux4gDivider(orientation: Ux4gDividerOrientation.vertical, color: Ux4gPalette.neutral300)),
         SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
       ],
     ),
-    Divider(height: 1, color: Color(0xFFE5E7EB)),
+    Ux4gDivider(color: Ux4gPalette.neutral200),
 
     Expanded(
       child: Container(
         width: double.infinity,
-        color: Color(0xFFE9E5FF),
+        color: Ux4gPalette.primary100,
         child: Column(
           children: [
             Padding(
@@ -5763,7 +5760,7 @@ Column(
                       style: TextStyle(fontSize: 26, fontWeight: FontWeight.w800)),
                     SizedBox(height: 8),
                     Text('OTP sent to +91 98765 XXXXX',
-                      style: TextStyle(fontSize: 14, color: Color(0xFF6B7280))),
+                      style: TextStyle(fontSize: 14, color: Ux4gPalette.neutral500)),
                     SizedBox(height: 20),
 
                     Ux4gOtpInput(
@@ -5826,7 +5823,7 @@ Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text('Powered by -',
-                    style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+                    style: TextStyle(fontSize: 11, color: Ux4gPalette.neutral400)),
                   SizedBox(height: 6),
                   Image.asset('assets/digital_india_logo.png', height: 22, color: Theme.of(context).brightness == Brightness.dark ? Colors.white : null),
                 ],
@@ -5974,11 +5971,11 @@ Column(
       variant: Ux4gAppHeaderVariant.light,
       leadingWidgets: [
         SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
-        Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
+        SizedBox(height: 28, child: Ux4gDivider(orientation: Ux4gDividerOrientation.vertical, color: Ux4gPalette.neutral300)),
         SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
       ],
     ),
-    Divider(height: 1, color: Color(0xFFE5E7EB)),
+    Ux4gDivider(color: Ux4gPalette.neutral200),
 
     Padding(
       padding: EdgeInsets.fromLTRB(20, 32, 20, 0),
@@ -5998,7 +5995,7 @@ Column(
             style: TextStyle(fontSize: 26, fontWeight: FontWeight.w800)),
           SizedBox(height: 8),
           Text('OTP sent to +91 98765 XXXXX',
-            style: TextStyle(fontSize: 14, color: Color(0xFF6B7280))),
+            style: TextStyle(fontSize: 14, color: Ux4gPalette.neutral500)),
           SizedBox(height: 24),
 
           Ux4gOtpInput(
@@ -6059,7 +6056,7 @@ Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           Text('Powered by -',
-            style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+            style: TextStyle(fontSize: 11, color: Ux4gPalette.neutral400)),
           SizedBox(height: 6),
           Image.asset('assets/digital_india_logo.png', height: 22, color: Theme.of(context).brightness == Brightness.dark ? Colors.white : null),
         ],
@@ -6227,16 +6224,16 @@ Column(
       variant: Ux4gAppHeaderVariant.light,
       leadingWidgets: [
         SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
-        Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
+        SizedBox(height: 28, child: Ux4gDivider(orientation: Ux4gDividerOrientation.vertical, color: Ux4gPalette.neutral300)),
         SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
       ],
     ),
-    Divider(height: 1, color: Color(0xFFE5E7EB)),
+    Ux4gDivider(color: Ux4gPalette.neutral200),
 
     Expanded(
       child: Container(
         width: double.infinity,
-        color: Color(0xFFE9E5FF),
+        color: Ux4gPalette.primary100,
         child: Column(
           children: [
             Padding(
@@ -6270,7 +6267,7 @@ Column(
                       style: TextStyle(fontSize: 26, fontWeight: FontWeight.w800)),
                     SizedBox(height: 8),
                     Text('OTP sent to +91 98765 XXXXX',
-                      style: TextStyle(fontSize: 14, color: Color(0xFF6B7280))),
+                      style: TextStyle(fontSize: 14, color: Ux4gPalette.neutral500)),
                     SizedBox(height: 20),
 
                     Ux4gOtpInput(
@@ -6333,7 +6330,7 @@ Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text('Powered by -',
-                    style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+                    style: TextStyle(fontSize: 11, color: Ux4gPalette.neutral400)),
                   SizedBox(height: 6),
                   Image.asset('assets/digital_india_logo.png', height: 22, color: Theme.of(context).brightness == Brightness.dark ? Colors.white : null),
                 ],
@@ -6497,11 +6494,11 @@ Column(
       variant: Ux4gAppHeaderVariant.light,
       leadingWidgets: [
         SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
-        Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
+        SizedBox(height: 28, child: Ux4gDivider(orientation: Ux4gDividerOrientation.vertical, color: Ux4gPalette.neutral300)),
         SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
       ],
     ),
-    Divider(height: 1, color: Color(0xFFE5E7EB)),
+    Ux4gDivider(color: Ux4gPalette.neutral200),
 
     Padding(
       padding: EdgeInsets.fromLTRB(20, 24, 20, 0),
@@ -6567,7 +6564,7 @@ Column(
             crossAxisAlignment: WrapCrossAlignment.center,
             children: [
               Text('Need help?  ',
-                style: TextStyle(fontSize: 14, color: Color(0xFF6B7280))),
+                style: TextStyle(fontSize: 14, color: Ux4gPalette.neutral500)),
               Ux4gButton(
                 text: 'Call 1800-XXX-XXXX',
                 onPressed: () {},
@@ -6586,7 +6583,7 @@ Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           Text('Powered by -',
-            style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+            style: TextStyle(fontSize: 11, color: Ux4gPalette.neutral400)),
           SizedBox(height: 6),
           Image.asset('assets/digital_india_logo.png', height: 22, color: Theme.of(context).brightness == Brightness.dark ? Colors.white : null),
         ],
@@ -6761,11 +6758,11 @@ const _verifyAccountLockedCardCode =
 Column(
   children: [
     Ux4gAppHeader(/* ... */),
-    Divider(height: 1, color: Color(0xFFE5E7EB)),
+    Ux4gDivider(color: Ux4gPalette.neutral200),
     Expanded(
       child: Container(
         width: double.infinity,
-        color: Color(0xFFE9E5FF),
+        color: Ux4gPalette.primary100,
         child: Column(
           children: [
             Padding(
@@ -6892,11 +6889,11 @@ Column(
       variant: Ux4gAppHeaderVariant.light,
       leadingWidgets: [
         SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
-        Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
+        SizedBox(height: 28, child: Ux4gDivider(orientation: Ux4gDividerOrientation.vertical, color: Ux4gPalette.neutral300)),
         SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
       ],
     ),
-    Divider(height: 1, color: Color(0xFFE5E7EB)),
+    Ux4gDivider(color: Ux4gPalette.neutral200),
 
     Padding(
       padding: EdgeInsets.fromLTRB(20, 64, 20, 0),
@@ -6925,7 +6922,7 @@ Column(
             style: TextStyle(fontSize: 22, fontWeight: FontWeight.w800)),
           SizedBox(height: 8),
           Text('Redirecting you to your dashboard...',
-            style: TextStyle(fontSize: 14, color: Color(0xFF6B7280))),
+            style: TextStyle(fontSize: 14, color: Ux4gPalette.neutral500)),
           SizedBox(height: 24),
 
           // OTP field tinted green via the design-system's success
@@ -6951,7 +6948,7 @@ Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           Text('Powered by -',
-            style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+            style: TextStyle(fontSize: 11, color: Ux4gPalette.neutral400)),
           SizedBox(height: 6),
           Image.asset('assets/digital_india_logo.png', height: 22, color: Theme.of(context).brightness == Brightness.dark ? Colors.white : null),
         ],
@@ -7080,11 +7077,11 @@ const _otpVerifiedSuccessCardCode =
 Column(
   children: [
     Ux4gAppHeader(/* ... */),
-    Divider(height: 1, color: Color(0xFFE5E7EB)),
+    Ux4gDivider(color: Ux4gPalette.neutral200),
     Expanded(
       child: Container(
         width: double.infinity,
-        color: Color(0xFFE9E5FF),
+        color: Ux4gPalette.primary100,
         child: Column(
           children: [
             Padding(
@@ -7336,7 +7333,7 @@ SizedBox(
           "You've been inactive for a while. For your security, "
           "we'll sign you out automatically.",
           textAlign: TextAlign.center,
-          style: TextStyle(fontSize: 14, color: Color(0xFF6B7280)),
+          style: TextStyle(fontSize: 14, color: Ux4gPalette.neutral500),
         ),
         SizedBox(height: 20),
         Ux4gAnimatedLinearProgress(
@@ -7386,7 +7383,7 @@ SizedBox(
         SizedBox(height: 16),
         Text("You'll be signed out in less than a minute",
           textAlign: TextAlign.center,
-          style: TextStyle(fontSize: 14, color: Color(0xFF6B7280))),
+          style: TextStyle(fontSize: 14, color: Ux4gPalette.neutral500)),
         SizedBox(height: 20),
         Ux4gAnimatedLinearProgress(
           value: secondsLeft / totalSeconds,
@@ -7427,7 +7424,7 @@ SizedBox(
       'Your form progress has been saved. Sign in again to '
       'continue where you left off.',
       textAlign: TextAlign.center,
-      style: TextStyle(fontSize: 14, color: Color(0xFF6B7280)),
+      style: TextStyle(fontSize: 14, color: Ux4gPalette.neutral500),
     ),
     footerButtons: Ux4gModalFooterButtons.oneButton,
     footerAlign: Ux4gModalFooterAlign.center,
@@ -7524,11 +7521,11 @@ Column(
       variant: Ux4gAppHeaderVariant.light,
       leadingWidgets: [
         SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
-        Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
+        SizedBox(height: 28, child: Ux4gDivider(orientation: Ux4gDividerOrientation.vertical, color: Ux4gPalette.neutral300)),
         SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
       ],
     ),
-    Divider(height: 1, color: Color(0xFFE5E7EB)),
+    Ux4gDivider(color: Ux4gPalette.neutral200),
 
     Padding(
       padding: EdgeInsets.fromLTRB(20, 24, 20, 0),
@@ -7548,7 +7545,7 @@ Column(
             style: TextStyle(fontSize: 24, fontWeight: FontWeight.w800)),
           SizedBox(height: 8),
           Text('Enter the 6-digit code sent to +91 98XXX XXXXX',
-            style: TextStyle(fontSize: 14, color: Color(0xFF6B7280))),
+            style: TextStyle(fontSize: 14, color: Ux4gPalette.neutral500)),
           SizedBox(height: 24),
 
           // The design-system Ux4gOtpInput renders red borders + the
@@ -7588,7 +7585,7 @@ Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           Text('Powered by -',
-            style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+            style: TextStyle(fontSize: 11, color: Ux4gPalette.neutral400)),
           SizedBox(height: 6),
           Image.asset('assets/digital_india_logo.png', height: 22, color: Theme.of(context).brightness == Brightness.dark ? Colors.white : null),
         ],
@@ -7741,16 +7738,16 @@ Column(
       variant: Ux4gAppHeaderVariant.light,
       leadingWidgets: [
         SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
-        Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
+        SizedBox(height: 28, child: Ux4gDivider(orientation: Ux4gDividerOrientation.vertical, color: Ux4gPalette.neutral300)),
         SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
       ],
     ),
-    Divider(height: 1, color: Color(0xFFE5E7EB)),
+    Ux4gDivider(color: Ux4gPalette.neutral200),
 
     Expanded(
       child: Container(
         width: double.infinity,
-        color: Color(0xFFE9E5FF),
+        color: Ux4gPalette.primary100,
         child: Column(
           children: [
             SizedBox(height: 16),
@@ -7778,7 +7775,7 @@ Column(
                       style: TextStyle(fontSize: 24, fontWeight: FontWeight.w800)),
                     SizedBox(height: 8),
                     Text('Enter the 6-digit code sent to +91 98XXX XXXXX',
-                      style: TextStyle(fontSize: 14, color: Color(0xFF6B7280))),
+                      style: TextStyle(fontSize: 14, color: Ux4gPalette.neutral500)),
                     SizedBox(height: 20),
 
                     Ux4gOtpInput(
@@ -7830,7 +7827,7 @@ Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text('Powered by -',
-                    style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+                    style: TextStyle(fontSize: 11, color: Ux4gPalette.neutral400)),
                   SizedBox(height: 6),
                   Image.asset('assets/digital_india_logo.png', height: 22, color: Theme.of(context).brightness == Brightness.dark ? Colors.white : null),
                 ],
@@ -7978,11 +7975,11 @@ Column(
       variant: Ux4gAppHeaderVariant.light,
       leadingWidgets: [
         SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
-        Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
+        SizedBox(height: 28, child: Ux4gDivider(orientation: Ux4gDividerOrientation.vertical, color: Ux4gPalette.neutral300)),
         SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
       ],
     ),
-    Divider(height: 1, color: Color(0xFFE5E7EB)),
+    Ux4gDivider(color: Ux4gPalette.neutral200),
 
     Padding(
       padding: EdgeInsets.fromLTRB(20, 24, 20, 0),
@@ -8002,7 +7999,7 @@ Column(
             style: TextStyle(fontSize: 24, fontWeight: FontWeight.w800)),
           SizedBox(height: 8),
           Text('Enter the 6-digit code sent to +91 98XXX XXXXX',
-            style: TextStyle(fontSize: 14, color: Color(0xFF6B7280))),
+            style: TextStyle(fontSize: 14, color: Ux4gPalette.neutral500)),
           SizedBox(height: 24),
 
           // OTP boxes in error state with inline "Incorrect OTP" caption.
@@ -8071,7 +8068,7 @@ Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           Text('Powered by -',
-            style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+            style: TextStyle(fontSize: 11, color: Ux4gPalette.neutral400)),
           SizedBox(height: 6),
           Image.asset('assets/digital_india_logo.png', height: 22, color: Theme.of(context).brightness == Brightness.dark ? Colors.white : null),
         ],
@@ -8239,16 +8236,16 @@ Column(
       variant: Ux4gAppHeaderVariant.light,
       leadingWidgets: [
         SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
-        Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
+        SizedBox(height: 28, child: Ux4gDivider(orientation: Ux4gDividerOrientation.vertical, color: Ux4gPalette.neutral300)),
         SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
       ],
     ),
-    Divider(height: 1, color: Color(0xFFE5E7EB)),
+    Ux4gDivider(color: Ux4gPalette.neutral200),
 
     Expanded(
       child: Container(
         width: double.infinity,
-        color: Color(0xFFE9E5FF),
+        color: Ux4gPalette.primary100,
         child: Column(
           children: [
             SizedBox(height: 16),
@@ -8285,7 +8282,7 @@ Column(
                       style: TextStyle(fontSize: 24, fontWeight: FontWeight.w800)),
                     SizedBox(height: 8),
                     Text('Enter the 6-digit code sent to +91 98XXX XXXXX',
-                      style: TextStyle(fontSize: 14, color: Color(0xFF6B7280))),
+                      style: TextStyle(fontSize: 14, color: Ux4gPalette.neutral500)),
                     SizedBox(height: 20),
 
                     Ux4gOtpInput(
@@ -8352,7 +8349,7 @@ Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text('Powered by -',
-                    style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+                    style: TextStyle(fontSize: 11, color: Ux4gPalette.neutral400)),
                   SizedBox(height: 6),
                   Image.asset('assets/digital_india_logo.png', height: 22, color: Theme.of(context).brightness == Brightness.dark ? Colors.white : null),
                 ],
@@ -8650,11 +8647,11 @@ Column(
       variant: Ux4gAppHeaderVariant.light,
       leadingWidgets: [
         SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
-        Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
+        SizedBox(height: 28, child: Ux4gDivider(orientation: Ux4gDividerOrientation.vertical, color: Ux4gPalette.neutral300)),
         SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
       ],
     ),
-    Divider(height: 1, color: Color(0xFFE5E7EB)),
+    Ux4gDivider(color: Ux4gPalette.neutral200),
 
     Padding(
       padding: EdgeInsets.fromLTRB(20, 24, 20, 0),
@@ -8674,7 +8671,7 @@ Column(
             style: TextStyle(fontSize: 24, fontWeight: FontWeight.w800)),
           SizedBox(height: 8),
           Text('Enter the 6-digit code sent to +91 98XXX XXXXX',
-            style: TextStyle(fontSize: 14, color: Color(0xFF6B7280))),
+            style: TextStyle(fontSize: 14, color: Ux4gPalette.neutral500)),
           SizedBox(height: 24),
 
           Ux4gOtpInput(
@@ -8742,7 +8739,7 @@ Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           Text('Powered by -',
-            style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+            style: TextStyle(fontSize: 11, color: Ux4gPalette.neutral400)),
           SizedBox(height: 6),
           Image.asset('assets/digital_india_logo.png', height: 22, color: Theme.of(context).brightness == Brightness.dark ? Colors.white : null),
         ],
@@ -8759,16 +8756,16 @@ Column(
       variant: Ux4gAppHeaderVariant.light,
       leadingWidgets: [
         SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
-        Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
+        SizedBox(height: 28, child: Ux4gDivider(orientation: Ux4gDividerOrientation.vertical, color: Ux4gPalette.neutral300)),
         SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
       ],
     ),
-    Divider(height: 1, color: Color(0xFFE5E7EB)),
+    Ux4gDivider(color: Ux4gPalette.neutral200),
 
     Expanded(
       child: Container(
         width: double.infinity,
-        color: Color(0xFFE9E5FF),
+        color: Ux4gPalette.primary100,
         child: Column(
           children: [
             SizedBox(height: 16),
@@ -8805,7 +8802,7 @@ Column(
                       style: TextStyle(fontSize: 24, fontWeight: FontWeight.w800)),
                     SizedBox(height: 8),
                     Text('Enter the 6-digit code sent to +91 98XXX XXXXX',
-                      style: TextStyle(fontSize: 14, color: Color(0xFF6B7280))),
+                      style: TextStyle(fontSize: 14, color: Ux4gPalette.neutral500)),
                     SizedBox(height: 20),
 
                     Ux4gOtpInput(
@@ -8872,7 +8869,7 @@ Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text('Powered by -',
-                    style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+                    style: TextStyle(fontSize: 11, color: Ux4gPalette.neutral400)),
                   SizedBox(height: 6),
                   Image.asset('assets/digital_india_logo.png', height: 22, color: Theme.of(context).brightness == Brightness.dark ? Colors.white : null),
                 ],
@@ -9147,11 +9144,11 @@ Column(
       variant: Ux4gAppHeaderVariant.light,
       leadingWidgets: [
         SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
-        Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
+        SizedBox(height: 28, child: Ux4gDivider(orientation: Ux4gDividerOrientation.vertical, color: Ux4gPalette.neutral300)),
         SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
       ],
     ),
-    Divider(height: 1, color: Color(0xFFE5E7EB)),
+    Ux4gDivider(color: Ux4gPalette.neutral200),
 
     Padding(
       padding: EdgeInsets.fromLTRB(20, 24, 20, 0),
@@ -9186,7 +9183,7 @@ Column(
             style: TextStyle(fontSize: 24, fontWeight: FontWeight.w800)),
           SizedBox(height: 8),
           Text('Enter the 6-digit code sent to +91 98XXX XXXXX',
-            style: TextStyle(fontSize: 14, color: Color(0xFF6B7280))),
+            style: TextStyle(fontSize: 14, color: Ux4gPalette.neutral500)),
           SizedBox(height: 24),
 
           Ux4gOtpInput(
@@ -9228,7 +9225,7 @@ Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           Text('Powered by -',
-            style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+            style: TextStyle(fontSize: 11, color: Ux4gPalette.neutral400)),
           SizedBox(height: 6),
           Image.asset('assets/digital_india_logo.png', height: 22, color: Theme.of(context).brightness == Brightness.dark ? Colors.white : null),
         ],
@@ -9245,16 +9242,16 @@ Column(
       variant: Ux4gAppHeaderVariant.light,
       leadingWidgets: [
         SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
-        Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
+        SizedBox(height: 28, child: Ux4gDivider(orientation: Ux4gDividerOrientation.vertical, color: Ux4gPalette.neutral300)),
         SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
       ],
     ),
-    Divider(height: 1, color: Color(0xFFE5E7EB)),
+    Ux4gDivider(color: Ux4gPalette.neutral200),
 
     Expanded(
       child: Container(
         width: double.infinity,
-        color: Color(0xFFE9E5FF),
+        color: Ux4gPalette.primary100,
         child: Column(
           children: [
             SizedBox(height: 16),
@@ -9305,7 +9302,7 @@ Column(
                       style: TextStyle(fontSize: 24, fontWeight: FontWeight.w800)),
                     SizedBox(height: 8),
                     Text('Enter the 6-digit code sent to +91 98XXX XXXXX',
-                      style: TextStyle(fontSize: 14, color: Color(0xFF6B7280))),
+                      style: TextStyle(fontSize: 14, color: Ux4gPalette.neutral500)),
                     SizedBox(height: 20),
 
                     Ux4gOtpInput(
@@ -9349,7 +9346,7 @@ Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text('Powered by -',
-                    style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+                    style: TextStyle(fontSize: 11, color: Ux4gPalette.neutral400)),
                   SizedBox(height: 6),
                   Image.asset('assets/digital_india_logo.png', height: 22, color: Theme.of(context).brightness == Brightness.dark ? Colors.white : null),
                 ],
@@ -9644,11 +9641,11 @@ Column(
       variant: Ux4gAppHeaderVariant.light,
       leadingWidgets: [
         SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
-        Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
+        SizedBox(height: 28, child: Ux4gDivider(orientation: Ux4gDividerOrientation.vertical, color: Ux4gPalette.neutral300)),
         SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
       ],
     ),
-    Divider(height: 1, color: Color(0xFFE5E7EB)),
+    Ux4gDivider(color: Ux4gPalette.neutral200),
 
     Padding(
       padding: EdgeInsets.fromLTRB(20, 24, 20, 0),
@@ -9690,7 +9687,7 @@ Column(
           SizedBox(height: 8),
           Text('A verification code has been sent to your '
             'registered number for security verification.',
-            style: TextStyle(fontSize: 14, color: Color(0xFF6B7280))),
+            style: TextStyle(fontSize: 14, color: Ux4gPalette.neutral500)),
           SizedBox(height: 24),
 
           Ux4gOtpInput(
@@ -9732,7 +9729,7 @@ Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           Text('Powered by -',
-            style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+            style: TextStyle(fontSize: 11, color: Ux4gPalette.neutral400)),
           SizedBox(height: 6),
           Image.asset('assets/digital_india_logo.png', height: 22, color: Theme.of(context).brightness == Brightness.dark ? Colors.white : null),
         ],
@@ -9749,16 +9746,16 @@ Column(
       variant: Ux4gAppHeaderVariant.light,
       leadingWidgets: [
         SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
-        Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
+        SizedBox(height: 28, child: Ux4gDivider(orientation: Ux4gDividerOrientation.vertical, color: Ux4gPalette.neutral300)),
         SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
       ],
     ),
-    Divider(height: 1, color: Color(0xFFE5E7EB)),
+    Ux4gDivider(color: Ux4gPalette.neutral200),
 
     Expanded(
       child: Container(
         width: double.infinity,
-        color: Color(0xFFE9E5FF),
+        color: Ux4gPalette.primary100,
         child: Column(
           children: [
             SizedBox(height: 16),
@@ -9816,7 +9813,7 @@ Column(
                     SizedBox(height: 8),
                     Text('A verification code has been sent to your '
                       'registered number for security verification.',
-                      style: TextStyle(fontSize: 14, color: Color(0xFF6B7280))),
+                      style: TextStyle(fontSize: 14, color: Ux4gPalette.neutral500)),
                     SizedBox(height: 20),
 
                     Ux4gOtpInput(
@@ -9860,7 +9857,7 @@ Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text('Powered by -',
-                    style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+                    style: TextStyle(fontSize: 11, color: Ux4gPalette.neutral400)),
                   SizedBox(height: 6),
                   Image.asset('assets/digital_india_logo.png', height: 22, color: Theme.of(context).brightness == Brightness.dark ? Colors.white : null),
                 ],
@@ -10111,7 +10108,7 @@ class _BrandHeaderWithMenu extends StatelessWidget {
           title: '',
           leadingWidgets: [
             SvgPicture.asset(_nationalEmblemPath, height: 32),
-            Container(width: 1, height: 28, color: const Color(0xFFD1D5DB)),
+            SizedBox(height: 28, child: Ux4gDivider(orientation: Ux4gDividerOrientation.vertical, color: Ux4gPalette.neutral300)),
             SvgPicture.asset(_unionLogoPath, height: 32),
           ],
           horizontalPadding: 16,
@@ -10302,14 +10299,14 @@ Column(
       variant: Ux4gAppHeaderVariant.light,
       leadingWidgets: [
         SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
-        Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
+        SizedBox(height: 28, child: Ux4gDivider(orientation: Ux4gDividerOrientation.vertical, color: Ux4gPalette.neutral300)),
         SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
       ],
       actions: [
         Ux4gAppHeaderAction(icon: Icons.menu, onPressed: () {}),
       ],
     ),
-    Divider(height: 1, color: Color(0xFFE5E7EB)),
+    Ux4gDivider(color: Ux4gPalette.neutral200),
 
     Padding(
       padding: EdgeInsets.fromLTRB(20, 24, 20, 0),
@@ -10330,7 +10327,7 @@ Column(
           SizedBox(height: 8),
           Text('Choose how you want to authenticate. Your Aadhaar '
             'number is never stored.',
-            style: TextStyle(fontSize: 14, color: Color(0xFF6B7280))),
+            style: TextStyle(fontSize: 14, color: Ux4gPalette.neutral500)),
           SizedBox(height: 20),
 
           // Each option card uses the design-system Ux4gCard:
@@ -10371,7 +10368,7 @@ Column(
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Divider(height: 1, color: Color(0xFFE5E7EB)),
+          Ux4gDivider(color: Ux4gPalette.neutral200),
           SizedBox(height: 12),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -10400,7 +10397,7 @@ Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           Text('Powered by -',
-            style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+            style: TextStyle(fontSize: 11, color: Ux4gPalette.neutral400)),
           SizedBox(height: 6),
           Image.asset('assets/digital_india_logo.png', height: 22, color: Theme.of(context).brightness == Brightness.dark ? Colors.white : null),
         ],
@@ -10418,19 +10415,19 @@ Column(
       variant: Ux4gAppHeaderVariant.light,
       leadingWidgets: [
         SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
-        Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
+        SizedBox(height: 28, child: Ux4gDivider(orientation: Ux4gDividerOrientation.vertical, color: Ux4gPalette.neutral300)),
         SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
       ],
       actions: [
         Ux4gAppHeaderAction(icon: Icons.menu, onPressed: () {}),
       ],
     ),
-    Divider(height: 1, color: Color(0xFFE5E7EB)),
+    Ux4gDivider(color: Ux4gPalette.neutral200),
 
     Expanded(
       child: Container(
         width: double.infinity,
-        color: Color(0xFFE9E5FF),
+        color: Ux4gPalette.primary100,
         child: Column(
           children: [
             SizedBox(height: 16),
@@ -10467,7 +10464,7 @@ Column(
                     SizedBox(height: 8),
                     Text('Choose how you want to authenticate. Your '
                       'Aadhaar number is never stored.',
-                      style: TextStyle(fontSize: 14, color: Color(0xFF6B7280))),
+                      style: TextStyle(fontSize: 14, color: Ux4gPalette.neutral500)),
                     SizedBox(height: 16),
 
                     // 3 option cards via _AadhaarMethodCard — see flat
@@ -10506,7 +10503,7 @@ Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text('Powered by -',
-                    style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+                    style: TextStyle(fontSize: 11, color: Ux4gPalette.neutral400)),
                   SizedBox(height: 6),
                   Image.asset('assets/digital_india_logo.png', height: 22, color: Theme.of(context).brightness == Brightness.dark ? Colors.white : null),
                 ],
@@ -10766,7 +10763,7 @@ Column(
       variant: Ux4gAppHeaderVariant.light,
       leadingWidgets: [
         SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
-        Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
+        SizedBox(height: 28, child: Ux4gDivider(orientation: Ux4gDividerOrientation.vertical, color: Ux4gPalette.neutral300)),
         SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
       ],
       actions: [
@@ -10788,7 +10785,7 @@ Column(
         ),
       ],
     ),
-    Divider(height: 1, color: Color(0xFFE5E7EB)),
+    Ux4gDivider(color: Ux4gPalette.neutral200),
 
     Padding(
       padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
@@ -10810,7 +10807,7 @@ Column(
           SizedBox(height: 8),
           Text('A 6-digit OTP has been sent to the mobile number '
             'linked to your Aadhaar.',
-            style: TextStyle(fontSize: 14, color: Color(0xFF6B7280))),
+            style: TextStyle(fontSize: 14, color: Ux4gPalette.neutral500)),
           SizedBox(height: 20),
 
           Ux4gOtpInput(
@@ -10843,7 +10840,7 @@ Column(
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Divider(height: 1, color: Color(0xFFE5E7EB)),
+          Ux4gDivider(color: Ux4gPalette.neutral200),
           SizedBox(height: 6),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -10872,7 +10869,7 @@ Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           Text('Powered by -',
-            style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+            style: TextStyle(fontSize: 11, color: Ux4gPalette.neutral400)),
           SizedBox(height: 6),
           Image.asset('assets/digital_india_logo.png', height: 22, color: Theme.of(context).brightness == Brightness.dark ? Colors.white : null),
         ],
@@ -10889,7 +10886,7 @@ Column(
       variant: Ux4gAppHeaderVariant.light,
       leadingWidgets: [
         SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
-        Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
+        SizedBox(height: 28, child: Ux4gDivider(orientation: Ux4gDividerOrientation.vertical, color: Ux4gPalette.neutral300)),
         SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
       ],
       actions: [
@@ -10911,12 +10908,12 @@ Column(
         ),
       ],
     ),
-    Divider(height: 1, color: Color(0xFFE5E7EB)),
+    Ux4gDivider(color: Ux4gPalette.neutral200),
 
     Expanded(
       child: Container(
         width: double.infinity,
-        color: Color(0xFFE9E5FF),
+        color: Ux4gPalette.primary100,
         child: Column(
           children: [
             SizedBox(height: 16),
@@ -10954,7 +10951,7 @@ Column(
                     SizedBox(height: 8),
                     Text('A 6-digit OTP has been sent to the mobile '
                       'number linked to your Aadhaar.',
-                      style: TextStyle(fontSize: 14, color: Color(0xFF6B7280))),
+                      style: TextStyle(fontSize: 14, color: Ux4gPalette.neutral500)),
                     SizedBox(height: 20),
 
                     Ux4gOtpInput(
@@ -10990,7 +10987,7 @@ Column(
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Divider(height: 1, color: Color(0xFFE5E7EB)),
+                  Ux4gDivider(color: Ux4gPalette.neutral200),
                   SizedBox(height: 6),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -11019,7 +11016,7 @@ Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text('Powered by -',
-                    style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+                    style: TextStyle(fontSize: 11, color: Ux4gPalette.neutral400)),
                   SizedBox(height: 6),
                   Image.asset('assets/digital_india_logo.png', height: 22, color: Theme.of(context).brightness == Brightness.dark ? Colors.white : null),
                 ],
@@ -11264,7 +11261,7 @@ Column(
       variant: Ux4gAppHeaderVariant.light,
       leadingWidgets: [
         SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
-        Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
+        SizedBox(height: 28, child: Ux4gDivider(orientation: Ux4gDividerOrientation.vertical, color: Ux4gPalette.neutral300)),
         SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
       ],
       actions: [
@@ -11273,7 +11270,7 @@ Column(
         // a 1.5px Ux4gPalette.primary100 border).
       ],
     ),
-    Divider(height: 1, color: Color(0xFFE5E7EB)),
+    Ux4gDivider(color: Ux4gPalette.neutral200),
 
     Padding(
       padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
@@ -11294,7 +11291,7 @@ Column(
           SizedBox(height: 8),
           Text('Allow camera access to capture your face for '
             'Aadhaar biometric verification.',
-            style: TextStyle(fontSize: 14, color: Color(0xFF6B7280))),
+            style: TextStyle(fontSize: 14, color: Ux4gPalette.neutral500)),
           SizedBox(height: 20),
 
           // Privacy info card — design-system Ux4gCard with a cream
@@ -11315,7 +11312,7 @@ Column(
                   Text('Your face scan data is processed locally and '
                     'never stored on our servers.',
                     textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 14, color: Color(0xFF6B7280))),
+                    style: TextStyle(fontSize: 14, color: Ux4gPalette.neutral500)),
                 ],
               ),
             ),
@@ -11330,7 +11327,7 @@ Column(
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Divider(height: 1, color: Color(0xFFE5E7EB)),
+          Ux4gDivider(color: Ux4gPalette.neutral200),
           SizedBox(height: 6),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -11359,7 +11356,7 @@ Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           Text('Powered by -',
-            style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+            style: TextStyle(fontSize: 11, color: Ux4gPalette.neutral400)),
           SizedBox(height: 6),
           Image.asset('assets/digital_india_logo.png', height: 22, color: Theme.of(context).brightness == Brightness.dark ? Colors.white : null),
         ],
@@ -11376,19 +11373,19 @@ Column(
       variant: Ux4gAppHeaderVariant.light,
       leadingWidgets: [
         SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
-        Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
+        SizedBox(height: 28, child: Ux4gDivider(orientation: Ux4gDividerOrientation.vertical, color: Ux4gPalette.neutral300)),
         SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
       ],
       actions: [
         // Bordered hamburger tile — see _BrandHeaderWithMenu.
       ],
     ),
-    Divider(height: 1, color: Color(0xFFE5E7EB)),
+    Ux4gDivider(color: Ux4gPalette.neutral200),
 
     Expanded(
       child: Container(
         width: double.infinity,
-        color: Color(0xFFE9E5FF),
+        color: Ux4gPalette.primary100,
         child: Column(
           children: [
             SizedBox(height: 16),
@@ -11426,7 +11423,7 @@ Column(
                     SizedBox(height: 8),
                     Text('Allow camera access to capture your face '
                       'for Aadhaar biometric verification.',
-                      style: TextStyle(fontSize: 14, color: Color(0xFF6B7280))),
+                      style: TextStyle(fontSize: 14, color: Ux4gPalette.neutral500)),
                     SizedBox(height: 20),
 
                     Ux4gCard(
@@ -11446,7 +11443,7 @@ Column(
                             Text('Your face scan data is processed locally '
                               'and never stored on our servers.',
                               textAlign: TextAlign.center,
-                              style: TextStyle(fontSize: 14, color: Color(0xFF6B7280))),
+                              style: TextStyle(fontSize: 14, color: Ux4gPalette.neutral500)),
                           ],
                         ),
                       ),
@@ -11464,7 +11461,7 @@ Column(
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Divider(height: 1, color: Color(0xFFE5E7EB)),
+                  Ux4gDivider(color: Ux4gPalette.neutral200),
                   SizedBox(height: 6),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -11492,7 +11489,7 @@ Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text('Powered by -',
-                    style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+                    style: TextStyle(fontSize: 11, color: Ux4gPalette.neutral400)),
                   SizedBox(height: 6),
                   Image.asset('assets/digital_india_logo.png', height: 22, color: Theme.of(context).brightness == Brightness.dark ? Colors.white : null),
                 ],
@@ -11770,7 +11767,7 @@ const _aadhaarVerifiedSuccessCode =
 Column(
   children: [
     Ux4gAppHeader(/* same header with bordered hamburger action */),
-    Divider(height: 1, color: Color(0xFFE5E7EB)),
+    Ux4gDivider(color: Ux4gPalette.neutral200),
 
     Padding(
       padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
@@ -11797,7 +11794,7 @@ Column(
           SizedBox(height: 8),
           Text('Your Aadhaar identity has been verified. You may '
             'now proceed to the service.',
-            style: TextStyle(fontSize: 14, color: Color(0xFF6B7280))),
+            style: TextStyle(fontSize: 14, color: Ux4gPalette.neutral500)),
           SizedBox(height: 20),
 
           // Transaction-ID card — light-primary surface.
@@ -11812,7 +11809,7 @@ Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text('Transaction ID',
-                    style: TextStyle(fontSize: 13, color: Color(0xFF6B7280))),
+                    style: TextStyle(fontSize: 13, color: Ux4gPalette.neutral500)),
                   SizedBox(height: 4),
                   Text('TXN-2024-AAD-78432',
                     style: TextStyle(fontSize: 16, fontWeight: FontWeight.w800)),
@@ -11830,7 +11827,7 @@ Column(
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Divider(height: 1, color: Color(0xFFE5E7EB)),
+          Ux4gDivider(color: Ux4gPalette.neutral200),
           SizedBox(height: 12),
           Ux4gButton(
             text: 'Continue to Service',
@@ -11850,7 +11847,7 @@ Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           Text('Powered by -',
-            style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+            style: TextStyle(fontSize: 11, color: Ux4gPalette.neutral400)),
           SizedBox(height: 6),
           Image.asset('assets/digital_india_logo.png', height: 22, color: Theme.of(context).brightness == Brightness.dark ? Colors.white : null),
         ],
@@ -11864,12 +11861,12 @@ const _aadhaarVerifiedSuccessCardCode =
 Column(
   children: [
     Ux4gAppHeader(/* same header with bordered hamburger action */),
-    Divider(height: 1, color: Color(0xFFE5E7EB)),
+    Ux4gDivider(color: Ux4gPalette.neutral200),
 
     Expanded(
       child: Container(
         width: double.infinity,
-        color: Color(0xFFE9E5FF),
+        color: Ux4gPalette.primary100,
         child: Column(
           children: [
             SizedBox(height: 16),
@@ -11912,7 +11909,7 @@ Column(
                     SizedBox(height: 8),
                     Text('Your Aadhaar identity has been verified. '
                       'You may now proceed to the service.',
-                      style: TextStyle(fontSize: 14, color: Color(0xFF6B7280))),
+                      style: TextStyle(fontSize: 14, color: Ux4gPalette.neutral500)),
                     SizedBox(height: 20),
 
                     Ux4gCard(
@@ -11926,7 +11923,7 @@ Column(
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             Text('Transaction ID',
-                              style: TextStyle(fontSize: 13, color: Color(0xFF6B7280))),
+                              style: TextStyle(fontSize: 13, color: Ux4gPalette.neutral500)),
                             SizedBox(height: 4),
                             Text('TXN-2024-AAD-78432',
                               style: TextStyle(fontSize: 16, fontWeight: FontWeight.w800)),
@@ -11958,7 +11955,7 @@ Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text('Powered by -',
-                    style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+                    style: TextStyle(fontSize: 11, color: Ux4gPalette.neutral400)),
                   SizedBox(height: 6),
                   Image.asset('assets/digital_india_logo.png', height: 22, color: Theme.of(context).brightness == Brightness.dark ? Colors.white : null),
                 ],
@@ -12262,7 +12259,7 @@ const _aadhaarVerificationFailedCode =
 Column(
   children: [
     Ux4gAppHeader(/* same header with bordered hamburger action */),
-    Divider(height: 1, color: Color(0xFFE5E7EB)),
+    Ux4gDivider(color: Ux4gPalette.neutral200),
 
     Padding(
       padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
@@ -12293,7 +12290,7 @@ Column(
           SizedBox(height: 8),
           Text('The OTP entered is incorrect. You have 2 attempts '
             'remaining before your account is temporarily locked.',
-            style: TextStyle(fontSize: 14, color: Color(0xFF6B7280))),
+            style: TextStyle(fontSize: 14, color: Ux4gPalette.neutral500)),
           SizedBox(height: 16),
 
           // Error banner with an attempt-counter pill on the side.
@@ -12331,7 +12328,7 @@ Column(
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Divider(height: 1, color: Color(0xFFE5E7EB)),
+          Ux4gDivider(color: Ux4gPalette.neutral200),
           SizedBox(height: 6),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -12360,7 +12357,7 @@ Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           Text('Powered by -',
-            style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+            style: TextStyle(fontSize: 11, color: Ux4gPalette.neutral400)),
           SizedBox(height: 6),
           Image.asset('assets/digital_india_logo.png', height: 22, color: Theme.of(context).brightness == Brightness.dark ? Colors.white : null),
         ],
@@ -12374,12 +12371,12 @@ const _aadhaarVerificationFailedCardCode =
 Column(
   children: [
     Ux4gAppHeader(/* same header with bordered hamburger action */),
-    Divider(height: 1, color: Color(0xFFE5E7EB)),
+    Ux4gDivider(color: Ux4gPalette.neutral200),
 
     Expanded(
       child: Container(
         width: double.infinity,
-        color: Color(0xFFE9E5FF),
+        color: Ux4gPalette.primary100,
         child: Column(
           children: [
             SizedBox(height: 16),
@@ -12429,10 +12426,10 @@ Column(
                     Text('The OTP entered is incorrect. You have 2 '
                       'attempts remaining before your account is '
                       'temporarily locked.',
-                      style: TextStyle(fontSize: 14, color: Color(0xFF6B7280))),
+                      style: TextStyle(fontSize: 14, color: Ux4gPalette.neutral500)),
                     SizedBox(height: 12),
 
-                    Divider(height: 16, color: Color(0xFFE5E7EB)),
+                    Divider(height: 16, color: Ux4gPalette.neutral200),
                     SizedBox(height: 4),
 
                     Ux4gStatusBanner(
@@ -12493,7 +12490,7 @@ Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text('Powered by -',
-                    style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+                    style: TextStyle(fontSize: 11, color: Ux4gPalette.neutral400)),
                   SizedBox(height: 6),
                   Image.asset('assets/digital_india_logo.png', height: 22, color: Theme.of(context).brightness == Brightness.dark ? Colors.white : null),
                 ],
@@ -12804,7 +12801,7 @@ Container(
   decoration: BoxDecoration(
     color: Colors.white,
     borderRadius: BorderRadius.circular(20),
-    border: Border.all(color: Color(0xFFE5E7EB)),
+    border: Border.all(color: Ux4gPalette.neutral200),
     boxShadow: [
       BoxShadow(
         color: Colors.black.withOpacity(0.08),
@@ -12820,7 +12817,7 @@ Container(
         title: '',
         leadingWidgets: [
           SvgPicture.asset('assets/icons/national_amblam_logo.svg', height: 32),
-          Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
+          SizedBox(height: 28, child: Ux4gDivider(orientation: Ux4gDividerOrientation.vertical, color: Ux4gPalette.neutral300)),
           SvgPicture.asset('assets/icons/Union.svg', height: 32),
         ],
         actions: [
@@ -12830,14 +12827,14 @@ Container(
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(10),
-                border: Border.all(color: Color(0xFFE9E5FF), width: 1.5),
+                border: Border.all(color: Ux4gPalette.primary100, width: 1.5),
               ),
               child: Icon(Icons.menu, size: 20, color: Color(0xFF4F46E5)),
             ),
           ),
         ],
       ),
-      Divider(height: 1, color: Color(0xFFE5E7EB)),
+      Ux4gDivider(color: Ux4gPalette.neutral200),
 
       Expanded(
         child: SingleChildScrollView(
@@ -12874,7 +12871,7 @@ Container(
                 )),
               SizedBox(height: 8),
               Text('Your Aadhaar authentication has been suspended due to too many failed attempts.',
-                style: TextStyle(fontSize: 14, color: Color(0xFF6B7280), height: 1.35)),
+                style: TextStyle(fontSize: 14, color: Ux4gPalette.neutral500, height: 1.35)),
               SizedBox(height: 24),
 
               // Yellow countdown box
@@ -12927,7 +12924,7 @@ Container(
         padding: EdgeInsets.only(bottom: 20, top: 8),
         child: Column(
           children: [
-            Text('Powered by -', style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+            Text('Powered by -', style: TextStyle(fontSize: 11, color: Ux4gPalette.neutral400)),
             SizedBox(height: 6),
             Image.asset('assets/digital_india_logo.png', height: 22, color: Theme.of(context).brightness == Brightness.dark ? Colors.white : null),
           ],
@@ -12946,7 +12943,7 @@ Container(
   decoration: BoxDecoration(
     color: Colors.white,
     borderRadius: BorderRadius.circular(20),
-    border: Border.all(color: Color(0xFFE5E7EB)),
+    border: Border.all(color: Ux4gPalette.neutral200),
     boxShadow: [
       BoxShadow(
         color: Colors.black.withOpacity(0.08),
@@ -12962,7 +12959,7 @@ Container(
         title: '',
         leadingWidgets: [
           SvgPicture.asset('assets/icons/national_amblam_logo.svg', height: 32),
-          Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
+          SizedBox(height: 28, child: Ux4gDivider(orientation: Ux4gDividerOrientation.vertical, color: Ux4gPalette.neutral300)),
           SvgPicture.asset('assets/icons/Union.svg', height: 32),
         ],
         actions: [
@@ -12972,19 +12969,19 @@ Container(
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(10),
-                border: Border.all(color: Color(0xFFE9E5FF), width: 1.5),
+                border: Border.all(color: Ux4gPalette.primary100, width: 1.5),
               ),
               child: Icon(Icons.menu, size: 20, color: Color(0xFF4F46E5)),
             ),
           ),
         ],
       ),
-      Divider(height: 1, color: Color(0xFFE5E7EB)),
+      Ux4gDivider(color: Ux4gPalette.neutral200),
 
       Expanded(
         child: Container(
           width: double.infinity,
-          color: Color(0xFFE9E5FF), // Soft purple background
+          color: Ux4gPalette.primary100, // Soft purple background
           child: Column(
             children: [
               SizedBox(height: 16),
@@ -13037,7 +13034,7 @@ Container(
                         )),
                       SizedBox(height: 8),
                       Text('Your Aadhaar authentication has been suspended due to too many failed attempts.',
-                        style: TextStyle(fontSize: 14, color: Color(0xFF6B7280), height: 1.35)),
+                        style: TextStyle(fontSize: 14, color: Ux4gPalette.neutral500, height: 1.35)),
                       SizedBox(height: 24),
 
                       // Yellow countdown box
@@ -13092,7 +13089,7 @@ Container(
                 padding: EdgeInsets.only(bottom: 20, top: 8),
                 child: Column(
                   children: [
-                    Text('Powered by -', style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+                    Text('Powered by -', style: TextStyle(fontSize: 11, color: Ux4gPalette.neutral400)),
                     SizedBox(height: 6),
                     Image.asset('assets/digital_india_logo.png', height: 22, color: Theme.of(context).brightness == Brightness.dark ? Colors.white : null),
                   ],
@@ -13372,7 +13369,7 @@ Container(
   decoration: BoxDecoration(
     color: Colors.white,
     borderRadius: BorderRadius.circular(20),
-    border: Border.all(color: Color(0xFFE5E7EB)),
+    border: Border.all(color: Ux4gPalette.neutral200),
     boxShadow: [
       BoxShadow(
         color: Colors.black.withOpacity(0.08),
@@ -13388,7 +13385,7 @@ Container(
         title: '',
         leadingWidgets: [
           SvgPicture.asset('assets/icons/national_amblam_logo.svg', height: 32),
-          Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
+          SizedBox(height: 28, child: Ux4gDivider(orientation: Ux4gDividerOrientation.vertical, color: Ux4gPalette.neutral300)),
           SvgPicture.asset('assets/icons/Union.svg', height: 32),
         ],
         actions: [
@@ -13398,14 +13395,14 @@ Container(
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(10),
-                border: Border.all(color: Color(0xFFE9E5FF), width: 1.5),
+                border: Border.all(color: Ux4gPalette.primary100, width: 1.5),
               ),
               child: Icon(Icons.menu, size: 20, color: Color(0xFF4F46E5)),
             ),
           ),
         ],
       ),
-      Divider(height: 1, color: Color(0xFFE5E7EB)),
+      Ux4gDivider(color: Ux4gPalette.neutral200),
 
       Expanded(
         child: SingleChildScrollView(
@@ -13432,7 +13429,7 @@ Container(
                 )),
               SizedBox(height: 8),
               Text('A certified VLE operator will conduct this Aadhaar verification on your behalf with your consent.',
-                style: TextStyle(fontSize: 14, color: Color(0xFF6B7280), height: 1.35)),
+                style: TextStyle(fontSize: 14, color: Ux4gPalette.neutral500, height: 1.35)),
               SizedBox(height: 24),
 
               // Operator Info Card
@@ -13446,13 +13443,13 @@ Container(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('VLE Operator', style: TextStyle(fontSize: 13, color: Color(0xFF6B7280))),
+                    Text('VLE Operator', style: TextStyle(fontSize: 13, color: Ux4gPalette.neutral500)),
                     SizedBox(height: 4),
                     Text('Ramesh Kumar', 
                       style: TextStyle(fontSize: 18, fontWeight: FontWeight.w800, color: Color(0xFF111827))),
                     SizedBox(height: 8),
                     Text('ID: VLE-MH-2024-00387 · Certified by MeitY',
-                      style: TextStyle(fontSize: 12, color: Color(0xFF9CA3AF))),
+                      style: TextStyle(fontSize: 12, color: Ux4gPalette.neutral400)),
                   ],
                 ),
               ),
@@ -13495,7 +13492,7 @@ Container(
         padding: EdgeInsets.only(bottom: 20, top: 8),
         child: Column(
           children: [
-            Text('Powered by -', style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+            Text('Powered by -', style: TextStyle(fontSize: 11, color: Ux4gPalette.neutral400)),
             SizedBox(height: 6),
             Image.asset('assets/digital_india_logo.png', height: 22, color: Theme.of(context).brightness == Brightness.dark ? Colors.white : null),
           ],
@@ -13514,7 +13511,7 @@ Container(
   decoration: BoxDecoration(
     color: Colors.white,
     borderRadius: BorderRadius.circular(20),
-    border: Border.all(color: Color(0xFFE5E7EB)),
+    border: Border.all(color: Ux4gPalette.neutral200),
     boxShadow: [
       BoxShadow(
         color: Colors.black.withOpacity(0.08),
@@ -13530,7 +13527,7 @@ Container(
         title: '',
         leadingWidgets: [
           SvgPicture.asset('assets/icons/national_amblam_logo.svg', height: 32),
-          Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
+          SizedBox(height: 28, child: Ux4gDivider(orientation: Ux4gDividerOrientation.vertical, color: Ux4gPalette.neutral300)),
           SvgPicture.asset('assets/icons/Union.svg', height: 32),
         ],
         actions: [
@@ -13540,19 +13537,19 @@ Container(
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(10),
-                border: Border.all(color: Color(0xFFE9E5FF), width: 1.5),
+                border: Border.all(color: Ux4gPalette.primary100, width: 1.5),
               ),
               child: Icon(Icons.menu, size: 20, color: Color(0xFF4F46E5)),
             ),
           ),
         ],
       ),
-      Divider(height: 1, color: Color(0xFFE5E7EB)),
+      Ux4gDivider(color: Ux4gPalette.neutral200),
 
       Expanded(
         child: Container(
           width: double.infinity,
-          color: Color(0xFFE9E5FF),
+          color: Ux4gPalette.primary100,
           child: Column(
             children: [
               SizedBox(height: 16),
@@ -13595,7 +13592,7 @@ Container(
                         )),
                       SizedBox(height: 8),
                       Text('A certified VLE operator will conduct this Aadhaar verification on your behalf with your consent.',
-                        style: TextStyle(fontSize: 14, color: Color(0xFF6B7280), height: 1.35)),
+                        style: TextStyle(fontSize: 14, color: Ux4gPalette.neutral500, height: 1.35)),
                       SizedBox(height: 20),
 
                       // Operator Info Card
@@ -13609,13 +13606,13 @@ Container(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text('VLE Operator', style: TextStyle(fontSize: 13, color: Color(0xFF6B7280))),
+                            Text('VLE Operator', style: TextStyle(fontSize: 13, color: Ux4gPalette.neutral500)),
                             SizedBox(height: 4),
                             Text('Ramesh Kumar', 
                               style: TextStyle(fontSize: 18, fontWeight: FontWeight.w800, color: Color(0xFF111827))),
                             SizedBox(height: 8),
                             Text('ID: VLE-MH-2024-00387 · Certified by MeitY',
-                              style: TextStyle(fontSize: 12, color: Color(0xFF9CA3AF))),
+                              style: TextStyle(fontSize: 12, color: Ux4gPalette.neutral400)),
                           ],
                         ),
                       ),
@@ -13639,7 +13636,7 @@ Container(
                 padding: EdgeInsets.fromLTRB(20, 12, 20, 8),
                 child: Column(
                   children: [
-                    Divider(height: 1, color: Color(0xFFD1D5DB)),
+                    Divider(height: 1, color: Ux4gPalette.neutral300),
                     SizedBox(height: 12),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -13666,7 +13663,7 @@ Container(
                 padding: EdgeInsets.only(bottom: 20, top: 8),
                 child: Column(
                   children: [
-                    Text('Powered by -', style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+                    Text('Powered by -', style: TextStyle(fontSize: 11, color: Ux4gPalette.neutral400)),
                     SizedBox(height: 6),
                     Image.asset('assets/digital_india_logo.png', height: 22, color: Theme.of(context).brightness == Brightness.dark ? Colors.white : null),
                   ],
@@ -13776,7 +13773,7 @@ BoxDecoration _suCardDeco() => BoxDecoration(
   ],
 );
 
-const _suCardBg = Color(0xFFE9E5FF);
+const _suCardBg = Ux4gPalette.primary100;
 
 // -----------------------------------------------------------------------
 // STEP 1 � Create your account
@@ -13992,18 +13989,18 @@ class _SignUpStep1CardMockupState extends State<_SignUpStep1CardMockup> {
 
 const _signUpStep1Code = r'''// Step 1 � Create your account (360 � 760)
 Container(
-  width: 360, height: 760, color: Color(0xFFFAFAFA),
+  width: 360, height: 760, color: Ux4gPalette.neutral50,
   child: Column(children: [
     Ux4gAppHeader(
       variant: Ux4gAppHeaderVariant.light,
       leadingWidgets: [
         SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
-        Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
+        SizedBox(height: 28, child: Ux4gDivider(orientation: Ux4gDividerOrientation.vertical, color: Ux4gPalette.neutral300)),
         SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
       ],
       horizontalPadding: 16, leadingSpacing: 12,
     ),
-    Divider(height: 1, color: Color(0xFFE5E7EB)),
+    Ux4gDivider(color: Ux4gPalette.neutral200),
     Expanded(
       child: SingleChildScrollView(
         padding: EdgeInsets.fromLTRB(20, 24, 20, 0),
@@ -14015,7 +14012,7 @@ Container(
                 color: Color(0xFF111827))),
             SizedBox(height: 6),
             Text('Register to access government services',
-              style: TextStyle(fontSize: 14, color: Color(0xFF6B7280))),
+              style: TextStyle(fontSize: 14, color: Ux4gPalette.neutral500)),
             SizedBox(height: 24),
             Ux4gInputField(
               value: mobile, onValueChange: (v) => setState(() => mobile = v),
@@ -14063,7 +14060,7 @@ Container(
       padding: EdgeInsets.symmetric(horizontal: 20, vertical: 14),
       child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
         Text('Powered by - ',
-          style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+          style: TextStyle(fontSize: 11, color: Ux4gPalette.neutral400)),
         SvgPicture.asset('assets/Digital_India_logo.svg', height: 24),
       ]),
     ),
@@ -14079,15 +14076,15 @@ Container(
       variant: Ux4gAppHeaderVariant.light,
       leadingWidgets: [
         SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
-        Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
+        SizedBox(height: 28, child: Ux4gDivider(orientation: Ux4gDividerOrientation.vertical, color: Ux4gPalette.neutral300)),
         SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
       ],
       horizontalPadding: 16, leadingSpacing: 12,
     ),
-    Divider(height: 1, color: Color(0xFFE5E7EB)),
+    Ux4gDivider(color: Ux4gPalette.neutral200),
     Expanded(
       child: Container(
-        color: Color(0xFFE9E5FF),
+        color: Ux4gPalette.primary100,
         child: Column(children: [
           Expanded(
             child: SingleChildScrollView(
@@ -14110,7 +14107,7 @@ Container(
                         color: Color(0xFF111827))),
                     SizedBox(height: 6),
                     Text('Register to access government services',
-                      style: TextStyle(fontSize: 13, color: Color(0xFF6B7280))),
+                      style: TextStyle(fontSize: 13, color: Ux4gPalette.neutral500)),
                     SizedBox(height: 20),
                     Ux4gInputField(
                       value: mobile, onValueChange: (v) => setState(() => mobile = v),
@@ -14158,7 +14155,7 @@ Container(
             padding: EdgeInsets.symmetric(horizontal: 20, vertical: 14),
             child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
               Text('Powered by - ',
-                style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+                style: TextStyle(fontSize: 11, color: Ux4gPalette.neutral400)),
               SvgPicture.asset('assets/Digital_India_logo.svg', height: 24),
             ]),
           ),
@@ -14374,18 +14371,18 @@ class _SignUpStep2CardMockupState extends State<_SignUpStep2CardMockup> {
 
 const _signUpStep2Code = r'''// Step 2 � Verify your mobile (360 � 760)
 Container(
-  width: 360, height: 760, color: Color(0xFFFAFAFA),
+  width: 360, height: 760, color: Ux4gPalette.neutral50,
   child: Column(children: [
     Ux4gAppHeader(
       variant: Ux4gAppHeaderVariant.light,
       leadingWidgets: [
         SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
-        Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
+        SizedBox(height: 28, child: Ux4gDivider(orientation: Ux4gDividerOrientation.vertical, color: Ux4gPalette.neutral300)),
         SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
       ],
       horizontalPadding: 16, leadingSpacing: 12,
     ),
-    Divider(height: 1, color: Color(0xFFE5E7EB)),
+    Ux4gDivider(color: Ux4gPalette.neutral200),
     Expanded(
       child: SingleChildScrollView(
         padding: EdgeInsets.fromLTRB(20, 24, 20, 0),
@@ -14397,7 +14394,7 @@ Container(
                 color: Color(0xFF111827))),
             SizedBox(height: 6),
             Text('Enter the 6-digit OTP sent to +91 98765 XXXXX',
-              style: TextStyle(fontSize: 14, color: Color(0xFF6B7280))),
+              style: TextStyle(fontSize: 14, color: Ux4gPalette.neutral500)),
             SizedBox(height: 28),
             Ux4gOtpInput(
               length: 6,
@@ -14425,7 +14422,7 @@ Container(
       padding: EdgeInsets.symmetric(horizontal: 20, vertical: 14),
       child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
         Text('Powered by - ',
-          style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+          style: TextStyle(fontSize: 11, color: Ux4gPalette.neutral400)),
         SvgPicture.asset('assets/Digital_India_logo.svg', height: 24),
       ]),
     ),
@@ -14441,15 +14438,15 @@ Container(
       variant: Ux4gAppHeaderVariant.light,
       leadingWidgets: [
         SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
-        Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
+        SizedBox(height: 28, child: Ux4gDivider(orientation: Ux4gDividerOrientation.vertical, color: Ux4gPalette.neutral300)),
         SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
       ],
       horizontalPadding: 16, leadingSpacing: 12,
     ),
-    Divider(height: 1, color: Color(0xFFE5E7EB)),
+    Ux4gDivider(color: Ux4gPalette.neutral200),
     Expanded(
       child: Container(
-        color: Color(0xFFE9E5FF),
+        color: Ux4gPalette.primary100,
         child: Column(children: [
           Expanded(
             child: SingleChildScrollView(
@@ -14472,7 +14469,7 @@ Container(
                         color: Color(0xFF111827))),
                     SizedBox(height: 6),
                     Text('Enter the 6-digit OTP sent to +91 98765 XXXXX',
-                      style: TextStyle(fontSize: 13, color: Color(0xFF6B7280))),
+                      style: TextStyle(fontSize: 13, color: Ux4gPalette.neutral500)),
                     SizedBox(height: 24),
                     Ux4gOtpInput(
                       length: 6,
@@ -14501,7 +14498,7 @@ Container(
             padding: EdgeInsets.symmetric(horizontal: 20, vertical: 14),
             child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
               Text('Powered by - ',
-                style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+                style: TextStyle(fontSize: 11, color: Ux4gPalette.neutral400)),
               SvgPicture.asset('assets/Digital_India_logo.svg', height: 24),
             ]),
           ),
@@ -14793,18 +14790,18 @@ class _SignUpStep3CardMockupState extends State<_SignUpStep3CardMockup> {
 
 const _signUpStep3Code = r'''// Step 3 � Complete your profile (360 � 760)
 Container(
-  width: 360, height: 760, color: Color(0xFFFAFAFA),
+  width: 360, height: 760, color: Ux4gPalette.neutral50,
   child: Column(children: [
     Ux4gAppHeader(
       variant: Ux4gAppHeaderVariant.light,
       leadingWidgets: [
         SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
-        Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
+        SizedBox(height: 28, child: Ux4gDivider(orientation: Ux4gDividerOrientation.vertical, color: Ux4gPalette.neutral300)),
         SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
       ],
       horizontalPadding: 16, leadingSpacing: 12,
     ),
-    Divider(height: 1, color: Color(0xFFE5E7EB)),
+    Ux4gDivider(color: Ux4gPalette.neutral200),
     Expanded(
       child: SingleChildScrollView(
         padding: EdgeInsets.fromLTRB(20, 24, 20, 0),
@@ -14816,7 +14813,7 @@ Container(
                 color: Color(0xFF111827))),
             SizedBox(height: 6),
             Text('Help us personalise your experience',
-              style: TextStyle(fontSize: 14, color: Color(0xFF6B7280))),
+              style: TextStyle(fontSize: 14, color: Ux4gPalette.neutral500)),
             SizedBox(height: 24),
             Ux4gInputField(
               value: fullName, onValueChange: (v) => setState(() => fullName = v),
@@ -14860,7 +14857,7 @@ Container(
       padding: EdgeInsets.symmetric(horizontal: 20, vertical: 14),
       child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
         Text('Powered by - ',
-          style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+          style: TextStyle(fontSize: 11, color: Ux4gPalette.neutral400)),
         SvgPicture.asset('assets/Digital_India_logo.svg', height: 24),
       ]),
     ),
@@ -14876,15 +14873,15 @@ Container(
       variant: Ux4gAppHeaderVariant.light,
       leadingWidgets: [
         SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
-        Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
+        SizedBox(height: 28, child: Ux4gDivider(orientation: Ux4gDividerOrientation.vertical, color: Ux4gPalette.neutral300)),
         SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
       ],
       horizontalPadding: 16, leadingSpacing: 12,
     ),
-    Divider(height: 1, color: Color(0xFFE5E7EB)),
+    Ux4gDivider(color: Ux4gPalette.neutral200),
     Expanded(
       child: Container(
-        color: Color(0xFFE9E5FF),
+        color: Ux4gPalette.primary100,
         child: Column(children: [
           Expanded(
             child: SingleChildScrollView(
@@ -14907,7 +14904,7 @@ Container(
                         color: Color(0xFF111827))),
                     SizedBox(height: 6),
                     Text('Help us personalise your experience',
-                      style: TextStyle(fontSize: 13, color: Color(0xFF6B7280))),
+                      style: TextStyle(fontSize: 13, color: Ux4gPalette.neutral500)),
                     SizedBox(height: 20),
                     Ux4gInputField(
                       value: fullName, onValueChange: (v) => setState(() => fullName = v),
@@ -14952,7 +14949,7 @@ Container(
             padding: EdgeInsets.symmetric(horizontal: 20, vertical: 14),
             child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
               Text('Powered by - ',
-                style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+                style: TextStyle(fontSize: 11, color: Ux4gPalette.neutral400)),
               SvgPicture.asset('assets/Digital_India_logo.svg', height: 24),
             ]),
           ),
@@ -15182,18 +15179,18 @@ class _SignUpStep4CardMockupState extends State<_SignUpStep4CardMockup> {
 
 const _signUpStep4Code = r'''// Step 4 � Password setup (360 � 760)
 Container(
-  width: 360, height: 760, color: Color(0xFFFAFAFA),
+  width: 360, height: 760, color: Ux4gPalette.neutral50,
   child: Column(children: [
     Ux4gAppHeader(
       variant: Ux4gAppHeaderVariant.light,
       leadingWidgets: [
         SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
-        Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
+        SizedBox(height: 28, child: Ux4gDivider(orientation: Ux4gDividerOrientation.vertical, color: Ux4gPalette.neutral300)),
         SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
       ],
       horizontalPadding: 16, leadingSpacing: 12,
     ),
-    Divider(height: 1, color: Color(0xFFE5E7EB)),
+    Ux4gDivider(color: Ux4gPalette.neutral200),
     Expanded(
       child: SingleChildScrollView(
         padding: EdgeInsets.fromLTRB(20, 24, 20, 0),
@@ -15205,7 +15202,7 @@ Container(
                 color: Color(0xFF111827))),
             SizedBox(height: 6),
             Text('Create a strong password for your account',
-              style: TextStyle(fontSize: 14, color: Color(0xFF6B7280))),
+              style: TextStyle(fontSize: 14, color: Ux4gPalette.neutral500)),
             SizedBox(height: 24),
             Ux4gInputField(
               value: password, onValueChange: (v) => setState(() => password = v),
@@ -15233,7 +15230,7 @@ Container(
       padding: EdgeInsets.symmetric(horizontal: 20, vertical: 14),
       child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
         Text('Powered by - ',
-          style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+          style: TextStyle(fontSize: 11, color: Ux4gPalette.neutral400)),
         SvgPicture.asset('assets/Digital_India_logo.svg', height: 24),
       ]),
     ),
@@ -15249,15 +15246,15 @@ Container(
       variant: Ux4gAppHeaderVariant.light,
       leadingWidgets: [
         SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
-        Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
+        SizedBox(height: 28, child: Ux4gDivider(orientation: Ux4gDividerOrientation.vertical, color: Ux4gPalette.neutral300)),
         SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
       ],
       horizontalPadding: 16, leadingSpacing: 12,
     ),
-    Divider(height: 1, color: Color(0xFFE5E7EB)),
+    Ux4gDivider(color: Ux4gPalette.neutral200),
     Expanded(
       child: Container(
-        color: Color(0xFFE9E5FF),
+        color: Ux4gPalette.primary100,
         child: Column(children: [
           Expanded(
             child: SingleChildScrollView(
@@ -15280,7 +15277,7 @@ Container(
                         color: Color(0xFF111827))),
                     SizedBox(height: 6),
                     Text('Create a strong password for your account',
-                      style: TextStyle(fontSize: 13, color: Color(0xFF6B7280))),
+                      style: TextStyle(fontSize: 13, color: Ux4gPalette.neutral500)),
                     SizedBox(height: 20),
                     Ux4gInputField(
                       value: password, onValueChange: (v) => setState(() => password = v),
@@ -15309,7 +15306,7 @@ Container(
             padding: EdgeInsets.symmetric(horizontal: 20, vertical: 14),
             child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
               Text('Powered by - ',
-                style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+                style: TextStyle(fontSize: 11, color: Ux4gPalette.neutral400)),
               SvgPicture.asset('assets/Digital_India_logo.svg', height: 24),
             ]),
           ),
@@ -15605,18 +15602,18 @@ class _SignUpStep5CardMockup extends StatelessWidget {
 
 const _signUpStep5Code = r'''// Step 5 � Account Created (360 � 760)
 Container(
-  width: 360, height: 760, color: Color(0xFFFAFAFA),
+  width: 360, height: 760, color: Ux4gPalette.neutral50,
   child: Column(children: [
     Ux4gAppHeader(
       variant: Ux4gAppHeaderVariant.light,
       leadingWidgets: [
         SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
-        Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
+        SizedBox(height: 28, child: Ux4gDivider(orientation: Ux4gDividerOrientation.vertical, color: Ux4gPalette.neutral300)),
         SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
       ],
       horizontalPadding: 16, leadingSpacing: 12,
     ),
-    Divider(height: 1, color: Color(0xFFE5E7EB)),
+    Ux4gDivider(color: Ux4gPalette.neutral200),
     Expanded(
       child: SingleChildScrollView(
         padding: EdgeInsets.fromLTRB(20, 40, 20, 0),
@@ -15641,7 +15638,7 @@ Container(
                 color: Color(0xFF16A34A))),
             SizedBox(height: 8),
             Text('Welcome, Ramesh Kumar',
-              style: TextStyle(fontSize: 14, color: Color(0xFF6B7280))),
+              style: TextStyle(fontSize: 14, color: Ux4gPalette.neutral500)),
             SizedBox(height: 32),
             Container(
               padding: EdgeInsets.symmetric(horizontal: 10, vertical: 4),
@@ -15670,7 +15667,7 @@ Container(
             ),
             SizedBox(height: 16),
             Text('You can link Aadhaar later from your profile',
-              style: TextStyle(fontSize: 12, color: Color(0xFF9CA3AF))),
+              style: TextStyle(fontSize: 12, color: Ux4gPalette.neutral400)),
           ],
         ),
       ),
@@ -15679,7 +15676,7 @@ Container(
       padding: EdgeInsets.symmetric(horizontal: 20, vertical: 14),
       child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
         Text('Powered by - ',
-          style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+          style: TextStyle(fontSize: 11, color: Ux4gPalette.neutral400)),
         SvgPicture.asset('assets/Digital_India_logo.svg', height: 24),
       ]),
     ),
@@ -15695,15 +15692,15 @@ Container(
       variant: Ux4gAppHeaderVariant.light,
       leadingWidgets: [
         SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
-        Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
+        SizedBox(height: 28, child: Ux4gDivider(orientation: Ux4gDividerOrientation.vertical, color: Ux4gPalette.neutral300)),
         SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
       ],
       horizontalPadding: 16, leadingSpacing: 12,
     ),
-    Divider(height: 1, color: Color(0xFFE5E7EB)),
+    Ux4gDivider(color: Ux4gPalette.neutral200),
     Expanded(
       child: Container(
-        color: Color(0xFFE9E5FF),
+        color: Ux4gPalette.primary100,
         child: Column(children: [
           Expanded(
             child: SingleChildScrollView(
@@ -15739,7 +15736,7 @@ Container(
                         color: Color(0xFF16A34A))),
                     SizedBox(height: 6),
                     Text('Welcome, Ramesh Kumar',
-                      style: TextStyle(fontSize: 13, color: Color(0xFF6B7280))),
+                      style: TextStyle(fontSize: 13, color: Ux4gPalette.neutral500)),
                     SizedBox(height: 24),
                     Container(
                       padding: EdgeInsets.symmetric(horizontal: 10, vertical: 4),
@@ -15768,7 +15765,7 @@ Container(
                     ),
                     SizedBox(height: 14),
                     Text('You can link Aadhaar later from your profile',
-                      style: TextStyle(fontSize: 12, color: Color(0xFF9CA3AF))),
+                      style: TextStyle(fontSize: 12, color: Ux4gPalette.neutral400)),
                   ],
                 ),
               ),
@@ -15778,7 +15775,7 @@ Container(
             padding: EdgeInsets.symmetric(horizontal: 20, vertical: 14),
             child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
               Text('Powered by - ',
-                style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+                style: TextStyle(fontSize: 11, color: Ux4gPalette.neutral400)),
               SvgPicture.asset('assets/Digital_India_logo.svg', height: 24),
             ]),
           ),
@@ -15850,7 +15847,7 @@ Widget _passwordStrength() {
       Ux4gLinearProgress(
         value: 0.85,
         gradientColors: const [Color(0xFF86EFAC), Color(0xFF15803D)],
-        trackColor: const Color(0xFFE5E7EB),
+        trackColor: Ux4gPalette.neutral200,
         shape: Ux4gProgressShape.rounded,
         height: 8,
       ),
@@ -16226,18 +16223,18 @@ class _FpStep1CardMockupState extends State<_FpStep1CardMockup> {
 
 const _fpStep1Code = r'''// FP Step 1 � Reset Password (360 � 760)
 Container(
-  width: 360, height: 760, color: Color(0xFFFAFAFA),
+  width: 360, height: 760, color: Ux4gPalette.neutral50,
   child: Column(children: [
     Ux4gAppHeader(
       variant: Ux4gAppHeaderVariant.light,
       leadingWidgets: [
         SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
-        Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
+        SizedBox(height: 28, child: Ux4gDivider(orientation: Ux4gDividerOrientation.vertical, color: Ux4gPalette.neutral300)),
         SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
       ],
       horizontalPadding: 16, leadingSpacing: 12,
     ),
-    Divider(height: 1, color: Color(0xFFE5E7EB)),
+    Ux4gDivider(color: Ux4gPalette.neutral200),
     Expanded(
       child: SingleChildScrollView(
         padding: EdgeInsets.fromLTRB(20, 16, 20, 0),
@@ -16256,7 +16253,7 @@ Container(
                 color: Color(0xFF111827))),
             SizedBox(height: 6),
             Text('Enter your registered mobile number',
-              style: TextStyle(fontSize: 14, color: Color(0xFF6B7280))),
+              style: TextStyle(fontSize: 14, color: Ux4gPalette.neutral500)),
             SizedBox(height: 24),
             Ux4gInputField(
               value: mobile, onValueChange: (v) => setState(() => mobile = v),
@@ -16281,13 +16278,13 @@ Container(
             ),
             SizedBox(height: 12),
             Row(children: [
-              Expanded(child: Divider(color: Color(0xFFE5E7EB))),
+              Expanded(child: Divider(color: Ux4gPalette.neutral200)),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 12),
                 child: Text('OR', style: TextStyle(fontSize: 12,
-                  color: Color(0xFF9CA3AF), fontWeight: FontWeight.w500)),
+                  color: Ux4gPalette.neutral400, fontWeight: FontWeight.w500)),
               ),
-              Expanded(child: Divider(color: Color(0xFFE5E7EB))),
+              Expanded(child: Divider(color: Ux4gPalette.neutral200)),
             ]),
             SizedBox(height: 12),
             Ux4gButton(
@@ -16311,7 +16308,7 @@ Container(
       padding: EdgeInsets.symmetric(horizontal: 20, vertical: 14),
       child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
         Text('Powered by - ',
-          style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+          style: TextStyle(fontSize: 11, color: Ux4gPalette.neutral400)),
         SvgPicture.asset('assets/Digital_India_logo.svg', height: 24),
       ]),
     ),
@@ -16327,15 +16324,15 @@ Container(
       variant: Ux4gAppHeaderVariant.light,
       leadingWidgets: [
         SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
-        Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
+        SizedBox(height: 28, child: Ux4gDivider(orientation: Ux4gDividerOrientation.vertical, color: Ux4gPalette.neutral300)),
         SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.red500, BlendMode.srcIn)),
       ],
       horizontalPadding: 16, leadingSpacing: 12,
     ),
-    Divider(height: 1, color: Color(0xFFE5E7EB)),
+    Ux4gDivider(color: Ux4gPalette.neutral200),
     Expanded(
       child: Container(
-        color: Color(0xFFE9E5FF),
+        color: Ux4gPalette.primary100,
         child: Column(children: [
           Expanded(
             child: SingleChildScrollView(
@@ -16365,7 +16362,7 @@ Container(
                         color: Color(0xFF111827))),
                     SizedBox(height: 6),
                     Text('Enter your registered mobile number',
-                      style: TextStyle(fontSize: 13, color: Color(0xFF6B7280))),
+                      style: TextStyle(fontSize: 13, color: Ux4gPalette.neutral500)),
                     SizedBox(height: 18),
                     Ux4gInputField(
                       value: mobile, onValueChange: (v) => setState(() => mobile = v),
@@ -16390,13 +16387,13 @@ Container(
                     ),
                     SizedBox(height: 10),
                     Row(children: [
-                      Expanded(child: Divider(color: Color(0xFFE5E7EB))),
+                      Expanded(child: Divider(color: Ux4gPalette.neutral200)),
                       Padding(
                         padding: EdgeInsets.symmetric(horizontal: 12),
                         child: Text('OR', style: TextStyle(fontSize: 12,
-                          color: Color(0xFF9CA3AF), fontWeight: FontWeight.w500)),
+                          color: Ux4gPalette.neutral400, fontWeight: FontWeight.w500)),
                       ),
-                      Expanded(child: Divider(color: Color(0xFFE5E7EB))),
+                      Expanded(child: Divider(color: Ux4gPalette.neutral200)),
                     ]),
                     SizedBox(height: 10),
                     Ux4gButton(
@@ -16421,7 +16418,7 @@ Container(
             padding: EdgeInsets.symmetric(horizontal: 20, vertical: 14),
             child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
               Text('Powered by - ',
-                style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+                style: TextStyle(fontSize: 11, color: Ux4gPalette.neutral400)),
               SvgPicture.asset('assets/Digital_India_logo.svg', height: 24),
             ]),
           ),
@@ -16643,18 +16640,18 @@ class _FpStep2CardMockupState extends State<_FpStep2CardMockup> {
 
 const _fpStep2Code = r'''// FP Step 2 � Enter OTP (360 � 760)
 Container(
-  width: 360, height: 760, color: Color(0xFFFAFAFA),
+  width: 360, height: 760, color: Ux4gPalette.neutral50,
   child: Column(children: [
     Ux4gAppHeader(
       variant: Ux4gAppHeaderVariant.light,
       leadingWidgets: [
         SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
-        Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
+        SizedBox(height: 28, child: Ux4gDivider(orientation: Ux4gDividerOrientation.vertical, color: Ux4gPalette.neutral300)),
         SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
       ],
       horizontalPadding: 16, leadingSpacing: 12,
     ),
-    Divider(height: 1, color: Color(0xFFE5E7EB)),
+    Ux4gDivider(color: Ux4gPalette.neutral200),
     Expanded(
       child: SingleChildScrollView(
         padding: EdgeInsets.fromLTRB(20, 16, 20, 0),
@@ -16673,7 +16670,7 @@ Container(
                 color: Color(0xFF111827))),
             SizedBox(height: 6),
             Text('Sent to +91 98765 XXXXX',
-              style: TextStyle(fontSize: 14, color: Color(0xFF6B7280))),
+              style: TextStyle(fontSize: 14, color: Ux4gPalette.neutral500)),
             SizedBox(height: 28),
             Ux4gOtpInput(
               length: 6,
@@ -16701,7 +16698,7 @@ Container(
       padding: EdgeInsets.symmetric(horizontal: 20, vertical: 14),
       child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
         Text('Powered by - ',
-          style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+          style: TextStyle(fontSize: 11, color: Ux4gPalette.neutral400)),
         SvgPicture.asset('assets/Digital_India_logo.svg', height: 24),
       ]),
     ),
@@ -16716,15 +16713,15 @@ Container(
       variant: Ux4gAppHeaderVariant.light,
       leadingWidgets: [
         SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
-        Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
+        SizedBox(height: 28, child: Ux4gDivider(orientation: Ux4gDividerOrientation.vertical, color: Ux4gPalette.neutral300)),
         SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
       ],
       horizontalPadding: 16, leadingSpacing: 12,
     ),
-    Divider(height: 1, color: Color(0xFFE5E7EB)),
+    Ux4gDivider(color: Ux4gPalette.neutral200),
     Expanded(
       child: Container(
-        color: Color(0xFFE9E5FF),
+        color: Ux4gPalette.primary100,
         child: Column(children: [
           Expanded(
             child: SingleChildScrollView(
@@ -16754,7 +16751,7 @@ Container(
                         color: Color(0xFF111827))),
                     SizedBox(height: 6),
                     Text('Sent to +91 98765 XXXXX',
-                      style: TextStyle(fontSize: 13, color: Color(0xFF6B7280))),
+                      style: TextStyle(fontSize: 13, color: Ux4gPalette.neutral500)),
                     SizedBox(height: 24),
                     Ux4gOtpInput(
                       length: 6,
@@ -16783,7 +16780,7 @@ Container(
             padding: EdgeInsets.symmetric(horizontal: 20, vertical: 14),
             child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
               Text('Powered by - ',
-                style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+                style: TextStyle(fontSize: 11, color: Ux4gPalette.neutral400)),
               SvgPicture.asset('assets/Digital_India_logo.svg', height: 24),
             ]),
           ),
@@ -17048,18 +17045,18 @@ class _FpStep3CardMockupState extends State<_FpStep3CardMockup> {
 
 const _fpStep3Code = r'''// FP Step 3 � Create new password (360 � 760)
 Container(
-  width: 360, height: 760, color: Color(0xFFFAFAFA),
+  width: 360, height: 760, color: Ux4gPalette.neutral50,
   child: Column(children: [
     Ux4gAppHeader(
       variant: Ux4gAppHeaderVariant.light,
       leadingWidgets: [
         SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
-        Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
+        SizedBox(height: 28, child: Ux4gDivider(orientation: Ux4gDividerOrientation.vertical, color: Ux4gPalette.neutral300)),
         SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
       ],
       horizontalPadding: 16, leadingSpacing: 12,
     ),
-    Divider(height: 1, color: Color(0xFFE5E7EB)),
+    Ux4gDivider(color: Ux4gPalette.neutral200),
     Expanded(
       child: SingleChildScrollView(
         padding: EdgeInsets.fromLTRB(20, 24, 20, 0),
@@ -17071,7 +17068,7 @@ Container(
                 color: Color(0xFF111827))),
             SizedBox(height: 6),
             Text('Your new password must be different from your previous one.',
-              style: TextStyle(fontSize: 14, color: Color(0xFF6B7280))),
+              style: TextStyle(fontSize: 14, color: Ux4gPalette.neutral500)),
             SizedBox(height: 24),
             Ux4gInputField(
               value: password, onValueChange: (v) => setState(() => password = v),
@@ -17082,7 +17079,7 @@ Container(
             Ux4gLinearProgress(
               value: 0.85,
               gradientColors: [Color(0xFF86EFAC), Color(0xFF15803D)],
-              trackColor: Color(0xFFE5E7EB),
+              trackColor: Ux4gPalette.neutral200,
               shape: Ux4gProgressShape.rounded,
               height: 8,
             ),
@@ -17116,7 +17113,7 @@ Container(
               Icon(Icons.error, color: Color(0xFFDC2626), size: 16),
               SizedBox(width: 6),
               Text('Special character',
-                style: TextStyle(fontSize: 13, color: Color(0xFF6B7280))),
+                style: TextStyle(fontSize: 13, color: Ux4gPalette.neutral500)),
             ]),
             SizedBox(height: 16),
             Ux4gInputField(
@@ -17142,7 +17139,7 @@ Container(
       padding: EdgeInsets.symmetric(horizontal: 20, vertical: 14),
       child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
         Text('Powered by - ',
-          style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+          style: TextStyle(fontSize: 11, color: Ux4gPalette.neutral400)),
         SvgPicture.asset('assets/Digital_India_logo.svg', height: 24),
       ]),
     ),
@@ -17158,15 +17155,15 @@ Container(
       variant: Ux4gAppHeaderVariant.light,
       leadingWidgets: [
         SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
-        Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
+        SizedBox(height: 28, child: Ux4gDivider(orientation: Ux4gDividerOrientation.vertical, color: Ux4gPalette.neutral300)),
         SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
       ],
       horizontalPadding: 16, leadingSpacing: 12,
     ),
-    Divider(height: 1, color: Color(0xFFE5E7EB)),
+    Ux4gDivider(color: Ux4gPalette.neutral200),
     Expanded(
       child: Container(
-        color: Color(0xFFE9E5FF),
+        color: Ux4gPalette.primary100,
         child: Column(children: [
           Expanded(
             child: SingleChildScrollView(
@@ -17189,7 +17186,7 @@ Container(
                         color: Color(0xFF111827))),
                     SizedBox(height: 6),
                     Text('Your new password must be different from your previous one.',
-                      style: TextStyle(fontSize: 13, color: Color(0xFF6B7280))),
+                      style: TextStyle(fontSize: 13, color: Ux4gPalette.neutral500)),
                     SizedBox(height: 20),
                     Ux4gInputField(
                       value: password, onValueChange: (v) => setState(() => password = v),
@@ -17200,7 +17197,7 @@ Container(
                     Ux4gLinearProgress(
                       value: 0.85,
                       gradientColors: [Color(0xFF86EFAC), Color(0xFF15803D)],
-                      trackColor: Color(0xFFE5E7EB),
+                      trackColor: Ux4gPalette.neutral200,
                       shape: Ux4gProgressShape.rounded,
                       height: 8,
                     ),
@@ -17234,7 +17231,7 @@ Container(
                       Icon(Icons.error, color: Color(0xFFDC2626), size: 16),
                       SizedBox(width: 6),
                       Text('Special character',
-                        style: TextStyle(fontSize: 13, color: Color(0xFF6B7280))),
+                        style: TextStyle(fontSize: 13, color: Ux4gPalette.neutral500)),
                     ]),
                     SizedBox(height: 14),
                     Ux4gInputField(
@@ -17261,7 +17258,7 @@ Container(
             padding: EdgeInsets.symmetric(horizontal: 20, vertical: 14),
             child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
               Text('Powered by - ',
-                style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+                style: TextStyle(fontSize: 11, color: Ux4gPalette.neutral400)),
               SvgPicture.asset('assets/Digital_India_logo.svg', height: 24),
             ]),
           ),
@@ -17472,18 +17469,18 @@ class _FpStep4CardMockup extends StatelessWidget {
 
 const _fpStep4Code = r'''// FP Step 4 � Password reset successfully (360 � 760)
 Container(
-  width: 360, height: 760, color: Color(0xFFFAFAFA),
+  width: 360, height: 760, color: Ux4gPalette.neutral50,
   child: Column(children: [
     Ux4gAppHeader(
       variant: Ux4gAppHeaderVariant.light,
       leadingWidgets: [
         SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
-        Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
+        SizedBox(height: 28, child: Ux4gDivider(orientation: Ux4gDividerOrientation.vertical, color: Ux4gPalette.neutral300)),
         SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
       ],
       horizontalPadding: 16, leadingSpacing: 12,
     ),
-    Divider(height: 1, color: Color(0xFFE5E7EB)),
+    Ux4gDivider(color: Ux4gPalette.neutral200),
     Expanded(
       child: SingleChildScrollView(
         padding: EdgeInsets.fromLTRB(20, 48, 20, 0),
@@ -17511,7 +17508,7 @@ Container(
             Text(
               'Sign in with your new password to continue\naccess to government services.',
               textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 14, color: Color(0xFF6B7280))),
+              style: TextStyle(fontSize: 14, color: Ux4gPalette.neutral500)),
             SizedBox(height: 32),
             Ux4gButton(
               text: 'Sign in', onPressed: () {},
@@ -17527,7 +17524,7 @@ Container(
       padding: EdgeInsets.symmetric(horizontal: 20, vertical: 14),
       child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
         Text('Powered by - ',
-          style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+          style: TextStyle(fontSize: 11, color: Ux4gPalette.neutral400)),
         SvgPicture.asset('assets/Digital_India_logo.svg', height: 24),
       ]),
     ),
@@ -17543,15 +17540,15 @@ Container(
       variant: Ux4gAppHeaderVariant.light,
       leadingWidgets: [
         SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
-        Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
+        SizedBox(height: 28, child: Ux4gDivider(orientation: Ux4gDividerOrientation.vertical, color: Ux4gPalette.neutral300)),
         SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
       ],
       horizontalPadding: 16, leadingSpacing: 12,
     ),
-    Divider(height: 1, color: Color(0xFFE5E7EB)),
+    Ux4gDivider(color: Ux4gPalette.neutral200),
     Expanded(
       child: Container(
-        color: Color(0xFFE9E5FF),
+        color: Ux4gPalette.primary100,
         child: Column(children: [
           Expanded(
             child: SingleChildScrollView(
@@ -17590,7 +17587,7 @@ Container(
                     Text(
                       'Sign in with your new password to continue\naccess to government services.',
                       textAlign: TextAlign.center,
-                      style: TextStyle(fontSize: 13, color: Color(0xFF6B7280))),
+                      style: TextStyle(fontSize: 13, color: Ux4gPalette.neutral500)),
                     SizedBox(height: 28),
                     Ux4gButton(
                       text: 'Sign in', onPressed: () {},
@@ -17607,7 +17604,7 @@ Container(
             padding: EdgeInsets.symmetric(horizontal: 20, vertical: 14),
             child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
               Text('Powered by - ',
-                style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+                style: TextStyle(fontSize: 11, color: Ux4gPalette.neutral400)),
               SvgPicture.asset('assets/Digital_India_logo.svg', height: 24),
             ]),
           ),
@@ -17837,18 +17834,18 @@ class _FpStep5CardMockupState extends State<_FpStep5CardMockup> {
 
 const _fpStep5Code = r'''// FP Step 5 � Account recovery (360 � 760)
 Container(
-  width: 360, height: 760, color: Color(0xFFFAFAFA),
+  width: 360, height: 760, color: Ux4gPalette.neutral50,
   child: Column(children: [
     Ux4gAppHeader(
       variant: Ux4gAppHeaderVariant.light,
       leadingWidgets: [
         SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
-        Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
+        SizedBox(height: 28, child: Ux4gDivider(orientation: Ux4gDividerOrientation.vertical, color: Ux4gPalette.neutral300)),
         SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
       ],
       horizontalPadding: 16, leadingSpacing: 12,
     ),
-    Divider(height: 1, color: Color(0xFFE5E7EB)),
+    Ux4gDivider(color: Ux4gPalette.neutral200),
     Expanded(
       child: SingleChildScrollView(
         padding: EdgeInsets.fromLTRB(20, 24, 20, 0),
@@ -17860,7 +17857,7 @@ Container(
                 color: Color(0xFF111827))),
             SizedBox(height: 6),
             Text('Verify your identity using Aadhaar',
-              style: TextStyle(fontSize: 14, color: Color(0xFF6B7280))),
+              style: TextStyle(fontSize: 14, color: Ux4gPalette.neutral500)),
             SizedBox(height: 24),
             Ux4gAadhaarInputField(
               value: aadhaar,
@@ -17896,7 +17893,7 @@ Container(
       padding: EdgeInsets.symmetric(horizontal: 20, vertical: 14),
       child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
         Text('Powered by - ',
-          style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+          style: TextStyle(fontSize: 11, color: Ux4gPalette.neutral400)),
         SvgPicture.asset('assets/Digital_India_logo.svg', height: 24),
       ]),
     ),
@@ -17912,15 +17909,15 @@ Container(
       variant: Ux4gAppHeaderVariant.light,
       leadingWidgets: [
         SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
-        Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
+        SizedBox(height: 28, child: Ux4gDivider(orientation: Ux4gDividerOrientation.vertical, color: Ux4gPalette.neutral300)),
         SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
       ],
       horizontalPadding: 16, leadingSpacing: 12,
     ),
-    Divider(height: 1, color: Color(0xFFE5E7EB)),
+    Ux4gDivider(color: Ux4gPalette.neutral200),
     Expanded(
       child: Container(
-        color: Color(0xFFE9E5FF),
+        color: Ux4gPalette.primary100,
         child: Column(children: [
           Expanded(
             child: SingleChildScrollView(
@@ -17943,7 +17940,7 @@ Container(
                         color: Color(0xFF111827))),
                     SizedBox(height: 6),
                     Text('Verify your identity using Aadhaar',
-                      style: TextStyle(fontSize: 13, color: Color(0xFF6B7280))),
+                      style: TextStyle(fontSize: 13, color: Ux4gPalette.neutral500)),
                     SizedBox(height: 18),
                     Ux4gAadhaarInputField(
                       value: aadhaar,
@@ -17980,7 +17977,7 @@ Container(
             padding: EdgeInsets.symmetric(horizontal: 20, vertical: 14),
             child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
               Text('Powered by - ',
-                style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+                style: TextStyle(fontSize: 11, color: Ux4gPalette.neutral400)),
               SvgPicture.asset('assets/Digital_India_logo.svg', height: 24),
             ]),
           ),
@@ -18249,7 +18246,7 @@ class _NotifRemindersMockupState extends State<_NotifRemindersMockup> {
                             child: const Icon(
                               Icons.notifications_none_outlined,
                               size: 32,
-                              color: Color(0xFF9CA3AF),
+                              color: Ux4gPalette.neutral400,
                             ),
                           ),
                           const SizedBox(height: 16),
@@ -18267,7 +18264,7 @@ class _NotifRemindersMockupState extends State<_NotifRemindersMockup> {
                             'All reminders have been dismissed.',
                             style: TextStyle(
                               fontSize: 13,
-                              color: Color(0xFF6B7280),
+                              color: Ux4gPalette.neutral500,
                               height: 1.5,
                             ),
                             textAlign: TextAlign.center,
@@ -18294,7 +18291,7 @@ class _NotifRemindersMockupState extends State<_NotifRemindersMockup> {
                             icon: const Icon(
                               Icons.close,
                               size: 18,
-                              color: Color(0xFF6B7280),
+                              color: Ux4gPalette.neutral500,
                             ),
                             onPressed: () =>
                                 setState(() => alert.dismissed = true),
@@ -18379,7 +18376,7 @@ class _NotifPanelHeader extends StatelessWidget {
                   'Mark as read',
                   style: TextStyle(
                     fontSize: 13,
-                    color: Color(0xFF6B7280),
+                    color: Ux4gPalette.neutral500,
                     fontWeight: FontWeight.w500,
                   ),
                 ),
@@ -18388,7 +18385,7 @@ class _NotifPanelHeader extends StatelessWidget {
                 icon: const Icon(
                   Icons.close,
                   size: 20,
-                  color: Color(0xFF6B7280),
+                  color: Ux4gPalette.neutral500,
                 ),
                 onPressed: onClose ?? () {},
                 padding: const EdgeInsets.all(8),
@@ -18417,7 +18414,7 @@ class _NotifSectionLabel extends StatelessWidget {
         style: const TextStyle(
           fontSize: 11,
           fontWeight: FontWeight.w600,
-          color: Color(0xFF9CA3AF),
+          color: Ux4gPalette.neutral400,
           letterSpacing: 0.6,
         ),
       ),
@@ -18467,7 +18464,7 @@ class _NotifTile extends StatelessWidget {
                       item.time,
                       style: const TextStyle(
                         fontSize: 11,
-                        color: Color(0xFF9CA3AF),
+                        color: Ux4gPalette.neutral400,
                       ),
                     ),
                   ],
@@ -18487,7 +18484,7 @@ class _NotifTile extends StatelessWidget {
                   item.body,
                   style: const TextStyle(
                     fontSize: 12,
-                    color: Color(0xFF6B7280),
+                    color: Ux4gPalette.neutral500,
                     height: 1.45,
                   ),
                 ),
@@ -18580,7 +18577,7 @@ class _NotifListMockupState extends State<_NotifListMockup> {
                       const Divider(
                         height: 1,
                         thickness: 1,
-                        color: Color(0xFFE5E7EB),
+                        color: Ux4gPalette.neutral200,
                         indent: 34,
                       ),
                   ],
@@ -18601,7 +18598,7 @@ class _NotifEmptyMockup extends StatelessWidget {
   //   � allCaughtUp  (default) ? neutral gray  0xFFF3F4F6
   //   � neverHadAny            ? soft blue tint 0xFFEFF6FF
   static const Color _iconBgAllCaughtUp = Color(0xFFF3F4F6);
-  static const Color _iconColorAllCaughtUp = Color(0xFF9CA3AF);
+  static const Color _iconColorAllCaughtUp = Ux4gPalette.neutral400;
 
   @override
   Widget build(BuildContext context) {
@@ -18649,7 +18646,7 @@ class _NotifEmptyMockup extends StatelessWidget {
                       'No new notifications. We will let you know when\nsomething needs your attention.',
                       style: TextStyle(
                         fontSize: 13,
-                        color: Color(0xFF6B7280),
+                        color: Ux4gPalette.neutral500,
                         height: 1.5,
                       ),
                       textAlign: TextAlign.center,
@@ -18725,19 +18722,19 @@ Container(
         Spacer(),
         TextButton(onPressed: _markAllAsRead,
           child: Text('Mark as read',
-            style: TextStyle(fontSize: 13, color: Color(0xFF6B7280), fontWeight: FontWeight.w500))),
-        IconButton(icon: Icon(Icons.close, size: 20, color: Color(0xFF6B7280)),
+            style: TextStyle(fontSize: 13, color: Ux4gPalette.neutral500, fontWeight: FontWeight.w500))),
+        IconButton(icon: Icon(Icons.close, size: 20, color: Ux4gPalette.neutral500),
           onPressed: () {}, padding: EdgeInsets.all(8)),
       ]),
     ),
-    Divider(height: 1, color: Color(0xFFE5E7EB)),
+    Ux4gDivider(color: Ux4gPalette.neutral200),
     Expanded(
       child: ListView(padding: EdgeInsets.zero, children: [
         // Section label
         Container(color: Colors.white, padding: EdgeInsets.fromLTRB(16, 14, 16, 6),
           child: Text('TODAY',
             style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600,
-              color: Color(0xFF9CA3AF), letterSpacing: 0.6))),
+              color: Ux4gPalette.neutral400, letterSpacing: 0.6))),
 
         // Unread tile ? gray bg
         Container(
@@ -18751,21 +18748,21 @@ Container(
               Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
                 Text('Action required',
                   style: TextStyle(fontSize: 11, color: Color(0xFFEF4444), fontWeight: FontWeight.w600)),
-                Text('10:24 AM', style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+                Text('10:24 AM', style: TextStyle(fontSize: 11, color: Ux4gPalette.neutral400)),
               ]),
               SizedBox(height: 4),
               Text('Income Certificate . Action required',
                 style: TextStyle(fontSize: 13, fontWeight: FontWeight.w700, color: Color(0xFF111827))),
               SizedBox(height: 3),
               Text('Upload your income proof by 15 Apr to avoid rejection.',
-                style: TextStyle(fontSize: 12, color: Color(0xFF6B7280))),
+                style: TextStyle(fontSize: 12, color: Ux4gPalette.neutral500)),
               SizedBox(height: 6),
               Text('Upload now',
                 style: TextStyle(fontSize: 12, color: Color(0xFF2563EB), fontWeight: FontWeight.w600)),
             ])),
           ]),
         ),
-        Divider(height: 1, color: Color(0xFFE5E7EB), indent: 34),
+        Divider(height: 1, color: Ux4gPalette.neutral200, indent: 34),
 
         // Read tile ? white bg
         Container(
@@ -18779,14 +18776,14 @@ Container(
               Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
                 Text('Reminder',
                   style: TextStyle(fontSize: 11, color: Color(0xFFF59E0B), fontWeight: FontWeight.w600)),
-                Text('8:03 AM', style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+                Text('8:03 AM', style: TextStyle(fontSize: 11, color: Ux4gPalette.neutral400)),
               ]),
               SizedBox(height: 4),
               Text('Draft expiring . Income Certificate',
                 style: TextStyle(fontSize: 13, fontWeight: FontWeight.w700, color: Color(0xFF111827))),
               SizedBox(height: 3),
               Text('Your draft expires in 5 days.',
-                style: TextStyle(fontSize: 12, color: Color(0xFF6B7280))),
+                style: TextStyle(fontSize: 12, color: Ux4gPalette.neutral500)),
             ])),
           ]),
         ),
@@ -18802,27 +18799,27 @@ Container(
   width: 360, height: 760, color: Colors.white,
   child: Column(children: [
     // Same header as default . omitted for brevity
-    Divider(height: 1, color: Color(0xFFE5E7EB)),
+    Ux4gDivider(color: Ux4gPalette.neutral200),
     Container(color: Colors.white, padding: EdgeInsets.fromLTRB(16, 14, 16, 6),
       child: Text('NOTIFICATION TYPES',
         style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600,
-          color: Color(0xFF9CA3AF), letterSpacing: 0.6))),
+          color: Ux4gPalette.neutral400, letterSpacing: 0.6))),
     Expanded(
       child: ListView(padding: EdgeInsets.zero, children: [
         _buildTile(bg: Color(0xFFF3F4F6), dot: Color(0xFFEF4444), label: 'Action required',
           time: '8:03 AM', title: 'Income Certificate . Action required',
           body: 'Upload your income proof by 15 Apr.', action: 'Upload now'),
-        Divider(height: 1, color: Color(0xFFE5E7EB), indent: 34),
+        Divider(height: 1, color: Ux4gPalette.neutral200, indent: 34),
 
         _buildTile(bg: Color(0xFFF3F4F6), dot: Color(0xFF3B82F6), label: 'Status Update',
           time: '8:03 AM', title: 'Income Certificate . Action required',
           body: 'Upload your income proof by 15 Apr.'),
-        Divider(height: 1, color: Color(0xFFE5E7EB), indent: 34),
+        Divider(height: 1, color: Ux4gPalette.neutral200, indent: 34),
 
         _buildTile(bg: Colors.white, dot: Color(0xFFF59E0B), label: 'Reminder',
           time: '8:03 AM', title: 'Draft expiring . Income Certificate',
           body: 'Your draft expires in 5 days.'),
-        Divider(height: 1, color: Color(0xFFE5E7EB), indent: 34),
+        Divider(height: 1, color: Ux4gPalette.neutral200, indent: 34),
 
         _buildTile(bg: Colors.white, dot: Color(0xFF14B8A6), label: 'Info',
           time: '8:03 AM', title: 'Birth Certificate . Submitted',
@@ -18848,12 +18845,12 @@ Container(
         Spacer(),
         TextButton(onPressed: () {},
           child: Text('Mark as read',
-            style: TextStyle(fontSize: 13, color: Color(0xFF6B7280)))),
-        IconButton(icon: Icon(Icons.close, size: 20, color: Color(0xFF6B7280)),
+            style: TextStyle(fontSize: 13, color: Ux4gPalette.neutral500))),
+        IconButton(icon: Icon(Icons.close, size: 20, color: Ux4gPalette.neutral500),
           onPressed: () {}, padding: EdgeInsets.all(8)),
       ]),
     ),
-    Divider(height: 1, color: Color(0xFFE5E7EB)),
+    Ux4gDivider(color: Ux4gPalette.neutral200),
     Expanded(
       child: Center(
         child: Padding(
@@ -18873,7 +18870,7 @@ Container(
                 ),
                 alignment: Alignment.center,
                 child: Icon(Icons.notifications_none_outlined,
-                  size: 32, color: Color(0xFF9CA3AF)),
+                  size: 32, color: Ux4gPalette.neutral400),
               ),
               SizedBox(height: 16),
               Text('You are all caught up',
@@ -18883,7 +18880,7 @@ Container(
               SizedBox(height: 8),
               Text(
                 'No new notifications. We will let you know when\nsomething needs your attention.',
-                style: TextStyle(fontSize: 13, color: Color(0xFF6B7280), height: 1.5),
+                style: TextStyle(fontSize: 13, color: Ux4gPalette.neutral500, height: 1.5),
                 textAlign: TextAlign.center),
             ],
           ),
@@ -18972,7 +18969,7 @@ class _ReminderAlertMockupState extends State<_ReminderAlertMockup> {
                                       widget.alert.body,
                                       style: const TextStyle(
                                         fontSize: 12,
-                                        color: Color(0xFF6B7280),
+                                        color: Ux4gPalette.neutral500,
                                       ),
                                     ),
                                   ],
@@ -18982,7 +18979,7 @@ class _ReminderAlertMockupState extends State<_ReminderAlertMockup> {
                                 icon: const Icon(
                                   Icons.close,
                                   size: 16,
-                                  color: Color(0xFF9CA3AF),
+                                  color: Ux4gPalette.neutral400,
                                 ),
                                 onPressed: () =>
                                     setState(() => _dismissed = true),
@@ -19036,7 +19033,7 @@ Ux4gStatusBanner(
   leadingIcon: Icon(Icons.info_outline_rounded,
     color: Color(0xFF14B8A6), size: 20),
   trailingIcon: IconButton(
-    icon: Icon(Icons.close, size: 18, color: Color(0xFF6B7280)),
+    icon: Icon(Icons.close, size: 18, color: Ux4gPalette.neutral500),
     onPressed: _dismiss, padding: EdgeInsets.zero,
     constraints: BoxConstraints()),
   margin: EdgeInsets.symmetric(horizontal: 12, vertical: 4),
@@ -19053,7 +19050,7 @@ Ux4gStatusBanner(
   leadingIcon: Icon(Icons.warning_amber_rounded,
     color: Color(0xFFF59E0B), size: 20),
   trailingIcon: IconButton(
-    icon: Icon(Icons.close, size: 18, color: Color(0xFF6B7280)),
+    icon: Icon(Icons.close, size: 18, color: Ux4gPalette.neutral500),
     onPressed: _dismiss, padding: EdgeInsets.zero,
     constraints: BoxConstraints()),
   margin: EdgeInsets.symmetric(horizontal: 12, vertical: 4),
@@ -19070,7 +19067,7 @@ Ux4gStatusBanner(
   leadingIcon: Icon(Icons.error_outline_rounded,
     color: Color(0xFFEF4444), size: 20),
   trailingIcon: IconButton(
-    icon: Icon(Icons.close, size: 18, color: Color(0xFF6B7280)),
+    icon: Icon(Icons.close, size: 18, color: Ux4gPalette.neutral500),
     onPressed: _dismiss, padding: EdgeInsets.zero,
     constraints: BoxConstraints()),
   margin: EdgeInsets.symmetric(horizontal: 12, vertical: 4),
@@ -19087,7 +19084,7 @@ Ux4gStatusBanner(
   leadingIcon: Icon(Icons.error_outline_rounded,
     color: Color(0xFFEF4444), size: 20),
   trailingIcon: IconButton(
-    icon: Icon(Icons.close, size: 18, color: Color(0xFF6B7280)),
+    icon: Icon(Icons.close, size: 18, color: Ux4gPalette.neutral500),
     onPressed: _dismiss, padding: EdgeInsets.zero,
     constraints: BoxConstraints()),
   actions: [
@@ -19115,7 +19112,7 @@ Ux4gStatusBanner(
   leadingIcon: Icon(Icons.check_circle_outline_rounded,
     color: Color(0xFF22C55E), size: 20),
   trailingIcon: IconButton(
-    icon: Icon(Icons.close, size: 18, color: Color(0xFF6B7280)),
+    icon: Icon(Icons.close, size: 18, color: Ux4gPalette.neutral500),
     onPressed: _dismiss, padding: EdgeInsets.zero,
     constraints: BoxConstraints()),
   margin: EdgeInsets.symmetric(horizontal: 12, vertical: 4),
@@ -19175,12 +19172,12 @@ final reminderAlertsComponent = WidgetbookComponent(
 // Notification Preferences
 // ------------------------------------------------------------------------------
 
-const _prefBg = Color(0xFFFAFAFA);
-const _prefBorder = Color(0xFFE5E7EB);
+const _prefBg = Ux4gPalette.neutral50;
+const _prefBorder = Ux4gPalette.neutral200;
 const _prefPurple = Color(0xFF6B21A8);
 const _prefTitle = Color(0xFF111827);
-const _prefSub = Color(0xFF6B7280);
-const _prefMuted = Color(0xFF9CA3AF);
+const _prefSub = Ux4gPalette.neutral500;
+const _prefMuted = Ux4gPalette.neutral400;
 
 // ── Chip model ────────────────────────────────────────────────────────────────
 
@@ -19237,7 +19234,7 @@ class _PrefChipBarState extends State<_PrefChipBar> {
             size: Ux4gChoiceChipSize.s,
             borderRadius: 4,
             unselectedBackgroundColor: Colors.white,
-            unselectedBorderColor: const Color(0xFFD1D5DB),
+            unselectedBorderColor: Ux4gPalette.neutral300,
             unselectedTextColor: const Color(0xFF374151),
             trailingContent: sel
                 ? Text(
@@ -19321,14 +19318,14 @@ class _PrefPlaceholderContent extends StatelessWidget {
           decoration: BoxDecoration(
             color: const Color(0xFFF9FAFB),
             borderRadius: BorderRadius.circular(8),
-            border: Border.all(color: const Color(0xFFD1D5DB)),
+            border: Border.all(color: Ux4gPalette.neutral300),
           ),
           alignment: Alignment.center,
           child: const Text(
             'Content area',
             style: TextStyle(
               fontSize: 13,
-              color: Color(0xFF9CA3AF),
+              color: Ux4gPalette.neutral400,
               fontWeight: FontWeight.w500,
             ),
           ),
@@ -20369,7 +20366,7 @@ Ux4gChoiceChip(
   size: Ux4gChoiceChipSize.s,
   borderRadius: 4,
   unselectedBackgroundColor: Colors.white,
-  unselectedBorderColor: Color(0xFFD1D5DB),
+  unselectedBorderColor: Ux4gPalette.neutral300,
   trailingContent: Container(
     padding: EdgeInsets.symmetric(horizontal: 5, vertical: 1),
     decoration: BoxDecoration(
@@ -20435,7 +20432,7 @@ class _PmtStepBar extends StatelessWidget {
                   padding: const EdgeInsets.only(top: 15),
                   child: Container(
                     height: 2,
-                    color: i < currentStep ? primary : const Color(0xFFD1D5DB),
+                    color: i < currentStep ? primary : Ux4gPalette.neutral300,
                   ),
                 ),
               ),
@@ -20481,7 +20478,7 @@ class _PmtCircle extends StatelessWidget {
         color: isCompleted ? primary : Colors.transparent,
         shape: BoxShape.circle,
         border: Border.all(
-          color: (isCompleted || isActive) ? primary : const Color(0xFFD1D5DB),
+          color: (isCompleted || isActive) ? primary : Ux4gPalette.neutral300,
           width: 2,
         ),
       ),
@@ -20499,7 +20496,7 @@ class _PmtCircle extends StatelessWidget {
               style: const TextStyle(
                 fontSize: 12,
                 fontWeight: FontWeight.bold,
-                color: Color(0xFFD1D5DB),
+                color: Ux4gPalette.neutral300,
               ),
             ),
     );
@@ -20669,7 +20666,7 @@ class _PmtOptionTile extends StatelessWidget {
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 border: Border.all(
-                  color: selected ? primary : const Color(0xFFD1D5DB),
+                  color: selected ? primary : Ux4gPalette.neutral300,
                   width: 2,
                 ),
               ),
@@ -20992,7 +20989,7 @@ class _PaymentSummaryCardMockup extends StatelessWidget {
 
 const _paymentSummaryCode = r'''
 Scaffold(
-  backgroundColor: Color(0xFFFAFAFA),
+  backgroundColor: Ux4gPalette.neutral50,
   body: Column(
     children: [
       // Government header
@@ -21001,13 +20998,13 @@ Scaffold(
         title: '',
         leadingWidgets: [
           SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
-          Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
+          SizedBox(height: 28, child: Ux4gDivider(orientation: Ux4gDividerOrientation.vertical, color: Ux4gPalette.neutral300)),
           SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
         ],
         horizontalPadding: 16,
         leadingSpacing: 12,
       ),
-      Divider(height: 1, thickness: 1, color: Color(0xFFE5E7EB)),
+      Divider(height: 1, thickness: 1, color: Ux4gPalette.neutral200),
       // Step bar (5 steps, current = 5 "Payment")
       Padding(
         padding: EdgeInsets.fromLTRB(16, 10, 16, 10),
@@ -21024,10 +21021,10 @@ Scaffold(
           ],
         ),
       ),
-      Divider(height: 1, thickness: 1, color: Color(0xFFE5E7EB)),
+      Divider(height: 1, thickness: 1, color: Ux4gPalette.neutral200),
       Expanded(
         child: Container(
-          color: Color(0xFFFAFAFA),
+          color: Ux4gPalette.neutral50,
           child: Column(
             children: [
               Expanded(
@@ -21051,7 +21048,7 @@ Scaffold(
                         'Income Certificate — Application #INC-2024-00842',
                         style: TextStyle(
                           fontSize: 13,
-                          color: Color(0xFF6B7280),
+                          color: Ux4gPalette.neutral500,
                           height: 1.4,
                         ),
                       ),
@@ -21059,18 +21056,18 @@ Scaffold(
                       // Fee breakdown table
                       Container(
                         decoration: BoxDecoration(
-                          border: Border.all(color: Color(0xFFE5E7EB)),
+                          border: Border.all(color: Ux4gPalette.neutral200),
                           borderRadius: BorderRadius.circular(10),
                         ),
                         clipBehavior: Clip.hardEdge,
                         child: Column(
                           children: [
                             _feeRow('Application fee', 'Rs 30.00'),
-                            Divider(height: 1, thickness: 1, color: Color(0xFFE5E7EB)),
+                            Divider(height: 1, thickness: 1, color: Ux4gPalette.neutral200),
                             _feeRow('Processing charge', 'Rs 5.00'),
-                            Divider(height: 1, thickness: 1, color: Color(0xFFE5E7EB)),
+                            Divider(height: 1, thickness: 1, color: Ux4gPalette.neutral200),
                             _feeRow('GST 18%', 'Rs 6.30'),
-                            Divider(height: 1, thickness: 1, color: Color(0xFFE5E7EB)),
+                            Divider(height: 1, thickness: 1, color: Ux4gPalette.neutral200),
                             _feeRow('Total', 'Rs 41.30', bold: true),
                           ],
                         ),
@@ -21113,7 +21110,7 @@ Scaffold(
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Text('Powered by -',
-                        style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF),
+                        style: TextStyle(fontSize: 11, color: Ux4gPalette.neutral400,
                             fontWeight: FontWeight.w500)),
                     SizedBox(height: 6),
                     Image.asset('assets/digital_india_logo.png', height: 22, color: Theme.of(context).brightness == Brightness.dark ? Colors.white : null),
@@ -21139,7 +21136,7 @@ Widget _feeRow(String label, String amount, {bool bold = false}) {
               style: TextStyle(
                 fontSize: 13,
                 fontWeight: bold ? FontWeight.w600 : FontWeight.w400,
-                color: bold ? Color(0xFF111827) : Color(0xFF6B7280),
+                color: bold ? Color(0xFF111827) : Ux4gPalette.neutral500,
               )),
         ),
         Text(amount,
@@ -21155,7 +21152,7 @@ Widget _feeRow(String label, String amount, {bool bold = false}) {
 
 const _paymentSummaryCardCode = r'''
 Scaffold(
-  backgroundColor: Color(0xFFE9E5FF),
+  backgroundColor: Ux4gPalette.primary100,
   body: Column(
     children: [
       // Government header
@@ -21164,13 +21161,13 @@ Scaffold(
         title: '',
         leadingWidgets: [
           SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
-          Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
+          SizedBox(height: 28, child: Ux4gDivider(orientation: Ux4gDividerOrientation.vertical, color: Ux4gPalette.neutral300)),
           SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
         ],
         horizontalPadding: 16,
         leadingSpacing: 12,
       ),
-      Divider(height: 1, thickness: 1, color: Color(0xFFE5E7EB)),
+      Divider(height: 1, thickness: 1, color: Ux4gPalette.neutral200),
       // Step bar
       Padding(
         padding: EdgeInsets.fromLTRB(16, 10, 16, 10),
@@ -21187,10 +21184,10 @@ Scaffold(
           ],
         ),
       ),
-      Divider(height: 1, thickness: 1, color: Color(0xFFE5E7EB)),
+      Divider(height: 1, thickness: 1, color: Ux4gPalette.neutral200),
       Expanded(
         child: Container(
-          color: Color(0xFFE9E5FF),
+          color: Ux4gPalette.primary100,
           child: Column(
             children: [
               Expanded(
@@ -21227,25 +21224,25 @@ Scaffold(
                           'Income Certificate — Application #INC-2024-00842',
                           style: TextStyle(
                             fontSize: 13,
-                            color: Color(0xFF6B7280),
+                            color: Ux4gPalette.neutral500,
                             height: 1.4,
                           ),
                         ),
                         SizedBox(height: 20),
                         Container(
                           decoration: BoxDecoration(
-                            border: Border.all(color: Color(0xFFE5E7EB)),
+                            border: Border.all(color: Ux4gPalette.neutral200),
                             borderRadius: BorderRadius.circular(10),
                           ),
                           clipBehavior: Clip.hardEdge,
                           child: Column(
                             children: [
                               _feeRow('Application fee', 'Rs 30.00'),
-                              Divider(height: 1, thickness: 1, color: Color(0xFFE5E7EB)),
+                              Divider(height: 1, thickness: 1, color: Ux4gPalette.neutral200),
                               _feeRow('Processing charge', 'Rs 5.00'),
-                              Divider(height: 1, thickness: 1, color: Color(0xFFE5E7EB)),
+                              Divider(height: 1, thickness: 1, color: Ux4gPalette.neutral200),
                               _feeRow('GST 18%', 'Rs 6.30'),
-                              Divider(height: 1, thickness: 1, color: Color(0xFFE5E7EB)),
+                              Divider(height: 1, thickness: 1, color: Ux4gPalette.neutral200),
                               _feeRow('Total', 'Rs 41.30', bold: true),
                             ],
                           ),
@@ -21289,7 +21286,7 @@ Scaffold(
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Text('Powered by -',
-                        style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF),
+                        style: TextStyle(fontSize: 11, color: Ux4gPalette.neutral400,
                             fontWeight: FontWeight.w500)),
                     SizedBox(height: 6),
                     Image.asset('assets/digital_india_logo.png', height: 22, color: Theme.of(context).brightness == Brightness.dark ? Colors.white : null),
@@ -21315,7 +21312,7 @@ Widget _feeRow(String label, String amount, {bool bold = false}) {
               style: TextStyle(
                 fontSize: 13,
                 fontWeight: bold ? FontWeight.w600 : FontWeight.w400,
-                color: bold ? Color(0xFF111827) : Color(0xFF6B7280),
+                color: bold ? Color(0xFF111827) : Ux4gPalette.neutral500,
               )),
         ),
         Text(amount,
@@ -21622,7 +21619,7 @@ String _method = 'upi';
 String _upiId = '';
 
 Scaffold(
-  backgroundColor: Color(0xFFFAFAFA),
+  backgroundColor: Ux4gPalette.neutral50,
   body: Column(
     children: [
       Ux4gAppHeader(
@@ -21630,13 +21627,13 @@ Scaffold(
         title: '',
         leadingWidgets: [
           SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
-          Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
+          SizedBox(height: 28, child: Ux4gDivider(orientation: Ux4gDividerOrientation.vertical, color: Ux4gPalette.neutral300)),
           SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
         ],
         horizontalPadding: 16,
         leadingSpacing: 12,
       ),
-      Divider(height: 1, thickness: 1, color: Color(0xFFE5E7EB)),
+      Divider(height: 1, thickness: 1, color: Ux4gPalette.neutral200),
       Padding(
         padding: EdgeInsets.fromLTRB(16, 10, 16, 10),
         child: Ux4gStepper(
@@ -21652,10 +21649,10 @@ Scaffold(
           ],
         ),
       ),
-      Divider(height: 1, thickness: 1, color: Color(0xFFE5E7EB)),
+      Divider(height: 1, thickness: 1, color: Ux4gPalette.neutral200),
       Expanded(
         child: Container(
-          color: Color(0xFFFAFAFA),
+          color: Ux4gPalette.neutral50,
           child: Column(
             children: [
               Expanded(
@@ -21679,7 +21676,7 @@ Scaffold(
                         'Select how you would like to pay Rs 41.30.',
                         style: TextStyle(
                           fontSize: 13,
-                          color: Color(0xFF6B7280),
+                          color: Ux4gPalette.neutral500,
                           height: 1.4,
                         ),
                       ),
@@ -21750,7 +21747,7 @@ Scaffold(
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Text('Powered by -',
-                        style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF),
+                        style: TextStyle(fontSize: 11, color: Ux4gPalette.neutral400,
                             fontWeight: FontWeight.w500)),
                     SizedBox(height: 6),
                     Image.asset('assets/digital_india_logo.png', height: 22, color: Theme.of(context).brightness == Brightness.dark ? Colors.white : null),
@@ -21784,7 +21781,7 @@ Widget _pmtOptionTile({
         color: selected ? primary.withOpacity(0.06) : Colors.white,
         borderRadius: BorderRadius.circular(10),
         border: Border.all(
-          color: selected ? primary : Color(0xFFE5E7EB),
+          color: selected ? primary : Ux4gPalette.neutral200,
           width: selected ? 2 : 1,
         ),
       ),
@@ -21795,7 +21792,7 @@ Widget _pmtOptionTile({
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               border: Border.all(
-                color: selected ? primary : Color(0xFFD1D5DB), width: 2),
+                color: selected ? primary : Ux4gPalette.neutral300, width: 2),
             ),
             alignment: Alignment.center,
             child: selected
@@ -21816,7 +21813,7 @@ Widget _pmtOptionTile({
                 SizedBox(height: 2),
                 Text(subtitle,
                     style: TextStyle(
-                      fontSize: 12, color: Color(0xFF6B7280), height: 1.3)),
+                      fontSize: 12, color: Ux4gPalette.neutral500, height: 1.3)),
               ],
             ),
           ),
@@ -21832,7 +21829,7 @@ String _method = 'upi';
 String _upiId = '';
 
 Scaffold(
-  backgroundColor: Color(0xFFE9E5FF),
+  backgroundColor: Ux4gPalette.primary100,
   body: Column(
     children: [
       Ux4gAppHeader(
@@ -21840,13 +21837,13 @@ Scaffold(
         title: '',
         leadingWidgets: [
           SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
-          Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
+          SizedBox(height: 28, child: Ux4gDivider(orientation: Ux4gDividerOrientation.vertical, color: Ux4gPalette.neutral300)),
           SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
         ],
         horizontalPadding: 16,
         leadingSpacing: 12,
       ),
-      Divider(height: 1, thickness: 1, color: Color(0xFFE5E7EB)),
+      Divider(height: 1, thickness: 1, color: Ux4gPalette.neutral200),
       Padding(
         padding: EdgeInsets.fromLTRB(16, 10, 16, 10),
         child: Ux4gStepper(
@@ -21862,10 +21859,10 @@ Scaffold(
           ],
         ),
       ),
-      Divider(height: 1, thickness: 1, color: Color(0xFFE5E7EB)),
+      Divider(height: 1, thickness: 1, color: Ux4gPalette.neutral200),
       Expanded(
         child: Container(
-          color: Color(0xFFE9E5FF),
+          color: Ux4gPalette.primary100,
           child: Column(
             children: [
               Expanded(
@@ -21902,7 +21899,7 @@ Scaffold(
                           'Select how you would like to pay Rs 41.30.',
                           style: TextStyle(
                             fontSize: 13,
-                            color: Color(0xFF6B7280),
+                            color: Ux4gPalette.neutral500,
                             height: 1.4,
                           ),
                         ),
@@ -21973,7 +21970,7 @@ Scaffold(
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Text('Powered by -',
-                        style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF),
+                        style: TextStyle(fontSize: 11, color: Ux4gPalette.neutral400,
                             fontWeight: FontWeight.w500)),
                     SizedBox(height: 6),
                     Image.asset('assets/digital_india_logo.png', height: 22, color: Theme.of(context).brightness == Brightness.dark ? Colors.white : null),
@@ -22211,7 +22208,7 @@ class _PaymentProcessingCardMockup extends StatelessWidget {
 
 const _paymentProcessingCode = r'''
 Scaffold(
-  backgroundColor: Color(0xFFFAFAFA),
+  backgroundColor: Ux4gPalette.neutral50,
   body: Stack(
     children: [
       // Background: previous screen layout (dimmed)
@@ -22222,13 +22219,13 @@ Scaffold(
             title: '',
             leadingWidgets: [
               SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
-              Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
+              SizedBox(height: 28, child: Ux4gDivider(orientation: Ux4gDividerOrientation.vertical, color: Ux4gPalette.neutral300)),
               SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
             ],
             horizontalPadding: 16,
             leadingSpacing: 12,
           ),
-          Divider(height: 1, thickness: 1, color: Color(0xFFE5E7EB)),
+          Divider(height: 1, thickness: 1, color: Ux4gPalette.neutral200),
           Padding(
             padding: EdgeInsets.fromLTRB(16, 10, 16, 10),
             child: Ux4gStepper(
@@ -22244,10 +22241,10 @@ Scaffold(
               ],
             ),
           ),
-          Divider(height: 1, thickness: 1, color: Color(0xFFE5E7EB)),
+          Divider(height: 1, thickness: 1, color: Ux4gPalette.neutral200),
           Expanded(
             child: Container(
-              color: Color(0xFFFAFAFA),
+              color: Ux4gPalette.neutral50,
               padding: EdgeInsets.fromLTRB(16, 20, 16, 16),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -22257,7 +22254,7 @@ Scaffold(
                           color: Color(0xFF111827), height: 1.2)),
                   SizedBox(height: 4),
                   Text('Select how you would like to pay Rs 41.30.',
-                      style: TextStyle(fontSize: 13, color: Color(0xFF6B7280))),
+                      style: TextStyle(fontSize: 13, color: Ux4gPalette.neutral500)),
                 ],
               ),
             ),
@@ -22312,7 +22309,7 @@ Scaffold(
                   'Your payment is being processed securely.',
                   style: TextStyle(
                     fontSize: 13,
-                    color: Color(0xFF6B7280),
+                    color: Ux4gPalette.neutral500,
                     height: 1.4,
                   ),
                   textAlign: TextAlign.center,
@@ -22328,7 +22325,7 @@ Scaffold(
 
 const _paymentProcessingCardCode = r'''
 Scaffold(
-  backgroundColor: Color(0xFFE9E5FF),
+  backgroundColor: Ux4gPalette.primary100,
   body: Stack(
     children: [
       // Background: card-style previous screen (dimmed)
@@ -22339,13 +22336,13 @@ Scaffold(
             title: '',
             leadingWidgets: [
               SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
-              Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
+              SizedBox(height: 28, child: Ux4gDivider(orientation: Ux4gDividerOrientation.vertical, color: Ux4gPalette.neutral300)),
               SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
             ],
             horizontalPadding: 16,
             leadingSpacing: 12,
           ),
-          Divider(height: 1, thickness: 1, color: Color(0xFFE5E7EB)),
+          Divider(height: 1, thickness: 1, color: Ux4gPalette.neutral200),
           Padding(
             padding: EdgeInsets.fromLTRB(16, 10, 16, 10),
             child: Ux4gStepper(
@@ -22361,10 +22358,10 @@ Scaffold(
               ],
             ),
           ),
-          Divider(height: 1, thickness: 1, color: Color(0xFFE5E7EB)),
+          Divider(height: 1, thickness: 1, color: Ux4gPalette.neutral200),
           Expanded(
             child: Container(
-              color: Color(0xFFE9E5FF),
+              color: Ux4gPalette.primary100,
               padding: EdgeInsets.fromLTRB(16, 20, 16, 16),
               child: Container(
                 padding: EdgeInsets.fromLTRB(16, 24, 16, 20),
@@ -22387,7 +22384,7 @@ Scaffold(
                             color: Color(0xFF111827), height: 1.2)),
                     SizedBox(height: 4),
                     Text('Select how you would like to pay Rs 41.30.',
-                        style: TextStyle(fontSize: 13, color: Color(0xFF6B7280))),
+                        style: TextStyle(fontSize: 13, color: Ux4gPalette.neutral500)),
                   ],
                 ),
               ),
@@ -22443,7 +22440,7 @@ Scaffold(
                   'Your payment is being processed securely.',
                   style: TextStyle(
                     fontSize: 13,
-                    color: Color(0xFF6B7280),
+                    color: Ux4gPalette.neutral500,
                     height: 1.4,
                   ),
                   textAlign: TextAlign.center,
@@ -22746,7 +22743,7 @@ class _PaymentSuccessCardMockup extends StatelessWidget {
 
 const _paymentSuccessCode = r'''
 Scaffold(
-  backgroundColor: Color(0xFFFAFAFA),
+  backgroundColor: Ux4gPalette.neutral50,
   body: Column(
     children: [
       Ux4gAppHeader(
@@ -22754,13 +22751,13 @@ Scaffold(
         title: '',
         leadingWidgets: [
           SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
-          Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
+          SizedBox(height: 28, child: Ux4gDivider(orientation: Ux4gDividerOrientation.vertical, color: Ux4gPalette.neutral300)),
           SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
         ],
         horizontalPadding: 16,
         leadingSpacing: 12,
       ),
-      Divider(height: 1, thickness: 1, color: Color(0xFFE5E7EB)),
+      Divider(height: 1, thickness: 1, color: Ux4gPalette.neutral200),
       Padding(
         padding: EdgeInsets.fromLTRB(16, 10, 16, 10),
         child: Ux4gStepper(
@@ -22773,10 +22770,10 @@ Scaffold(
           ],
         ),
       ),
-      Divider(height: 1, thickness: 1, color: Color(0xFFE5E7EB)),
+      Divider(height: 1, thickness: 1, color: Ux4gPalette.neutral200),
       Expanded(
         child: Container(
-          color: Color(0xFFFAFAFA),
+          color: Ux4gPalette.neutral50,
           child: Column(
             children: [
               Expanded(
@@ -22812,7 +22809,7 @@ Scaffold(
                         'Rs 41.30 paid for Income Certificate '
                         '(Application #INC-2024-00842).',
                         style: TextStyle(
-                          fontSize: 13, color: Color(0xFF6B7280), height: 1.4),
+                          fontSize: 13, color: Ux4gPalette.neutral500, height: 1.4),
                         textAlign: TextAlign.center,
                       ),
                       SizedBox(height: 20),
@@ -22867,7 +22864,7 @@ Scaffold(
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Text('Powered by -',
-                        style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF),
+                        style: TextStyle(fontSize: 11, color: Ux4gPalette.neutral400,
                             fontWeight: FontWeight.w500)),
                     SizedBox(height: 6),
                     Image.asset('assets/digital_india_logo.png', height: 22, color: Theme.of(context).brightness == Brightness.dark ? Colors.white : null),
@@ -22890,7 +22887,7 @@ Widget _payDetailRow(String label, String value, {bool valueBold = false, Color?
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Expanded(flex: 4,
-          child: Text(label, style: TextStyle(fontSize: 13, color: Color(0xFF6B7280)))),
+          child: Text(label, style: TextStyle(fontSize: 13, color: Ux4gPalette.neutral500))),
         Expanded(flex: 5,
           child: Text(value, textAlign: TextAlign.right,
               style: TextStyle(fontSize: 13,
@@ -22903,7 +22900,7 @@ Widget _payDetailRow(String label, String value, {bool valueBold = false, Color?
 
 const _paymentSuccessCardCode = r'''
 Scaffold(
-  backgroundColor: Color(0xFFE9E5FF),
+  backgroundColor: Ux4gPalette.primary100,
   body: Column(
     children: [
       Ux4gAppHeader(
@@ -22911,13 +22908,13 @@ Scaffold(
         title: '',
         leadingWidgets: [
           SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
-          Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
+          SizedBox(height: 28, child: Ux4gDivider(orientation: Ux4gDividerOrientation.vertical, color: Ux4gPalette.neutral300)),
           SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
         ],
         horizontalPadding: 16,
         leadingSpacing: 12,
       ),
-      Divider(height: 1, thickness: 1, color: Color(0xFFE5E7EB)),
+      Divider(height: 1, thickness: 1, color: Ux4gPalette.neutral200),
       Padding(
         padding: EdgeInsets.fromLTRB(16, 10, 16, 10),
         child: Ux4gStepper(
@@ -22930,10 +22927,10 @@ Scaffold(
           ],
         ),
       ),
-      Divider(height: 1, thickness: 1, color: Color(0xFFE5E7EB)),
+      Divider(height: 1, thickness: 1, color: Ux4gPalette.neutral200),
       Expanded(
         child: Container(
-          color: Color(0xFFE9E5FF),
+          color: Ux4gPalette.primary100,
           child: Column(
             children: [
               Expanded(
@@ -22972,7 +22969,7 @@ Scaffold(
                         SizedBox(height: 6),
                         Text('Rs 41.30 paid for Income Certificate '
                             '(Application #INC-2024-00842).',
-                          style: TextStyle(fontSize: 13, color: Color(0xFF6B7280),
+                          style: TextStyle(fontSize: 13, color: Ux4gPalette.neutral500,
                               height: 1.4),
                           textAlign: TextAlign.center),
                         SizedBox(height: 20),
@@ -23016,7 +23013,7 @@ Scaffold(
                 padding: EdgeInsets.only(bottom: 20, top: 8),
                 child: Column(mainAxisSize: MainAxisSize.min, children: [
                   Text('Powered by -', style: TextStyle(fontSize: 11,
-                      color: Color(0xFF9CA3AF), fontWeight: FontWeight.w500)),
+                      color: Ux4gPalette.neutral400, fontWeight: FontWeight.w500)),
                   SizedBox(height: 6),
                   Image.asset('assets/digital_india_logo.png', height: 22, color: Theme.of(context).brightness == Brightness.dark ? Colors.white : null),
                 ]),
@@ -23302,7 +23299,7 @@ class _PaymentFailedCardMockup extends StatelessWidget {
 
 const _paymentFailedCode = r'''
 Scaffold(
-  backgroundColor: Color(0xFFFAFAFA),
+  backgroundColor: Ux4gPalette.neutral50,
   body: Column(
     children: [
       Ux4gAppHeader(
@@ -23310,13 +23307,13 @@ Scaffold(
         title: '',
         leadingWidgets: [
           SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
-          Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
+          SizedBox(height: 28, child: Ux4gDivider(orientation: Ux4gDividerOrientation.vertical, color: Ux4gPalette.neutral300)),
           SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
         ],
         horizontalPadding: 16,
         leadingSpacing: 12,
       ),
-      Divider(height: 1, thickness: 1, color: Color(0xFFE5E7EB)),
+      Divider(height: 1, thickness: 1, color: Ux4gPalette.neutral200),
       Padding(
         padding: EdgeInsets.fromLTRB(16, 10, 16, 10),
         child: Ux4gStepper(
@@ -23329,10 +23326,10 @@ Scaffold(
           ],
         ),
       ),
-      Divider(height: 1, thickness: 1, color: Color(0xFFE5E7EB)),
+      Divider(height: 1, thickness: 1, color: Ux4gPalette.neutral200),
       Expanded(
         child: Container(
-          color: Color(0xFFFAFAFA),
+          color: Ux4gPalette.neutral50,
           child: Column(
             children: [
               Expanded(
@@ -23363,7 +23360,7 @@ Scaffold(
                       Text(
                         'Your payment of Rs 41.30 could not be processed.',
                         style: TextStyle(
-                          fontSize: 13, color: Color(0xFF6B7280), height: 1.4),
+                          fontSize: 13, color: Ux4gPalette.neutral500, height: 1.4),
                         textAlign: TextAlign.center,
                       ),
                       SizedBox(height: 20),
@@ -23419,7 +23416,7 @@ Scaffold(
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Text('Powered by -',
-                        style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF),
+                        style: TextStyle(fontSize: 11, color: Ux4gPalette.neutral400,
                             fontWeight: FontWeight.w500)),
                     SizedBox(height: 6),
                     Image.asset('assets/digital_india_logo.png', height: 22, color: Theme.of(context).brightness == Brightness.dark ? Colors.white : null),
@@ -23438,7 +23435,7 @@ Scaffold(
 
 const _paymentFailedCardCode = r'''
 Scaffold(
-  backgroundColor: Color(0xFFE9E5FF),
+  backgroundColor: Ux4gPalette.primary100,
   body: Column(
     children: [
       Ux4gAppHeader(
@@ -23446,13 +23443,13 @@ Scaffold(
         title: '',
         leadingWidgets: [
           SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
-          Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
+          SizedBox(height: 28, child: Ux4gDivider(orientation: Ux4gDividerOrientation.vertical, color: Ux4gPalette.neutral300)),
           SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
         ],
         horizontalPadding: 16,
         leadingSpacing: 12,
       ),
-      Divider(height: 1, thickness: 1, color: Color(0xFFE5E7EB)),
+      Divider(height: 1, thickness: 1, color: Ux4gPalette.neutral200),
       Padding(
         padding: EdgeInsets.fromLTRB(16, 10, 16, 10),
         child: Ux4gStepper(
@@ -23465,10 +23462,10 @@ Scaffold(
           ],
         ),
       ),
-      Divider(height: 1, thickness: 1, color: Color(0xFFE5E7EB)),
+      Divider(height: 1, thickness: 1, color: Ux4gPalette.neutral200),
       Expanded(
         child: Container(
-          color: Color(0xFFE9E5FF),
+          color: Ux4gPalette.primary100,
           child: Column(
             children: [
               Expanded(
@@ -23502,7 +23499,7 @@ Scaffold(
                           textAlign: TextAlign.center),
                         SizedBox(height: 6),
                         Text('Your payment of Rs 41.30 could not be processed.',
-                          style: TextStyle(fontSize: 13, color: Color(0xFF6B7280),
+                          style: TextStyle(fontSize: 13, color: Ux4gPalette.neutral500,
                               height: 1.4),
                           textAlign: TextAlign.center),
                         SizedBox(height: 20),
@@ -23547,7 +23544,7 @@ Scaffold(
                 padding: EdgeInsets.only(bottom: 20, top: 8),
                 child: Column(mainAxisSize: MainAxisSize.min, children: [
                   Text('Powered by -', style: TextStyle(fontSize: 11,
-                      color: Color(0xFF9CA3AF), fontWeight: FontWeight.w500)),
+                      color: Ux4gPalette.neutral400, fontWeight: FontWeight.w500)),
                   SizedBox(height: 6),
                   Image.asset('assets/digital_india_logo.png', height: 22, color: Theme.of(context).brightness == Brightness.dark ? Colors.white : null),
                 ]),
@@ -23843,7 +23840,7 @@ class _FeeWaivedCardMockup extends StatelessWidget {
 
 const _feeWaivedCode = r'''
 Scaffold(
-  backgroundColor: Color(0xFFFAFAFA),
+  backgroundColor: Ux4gPalette.neutral50,
   body: Column(
     children: [
       Ux4gAppHeader(
@@ -23851,13 +23848,13 @@ Scaffold(
         title: '',
         leadingWidgets: [
           SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
-          Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
+          SizedBox(height: 28, child: Ux4gDivider(orientation: Ux4gDividerOrientation.vertical, color: Ux4gPalette.neutral300)),
           SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
         ],
         horizontalPadding: 16,
         leadingSpacing: 12,
       ),
-      Divider(height: 1, thickness: 1, color: Color(0xFFE5E7EB)),
+      Divider(height: 1, thickness: 1, color: Ux4gPalette.neutral200),
       Padding(
         padding: EdgeInsets.fromLTRB(16, 10, 16, 10),
         child: Ux4gStepper(
@@ -23870,10 +23867,10 @@ Scaffold(
           ],
         ),
       ),
-      Divider(height: 1, thickness: 1, color: Color(0xFFE5E7EB)),
+      Divider(height: 1, thickness: 1, color: Ux4gPalette.neutral200),
       Expanded(
         child: Container(
-          color: Color(0xFFFAFAFA),
+          color: Ux4gPalette.neutral50,
           child: Column(
             children: [
               Expanded(
@@ -23909,7 +23906,7 @@ Scaffold(
                         'As an SC/ST applicant, you are eligible for '
                         'a full fee waiver for this certificate.',
                         style: TextStyle(
-                          fontSize: 13, color: Color(0xFF6B7280), height: 1.4),
+                          fontSize: 13, color: Ux4gPalette.neutral500, height: 1.4),
                         textAlign: TextAlign.center,
                       ),
                       SizedBox(height: 20),
@@ -23956,7 +23953,7 @@ Scaffold(
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Text('Powered by -',
-                        style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF),
+                        style: TextStyle(fontSize: 11, color: Ux4gPalette.neutral400,
                             fontWeight: FontWeight.w500)),
                     SizedBox(height: 6),
                     Image.asset('assets/digital_india_logo.png', height: 22, color: Theme.of(context).brightness == Brightness.dark ? Colors.white : null),
@@ -23981,7 +23978,7 @@ Widget _feeRow(String label, String amount, {bool bold = false, bool redAmount =
           child: Text(label,
               style: TextStyle(fontSize: 13,
                 fontWeight: bold ? FontWeight.w600 : FontWeight.w400,
-                color: bold ? Color(0xFF111827) : Color(0xFF6B7280)))),
+                color: bold ? Color(0xFF111827) : Ux4gPalette.neutral500))),
         Text(amount,
             style: TextStyle(fontSize: 13,
               fontWeight: bold ? FontWeight.w600 : FontWeight.w400,
@@ -23994,7 +23991,7 @@ Widget _feeRow(String label, String amount, {bool bold = false, bool redAmount =
 
 const _feeWaivedCardCode = r'''
 Scaffold(
-  backgroundColor: Color(0xFFE9E5FF),
+  backgroundColor: Ux4gPalette.primary100,
   body: Column(
     children: [
       Ux4gAppHeader(
@@ -24002,13 +23999,13 @@ Scaffold(
         title: '',
         leadingWidgets: [
           SvgPicture.asset('assets/national_amblam_logo.svg', height: 32),
-          Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
+          SizedBox(height: 28, child: Ux4gDivider(orientation: Ux4gDividerOrientation.vertical, color: Ux4gPalette.neutral300)),
           SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
         ],
         horizontalPadding: 16,
         leadingSpacing: 12,
       ),
-      Divider(height: 1, thickness: 1, color: Color(0xFFE5E7EB)),
+      Divider(height: 1, thickness: 1, color: Ux4gPalette.neutral200),
       Padding(
         padding: EdgeInsets.fromLTRB(16, 10, 16, 10),
         child: Ux4gStepper(
@@ -24021,10 +24018,10 @@ Scaffold(
           ],
         ),
       ),
-      Divider(height: 1, thickness: 1, color: Color(0xFFE5E7EB)),
+      Divider(height: 1, thickness: 1, color: Ux4gPalette.neutral200),
       Expanded(
         child: Container(
-          color: Color(0xFFE9E5FF),
+          color: Ux4gPalette.primary100,
           child: Column(
             children: [
               Expanded(
@@ -24063,7 +24060,7 @@ Scaffold(
                         SizedBox(height: 6),
                         Text('As an SC/ST applicant, you are eligible for '
                             'a full fee waiver for this certificate.',
-                          style: TextStyle(fontSize: 13, color: Color(0xFF6B7280),
+                          style: TextStyle(fontSize: 13, color: Ux4gPalette.neutral500,
                               height: 1.4),
                           textAlign: TextAlign.center),
                         SizedBox(height: 20),
@@ -24101,7 +24098,7 @@ Scaffold(
                 padding: EdgeInsets.only(bottom: 20, top: 8),
                 child: Column(mainAxisSize: MainAxisSize.min, children: [
                   Text('Powered by -', style: TextStyle(fontSize: 11,
-                      color: Color(0xFF9CA3AF), fontWeight: FontWeight.w500)),
+                      color: Ux4gPalette.neutral400, fontWeight: FontWeight.w500)),
                   SizedBox(height: 6),
                   Image.asset('assets/digital_india_logo.png', height: 22, color: Theme.of(context).brightness == Brightness.dark ? Colors.white : null),
                 ]),
@@ -24563,7 +24560,7 @@ class _AstTimelineStep extends StatelessWidget {
   Widget build(BuildContext context) {
     final dotColor = (isCompleted || isActive)
         ? primary
-        : const Color(0xFFD1D5DB);
+        : Ux4gPalette.neutral300;
 
     return IntrinsicHeight(
       child: Row(
@@ -24601,7 +24598,7 @@ class _AstTimelineStep extends StatelessWidget {
                     child: Center(
                       child: Container(
                         width: 2,
-                        color: isCompleted ? primary : const Color(0xFFE5E7EB),
+                        color: isCompleted ? primary : Ux4gPalette.neutral200,
                       ),
                     ),
                   ),
@@ -24622,7 +24619,7 @@ class _AstTimelineStep extends StatelessWidget {
                   border: Border.all(
                     color: isActive
                         ? primary.withValues(alpha: 0.2)
-                        : const Color(0xFFE5E7EB),
+                        : Ux4gPalette.neutral200,
                   ),
                 ),
                 child: Column(
@@ -25049,15 +25046,15 @@ Container(
       title: '',
       leadingWidgets: [
         SvgPicture.asset('assets/national_emblem_logo.svg', height: 32),
-        Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
+        SizedBox(height: 28, child: Ux4gDivider(orientation: Ux4gDividerOrientation.vertical, color: Ux4gPalette.neutral300)),
         SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
       ],
       horizontalPadding: 16,
       leadingSpacing: 12,
     ),
-    Divider(height: 1, color: Color(0xFFE5E7EB)),
+    Ux4gDivider(color: Ux4gPalette.neutral200),
     Expanded(child: Container(
-      color: Color(0xFFFAFAFA),
+      color: Ux4gPalette.neutral50,
       child: Column(children: [
         Expanded(child: SingleChildScrollView(
           child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
@@ -25122,7 +25119,7 @@ Container(
                 padding: EdgeInsets.all(14),
                 decoration: BoxDecoration(
                   color: Colors.white,
-                  border: Border.all(color: Color(0xFFE5E7EB)),
+                  border: Border.all(color: Ux4gPalette.neutral200),
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Column(crossAxisAlignment: CrossAxisAlignment.start,
@@ -25136,7 +25133,7 @@ Container(
                   ]),
                   SizedBox(height: 4),
                   Text('Application ID · INC-2026-MH-04127',
-                      style: TextStyle(fontSize: 12, color: Color(0xFF6B7280))),
+                      style: TextStyle(fontSize: 12, color: Ux4gPalette.neutral500)),
                   // ▸ Progress bar hidden for Approved state
                   if (!isApproved) ...[
                     SizedBox(height: 10),
@@ -25158,7 +25155,7 @@ Container(
               child: Container(
                 decoration: BoxDecoration(
                   color: Colors.white,
-                  border: Border.all(color: Color(0xFFE5E7EB)),
+                  border: Border.all(color: Ux4gPalette.neutral200),
                   borderRadius: BorderRadius.circular(10),
                 ),
                 padding: EdgeInsets.all(14),
@@ -25243,7 +25240,7 @@ Container(
         Padding(padding: EdgeInsets.only(bottom: 20, top: 8), child: Column(
           mainAxisSize: MainAxisSize.min, children: [
           Text('Powered by -',
-              style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF),
+              style: TextStyle(fontSize: 11, color: Ux4gPalette.neutral400,
                   fontWeight: FontWeight.w500)),
           SizedBox(height: 6),
           Image.asset('assets/digital_india_logo.png', height: 22, color: Theme.of(context).brightness == Brightness.dark ? Colors.white : null),
@@ -25256,7 +25253,7 @@ Container(
 const _astCardCode = r'''
 // Application Status Tracker — card style (360 × 760)
 // Same inner content as flat layout but hPad=14; content sits inside a
-// white elevated card over a purple-tinted (Color(0xFFE9E5FF)) background.
+// white elevated card over a purple-tinted (Ux4gPalette.primary100) background.
 // primaryColor: Theme.of(context).extension<Ux4gColors>()?.primary
 // tagColor: neutral=UnderReview, warning=ActionRequired/Delayed, error=Rejected, success=Approved
 Container(
@@ -25268,15 +25265,15 @@ Container(
       title: '',
       leadingWidgets: [
         SvgPicture.asset('assets/national_emblem_logo.svg', height: 32),
-        Container(width: 1, height: 28, color: Color(0xFFD1D5DB)),
+        SizedBox(height: 28, child: Ux4gDivider(orientation: Ux4gDividerOrientation.vertical, color: Ux4gPalette.neutral300)),
         SvgPicture.asset('assets/Union.svg', height: 32, colorFilter: ColorFilter.mode(Theme.of(context).brightness == Brightness.dark ? Colors.white : Ux4gPalette.primary500, BlendMode.srcIn)),
       ],
       horizontalPadding: 16,
       leadingSpacing: 12,
     ),
-    Divider(height: 1, color: Color(0xFFE5E7EB)),
+    Ux4gDivider(color: Ux4gPalette.neutral200),
     Expanded(child: Container(
-      color: Color(0xFFE9E5FF),
+      color: Ux4gPalette.primary100,
       child: Column(children: [
         Expanded(child: SingleChildScrollView(
           padding: EdgeInsets.all(16),
@@ -25319,8 +25316,8 @@ Container(
                 child: Container(
                   padding: EdgeInsets.all(14),
                   decoration: BoxDecoration(
-                    color: Color(0xFFFAFAFA),
-                    border: Border.all(color: Color(0xFFE5E7EB)),
+                    color: Ux4gPalette.neutral50,
+                    border: Border.all(color: Ux4gPalette.neutral200),
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: Column(crossAxisAlignment: CrossAxisAlignment.start,
@@ -25335,7 +25332,7 @@ Container(
                     SizedBox(height: 4),
                     Text('Application ID · INC-2026-MH-04127',
                         style: TextStyle(fontSize: 12,
-                            color: Color(0xFF6B7280))),
+                            color: Ux4gPalette.neutral500)),
                     // ▸ Progress bar hidden for Approved state
                     if (!isApproved) ...[
                       SizedBox(height: 10),
@@ -25357,7 +25354,7 @@ Container(
                 child: Container(
                   decoration: BoxDecoration(
                     color: Colors.white,
-                    border: Border.all(color: Color(0xFFE5E7EB)),
+                    border: Border.all(color: Ux4gPalette.neutral200),
                     borderRadius: BorderRadius.circular(10),
                   ),
                   padding: EdgeInsets.all(14),
@@ -25447,7 +25444,7 @@ Container(
         Padding(padding: EdgeInsets.only(bottom: 20, top: 8), child: Column(
           mainAxisSize: MainAxisSize.min, children: [
           Text('Powered by -',
-              style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF),
+              style: TextStyle(fontSize: 11, color: Ux4gPalette.neutral400,
                   fontWeight: FontWeight.w500)),
           SizedBox(height: 6),
           Image.asset('assets/digital_india_logo.png', height: 22, color: Theme.of(context).brightness == Brightness.dark ? Colors.white : null),
@@ -25904,7 +25901,7 @@ class _GstEscalationLevel extends StatelessWidget {
       decoration: BoxDecoration(
         color: isActive ? Ux4gPalette.orange50 : const Color(0xFFF9FAFB),
         border: Border.all(
-          color: isActive ? Ux4gPalette.orange500 : const Color(0xFFE5E7EB),
+          color: isActive ? Ux4gPalette.orange500 : Ux4gPalette.neutral200,
         ),
         borderRadius: BorderRadius.circular(8),
       ),
@@ -26317,7 +26314,7 @@ Column(children: [
     horizontalPadding: 16,
   ),
   Expanded(child: Container(
-    color: Color(0xFFFAFAFA),
+    color: Ux4gPalette.neutral50,
     child: SingleChildScrollView(child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -26327,7 +26324,7 @@ Column(children: [
           padding: EdgeInsets.all(14),
           decoration: BoxDecoration(
             color: Colors.white,
-            border: Border.all(color: Color(0xFFE5E7EB)),
+            border: Border.all(color: Ux4gPalette.neutral200),
             borderRadius: BorderRadius.circular(10),
           ),
           child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
@@ -26340,7 +26337,7 @@ Column(children: [
             ]),
             SizedBox(height: 4),
             Text('Grievance ID · GRV-2026-MH-04127',
-              style: TextStyle(fontSize: 12, color: Color(0xFF6B7280))),
+              style: TextStyle(fontSize: 12, color: Ux4gPalette.neutral500)),
             SizedBox(height: 10),
             Ux4gLinearProgress(value: 0.55, label: '8 days left',
               gradientColors: [Colors.white, primaryColor],
@@ -26420,3 +26417,7 @@ final grievanceStatusTrackerComponent = WidgetbookComponent(
     ),
   ],
 );
+
+
+
+
