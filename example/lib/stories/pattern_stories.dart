@@ -1597,22 +1597,22 @@ class _EnterOtpMobileMockupState extends State<_EnterOtpMobileMockup> {
                   const _BackButton(),
                   const SizedBox(height: 32),
 
-                  const Text(
+                  Text(
                     'Enter OTP',
                     style: TextStyle(
                       fontSize: 26,
                       fontWeight: FontWeight.w800,
-                      color: _titleColor,
+                      color: _getTitleColor(context),
                       height: 1.2,
                       letterSpacing: -0.3,
                     ),
                   ),
                   const SizedBox(height: 6),
-                  const Text(
+                  Text(
                     'Sent to +91 98765 XXXXX',
                     style: TextStyle(
                       fontSize: 14,
-                      color: _subtleText,
+                      color: _getSubtleText(context),
                       height: 1.3,
                     ),
                   ),
@@ -1654,10 +1654,10 @@ class _EnterOtpMobileMockupState extends State<_EnterOtpMobileMockup> {
                   ),
                   const SizedBox(height: 12),
 
-                  const Center(
+                  Center(
                     child: Text(
                       'OTP is valid for 10 minutes',
-                      style: TextStyle(fontSize: 13, color: _subtleText),
+                      style: TextStyle(fontSize: 13, color: _getSubtleText(context)),
                     ),
                   ),
                 ],
@@ -2174,10 +2174,10 @@ Column(
           SizedBox(height: 32),
 
           Text('Enter OTP',
-            style: TextStyle(fontSize: 26, fontWeight: FontWeight.w800)),
+            style: TextStyle(fontSize: 26, fontWeight: FontWeight.w800, color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.neutral50 : Ux4gPalette.gray900)),
           SizedBox(height: 6),
           Text('Sent to +91 98765 XXXXX',
-            style: TextStyle(fontSize: 14, color: Color(0xFF6B7280))),
+            style: TextStyle(fontSize: 14, color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.neutral400 : Color(0xFF6B7280))),
           SizedBox(height: 24),
 
           // 6 OTP boxes � built-in 60s countdown + tap-to-resend.
@@ -3634,8 +3634,7 @@ class _EnterOtpCardMockupState extends State<_EnterOtpCardMockup> {
   String _otp = '';
   int _resendNonce = 0;
 
-  Color _getCardBg(BuildContext context) =>
-      _isDark(context) ? Ux4gPalette.red900 : Ux4gPalette.red50;
+  Color _getCardBg(BuildContext context) => _getBg(context);
 
   @override
   Widget build(BuildContext context) {
@@ -3657,7 +3656,9 @@ class _EnterOtpCardMockupState extends State<_EnterOtpCardMockup> {
                     child: Container(
                       padding: const EdgeInsets.fromLTRB(20, 16, 20, 24),
                       decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: _isDark(context)
+                            ? Ux4gPalette.gray900
+                            : Colors.white,
                         borderRadius: BorderRadius.circular(16),
                         boxShadow: [
                           BoxShadow(
@@ -3673,22 +3674,22 @@ class _EnterOtpCardMockupState extends State<_EnterOtpCardMockup> {
                           const _BackButton(),
                           const SizedBox(height: 16),
 
-                          const Text(
+                          Text(
                             'Enter OTP',
                             style: TextStyle(
                               fontSize: 26,
                               fontWeight: FontWeight.w800,
-                              color: _titleColor,
+                              color: _getTitleColor(context),
                               height: 1.2,
                               letterSpacing: -0.3,
                             ),
                           ),
                           const SizedBox(height: 6),
-                          const Text(
+                          Text(
                             'Sent to +91 98765 XXXXX',
                             style: TextStyle(
                               fontSize: 14,
-                              color: _subtleText,
+                              color: _getSubtleText(context),
                               height: 1.3,
                             ),
                           ),
@@ -3724,12 +3725,12 @@ class _EnterOtpCardMockupState extends State<_EnterOtpCardMockup> {
                           ),
                           const SizedBox(height: 12),
 
-                          const Center(
+                          Center(
                             child: Text(
                               'OTP is valid for 10 minutes',
                               style: TextStyle(
                                 fontSize: 13,
-                                color: _subtleText,
+                                color: _getSubtleText(context),
                               ),
                             ),
                           ),
@@ -3799,10 +3800,10 @@ Column(
                     SizedBox(height: 16),
 
                     Text('Enter OTP',
-                      style: TextStyle(fontSize: 26, fontWeight: FontWeight.w800)),
+                      style: TextStyle(fontSize: 26, fontWeight: FontWeight.w800, color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.neutral50 : Ux4gPalette.gray900)),
                     SizedBox(height: 6),
                     Text('Sent to +91 98765 XXXXX',
-                      style: TextStyle(fontSize: 14, color: Color(0xFF6B7280))),
+                      style: TextStyle(fontSize: 14, color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.neutral400 : Color(0xFF6B7280))),
                     SizedBox(height: 20),
 
                     Ux4gOtpInput(
