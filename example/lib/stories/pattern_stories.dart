@@ -4258,7 +4258,9 @@ class _SignedInSuccessCardMockupState
                     child: Container(
                       padding: const EdgeInsets.fromLTRB(20, 28, 20, 28),
                       decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: _isDark(context)
+                            ? Ux4gPalette.gray900
+                            : Colors.white,
                         borderRadius: BorderRadius.circular(16),
                         boxShadow: [
                           BoxShadow(
@@ -4274,8 +4276,10 @@ class _SignedInSuccessCardMockupState
                           Container(
                             width: 64,
                             height: 64,
-                            decoration: const BoxDecoration(
-                              color: _successLight,
+                            decoration: BoxDecoration(
+                              color: _isDark(context)
+                                  ? Ux4gPalette.green900
+                                  : _successLight,
                               shape: BoxShape.circle,
                             ),
                             alignment: Alignment.center,
@@ -4295,22 +4299,24 @@ class _SignedInSuccessCardMockupState
                           ),
                           const SizedBox(height: 24),
 
-                          const Text(
+                          Text(
                             'Signed in successfully!',
                             style: TextStyle(
                               fontSize: 24,
                               fontWeight: FontWeight.w800,
-                              color: _successDark,
+                              color: _isDark(context)
+                                  ? Ux4gPalette.green300
+                                  : _successDark,
                               height: 1.2,
                               letterSpacing: -0.3,
                             ),
                           ),
                           const SizedBox(height: 8),
-                          const Text(
+                          Text(
                             'You are being redirected to your service',
                             style: TextStyle(
                               fontSize: 14,
-                              color: _subtleText,
+                              color: _getSubtleText(context),
                               height: 1.3,
                             ),
                             textAlign: TextAlign.center,
@@ -4334,9 +4340,9 @@ class _SignedInSuccessCardMockupState
 
                           Text(
                             'Redirecting in $_secondsLeft seconds...',
-                            style: const TextStyle(
+                            style: TextStyle(
                               fontSize: 13,
-                              color: _mutedText,
+                              color: _getMutedText(context),
                               height: 1.3,
                             ),
                           ),
@@ -4415,11 +4421,11 @@ Column(
                     Text('Signed in successfully!',
                       style: TextStyle(
                         fontSize: 24, fontWeight: FontWeight.w800,
-                        color: Ux4gPalette.green700,
+                        color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.green300 : Ux4gPalette.green700,
                       )),
                     SizedBox(height: 8),
                     Text('You are being redirected to your service',
-                      style: TextStyle(fontSize: 14, color: Color(0xFF6B7280)),
+                      style: TextStyle(fontSize: 14, color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.neutral400 : Color(0xFF6B7280)),
                       textAlign: TextAlign.center),
                     SizedBox(height: 24),
 
@@ -4439,7 +4445,7 @@ Column(
                     SizedBox(height: 18),
 
                     Text('Redirecting in 3 seconds...',
-                      style: TextStyle(fontSize: 13, color: Color(0xFF9CA3AF))),
+                      style: TextStyle(fontSize: 13, color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.neutral500 : Color(0xFF9CA3AF))),
                   ],
                 ),
               ),
