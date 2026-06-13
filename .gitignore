@@ -46,3 +46,8 @@ example/windows/flutter/generated_plugins.cmake
 scratch/
 *.patch
 figma_test.json
+*.py
+clean_diff.txt
+diff.txt
+temp_*.dart
+fix_*.dart
