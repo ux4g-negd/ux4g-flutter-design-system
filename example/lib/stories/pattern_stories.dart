@@ -312,7 +312,7 @@ final authIncorrectOtpComponent = WidgetbookComponent(
           name: 'OTP error — incorrect entry',
           description:
               'OTP verification screen showing the error state — '
-              '6 boxes filled with the user\'s wrong code rendered '
+              '6 boxes filled with the user's wrong code rendered '
               'with red borders via [Ux4gOtpInputStatus.error], plus '
               'an inline "Incorrect OTP" caption with a live resend '
               'countdown via [Ux4gOtpCaptionVariant.attemptWithTimer]. '
@@ -596,7 +596,7 @@ final aadhaarVerifyMethodComponent = WidgetbookComponent(
               'Method-picker shown after the user enters their Aadhaar '
               'number. Three selectable option cards (Aadhaar OTP, Face '
               'Authentication, mAadhaar TOTP) built with the design '
-              'system\'s [Ux4gCard] (selection state) and [Ux4gRadioButton]. '
+              'system's [Ux4gCard] (selection state) and [Ux4gRadioButton]. '
               'A Cancel + Continue footer pinned above the standard '
               'brand footer. Use the [Variant] knob on the right to '
               'toggle between the flat layout and the card-style layout. '
@@ -2780,7 +2780,7 @@ class _SignInCardMockupState extends State<_SignInCardMockup> {
 
   // Card-variant background � soft purple tint behind the white card.
   Color _getCardBg(BuildContext context) =>
-      _isDark(context) ? Ux4gPalette.red900 : Ux4gPalette.red50;
+      _isDark(context) ? Ux4gPalette.primary800 : Ux4gPalette.primary100;
 
   @override
   Widget build(BuildContext context) {
@@ -4499,26 +4499,26 @@ class _VerifyMobileOtpMockupState extends State<_VerifyMobileOtpMockup> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   // -- Title (wraps to 2 lines as per the reference) --
-                  const Text(
+                  Text(
                     'Verify your mobile\nnumber',
                     style: TextStyle(
                       fontSize: 26,
                       fontWeight: FontWeight.w800,
-                      color: _titleColor,
+                      color: _getTitleColor(context),
                       height: 1.2,
                       letterSpacing: -0.3,
                     ),
                   ),
-                  const SizedBox(height: 8),
-                  const Text(
+                  SizedBox(height: 8),
+                  Text(
                     'OTP sent to +91 98765 XXXXX',
                     style: TextStyle(
                       fontSize: 14,
-                      color: _subtleText,
+                      color: _getSubtleText(context),
                       height: 1.3,
                     ),
                   ),
-                  const SizedBox(height: 24),
+                  SizedBox(height: 24),
 
                   // 6 OTP boxes via the design-system component.
                   // Same resend-timer mechanics as the Enter OTP pattern.
@@ -4541,7 +4541,7 @@ class _VerifyMobileOtpMockupState extends State<_VerifyMobileOtpMockup> {
                       });
                     },
                   ),
-                  const SizedBox(height: 24),
+                  SizedBox(height: 24),
 
                   Ux4gButton(
                     text: 'Verify OTP',
@@ -4550,7 +4550,7 @@ class _VerifyMobileOtpMockupState extends State<_VerifyMobileOtpMockup> {
                     height: 48,
                     width: 326,
                   ),
-                  const SizedBox(height: 8),
+                  SizedBox(height: 8),
 
                   // "Change mobile number" � ghost-style link button.
                   Center(
@@ -4595,7 +4595,7 @@ Column(
             style: TextStyle(fontSize: 26, fontWeight: FontWeight.w800)),
           SizedBox(height: 8),
           Text('OTP sent to +91 98765 XXXXX',
-            style: TextStyle(fontSize: 14, color: Ux4gPalette.neutral500)),
+            style: TextStyle(fontSize: 14, color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.neutral400 : Ux4gPalette.neutral500)),
           SizedBox(height: 24),
 
           // 6 OTP boxes via the design-system component.
@@ -4646,7 +4646,7 @@ Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           Text('Powered by -',
-            style: TextStyle(fontSize: 11, color: Ux4gPalette.neutral400)),
+            style: TextStyle(fontSize: 11, color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.neutral500 : Ux4gPalette.neutral400)),
           SizedBox(height: 6),
           Image.asset('assets/digital_india_logo.png', height: 22, color: Theme.of(context).brightness == Brightness.dark ? Colors.white : null),
         ],
@@ -4689,7 +4689,7 @@ class _VerifyMobileOtpCardMockupState
                   // Soft-purple gap above the card � image shows the
                   // card sitting in the upper-middle of the body, not
                   // flush at the top.
-                  const SizedBox(height: 56),
+                  SizedBox(height: 56),
 
                   // White card with the OTP form.
                   Padding(
@@ -4697,7 +4697,7 @@ class _VerifyMobileOtpCardMockupState
                     child: Container(
                       padding: const EdgeInsets.fromLTRB(20, 24, 20, 24),
                       decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.gray900 : Colors.white,
                         borderRadius: BorderRadius.circular(16),
                         boxShadow: [
                           BoxShadow(
@@ -4710,26 +4710,26 @@ class _VerifyMobileOtpCardMockupState
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
+                          Text(
                             'Verify your mobile\nnumber',
                             style: TextStyle(
                               fontSize: 26,
                               fontWeight: FontWeight.w800,
-                              color: _titleColor,
+                              color: _getTitleColor(context),
                               height: 1.2,
                               letterSpacing: -0.3,
                             ),
                           ),
-                          const SizedBox(height: 8),
-                          const Text(
+                          SizedBox(height: 8),
+                          Text(
                             'OTP sent to +91 98765 XXXXX',
                             style: TextStyle(
                               fontSize: 14,
-                              color: _subtleText,
+                              color: _getSubtleText(context),
                               height: 1.3,
                             ),
                           ),
-                          const SizedBox(height: 20),
+                          SizedBox(height: 20),
 
                           Ux4gOtpInput(
                             key: ValueKey(
@@ -4752,7 +4752,7 @@ class _VerifyMobileOtpCardMockupState
                               });
                             },
                           ),
-                          const SizedBox(height: 24),
+                          SizedBox(height: 24),
 
                           Ux4gButton(
                             text: 'Verify OTP',
@@ -4761,7 +4761,7 @@ class _VerifyMobileOtpCardMockupState
                             height: 48,
                             width: 326,
                           ),
-                          const SizedBox(height: 4),
+                          SizedBox(height: 4),
 
                           Center(
                             child: Ux4gButton(
@@ -4805,7 +4805,7 @@ Column(
     Expanded(
       child: Container(
         width: double.infinity,
-        color: Ux4gPalette.primary100,
+        color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.primary800 : Ux4gPalette.primary100,
         child: Column(
           children: [
             SizedBox(height: 56),
@@ -4815,7 +4815,7 @@ Column(
               child: Container(
                 padding: EdgeInsets.fromLTRB(20, 24, 20, 24),
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.gray900 : Colors.white,
                   borderRadius: BorderRadius.circular(16),
                   boxShadow: [
                     BoxShadow(
@@ -4832,7 +4832,7 @@ Column(
                       style: TextStyle(fontSize: 26, fontWeight: FontWeight.w800)),
                     SizedBox(height: 8),
                     Text('OTP sent to +91 98765 XXXXX',
-                      style: TextStyle(fontSize: 14, color: Ux4gPalette.neutral500)),
+                      style: TextStyle(fontSize: 14, color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.neutral400 : Ux4gPalette.neutral500)),
                     SizedBox(height: 20),
 
                     Ux4gOtpInput(
@@ -4884,7 +4884,7 @@ Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text('Powered by -',
-                    style: TextStyle(fontSize: 11, color: Ux4gPalette.neutral400)),
+                    style: TextStyle(fontSize: 11, color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.neutral500 : Ux4gPalette.neutral400)),
                   SizedBox(height: 6),
                   Image.asset('assets/digital_india_logo.png', height: 22, color: Theme.of(context).brightness == Brightness.dark ? Colors.white : null),
                 ],
@@ -4924,29 +4924,29 @@ class _VerifyMobileVoiceMockupState extends State<_VerifyMobileVoiceMockup> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const _BackButton(),
-                  const SizedBox(height: 24),
+                  SizedBox(height: 24),
 
                   // -- 2-line title --
-                  const Text(
+                  Text(
                     'Verify your mobile\nnumber',
                     style: TextStyle(
                       fontSize: 26,
                       fontWeight: FontWeight.w800,
-                      color: _titleColor,
+                      color: _getTitleColor(context),
                       height: 1.2,
                       letterSpacing: -0.3,
                     ),
                   ),
-                  const SizedBox(height: 8),
-                  const Text(
+                  SizedBox(height: 8),
+                  Text(
                     'OTP sent to +91 98765 XXXXX',
                     style: TextStyle(
                       fontSize: 14,
-                      color: _subtleText,
+                      color: _getSubtleText(context),
                       height: 1.3,
                     ),
                   ),
-                  const SizedBox(height: 24),
+                  SizedBox(height: 24),
 
                   // 6 OTP boxes � caption is in [resendAction] mode so
                   // "Resend OTP" appears as a tap-able link (the timer
@@ -4967,7 +4967,7 @@ class _VerifyMobileVoiceMockupState extends State<_VerifyMobileVoiceMockup> {
                       });
                     },
                   ),
-                  const SizedBox(height: 24),
+                  SizedBox(height: 24),
 
                   Ux4gButton(
                     text: 'Verify OTP',
@@ -4976,7 +4976,7 @@ class _VerifyMobileVoiceMockupState extends State<_VerifyMobileVoiceMockup> {
                     height: 48,
                     width: 326,
                   ),
-                  const SizedBox(height: 12),
+                  SizedBox(height: 12),
 
                   // Secondary action � voice-call fallback for users
                   // who couldn't receive the SMS.
@@ -5032,7 +5032,7 @@ Column(
             style: TextStyle(fontSize: 26, fontWeight: FontWeight.w800)),
           SizedBox(height: 8),
           Text('OTP sent to +91 98765 XXXXX',
-            style: TextStyle(fontSize: 14, color: Ux4gPalette.neutral500)),
+            style: TextStyle(fontSize: 14, color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.neutral400 : Ux4gPalette.neutral500)),
           SizedBox(height: 24),
 
           // 6 OTP boxes with the resend caption in its expired
@@ -5079,7 +5079,7 @@ Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           Text('Powered by -',
-            style: TextStyle(fontSize: 11, color: Ux4gPalette.neutral400)),
+            style: TextStyle(fontSize: 11, color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.neutral500 : Ux4gPalette.neutral400)),
           SizedBox(height: 6),
           Image.asset('assets/digital_india_logo.png', height: 22, color: Theme.of(context).brightness == Brightness.dark ? Colors.white : null),
         ],
@@ -5124,7 +5124,7 @@ class _VerifyMobileVoiceCardMockupState
                     child: Container(
                       padding: const EdgeInsets.fromLTRB(20, 16, 20, 24),
                       decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.gray900 : Colors.white,
                         borderRadius: BorderRadius.circular(16),
                         boxShadow: [
                           BoxShadow(
@@ -5138,28 +5138,28 @@ class _VerifyMobileVoiceCardMockupState
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           const _BackButton(),
-                          const SizedBox(height: 16),
+                          SizedBox(height: 16),
 
-                          const Text(
+                          Text(
                             'Verify your mobile\nnumber',
                             style: TextStyle(
                               fontSize: 26,
                               fontWeight: FontWeight.w800,
-                              color: _titleColor,
+                              color: _getTitleColor(context),
                               height: 1.2,
                               letterSpacing: -0.3,
                             ),
                           ),
-                          const SizedBox(height: 8),
-                          const Text(
+                          SizedBox(height: 8),
+                          Text(
                             'OTP sent to +91 98765 XXXXX',
                             style: TextStyle(
                               fontSize: 14,
-                              color: _subtleText,
+                              color: _getSubtleText(context),
                               height: 1.3,
                             ),
                           ),
-                          const SizedBox(height: 20),
+                          SizedBox(height: 20),
 
                           // Caption already in expired/action state so
                           // "Resend OTP" is immediately tap-able.
@@ -5177,7 +5177,7 @@ class _VerifyMobileVoiceCardMockupState
                               setState(() => _otp = '');
                             },
                           ),
-                          const SizedBox(height: 24),
+                          SizedBox(height: 24),
 
                           Ux4gButton(
                             text: 'Verify OTP',
@@ -5186,7 +5186,7 @@ class _VerifyMobileVoiceCardMockupState
                             height: 48,
                             width: 326,
                           ),
-                          const SizedBox(height: 12),
+                          SizedBox(height: 12),
 
                           Ux4gButton(
                             text: 'Get OTP via voice call',
@@ -5231,7 +5231,7 @@ Column(
     Expanded(
       child: Container(
         width: double.infinity,
-        color: Ux4gPalette.primary100,
+        color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.primary800 : Ux4gPalette.primary100,
         child: Column(
           children: [
             Padding(
@@ -5239,7 +5239,7 @@ Column(
               child: Container(
                 padding: EdgeInsets.fromLTRB(20, 16, 20, 24),
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.gray900 : Colors.white,
                   borderRadius: BorderRadius.circular(16),
                   boxShadow: [
                     BoxShadow(
@@ -5265,7 +5265,7 @@ Column(
                       style: TextStyle(fontSize: 26, fontWeight: FontWeight.w800)),
                     SizedBox(height: 8),
                     Text('OTP sent to +91 98765 XXXXX',
-                      style: TextStyle(fontSize: 14, color: Ux4gPalette.neutral500)),
+                      style: TextStyle(fontSize: 14, color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.neutral400 : Ux4gPalette.neutral500)),
                     SizedBox(height: 20),
 
                     Ux4gOtpInput(
@@ -5312,7 +5312,7 @@ Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text('Powered by -',
-                    style: TextStyle(fontSize: 11, color: Ux4gPalette.neutral400)),
+                    style: TextStyle(fontSize: 11, color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.neutral500 : Ux4gPalette.neutral400)),
                   SizedBox(height: 6),
                   Image.asset('assets/digital_india_logo.png', height: 22, color: Theme.of(context).brightness == Brightness.dark ? Colors.white : null),
                 ],
@@ -5353,28 +5353,28 @@ class _VerifyMobileAttemptWarningMockupState
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const _BackButton(),
-                  const SizedBox(height: 24),
+                  SizedBox(height: 24),
 
-                  const Text(
+                  Text(
                     'Verify your mobile\nnumber',
                     style: TextStyle(
                       fontSize: 26,
                       fontWeight: FontWeight.w800,
-                      color: _titleColor,
+                      color: _getTitleColor(context),
                       height: 1.2,
                       letterSpacing: -0.3,
                     ),
                   ),
-                  const SizedBox(height: 8),
-                  const Text(
+                  SizedBox(height: 8),
+                  Text(
                     'OTP sent to +91 98765 XXXXX',
                     style: TextStyle(
                       fontSize: 14,
-                      color: _subtleText,
+                      color: _getSubtleText(context),
                       height: 1.3,
                     ),
                   ),
-                  const SizedBox(height: 24),
+                  SizedBox(height: 24),
 
                   // 6 OTP boxes � caption suppressed since the warning
                   // banner below carries the resend message.
@@ -5393,45 +5393,57 @@ class _VerifyMobileAttemptWarningMockupState
                   // the trailing side.
                   Ux4gStatusBanner(
                     variant: Ux4gBannerVariant.warningLight,
+                    backgroundColor: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.orange900 : Ux4gPalette.orange50,
+                    borderColor: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.orange600 : Ux4gPalette.orange300,
                     title: 'Incorrect OTP',
-                    subtitle: '1 more incorrect entry\nbefore 30-min lockout',
                     margin: EdgeInsets.zero,
                     padding: const EdgeInsets.fromLTRB(12, 12, 10, 12),
-                    titleStyle: const TextStyle(
+                    titleStyle: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w400,
-                      color: Ux4gPalette.secondary800,
+                      color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.orange300 : Ux4gPalette.orange800,
                       height: 1.3,
                     ),
-                    subtitleStyle: const TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w700,
-                      color: Ux4gPalette.secondary800,
-                      height: 1.3,
-                    ),
-                    leadingIcon: const Icon(
+                    leadingIcon: Icon(
                       Icons.error_outline,
-                      color: Ux4gPalette.secondary600,
+                      color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.orange500 : Ux4gPalette.orange600,
                       size: 20,
                     ),
-                    trailingIcon: Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 10,
-                        vertical: 5,
-                      ),
-                      decoration: BoxDecoration(
-                        color: Ux4gPalette.secondary100,
-                        borderRadius: BorderRadius.circular(6),
-                      ),
-                      child: const Text(
-                        'Attempt 1 of 3',
-                        style: TextStyle(
-                          fontSize: 12,
-                          color: Ux4gPalette.secondary800,
-                          fontWeight: FontWeight.w500,
-                          height: 1.2,
+                    subtitleWidget: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Expanded(
+                          child: Text(
+                            '1 more incorrect entry\nbefore 30-min lockout',
+                            style: TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w700,
+                              color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.orange300 : Ux4gPalette.orange800,
+                              height: 1.3,
+                            ),
+                          ),
                         ),
-                      ),
+                        const SizedBox(width: 8),
+                        Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 10,
+                            vertical: 5,
+                          ),
+                          decoration: BoxDecoration(
+                            color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.orange800 : Ux4gPalette.orange100,
+                            borderRadius: BorderRadius.circular(6),
+                          ),
+                          child: Text(
+                            'Attempt 1 of 3',
+                            style: TextStyle(
+                              fontSize: 12,
+                              color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.orange300 : Ux4gPalette.orange800,
+                              fontWeight: FontWeight.w500,
+                              height: 1.2,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                   const SizedBox(height: 20),
@@ -5502,30 +5514,57 @@ Column(
           // Warning banner � design-system Ux4gStatusBanner.
           Ux4gStatusBanner(
             variant: Ux4gBannerVariant.warningLight,
+            backgroundColor: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.orange900 : Ux4gPalette.orange50,
+            borderColor: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.orange600 : Ux4gPalette.orange300,
             title: 'Incorrect OTP',
-            subtitle: '1 more incorrect entry\nbefore 30-min lockout',
             margin: EdgeInsets.zero,
-            padding: EdgeInsets.fromLTRB(12, 12, 10, 12),
+            padding: const EdgeInsets.fromLTRB(12, 12, 10, 12),
             titleStyle: TextStyle(
-              fontSize: 14, fontWeight: FontWeight.w400,
-              color: Ux4gPalette.secondary800,
+              fontSize: 14,
+              fontWeight: FontWeight.w400,
+              color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.orange300 : Ux4gPalette.orange800,
+              height: 1.3,
             ),
-            subtitleStyle: TextStyle(
-              fontSize: 14, fontWeight: FontWeight.w700,
-              color: Ux4gPalette.secondary800,
+            leadingIcon: Icon(
+              Icons.error_outline,
+              color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.orange500 : Ux4gPalette.orange600,
+              size: 20,
             ),
-            leadingIcon: Icon(Icons.error_outline,
-              color: Ux4gPalette.secondary600, size: 20),
-            trailingIcon: Container(
-              padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-              decoration: BoxDecoration(
-                color: Ux4gPalette.secondary100,
-                borderRadius: BorderRadius.circular(6),
-              ),
-              child: Text('Attempt 1 of 3',
-                style: TextStyle(fontSize: 12,
-                  color: Ux4gPalette.secondary800,
-                  fontWeight: FontWeight.w500)),
+            subtitleWidget: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Expanded(
+                  child: Text(
+                    '1 more incorrect entry\nbefore 30-min lockout',
+                    style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w700,
+                      color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.orange300 : Ux4gPalette.orange800,
+                      height: 1.3,
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 8),
+                Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 10,
+                    vertical: 5,
+                  ),
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.orange800 : Ux4gPalette.orange100,
+                    borderRadius: BorderRadius.circular(6),
+                  ),
+                  child: Text(
+                    'Attempt 1 of 3',
+                    style: TextStyle(
+                      fontSize: 12,
+                      color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.orange300 : Ux4gPalette.orange800,
+                      fontWeight: FontWeight.w500,
+                      height: 1.2,
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
           SizedBox(height: 20),
@@ -5547,7 +5586,7 @@ Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           Text('Powered by -',
-            style: TextStyle(fontSize: 11, color: Ux4gPalette.neutral400)),
+            style: TextStyle(fontSize: 11, color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.neutral500 : Ux4gPalette.neutral400)),
           SizedBox(height: 6),
           Image.asset('assets/digital_india_logo.png', height: 22, color: Theme.of(context).brightness == Brightness.dark ? Colors.white : null),
         ],
@@ -5571,8 +5610,7 @@ class _VerifyMobileAttemptWarningCardMockupState
     extends State<_VerifyMobileAttemptWarningCardMockup> {
   String _otp = '';
 
-  Color _getCardBg(BuildContext context) =>
-      _isDark(context) ? Ux4gPalette.red900 : Ux4gPalette.red50;
+  Color _getCardBg(BuildContext context) => _getBg(context);
 
   @override
   Widget build(BuildContext context) {
@@ -5592,7 +5630,7 @@ class _VerifyMobileAttemptWarningCardMockupState
                     child: Container(
                       padding: const EdgeInsets.fromLTRB(20, 16, 20, 24),
                       decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.gray900 : Colors.white,
                         borderRadius: BorderRadius.circular(16),
                         boxShadow: [
                           BoxShadow(
@@ -5606,28 +5644,28 @@ class _VerifyMobileAttemptWarningCardMockupState
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           const _BackButton(),
-                          const SizedBox(height: 16),
+                          SizedBox(height: 16),
 
-                          const Text(
+                          Text(
                             'Verify your mobile\nnumber',
                             style: TextStyle(
                               fontSize: 26,
                               fontWeight: FontWeight.w800,
-                              color: _titleColor,
+                              color: _getTitleColor(context),
                               height: 1.2,
                               letterSpacing: -0.3,
                             ),
                           ),
-                          const SizedBox(height: 8),
-                          const Text(
+                          SizedBox(height: 8),
+                          Text(
                             'OTP sent to +91 98765 XXXXX',
                             style: TextStyle(
                               fontSize: 14,
-                              color: _subtleText,
+                              color: _getSubtleText(context),
                               height: 1.3,
                             ),
                           ),
-                          const SizedBox(height: 20),
+                          SizedBox(height: 20),
 
                           Ux4gOtpInput(
                             length: 6,
@@ -5726,7 +5764,7 @@ Column(
     Expanded(
       child: Container(
         width: double.infinity,
-        color: Ux4gPalette.primary100,
+        color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.primary800 : Ux4gPalette.primary100,
         child: Column(
           children: [
             Padding(
@@ -5734,7 +5772,7 @@ Column(
               child: Container(
                 padding: EdgeInsets.fromLTRB(20, 16, 20, 24),
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.gray900 : Colors.white,
                   borderRadius: BorderRadius.circular(16),
                   boxShadow: [
                     BoxShadow(
@@ -5760,7 +5798,7 @@ Column(
                       style: TextStyle(fontSize: 26, fontWeight: FontWeight.w800)),
                     SizedBox(height: 8),
                     Text('OTP sent to +91 98765 XXXXX',
-                      style: TextStyle(fontSize: 14, color: Ux4gPalette.neutral500)),
+                      style: TextStyle(fontSize: 14, color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.neutral400 : Ux4gPalette.neutral500)),
                     SizedBox(height: 20),
 
                     Ux4gOtpInput(
@@ -5775,30 +5813,57 @@ Column(
 
                     Ux4gStatusBanner(
                       variant: Ux4gBannerVariant.warningLight,
+                      backgroundColor: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.orange900 : Ux4gPalette.orange50,
+                      borderColor: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.orange600 : Ux4gPalette.orange300,
                       title: 'Incorrect OTP',
-                      subtitle: '1 more incorrect entry\nbefore 30-min lockout',
                       margin: EdgeInsets.zero,
-                      padding: EdgeInsets.fromLTRB(12, 12, 10, 12),
+                      padding: const EdgeInsets.fromLTRB(12, 12, 10, 12),
                       titleStyle: TextStyle(
-                        fontSize: 14, fontWeight: FontWeight.w400,
-                        color: Ux4gPalette.secondary800,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w400,
+                        color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.orange300 : Ux4gPalette.orange800,
+                        height: 1.3,
                       ),
-                      subtitleStyle: TextStyle(
-                        fontSize: 14, fontWeight: FontWeight.w700,
-                        color: Ux4gPalette.secondary800,
+                      leadingIcon: Icon(
+                        Icons.error_outline,
+                        color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.orange500 : Ux4gPalette.orange600,
+                        size: 20,
                       ),
-                      leadingIcon: Icon(Icons.error_outline,
-                        color: Ux4gPalette.secondary600, size: 20),
-                      trailingIcon: Container(
-                        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                        decoration: BoxDecoration(
-                          color: Ux4gPalette.secondary100,
-                          borderRadius: BorderRadius.circular(6),
-                        ),
-                        child: Text('Attempt 1 of 3',
-                          style: TextStyle(fontSize: 12,
-                            color: Ux4gPalette.secondary800,
-                            fontWeight: FontWeight.w500)),
+                      subtitleWidget: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Expanded(
+                            child: Text(
+                              '1 more incorrect entry\nbefore 30-min lockout',
+                              style: TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w700,
+                                color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.orange300 : Ux4gPalette.orange800,
+                                height: 1.3,
+                              ),
+                            ),
+                          ),
+                          const SizedBox(width: 8),
+                          Container(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 10,
+                              vertical: 5,
+                            ),
+                            decoration: BoxDecoration(
+                              color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.orange800 : Ux4gPalette.orange100,
+                              borderRadius: BorderRadius.circular(6),
+                            ),
+                            child: Text(
+                              'Attempt 1 of 3',
+                              style: TextStyle(
+                                fontSize: 12,
+                                color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.orange300 : Ux4gPalette.orange800,
+                                fontWeight: FontWeight.w500,
+                                height: 1.2,
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                     SizedBox(height: 20),
@@ -5823,7 +5888,7 @@ Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text('Powered by -',
-                    style: TextStyle(fontSize: 11, color: Ux4gPalette.neutral400)),
+                    style: TextStyle(fontSize: 11, color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.neutral500 : Ux4gPalette.neutral400)),
                   SizedBox(height: 6),
                   Image.asset('assets/digital_india_logo.png', height: 22, color: Theme.of(context).brightness == Brightness.dark ? Colors.white : null),
                 ],
@@ -5864,28 +5929,28 @@ class _VerifyMobileLastAttemptMockupState
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const _BackButton(),
-                  const SizedBox(height: 24),
+                  SizedBox(height: 24),
 
-                  const Text(
+                  Text(
                     'Verify your mobile\nnumber',
                     style: TextStyle(
                       fontSize: 26,
                       fontWeight: FontWeight.w800,
-                      color: _titleColor,
+                      color: _getTitleColor(context),
                       height: 1.2,
                       letterSpacing: -0.3,
                     ),
                   ),
-                  const SizedBox(height: 8),
-                  const Text(
+                  SizedBox(height: 8),
+                  Text(
                     'OTP sent to +91 98765 XXXXX',
                     style: TextStyle(
                       fontSize: 14,
-                      color: _subtleText,
+                      color: _getSubtleText(context),
                       height: 1.3,
                     ),
                   ),
-                  const SizedBox(height: 24),
+                  SizedBox(height: 24),
 
                   Ux4gOtpInput(
                     length: 6,
@@ -5895,7 +5960,7 @@ class _VerifyMobileLastAttemptMockupState
                     gap: 8,
                     showSeparator: false,
                   ),
-                  const SizedBox(height: 16),
+                  SizedBox(height: 16),
 
                   // Error-styled banner � escalated from warning since
                   // this is the final attempt before lockout.
@@ -5906,19 +5971,19 @@ class _VerifyMobileLastAttemptMockupState
                         'This is your last attempt\nbefore a 30-min lockout',
                     margin: EdgeInsets.zero,
                     padding: const EdgeInsets.fromLTRB(12, 12, 10, 12),
-                    titleStyle: const TextStyle(
+                    titleStyle: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w400,
                       color: Ux4gPalette.red800,
                       height: 1.3,
                     ),
-                    subtitleStyle: const TextStyle(
+                    subtitleStyle: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w700,
                       color: Ux4gPalette.red800,
                       height: 1.3,
                     ),
-                    leadingIcon: const Icon(
+                    leadingIcon: Icon(
                       Icons.error_outline,
                       color: Ux4gPalette.red600,
                       size: 20,
@@ -5932,7 +5997,7 @@ class _VerifyMobileLastAttemptMockupState
                         color: Ux4gPalette.red200,
                         borderRadius: BorderRadius.circular(6),
                       ),
-                      child: const Text(
+                      child: Text(
                         'Attempt 2 of 3',
                         style: TextStyle(
                           fontSize: 12,
@@ -5943,7 +6008,7 @@ class _VerifyMobileLastAttemptMockupState
                       ),
                     ),
                   ),
-                  const SizedBox(height: 20),
+                  SizedBox(height: 20),
 
                   Ux4gButton(
                     text: 'Verify OTP',
@@ -5995,7 +6060,7 @@ Column(
             style: TextStyle(fontSize: 26, fontWeight: FontWeight.w800)),
           SizedBox(height: 8),
           Text('OTP sent to +91 98765 XXXXX',
-            style: TextStyle(fontSize: 14, color: Ux4gPalette.neutral500)),
+            style: TextStyle(fontSize: 14, color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.neutral400 : Ux4gPalette.neutral500)),
           SizedBox(height: 24),
 
           Ux4gOtpInput(
@@ -6056,7 +6121,7 @@ Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           Text('Powered by -',
-            style: TextStyle(fontSize: 11, color: Ux4gPalette.neutral400)),
+            style: TextStyle(fontSize: 11, color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.neutral500 : Ux4gPalette.neutral400)),
           SizedBox(height: 6),
           Image.asset('assets/digital_india_logo.png', height: 22, color: Theme.of(context).brightness == Brightness.dark ? Colors.white : null),
         ],
@@ -6079,8 +6144,7 @@ class _VerifyMobileLastAttemptCardMockupState
     extends State<_VerifyMobileLastAttemptCardMockup> {
   String _otp = '';
 
-  Color _getCardBg(BuildContext context) =>
-      _isDark(context) ? Ux4gPalette.red900 : Ux4gPalette.red50;
+  Color _getCardBg(BuildContext context) => _getBg(context);
 
   @override
   Widget build(BuildContext context) {
@@ -6099,7 +6163,7 @@ class _VerifyMobileLastAttemptCardMockupState
                     child: Container(
                       padding: const EdgeInsets.fromLTRB(20, 16, 20, 24),
                       decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.gray900 : Colors.white,
                         borderRadius: BorderRadius.circular(16),
                         boxShadow: [
                           BoxShadow(
@@ -6113,28 +6177,28 @@ class _VerifyMobileLastAttemptCardMockupState
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           const _BackButton(),
-                          const SizedBox(height: 16),
+                          SizedBox(height: 16),
 
-                          const Text(
+                          Text(
                             'Verify your mobile\nnumber',
                             style: TextStyle(
                               fontSize: 26,
                               fontWeight: FontWeight.w800,
-                              color: _titleColor,
+                              color: _getTitleColor(context),
                               height: 1.2,
                               letterSpacing: -0.3,
                             ),
                           ),
-                          const SizedBox(height: 8),
-                          const Text(
+                          SizedBox(height: 8),
+                          Text(
                             'OTP sent to +91 98765 XXXXX',
                             style: TextStyle(
                               fontSize: 14,
-                              color: _subtleText,
+                              color: _getSubtleText(context),
                               height: 1.3,
                             ),
                           ),
-                          const SizedBox(height: 20),
+                          SizedBox(height: 20),
 
                           Ux4gOtpInput(
                             length: 6,
@@ -6144,7 +6208,7 @@ class _VerifyMobileLastAttemptCardMockupState
                             gap: 8,
                             showSeparator: false,
                           ),
-                          const SizedBox(height: 16),
+                          SizedBox(height: 16),
 
                           Ux4gStatusBanner(
                             variant: Ux4gBannerVariant.errorLight,
@@ -6153,19 +6217,19 @@ class _VerifyMobileLastAttemptCardMockupState
                                 'This is your last attempt\nbefore a 30-min lockout',
                             margin: EdgeInsets.zero,
                             padding: const EdgeInsets.fromLTRB(12, 12, 10, 12),
-                            titleStyle: const TextStyle(
+                            titleStyle: TextStyle(
                               fontSize: 14,
                               fontWeight: FontWeight.w400,
                               color: Ux4gPalette.red800,
                               height: 1.3,
                             ),
-                            subtitleStyle: const TextStyle(
+                            subtitleStyle: TextStyle(
                               fontSize: 14,
                               fontWeight: FontWeight.w700,
                               color: Ux4gPalette.red800,
                               height: 1.3,
                             ),
-                            leadingIcon: const Icon(
+                            leadingIcon: Icon(
                               Icons.error_outline,
                               color: Ux4gPalette.red600,
                               size: 20,
@@ -6179,7 +6243,7 @@ class _VerifyMobileLastAttemptCardMockupState
                                 color: Ux4gPalette.red200,
                                 borderRadius: BorderRadius.circular(6),
                               ),
-                              child: const Text(
+                              child: Text(
                                 'Attempt 2 of 3',
                                 style: TextStyle(
                                   fontSize: 12,
@@ -6190,7 +6254,7 @@ class _VerifyMobileLastAttemptCardMockupState
                               ),
                             ),
                           ),
-                          const SizedBox(height: 20),
+                          SizedBox(height: 20),
 
                           Ux4gButton(
                             text: 'Verify OTP',
@@ -6233,7 +6297,7 @@ Column(
     Expanded(
       child: Container(
         width: double.infinity,
-        color: Ux4gPalette.primary100,
+        color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.primary800 : Ux4gPalette.primary100,
         child: Column(
           children: [
             Padding(
@@ -6241,7 +6305,7 @@ Column(
               child: Container(
                 padding: EdgeInsets.fromLTRB(20, 16, 20, 24),
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.gray900 : Colors.white,
                   borderRadius: BorderRadius.circular(16),
                   boxShadow: [
                     BoxShadow(
@@ -6267,7 +6331,7 @@ Column(
                       style: TextStyle(fontSize: 26, fontWeight: FontWeight.w800)),
                     SizedBox(height: 8),
                     Text('OTP sent to +91 98765 XXXXX',
-                      style: TextStyle(fontSize: 14, color: Ux4gPalette.neutral500)),
+                      style: TextStyle(fontSize: 14, color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.neutral400 : Ux4gPalette.neutral500)),
                     SizedBox(height: 20),
 
                     Ux4gOtpInput(
@@ -6330,7 +6394,7 @@ Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text('Powered by -',
-                    style: TextStyle(fontSize: 11, color: Ux4gPalette.neutral400)),
+                    style: TextStyle(fontSize: 11, color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.neutral500 : Ux4gPalette.neutral400)),
                   SizedBox(height: 6),
                   Image.asset('assets/digital_india_logo.png', height: 22, color: Theme.of(context).brightness == Brightness.dark ? Colors.white : null),
                 ],
@@ -6373,7 +6437,7 @@ class _VerifyAccountLockedMockupState
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const _BackButton(),
-                  const SizedBox(height: 24),
+                  SizedBox(height: 24),
 
                   // -- Lock badge --
                   Center(
@@ -6385,29 +6449,29 @@ class _VerifyAccountLockedMockupState
                         shape: BoxShape.circle,
                       ),
                       alignment: Alignment.center,
-                      child: const Icon(
+                      child: Icon(
                         Icons.lock,
                         color: _lockIconColor,
                         size: 28,
                       ),
                     ),
                   ),
-                  const SizedBox(height: 16),
+                  SizedBox(height: 16),
 
-                  const Center(
+                  Center(
                     child: Text(
                       'Too many incorrect\nattempts',
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontSize: 22,
                         fontWeight: FontWeight.w800,
-                        color: _titleColor,
+                        color: _getTitleColor(context),
                         height: 1.2,
                         letterSpacing: -0.3,
                       ),
                     ),
                   ),
-                  const SizedBox(height: 24),
+                  SizedBox(height: 24),
 
                   // 6 disabled OTP boxes with the [locked] caption � the
                   // design-system component renders "?? Locked for mm:ss"
@@ -6425,7 +6489,7 @@ class _VerifyAccountLockedMockupState
                     captionLeadingText: 'Locked for 28:43',
                     captionTrailingText: 'Resend OTP',
                   ),
-                  const SizedBox(height: 12),
+                  SizedBox(height: 12),
 
                   // -- Error banner --
                   Ux4gStatusBanner(
@@ -6435,30 +6499,30 @@ class _VerifyAccountLockedMockupState
                         'countdown to complete',
                     margin: EdgeInsets.zero,
                     padding: const EdgeInsets.fromLTRB(12, 12, 12, 12),
-                    titleStyle: const TextStyle(
+                    titleStyle: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w400,
                       color: Ux4gPalette.red800,
                       height: 1.35,
                     ),
-                    leadingIcon: const Icon(
+                    leadingIcon: Icon(
                       Icons.error_outline,
                       color: Ux4gPalette.red600,
                       size: 20,
                     ),
                   ),
-                  const SizedBox(height: 20),
+                  SizedBox(height: 20),
 
                   // -- Support link --
                   Center(
                     child: Wrap(
                       crossAxisAlignment: WrapCrossAlignment.center,
                       children: [
-                        const Text(
+                        Text(
                           'Need help?  ',
                           style: TextStyle(
                             fontSize: 14,
-                            color: _subtleText,
+                            color: _getSubtleText(context),
                             height: 1.3,
                           ),
                         ),
@@ -6564,7 +6628,7 @@ Column(
             crossAxisAlignment: WrapCrossAlignment.center,
             children: [
               Text('Need help?  ',
-                style: TextStyle(fontSize: 14, color: Ux4gPalette.neutral500)),
+                style: TextStyle(fontSize: 14, color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.neutral400 : Ux4gPalette.neutral500)),
               Ux4gButton(
                 text: 'Call 1800-XXX-XXXX',
                 onPressed: () {},
@@ -6583,7 +6647,7 @@ Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           Text('Powered by -',
-            style: TextStyle(fontSize: 11, color: Ux4gPalette.neutral400)),
+            style: TextStyle(fontSize: 11, color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.neutral500 : Ux4gPalette.neutral400)),
           SizedBox(height: 6),
           Image.asset('assets/digital_india_logo.png', height: 22, color: Theme.of(context).brightness == Brightness.dark ? Colors.white : null),
         ],
@@ -6604,8 +6668,7 @@ class _VerifyAccountLockedCardMockup extends StatefulWidget {
 
 class _VerifyAccountLockedCardMockupState
     extends State<_VerifyAccountLockedCardMockup> {
-  Color _getCardBg(BuildContext context) =>
-      _isDark(context) ? Ux4gPalette.red900 : Ux4gPalette.red50;
+  Color _getCardBg(BuildContext context) => _getBg(context);
   static const _lockBadgeBg = Ux4gPalette.red100;
   static const _lockIconColor = Ux4gPalette.red600;
 
@@ -6626,7 +6689,7 @@ class _VerifyAccountLockedCardMockupState
                     child: Container(
                       padding: const EdgeInsets.fromLTRB(20, 16, 20, 24),
                       decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.gray900 : Colors.white,
                         borderRadius: BorderRadius.circular(16),
                         boxShadow: [
                           BoxShadow(
@@ -6640,7 +6703,7 @@ class _VerifyAccountLockedCardMockupState
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           const _BackButton(),
-                          const SizedBox(height: 16),
+                          SizedBox(height: 16),
 
                           Center(
                             child: Container(
@@ -6651,29 +6714,29 @@ class _VerifyAccountLockedCardMockupState
                                 shape: BoxShape.circle,
                               ),
                               alignment: Alignment.center,
-                              child: const Icon(
+                              child: Icon(
                                 Icons.lock,
                                 color: _lockIconColor,
                                 size: 28,
                               ),
                             ),
                           ),
-                          const SizedBox(height: 12),
+                          SizedBox(height: 12),
 
-                          const Center(
+                          Center(
                             child: Text(
                               'Too many incorrect\nattempts',
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                 fontSize: 22,
                                 fontWeight: FontWeight.w800,
-                                color: _titleColor,
+                                color: _getTitleColor(context),
                                 height: 1.2,
                                 letterSpacing: -0.3,
                               ),
                             ),
                           ),
-                          const SizedBox(height: 20),
+                          SizedBox(height: 20),
 
                           Ux4gOtpInput(
                             length: 6,
@@ -6687,7 +6750,7 @@ class _VerifyAccountLockedCardMockupState
                             captionLeadingText: 'Locked for 28:43',
                             captionTrailingText: 'Resend OTP',
                           ),
-                          const SizedBox(height: 12),
+                          SizedBox(height: 12),
 
                           Ux4gStatusBanner(
                             variant: Ux4gBannerVariant.errorLight,
@@ -6695,29 +6758,29 @@ class _VerifyAccountLockedCardMockupState
                                 'Account locked. Please wait for the\ncountdown to complete',
                             margin: EdgeInsets.zero,
                             padding: const EdgeInsets.fromLTRB(12, 12, 12, 12),
-                            titleStyle: const TextStyle(
+                            titleStyle: TextStyle(
                               fontSize: 14,
                               fontWeight: FontWeight.w400,
                               color: Ux4gPalette.red800,
                               height: 1.35,
                             ),
-                            leadingIcon: const Icon(
+                            leadingIcon: Icon(
                               Icons.error_outline,
                               color: Ux4gPalette.red600,
                               size: 20,
                             ),
                           ),
-                          const SizedBox(height: 20),
+                          SizedBox(height: 20),
 
                           Center(
                             child: Wrap(
                               crossAxisAlignment: WrapCrossAlignment.center,
                               children: [
-                                const Text(
+                                Text(
                                   'Need help?  ',
                                   style: TextStyle(
                                     fontSize: 14,
-                                    color: _subtleText,
+                                    color: _getSubtleText(context),
                                     height: 1.3,
                                   ),
                                 ),
@@ -6762,7 +6825,7 @@ Column(
     Expanded(
       child: Container(
         width: double.infinity,
-        color: Ux4gPalette.primary100,
+        color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.primary800 : Ux4gPalette.primary100,
         child: Column(
           children: [
             Padding(
@@ -6770,7 +6833,7 @@ Column(
               child: Container(
                 padding: EdgeInsets.fromLTRB(20, 16, 20, 24),
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.gray900 : Colors.white,
                   borderRadius: BorderRadius.circular(16),
                   boxShadow: [/* subtle shadow */],
                 ),
@@ -6825,35 +6888,35 @@ class _OtpVerifiedSuccessMockup extends StatelessWidget {
                         color: _successMid,
                         shape: BoxShape.circle,
                       ),
-                      child: const Icon(
+                      child: Icon(
                         Icons.check,
                         color: Colors.white,
                         size: 22,
                       ),
                     ),
                   ),
-                  const SizedBox(height: 20),
+                  SizedBox(height: 20),
 
-                  const Text(
+                  Text(
                     'Verified!',
                     style: TextStyle(
                       fontSize: 22,
                       fontWeight: FontWeight.w800,
-                      color: _titleColor,
+                      color: _getTitleColor(context),
                       height: 1.2,
                       letterSpacing: -0.3,
                     ),
                   ),
-                  const SizedBox(height: 8),
-                  const Text(
+                  SizedBox(height: 8),
+                  Text(
                     'Redirecting you to your dashboard...',
                     style: TextStyle(
                       fontSize: 14,
-                      color: _subtleText,
+                      color: _getSubtleText(context),
                       height: 1.3,
                     ),
                   ),
-                  const SizedBox(height: 24),
+                  SizedBox(height: 24),
 
                   // 6 OTP boxes filled with the entered code, tinted
                   // green via the design-system's success status.
@@ -6922,7 +6985,7 @@ Column(
             style: TextStyle(fontSize: 22, fontWeight: FontWeight.w800)),
           SizedBox(height: 8),
           Text('Redirecting you to your dashboard...',
-            style: TextStyle(fontSize: 14, color: Ux4gPalette.neutral500)),
+            style: TextStyle(fontSize: 14, color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.neutral400 : Ux4gPalette.neutral500)),
           SizedBox(height: 24),
 
           // OTP field tinted green via the design-system's success
@@ -6948,7 +7011,7 @@ Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           Text('Powered by -',
-            style: TextStyle(fontSize: 11, color: Ux4gPalette.neutral400)),
+            style: TextStyle(fontSize: 11, color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.neutral500 : Ux4gPalette.neutral400)),
           SizedBox(height: 6),
           Image.asset('assets/digital_india_logo.png', height: 22, color: Theme.of(context).brightness == Brightness.dark ? Colors.white : null),
         ],
@@ -6984,7 +7047,7 @@ class _OtpVerifiedSuccessCardMockup extends StatelessWidget {
                     child: Container(
                       padding: const EdgeInsets.fromLTRB(20, 28, 20, 28),
                       decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.gray900 : Colors.white,
                         borderRadius: BorderRadius.circular(16),
                         boxShadow: [
                           BoxShadow(
@@ -7011,36 +7074,36 @@ class _OtpVerifiedSuccessCardMockup extends StatelessWidget {
                                 color: _successMid,
                                 shape: BoxShape.circle,
                               ),
-                              child: const Icon(
+                              child: Icon(
                                 Icons.check,
                                 color: Colors.white,
                                 size: 22,
                               ),
                             ),
                           ),
-                          const SizedBox(height: 20),
+                          SizedBox(height: 20),
 
-                          const Text(
+                          Text(
                             'Verified!',
                             style: TextStyle(
                               fontSize: 22,
                               fontWeight: FontWeight.w800,
-                              color: _titleColor,
+                              color: _getTitleColor(context),
                               height: 1.2,
                               letterSpacing: -0.3,
                             ),
                           ),
-                          const SizedBox(height: 8),
-                          const Text(
+                          SizedBox(height: 8),
+                          Text(
                             'Redirecting you to your dashboard...',
                             style: TextStyle(
                               fontSize: 14,
-                              color: _subtleText,
+                              color: _getSubtleText(context),
                               height: 1.3,
                             ),
                             textAlign: TextAlign.center,
                           ),
-                          const SizedBox(height: 24),
+                          SizedBox(height: 24),
 
                           Ux4gOtpInput(
                             length: 6,
@@ -7081,7 +7144,7 @@ Column(
     Expanded(
       child: Container(
         width: double.infinity,
-        color: Ux4gPalette.primary100,
+        color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.primary800 : Ux4gPalette.primary100,
         child: Column(
           children: [
             Padding(
@@ -7089,7 +7152,7 @@ Column(
               child: Container(
                 padding: EdgeInsets.fromLTRB(20, 28, 20, 28),
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.gray900 : Colors.white,
                   borderRadius: BorderRadius.circular(16),
                   boxShadow: [/* subtle shadow */],
                 ),
@@ -7904,45 +7967,57 @@ class _AuthOtpAttemptWarningMockup extends StatelessWidget {
                   // the trailing side.
                   Ux4gStatusBanner(
                     variant: Ux4gBannerVariant.warningLight,
+                    backgroundColor: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.orange900 : Ux4gPalette.orange50,
+                    borderColor: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.orange600 : Ux4gPalette.orange300,
                     title: 'Incorrect OTP',
-                    subtitle: '1 more incorrect entry\nbefore 30-min lockout',
                     margin: EdgeInsets.zero,
                     padding: const EdgeInsets.fromLTRB(12, 12, 10, 12),
                     titleStyle: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w400,
-                      color: Ux4gPalette.secondary800,
-                      height: 1.3,
-                    ),
-                    subtitleStyle: TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w700,
-                      color: Ux4gPalette.secondary800,
+                      color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.orange300 : Ux4gPalette.orange800,
                       height: 1.3,
                     ),
                     leadingIcon: Icon(
                       Icons.error_outline,
-                      color: Ux4gPalette.secondary600,
+                      color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.orange500 : Ux4gPalette.orange600,
                       size: 20,
                     ),
-                    trailingIcon: Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 10,
-                        vertical: 5,
-                      ),
-                      decoration: BoxDecoration(
-                        color: Ux4gPalette.secondary100,
-                        borderRadius: BorderRadius.circular(6),
-                      ),
-                      child: Text(
-                        'Attempt 1 of 3',
-                        style: TextStyle(
-                          fontSize: 12,
-                          color: Ux4gPalette.secondary800,
-                          fontWeight: FontWeight.w500,
-                          height: 1.2,
+                    subtitleWidget: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Expanded(
+                          child: Text(
+                            '1 more incorrect entry\nbefore 30-min lockout',
+                            style: TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w700,
+                              color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.orange300 : Ux4gPalette.orange800,
+                              height: 1.3,
+                            ),
+                          ),
                         ),
-                      ),
+                        const SizedBox(width: 8),
+                        Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 10,
+                            vertical: 5,
+                          ),
+                          decoration: BoxDecoration(
+                            color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.orange800 : Ux4gPalette.orange100,
+                            borderRadius: BorderRadius.circular(6),
+                          ),
+                          child: Text(
+                            'Attempt 1 of 3',
+                            style: TextStyle(
+                              fontSize: 12,
+                              color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.orange300 : Ux4gPalette.orange800,
+                              fontWeight: FontWeight.w500,
+                              height: 1.2,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                   const SizedBox(height: 24),
@@ -8020,30 +8095,57 @@ Column(
           // Warning banner — design-system Ux4gStatusBanner.
           Ux4gStatusBanner(
             variant: Ux4gBannerVariant.warningLight,
+            backgroundColor: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.orange900 : Ux4gPalette.orange50,
+            borderColor: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.orange600 : Ux4gPalette.orange300,
             title: 'Incorrect OTP',
-            subtitle: '1 more incorrect entry\nbefore 30-min lockout',
             margin: EdgeInsets.zero,
-            padding: EdgeInsets.fromLTRB(12, 12, 10, 12),
+            padding: const EdgeInsets.fromLTRB(12, 12, 10, 12),
             titleStyle: TextStyle(
-              fontSize: 14, fontWeight: FontWeight.w400,
-              color: Ux4gPalette.secondary800,
+              fontSize: 14,
+              fontWeight: FontWeight.w400,
+              color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.orange300 : Ux4gPalette.orange800,
+              height: 1.3,
             ),
-            subtitleStyle: TextStyle(
-              fontSize: 14, fontWeight: FontWeight.w700,
-              color: Ux4gPalette.secondary800,
+            leadingIcon: Icon(
+              Icons.error_outline,
+              color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.orange500 : Ux4gPalette.orange600,
+              size: 20,
             ),
-            leadingIcon: Icon(Icons.error_outline,
-              color: Ux4gPalette.secondary600, size: 20),
-            trailingIcon: Container(
-              padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-              decoration: BoxDecoration(
-                color: Ux4gPalette.secondary100,
-                borderRadius: BorderRadius.circular(6),
-              ),
-              child: Text('Attempt 1 of 3',
-                style: TextStyle(fontSize: 12,
-                  color: Ux4gPalette.secondary800,
-                  fontWeight: FontWeight.w500)),
+            subtitleWidget: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Expanded(
+                  child: Text(
+                    '1 more incorrect entry\nbefore 30-min lockout',
+                    style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w700,
+                      color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.orange300 : Ux4gPalette.orange800,
+                      height: 1.3,
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 8),
+                Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 10,
+                    vertical: 5,
+                  ),
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.orange800 : Ux4gPalette.orange100,
+                    borderRadius: BorderRadius.circular(6),
+                  ),
+                  child: Text(
+                    'Attempt 1 of 3',
+                    style: TextStyle(
+                      fontSize: 12,
+                      color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.orange300 : Ux4gPalette.orange800,
+                      fontWeight: FontWeight.w500,
+                      height: 1.2,
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
         ],
@@ -8083,7 +8185,7 @@ class _AuthOtpAttemptWarningCardMockup extends StatelessWidget {
   const _AuthOtpAttemptWarningCardMockup();
 
   Color _getCardBg(BuildContext context) =>
-      _isDark(context) ? Ux4gPalette.red900 : Ux4gPalette.red50;
+      _isDark(context) ? Ux4gPalette.primary800 : Ux4gPalette.primary100;
 
   @override
   Widget build(BuildContext context) {
@@ -8161,8 +8263,6 @@ class _AuthOtpAttemptWarningCardMockup extends StatelessWidget {
                           Ux4gStatusBanner(
                             variant: Ux4gBannerVariant.warningLight,
                             title: 'Incorrect OTP',
-                            subtitle:
-                                '1 more incorrect entry\nbefore 30-min lockout',
                             margin: EdgeInsets.zero,
                             padding: const EdgeInsets.fromLTRB(12, 12, 10, 12),
                             titleStyle: TextStyle(
@@ -8301,30 +8401,57 @@ Column(
 
                     Ux4gStatusBanner(
                       variant: Ux4gBannerVariant.warningLight,
+                      backgroundColor: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.orange900 : Ux4gPalette.orange50,
+                      borderColor: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.orange600 : Ux4gPalette.orange300,
                       title: 'Incorrect OTP',
-                      subtitle: '1 more incorrect entry\nbefore 30-min lockout',
                       margin: EdgeInsets.zero,
-                      padding: EdgeInsets.fromLTRB(12, 12, 10, 12),
+                      padding: const EdgeInsets.fromLTRB(12, 12, 10, 12),
                       titleStyle: TextStyle(
-                        fontSize: 14, fontWeight: FontWeight.w400,
-                        color: Ux4gPalette.secondary800,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w400,
+                        color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.orange300 : Ux4gPalette.orange800,
+                        height: 1.3,
                       ),
-                      subtitleStyle: TextStyle(
-                        fontSize: 14, fontWeight: FontWeight.w700,
-                        color: Ux4gPalette.secondary800,
+                      leadingIcon: Icon(
+                        Icons.error_outline,
+                        color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.orange500 : Ux4gPalette.orange600,
+                        size: 20,
                       ),
-                      leadingIcon: Icon(Icons.error_outline,
-                        color: Ux4gPalette.secondary600, size: 20),
-                      trailingIcon: Container(
-                        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                        decoration: BoxDecoration(
-                          color: Ux4gPalette.secondary100,
-                          borderRadius: BorderRadius.circular(6),
-                        ),
-                        child: Text('Attempt 1 of 3',
-                          style: TextStyle(fontSize: 12,
-                            color: Ux4gPalette.secondary800,
-                            fontWeight: FontWeight.w500)),
+                      subtitleWidget: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Expanded(
+                            child: Text(
+                              '1 more incorrect entry\nbefore 30-min lockout',
+                              style: TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w700,
+                                color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.orange300 : Ux4gPalette.orange800,
+                                height: 1.3,
+                              ),
+                            ),
+                          ),
+                          const SizedBox(width: 8),
+                          Container(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 10,
+                              vertical: 5,
+                            ),
+                            decoration: BoxDecoration(
+                              color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.orange800 : Ux4gPalette.orange100,
+                              borderRadius: BorderRadius.circular(6),
+                            ),
+                            child: Text(
+                              'Attempt 1 of 3',
+                              style: TextStyle(
+                                fontSize: 12,
+                                color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.orange300 : Ux4gPalette.orange800,
+                                fontWeight: FontWeight.w500,
+                                height: 1.2,
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                     SizedBox(height: 16),
@@ -12102,7 +12229,7 @@ class _AadhaarVerificationFailedCardMockup extends StatelessWidget {
   const _AadhaarVerificationFailedCardMockup();
 
   Color _getCardBg(BuildContext context) =>
-      _isDark(context) ? Ux4gPalette.red900 : Ux4gPalette.red50;
+      _isDark(context) ? Ux4gPalette.primary800 : Ux4gPalette.primary100;
 
   @override
   Widget build(BuildContext context) {
@@ -26417,6 +26544,15 @@ final grievanceStatusTrackerComponent = WidgetbookComponent(
     ),
   ],
 );
+
+
+
+
+
+
+
+
+
 
 
 
