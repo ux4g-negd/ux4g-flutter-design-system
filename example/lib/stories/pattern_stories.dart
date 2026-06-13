@@ -1723,22 +1723,22 @@ class _SignInAadhaarMobileMockupState
                   const _BackButton(),
                   const SizedBox(height: 32),
 
-                  const Text(
+                  Text(
                     'Sign in with Aadhaar',
                     style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.w800,
-                      color: _titleColor,
+                      color: _getTitleColor(context),
                       height: 1.2,
                       letterSpacing: -0.3,
                     ),
                   ),
                   const SizedBox(height: 6),
-                  const Text(
+                  Text(
                     'Enter your 12-digit Aadhaar number',
                     style: TextStyle(
                       fontSize: 14,
-                      color: _subtleText,
+                      color: _getSubtleText(context),
                       height: 1.3,
                     ),
                   ),
@@ -1759,11 +1759,11 @@ class _SignInAadhaarMobileMockupState
                   ),
                   const SizedBox(height: 20),
 
-                  const Text(
+                  Text(
                     'Choose Authentication Method',
                     style: TextStyle(
                       fontSize: 14,
-                      color: _subtleText,
+                      color: _getSubtleText(context),
                       height: 1.3,
                     ),
                   ),
@@ -1809,12 +1809,12 @@ class _SignInAadhaarMobileMockupState
                   Center(
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
-                      children: const [
-                        Icon(Icons.lock_outline, size: 14, color: _mutedText),
-                        SizedBox(width: 6),
+                      children: [
+                        Icon(Icons.lock_outline, size: 14, color: _getMutedText(context)),
+                        const SizedBox(width: 6),
                         Text(
                           'Your Aadhaar details are encrypted and secure',
-                          style: TextStyle(fontSize: 12, color: _subtleText),
+                          style: TextStyle(fontSize: 12, color: _getSubtleText(context)),
                         ),
                       ],
                     ),
@@ -2255,10 +2255,10 @@ Column(
           SizedBox(height: 32),
 
           Text('Sign in with Aadhaar',
-            style: TextStyle(fontSize: 24, fontWeight: FontWeight.w800)),
+            style: TextStyle(fontSize: 24, fontWeight: FontWeight.w800, color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.neutral50 : Ux4gPalette.gray900)),
           SizedBox(height: 6),
           Text('Enter your 12-digit Aadhaar number',
-            style: TextStyle(fontSize: 14, color: Color(0xFF6B7280))),
+            style: TextStyle(fontSize: 14, color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.neutral400 : Color(0xFF6B7280))),
           SizedBox(height: 24),
 
           // Live Verhoeff validation � only flag errors once all
@@ -2294,7 +2294,7 @@ Column(
           SizedBox(height: 20),
 
           Text('Choose Authentication Method',
-            style: TextStyle(fontSize: 14, color: Color(0xFF6B7280))),
+            style: TextStyle(fontSize: 14, color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.neutral400 : Color(0xFF6B7280))),
           SizedBox(height: 10),
           Row(children: [
             Expanded(
@@ -3919,7 +3919,9 @@ class _SignInAadhaarCardMockupState extends State<_SignInAadhaarCardMockup> {
                     child: Container(
                       padding: const EdgeInsets.fromLTRB(20, 16, 20, 24),
                       decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: _isDark(context)
+                            ? Ux4gPalette.gray900
+                            : Colors.white,
                         borderRadius: BorderRadius.circular(16),
                         boxShadow: [
                           BoxShadow(
@@ -3935,22 +3937,22 @@ class _SignInAadhaarCardMockupState extends State<_SignInAadhaarCardMockup> {
                           const _BackButton(),
                           const SizedBox(height: 16),
 
-                          const Text(
+                          Text(
                             'Sign in with Aadhaar',
                             style: TextStyle(
                               fontSize: 24,
                               fontWeight: FontWeight.w800,
-                              color: _titleColor,
+                              color: _getTitleColor(context),
                               height: 1.2,
                               letterSpacing: -0.3,
                             ),
                           ),
                           const SizedBox(height: 6),
-                          const Text(
+                          Text(
                             'Enter your 12-digit Aadhaar number',
                             style: TextStyle(
                               fontSize: 14,
-                              color: _subtleText,
+                              color: _getSubtleText(context),
                               height: 1.3,
                             ),
                           ),
@@ -3976,11 +3978,11 @@ class _SignInAadhaarCardMockupState extends State<_SignInAadhaarCardMockup> {
                           ),
                           const SizedBox(height: 16),
 
-                          const Text(
+                          Text(
                             'Choose Authentication Method',
                             style: TextStyle(
                               fontSize: 14,
-                              color: _subtleText,
+                              color: _getSubtleText(context),
                               height: 1.3,
                             ),
                           ),
@@ -4033,12 +4035,12 @@ class _SignInAadhaarCardMockupState extends State<_SignInAadhaarCardMockup> {
                   Center(
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
-                      children: const [
-                        Icon(Icons.lock_outline, size: 14, color: _mutedText),
-                        SizedBox(width: 6),
+                      children: [
+                        Icon(Icons.lock_outline, size: 14, color: _getMutedText(context)),
+                        const SizedBox(width: 6),
                         Text(
                           'Your Aadhaar details are encrypted and secure',
-                          style: TextStyle(fontSize: 12, color: _subtleText),
+                          style: TextStyle(fontSize: 12, color: _getSubtleText(context)),
                         ),
                       ],
                     ),
@@ -4103,10 +4105,10 @@ Column(
                     SizedBox(height: 16),
 
                     Text('Sign in with Aadhaar',
-                      style: TextStyle(fontSize: 24, fontWeight: FontWeight.w800)),
+                      style: TextStyle(fontSize: 24, fontWeight: FontWeight.w800, color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.neutral50 : Ux4gPalette.gray900)),
                     SizedBox(height: 6),
                     Text('Enter your 12-digit Aadhaar number',
-                      style: TextStyle(fontSize: 14, color: Color(0xFF6B7280))),
+                      style: TextStyle(fontSize: 14, color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.neutral400 : Color(0xFF6B7280))),
                     SizedBox(height: 20),
 
                     // Live Verhoeff validation � see Default variant for details.
@@ -4119,7 +4121,7 @@ Column(
                     SizedBox(height: 16),
 
                     Text('Choose Authentication Method',
-                      style: TextStyle(fontSize: 14, color: Color(0xFF6B7280))),
+                      style: TextStyle(fontSize: 14, color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.neutral400 : Color(0xFF6B7280))),
                     SizedBox(height: 10),
                     Row(children: [
                       Expanded(
