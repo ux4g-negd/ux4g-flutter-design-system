@@ -354,6 +354,7 @@ class UX4GWidgetbook extends StatelessWidget {
             ),
             WidgetbookFolder(
               name: 'Payment and Confirmation',
+              isInitiallyExpanded: false,
               children: [
                 paymentSummaryComponent,
                 paymentMethodComponent,
@@ -365,10 +366,12 @@ class UX4GWidgetbook extends StatelessWidget {
             ),
             WidgetbookFolder(
               name: 'Application Status Tracker',
+              isInitiallyExpanded: false,
               children: [appStatusTrackerComponent],
             ),
             WidgetbookFolder(
               name: 'Grievance Status Tracker',
+              isInitiallyExpanded: false,
               children: [grievanceStatusTrackerComponent],
             ),
             WidgetbookFolder(

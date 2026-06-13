@@ -7476,26 +7476,38 @@ class _SessionExpiringDialogMockupState
 
   @override
   Widget build(BuildContext context) {
-    final primary = Theme.of(context).colorScheme.primary;
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
     final progress = widget.totalSeconds == 0
         ? 0.0
         : (_live / widget.totalSeconds).clamp(0.0, 1.0);
 
-    // ── State-driven palette + content ──────────────────────────────
-    late final Color accent;
+    final isEnded = widget.state == 'Session ended';
+    final isExpiringSoon = widget.state == 'Expiring soon';
+
+    // Exact colors per user instruction
+    Color iconBgColor = isDark ? const Color(0xFF5D2F80) : const Color(0xFFE9DAF3);
+    Color primaryAccent = isDark ? const Color(0xFFA391FF) : const Color(0xFF4A2BC2);
+    Color outlineBorder = isDark ? const Color(0xFF525252) : const Color(0xFFD9D9D9);
+    Color textColor = isDark ? const Color(0xFFFAFAFA) : const Color(0xFF171717);
+    Color descColor = isDark ? const Color(0xFFE5E5E5) : const Color(0xFF404040);
+    Color progressBg = isDark ? const Color(0xFF525252) : const Color(0xFFE5E5E5);
+
     late final IconData badgeIcon;
     late final String title;
     late final String body;
 
     switch (widget.state) {
       case 'Expiring soon':
-        accent = Ux4gPalette.secondary600;
+        primaryAccent = Ux4gPalette.secondary600;
+        iconBgColor = Ux4gPalette.secondary50;
         badgeIcon = Icons.warning_amber_rounded;
         title = 'Your session is expiring soon';
         body = "You'll be signed out in less than a minute";
         break;
       case 'Session ended':
-        accent = Ux4gPalette.gray800;
+        primaryAccent = isDark ? const Color(0xFFFAFAFA) : const Color(0xFF171717);
+        iconBgColor = isDark ? const Color(0xFF404040) : const Color(0xFFE5E5E5);
         badgeIcon = Icons.access_time;
         title = 'Session ended';
         body =
@@ -7504,88 +7516,127 @@ class _SessionExpiringDialogMockupState
         break;
       case 'Expiring':
       default:
-        accent = primary;
-        badgeIcon = Icons.lock;
+        badgeIcon = Icons.lock_outline_rounded;
         title = 'Your session is expiring';
         body =
             "You've been inactive for a while. For your security, "
             "we'll sign you out automatically.";
     }
 
-    final isEnded = widget.state == 'Session ended';
-
-    // Countdown + description + progress live in the body slot of
-    // [Ux4gModalContent]. For the terminal "Session ended" state the
-    // countdown/progress are hidden — only the description remains.
-    final bodyContent = Padding(
-      padding: const EdgeInsets.only(top: 4),
+    return Container(
+      width: 400,
+      padding: const EdgeInsets.all(24),
+      decoration: BoxDecoration(
+        color: isDark ? const Color(0xFF171717) : Colors.white,
+        borderRadius: BorderRadius.circular(16),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.04),
+            blurRadius: 16,
+            offset: const Offset(0, 4),
+          ),
+        ],
+      ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
+          // Icon Container
+          Container(
+            width: 56,
+            height: 56,
+            decoration: BoxDecoration(
+              color: iconBgColor,
+              shape: BoxShape.circle,
+            ),
+            child: Icon(
+              badgeIcon,
+              color: primaryAccent,
+              size: 28,
+            ),
+          ),
+          const SizedBox(height: 20),
+          
+          // Heading
+          Text(
+            title,
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.w700,
+              color: textColor,
+            ),
+          ),
+          const SizedBox(height: 8),
+          
           if (!isEnded) ...[
+            // Timer
             Text(
               _formattedTime,
               style: TextStyle(
                 fontSize: 40,
                 fontWeight: FontWeight.w800,
-                color: accent,
+                color: primaryAccent,
                 height: 1.0,
                 letterSpacing: -0.5,
               ),
             ),
             const SizedBox(height: 16),
           ],
+          
+          // Description
           Text(
             body,
             textAlign: TextAlign.center,
-            style: const TextStyle(
+            style: TextStyle(
               fontSize: 14,
-              color: _subtleText,
+              fontWeight: FontWeight.w400,
+              color: descColor,
               height: 1.4,
             ),
           ),
+          
           if (!isEnded) ...[
             const SizedBox(height: 20),
+            // Progress Bar
             Ux4gAnimatedLinearProgress(
               value: progress,
-              height: 8,
-              color: accent,
-              duration: const Duration(milliseconds: 800),
+              color: primaryAccent,
+              trackColor: progressBg,
+              height: 6,
             ),
           ],
+          
+          const SizedBox(height: 24),
+          
+          // Buttons
+          Row(
+            children: [
+              Expanded(
+                child: Ux4gButton(
+                  text: isEnded ? 'Sign in to continue' : 'Stay signed in',
+                  onPressed: () {},
+                  variant: Ux4gButtonVariant.primary,
+                  backgroundColor: primaryAccent,
+                  contentColor: isDark ? const Color(0xFF171717) : Colors.white,
+                  height: 48,
+                ),
+              ),
+              if (!isEnded) ...[
+                const SizedBox(width: 12),
+                Expanded(
+                  child: Ux4gButton(
+                    text: 'Sign out now',
+                    onPressed: () {},
+                    variant: Ux4gButtonVariant.outline,
+                    contentColor: textColor,
+                    borderColor: outlineBorder,
+                    height: 48,
+                  ),
+                ),
+              ],
+            ],
+          ),
         ],
-      ),
-    );
-
-    // Render via the design-system modal content. We use the inline
-    // [Ux4gModalContent] (not the [Ux4gModal] wrapper that calls
-    // [showDialog]) because the pattern preview lives directly inside
-    // the canvas, not inside an actual dialog route.
-    return SizedBox(
-      width: 360,
-      child: Ux4gModalContent(
-        onDismiss: () {},
-        backgroundColor: Colors.white,
-        cornerRadius: 20,
-        alignment: Ux4gModalAlignment.centered,
-        leadingItem: Ux4gModalLeadingItem.icon,
-        leadingIcon: badgeIcon,
-        leadingIconTint: accent,
-        showCloseButton: false,
-        showDividers: false,
-        showSubtitle: false,
-        showDescription: false,
-        headerTitle: title,
-        bodyContent: bodyContent,
-        footerButtons: isEnded
-            ? Ux4gModalFooterButtons.oneButton
-            : Ux4gModalFooterButtons.twoButtons,
-        footerAlign: Ux4gModalFooterAlign.center,
-        primaryButtonText: isEnded ? 'Sign in to continue' : 'Stay signed in',
-        secondaryButtonText: 'Sign out now',
-        onPrimaryClick: () {},
-        onSecondaryClick: () {},
       ),
     );
   }
@@ -7602,52 +7653,116 @@ class _SessionExpiringDialogMockupState
 const _sessionExpiringCode =
     r'''// "Your session is expiring" — early warning state.
 // Wired to a Timer.periodic that decrements [secondsLeft] every second.
-SizedBox(
-  width: 360,
-  child: Ux4gModalContent(
-    onDismiss: () {},
-    backgroundColor: Colors.white,
-    cornerRadius: 20,
-    alignment: Ux4gModalAlignment.centered,
-    leadingItem: Ux4gModalLeadingItem.icon,
-    leadingIcon: Icons.lock,
-    leadingIconTint: Theme.of(context).colorScheme.primary,
-    showCloseButton: false,
-    showDividers: false,
-    showSubtitle: false,
-    showDescription: false,
-    headerTitle: 'Your session is expiring',
-    bodyContent: Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Text(formattedTime, // e.g. "04:47"
-          style: TextStyle(
-            fontSize: 40,
-            fontWeight: FontWeight.w800,
-            color: Theme.of(context).colorScheme.primary,
-          )),
-        SizedBox(height: 16),
-        Text(
-          "You've been inactive for a while. For your security, "
-          "we'll sign you out automatically.",
-          textAlign: TextAlign.center,
-          style: TextStyle(fontSize: 14, color: Ux4gPalette.neutral500),
-        ),
-        SizedBox(height: 20),
-        Ux4gAnimatedLinearProgress(
-          value: secondsLeft / totalSeconds,
-          height: 8,
-          duration: Duration(milliseconds: 800),
-        ),
-      ],
-    ),
-    footerButtons: Ux4gModalFooterButtons.twoButtons,
-    footerAlign: Ux4gModalFooterAlign.center,
-    primaryButtonText: 'Stay signed in',
-    secondaryButtonText: 'Sign out now',
-    onPrimaryClick: () {},
-    onSecondaryClick: () {},
-  ),
+Builder(
+  builder: (context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final iconBgColor = isDark ? const Color(0xFF5D2F80) : const Color(0xFFE9DAF3);
+    final primaryAccent = isDark ? const Color(0xFFA391FF) : const Color(0xFF4A2BC2);
+    final outlineBorder = isDark ? const Color(0xFF525252) : const Color(0xFFD9D9D9);
+    final textColor = isDark ? const Color(0xFFFAFAFA) : const Color(0xFF171717);
+    final descColor = isDark ? const Color(0xFFE5E5E5) : const Color(0xFF404040);
+    final progressBg = isDark ? const Color(0xFF525252) : const Color(0xFFE5E5E5);
+
+    return Container(
+      width: 400,
+      padding: const EdgeInsets.all(24),
+      decoration: BoxDecoration(
+        color: isDark ? const Color(0xFF171717) : Colors.white,
+        borderRadius: BorderRadius.circular(16),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.04),
+            blurRadius: 16,
+            offset: const Offset(0, 4),
+          ),
+        ],
+      ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Container(
+            width: 56,
+            height: 56,
+            decoration: BoxDecoration(
+              color: iconBgColor,
+              shape: BoxShape.circle,
+            ),
+            child: Icon(
+              Icons.lock_outline_rounded,
+              color: primaryAccent,
+              size: 28,
+            ),
+          ),
+          const SizedBox(height: 20),
+          Text(
+            'Your session is expiring',
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.w700,
+              color: textColor,
+            ),
+          ),
+          const SizedBox(height: 8),
+          Text(
+            formattedTime, // e.g. "04:47"
+            style: TextStyle(
+              fontSize: 40,
+              fontWeight: FontWeight.w800,
+              color: primaryAccent,
+              height: 1.0,
+              letterSpacing: -0.5,
+            ),
+          ),
+          const SizedBox(height: 16),
+          Text(
+            "You've been inactive for a while. For your security, "
+            "we'll sign you out automatically.",
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.w400,
+              color: descColor,
+              height: 1.4,
+            ),
+          ),
+          const SizedBox(height: 20),
+          Ux4gAnimatedLinearProgress(
+            value: secondsLeft / totalSeconds,
+            color: primaryAccent,
+            trackColor: progressBg,
+            height: 6,
+          ),
+          const SizedBox(height: 24),
+          Row(
+            children: [
+              Expanded(
+                child: Ux4gButton(
+                  text: 'Stay signed in',
+                  onPressed: () {},
+                  variant: Ux4gButtonVariant.primary,
+                  backgroundColor: primaryAccent,
+                  contentColor: isDark ? const Color(0xFF171717) : Colors.white,
+                  height: 48,
+                ),
+              ),
+              const SizedBox(width: 12),
+              Expanded(
+                child: Ux4gButton(
+                  text: 'Sign out now',
+                  onPressed: () {},
+                  variant: Ux4gButtonVariant.outline,
+                  contentColor: textColor,
+                  borderColor: outlineBorder,
+                  height: 48,
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  },
 )''';
 
 const _sessionExpiringSoonCode =
