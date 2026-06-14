@@ -1,3 +1,7 @@
+## 0.4.1
+
+* Updated pub.dev default example to display the Showcase app.
+
 ## 0.4.0
 
 * Updates and bug fixes in `Ux4gStatusBanner`.
