@@ -14372,7 +14372,7 @@ class _SignInLink extends StatelessWidget {
 }
 
 /// Inline error banner reusing the same [Ux4gStatusBanner] as SignIn.
-Widget _signUpErrorBanner({
+Widget _signUpErrorBanner(BuildContext context, {
   String title = 'Your status message goes here',
   String subtitle = 'Take action',
   String badge = 'Attempt 1 of 5',
@@ -14383,34 +14383,34 @@ Widget _signUpErrorBanner({
     subtitle: subtitle,
     margin: EdgeInsets.zero,
     padding: const EdgeInsets.fromLTRB(12, 12, 10, 12),
-    titleStyle: const TextStyle(
+    titleStyle: TextStyle(
       fontSize: 14,
       fontWeight: FontWeight.w400,
-      color: Color(0xFF991B1B),
+      color: _isDark(context) ? Ux4gPalette.red300 : Ux4gPalette.red800,
       height: 1.3,
     ),
-    subtitleStyle: const TextStyle(
+    subtitleStyle: TextStyle(
       fontSize: 14,
       fontWeight: FontWeight.w700,
-      color: Color(0xFF991B1B),
+      color: _isDark(context) ? Ux4gPalette.red300 : Ux4gPalette.red800,
       height: 1.3,
     ),
-    leadingIcon: const Icon(
+    leadingIcon: Icon(
       Icons.error_outline,
-      color: Color(0xFFDC2626),
+      color: _isDark(context) ? Ux4gPalette.red500 : Ux4gPalette.red600,
       size: 20,
     ),
     trailingIcon: Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
       decoration: BoxDecoration(
-        color: const Color(0xFFFEE2E2),
+        color: _isDark(context) ? Ux4gPalette.red800 : Ux4gPalette.red100,
         borderRadius: BorderRadius.circular(6),
       ),
       child: Text(
         badge,
-        style: const TextStyle(
+        style: TextStyle(
           fontSize: 12,
-          color: Color(0xFF991B1B),
+          color: _isDark(context) ? Ux4gPalette.red300 : Ux4gPalette.red800,
           fontWeight: FontWeight.w500,
           height: 1.2,
         ),
@@ -14420,8 +14420,8 @@ Widget _signUpErrorBanner({
 }
 
 /// Card-container decoration shared by all 5 SignUp card-style steps.
-BoxDecoration _suCardDeco() => BoxDecoration(
-  color: Colors.white,
+BoxDecoration _suCardDeco(BuildContext context) => BoxDecoration(
+  color: _isDark(context) ? Ux4gPalette.gray900 : Colors.white,
   borderRadius: BorderRadius.circular(16),
   boxShadow: [
     BoxShadow(
@@ -14432,7 +14432,7 @@ BoxDecoration _suCardDeco() => BoxDecoration(
   ],
 );
 
-const _suCardBg = Ux4gPalette.primary100;
+Color _getSuCardBg(BuildContext context) => _isDark(context) ? Ux4gPalette.primary800 : Ux4gPalette.primary100;
 
 // -----------------------------------------------------------------------
 // STEP 1 � Create your account
@@ -14490,22 +14490,22 @@ class _SignUpStep1MockupState extends State<_SignUpStep1Mockup> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
+                  Text(
                     'Create your account',
                     style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.w800,
-                      color: _titleColor,
+                      color: _getTitleColor(context),
                       height: 1.2,
                       letterSpacing: -0.3,
                     ),
                   ),
                   const SizedBox(height: 6),
-                  const Text(
+                  Text(
                     'Enter your mobile number to get started',
                     style: TextStyle(
                       fontSize: 14,
-                      color: _subtleText,
+                      color: _getSubtleText(context),
                       height: 1.3,
                     ),
                   ),
@@ -14528,7 +14528,7 @@ class _SignUpStep1MockupState extends State<_SignUpStep1Mockup> {
                     maxLength: 10,
                   ),
                   const SizedBox(height: 16),
-                  _signUpErrorBanner(),
+                  _signUpErrorBanner(context, ),
                   const SizedBox(height: 20),
                   Ux4gButton(
                     text: 'Send OTP',
@@ -14567,7 +14567,7 @@ class _SignUpStep1CardMockupState extends State<_SignUpStep1CardMockup> {
           const _BrandHeader(),
           Expanded(
             child: Container(
-              color: _suCardBg,
+              color: _getSuCardBg(context),
               child: Column(
                 children: [
                   Expanded(
@@ -14575,26 +14575,26 @@ class _SignUpStep1CardMockupState extends State<_SignUpStep1CardMockup> {
                       padding: const EdgeInsets.fromLTRB(16, 20, 16, 16),
                       child: Container(
                         padding: const EdgeInsets.fromLTRB(20, 24, 20, 24),
-                        decoration: _suCardDeco(),
+                        decoration: _suCardDeco(context),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Text(
+                            Text(
                               'Create your account',
                               style: TextStyle(
                                 fontSize: 22,
                                 fontWeight: FontWeight.w800,
-                                color: _titleColor,
+                                color: _getTitleColor(context),
                                 height: 1.2,
                                 letterSpacing: -0.3,
                               ),
                             ),
                             const SizedBox(height: 6),
-                            const Text(
+                            Text(
                               'Enter your mobile number to get started',
                               style: TextStyle(
                                 fontSize: 13,
-                                color: _subtleText,
+                                color: _getSubtleText(context),
                                 height: 1.3,
                               ),
                             ),
@@ -14619,7 +14619,7 @@ class _SignUpStep1CardMockupState extends State<_SignUpStep1CardMockup> {
                               maxLength: 10,
                             ),
                             const SizedBox(height: 12),
-                            _signUpErrorBanner(),
+                            _signUpErrorBanner(context, ),
                             const SizedBox(height: 16),
                             Ux4gButton(
                               text: 'Send OTP',
@@ -14881,22 +14881,22 @@ class _SignUpStep2MockupState extends State<_SignUpStep2Mockup> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
+                  Text(
                     'Verify your mobile',
                     style: TextStyle(
                       fontSize: 26,
                       fontWeight: FontWeight.w800,
-                      color: _titleColor,
+                      color: _getTitleColor(context),
                       height: 1.2,
                       letterSpacing: -0.3,
                     ),
                   ),
                   const SizedBox(height: 6),
-                  const Text(
+                  Text(
                     'Enter the 6-digit OTP sent to +91 98765 XXXXX',
                     style: TextStyle(
                       fontSize: 14,
-                      color: _subtleText,
+                      color: _getSubtleText(context),
                       height: 1.4,
                     ),
                   ),
@@ -14955,7 +14955,7 @@ class _SignUpStep2CardMockupState extends State<_SignUpStep2CardMockup> {
           const _BrandHeader(),
           Expanded(
             child: Container(
-              color: _suCardBg,
+              color: _getSuCardBg(context),
               child: Column(
                 children: [
                   Expanded(
@@ -14963,26 +14963,26 @@ class _SignUpStep2CardMockupState extends State<_SignUpStep2CardMockup> {
                       padding: const EdgeInsets.fromLTRB(16, 20, 16, 16),
                       child: Container(
                         padding: const EdgeInsets.fromLTRB(20, 24, 20, 24),
-                        decoration: _suCardDeco(),
+                        decoration: _suCardDeco(context),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Text(
+                            Text(
                               'Verify your mobile',
                               style: TextStyle(
                                 fontSize: 22,
                                 fontWeight: FontWeight.w800,
-                                color: _titleColor,
+                                color: _getTitleColor(context),
                                 height: 1.2,
                                 letterSpacing: -0.3,
                               ),
                             ),
                             const SizedBox(height: 6),
-                            const Text(
+                            Text(
                               'Enter the 6-digit OTP sent to +91 98765 XXXXX',
                               style: TextStyle(
                                 fontSize: 13,
-                                color: _subtleText,
+                                color: _getSubtleText(context),
                                 height: 1.4,
                               ),
                             ),
@@ -15279,12 +15279,12 @@ class _SignUpStep3MockupState extends State<_SignUpStep3Mockup> {
                     maxLength: 10,
                   ),
                   const SizedBox(height: 16),
-                  const Text(
+                  Text(
                     'Category',
                     style: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w700,
-                      color: _titleColor,
+                      color: _getTitleColor(context),
                     ),
                   ),
                   const SizedBox(height: 4),
@@ -15338,7 +15338,7 @@ class _SignUpStep3CardMockupState extends State<_SignUpStep3CardMockup> {
           const _BrandHeader(),
           Expanded(
             child: Container(
-              color: _suCardBg,
+              color: _getSuCardBg(context),
               child: Column(
                 children: [
                   Expanded(
@@ -15346,7 +15346,7 @@ class _SignUpStep3CardMockupState extends State<_SignUpStep3CardMockup> {
                       padding: const EdgeInsets.fromLTRB(16, 20, 16, 16),
                       child: Container(
                         padding: const EdgeInsets.fromLTRB(20, 24, 20, 24),
-                        decoration: _suCardDeco(),
+                        decoration: _suCardDeco(context),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -15406,12 +15406,12 @@ class _SignUpStep3CardMockupState extends State<_SignUpStep3CardMockup> {
                               maxLength: 10,
                             ),
                             const SizedBox(height: 14),
-                            const Text(
+                            Text(
                               'Category',
                               style: TextStyle(
                                 fontSize: 14,
                                 fontWeight: FontWeight.w700,
-                                color: _titleColor,
+                                color: _getTitleColor(context),
                               ),
                             ),
                             const SizedBox(height: 4),
@@ -15674,12 +15674,12 @@ class _SignUpStep4MockupState extends State<_SignUpStep4Mockup> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
+                  Text(
                     'Password setup',
                     style: TextStyle(
                       fontSize: 26,
                       fontWeight: FontWeight.w800,
-                      color: _titleColor,
+                      color: _getTitleColor(context),
                       height: 1.2,
                       letterSpacing: -0.3,
                     ),
@@ -15752,7 +15752,7 @@ class _SignUpStep4CardMockupState extends State<_SignUpStep4CardMockup> {
           const _BrandHeader(),
           Expanded(
             child: Container(
-              color: _suCardBg,
+              color: _getSuCardBg(context),
               child: Column(
                 children: [
                   Expanded(
@@ -15760,16 +15760,16 @@ class _SignUpStep4CardMockupState extends State<_SignUpStep4CardMockup> {
                       padding: const EdgeInsets.fromLTRB(16, 20, 16, 16),
                       child: Container(
                         padding: const EdgeInsets.fromLTRB(20, 24, 20, 24),
-                        decoration: _suCardDeco(),
+                        decoration: _suCardDeco(context),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Text(
+                            Text(
                               'Password setup',
                               style: TextStyle(
                                 fontSize: 22,
                                 fontWeight: FontWeight.w800,
-                                color: _titleColor,
+                                color: _getTitleColor(context),
                                 height: 1.2,
                                 letterSpacing: -0.3,
                               ),
@@ -16047,24 +16047,24 @@ class _SignUpStep5Mockup extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 24),
-                  const Text(
+                  Text(
                     'Account Created!',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 26,
                       fontWeight: FontWeight.w800,
-                      color: _titleColor,
+                      color: _getTitleColor(context),
                       height: 1.2,
                       letterSpacing: -0.3,
                     ),
                   ),
                   const SizedBox(height: 8),
-                  const Text(
+                  Text(
                     'Welcome, Ramesh Kumar',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 15,
-                      color: _subtleText,
+                      color: _getSubtleText(context),
                       height: 1.3,
                     ),
                   ),
@@ -16079,7 +16079,7 @@ class _SignUpStep5Mockup extends StatelessWidget {
                       borderRadius: BorderRadius.circular(6),
                       border: Border.all(color: const Color(0xFFFDE68A)),
                     ),
-                    child: const Text(
+                    child: Text(
                       'RECOMMENDED',
                       style: TextStyle(
                         fontSize: 11,
@@ -16107,12 +16107,12 @@ class _SignUpStep5Mockup extends StatelessWidget {
                     width: 326,
                   ),
                   const SizedBox(height: 16),
-                  const Text(
+                  Text(
                     'You can link Aadhaar later from your profile',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 13,
-                      color: _subtleText,
+                      color: _getSubtleText(context),
                       height: 1.4,
                     ),
                   ),
@@ -16138,7 +16138,7 @@ class _SignUpStep5CardMockup extends StatelessWidget {
           const _BrandHeader(),
           Expanded(
             child: Container(
-              color: _suCardBg,
+              color: _getSuCardBg(context),
               child: Column(
                 children: [
                   Expanded(
@@ -16146,7 +16146,7 @@ class _SignUpStep5CardMockup extends StatelessWidget {
                       padding: const EdgeInsets.fromLTRB(16, 20, 16, 16),
                       child: Container(
                         padding: const EdgeInsets.fromLTRB(20, 32, 20, 24),
-                        decoration: _suCardDeco(),
+                        decoration: _suCardDeco(context),
                         child: Column(
                           children: [
                             Container(
@@ -16172,24 +16172,24 @@ class _SignUpStep5CardMockup extends StatelessWidget {
                               ),
                             ),
                             const SizedBox(height: 20),
-                            const Text(
+                            Text(
                               'Account Created!',
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                 fontSize: 22,
                                 fontWeight: FontWeight.w800,
-                                color: _titleColor,
+                                color: _getTitleColor(context),
                                 height: 1.2,
                                 letterSpacing: -0.3,
                               ),
                             ),
                             const SizedBox(height: 6),
-                            const Text(
+                            Text(
                               'Welcome, Ramesh Kumar',
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                 fontSize: 13,
-                                color: _subtleText,
+                                color: _getSubtleText(context),
                                 height: 1.3,
                               ),
                             ),
@@ -16206,7 +16206,7 @@ class _SignUpStep5CardMockup extends StatelessWidget {
                                   color: const Color(0xFFFDE68A),
                                 ),
                               ),
-                              child: const Text(
+                              child: Text(
                                 'RECOMMENDED',
                                 style: TextStyle(
                                   fontSize: 11,
@@ -16234,12 +16234,12 @@ class _SignUpStep5CardMockup extends StatelessWidget {
                               width: 326,
                             ),
                             const SizedBox(height: 12),
-                            const Text(
+                            Text(
                               'You can link Aadhaar later from your profile',
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                 fontSize: 12,
-                                color: _subtleText,
+                                color: _getSubtleText(context),
                                 height: 1.4,
                               ),
                             ),
@@ -16491,13 +16491,13 @@ Widget _fpWarningBanner() => Ux4gStatusBanner(
 );
 
 /// Password strength row (Ux4gLinearProgress + checklist).
-Widget _passwordStrength() {
+Widget _passwordStrength(BuildContext context) {
   const greenCheck = Icon(
     Icons.check_circle_rounded,
     color: Color(0xFF16A34A),
     size: 16,
   );
-  const redX = Icon(Icons.error, color: Color(0xFFDC2626), size: 16);
+  final redX = Icon(Icons.error, color: _isDark(context) ? Ux4gPalette.red500 : Ux4gPalette.red600, size: 16);
   const itemStyle = TextStyle(fontSize: 13, color: Color(0xFF374151));
 
   return Column(
@@ -16511,7 +16511,7 @@ Widget _passwordStrength() {
         height: 8,
       ),
       const SizedBox(height: 6),
-      const Text(
+      Text(
         'Password Strength: Strong',
         style: TextStyle(
           fontSize: 12,
@@ -16524,7 +16524,7 @@ Widget _passwordStrength() {
         children: [
           greenCheck,
           const SizedBox(width: 6),
-          const Text('8+ characters', style: itemStyle),
+          Text('8+ characters', style: itemStyle),
         ],
       ),
       const SizedBox(height: 4),
@@ -16532,7 +16532,7 @@ Widget _passwordStrength() {
         children: [
           greenCheck,
           const SizedBox(width: 6),
-          const Text('Uppercase letter', style: itemStyle),
+          Text('Uppercase letter', style: itemStyle),
         ],
       ),
       const SizedBox(height: 4),
@@ -16540,7 +16540,7 @@ Widget _passwordStrength() {
         children: [
           greenCheck,
           const SizedBox(width: 6),
-          const Text('Number', style: itemStyle),
+          Text('Number', style: itemStyle),
         ],
       ),
       const SizedBox(height: 4),
@@ -16548,7 +16548,7 @@ Widget _passwordStrength() {
         children: [
           redX,
           const SizedBox(width: 6),
-          const Text('Special character', style: itemStyle),
+          Text('Special character', style: itemStyle),
         ],
       ),
     ],
@@ -16734,7 +16734,7 @@ class _FpStep1CardMockupState extends State<_FpStep1CardMockup> {
           const _BrandHeader(),
           Expanded(
             child: Container(
-              color: _suCardBg,
+              color: _getSuCardBg(context),
               child: Column(
                 children: [
                   Expanded(
@@ -16747,7 +16747,7 @@ class _FpStep1CardMockupState extends State<_FpStep1CardMockup> {
                           const SizedBox(height: 12),
                           Container(
                             padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
-                            decoration: _suCardDeco(),
+                            decoration: _suCardDeco(context),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -17216,7 +17216,7 @@ class _FpStep2CardMockupState extends State<_FpStep2CardMockup> {
           const _BrandHeader(),
           Expanded(
             child: Container(
-              color: _suCardBg,
+              color: _getSuCardBg(context),
               child: Column(
                 children: [
                   Expanded(
@@ -17229,7 +17229,7 @@ class _FpStep2CardMockupState extends State<_FpStep2CardMockup> {
                           const SizedBox(height: 12),
                           Container(
                             padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
-                            decoration: _suCardDeco(),
+                            decoration: _suCardDeco(context),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -17539,7 +17539,7 @@ class _FpStep3MockupState extends State<_FpStep3Mockup> {
                     type: Ux4gInputFieldType.password,
                   ),
                   const SizedBox(height: 12),
-                  _passwordStrength(),
+                  _passwordStrength(context),
                   const SizedBox(height: 16),
                   Ux4gInputField(
                     value: _confirm,
@@ -17600,7 +17600,7 @@ class _FpStep3CardMockupState extends State<_FpStep3CardMockup> {
           const _BrandHeader(),
           Expanded(
             child: Container(
-              color: _suCardBg,
+              color: _getSuCardBg(context),
               child: Column(
                 children: [
                   Expanded(
@@ -17608,7 +17608,7 @@ class _FpStep3CardMockupState extends State<_FpStep3CardMockup> {
                       padding: const EdgeInsets.fromLTRB(16, 20, 16, 16),
                       child: Container(
                         padding: const EdgeInsets.fromLTRB(20, 24, 20, 24),
-                        decoration: _suCardDeco(),
+                        decoration: _suCardDeco(context),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -17651,7 +17651,7 @@ class _FpStep3CardMockupState extends State<_FpStep3CardMockup> {
                               type: Ux4gInputFieldType.password,
                             ),
                             const SizedBox(height: 10),
-                            _passwordStrength(),
+                            _passwordStrength(context),
                             const SizedBox(height: 14),
                             Ux4gInputField(
                               value: _confirm,
@@ -18047,7 +18047,7 @@ class _FpStep4CardMockup extends StatelessWidget {
           const _BrandHeader(),
           Expanded(
             child: Container(
-              color: _suCardBg,
+              color: _getSuCardBg(context),
               child: Column(
                 children: [
                   Expanded(
@@ -18055,7 +18055,7 @@ class _FpStep4CardMockup extends StatelessWidget {
                       padding: const EdgeInsets.fromLTRB(16, 20, 16, 16),
                       child: Container(
                         padding: const EdgeInsets.fromLTRB(20, 36, 20, 28),
-                        decoration: _suCardDeco(),
+                        decoration: _suCardDeco(context),
                         child: Column(
                           children: [
                             Container(
@@ -18405,7 +18405,7 @@ class _FpStep5CardMockupState extends State<_FpStep5CardMockup> {
           const _BrandHeader(),
           Expanded(
             child: Container(
-              color: _suCardBg,
+              color: _getSuCardBg(context),
               child: Column(
                 children: [
                   Expanded(
@@ -18416,7 +18416,7 @@ class _FpStep5CardMockupState extends State<_FpStep5CardMockup> {
                         children: [
                           Container(
                             padding: const EdgeInsets.fromLTRB(20, 20, 20, 24),
-                            decoration: _suCardDeco(),
+                            decoration: _suCardDeco(context),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -21520,7 +21520,7 @@ class _PaymentSummaryCardMockup extends StatelessWidget {
           const Divider(height: 1, thickness: 1, color: _border),
           Expanded(
             child: Container(
-              color: _suCardBg,
+              color: _getSuCardBg(context),
               child: Column(
                 children: [
                   Expanded(
@@ -21528,7 +21528,7 @@ class _PaymentSummaryCardMockup extends StatelessWidget {
                       padding: const EdgeInsets.fromLTRB(16, 20, 16, 16),
                       child: Container(
                         padding: const EdgeInsets.fromLTRB(16, 24, 16, 20),
-                        decoration: _suCardDeco(),
+                        decoration: _suCardDeco(context),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -22149,7 +22149,7 @@ class _PaymentMethodCardMockupState extends State<_PaymentMethodCardMockup> {
           const Divider(height: 1, thickness: 1, color: _border),
           Expanded(
             child: Container(
-              color: _suCardBg,
+              color: _getSuCardBg(context),
               child: Column(
                 children: [
                   Expanded(
@@ -22157,7 +22157,7 @@ class _PaymentMethodCardMockupState extends State<_PaymentMethodCardMockup> {
                       padding: const EdgeInsets.fromLTRB(16, 20, 16, 16),
                       child: Container(
                         padding: const EdgeInsets.fromLTRB(16, 24, 16, 20),
-                        decoration: _suCardDeco(),
+                        decoration: _suCardDeco(context),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -22773,11 +22773,11 @@ class _PaymentProcessingCardMockup extends StatelessWidget {
               const Divider(height: 1, thickness: 1, color: _border),
               Expanded(
                 child: Container(
-                  color: _suCardBg,
+                  color: _getSuCardBg(context),
                   padding: const EdgeInsets.fromLTRB(16, 20, 16, 16),
                   child: Container(
                     padding: const EdgeInsets.fromLTRB(16, 24, 16, 20),
-                    decoration: _suCardDeco(),
+                    decoration: _suCardDeco(context),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: const [
@@ -23269,7 +23269,7 @@ class _PaymentSuccessCardMockup extends StatelessWidget {
           const Divider(height: 1, thickness: 1, color: _border),
           Expanded(
             child: Container(
-              color: _suCardBg,
+              color: _getSuCardBg(context),
               child: Column(
                 children: [
                   Expanded(
@@ -23277,7 +23277,7 @@ class _PaymentSuccessCardMockup extends StatelessWidget {
                       padding: const EdgeInsets.fromLTRB(16, 20, 16, 16),
                       child: Container(
                         padding: const EdgeInsets.fromLTRB(16, 24, 16, 20),
-                        decoration: _suCardDeco(),
+                        decoration: _suCardDeco(context),
                         child: Column(
                           children: [
                             Container(
@@ -23834,7 +23834,7 @@ class _PaymentFailedCardMockup extends StatelessWidget {
           const Divider(height: 1, thickness: 1, color: _border),
           Expanded(
             child: Container(
-              color: _suCardBg,
+              color: _getSuCardBg(context),
               child: Column(
                 children: [
                   Expanded(
@@ -23842,7 +23842,7 @@ class _PaymentFailedCardMockup extends StatelessWidget {
                       padding: const EdgeInsets.fromLTRB(16, 20, 16, 16),
                       child: Container(
                         padding: const EdgeInsets.fromLTRB(16, 24, 16, 20),
-                        decoration: _suCardDeco(),
+                        decoration: _suCardDeco(context),
                         child: Column(
                           children: [
                             Container(
@@ -24370,7 +24370,7 @@ class _FeeWaivedCardMockup extends StatelessWidget {
           const Divider(height: 1, thickness: 1, color: _border),
           Expanded(
             child: Container(
-              color: _suCardBg,
+              color: _getSuCardBg(context),
               child: Column(
                 children: [
                   Expanded(
@@ -24378,7 +24378,7 @@ class _FeeWaivedCardMockup extends StatelessWidget {
                       padding: const EdgeInsets.fromLTRB(16, 20, 16, 16),
                       child: Container(
                         padding: const EdgeInsets.fromLTRB(16, 24, 16, 20),
-                        decoration: _suCardDeco(),
+                        decoration: _suCardDeco(context),
                         child: Column(
                           children: [
                             Container(
@@ -25633,7 +25633,7 @@ class _AppStatusTrackerCardMockup extends StatelessWidget {
                     child: SingleChildScrollView(
                       padding: const EdgeInsets.fromLTRB(16, 16, 16, 16),
                       child: Container(
-                        decoration: _suCardDeco(),
+                        decoration: _suCardDeco(context),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
