@@ -1,3 +1,7 @@
+## 0.4.0
+
+* Updates and bug fixes in `Ux4gStatusBanner`.
+
 ## 0.3.1
 
 * Updated README for installation instructions.
