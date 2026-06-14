@@ -1,7 +1,7 @@
 # 🌟 UX4G Flutter Design System
 
 ![Flutter](https://img.shields.io/badge/Flutter-%2302569B.svg?style=for-the-badge&logo=Flutter&logoColor=white)
-![Version](https://img.shields.io/badge/Version-0.4.1-blue.svg?style=for-the-badge)
+![Version](https://img.shields.io/badge/Version-0.4.2-blue.svg?style=for-the-badge)
 
 Flutter package for the **UX4G design system**, providing beautifully crafted, reusable foundations and UI components ported directly from the Android Compose implementation.
 
@@ -31,7 +31,7 @@ This will automatically add the following line to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  ux4g_flutter_design_system: ^0.4.1
+  ux4g_flutter_design_system: ^0.4.2
 ```
 
 ### 2️⃣ Import it

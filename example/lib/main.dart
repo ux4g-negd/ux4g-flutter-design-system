@@ -46,8 +46,10 @@ class DemoScreen extends StatelessWidget {
             const Text('Input Field', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
             const SizedBox(height: 8),
             Ux4gInputField(
+              value: '',
+              onValueChange: (value) {},
               label: 'Email Address',
-              hintText: 'Enter your email',
+              placeholder: 'Enter your email',
             ),
           ],
         ),
