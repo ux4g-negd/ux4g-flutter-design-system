@@ -7476,26 +7476,38 @@ class _SessionExpiringDialogMockupState
 
   @override
   Widget build(BuildContext context) {
-    final primary = Theme.of(context).colorScheme.primary;
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
     final progress = widget.totalSeconds == 0
         ? 0.0
         : (_live / widget.totalSeconds).clamp(0.0, 1.0);
 
-    // ── State-driven palette + content ──────────────────────────────
-    late final Color accent;
+    final isEnded = widget.state == 'Session ended';
+    final isExpiringSoon = widget.state == 'Expiring soon';
+
+    // Exact colors per user instruction
+    Color iconBgColor = isDark ? const Color(0xFF5D2F80) : const Color(0xFFE9DAF3);
+    Color primaryAccent = isDark ? const Color(0xFFA391FF) : const Color(0xFF4A2BC2);
+    Color outlineBorder = isDark ? const Color(0xFF525252) : const Color(0xFFD9D9D9);
+    Color textColor = isDark ? const Color(0xFFFAFAFA) : const Color(0xFF171717);
+    Color descColor = isDark ? const Color(0xFFE5E5E5) : const Color(0xFF404040);
+    Color progressBg = isDark ? const Color(0xFF525252) : const Color(0xFFE5E5E5);
+
     late final IconData badgeIcon;
     late final String title;
     late final String body;
 
     switch (widget.state) {
       case 'Expiring soon':
-        accent = Ux4gPalette.secondary600;
+        primaryAccent = Ux4gPalette.secondary600;
+        iconBgColor = Ux4gPalette.secondary50;
         badgeIcon = Icons.warning_amber_rounded;
         title = 'Your session is expiring soon';
         body = "You'll be signed out in less than a minute";
         break;
       case 'Session ended':
-        accent = Ux4gPalette.gray800;
+        primaryAccent = isDark ? const Color(0xFFFAFAFA) : const Color(0xFF171717);
+        iconBgColor = isDark ? const Color(0xFF404040) : const Color(0xFFE5E5E5);
         badgeIcon = Icons.access_time;
         title = 'Session ended';
         body =
@@ -7504,88 +7516,127 @@ class _SessionExpiringDialogMockupState
         break;
       case 'Expiring':
       default:
-        accent = primary;
-        badgeIcon = Icons.lock;
+        badgeIcon = Icons.lock_outline_rounded;
         title = 'Your session is expiring';
         body =
             "You've been inactive for a while. For your security, "
             "we'll sign you out automatically.";
     }
 
-    final isEnded = widget.state == 'Session ended';
-
-    // Countdown + description + progress live in the body slot of
-    // [Ux4gModalContent]. For the terminal "Session ended" state the
-    // countdown/progress are hidden — only the description remains.
-    final bodyContent = Padding(
-      padding: const EdgeInsets.only(top: 4),
+    return Container(
+      width: 400,
+      padding: const EdgeInsets.all(24),
+      decoration: BoxDecoration(
+        color: isDark ? const Color(0xFF171717) : Ux4gPalette.neutral50,
+        borderRadius: BorderRadius.circular(16),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.04),
+            blurRadius: 16,
+            offset: const Offset(0, 4),
+          ),
+        ],
+      ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
+          // Icon Container
+          Container(
+            width: 56,
+            height: 56,
+            decoration: BoxDecoration(
+              color: iconBgColor,
+              shape: BoxShape.circle,
+            ),
+            child: Icon(
+              badgeIcon,
+              color: primaryAccent,
+              size: 28,
+            ),
+          ),
+          const SizedBox(height: 20),
+          
+          // Heading
+          Text(
+            title,
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.w700,
+              color: textColor,
+            ),
+          ),
+          const SizedBox(height: 8),
+          
           if (!isEnded) ...[
+            // Timer
             Text(
               _formattedTime,
               style: TextStyle(
                 fontSize: 40,
                 fontWeight: FontWeight.w800,
-                color: accent,
+                color: primaryAccent,
                 height: 1.0,
                 letterSpacing: -0.5,
               ),
             ),
             const SizedBox(height: 16),
           ],
+          
+          // Description
           Text(
             body,
             textAlign: TextAlign.center,
-            style: const TextStyle(
+            style: TextStyle(
               fontSize: 14,
-              color: _subtleText,
+              fontWeight: FontWeight.w400,
+              color: descColor,
               height: 1.4,
             ),
           ),
+          
           if (!isEnded) ...[
             const SizedBox(height: 20),
+            // Progress Bar
             Ux4gAnimatedLinearProgress(
               value: progress,
-              height: 8,
-              color: accent,
-              duration: const Duration(milliseconds: 800),
+              color: primaryAccent,
+              trackColor: progressBg,
+              height: 6,
             ),
           ],
+          
+          const SizedBox(height: 24),
+          
+          // Buttons
+          Row(
+            children: [
+              Expanded(
+                child: Ux4gButton(
+                  text: isEnded ? 'Sign in to continue' : 'Stay signed in',
+                  onPressed: () {},
+                  variant: Ux4gButtonVariant.primary,
+                  backgroundColor: primaryAccent,
+                  contentColor: isDark ? const Color(0xFF171717) : Ux4gPalette.neutral50,
+                  height: 48,
+                ),
+              ),
+              if (!isEnded) ...[
+                const SizedBox(width: 12),
+                Expanded(
+                  child: Ux4gButton(
+                    text: 'Sign out now',
+                    onPressed: () {},
+                    variant: Ux4gButtonVariant.outline,
+                    contentColor: textColor,
+                    borderColor: outlineBorder,
+                    height: 48,
+                  ),
+                ),
+              ],
+            ],
+          ),
         ],
-      ),
-    );
-
-    // Render via the design-system modal content. We use the inline
-    // [Ux4gModalContent] (not the [Ux4gModal] wrapper that calls
-    // [showDialog]) because the pattern preview lives directly inside
-    // the canvas, not inside an actual dialog route.
-    return SizedBox(
-      width: 360,
-      child: Ux4gModalContent(
-        onDismiss: () {},
-        backgroundColor: Colors.white,
-        cornerRadius: 20,
-        alignment: Ux4gModalAlignment.centered,
-        leadingItem: Ux4gModalLeadingItem.icon,
-        leadingIcon: badgeIcon,
-        leadingIconTint: accent,
-        showCloseButton: false,
-        showDividers: false,
-        showSubtitle: false,
-        showDescription: false,
-        headerTitle: title,
-        bodyContent: bodyContent,
-        footerButtons: isEnded
-            ? Ux4gModalFooterButtons.oneButton
-            : Ux4gModalFooterButtons.twoButtons,
-        footerAlign: Ux4gModalFooterAlign.center,
-        primaryButtonText: isEnded ? 'Sign in to continue' : 'Stay signed in',
-        secondaryButtonText: 'Sign out now',
-        onPrimaryClick: () {},
-        onSecondaryClick: () {},
       ),
     );
   }
@@ -7602,52 +7653,116 @@ class _SessionExpiringDialogMockupState
 const _sessionExpiringCode =
     r'''// "Your session is expiring" — early warning state.
 // Wired to a Timer.periodic that decrements [secondsLeft] every second.
-SizedBox(
-  width: 360,
-  child: Ux4gModalContent(
-    onDismiss: () {},
-    backgroundColor: Colors.white,
-    cornerRadius: 20,
-    alignment: Ux4gModalAlignment.centered,
-    leadingItem: Ux4gModalLeadingItem.icon,
-    leadingIcon: Icons.lock,
-    leadingIconTint: Theme.of(context).colorScheme.primary,
-    showCloseButton: false,
-    showDividers: false,
-    showSubtitle: false,
-    showDescription: false,
-    headerTitle: 'Your session is expiring',
-    bodyContent: Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Text(formattedTime, // e.g. "04:47"
-          style: TextStyle(
-            fontSize: 40,
-            fontWeight: FontWeight.w800,
-            color: Theme.of(context).colorScheme.primary,
-          )),
-        SizedBox(height: 16),
-        Text(
-          "You've been inactive for a while. For your security, "
-          "we'll sign you out automatically.",
-          textAlign: TextAlign.center,
-          style: TextStyle(fontSize: 14, color: Ux4gPalette.neutral500),
-        ),
-        SizedBox(height: 20),
-        Ux4gAnimatedLinearProgress(
-          value: secondsLeft / totalSeconds,
-          height: 8,
-          duration: Duration(milliseconds: 800),
-        ),
-      ],
-    ),
-    footerButtons: Ux4gModalFooterButtons.twoButtons,
-    footerAlign: Ux4gModalFooterAlign.center,
-    primaryButtonText: 'Stay signed in',
-    secondaryButtonText: 'Sign out now',
-    onPrimaryClick: () {},
-    onSecondaryClick: () {},
-  ),
+Builder(
+  builder: (context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final iconBgColor = isDark ? const Color(0xFF5D2F80) : const Color(0xFFE9DAF3);
+    final primaryAccent = isDark ? const Color(0xFFA391FF) : const Color(0xFF4A2BC2);
+    final outlineBorder = isDark ? const Color(0xFF525252) : const Color(0xFFD9D9D9);
+    final textColor = isDark ? const Color(0xFFFAFAFA) : const Color(0xFF171717);
+    final descColor = isDark ? const Color(0xFFE5E5E5) : const Color(0xFF404040);
+    final progressBg = isDark ? const Color(0xFF525252) : const Color(0xFFE5E5E5);
+
+    return Container(
+      width: 400,
+      padding: const EdgeInsets.all(24),
+      decoration: BoxDecoration(
+        color: isDark ? const Color(0xFF171717) : Ux4gPalette.neutral50,
+        borderRadius: BorderRadius.circular(16),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.04),
+            blurRadius: 16,
+            offset: const Offset(0, 4),
+          ),
+        ],
+      ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Container(
+            width: 56,
+            height: 56,
+            decoration: BoxDecoration(
+              color: iconBgColor,
+              shape: BoxShape.circle,
+            ),
+            child: Icon(
+              Icons.lock_outline_rounded,
+              color: primaryAccent,
+              size: 28,
+            ),
+          ),
+          const SizedBox(height: 20),
+          Text(
+            'Your session is expiring',
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.w700,
+              color: textColor,
+            ),
+          ),
+          const SizedBox(height: 8),
+          Text(
+            formattedTime, // e.g. "04:47"
+            style: TextStyle(
+              fontSize: 40,
+              fontWeight: FontWeight.w800,
+              color: primaryAccent,
+              height: 1.0,
+              letterSpacing: -0.5,
+            ),
+          ),
+          const SizedBox(height: 16),
+          Text(
+            "You've been inactive for a while. For your security, "
+            "we'll sign you out automatically.",
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.w400,
+              color: descColor,
+              height: 1.4,
+            ),
+          ),
+          const SizedBox(height: 20),
+          Ux4gAnimatedLinearProgress(
+            value: secondsLeft / totalSeconds,
+            color: primaryAccent,
+            trackColor: progressBg,
+            height: 6,
+          ),
+          const SizedBox(height: 24),
+          Row(
+            children: [
+              Expanded(
+                child: Ux4gButton(
+                  text: 'Stay signed in',
+                  onPressed: () {},
+                  variant: Ux4gButtonVariant.primary,
+                  backgroundColor: primaryAccent,
+                  contentColor: isDark ? const Color(0xFF171717) : Ux4gPalette.neutral50,
+                  height: 48,
+                ),
+              ),
+              const SizedBox(width: 12),
+              Expanded(
+                child: Ux4gButton(
+                  text: 'Sign out now',
+                  onPressed: () {},
+                  variant: Ux4gButtonVariant.outline,
+                  contentColor: textColor,
+                  borderColor: outlineBorder,
+                  height: 48,
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  },
 )''';
 
 const _sessionExpiringSoonCode =
@@ -7658,7 +7773,7 @@ SizedBox(
   width: 360,
   child: Ux4gModalContent(
     onDismiss: () {},
-    backgroundColor: Colors.white,
+    backgroundColor: Theme.of(context).brightness == Brightness.dark ? const Color(0xFF171717) : Ux4gPalette.neutral50,
     cornerRadius: 20,
     alignment: Ux4gModalAlignment.centered,
     leadingItem: Ux4gModalLeadingItem.icon,
@@ -7707,7 +7822,7 @@ SizedBox(
   width: 360,
   child: Ux4gModalContent(
     onDismiss: () {},
-    backgroundColor: Colors.white,
+    backgroundColor: Theme.of(context).brightness == Brightness.dark ? const Color(0xFF171717) : Ux4gPalette.neutral50,
     cornerRadius: 20,
     alignment: Ux4gModalAlignment.centered,
     leadingItem: Ux4gModalLeadingItem.icon,
@@ -7752,22 +7867,22 @@ class _AuthIncorrectOtpMockup extends StatelessWidget {
                   const _BackButton(),
                   const SizedBox(height: 24),
 
-                  const Text(
+                  Text(
                     'OTP Verification',
                     style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.w800,
-                      color: _titleColor,
+                      color: _getTitleColor(context),
                       height: 1.2,
                       letterSpacing: -0.3,
                     ),
                   ),
                   const SizedBox(height: 8),
-                  const Text(
+                  Text(
                     'Enter the 6-digit code sent to +91 98XXX XXXXX',
                     style: TextStyle(
                       fontSize: 14,
-                      color: _subtleText,
+                      color: _getSubtleText(context),
                       height: 1.3,
                     ),
                   ),
@@ -7936,7 +8051,7 @@ class _AuthIncorrectOtpCardMockupState
                       width: double.infinity,
                       padding: const EdgeInsets.fromLTRB(20, 24, 20, 24),
                       decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.neutral900 : Ux4gPalette.neutral50,
                         borderRadius: BorderRadius.circular(16),
                         boxShadow: [
                           BoxShadow(
@@ -7949,22 +8064,22 @@ class _AuthIncorrectOtpCardMockupState
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
+                          Text(
                             'OTP Verification',
                             style: TextStyle(
                               fontSize: 24,
                               fontWeight: FontWeight.w800,
-                              color: _titleColor,
+                              color: _getTitleColor(context),
                               height: 1.2,
                               letterSpacing: -0.3,
                             ),
                           ),
                           const SizedBox(height: 8),
-                          const Text(
+                          Text(
                             'Enter the 6-digit code sent to +91 98XXX XXXXX',
                             style: TextStyle(
                               fontSize: 14,
-                              color: _subtleText,
+                              color: _getSubtleText(context),
                               height: 1.3,
                             ),
                           ),
@@ -8056,7 +8171,7 @@ Column(
                 width: double.infinity,
                 padding: EdgeInsets.fromLTRB(20, 24, 20, 24),
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.neutral900 : Ux4gPalette.neutral50,
                   borderRadius: BorderRadius.circular(16),
                   boxShadow: [
                     BoxShadow(
@@ -8161,22 +8276,22 @@ class _AuthOtpAttemptWarningMockup extends StatelessWidget {
                   const _BackButton(),
                   const SizedBox(height: 24),
 
-                  const Text(
+                  Text(
                     'OTP Verification',
                     style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.w800,
-                      color: _titleColor,
+                      color: _getTitleColor(context),
                       height: 1.2,
                       letterSpacing: -0.3,
                     ),
                   ),
                   const SizedBox(height: 8),
-                  const Text(
+                  Text(
                     'Enter the 6-digit code sent to +91 98XXX XXXXX',
                     style: TextStyle(
                       fontSize: 14,
-                      color: _subtleText,
+                      color: _getSubtleText(context),
                       height: 1.3,
                     ),
                   ),
@@ -8463,7 +8578,7 @@ class _AuthOtpAttemptWarningCardMockup extends StatelessWidget {
                       width: double.infinity,
                       padding: const EdgeInsets.fromLTRB(20, 24, 20, 24),
                       decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.neutral900 : Ux4gPalette.neutral50,
                         borderRadius: BorderRadius.circular(16),
                         boxShadow: [
                           BoxShadow(
@@ -8479,22 +8594,22 @@ class _AuthOtpAttemptWarningCardMockup extends StatelessWidget {
                           const _BackButton(),
                           const SizedBox(height: 16),
 
-                          const Text(
+                          Text(
                             'OTP Verification',
                             style: TextStyle(
                               fontSize: 24,
                               fontWeight: FontWeight.w800,
-                              color: _titleColor,
+                              color: _getTitleColor(context),
                               height: 1.2,
                               letterSpacing: -0.3,
                             ),
                           ),
                           const SizedBox(height: 8),
-                          const Text(
+                          Text(
                             'Enter the 6-digit code sent to +91 98XXX XXXXX',
                             style: TextStyle(
                               fontSize: 14,
-                              color: _subtleText,
+                              color: _getSubtleText(context),
                               height: 1.3,
                             ),
                           ),
@@ -8517,44 +8632,77 @@ class _AuthOtpAttemptWarningCardMockup extends StatelessWidget {
 
                           Ux4gStatusBanner(
                             variant: Ux4gBannerVariant.warningLight,
+                            backgroundColor:
+                                Theme.of(context).brightness == Brightness.dark
+                                ? Ux4gPalette.orange900
+                                : Ux4gPalette.orange50,
+                            borderColor: Theme.of(context).brightness == Brightness.dark
+                                ? Ux4gPalette.orange600
+                                : Ux4gPalette.orange300,
                             title: 'Incorrect OTP',
                             margin: EdgeInsets.zero,
                             padding: const EdgeInsets.fromLTRB(12, 12, 10, 12),
                             titleStyle: TextStyle(
                               fontSize: 14,
                               fontWeight: FontWeight.w400,
-                              color: Ux4gPalette.secondary800,
-                              height: 1.3,
-                            ),
-                            subtitleStyle: TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w700,
-                              color: Ux4gPalette.secondary800,
+                              color: Theme.of(context).brightness == Brightness.dark
+                                  ? Ux4gPalette.orange300
+                                  : Ux4gPalette.orange800,
                               height: 1.3,
                             ),
                             leadingIcon: Icon(
                               Icons.error_outline,
-                              color: Ux4gPalette.secondary600,
+                              color: Theme.of(context).brightness == Brightness.dark
+                                  ? Ux4gPalette.orange500
+                                  : Ux4gPalette.orange600,
                               size: 20,
                             ),
-                            trailingIcon: Container(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 10,
-                                vertical: 5,
-                              ),
-                              decoration: BoxDecoration(
-                                color: Ux4gPalette.secondary100,
-                                borderRadius: BorderRadius.circular(6),
-                              ),
-                              child: Text(
-                                'Attempt 1 of 3',
-                                style: TextStyle(
-                                  fontSize: 12,
-                                  color: Ux4gPalette.secondary800,
-                                  fontWeight: FontWeight.w500,
-                                  height: 1.2,
+                            subtitleWidget: Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Expanded(
+                                  child: Text(
+                                    '1 more incorrect entry\nbefore 30-min lockout',
+                                    style: TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w700,
+                                      color:
+                                          Theme.of(context).brightness ==
+                                              Brightness.dark
+                                          ? Ux4gPalette.orange300
+                                          : Ux4gPalette.orange800,
+                                      height: 1.3,
+                                    ),
+                                  ),
                                 ),
-                              ),
+                                const SizedBox(width: 8),
+                                Container(
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 10,
+                                    vertical: 5,
+                                  ),
+                                  decoration: BoxDecoration(
+                                    color:
+                                        Theme.of(context).brightness == Brightness.dark
+                                        ? Ux4gPalette.orange800
+                                        : Ux4gPalette.orange100,
+                                    borderRadius: BorderRadius.circular(6),
+                                  ),
+                                  child: Text(
+                                    'Attempt 1 of 3',
+                                    style: TextStyle(
+                                      fontSize: 12,
+                                      color:
+                                          Theme.of(context).brightness ==
+                                              Brightness.dark
+                                          ? Ux4gPalette.orange300
+                                          : Ux4gPalette.orange800,
+                                      fontWeight: FontWeight.w500,
+                                      height: 1.2,
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                           const SizedBox(height: 16),
@@ -8611,7 +8759,7 @@ Column(
                 width: double.infinity,
                 padding: EdgeInsets.fromLTRB(20, 24, 20, 24),
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.neutral900 : Ux4gPalette.neutral50,
                   borderRadius: BorderRadius.circular(16),
                   boxShadow: [
                     BoxShadow(
@@ -8767,22 +8915,22 @@ class _AuthOtpLastAttemptMockup extends StatelessWidget {
                   const _BackButton(),
                   const SizedBox(height: 24),
 
-                  const Text(
+                  Text(
                     'OTP Verification',
                     style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.w800,
-                      color: _titleColor,
+                      color: _getTitleColor(context),
                       height: 1.2,
                       letterSpacing: -0.3,
                     ),
                   ),
                   const SizedBox(height: 8),
-                  const Text(
+                  Text(
                     'Enter the 6-digit code sent to +91 98XXX XXXXX',
                     style: TextStyle(
                       fontSize: 14,
-                      color: _subtleText,
+                      color: _getSubtleText(context),
                       height: 1.3,
                     ),
                   ),
@@ -8806,46 +8954,57 @@ class _AuthOtpLastAttemptMockup extends StatelessWidget {
                   // is the final attempt before lockout.
                   Ux4gStatusBanner(
                     variant: Ux4gBannerVariant.errorLight,
+                    backgroundColor: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.red900 : Ux4gPalette.red50,
+                    borderColor: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.red600 : Ux4gPalette.red300,
                     title: 'Incorrect OTP',
-                    subtitle:
-                        'This is your last attempt\nbefore a 30-min lockout',
                     margin: EdgeInsets.zero,
                     padding: const EdgeInsets.fromLTRB(12, 12, 10, 12),
                     titleStyle: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w400,
-                      color: Ux4gPalette.red800,
-                      height: 1.3,
-                    ),
-                    subtitleStyle: TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w700,
-                      color: Ux4gPalette.red800,
+                      color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.red300 : Ux4gPalette.red800,
                       height: 1.3,
                     ),
                     leadingIcon: Icon(
-                      Icons.error_outline,
-                      color: Ux4gPalette.red600,
+                      Icons.error,
+                      color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.red500 : Ux4gPalette.red600,
                       size: 20,
                     ),
-                    trailingIcon: Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 10,
-                        vertical: 5,
-                      ),
-                      decoration: BoxDecoration(
-                        color: Ux4gPalette.red200,
-                        borderRadius: BorderRadius.circular(6),
-                      ),
-                      child: Text(
-                        'Attempt 2 of 3',
-                        style: TextStyle(
-                          fontSize: 12,
-                          color: Ux4gPalette.red800,
-                          fontWeight: FontWeight.w500,
-                          height: 1.2,
+                    subtitleWidget: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Expanded(
+                          child: Text(
+                            'This is your last attempt\nbefore a 30-min lockout',
+                            style: TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w700,
+                              color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.red300 : Ux4gPalette.red800,
+                              height: 1.3,
+                            ),
+                          ),
                         ),
-                      ),
+                        const SizedBox(width: 8),
+                        Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 10,
+                            vertical: 5,
+                          ),
+                          decoration: BoxDecoration(
+                            color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.red800 : Ux4gPalette.red100,
+                            borderRadius: BorderRadius.circular(6),
+                          ),
+                          child: Text(
+                            'Attempt 2 of 3',
+                            style: TextStyle(
+                              fontSize: 12,
+                              color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.red300 : Ux4gPalette.red800,
+                              fontWeight: FontWeight.w500,
+                              height: 1.2,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                   const SizedBox(height: 24),
@@ -8899,7 +9058,7 @@ class _AuthOtpLastAttemptCardMockup extends StatelessWidget {
                       width: double.infinity,
                       padding: const EdgeInsets.fromLTRB(20, 24, 20, 24),
                       decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.neutral900 : Ux4gPalette.neutral50,
                         borderRadius: BorderRadius.circular(16),
                         boxShadow: [
                           BoxShadow(
@@ -8915,22 +9074,22 @@ class _AuthOtpLastAttemptCardMockup extends StatelessWidget {
                           const _BackButton(),
                           const SizedBox(height: 16),
 
-                          const Text(
+                          Text(
                             'OTP Verification',
                             style: TextStyle(
                               fontSize: 24,
                               fontWeight: FontWeight.w800,
-                              color: _titleColor,
+                              color: _getTitleColor(context),
                               height: 1.2,
                               letterSpacing: -0.3,
                             ),
                           ),
                           const SizedBox(height: 8),
-                          const Text(
+                          Text(
                             'Enter the 6-digit code sent to +91 98XXX XXXXX',
                             style: TextStyle(
                               fontSize: 14,
-                              color: _subtleText,
+                              color: _getSubtleText(context),
                               height: 1.3,
                             ),
                           ),
@@ -8953,46 +9112,57 @@ class _AuthOtpLastAttemptCardMockup extends StatelessWidget {
 
                           Ux4gStatusBanner(
                             variant: Ux4gBannerVariant.errorLight,
+                            backgroundColor: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.red900 : Ux4gPalette.red50,
+                            borderColor: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.red600 : Ux4gPalette.red300,
                             title: 'Incorrect OTP',
-                            subtitle:
-                                'This is your last attempt\nbefore a 30-min lockout',
                             margin: EdgeInsets.zero,
                             padding: const EdgeInsets.fromLTRB(12, 12, 10, 12),
                             titleStyle: TextStyle(
                               fontSize: 14,
                               fontWeight: FontWeight.w400,
-                              color: Ux4gPalette.red800,
-                              height: 1.3,
-                            ),
-                            subtitleStyle: TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w700,
-                              color: Ux4gPalette.red800,
+                              color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.red300 : Ux4gPalette.red800,
                               height: 1.3,
                             ),
                             leadingIcon: Icon(
-                              Icons.error_outline,
-                              color: Ux4gPalette.red600,
+                              Icons.error,
+                              color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.red500 : Ux4gPalette.red600,
                               size: 20,
                             ),
-                            trailingIcon: Container(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 10,
-                                vertical: 5,
-                              ),
-                              decoration: BoxDecoration(
-                                color: Ux4gPalette.red200,
-                                borderRadius: BorderRadius.circular(6),
-                              ),
-                              child: Text(
-                                'Attempt 2 of 3',
-                                style: TextStyle(
-                                  fontSize: 12,
-                                  color: Ux4gPalette.red800,
-                                  fontWeight: FontWeight.w500,
-                                  height: 1.2,
+                            subtitleWidget: Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Expanded(
+                                  child: Text(
+                                    'This is your last attempt\nbefore a 30-min lockout',
+                                    style: TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w700,
+                                      color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.red300 : Ux4gPalette.red800,
+                                      height: 1.3,
+                                    ),
+                                  ),
                                 ),
-                              ),
+                                const SizedBox(width: 8),
+                                Container(
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 10,
+                                    vertical: 5,
+                                  ),
+                                  decoration: BoxDecoration(
+                                    color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.red800 : Ux4gPalette.red100,
+                                    borderRadius: BorderRadius.circular(6),
+                                  ),
+                                  child: Text(
+                                    'Attempt 2 of 3',
+                                    style: TextStyle(
+                                      fontSize: 12,
+                                      color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.red300 : Ux4gPalette.red800,
+                                      fontWeight: FontWeight.w500,
+                                      height: 1.2,
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                           const SizedBox(height: 16),
@@ -9073,30 +9243,57 @@ Column(
           // Error-styled banner — final attempt before lockout.
           Ux4gStatusBanner(
             variant: Ux4gBannerVariant.errorLight,
+            backgroundColor: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.red900 : Ux4gPalette.red50,
+            borderColor: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.red600 : Ux4gPalette.red300,
             title: 'Incorrect OTP',
-            subtitle: 'This is your last attempt\nbefore a 30-min lockout',
             margin: EdgeInsets.zero,
-            padding: EdgeInsets.fromLTRB(12, 12, 10, 12),
+            padding: const EdgeInsets.fromLTRB(12, 12, 10, 12),
             titleStyle: TextStyle(
-              fontSize: 14, fontWeight: FontWeight.w400,
-              color: Ux4gPalette.red800,
+              fontSize: 14,
+              fontWeight: FontWeight.w400,
+              color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.red300 : Ux4gPalette.red800,
+              height: 1.3,
             ),
-            subtitleStyle: TextStyle(
-              fontSize: 14, fontWeight: FontWeight.w700,
-              color: Ux4gPalette.red800,
+            leadingIcon: Icon(
+              Icons.error,
+              color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.red500 : Ux4gPalette.red600,
+              size: 20,
             ),
-            leadingIcon: Icon(Icons.error_outline,
-              color: Ux4gPalette.red600, size: 20),
-            trailingIcon: Container(
-              padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-              decoration: BoxDecoration(
-                color: Ux4gPalette.red200,
-                borderRadius: BorderRadius.circular(6),
-              ),
-              child: Text('Attempt 2 of 3',
-                style: TextStyle(fontSize: 12,
-                  color: Ux4gPalette.red800,
-                  fontWeight: FontWeight.w500)),
+            subtitleWidget: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Expanded(
+                  child: Text(
+                    'This is your last attempt\nbefore a 30-min lockout',
+                    style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w700,
+                      color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.red300 : Ux4gPalette.red800,
+                      height: 1.3,
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 8),
+                Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 10,
+                    vertical: 5,
+                  ),
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.red800 : Ux4gPalette.red100,
+                    borderRadius: BorderRadius.circular(6),
+                  ),
+                  child: Text(
+                    'Attempt 2 of 3',
+                    style: TextStyle(
+                      fontSize: 12,
+                      color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.red300 : Ux4gPalette.red800,
+                      fontWeight: FontWeight.w500,
+                      height: 1.2,
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
         ],
@@ -9158,7 +9355,7 @@ Column(
                 width: double.infinity,
                 padding: EdgeInsets.fromLTRB(20, 24, 20, 24),
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.neutral900 : Ux4gPalette.neutral50,
                   borderRadius: BorderRadius.circular(16),
                   boxShadow: [
                     BoxShadow(
@@ -9203,30 +9400,57 @@ Column(
 
                     Ux4gStatusBanner(
                       variant: Ux4gBannerVariant.errorLight,
+                      backgroundColor: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.red900 : Ux4gPalette.red50,
+                      borderColor: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.red600 : Ux4gPalette.red300,
                       title: 'Incorrect OTP',
-                      subtitle: 'This is your last attempt\nbefore a 30-min lockout',
                       margin: EdgeInsets.zero,
-                      padding: EdgeInsets.fromLTRB(12, 12, 10, 12),
+                      padding: const EdgeInsets.fromLTRB(12, 12, 10, 12),
                       titleStyle: TextStyle(
-                        fontSize: 14, fontWeight: FontWeight.w400,
-                        color: Ux4gPalette.red800,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w400,
+                        color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.red300 : Ux4gPalette.red800,
+                        height: 1.3,
                       ),
-                      subtitleStyle: TextStyle(
-                        fontSize: 14, fontWeight: FontWeight.w700,
-                        color: Ux4gPalette.red800,
+                      leadingIcon: Icon(
+                        Icons.error,
+                        color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.red500 : Ux4gPalette.red600,
+                        size: 20,
                       ),
-                      leadingIcon: Icon(Icons.error_outline,
-                        color: Ux4gPalette.red600, size: 20),
-                      trailingIcon: Container(
-                        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                        decoration: BoxDecoration(
-                          color: Ux4gPalette.red200,
-                          borderRadius: BorderRadius.circular(6),
-                        ),
-                        child: Text('Attempt 2 of 3',
-                          style: TextStyle(fontSize: 12,
-                            color: Ux4gPalette.red800,
-                            fontWeight: FontWeight.w500)),
+                      subtitleWidget: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Expanded(
+                            child: Text(
+                              'This is your last attempt\nbefore a 30-min lockout',
+                              style: TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w700,
+                                color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.red300 : Ux4gPalette.red800,
+                                height: 1.3,
+                              ),
+                            ),
+                          ),
+                          const SizedBox(width: 8),
+                          Container(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 10,
+                              vertical: 5,
+                            ),
+                            decoration: BoxDecoration(
+                              color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.red800 : Ux4gPalette.red100,
+                              borderRadius: BorderRadius.circular(6),
+                            ),
+                            child: Text(
+                              'Attempt 2 of 3',
+                              style: TextStyle(
+                                fontSize: 12,
+                                color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.red300 : Ux4gPalette.red800,
+                                fontWeight: FontWeight.w500,
+                                height: 1.2,
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                     SizedBox(height: 16),
@@ -9300,39 +9524,40 @@ class _AuthOtpRetryUnlockedMockupState
                   // Success banner — design-system Ux4gStatusBanner.
                   Ux4gStatusBanner(
                     variant: Ux4gBannerVariant.successLight,
+                    backgroundColor: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.green800 : Ux4gPalette.green100,
                     title: 'You can now try signing in again.',
                     margin: EdgeInsets.zero,
                     padding: const EdgeInsets.fromLTRB(12, 12, 12, 12),
                     titleStyle: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w500,
-                      color: Ux4gPalette.green700,
+                      color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.green300 : Ux4gPalette.green800,
                       height: 1.3,
                     ),
                     leadingIcon: Icon(
                       Icons.check_circle,
-                      color: Ux4gPalette.green,
+                      color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.green500 : Ux4gPalette.green600,
                       size: 20,
                     ),
                   ),
                   const SizedBox(height: 24),
 
-                  const Text(
+                  Text(
                     'OTP Verification',
                     style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.w800,
-                      color: _titleColor,
+                      color: _getTitleColor(context),
                       height: 1.2,
                       letterSpacing: -0.3,
                     ),
                   ),
                   const SizedBox(height: 8),
-                  const Text(
+                  Text(
                     'Enter the 6-digit code sent to +91 98XXX XXXXX',
                     style: TextStyle(
                       fontSize: 14,
-                      color: _subtleText,
+                      color: _getSubtleText(context),
                       height: 1.3,
                     ),
                   ),
@@ -9417,7 +9642,7 @@ class _AuthOtpRetryUnlockedCardMockupState
                       width: double.infinity,
                       padding: const EdgeInsets.fromLTRB(20, 24, 20, 24),
                       decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.neutral900 : Ux4gPalette.neutral50,
                         borderRadius: BorderRadius.circular(16),
                         boxShadow: [
                           BoxShadow(
@@ -9435,39 +9660,40 @@ class _AuthOtpRetryUnlockedCardMockupState
 
                           Ux4gStatusBanner(
                             variant: Ux4gBannerVariant.successLight,
+                            backgroundColor: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.green800 : Ux4gPalette.green100,
                             title: 'You can now try signing in again.',
                             margin: EdgeInsets.zero,
                             padding: const EdgeInsets.fromLTRB(12, 12, 12, 12),
                             titleStyle: TextStyle(
                               fontSize: 14,
                               fontWeight: FontWeight.w500,
-                              color: Ux4gPalette.green700,
+                              color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.green300 : Ux4gPalette.green800,
                               height: 1.3,
                             ),
                             leadingIcon: Icon(
                               Icons.check_circle,
-                              color: Ux4gPalette.green,
+                              color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.green500 : Ux4gPalette.green600,
                               size: 20,
                             ),
                           ),
                           const SizedBox(height: 20),
 
-                          const Text(
+                          Text(
                             'OTP Verification',
                             style: TextStyle(
                               fontSize: 24,
                               fontWeight: FontWeight.w800,
-                              color: _titleColor,
+                              color: _getTitleColor(context),
                               height: 1.2,
                               letterSpacing: -0.3,
                             ),
                           ),
                           const SizedBox(height: 8),
-                          const Text(
+                          Text(
                             'Enter the 6-digit code sent to +91 98XXX XXXXX',
                             style: TextStyle(
                               fontSize: 14,
-                              color: _subtleText,
+                              color: _getSubtleText(context),
                               height: 1.3,
                             ),
                           ),
@@ -9549,15 +9775,21 @@ Column(
           // Green confirmation banner — Ux4gBannerVariant.successLight.
           Ux4gStatusBanner(
             variant: Ux4gBannerVariant.successLight,
+            backgroundColor: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.green800 : Ux4gPalette.green100,
             title: 'You can now try signing in again.',
             margin: EdgeInsets.zero,
-            padding: EdgeInsets.fromLTRB(12, 12, 12, 12),
+            padding: const EdgeInsets.fromLTRB(12, 12, 12, 12),
             titleStyle: TextStyle(
-              fontSize: 14, fontWeight: FontWeight.w500,
-              color: Ux4gPalette.green700,
+              fontSize: 14,
+              fontWeight: FontWeight.w500,
+              color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.green300 : Ux4gPalette.green800,
+              height: 1.3,
             ),
-            leadingIcon: Icon(Icons.check_circle,
-              color: Ux4gPalette.green, size: 20),
+            leadingIcon: Icon(
+              Icons.check_circle,
+              color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.green500 : Ux4gPalette.green600,
+              size: 20,
+            ),
           ),
           SizedBox(height: 24),
 
@@ -9644,7 +9876,7 @@ Column(
                 width: double.infinity,
                 padding: EdgeInsets.fromLTRB(20, 24, 20, 24),
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.neutral900 : Ux4gPalette.neutral50,
                   borderRadius: BorderRadius.circular(16),
                   boxShadow: [
                     BoxShadow(
@@ -9668,15 +9900,21 @@ Column(
 
                     Ux4gStatusBanner(
                       variant: Ux4gBannerVariant.successLight,
+                      backgroundColor: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.green800 : Ux4gPalette.green100,
                       title: 'You can now try signing in again.',
                       margin: EdgeInsets.zero,
-                      padding: EdgeInsets.fromLTRB(12, 12, 12, 12),
+                      padding: const EdgeInsets.fromLTRB(12, 12, 12, 12),
                       titleStyle: TextStyle(
-                        fontSize: 14, fontWeight: FontWeight.w500,
-                        color: Ux4gPalette.green700,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500,
+                        color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.green300 : Ux4gPalette.green800,
+                        height: 1.3,
                       ),
-                      leadingIcon: Icon(Icons.check_circle,
-                        color: Ux4gPalette.green, size: 20),
+                      leadingIcon: Icon(
+                        Icons.check_circle,
+                        color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.green500 : Ux4gPalette.green600,
+                        size: 20,
+                      ),
                     ),
                     SizedBox(height: 20),
 
@@ -9778,6 +10016,8 @@ class _AuthOtpSuspiciousActivityMockupState
                   // Warning banner — multi-line description in subtitle.
                   Ux4gStatusBanner(
                     variant: Ux4gBannerVariant.warningLight,
+                    backgroundColor: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.orange900 : Ux4gPalette.orange50,
+                    borderColor: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.orange600 : Ux4gPalette.orange300,
                     title: 'Suspicious activity detected',
                     subtitle:
                         'We detected a sign-in from a new device. Please '
@@ -9787,40 +10027,40 @@ class _AuthOtpSuspiciousActivityMockupState
                     titleStyle: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w700,
-                      color: Ux4gPalette.secondary800,
+                      color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.orange300 : Ux4gPalette.orange800,
                       height: 1.3,
                     ),
                     subtitleStyle: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w400,
-                      color: Ux4gPalette.secondary800,
+                      color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.orange300 : Ux4gPalette.orange800,
                       height: 1.4,
                     ),
                     leadingIcon: Icon(
                       Icons.error_outline,
-                      color: Ux4gPalette.secondary600,
+                      color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.orange500 : Ux4gPalette.orange600,
                       size: 20,
                     ),
                   ),
                   const SizedBox(height: 24),
 
-                  const Text(
+                  Text(
                     'OTP Verification',
                     style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.w800,
-                      color: _titleColor,
+                      color: _getTitleColor(context),
                       height: 1.2,
                       letterSpacing: -0.3,
                     ),
                   ),
                   const SizedBox(height: 8),
-                  const Text(
+                  Text(
                     'A verification code has been sent to your '
                     'registered number for security verification.',
                     style: TextStyle(
                       fontSize: 14,
-                      color: _subtleText,
+                      color: _getSubtleText(context),
                       height: 1.3,
                     ),
                   ),
@@ -9904,7 +10144,7 @@ class _AuthOtpSuspiciousActivityCardMockupState
                       width: double.infinity,
                       padding: const EdgeInsets.fromLTRB(20, 24, 20, 24),
                       decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.neutral900 : Ux4gPalette.neutral50,
                         borderRadius: BorderRadius.circular(16),
                         boxShadow: [
                           BoxShadow(
@@ -9922,6 +10162,8 @@ class _AuthOtpSuspiciousActivityCardMockupState
 
                           Ux4gStatusBanner(
                             variant: Ux4gBannerVariant.warningLight,
+                            backgroundColor: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.orange900 : Ux4gPalette.orange50,
+                            borderColor: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.orange600 : Ux4gPalette.orange300,
                             title: 'Suspicious activity detected',
                             subtitle:
                                 'We detected a sign-in from a new device. '
@@ -9931,40 +10173,40 @@ class _AuthOtpSuspiciousActivityCardMockupState
                             titleStyle: TextStyle(
                               fontSize: 14,
                               fontWeight: FontWeight.w700,
-                              color: Ux4gPalette.secondary800,
+                              color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.orange300 : Ux4gPalette.orange800,
                               height: 1.3,
                             ),
                             subtitleStyle: TextStyle(
                               fontSize: 14,
                               fontWeight: FontWeight.w400,
-                              color: Ux4gPalette.secondary800,
+                              color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.orange300 : Ux4gPalette.orange800,
                               height: 1.4,
                             ),
                             leadingIcon: Icon(
                               Icons.error_outline,
-                              color: Ux4gPalette.secondary600,
+                              color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.orange500 : Ux4gPalette.orange600,
                               size: 20,
                             ),
                           ),
                           const SizedBox(height: 20),
 
-                          const Text(
+                          Text(
                             'OTP Verification',
                             style: TextStyle(
                               fontSize: 24,
                               fontWeight: FontWeight.w800,
-                              color: _titleColor,
+                              color: _getTitleColor(context),
                               height: 1.2,
                               letterSpacing: -0.3,
                             ),
                           ),
                           const SizedBox(height: 8),
-                          const Text(
+                          Text(
                             'A verification code has been sent to your '
                             'registered number for security verification.',
                             style: TextStyle(
                               fontSize: 14,
-                              color: _subtleText,
+                              color: _getSubtleText(context),
                               height: 1.3,
                             ),
                           ),
@@ -10046,21 +10288,28 @@ Column(
           // Orange warning banner — multi-line description.
           Ux4gStatusBanner(
             variant: Ux4gBannerVariant.warningLight,
+            backgroundColor: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.orange900 : Ux4gPalette.orange50,
+            borderColor: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.orange600 : Ux4gPalette.orange300,
             title: 'Suspicious activity detected',
             subtitle: 'We detected a sign-in from a new device. Please '
                 'verify your identity before continuing.',
             margin: EdgeInsets.zero,
-            padding: EdgeInsets.fromLTRB(12, 12, 12, 12),
+            padding: const EdgeInsets.fromLTRB(12, 12, 12, 12),
             titleStyle: TextStyle(
-              fontSize: 14, fontWeight: FontWeight.w700,
-              color: Ux4gPalette.secondary800,
+              fontSize: 14,
+              fontWeight: FontWeight.w700,
+              color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.orange300 : Ux4gPalette.orange800,
             ),
             subtitleStyle: TextStyle(
-              fontSize: 14, fontWeight: FontWeight.w400,
-              color: Ux4gPalette.secondary800,
+              fontSize: 14,
+              fontWeight: FontWeight.w400,
+              color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.orange300 : Ux4gPalette.orange800,
             ),
-            leadingIcon: Icon(Icons.error_outline,
-              color: Ux4gPalette.secondary600, size: 20),
+            leadingIcon: Icon(
+              Icons.error_outline,
+              color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.orange500 : Ux4gPalette.orange600,
+              size: 20,
+            ),
           ),
           SizedBox(height: 24),
 
@@ -10172,21 +10421,28 @@ Column(
 
                     Ux4gStatusBanner(
                       variant: Ux4gBannerVariant.warningLight,
+                      backgroundColor: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.orange900 : Ux4gPalette.orange50,
+                      borderColor: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.orange600 : Ux4gPalette.orange300,
                       title: 'Suspicious activity detected',
                       subtitle: 'We detected a sign-in from a new device. '
                           'Please verify your identity before continuing.',
                       margin: EdgeInsets.zero,
-                      padding: EdgeInsets.fromLTRB(12, 12, 12, 12),
+                      padding: const EdgeInsets.fromLTRB(12, 12, 12, 12),
                       titleStyle: TextStyle(
-                        fontSize: 14, fontWeight: FontWeight.w700,
-                        color: Ux4gPalette.secondary800,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w700,
+                        color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.orange300 : Ux4gPalette.orange800,
                       ),
                       subtitleStyle: TextStyle(
-                        fontSize: 14, fontWeight: FontWeight.w400,
-                        color: Ux4gPalette.secondary800,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w400,
+                        color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.orange300 : Ux4gPalette.orange800,
                       ),
-                      leadingIcon: Icon(Icons.error_outline,
-                        color: Ux4gPalette.secondary600, size: 20),
+                      leadingIcon: Icon(
+                        Icons.error_outline,
+                        color: Theme.of(context).brightness == Brightness.dark ? Ux4gPalette.orange500 : Ux4gPalette.orange600,
+                        size: 20,
+                      ),
                     ),
                     SizedBox(height: 20),
 
@@ -10285,23 +10541,23 @@ class _AadhaarVerifyMethodMockupState
                   const _BackButton(),
                   const SizedBox(height: 16),
 
-                  const Text(
+                  Text(
                     'Verify with Aadhaar',
                     style: TextStyle(
                       fontSize: 26,
                       fontWeight: FontWeight.w800,
-                      color: _titleColor,
+                      color: _getTitleColor(context),
                       height: 1.2,
                       letterSpacing: -0.3,
                     ),
                   ),
                   const SizedBox(height: 8),
-                  const Text(
+                  Text(
                     'Choose how you want to authenticate. Your Aadhaar '
                     'number is never stored.',
                     style: TextStyle(
                       fontSize: 14,
-                      color: _subtleText,
+                      color: _getSubtleText(context),
                       height: 1.3,
                     ),
                   ),
@@ -10362,7 +10618,7 @@ class _AadhaarVerifyMethodCardMockupState
   String _method = 'otp';
 
   Color _getCardBg(BuildContext context) =>
-      _isDark(context) ? Ux4gPalette.primary900 : Ux4gPalette.primary100;
+      _isDark(context) ? Ux4gPalette.primary800 : Ux4gPalette.primary100;
 
   @override
   Widget build(BuildContext context) {
@@ -10384,7 +10640,7 @@ class _AadhaarVerifyMethodCardMockupState
                       width: double.infinity,
                       padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
                       decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: _isDark(context) ? Ux4gPalette.gray900 : Colors.white,
                         borderRadius: BorderRadius.circular(16),
                         boxShadow: [
                           BoxShadow(
@@ -10400,23 +10656,23 @@ class _AadhaarVerifyMethodCardMockupState
                           const _BackButton(),
                           const SizedBox(height: 12),
 
-                          const Text(
-                            'Verify with Aadhaar',
+                          Text(
+                    'Verify with Aadhaar',
                             style: TextStyle(
                               fontSize: 26,
                               fontWeight: FontWeight.w800,
-                              color: _titleColor,
+                              color: _getTitleColor(context),
                               height: 1.2,
                               letterSpacing: -0.3,
                             ),
                           ),
                           const SizedBox(height: 8),
-                          const Text(
-                            'Choose how you want to authenticate. Your '
+                          Text(
+                    'Choose how you want to authenticate. Your '
                             'Aadhaar number is never stored.',
                             style: TextStyle(
                               fontSize: 14,
-                              color: _subtleText,
+                              color: _getSubtleText(context),
                               height: 1.3,
                             ),
                           ),
@@ -10489,41 +10745,54 @@ class _BrandHeaderWithMenu extends StatelessWidget {
           variant: Ux4gAppHeaderVariant.light,
           title: '',
           leadingWidgets: [
-            SvgPicture.asset(_nationalEmblemPath, height: 32),
+            SvgPicture.asset(
+              _nationalEmblemPath,
+              height: 32,
+              colorFilter: _isDark(context)
+                  ? const ColorFilter.mode(Colors.white, BlendMode.srcIn)
+                  : null,
+            ),
             SizedBox(
               height: 28,
               child: Ux4gDivider(
                 orientation: Ux4gDividerOrientation.vertical,
-                color: Ux4gPalette.neutral300,
+                color: _isDark(context)
+                    ? Ux4gPalette.neutral700
+                    : Ux4gPalette.neutral300,
               ),
             ),
-            SvgPicture.asset(_unionLogoPath, height: 32),
+            SvgPicture.asset(
+              _unionLogoPath,
+              height: 32,
+              colorFilter: ColorFilter.mode(
+                _isDark(context)
+                    ? Ux4gPalette.primary300
+                    : Ux4gPalette.primary600,
+                BlendMode.srcIn,
+              ),
+            ),
           ],
           horizontalPadding: 16,
           leadingSpacing: 12,
           actions: [
-            // Custom widget — bordered rounded square containing the
-            // menu icon. We use a Material+InkWell so the tap ripple
-            // is clipped to the same rounded shape as the border, and
-            // a fixed 40x40 SizedBox guarantees a true square (the
-            // design-system Ux4gButton would expand horizontally for
-            // its leading-icon row layout).
             Ux4gAppHeaderAction(
               customWidget: SizedBox(
                 width: 40,
                 height: 40,
                 child: Material(
-                  color: Colors.white,
+                  color: _isDark(context) ? Ux4gPalette.neutral800 : Colors.white,
                   borderRadius: BorderRadius.circular(10),
                   child: InkWell(
                     borderRadius: BorderRadius.circular(10),
                     onTap: onMenuPressed,
                     child: Ink(
                       decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: _isDark(context) ? Ux4gPalette.neutral800 : Colors.white,
                         borderRadius: BorderRadius.circular(10),
                         border: Border.all(
-                          color: Ux4gPalette.primary100,
+                          color: _isDark(context)
+                              ? Ux4gPalette.primary700
+                              : Ux4gPalette.primary100,
                           width: 1.5,
                         ),
                       ),
@@ -10541,7 +10810,7 @@ class _BrandHeaderWithMenu extends StatelessWidget {
             ),
           ],
         ),
-        const Divider(height: 1, thickness: 1, color: _border),
+        Divider(height: 1, thickness: 1, color: _getBorder(context)),
       ],
     );
   }
@@ -10575,7 +10844,9 @@ class _AadhaarMethodCard extends StatelessWidget {
       cornerRadius: 12,
       isClickable: true,
       onPressed: () => onChanged(value),
-      backgroundColor: isSelected ? Ux4gPalette.primary50 : Ux4gPalette.gray100,
+      backgroundColor: isSelected
+          ? (_isDark(context) ? Ux4gPalette.primary900 : Ux4gPalette.primary50)
+          : (_isDark(context) ? Ux4gPalette.neutral800 : Ux4gPalette.gray100),
       // No border — selected state communicated by the tinted
       // background + radio + tinted text only.
       borderColor: Colors.transparent,
@@ -10604,7 +10875,7 @@ class _AadhaarMethodCard extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 15,
                       fontWeight: FontWeight.w700,
-                      color: isSelected ? primary : _titleColor,
+                      color: isSelected ? primary : _getTitleColor(context),
                       height: 1.3,
                     ),
                   ),
@@ -10615,7 +10886,7 @@ class _AadhaarMethodCard extends StatelessWidget {
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
                       fontSize: 13,
-                      color: isSelected ? primary : _subtleText,
+                      color: isSelected ? primary : _getSubtleText(context),
                       height: 1.35,
                     ),
                   ),
@@ -10653,7 +10924,7 @@ class _AadhaarVerifyFooterRow extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          const Divider(height: 1, thickness: 1, color: _border),
+          Divider(height: 1, thickness: 1, color: _getBorder(context)),
           // Halved the gap between the divider and the action row —
           // matches the tighter spacing in the reference image.
           const SizedBox(height: 6),
@@ -10826,7 +11097,7 @@ Column(
                 width: double.infinity,
                 padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: _isDark(context) ? Ux4gPalette.gray900 : Colors.white,
                   borderRadius: BorderRadius.circular(16),
                   boxShadow: [
                     BoxShadow(
@@ -10950,23 +11221,23 @@ class _AadhaarOtpEnterMockupState extends State<_AadhaarOtpEnterMockup> {
                   ),
                   const SizedBox(height: 16),
 
-                  const Text(
+                  Text(
                     'Enter OTP',
                     style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.w800,
-                      color: _titleColor,
+                      color: _getTitleColor(context),
                       height: 1.2,
                       letterSpacing: -0.3,
                     ),
                   ),
                   const SizedBox(height: 8),
-                  const Text(
+                  Text(
                     'A 6-digit OTP has been sent to the mobile number '
                     'linked to your Aadhaar.',
                     style: TextStyle(
                       fontSize: 14,
-                      color: _subtleText,
+                      color: _getSubtleText(context),
                       height: 1.3,
                     ),
                   ),
@@ -11028,7 +11299,7 @@ class _AadhaarOtpEnterCardMockupState
   int _resendNonce = 0;
 
   Color _getCardBg(BuildContext context) =>
-      _isDark(context) ? Ux4gPalette.primary900 : Ux4gPalette.primary100;
+      _isDark(context) ? Ux4gPalette.primary800 : Ux4gPalette.primary100;
 
   @override
   Widget build(BuildContext context) {
@@ -11050,7 +11321,7 @@ class _AadhaarOtpEnterCardMockupState
                       width: double.infinity,
                       padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
                       decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: _isDark(context) ? Ux4gPalette.gray900 : Colors.white,
                         borderRadius: BorderRadius.circular(16),
                         boxShadow: [
                           BoxShadow(
@@ -11077,23 +11348,23 @@ class _AadhaarOtpEnterCardMockupState
                           ),
                           const SizedBox(height: 12),
 
-                          const Text(
-                            'Enter OTP',
+                          Text(
+                    'Enter OTP',
                             style: TextStyle(
                               fontSize: 24,
                               fontWeight: FontWeight.w800,
-                              color: _titleColor,
+                              color: _getTitleColor(context),
                               height: 1.2,
                               letterSpacing: -0.3,
                             ),
                           ),
                           const SizedBox(height: 8),
-                          const Text(
-                            'A 6-digit OTP has been sent to the mobile '
+                          Text(
+                    'A 6-digit OTP has been sent to the mobile '
                             'number linked to your Aadhaar.',
                             style: TextStyle(
                               fontSize: 14,
-                              color: _subtleText,
+                              color: _getSubtleText(context),
                               height: 1.3,
                             ),
                           ),
@@ -11312,7 +11583,7 @@ Column(
                 width: double.infinity,
                 padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: _isDark(context) ? Ux4gPalette.gray900 : Colors.white,
                   borderRadius: BorderRadius.circular(16),
                   boxShadow: [
                     BoxShadow(
@@ -11450,23 +11721,23 @@ class _AadhaarFaceAuthPermissionMockup extends StatelessWidget {
                   ),
                   const SizedBox(height: 16),
 
-                  const Text(
+                  Text(
                     'Face Authentication',
                     style: TextStyle(
                       fontSize: 26,
                       fontWeight: FontWeight.w800,
-                      color: _titleColor,
+                      color: _getTitleColor(context),
                       height: 1.2,
                       letterSpacing: -0.3,
                     ),
                   ),
                   const SizedBox(height: 8),
-                  const Text(
+                  Text(
                     'Allow camera access to capture your face for '
                     'Aadhaar biometric verification.',
                     style: TextStyle(
                       fontSize: 14,
-                      color: _subtleText,
+                      color: _getSubtleText(context),
                       height: 1.3,
                     ),
                   ),
@@ -11502,7 +11773,7 @@ class _AadhaarFaceAuthPermissionCardMockup extends StatelessWidget {
   const _AadhaarFaceAuthPermissionCardMockup();
 
   Color _getCardBg(BuildContext context) =>
-      _isDark(context) ? Ux4gPalette.primary900 : Ux4gPalette.primary100;
+      _isDark(context) ? Ux4gPalette.primary800 : Ux4gPalette.primary100;
 
   @override
   Widget build(BuildContext context) {
@@ -11524,7 +11795,7 @@ class _AadhaarFaceAuthPermissionCardMockup extends StatelessWidget {
                       width: double.infinity,
                       padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
                       decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: _isDark(context) ? Ux4gPalette.gray900 : Colors.white,
                         borderRadius: BorderRadius.circular(16),
                         boxShadow: [
                           BoxShadow(
@@ -11551,23 +11822,23 @@ class _AadhaarFaceAuthPermissionCardMockup extends StatelessWidget {
                           ),
                           const SizedBox(height: 12),
 
-                          const Text(
-                            'Face Authentication',
+                          Text(
+                    'Face Authentication',
                             style: TextStyle(
                               fontSize: 26,
                               fontWeight: FontWeight.w800,
-                              color: _titleColor,
+                              color: _getTitleColor(context),
                               height: 1.2,
                               letterSpacing: -0.3,
                             ),
                           ),
                           const SizedBox(height: 8),
-                          const Text(
-                            'Allow camera access to capture your face '
+                          Text(
+                    'Allow camera access to capture your face '
                             'for Aadhaar biometric verification.',
                             style: TextStyle(
                               fontSize: 14,
-                              color: _subtleText,
+                              color: _getSubtleText(context),
                               height: 1.3,
                             ),
                           ),
@@ -11608,7 +11879,7 @@ class _CameraPrivacyInfoCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Ux4gCard(
       cornerRadius: 12,
-      backgroundColor: Ux4gPalette.secondary50,
+      backgroundColor: _isDark(context) ? Ux4gPalette.secondary900 : Ux4gPalette.secondary50,
       borderColor: Colors.transparent,
       borderWidth: 0,
       child: Padding(
@@ -11616,14 +11887,14 @@ class _CameraPrivacyInfoCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
-          children: const [
+          children: [
             Text(
               'Camera Access Required',
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w800,
-                color: _titleColor,
+                color: _getTitleColor(context),
                 height: 1.3,
               ),
             ),
@@ -11632,7 +11903,7 @@ class _CameraPrivacyInfoCard extends StatelessWidget {
               'Your face scan data is processed locally and never '
               'stored on our servers.',
               textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 14, color: _subtleText, height: 1.4),
+              style: TextStyle(fontSize: 14, color: _getSubtleText(context), height: 1.4),
             ),
           ],
         ),
@@ -11686,7 +11957,7 @@ Column(
           // (Ux4gPalette.secondary50) surface and centered body.
           Ux4gCard(
             cornerRadius: 12,
-            backgroundColor: Ux4gPalette.secondary50,
+            backgroundColor: _isDark(context) ? Ux4gPalette.secondary900 : Ux4gPalette.secondary50,
             borderColor: Colors.transparent,
             child: Padding(
               padding: EdgeInsets.fromLTRB(16, 18, 16, 18),
@@ -11784,7 +12055,7 @@ Column(
                 width: double.infinity,
                 padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: _isDark(context) ? Ux4gPalette.gray900 : Colors.white,
                   borderRadius: BorderRadius.circular(16),
                   boxShadow: [
                     BoxShadow(
@@ -11816,7 +12087,7 @@ Column(
 
                     Ux4gCard(
                       cornerRadius: 12,
-                      backgroundColor: Ux4gPalette.secondary50,
+                      backgroundColor: _isDark(context) ? Ux4gPalette.secondary900 : Ux4gPalette.secondary50,
                       borderColor: Colors.transparent,
                       child: Padding(
                         padding: EdgeInsets.fromLTRB(16, 18, 16, 18),
@@ -11919,34 +12190,34 @@ class _AadhaarVerifiedSuccessMockup extends StatelessWidget {
                     titleStyle: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w500,
-                      color: Ux4gPalette.green700,
+                      color: _isDark(context) ? Ux4gPalette.green300 : Ux4gPalette.green700,
                       height: 1.3,
                     ),
                     leadingIcon: Icon(
                       Icons.check_circle,
-                      color: Ux4gPalette.green,
+                      color: _isDark(context) ? Ux4gPalette.green400 : Ux4gPalette.green,
                       size: 20,
                     ),
                   ),
                   const SizedBox(height: 20),
 
-                  const Text(
+                  Text(
                     'Authentication\nSuccessful',
                     style: TextStyle(
                       fontSize: 26,
                       fontWeight: FontWeight.w800,
-                      color: _titleColor,
+                      color: _getTitleColor(context),
                       height: 1.2,
                       letterSpacing: -0.3,
                     ),
                   ),
                   const SizedBox(height: 8),
-                  const Text(
+                  Text(
                     'Your Aadhaar identity has been verified. You may '
                     'now proceed to the service.',
                     style: TextStyle(
                       fontSize: 14,
-                      color: _subtleText,
+                      color: _getSubtleText(context),
                       height: 1.3,
                     ),
                   ),
@@ -11969,7 +12240,7 @@ class _AadhaarVerifiedSuccessMockup extends StatelessWidget {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                const Divider(height: 1, thickness: 1, color: _border),
+                Divider(height: 1, thickness: 1, color: _getBorder(context)),
                 const SizedBox(height: 12),
                 Ux4gButton(
                   text: 'Continue to Service',
@@ -11995,7 +12266,7 @@ class _AadhaarVerifiedSuccessCardMockup extends StatelessWidget {
   const _AadhaarVerifiedSuccessCardMockup();
 
   Color _getCardBg(BuildContext context) =>
-      _isDark(context) ? Ux4gPalette.primary900 : Ux4gPalette.primary100;
+      _isDark(context) ? Ux4gPalette.primary800 : Ux4gPalette.primary100;
 
   @override
   Widget build(BuildContext context) {
@@ -12017,7 +12288,7 @@ class _AadhaarVerifiedSuccessCardMockup extends StatelessWidget {
                       width: double.infinity,
                       padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
                       decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: _isDark(context) ? Ux4gPalette.gray900 : Colors.white,
                         borderRadius: BorderRadius.circular(16),
                         boxShadow: [
                           BoxShadow(
@@ -12038,40 +12309,40 @@ class _AadhaarVerifiedSuccessCardMockup extends StatelessWidget {
                             titleStyle: TextStyle(
                               fontSize: 14,
                               fontWeight: FontWeight.w500,
-                              color: Ux4gPalette.green700,
+                              color: _isDark(context) ? Ux4gPalette.green300 : Ux4gPalette.green700,
                               height: 1.3,
                             ),
                             leadingIcon: Icon(
                               Icons.check_circle,
-                              color: Ux4gPalette.green,
+                              color: _isDark(context) ? Ux4gPalette.green400 : Ux4gPalette.green,
                               size: 20,
                             ),
                           ),
                           const SizedBox(height: 20),
 
-                          const Text(
-                            'Authentication\nSuccessful',
+                          Text(
+                    'Authentication\nSuccessful',
                             style: TextStyle(
                               fontSize: 26,
                               fontWeight: FontWeight.w800,
-                              color: _titleColor,
+                              color: _getTitleColor(context),
                               height: 1.2,
                               letterSpacing: -0.3,
                             ),
                           ),
                           const SizedBox(height: 8),
-                          const Text(
-                            'Your Aadhaar identity has been verified. '
+                          Text(
+                    'Your Aadhaar identity has been verified. '
                             'You may now proceed to the service.',
                             style: TextStyle(
                               fontSize: 14,
-                              color: _subtleText,
+                              color: _getSubtleText(context),
                               height: 1.3,
                             ),
                           ),
                           const SizedBox(height: 20),
 
-                          const _TransactionIdCard(
+                          _TransactionIdCard(
                             label: 'Transaction ID',
                             value: 'TXN-2024-AAD-78432',
                           ),
@@ -12116,7 +12387,7 @@ class _TransactionIdCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Ux4gCard(
       cornerRadius: 12,
-      backgroundColor: Ux4gPalette.primary50,
+      backgroundColor: _isDark(context) ? Ux4gPalette.primary900 : Ux4gPalette.primary50,
       borderColor: Colors.transparent,
       borderWidth: 0,
       child: Padding(
@@ -12127,19 +12398,19 @@ class _TransactionIdCard extends StatelessWidget {
           children: [
             Text(
               label,
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 13,
-                color: _subtleText,
+                color: _getSubtleText(context),
                 height: 1.3,
               ),
             ),
             const SizedBox(height: 4),
             Text(
               value,
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w800,
-                color: _titleColor,
+                color: _getTitleColor(context),
                 height: 1.3,
               ),
             ),
@@ -12188,7 +12459,7 @@ Column(
           // Transaction-ID card — light-primary surface.
           Ux4gCard(
             cornerRadius: 12,
-            backgroundColor: Ux4gPalette.primary50,
+            backgroundColor: _isDark(context) ? Ux4gPalette.primary900 : Ux4gPalette.primary50,
             borderColor: Colors.transparent,
             child: Padding(
               padding: EdgeInsets.fromLTRB(16, 14, 16, 16),
@@ -12265,7 +12536,7 @@ Column(
                 width: double.infinity,
                 padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: _isDark(context) ? Ux4gPalette.gray900 : Colors.white,
                   borderRadius: BorderRadius.circular(16),
                   boxShadow: [
                     BoxShadow(
@@ -12302,7 +12573,7 @@ Column(
 
                     Ux4gCard(
                       cornerRadius: 12,
-                      backgroundColor: Ux4gPalette.primary50,
+                      backgroundColor: _isDark(context) ? Ux4gPalette.primary900 : Ux4gPalette.primary50,
                       borderColor: Colors.transparent,
                       child: Padding(
                         padding: EdgeInsets.fromLTRB(16, 14, 16, 16),
@@ -12381,8 +12652,8 @@ class _AadhaarVerificationFailedMockup extends StatelessWidget {
                   Container(
                     width: 64,
                     height: 64,
-                    decoration: const BoxDecoration(
-                      color: Ux4gPalette.red100,
+                    decoration: BoxDecoration(
+                      color: _isDark(context) ? Ux4gPalette.red900 : Ux4gPalette.red100,
                       shape: BoxShape.circle,
                     ),
                     alignment: Alignment.center,
@@ -12402,23 +12673,23 @@ class _AadhaarVerificationFailedMockup extends StatelessWidget {
                   ),
                   const SizedBox(height: 16),
 
-                  const Text(
+                  Text(
                     'Authentication Failed',
                     style: TextStyle(
                       fontSize: 26,
                       fontWeight: FontWeight.w800,
-                      color: _titleColor,
+                      color: _getTitleColor(context),
                       height: 1.2,
                       letterSpacing: -0.3,
                     ),
                   ),
                   const SizedBox(height: 8),
-                  const Text(
+                  Text(
                     'The OTP entered is incorrect. You have 2 attempts '
                     'remaining before your account is temporarily locked.',
                     style: TextStyle(
                       fontSize: 14,
-                      color: _subtleText,
+                      color: _getSubtleText(context),
                       height: 1.35,
                     ),
                   ),
@@ -12436,12 +12707,12 @@ class _AadhaarVerificationFailedMockup extends StatelessWidget {
                     titleStyle: TextStyle(
                       fontSize: 13,
                       fontWeight: FontWeight.w500,
-                      color: Ux4gPalette.red800,
+                      color: _isDark(context) ? Ux4gPalette.red300 : Ux4gPalette.red800,
                       height: 1.35,
                     ),
                     leadingIcon: Icon(
                       Icons.error,
-                      color: Ux4gPalette.red600,
+                      color: _isDark(context) ? Ux4gPalette.red500 : Ux4gPalette.red600,
                       size: 18,
                     ),
                     badge: Container(
@@ -12450,14 +12721,14 @@ class _AadhaarVerificationFailedMockup extends StatelessWidget {
                         vertical: 4,
                       ),
                       decoration: BoxDecoration(
-                        color: Ux4gPalette.red200,
+                        color: _isDark(context) ? Ux4gPalette.red800 : Ux4gPalette.red200,
                         borderRadius: BorderRadius.circular(6),
                       ),
                       child: Text(
                         'Attempt 1 of 2',
                         style: TextStyle(
                           fontSize: 11,
-                          color: Ux4gPalette.red800,
+                          color: _isDark(context) ? Ux4gPalette.red300 : Ux4gPalette.red800,
                           fontWeight: FontWeight.w500,
                           height: 1.2,
                         ),
@@ -12512,7 +12783,7 @@ class _AadhaarVerificationFailedCardMockup extends StatelessWidget {
                       width: double.infinity,
                       padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
                       decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: _isDark(context) ? Ux4gPalette.gray900 : Colors.white,
                         borderRadius: BorderRadius.circular(16),
                         boxShadow: [
                           BoxShadow(
@@ -12528,8 +12799,8 @@ class _AadhaarVerificationFailedCardMockup extends StatelessWidget {
                           Container(
                             width: 64,
                             height: 64,
-                            decoration: const BoxDecoration(
-                              color: Ux4gPalette.red100,
+                            decoration: BoxDecoration(
+                              color: _isDark(context) ? Ux4gPalette.red900 : Ux4gPalette.red100,
                               shape: BoxShape.circle,
                             ),
                             alignment: Alignment.center,
@@ -12549,34 +12820,34 @@ class _AadhaarVerificationFailedCardMockup extends StatelessWidget {
                           ),
                           const SizedBox(height: 16),
 
-                          const Text(
-                            'Authentication Failed',
+                          Text(
+                    'Authentication Failed',
                             style: TextStyle(
                               fontSize: 26,
                               fontWeight: FontWeight.w800,
-                              color: _titleColor,
+                              color: _getTitleColor(context),
                               height: 1.2,
                               letterSpacing: -0.3,
                             ),
                           ),
                           const SizedBox(height: 8),
-                          const Text(
-                            'The OTP entered is incorrect. You have 2 '
+                          Text(
+                    'The OTP entered is incorrect. You have 2 '
                             'attempts remaining before your account is '
                             'temporarily locked.',
                             style: TextStyle(
                               fontSize: 14,
-                              color: _subtleText,
+                              color: _getSubtleText(context),
                               height: 1.35,
                             ),
                           ),
                           const SizedBox(height: 12),
 
                           // Subtle divider seen in the reference image.
-                          const Divider(
+                          Divider(
                             height: 16,
                             thickness: 1,
-                            color: _border,
+                            color: _getBorder(context),
                           ),
                           const SizedBox(height: 4),
 
@@ -12590,12 +12861,12 @@ class _AadhaarVerificationFailedCardMockup extends StatelessWidget {
                             titleStyle: TextStyle(
                               fontSize: 13,
                               fontWeight: FontWeight.w500,
-                              color: Ux4gPalette.red800,
+                              color: _isDark(context) ? Ux4gPalette.red300 : Ux4gPalette.red800,
                               height: 1.35,
                             ),
                             leadingIcon: Icon(
                               Icons.error,
-                              color: Ux4gPalette.red600,
+                              color: _isDark(context) ? Ux4gPalette.red500 : Ux4gPalette.red600,
                               size: 18,
                             ),
                             badge: Container(
@@ -12604,14 +12875,14 @@ class _AadhaarVerificationFailedCardMockup extends StatelessWidget {
                                 vertical: 4,
                               ),
                               decoration: BoxDecoration(
-                                color: Ux4gPalette.red200,
+                                color: _isDark(context) ? Ux4gPalette.red800 : Ux4gPalette.red200,
                                 borderRadius: BorderRadius.circular(6),
                               ),
                               child: Text(
                                 'Attempt 1 of 2',
                                 style: TextStyle(
                                   fontSize: 11,
-                                  color: Ux4gPalette.red800,
+                                  color: _isDark(context) ? Ux4gPalette.red300 : Ux4gPalette.red800,
                                   fontWeight: FontWeight.w500,
                                   height: 1.2,
                                 ),
@@ -12775,7 +13046,7 @@ Column(
                 width: double.infinity,
                 padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: _isDark(context) ? Ux4gPalette.gray900 : Colors.white,
                   borderRadius: BorderRadius.circular(16),
                   boxShadow: [
                     BoxShadow(
@@ -12914,43 +13185,43 @@ class _AadhaarAccountLockedMockup extends StatelessWidget {
                   Container(
                     width: 64,
                     height: 64,
-                    decoration: const BoxDecoration(
-                      color: Color(0xFFFEF2F2), // Very light red
+                    decoration: BoxDecoration(
+                      color: _isDark(context) ? Ux4gPalette.red900 : Ux4gPalette.red50,
                       shape: BoxShape.circle,
                     ),
                     alignment: Alignment.center,
                     child: Container(
                       width: 36,
                       height: 36,
-                      decoration: const BoxDecoration(
-                        color: Ux4gPalette.red100,
+                      decoration: BoxDecoration(
+                        color: _isDark(context) ? Ux4gPalette.red800 : Ux4gPalette.red100,
                         shape: BoxShape.circle,
                       ),
-                      child: const Icon(
+                      child: Icon(
                         Icons.lock,
-                        color: Ux4gPalette.red600,
+                        color: _isDark(context) ? Ux4gPalette.red400 : Ux4gPalette.red600,
                         size: 22,
                       ),
                     ),
                   ),
                   const SizedBox(height: 16),
 
-                  const Text(
+                  Text(
                     'Account Locked',
                     style: TextStyle(
                       fontSize: 26,
                       fontWeight: FontWeight.w800,
-                      color: _titleColor,
+                      color: _getTitleColor(context),
                       height: 1.2,
                       letterSpacing: -0.3,
                     ),
                   ),
                   const SizedBox(height: 8),
-                  const Text(
+                  Text(
                     'Your Aadhaar authentication has been suspended due to too many failed attempts.',
                     style: TextStyle(
                       fontSize: 14,
-                      color: _subtleText,
+                      color: _getSubtleText(context),
                       height: 1.35,
                     ),
                   ),
@@ -12961,36 +13232,36 @@ class _AadhaarAccountLockedMockup extends StatelessWidget {
                     width: double.infinity,
                     padding: const EdgeInsets.all(20),
                     decoration: BoxDecoration(
-                      color: const Color(0xFFFFFBEB), // light yellow
+                      color: _isDark(context) ? Ux4gPalette.yellow950 : Ux4gPalette.yellow50,
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: Column(
                       children: [
-                        const Text(
-                          'Try again in',
+                        Text(
+                    'Try again in',
                           style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.w700,
-                            color: Color(0xFF92400E),
+                            color: _isDark(context) ? Ux4gPalette.orange300 : Ux4gPalette.orange800,
                           ),
                         ),
                         const SizedBox(height: 8),
-                        const Text(
-                          '23:45:00',
+                        Text(
+                    '23:45:00',
                           style: TextStyle(
                             fontSize: 36,
                             fontWeight: FontWeight.w800,
-                            color: Color(0xFF92400E),
+                            color: _isDark(context) ? Ux4gPalette.orange300 : Ux4gPalette.orange800,
                             letterSpacing: 1,
                           ),
                         ),
                         const SizedBox(height: 16),
-                        const Text(
-                          'Your account will be unlocked automatically. If you need immediate assistance, contact UIDAI support.',
+                        Text(
+                    'Your account will be unlocked automatically. If you need immediate assistance, contact UIDAI support.',
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             fontSize: 13,
-                            color: Color(0xFF92400E),
+                            color: _isDark(context) ? Ux4gPalette.orange300 : Ux4gPalette.orange800,
                             height: 1.4,
                           ),
                         ),
@@ -13028,7 +13299,7 @@ class _AadhaarAccountLockedCardMockup extends StatelessWidget {
   const _AadhaarAccountLockedCardMockup();
 
   Color _getCardBg(BuildContext context) =>
-      _isDark(context) ? Ux4gPalette.primary900 : Ux4gPalette.primary100;
+      _isDark(context) ? Ux4gPalette.primary800 : Ux4gPalette.primary100;
 
   @override
   Widget build(BuildContext context) {
@@ -13050,7 +13321,7 @@ class _AadhaarAccountLockedCardMockup extends StatelessWidget {
                       width: double.infinity,
                       padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
                       decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: _isDark(context) ? Ux4gPalette.gray900 : Colors.white,
                         borderRadius: BorderRadius.circular(16),
                         boxShadow: [
                           BoxShadow(
@@ -13067,43 +13338,43 @@ class _AadhaarAccountLockedCardMockup extends StatelessWidget {
                           Container(
                             width: 64,
                             height: 64,
-                            decoration: const BoxDecoration(
-                              color: Color(0xFFFEF2F2),
+                            decoration: BoxDecoration(
+                              color: _isDark(context) ? Ux4gPalette.red900 : Ux4gPalette.red50,
                               shape: BoxShape.circle,
                             ),
                             alignment: Alignment.center,
                             child: Container(
                               width: 36,
                               height: 36,
-                              decoration: const BoxDecoration(
-                                color: Ux4gPalette.red100,
+                              decoration: BoxDecoration(
+                                color: _isDark(context) ? Ux4gPalette.red800 : Ux4gPalette.red100,
                                 shape: BoxShape.circle,
                               ),
-                              child: const Icon(
+                              child: Icon(
                                 Icons.lock,
-                                color: Ux4gPalette.red600,
+                                color: _isDark(context) ? Ux4gPalette.red400 : Ux4gPalette.red600,
                                 size: 22,
                               ),
                             ),
                           ),
                           const SizedBox(height: 16),
 
-                          const Text(
-                            'Account Locked',
+                          Text(
+                    'Account Locked',
                             style: TextStyle(
                               fontSize: 26,
                               fontWeight: FontWeight.w800,
-                              color: _titleColor,
+                              color: _getTitleColor(context),
                               height: 1.2,
                               letterSpacing: -0.3,
                             ),
                           ),
                           const SizedBox(height: 8),
-                          const Text(
-                            'Your Aadhaar authentication has been suspended due to too many failed attempts.',
+                          Text(
+                    'Your Aadhaar authentication has been suspended due to too many failed attempts.',
                             style: TextStyle(
                               fontSize: 14,
-                              color: _subtleText,
+                              color: _getSubtleText(context),
                               height: 1.35,
                             ),
                           ),
@@ -13114,36 +13385,36 @@ class _AadhaarAccountLockedCardMockup extends StatelessWidget {
                             width: double.infinity,
                             padding: const EdgeInsets.all(20),
                             decoration: BoxDecoration(
-                              color: const Color(0xFFFFFBEB),
+                              color: _isDark(context) ? Ux4gPalette.yellow950 : Ux4gPalette.yellow50,
                               borderRadius: BorderRadius.circular(12),
                             ),
                             child: Column(
                               children: [
-                                const Text(
-                                  'Try again in',
+                                Text(
+                    'Try again in',
                                   style: TextStyle(
                                     fontSize: 16,
                                     fontWeight: FontWeight.w700,
-                                    color: Color(0xFF92400E),
+                                    color: _isDark(context) ? Ux4gPalette.orange300 : Ux4gPalette.orange800,
                                   ),
                                 ),
                                 const SizedBox(height: 8),
-                                const Text(
-                                  '23:45:00',
+                                Text(
+                    '23:45:00',
                                   style: TextStyle(
                                     fontSize: 36,
                                     fontWeight: FontWeight.w800,
-                                    color: Color(0xFF92400E),
+                                    color: _isDark(context) ? Ux4gPalette.orange300 : Ux4gPalette.orange800,
                                     letterSpacing: 1,
                                   ),
                                 ),
                                 const SizedBox(height: 16),
-                                const Text(
-                                  'Your account will be unlocked automatically. If you need immediate assistance, contact UIDAI support.',
+                                Text(
+                    'Your account will be unlocked automatically. If you need immediate assistance, contact UIDAI support.',
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                     fontSize: 13,
-                                    color: Color(0xFF92400E),
+                                    color: _isDark(context) ? Ux4gPalette.orange300 : Ux4gPalette.orange800,
                                     height: 1.4,
                                   ),
                                 ),
@@ -13234,7 +13505,7 @@ Container(
               Container(
                 width: 64, height: 64,
                 decoration: BoxDecoration(
-                  color: Color(0xFFFEF2F2),
+                  color: _isDark(context) ? Ux4gPalette.red900 : Ux4gPalette.red50,
                   shape: BoxShape.circle,
                 ),
                 alignment: Alignment.center,
@@ -13273,19 +13544,19 @@ Container(
                 child: Column(
                   children: [
                     Text('Try again in',
-                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: Color(0xFF92400E))),
+                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: _isDark(context) ? Ux4gPalette.orange300 : Ux4gPalette.orange800)),
                     SizedBox(height: 8),
                     Text('23:45:00',
                       style: TextStyle(
                         fontSize: 36, 
                         fontWeight: FontWeight.w800, 
-                        color: Color(0xFF92400E),
+                        color: _isDark(context) ? Ux4gPalette.orange300 : Ux4gPalette.orange800,
                         letterSpacing: 1,
                       )),
                     SizedBox(height: 16),
                     Text('Your account will be unlocked automatically. If you need immediate assistance, contact UIDAI support.',
                       textAlign: TextAlign.center,
-                      style: TextStyle(fontSize: 13, color: Color(0xFF92400E), height: 1.4)),
+                      style: TextStyle(fontSize: 13, color: _isDark(context) ? Ux4gPalette.orange300 : Ux4gPalette.orange800, height: 1.4)),
                   ],
                 ),
               ),
@@ -13380,7 +13651,7 @@ Container(
                   width: double.infinity,
                   padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
                   decoration: BoxDecoration(
-                    color: Colors.white,
+                    color: _isDark(context) ? Ux4gPalette.gray900 : Colors.white,
                     borderRadius: BorderRadius.circular(16),
                     boxShadow: [
                       BoxShadow(
@@ -13397,7 +13668,7 @@ Container(
                       Container(
                         width: 64, height: 64,
                         decoration: BoxDecoration(
-                          color: Color(0xFFFEF2F2),
+                          color: _isDark(context) ? Ux4gPalette.red900 : Ux4gPalette.red50,
                           shape: BoxShape.circle,
                         ),
                         alignment: Alignment.center,
@@ -13436,19 +13707,19 @@ Container(
                         child: Column(
                           children: [
                             Text('Try again in',
-                              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: Color(0xFF92400E))),
+                              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: _isDark(context) ? Ux4gPalette.orange300 : Ux4gPalette.orange800)),
                             SizedBox(height: 8),
                             Text('23:45:00',
                               style: TextStyle(
                                 fontSize: 36, 
                                 fontWeight: FontWeight.w800, 
-                                color: Color(0xFF92400E),
+                                color: _isDark(context) ? Ux4gPalette.orange300 : Ux4gPalette.orange800,
                                 letterSpacing: 1,
                               )),
                             SizedBox(height: 16),
                             Text('Your account will be unlocked automatically. If you need immediate assistance, contact UIDAI support.',
                               textAlign: TextAlign.center,
-                              style: TextStyle(fontSize: 13, color: Color(0xFF92400E), height: 1.4)),
+                              style: TextStyle(fontSize: 13, color: _isDark(context) ? Ux4gPalette.orange300 : Ux4gPalette.orange800, height: 1.4)),
                           ],
                         ),
                       ),
@@ -13522,22 +13793,22 @@ class _OperatorAssistedAuthMockupState
                   const _BackButton(),
                   const SizedBox(height: 16),
 
-                  const Text(
+                  Text(
                     'Operator-Assisted Authentication',
                     style: TextStyle(
                       fontSize: 26,
                       fontWeight: FontWeight.w800,
-                      color: _titleColor,
+                      color: _getTitleColor(context),
                       height: 1.2,
                       letterSpacing: -0.3,
                     ),
                   ),
                   const SizedBox(height: 8),
-                  const Text(
+                  Text(
                     'A certified VLE operator will conduct this Aadhaar verification on your behalf with your consent.',
                     style: TextStyle(
                       fontSize: 14,
-                      color: _subtleText,
+                      color: _getSubtleText(context),
                       height: 1.35,
                     ),
                   ),
@@ -13548,28 +13819,28 @@ class _OperatorAssistedAuthMockupState
                     width: double.infinity,
                     padding: const EdgeInsets.all(20),
                     decoration: BoxDecoration(
-                      color: const Color(0xFFF5F3FF), // Light purple
+                      color: _isDark(context) ? Ux4gPalette.primary900 : Ux4gPalette.primary50,
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text(
-                          'VLE Operator',
+                        Text(
+                    'VLE Operator',
                           style: TextStyle(fontSize: 13, color: _subtleText),
                         ),
                         const SizedBox(height: 4),
-                        const Text(
-                          'Ramesh Kumar',
+                        Text(
+                    'Ramesh Kumar',
                           style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.w800,
-                            color: _titleColor,
+                            color: _getTitleColor(context),
                           ),
                         ),
                         const SizedBox(height: 8),
-                        const Text(
-                          'ID: VLE-MH-2024-00387 · Certified by MeitY',
+                        Text(
+                    'ID: VLE-MH-2024-00387 · Certified by MeitY',
                           style: TextStyle(fontSize: 12, color: _mutedText),
                         ),
                       ],
@@ -13617,7 +13888,7 @@ class _OperatorAssistedAuthCardMockupState
     extends State<_OperatorAssistedAuthCardMockup> {
   bool _consent = false;
   Color _getCardBg(BuildContext context) =>
-      _isDark(context) ? Ux4gPalette.primary900 : Ux4gPalette.primary100;
+      _isDark(context) ? Ux4gPalette.primary800 : Ux4gPalette.primary100;
 
   @override
   Widget build(BuildContext context) {
@@ -13639,7 +13910,7 @@ class _OperatorAssistedAuthCardMockupState
                       width: double.infinity,
                       padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
                       decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: _isDark(context) ? Ux4gPalette.gray900 : Colors.white,
                         borderRadius: BorderRadius.circular(16),
                         boxShadow: [
                           BoxShadow(
@@ -13655,22 +13926,22 @@ class _OperatorAssistedAuthCardMockupState
                           const _BackButton(),
                           const SizedBox(height: 12),
 
-                          const Text(
-                            'Operator-Assisted Authentication',
+                          Text(
+                    'Operator-Assisted Authentication',
                             style: TextStyle(
                               fontSize: 26,
                               fontWeight: FontWeight.w800,
-                              color: _titleColor,
+                              color: _getTitleColor(context),
                               height: 1.2,
                               letterSpacing: -0.3,
                             ),
                           ),
                           const SizedBox(height: 8),
-                          const Text(
-                            'A certified VLE operator will conduct this Aadhaar verification on your behalf with your consent.',
+                          Text(
+                    'A certified VLE operator will conduct this Aadhaar verification on your behalf with your consent.',
                             style: TextStyle(
                               fontSize: 14,
-                              color: _subtleText,
+                              color: _getSubtleText(context),
                               height: 1.35,
                             ),
                           ),
@@ -13681,34 +13952,34 @@ class _OperatorAssistedAuthCardMockupState
                             width: double.infinity,
                             padding: const EdgeInsets.all(20),
                             decoration: BoxDecoration(
-                              color: const Color(0xFFF5F3FF),
+                              color: _isDark(context) ? Ux4gPalette.primary900 : Ux4gPalette.primary50,
                               borderRadius: BorderRadius.circular(12),
                             ),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                const Text(
-                                  'VLE Operator',
+                                Text(
+                    'VLE Operator',
                                   style: TextStyle(
                                     fontSize: 13,
-                                    color: _subtleText,
+                                    color: _getSubtleText(context),
                                   ),
                                 ),
                                 const SizedBox(height: 4),
-                                const Text(
-                                  'Ramesh Kumar',
+                                Text(
+                    'Ramesh Kumar',
                                   style: TextStyle(
                                     fontSize: 18,
                                     fontWeight: FontWeight.w800,
-                                    color: _titleColor,
+                                    color: _getTitleColor(context),
                                   ),
                                 ),
                                 const SizedBox(height: 8),
-                                const Text(
-                                  'ID: VLE-MH-2024-00387 · Certified by MeitY',
+                                Text(
+                    'ID: VLE-MH-2024-00387 · Certified by MeitY',
                                   style: TextStyle(
                                     fontSize: 12,
-                                    color: _mutedText,
+                                    color: _getMutedText(context),
                                   ),
                                 ),
                               ],
@@ -13948,7 +14219,7 @@ Container(
                   width: double.infinity,
                   padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
                   decoration: BoxDecoration(
-                    color: Colors.white,
+                    color: _isDark(context) ? Ux4gPalette.gray900 : Colors.white,
                     borderRadius: BorderRadius.circular(16),
                     boxShadow: [
                       BoxShadow(
@@ -14101,7 +14372,7 @@ class _SignInLink extends StatelessWidget {
 }
 
 /// Inline error banner reusing the same [Ux4gStatusBanner] as SignIn.
-Widget _signUpErrorBanner({
+Widget _signUpErrorBanner(BuildContext context, {
   String title = 'Your status message goes here',
   String subtitle = 'Take action',
   String badge = 'Attempt 1 of 5',
@@ -14112,34 +14383,34 @@ Widget _signUpErrorBanner({
     subtitle: subtitle,
     margin: EdgeInsets.zero,
     padding: const EdgeInsets.fromLTRB(12, 12, 10, 12),
-    titleStyle: const TextStyle(
+    titleStyle: TextStyle(
       fontSize: 14,
       fontWeight: FontWeight.w400,
-      color: Color(0xFF991B1B),
+      color: _isDark(context) ? Ux4gPalette.red300 : Ux4gPalette.red800,
       height: 1.3,
     ),
-    subtitleStyle: const TextStyle(
+    subtitleStyle: TextStyle(
       fontSize: 14,
       fontWeight: FontWeight.w700,
-      color: Color(0xFF991B1B),
+      color: _isDark(context) ? Ux4gPalette.red300 : Ux4gPalette.red800,
       height: 1.3,
     ),
-    leadingIcon: const Icon(
+    leadingIcon: Icon(
       Icons.error_outline,
-      color: Color(0xFFDC2626),
+      color: _isDark(context) ? Ux4gPalette.red500 : Ux4gPalette.red600,
       size: 20,
     ),
     trailingIcon: Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
       decoration: BoxDecoration(
-        color: const Color(0xFFFEE2E2),
+        color: _isDark(context) ? Ux4gPalette.red800 : Ux4gPalette.red100,
         borderRadius: BorderRadius.circular(6),
       ),
       child: Text(
         badge,
-        style: const TextStyle(
+        style: TextStyle(
           fontSize: 12,
-          color: Color(0xFF991B1B),
+          color: _isDark(context) ? Ux4gPalette.red300 : Ux4gPalette.red800,
           fontWeight: FontWeight.w500,
           height: 1.2,
         ),
@@ -14149,8 +14420,8 @@ Widget _signUpErrorBanner({
 }
 
 /// Card-container decoration shared by all 5 SignUp card-style steps.
-BoxDecoration _suCardDeco() => BoxDecoration(
-  color: Colors.white,
+BoxDecoration _suCardDeco(BuildContext context) => BoxDecoration(
+  color: _isDark(context) ? Ux4gPalette.gray900 : Colors.white,
   borderRadius: BorderRadius.circular(16),
   boxShadow: [
     BoxShadow(
@@ -14161,7 +14432,7 @@ BoxDecoration _suCardDeco() => BoxDecoration(
   ],
 );
 
-const _suCardBg = Ux4gPalette.primary100;
+Color _getSuCardBg(BuildContext context) => _isDark(context) ? Ux4gPalette.primary800 : Ux4gPalette.primary100;
 
 // -----------------------------------------------------------------------
 // STEP 1 � Create your account
@@ -14219,22 +14490,22 @@ class _SignUpStep1MockupState extends State<_SignUpStep1Mockup> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
+                  Text(
                     'Create your account',
                     style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.w800,
-                      color: _titleColor,
+                      color: _getTitleColor(context),
                       height: 1.2,
                       letterSpacing: -0.3,
                     ),
                   ),
                   const SizedBox(height: 6),
-                  const Text(
+                  Text(
                     'Enter your mobile number to get started',
                     style: TextStyle(
                       fontSize: 14,
-                      color: _subtleText,
+                      color: _getSubtleText(context),
                       height: 1.3,
                     ),
                   ),
@@ -14257,7 +14528,7 @@ class _SignUpStep1MockupState extends State<_SignUpStep1Mockup> {
                     maxLength: 10,
                   ),
                   const SizedBox(height: 16),
-                  _signUpErrorBanner(),
+                  _signUpErrorBanner(context, ),
                   const SizedBox(height: 20),
                   Ux4gButton(
                     text: 'Send OTP',
@@ -14296,7 +14567,7 @@ class _SignUpStep1CardMockupState extends State<_SignUpStep1CardMockup> {
           const _BrandHeader(),
           Expanded(
             child: Container(
-              color: _suCardBg,
+              color: _getSuCardBg(context),
               child: Column(
                 children: [
                   Expanded(
@@ -14304,26 +14575,26 @@ class _SignUpStep1CardMockupState extends State<_SignUpStep1CardMockup> {
                       padding: const EdgeInsets.fromLTRB(16, 20, 16, 16),
                       child: Container(
                         padding: const EdgeInsets.fromLTRB(20, 24, 20, 24),
-                        decoration: _suCardDeco(),
+                        decoration: _suCardDeco(context),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Text(
+                            Text(
                               'Create your account',
                               style: TextStyle(
                                 fontSize: 22,
                                 fontWeight: FontWeight.w800,
-                                color: _titleColor,
+                                color: _getTitleColor(context),
                                 height: 1.2,
                                 letterSpacing: -0.3,
                               ),
                             ),
                             const SizedBox(height: 6),
-                            const Text(
+                            Text(
                               'Enter your mobile number to get started',
                               style: TextStyle(
                                 fontSize: 13,
-                                color: _subtleText,
+                                color: _getSubtleText(context),
                                 height: 1.3,
                               ),
                             ),
@@ -14348,7 +14619,7 @@ class _SignUpStep1CardMockupState extends State<_SignUpStep1CardMockup> {
                               maxLength: 10,
                             ),
                             const SizedBox(height: 12),
-                            _signUpErrorBanner(),
+                            _signUpErrorBanner(context, ),
                             const SizedBox(height: 16),
                             Ux4gButton(
                               text: 'Send OTP',
@@ -14610,22 +14881,22 @@ class _SignUpStep2MockupState extends State<_SignUpStep2Mockup> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
+                  Text(
                     'Verify your mobile',
                     style: TextStyle(
                       fontSize: 26,
                       fontWeight: FontWeight.w800,
-                      color: _titleColor,
+                      color: _getTitleColor(context),
                       height: 1.2,
                       letterSpacing: -0.3,
                     ),
                   ),
                   const SizedBox(height: 6),
-                  const Text(
+                  Text(
                     'Enter the 6-digit OTP sent to +91 98765 XXXXX',
                     style: TextStyle(
                       fontSize: 14,
-                      color: _subtleText,
+                      color: _getSubtleText(context),
                       height: 1.4,
                     ),
                   ),
@@ -14684,7 +14955,7 @@ class _SignUpStep2CardMockupState extends State<_SignUpStep2CardMockup> {
           const _BrandHeader(),
           Expanded(
             child: Container(
-              color: _suCardBg,
+              color: _getSuCardBg(context),
               child: Column(
                 children: [
                   Expanded(
@@ -14692,26 +14963,26 @@ class _SignUpStep2CardMockupState extends State<_SignUpStep2CardMockup> {
                       padding: const EdgeInsets.fromLTRB(16, 20, 16, 16),
                       child: Container(
                         padding: const EdgeInsets.fromLTRB(20, 24, 20, 24),
-                        decoration: _suCardDeco(),
+                        decoration: _suCardDeco(context),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Text(
+                            Text(
                               'Verify your mobile',
                               style: TextStyle(
                                 fontSize: 22,
                                 fontWeight: FontWeight.w800,
-                                color: _titleColor,
+                                color: _getTitleColor(context),
                                 height: 1.2,
                                 letterSpacing: -0.3,
                               ),
                             ),
                             const SizedBox(height: 6),
-                            const Text(
+                            Text(
                               'Enter the 6-digit OTP sent to +91 98765 XXXXX',
                               style: TextStyle(
                                 fontSize: 13,
-                                color: _subtleText,
+                                color: _getSubtleText(context),
                                 height: 1.4,
                               ),
                             ),
@@ -15008,12 +15279,12 @@ class _SignUpStep3MockupState extends State<_SignUpStep3Mockup> {
                     maxLength: 10,
                   ),
                   const SizedBox(height: 16),
-                  const Text(
+                  Text(
                     'Category',
                     style: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w700,
-                      color: _titleColor,
+                      color: _getTitleColor(context),
                     ),
                   ),
                   const SizedBox(height: 4),
@@ -15067,7 +15338,7 @@ class _SignUpStep3CardMockupState extends State<_SignUpStep3CardMockup> {
           const _BrandHeader(),
           Expanded(
             child: Container(
-              color: _suCardBg,
+              color: _getSuCardBg(context),
               child: Column(
                 children: [
                   Expanded(
@@ -15075,7 +15346,7 @@ class _SignUpStep3CardMockupState extends State<_SignUpStep3CardMockup> {
                       padding: const EdgeInsets.fromLTRB(16, 20, 16, 16),
                       child: Container(
                         padding: const EdgeInsets.fromLTRB(20, 24, 20, 24),
-                        decoration: _suCardDeco(),
+                        decoration: _suCardDeco(context),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -15135,12 +15406,12 @@ class _SignUpStep3CardMockupState extends State<_SignUpStep3CardMockup> {
                               maxLength: 10,
                             ),
                             const SizedBox(height: 14),
-                            const Text(
+                            Text(
                               'Category',
                               style: TextStyle(
                                 fontSize: 14,
                                 fontWeight: FontWeight.w700,
-                                color: _titleColor,
+                                color: _getTitleColor(context),
                               ),
                             ),
                             const SizedBox(height: 4),
@@ -15403,12 +15674,12 @@ class _SignUpStep4MockupState extends State<_SignUpStep4Mockup> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
+                  Text(
                     'Password setup',
                     style: TextStyle(
                       fontSize: 26,
                       fontWeight: FontWeight.w800,
-                      color: _titleColor,
+                      color: _getTitleColor(context),
                       height: 1.2,
                       letterSpacing: -0.3,
                     ),
@@ -15481,7 +15752,7 @@ class _SignUpStep4CardMockupState extends State<_SignUpStep4CardMockup> {
           const _BrandHeader(),
           Expanded(
             child: Container(
-              color: _suCardBg,
+              color: _getSuCardBg(context),
               child: Column(
                 children: [
                   Expanded(
@@ -15489,16 +15760,16 @@ class _SignUpStep4CardMockupState extends State<_SignUpStep4CardMockup> {
                       padding: const EdgeInsets.fromLTRB(16, 20, 16, 16),
                       child: Container(
                         padding: const EdgeInsets.fromLTRB(20, 24, 20, 24),
-                        decoration: _suCardDeco(),
+                        decoration: _suCardDeco(context),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Text(
+                            Text(
                               'Password setup',
                               style: TextStyle(
                                 fontSize: 22,
                                 fontWeight: FontWeight.w800,
-                                color: _titleColor,
+                                color: _getTitleColor(context),
                                 height: 1.2,
                                 letterSpacing: -0.3,
                               ),
@@ -15776,24 +16047,24 @@ class _SignUpStep5Mockup extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 24),
-                  const Text(
+                  Text(
                     'Account Created!',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 26,
                       fontWeight: FontWeight.w800,
-                      color: _titleColor,
+                      color: _getTitleColor(context),
                       height: 1.2,
                       letterSpacing: -0.3,
                     ),
                   ),
                   const SizedBox(height: 8),
-                  const Text(
+                  Text(
                     'Welcome, Ramesh Kumar',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 15,
-                      color: _subtleText,
+                      color: _getSubtleText(context),
                       height: 1.3,
                     ),
                   ),
@@ -15808,7 +16079,7 @@ class _SignUpStep5Mockup extends StatelessWidget {
                       borderRadius: BorderRadius.circular(6),
                       border: Border.all(color: const Color(0xFFFDE68A)),
                     ),
-                    child: const Text(
+                    child: Text(
                       'RECOMMENDED',
                       style: TextStyle(
                         fontSize: 11,
@@ -15836,12 +16107,12 @@ class _SignUpStep5Mockup extends StatelessWidget {
                     width: 326,
                   ),
                   const SizedBox(height: 16),
-                  const Text(
+                  Text(
                     'You can link Aadhaar later from your profile',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 13,
-                      color: _subtleText,
+                      color: _getSubtleText(context),
                       height: 1.4,
                     ),
                   ),
@@ -15867,7 +16138,7 @@ class _SignUpStep5CardMockup extends StatelessWidget {
           const _BrandHeader(),
           Expanded(
             child: Container(
-              color: _suCardBg,
+              color: _getSuCardBg(context),
               child: Column(
                 children: [
                   Expanded(
@@ -15875,7 +16146,7 @@ class _SignUpStep5CardMockup extends StatelessWidget {
                       padding: const EdgeInsets.fromLTRB(16, 20, 16, 16),
                       child: Container(
                         padding: const EdgeInsets.fromLTRB(20, 32, 20, 24),
-                        decoration: _suCardDeco(),
+                        decoration: _suCardDeco(context),
                         child: Column(
                           children: [
                             Container(
@@ -15901,24 +16172,24 @@ class _SignUpStep5CardMockup extends StatelessWidget {
                               ),
                             ),
                             const SizedBox(height: 20),
-                            const Text(
+                            Text(
                               'Account Created!',
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                 fontSize: 22,
                                 fontWeight: FontWeight.w800,
-                                color: _titleColor,
+                                color: _getTitleColor(context),
                                 height: 1.2,
                                 letterSpacing: -0.3,
                               ),
                             ),
                             const SizedBox(height: 6),
-                            const Text(
+                            Text(
                               'Welcome, Ramesh Kumar',
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                 fontSize: 13,
-                                color: _subtleText,
+                                color: _getSubtleText(context),
                                 height: 1.3,
                               ),
                             ),
@@ -15935,7 +16206,7 @@ class _SignUpStep5CardMockup extends StatelessWidget {
                                   color: const Color(0xFFFDE68A),
                                 ),
                               ),
-                              child: const Text(
+                              child: Text(
                                 'RECOMMENDED',
                                 style: TextStyle(
                                   fontSize: 11,
@@ -15963,12 +16234,12 @@ class _SignUpStep5CardMockup extends StatelessWidget {
                               width: 326,
                             ),
                             const SizedBox(height: 12),
-                            const Text(
+                            Text(
                               'You can link Aadhaar later from your profile',
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                 fontSize: 12,
-                                color: _subtleText,
+                                color: _getSubtleText(context),
                                 height: 1.4,
                               ),
                             ),
@@ -16220,13 +16491,13 @@ Widget _fpWarningBanner() => Ux4gStatusBanner(
 );
 
 /// Password strength row (Ux4gLinearProgress + checklist).
-Widget _passwordStrength() {
+Widget _passwordStrength(BuildContext context) {
   const greenCheck = Icon(
     Icons.check_circle_rounded,
     color: Color(0xFF16A34A),
     size: 16,
   );
-  const redX = Icon(Icons.error, color: Color(0xFFDC2626), size: 16);
+  final redX = Icon(Icons.error, color: _isDark(context) ? Ux4gPalette.red500 : Ux4gPalette.red600, size: 16);
   const itemStyle = TextStyle(fontSize: 13, color: Color(0xFF374151));
 
   return Column(
@@ -16240,7 +16511,7 @@ Widget _passwordStrength() {
         height: 8,
       ),
       const SizedBox(height: 6),
-      const Text(
+      Text(
         'Password Strength: Strong',
         style: TextStyle(
           fontSize: 12,
@@ -16253,7 +16524,7 @@ Widget _passwordStrength() {
         children: [
           greenCheck,
           const SizedBox(width: 6),
-          const Text('8+ characters', style: itemStyle),
+          Text('8+ characters', style: itemStyle),
         ],
       ),
       const SizedBox(height: 4),
@@ -16261,7 +16532,7 @@ Widget _passwordStrength() {
         children: [
           greenCheck,
           const SizedBox(width: 6),
-          const Text('Uppercase letter', style: itemStyle),
+          Text('Uppercase letter', style: itemStyle),
         ],
       ),
       const SizedBox(height: 4),
@@ -16269,7 +16540,7 @@ Widget _passwordStrength() {
         children: [
           greenCheck,
           const SizedBox(width: 6),
-          const Text('Number', style: itemStyle),
+          Text('Number', style: itemStyle),
         ],
       ),
       const SizedBox(height: 4),
@@ -16277,7 +16548,7 @@ Widget _passwordStrength() {
         children: [
           redX,
           const SizedBox(width: 6),
-          const Text('Special character', style: itemStyle),
+          Text('Special character', style: itemStyle),
         ],
       ),
     ],
@@ -16340,22 +16611,22 @@ class _FpStep1MockupState extends State<_FpStep1Mockup> {
                 children: [
                   const _NavLink(label: 'Back to Sign In'),
                   const SizedBox(height: 20),
-                  const Text(
+                  Text(
                     'Reset Password',
                     style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.w800,
-                      color: _titleColor,
+                      color: _getTitleColor(context),
                       height: 1.2,
                       letterSpacing: -0.3,
                     ),
                   ),
                   const SizedBox(height: 6),
-                  const Text(
+                  Text(
                     'Enter your registered mobile number to receive a verification code',
                     style: TextStyle(
                       fontSize: 14,
-                      color: _subtleText,
+                      color: _getSubtleText(context),
                       height: 1.4,
                     ),
                   ),
@@ -16407,21 +16678,21 @@ class _FpStep1MockupState extends State<_FpStep1Mockup> {
                   ),
                   const SizedBox(height: 8),
                   Row(
-                    children: const [
-                      Expanded(child: Divider(color: _border, thickness: 1)),
+                    children: [
+                      Expanded(child: Divider(color: _getBorder(context), thickness: 1)),
                       Padding(
                         padding: EdgeInsets.symmetric(horizontal: 16),
                         child: Text(
                           'OR',
                           style: TextStyle(
                             fontSize: 12,
-                            color: _mutedText,
+                            color: _getMutedText(context),
                             fontWeight: FontWeight.w500,
                             letterSpacing: 0.5,
                           ),
                         ),
                       ),
-                      Expanded(child: Divider(color: _border, thickness: 1)),
+                      Expanded(child: Divider(color: _getBorder(context), thickness: 1)),
                     ],
                   ),
                   const SizedBox(height: 8),
@@ -16463,7 +16734,7 @@ class _FpStep1CardMockupState extends State<_FpStep1CardMockup> {
           const _BrandHeader(),
           Expanded(
             child: Container(
-              color: _suCardBg,
+              color: _getSuCardBg(context),
               child: Column(
                 children: [
                   Expanded(
@@ -16476,26 +16747,26 @@ class _FpStep1CardMockupState extends State<_FpStep1CardMockup> {
                           const SizedBox(height: 12),
                           Container(
                             padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
-                            decoration: _suCardDeco(),
+                            decoration: _suCardDeco(context),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                const Text(
+                                Text(
                                   'Reset Password',
                                   style: TextStyle(
                                     fontSize: 22,
                                     fontWeight: FontWeight.w800,
-                                    color: _titleColor,
+                                    color: _getTitleColor(context),
                                     height: 1.2,
                                     letterSpacing: -0.3,
                                   ),
                                 ),
                                 const SizedBox(height: 6),
-                                const Text(
+                                Text(
                                   'Enter your registered mobile number to receive a verification code',
                                   style: TextStyle(
                                     fontSize: 13,
-                                    color: _subtleText,
+                                    color: _getSubtleText(context),
                                     height: 1.4,
                                   ),
                                 ),
@@ -16552,10 +16823,10 @@ class _FpStep1CardMockupState extends State<_FpStep1CardMockup> {
                                 ),
                                 const SizedBox(height: 6),
                                 Row(
-                                  children: const [
+                                  children: [
                                     Expanded(
                                       child: Divider(
-                                        color: _border,
+                                        color: _getBorder(context),
                                         thickness: 1,
                                       ),
                                     ),
@@ -16567,14 +16838,14 @@ class _FpStep1CardMockupState extends State<_FpStep1CardMockup> {
                                         'OR',
                                         style: TextStyle(
                                           fontSize: 12,
-                                          color: _mutedText,
+                                          color: _getMutedText(context),
                                           fontWeight: FontWeight.w500,
                                         ),
                                       ),
                                     ),
                                     Expanded(
                                       child: Divider(
-                                        color: _border,
+                                        color: _getBorder(context),
                                         thickness: 1,
                                       ),
                                     ),
@@ -16638,7 +16909,7 @@ Container(
             SizedBox(height: 16),
             Text('Reset Password',
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.w800,
-                color: Color(0xFF111827))),
+                color: _getTitleColor(context))),
             SizedBox(height: 6),
             Text('Enter your registered mobile number',
               style: TextStyle(fontSize: 14, color: Ux4gPalette.neutral500)),
@@ -16728,7 +16999,7 @@ Container(
               child: Container(
                 padding: EdgeInsets.fromLTRB(20, 16, 20, 24),
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: _isDark(context) ? Ux4gPalette.gray900 : Colors.white,
                   borderRadius: BorderRadius.circular(16),
                   boxShadow: [BoxShadow(
                     color: Colors.black.withValues(alpha: 0.04),
@@ -16747,7 +17018,7 @@ Container(
                     SizedBox(height: 12),
                     Text('Reset Password',
                       style: TextStyle(fontSize: 22, fontWeight: FontWeight.w800,
-                        color: Color(0xFF111827))),
+                        color: _getTitleColor(context))),
                     SizedBox(height: 6),
                     Text('Enter your registered mobile number',
                       style: TextStyle(fontSize: 13, color: Ux4gPalette.neutral500)),
@@ -16871,22 +17142,22 @@ class _FpStep2MockupState extends State<_FpStep2Mockup> {
                 children: [
                   const _NavLink(label: 'Change mobile number'),
                   const SizedBox(height: 20),
-                  const Text(
+                  Text(
                     'Enter OTP',
                     style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.w800,
-                      color: _titleColor,
+                      color: _getTitleColor(context),
                       height: 1.2,
                       letterSpacing: -0.3,
                     ),
                   ),
                   const SizedBox(height: 6),
-                  const Text(
+                  Text(
                     'Sent to +91 98765 XXXXX',
                     style: TextStyle(
                       fontSize: 14,
-                      color: _subtleText,
+                      color: _getSubtleText(context),
                       height: 1.3,
                     ),
                   ),
@@ -16945,7 +17216,7 @@ class _FpStep2CardMockupState extends State<_FpStep2CardMockup> {
           const _BrandHeader(),
           Expanded(
             child: Container(
-              color: _suCardBg,
+              color: _getSuCardBg(context),
               child: Column(
                 children: [
                   Expanded(
@@ -16958,26 +17229,26 @@ class _FpStep2CardMockupState extends State<_FpStep2CardMockup> {
                           const SizedBox(height: 12),
                           Container(
                             padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
-                            decoration: _suCardDeco(),
+                            decoration: _suCardDeco(context),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                const Text(
+                                Text(
                                   'Enter OTP',
                                   style: TextStyle(
                                     fontSize: 22,
                                     fontWeight: FontWeight.w800,
-                                    color: _titleColor,
+                                    color: _getTitleColor(context),
                                     height: 1.2,
                                     letterSpacing: -0.3,
                                   ),
                                 ),
                                 const SizedBox(height: 6),
-                                const Text(
+                                Text(
                                   'Sent to +91 98765 XXXXX',
                                   style: TextStyle(
                                     fontSize: 13,
-                                    color: _subtleText,
+                                    color: _getSubtleText(context),
                                     height: 1.3,
                                   ),
                                 ),
@@ -17055,7 +17326,7 @@ Container(
             SizedBox(height: 16),
             Text('Enter OTP',
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.w800,
-                color: Color(0xFF111827))),
+                color: _getTitleColor(context))),
             SizedBox(height: 6),
             Text('Sent to +91 98765 XXXXX',
               style: TextStyle(fontSize: 14, color: Ux4gPalette.neutral500)),
@@ -17117,7 +17388,7 @@ Container(
               child: Container(
                 padding: EdgeInsets.fromLTRB(20, 16, 20, 24),
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: _isDark(context) ? Ux4gPalette.gray900 : Colors.white,
                   borderRadius: BorderRadius.circular(16),
                   boxShadow: [BoxShadow(
                     color: Colors.black.withValues(alpha: 0.04),
@@ -17136,7 +17407,7 @@ Container(
                     SizedBox(height: 12),
                     Text('Enter OTP',
                       style: TextStyle(fontSize: 22, fontWeight: FontWeight.w800,
-                        color: Color(0xFF111827))),
+                        color: _getTitleColor(context))),
                     SizedBox(height: 6),
                     Text('Sent to +91 98765 XXXXX',
                       style: TextStyle(fontSize: 13, color: Ux4gPalette.neutral500)),
@@ -17232,22 +17503,22 @@ class _FpStep3MockupState extends State<_FpStep3Mockup> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
+                  Text(
                     'Create new password',
                     style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.w800,
-                      color: _titleColor,
+                      color: _getTitleColor(context),
                       height: 1.2,
                       letterSpacing: -0.3,
                     ),
                   ),
                   const SizedBox(height: 6),
-                  const Text(
+                  Text(
                     'Choose a strong password to secure your account',
                     style: TextStyle(
                       fontSize: 14,
-                      color: _subtleText,
+                      color: _getSubtleText(context),
                       height: 1.4,
                     ),
                   ),
@@ -17268,7 +17539,7 @@ class _FpStep3MockupState extends State<_FpStep3Mockup> {
                     type: Ux4gInputFieldType.password,
                   ),
                   const SizedBox(height: 12),
-                  _passwordStrength(),
+                  _passwordStrength(context),
                   const SizedBox(height: 16),
                   Ux4gInputField(
                     value: _confirm,
@@ -17283,10 +17554,10 @@ class _FpStep3MockupState extends State<_FpStep3Mockup> {
                           : Ux4gPalette.neutral400,
                       height: 1.3,
                     ),
-                    labelStyle: const TextStyle(
+                    labelStyle: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w700,
-                      color: _titleColor,
+                      color: _getTitleColor(context),
                     ),
                     type: Ux4gInputFieldType.password,
                     status: Ux4gInputFieldStatus.error,
@@ -17329,7 +17600,7 @@ class _FpStep3CardMockupState extends State<_FpStep3CardMockup> {
           const _BrandHeader(),
           Expanded(
             child: Container(
-              color: _suCardBg,
+              color: _getSuCardBg(context),
               child: Column(
                 children: [
                   Expanded(
@@ -17337,26 +17608,26 @@ class _FpStep3CardMockupState extends State<_FpStep3CardMockup> {
                       padding: const EdgeInsets.fromLTRB(16, 20, 16, 16),
                       child: Container(
                         padding: const EdgeInsets.fromLTRB(20, 24, 20, 24),
-                        decoration: _suCardDeco(),
+                        decoration: _suCardDeco(context),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Text(
+                            Text(
                               'Create new password',
                               style: TextStyle(
                                 fontSize: 22,
                                 fontWeight: FontWeight.w800,
-                                color: _titleColor,
+                                color: _getTitleColor(context),
                                 height: 1.2,
                                 letterSpacing: -0.3,
                               ),
                             ),
                             const SizedBox(height: 6),
-                            const Text(
+                            Text(
                               'Choose a strong password to secure your account',
                               style: TextStyle(
                                 fontSize: 13,
-                                color: _subtleText,
+                                color: _getSubtleText(context),
                                 height: 1.4,
                               ),
                             ),
@@ -17380,7 +17651,7 @@ class _FpStep3CardMockupState extends State<_FpStep3CardMockup> {
                               type: Ux4gInputFieldType.password,
                             ),
                             const SizedBox(height: 10),
-                            _passwordStrength(),
+                            _passwordStrength(context),
                             const SizedBox(height: 14),
                             Ux4gInputField(
                               value: _confirm,
@@ -17398,10 +17669,10 @@ class _FpStep3CardMockupState extends State<_FpStep3CardMockup> {
                                     : Ux4gPalette.neutral400,
                                 height: 1.3,
                               ),
-                              labelStyle: const TextStyle(
+                              labelStyle: TextStyle(
                                 fontSize: 14,
                                 fontWeight: FontWeight.w700,
-                                color: _titleColor,
+                                color: _getTitleColor(context),
                               ),
                               type: Ux4gInputFieldType.password,
                               status: Ux4gInputFieldStatus.error,
@@ -17453,7 +17724,7 @@ Container(
           children: [
             Text('Create new password',
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.w800,
-                color: Color(0xFF111827))),
+                color: _getTitleColor(context))),
             SizedBox(height: 6),
             Text('Your new password must be different from your previous one.',
               style: TextStyle(fontSize: 14, color: Ux4gPalette.neutral500)),
@@ -17474,31 +17745,31 @@ Container(
             SizedBox(height: 4),
             Text('Password Strength: Strong',
               style: TextStyle(fontSize: 12, fontWeight: FontWeight.w700,
-                color: Color(0xFF16A34A))),
+                color: _isDark(context) ? Ux4gPalette.green400 : Ux4gPalette.green600)),
             SizedBox(height: 10),
             Row(children: [
-              Icon(Icons.check_circle_rounded, color: Color(0xFF16A34A), size: 16),
+              Icon(Icons.check_circle_rounded, color: _isDark(context) ? Ux4gPalette.green400 : Ux4gPalette.green600, size: 16),
               SizedBox(width: 6),
               Text('8+ characters',
-                style: TextStyle(fontSize: 13, color: Color(0xFF374151))),
+                style: TextStyle(fontSize: 13, color: _getSubtleText(context))),
             ]),
             SizedBox(height: 6),
             Row(children: [
-              Icon(Icons.check_circle_rounded, color: Color(0xFF16A34A), size: 16),
+              Icon(Icons.check_circle_rounded, color: _isDark(context) ? Ux4gPalette.green400 : Ux4gPalette.green600, size: 16),
               SizedBox(width: 6),
               Text('Uppercase letter',
-                style: TextStyle(fontSize: 13, color: Color(0xFF374151))),
+                style: TextStyle(fontSize: 13, color: _getSubtleText(context))),
             ]),
             SizedBox(height: 6),
             Row(children: [
-              Icon(Icons.check_circle_rounded, color: Color(0xFF16A34A), size: 16),
+              Icon(Icons.check_circle_rounded, color: _isDark(context) ? Ux4gPalette.green400 : Ux4gPalette.green600, size: 16),
               SizedBox(width: 6),
               Text('Number',
-                style: TextStyle(fontSize: 13, color: Color(0xFF374151))),
+                style: TextStyle(fontSize: 13, color: _getSubtleText(context))),
             ]),
             SizedBox(height: 6),
             Row(children: [
-              Icon(Icons.error, color: Color(0xFFDC2626), size: 16),
+              Icon(Icons.error, color: _isDark(context) ? Ux4gPalette.red500 : Ux4gPalette.red600, size: 16),
               SizedBox(width: 6),
               Text('Special character',
                 style: TextStyle(fontSize: 13, color: Ux4gPalette.neutral500)),
@@ -17510,7 +17781,7 @@ Container(
               type: Ux4gInputFieldType.password,
               status: Ux4gInputFieldStatus.error,
               caption: 'Passwords do not match',
-              labelStyle: TextStyle(color: Color(0xFF111827)),
+              labelStyle: TextStyle(color: _getTitleColor(context)),
             ),
             SizedBox(height: 24),
             Ux4gButton(
@@ -17559,7 +17830,7 @@ Container(
               child: Container(
                 padding: EdgeInsets.fromLTRB(20, 24, 20, 24),
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: _isDark(context) ? Ux4gPalette.gray900 : Colors.white,
                   borderRadius: BorderRadius.circular(16),
                   boxShadow: [BoxShadow(
                     color: Colors.black.withValues(alpha: 0.04),
@@ -17571,7 +17842,7 @@ Container(
                   children: [
                     Text('Create new password',
                       style: TextStyle(fontSize: 22, fontWeight: FontWeight.w800,
-                        color: Color(0xFF111827))),
+                        color: _getTitleColor(context))),
                     SizedBox(height: 6),
                     Text('Your new password must be different from your previous one.',
                       style: TextStyle(fontSize: 13, color: Ux4gPalette.neutral500)),
@@ -17592,31 +17863,31 @@ Container(
                     SizedBox(height: 4),
                     Text('Password Strength: Strong',
                       style: TextStyle(fontSize: 12, fontWeight: FontWeight.w700,
-                        color: Color(0xFF16A34A))),
+                        color: _isDark(context) ? Ux4gPalette.green400 : Ux4gPalette.green600)),
                     SizedBox(height: 10),
                     Row(children: [
-                      Icon(Icons.check_circle_rounded, color: Color(0xFF16A34A), size: 16),
+                      Icon(Icons.check_circle_rounded, color: _isDark(context) ? Ux4gPalette.green400 : Ux4gPalette.green600, size: 16),
                       SizedBox(width: 6),
                       Text('8+ characters',
-                        style: TextStyle(fontSize: 13, color: Color(0xFF374151))),
+                        style: TextStyle(fontSize: 13, color: _getSubtleText(context))),
                     ]),
                     SizedBox(height: 6),
                     Row(children: [
-                      Icon(Icons.check_circle_rounded, color: Color(0xFF16A34A), size: 16),
+                      Icon(Icons.check_circle_rounded, color: _isDark(context) ? Ux4gPalette.green400 : Ux4gPalette.green600, size: 16),
                       SizedBox(width: 6),
                       Text('Uppercase letter',
-                        style: TextStyle(fontSize: 13, color: Color(0xFF374151))),
+                        style: TextStyle(fontSize: 13, color: _getSubtleText(context))),
                     ]),
                     SizedBox(height: 6),
                     Row(children: [
-                      Icon(Icons.check_circle_rounded, color: Color(0xFF16A34A), size: 16),
+                      Icon(Icons.check_circle_rounded, color: _isDark(context) ? Ux4gPalette.green400 : Ux4gPalette.green600, size: 16),
                       SizedBox(width: 6),
                       Text('Number',
-                        style: TextStyle(fontSize: 13, color: Color(0xFF374151))),
+                        style: TextStyle(fontSize: 13, color: _getSubtleText(context))),
                     ]),
                     SizedBox(height: 6),
                     Row(children: [
-                      Icon(Icons.error, color: Color(0xFFDC2626), size: 16),
+                      Icon(Icons.error, color: _isDark(context) ? Ux4gPalette.red500 : Ux4gPalette.red600, size: 16),
                       SizedBox(width: 6),
                       Text('Special character',
                         style: TextStyle(fontSize: 13, color: Ux4gPalette.neutral500)),
@@ -17628,7 +17899,7 @@ Container(
                       type: Ux4gInputFieldType.password,
                       status: Ux4gInputFieldStatus.error,
                       caption: 'Passwords do not match',
-                      labelStyle: TextStyle(color: Color(0xFF111827)),
+                      labelStyle: TextStyle(color: _getTitleColor(context)),
                     ),
                     SizedBox(height: 20),
                     Ux4gButton(
@@ -17725,24 +17996,24 @@ class _FpStep4Mockup extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 24),
-                  const Text(
+                  Text(
                     'Password reset\nsuccessfully',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 26,
                       fontWeight: FontWeight.w800,
-                      color: Color(0xFF16A34A),
+                      color: _isDark(context) ? Ux4gPalette.green400 : Ux4gPalette.green600,
                       height: 1.25,
                       letterSpacing: -0.3,
                     ),
                   ),
                   const SizedBox(height: 12),
-                  const Text(
+                  Text(
                     'Sign in with your new password to continue access to government services.',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 14,
-                      color: _subtleText,
+                      color: _getSubtleText(context),
                       height: 1.5,
                     ),
                   ),
@@ -17776,7 +18047,7 @@ class _FpStep4CardMockup extends StatelessWidget {
           const _BrandHeader(),
           Expanded(
             child: Container(
-              color: _suCardBg,
+              color: _getSuCardBg(context),
               child: Column(
                 children: [
                   Expanded(
@@ -17784,7 +18055,7 @@ class _FpStep4CardMockup extends StatelessWidget {
                       padding: const EdgeInsets.fromLTRB(16, 20, 16, 16),
                       child: Container(
                         padding: const EdgeInsets.fromLTRB(20, 36, 20, 28),
-                        decoration: _suCardDeco(),
+                        decoration: _suCardDeco(context),
                         child: Column(
                           children: [
                             Container(
@@ -17810,24 +18081,24 @@ class _FpStep4CardMockup extends StatelessWidget {
                               ),
                             ),
                             const SizedBox(height: 20),
-                            const Text(
+                            Text(
                               'Password reset\nsuccessfully',
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                 fontSize: 22,
                                 fontWeight: FontWeight.w800,
-                                color: Color(0xFF16A34A),
+                                color: _isDark(context) ? Ux4gPalette.green400 : Ux4gPalette.green600,
                                 height: 1.25,
                                 letterSpacing: -0.3,
                               ),
                             ),
                             const SizedBox(height: 10),
-                            const Text(
+                            Text(
                               'Sign in with your new password to continue access to government services.',
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                 fontSize: 13,
-                                color: _subtleText,
+                                color: _getSubtleText(context),
                                 height: 1.5,
                               ),
                             ),
@@ -17891,7 +18162,7 @@ Container(
             Text('Password reset\nsuccessfully',
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 26, fontWeight: FontWeight.w800,
-                color: Color(0xFF16A34A), height: 1.25)),
+                color: _isDark(context) ? Ux4gPalette.green400 : Ux4gPalette.green600, height: 1.25)),
             SizedBox(height: 12),
             Text(
               'Sign in with your new password to continue\naccess to government services.',
@@ -17944,7 +18215,7 @@ Container(
               child: Container(
                 padding: EdgeInsets.fromLTRB(20, 36, 20, 28),
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: _isDark(context) ? Ux4gPalette.gray900 : Colors.white,
                   borderRadius: BorderRadius.circular(16),
                   boxShadow: [BoxShadow(
                     color: Colors.black.withValues(alpha: 0.04),
@@ -17970,7 +18241,7 @@ Container(
                     Text('Password reset\nsuccessfully',
                       textAlign: TextAlign.center,
                       style: TextStyle(fontSize: 22, fontWeight: FontWeight.w800,
-                        color: Color(0xFF16A34A), height: 1.25)),
+                        color: _isDark(context) ? Ux4gPalette.green400 : Ux4gPalette.green600, height: 1.25)),
                     SizedBox(height: 10),
                     Text(
                       'Sign in with your new password to continue\naccess to government services.',
@@ -18056,12 +18327,12 @@ class _FpStep5MockupState extends State<_FpStep5Mockup> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
+                  Text(
                     'Account recovery',
                     style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.w800,
-                      color: _titleColor,
+                      color: _getTitleColor(context),
                       height: 1.2,
                       letterSpacing: -0.3,
                     ),
@@ -18086,14 +18357,14 @@ class _FpStep5MockupState extends State<_FpStep5Mockup> {
                   Container(
                     padding: const EdgeInsets.all(14),
                     decoration: BoxDecoration(
-                      color: const Color(0xFFF3F4F6),
+                      color: _isDark(context) ? Ux4gPalette.gray800 : Ux4gPalette.gray100,
                       borderRadius: BorderRadius.circular(8),
                     ),
-                    child: const Text(
+                    child: Text(
                       'I agree to verify my identity via Aadhaar OTP for the purpose of password recovery.',
                       style: TextStyle(
                         fontSize: 13,
-                        color: _subtleText,
+                        color: _getSubtleText(context),
                         height: 1.5,
                       ),
                     ),
@@ -18134,7 +18405,7 @@ class _FpStep5CardMockupState extends State<_FpStep5CardMockup> {
           const _BrandHeader(),
           Expanded(
             child: Container(
-              color: _suCardBg,
+              color: _getSuCardBg(context),
               child: Column(
                 children: [
                   Expanded(
@@ -18145,16 +18416,16 @@ class _FpStep5CardMockupState extends State<_FpStep5CardMockup> {
                         children: [
                           Container(
                             padding: const EdgeInsets.fromLTRB(20, 20, 20, 24),
-                            decoration: _suCardDeco(),
+                            decoration: _suCardDeco(context),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                const Text(
+                                Text(
                                   'Account recovery',
                                   style: TextStyle(
                                     fontSize: 22,
                                     fontWeight: FontWeight.w800,
-                                    color: _titleColor,
+                                    color: _getTitleColor(context),
                                     height: 1.2,
                                     letterSpacing: -0.3,
                                   ),
@@ -18182,14 +18453,14 @@ class _FpStep5CardMockupState extends State<_FpStep5CardMockup> {
                                 Container(
                                   padding: const EdgeInsets.all(12),
                                   decoration: BoxDecoration(
-                                    color: const Color(0xFFF3F4F6),
+                                    color: _isDark(context) ? Ux4gPalette.gray800 : Ux4gPalette.gray100,
                                     borderRadius: BorderRadius.circular(8),
                                   ),
-                                  child: const Text(
+                                  child: Text(
                                     'I agree to verify my identity via Aadhaar OTP for the purpose of password recovery.',
                                     style: TextStyle(
                                       fontSize: 12,
-                                      color: _subtleText,
+                                      color: _getSubtleText(context),
                                       height: 1.5,
                                     ),
                                   ),
@@ -18242,7 +18513,7 @@ Container(
           children: [
             Text('Account recovery',
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.w800,
-                color: Color(0xFF111827))),
+                color: _getTitleColor(context))),
             SizedBox(height: 6),
             Text('Verify your identity using Aadhaar',
               style: TextStyle(fontSize: 14, color: Ux4gPalette.neutral500)),
@@ -18258,13 +18529,13 @@ Container(
             Container(
               padding: EdgeInsets.all(14),
               decoration: BoxDecoration(
-                color: Color(0xFFF3F4F6),
+                color: _isDark(context) ? Ux4gPalette.gray800 : Ux4gPalette.gray100,
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Text(
                 'I agree to verify my identity via Aadhaar OTP '
                 'for the purpose of password recovery.',
-                style: TextStyle(fontSize: 13, color: Color(0xFF374151))),
+                style: TextStyle(fontSize: 13, color: _getSubtleText(context))),
             ),
             SizedBox(height: 24),
             Ux4gButton(
@@ -18313,7 +18584,7 @@ Container(
               child: Container(
                 padding: EdgeInsets.fromLTRB(20, 20, 20, 24),
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: _isDark(context) ? Ux4gPalette.gray900 : Colors.white,
                   borderRadius: BorderRadius.circular(16),
                   boxShadow: [BoxShadow(
                     color: Colors.black.withValues(alpha: 0.04),
@@ -18325,7 +18596,7 @@ Container(
                   children: [
                     Text('Account recovery',
                       style: TextStyle(fontSize: 22, fontWeight: FontWeight.w800,
-                        color: Color(0xFF111827))),
+                        color: _getTitleColor(context))),
                     SizedBox(height: 6),
                     Text('Verify your identity using Aadhaar',
                       style: TextStyle(fontSize: 13, color: Ux4gPalette.neutral500)),
@@ -18341,13 +18612,13 @@ Container(
                     Container(
                       padding: EdgeInsets.all(12),
                       decoration: BoxDecoration(
-                        color: Color(0xFFF3F4F6),
+                        color: _isDark(context) ? Ux4gPalette.gray800 : Ux4gPalette.gray100,
                         borderRadius: BorderRadius.circular(8),
                       ),
                       child: Text(
                         'I agree to verify my identity via Aadhaar OTP '
                         'for the purpose of password recovery.',
-                        style: TextStyle(fontSize: 13, color: Color(0xFF374151))),
+                        style: TextStyle(fontSize: 13, color: _getSubtleText(context))),
                     ),
                     SizedBox(height: 20),
                     Ux4gButton(
@@ -19621,9 +19892,9 @@ class _PrefChipBarState extends State<_PrefChipBar> {
             onClick: () => setState(() => _selected = i),
             size: Ux4gChoiceChipSize.s,
             borderRadius: 4,
-            unselectedBackgroundColor: Colors.white,
-            unselectedBorderColor: Ux4gPalette.neutral300,
-            unselectedTextColor: const Color(0xFF374151),
+            unselectedBackgroundColor: _isDark(context) ? Ux4gPalette.gray900 : Colors.white,
+            unselectedBorderColor: _isDark(context) ? Ux4gPalette.neutral700 : Ux4gPalette.neutral300,
+            unselectedTextColor: _isDark(context) ? Ux4gPalette.neutral400 : const Color(0xFF374151),
             trailingContent: sel
                 ? Text(
                     '${chip.count}',
@@ -20753,8 +21024,8 @@ Ux4gChoiceChip(
   onClick: () => setState(() => _selected = i),
   size: Ux4gChoiceChipSize.s,
   borderRadius: 4,
-  unselectedBackgroundColor: Colors.white,
-  unselectedBorderColor: Ux4gPalette.neutral300,
+  unselectedBackgroundColor: _isDark(context) ? Ux4gPalette.gray900 : Colors.white,
+  unselectedBorderColor: _isDark(context) ? Ux4gPalette.neutral700 : Ux4gPalette.neutral300,
   trailingContent: Container(
     padding: EdgeInsets.symmetric(horizontal: 5, vertical: 1),
     decoration: BoxDecoration(
@@ -21249,7 +21520,7 @@ class _PaymentSummaryCardMockup extends StatelessWidget {
           const Divider(height: 1, thickness: 1, color: _border),
           Expanded(
             child: Container(
-              color: _suCardBg,
+              color: _getSuCardBg(context),
               child: Column(
                 children: [
                   Expanded(
@@ -21257,7 +21528,7 @@ class _PaymentSummaryCardMockup extends StatelessWidget {
                       padding: const EdgeInsets.fromLTRB(16, 20, 16, 16),
                       child: Container(
                         padding: const EdgeInsets.fromLTRB(16, 24, 16, 20),
-                        decoration: _suCardDeco(),
+                        decoration: _suCardDeco(context),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -21878,7 +22149,7 @@ class _PaymentMethodCardMockupState extends State<_PaymentMethodCardMockup> {
           const Divider(height: 1, thickness: 1, color: _border),
           Expanded(
             child: Container(
-              color: _suCardBg,
+              color: _getSuCardBg(context),
               child: Column(
                 children: [
                   Expanded(
@@ -21886,7 +22157,7 @@ class _PaymentMethodCardMockupState extends State<_PaymentMethodCardMockup> {
                       padding: const EdgeInsets.fromLTRB(16, 20, 16, 16),
                       child: Container(
                         padding: const EdgeInsets.fromLTRB(16, 24, 16, 20),
-                        decoration: _suCardDeco(),
+                        decoration: _suCardDeco(context),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -22502,11 +22773,11 @@ class _PaymentProcessingCardMockup extends StatelessWidget {
               const Divider(height: 1, thickness: 1, color: _border),
               Expanded(
                 child: Container(
-                  color: _suCardBg,
+                  color: _getSuCardBg(context),
                   padding: const EdgeInsets.fromLTRB(16, 20, 16, 16),
                   child: Container(
                     padding: const EdgeInsets.fromLTRB(16, 24, 16, 20),
-                    decoration: _suCardDeco(),
+                    decoration: _suCardDeco(context),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: const [
@@ -22998,7 +23269,7 @@ class _PaymentSuccessCardMockup extends StatelessWidget {
           const Divider(height: 1, thickness: 1, color: _border),
           Expanded(
             child: Container(
-              color: _suCardBg,
+              color: _getSuCardBg(context),
               child: Column(
                 children: [
                   Expanded(
@@ -23006,7 +23277,7 @@ class _PaymentSuccessCardMockup extends StatelessWidget {
                       padding: const EdgeInsets.fromLTRB(16, 20, 16, 16),
                       child: Container(
                         padding: const EdgeInsets.fromLTRB(16, 24, 16, 20),
-                        decoration: _suCardDeco(),
+                        decoration: _suCardDeco(context),
                         child: Column(
                           children: [
                             Container(
@@ -23563,7 +23834,7 @@ class _PaymentFailedCardMockup extends StatelessWidget {
           const Divider(height: 1, thickness: 1, color: _border),
           Expanded(
             child: Container(
-              color: _suCardBg,
+              color: _getSuCardBg(context),
               child: Column(
                 children: [
                   Expanded(
@@ -23571,7 +23842,7 @@ class _PaymentFailedCardMockup extends StatelessWidget {
                       padding: const EdgeInsets.fromLTRB(16, 20, 16, 16),
                       child: Container(
                         padding: const EdgeInsets.fromLTRB(16, 24, 16, 20),
-                        decoration: _suCardDeco(),
+                        decoration: _suCardDeco(context),
                         child: Column(
                           children: [
                             Container(
@@ -24099,7 +24370,7 @@ class _FeeWaivedCardMockup extends StatelessWidget {
           const Divider(height: 1, thickness: 1, color: _border),
           Expanded(
             child: Container(
-              color: _suCardBg,
+              color: _getSuCardBg(context),
               child: Column(
                 children: [
                   Expanded(
@@ -24107,7 +24378,7 @@ class _FeeWaivedCardMockup extends StatelessWidget {
                       padding: const EdgeInsets.fromLTRB(16, 20, 16, 16),
                       child: Container(
                         padding: const EdgeInsets.fromLTRB(16, 24, 16, 20),
-                        decoration: _suCardDeco(),
+                        decoration: _suCardDeco(context),
                         child: Column(
                           children: [
                             Container(
@@ -25362,7 +25633,7 @@ class _AppStatusTrackerCardMockup extends StatelessWidget {
                     child: SingleChildScrollView(
                       padding: const EdgeInsets.fromLTRB(16, 16, 16, 16),
                       child: Container(
-                        decoration: _suCardDeco(),
+                        decoration: _suCardDeco(context),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
