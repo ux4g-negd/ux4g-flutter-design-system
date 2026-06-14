@@ -10541,23 +10541,23 @@ class _AadhaarVerifyMethodMockupState
                   const _BackButton(),
                   const SizedBox(height: 16),
 
-                  const Text(
+                  Text(
                     'Verify with Aadhaar',
                     style: TextStyle(
                       fontSize: 26,
                       fontWeight: FontWeight.w800,
-                      color: _titleColor,
+                      color: _getTitleColor(context),
                       height: 1.2,
                       letterSpacing: -0.3,
                     ),
                   ),
                   const SizedBox(height: 8),
-                  const Text(
+                  Text(
                     'Choose how you want to authenticate. Your Aadhaar '
                     'number is never stored.',
                     style: TextStyle(
                       fontSize: 14,
-                      color: _subtleText,
+                      color: _getSubtleText(context),
                       height: 1.3,
                     ),
                   ),
@@ -10618,7 +10618,7 @@ class _AadhaarVerifyMethodCardMockupState
   String _method = 'otp';
 
   Color _getCardBg(BuildContext context) =>
-      _isDark(context) ? Ux4gPalette.primary900 : Ux4gPalette.primary100;
+      _isDark(context) ? Ux4gPalette.primary800 : Ux4gPalette.primary100;
 
   @override
   Widget build(BuildContext context) {
@@ -10640,7 +10640,7 @@ class _AadhaarVerifyMethodCardMockupState
                       width: double.infinity,
                       padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
                       decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: _isDark(context) ? Ux4gPalette.gray900 : Colors.white,
                         borderRadius: BorderRadius.circular(16),
                         boxShadow: [
                           BoxShadow(
@@ -10656,23 +10656,23 @@ class _AadhaarVerifyMethodCardMockupState
                           const _BackButton(),
                           const SizedBox(height: 12),
 
-                          const Text(
-                            'Verify with Aadhaar',
+                          Text(
+                    'Verify with Aadhaar',
                             style: TextStyle(
                               fontSize: 26,
                               fontWeight: FontWeight.w800,
-                              color: _titleColor,
+                              color: _getTitleColor(context),
                               height: 1.2,
                               letterSpacing: -0.3,
                             ),
                           ),
                           const SizedBox(height: 8),
-                          const Text(
-                            'Choose how you want to authenticate. Your '
+                          Text(
+                    'Choose how you want to authenticate. Your '
                             'Aadhaar number is never stored.',
                             style: TextStyle(
                               fontSize: 14,
-                              color: _subtleText,
+                              color: _getSubtleText(context),
                               height: 1.3,
                             ),
                           ),
@@ -10745,41 +10745,54 @@ class _BrandHeaderWithMenu extends StatelessWidget {
           variant: Ux4gAppHeaderVariant.light,
           title: '',
           leadingWidgets: [
-            SvgPicture.asset(_nationalEmblemPath, height: 32),
+            SvgPicture.asset(
+              _nationalEmblemPath,
+              height: 32,
+              colorFilter: _isDark(context)
+                  ? const ColorFilter.mode(Colors.white, BlendMode.srcIn)
+                  : null,
+            ),
             SizedBox(
               height: 28,
               child: Ux4gDivider(
                 orientation: Ux4gDividerOrientation.vertical,
-                color: Ux4gPalette.neutral300,
+                color: _isDark(context)
+                    ? Ux4gPalette.neutral700
+                    : Ux4gPalette.neutral300,
               ),
             ),
-            SvgPicture.asset(_unionLogoPath, height: 32),
+            SvgPicture.asset(
+              _unionLogoPath,
+              height: 32,
+              colorFilter: ColorFilter.mode(
+                _isDark(context)
+                    ? Ux4gPalette.primary300
+                    : Ux4gPalette.primary600,
+                BlendMode.srcIn,
+              ),
+            ),
           ],
           horizontalPadding: 16,
           leadingSpacing: 12,
           actions: [
-            // Custom widget — bordered rounded square containing the
-            // menu icon. We use a Material+InkWell so the tap ripple
-            // is clipped to the same rounded shape as the border, and
-            // a fixed 40x40 SizedBox guarantees a true square (the
-            // design-system Ux4gButton would expand horizontally for
-            // its leading-icon row layout).
             Ux4gAppHeaderAction(
               customWidget: SizedBox(
                 width: 40,
                 height: 40,
                 child: Material(
-                  color: Colors.white,
+                  color: _isDark(context) ? Ux4gPalette.neutral800 : Colors.white,
                   borderRadius: BorderRadius.circular(10),
                   child: InkWell(
                     borderRadius: BorderRadius.circular(10),
                     onTap: onMenuPressed,
                     child: Ink(
                       decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: _isDark(context) ? Ux4gPalette.neutral800 : Colors.white,
                         borderRadius: BorderRadius.circular(10),
                         border: Border.all(
-                          color: Ux4gPalette.primary100,
+                          color: _isDark(context)
+                              ? Ux4gPalette.primary700
+                              : Ux4gPalette.primary100,
                           width: 1.5,
                         ),
                       ),
@@ -10797,7 +10810,7 @@ class _BrandHeaderWithMenu extends StatelessWidget {
             ),
           ],
         ),
-        const Divider(height: 1, thickness: 1, color: _border),
+        Divider(height: 1, thickness: 1, color: _getBorder(context)),
       ],
     );
   }
@@ -10831,7 +10844,9 @@ class _AadhaarMethodCard extends StatelessWidget {
       cornerRadius: 12,
       isClickable: true,
       onPressed: () => onChanged(value),
-      backgroundColor: isSelected ? Ux4gPalette.primary50 : Ux4gPalette.gray100,
+      backgroundColor: isSelected
+          ? (_isDark(context) ? Ux4gPalette.primary900 : Ux4gPalette.primary50)
+          : (_isDark(context) ? Ux4gPalette.neutral800 : Ux4gPalette.gray100),
       // No border — selected state communicated by the tinted
       // background + radio + tinted text only.
       borderColor: Colors.transparent,
@@ -10860,7 +10875,7 @@ class _AadhaarMethodCard extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 15,
                       fontWeight: FontWeight.w700,
-                      color: isSelected ? primary : _titleColor,
+                      color: isSelected ? primary : _getTitleColor(context),
                       height: 1.3,
                     ),
                   ),
@@ -10871,7 +10886,7 @@ class _AadhaarMethodCard extends StatelessWidget {
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
                       fontSize: 13,
-                      color: isSelected ? primary : _subtleText,
+                      color: isSelected ? primary : _getSubtleText(context),
                       height: 1.35,
                     ),
                   ),
@@ -10909,7 +10924,7 @@ class _AadhaarVerifyFooterRow extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          const Divider(height: 1, thickness: 1, color: _border),
+          Divider(height: 1, thickness: 1, color: _getBorder(context)),
           // Halved the gap between the divider and the action row —
           // matches the tighter spacing in the reference image.
           const SizedBox(height: 6),
@@ -11082,7 +11097,7 @@ Column(
                 width: double.infinity,
                 padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: _isDark(context) ? Ux4gPalette.gray900 : Colors.white,
                   borderRadius: BorderRadius.circular(16),
                   boxShadow: [
                     BoxShadow(
@@ -11206,23 +11221,23 @@ class _AadhaarOtpEnterMockupState extends State<_AadhaarOtpEnterMockup> {
                   ),
                   const SizedBox(height: 16),
 
-                  const Text(
+                  Text(
                     'Enter OTP',
                     style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.w800,
-                      color: _titleColor,
+                      color: _getTitleColor(context),
                       height: 1.2,
                       letterSpacing: -0.3,
                     ),
                   ),
                   const SizedBox(height: 8),
-                  const Text(
+                  Text(
                     'A 6-digit OTP has been sent to the mobile number '
                     'linked to your Aadhaar.',
                     style: TextStyle(
                       fontSize: 14,
-                      color: _subtleText,
+                      color: _getSubtleText(context),
                       height: 1.3,
                     ),
                   ),
@@ -11284,7 +11299,7 @@ class _AadhaarOtpEnterCardMockupState
   int _resendNonce = 0;
 
   Color _getCardBg(BuildContext context) =>
-      _isDark(context) ? Ux4gPalette.primary900 : Ux4gPalette.primary100;
+      _isDark(context) ? Ux4gPalette.primary800 : Ux4gPalette.primary100;
 
   @override
   Widget build(BuildContext context) {
@@ -11306,7 +11321,7 @@ class _AadhaarOtpEnterCardMockupState
                       width: double.infinity,
                       padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
                       decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: _isDark(context) ? Ux4gPalette.gray900 : Colors.white,
                         borderRadius: BorderRadius.circular(16),
                         boxShadow: [
                           BoxShadow(
@@ -11333,23 +11348,23 @@ class _AadhaarOtpEnterCardMockupState
                           ),
                           const SizedBox(height: 12),
 
-                          const Text(
-                            'Enter OTP',
+                          Text(
+                    'Enter OTP',
                             style: TextStyle(
                               fontSize: 24,
                               fontWeight: FontWeight.w800,
-                              color: _titleColor,
+                              color: _getTitleColor(context),
                               height: 1.2,
                               letterSpacing: -0.3,
                             ),
                           ),
                           const SizedBox(height: 8),
-                          const Text(
-                            'A 6-digit OTP has been sent to the mobile '
+                          Text(
+                    'A 6-digit OTP has been sent to the mobile '
                             'number linked to your Aadhaar.',
                             style: TextStyle(
                               fontSize: 14,
-                              color: _subtleText,
+                              color: _getSubtleText(context),
                               height: 1.3,
                             ),
                           ),
@@ -11568,7 +11583,7 @@ Column(
                 width: double.infinity,
                 padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: _isDark(context) ? Ux4gPalette.gray900 : Colors.white,
                   borderRadius: BorderRadius.circular(16),
                   boxShadow: [
                     BoxShadow(
@@ -11706,23 +11721,23 @@ class _AadhaarFaceAuthPermissionMockup extends StatelessWidget {
                   ),
                   const SizedBox(height: 16),
 
-                  const Text(
+                  Text(
                     'Face Authentication',
                     style: TextStyle(
                       fontSize: 26,
                       fontWeight: FontWeight.w800,
-                      color: _titleColor,
+                      color: _getTitleColor(context),
                       height: 1.2,
                       letterSpacing: -0.3,
                     ),
                   ),
                   const SizedBox(height: 8),
-                  const Text(
+                  Text(
                     'Allow camera access to capture your face for '
                     'Aadhaar biometric verification.',
                     style: TextStyle(
                       fontSize: 14,
-                      color: _subtleText,
+                      color: _getSubtleText(context),
                       height: 1.3,
                     ),
                   ),
@@ -11758,7 +11773,7 @@ class _AadhaarFaceAuthPermissionCardMockup extends StatelessWidget {
   const _AadhaarFaceAuthPermissionCardMockup();
 
   Color _getCardBg(BuildContext context) =>
-      _isDark(context) ? Ux4gPalette.primary900 : Ux4gPalette.primary100;
+      _isDark(context) ? Ux4gPalette.primary800 : Ux4gPalette.primary100;
 
   @override
   Widget build(BuildContext context) {
@@ -11780,7 +11795,7 @@ class _AadhaarFaceAuthPermissionCardMockup extends StatelessWidget {
                       width: double.infinity,
                       padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
                       decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: _isDark(context) ? Ux4gPalette.gray900 : Colors.white,
                         borderRadius: BorderRadius.circular(16),
                         boxShadow: [
                           BoxShadow(
@@ -11807,23 +11822,23 @@ class _AadhaarFaceAuthPermissionCardMockup extends StatelessWidget {
                           ),
                           const SizedBox(height: 12),
 
-                          const Text(
-                            'Face Authentication',
+                          Text(
+                    'Face Authentication',
                             style: TextStyle(
                               fontSize: 26,
                               fontWeight: FontWeight.w800,
-                              color: _titleColor,
+                              color: _getTitleColor(context),
                               height: 1.2,
                               letterSpacing: -0.3,
                             ),
                           ),
                           const SizedBox(height: 8),
-                          const Text(
-                            'Allow camera access to capture your face '
+                          Text(
+                    'Allow camera access to capture your face '
                             'for Aadhaar biometric verification.',
                             style: TextStyle(
                               fontSize: 14,
-                              color: _subtleText,
+                              color: _getSubtleText(context),
                               height: 1.3,
                             ),
                           ),
@@ -11864,7 +11879,7 @@ class _CameraPrivacyInfoCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Ux4gCard(
       cornerRadius: 12,
-      backgroundColor: Ux4gPalette.secondary50,
+      backgroundColor: _isDark(context) ? Ux4gPalette.secondary900 : Ux4gPalette.secondary50,
       borderColor: Colors.transparent,
       borderWidth: 0,
       child: Padding(
@@ -11872,14 +11887,14 @@ class _CameraPrivacyInfoCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
-          children: const [
+          children: [
             Text(
               'Camera Access Required',
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w800,
-                color: _titleColor,
+                color: _getTitleColor(context),
                 height: 1.3,
               ),
             ),
@@ -11888,7 +11903,7 @@ class _CameraPrivacyInfoCard extends StatelessWidget {
               'Your face scan data is processed locally and never '
               'stored on our servers.',
               textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 14, color: _subtleText, height: 1.4),
+              style: TextStyle(fontSize: 14, color: _getSubtleText(context), height: 1.4),
             ),
           ],
         ),
@@ -11942,7 +11957,7 @@ Column(
           // (Ux4gPalette.secondary50) surface and centered body.
           Ux4gCard(
             cornerRadius: 12,
-            backgroundColor: Ux4gPalette.secondary50,
+            backgroundColor: _isDark(context) ? Ux4gPalette.secondary900 : Ux4gPalette.secondary50,
             borderColor: Colors.transparent,
             child: Padding(
               padding: EdgeInsets.fromLTRB(16, 18, 16, 18),
@@ -12040,7 +12055,7 @@ Column(
                 width: double.infinity,
                 padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: _isDark(context) ? Ux4gPalette.gray900 : Colors.white,
                   borderRadius: BorderRadius.circular(16),
                   boxShadow: [
                     BoxShadow(
@@ -12072,7 +12087,7 @@ Column(
 
                     Ux4gCard(
                       cornerRadius: 12,
-                      backgroundColor: Ux4gPalette.secondary50,
+                      backgroundColor: _isDark(context) ? Ux4gPalette.secondary900 : Ux4gPalette.secondary50,
                       borderColor: Colors.transparent,
                       child: Padding(
                         padding: EdgeInsets.fromLTRB(16, 18, 16, 18),
@@ -12175,34 +12190,34 @@ class _AadhaarVerifiedSuccessMockup extends StatelessWidget {
                     titleStyle: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w500,
-                      color: Ux4gPalette.green700,
+                      color: _isDark(context) ? Ux4gPalette.green300 : Ux4gPalette.green700,
                       height: 1.3,
                     ),
                     leadingIcon: Icon(
                       Icons.check_circle,
-                      color: Ux4gPalette.green,
+                      color: _isDark(context) ? Ux4gPalette.green400 : Ux4gPalette.green,
                       size: 20,
                     ),
                   ),
                   const SizedBox(height: 20),
 
-                  const Text(
+                  Text(
                     'Authentication\nSuccessful',
                     style: TextStyle(
                       fontSize: 26,
                       fontWeight: FontWeight.w800,
-                      color: _titleColor,
+                      color: _getTitleColor(context),
                       height: 1.2,
                       letterSpacing: -0.3,
                     ),
                   ),
                   const SizedBox(height: 8),
-                  const Text(
+                  Text(
                     'Your Aadhaar identity has been verified. You may '
                     'now proceed to the service.',
                     style: TextStyle(
                       fontSize: 14,
-                      color: _subtleText,
+                      color: _getSubtleText(context),
                       height: 1.3,
                     ),
                   ),
@@ -12225,7 +12240,7 @@ class _AadhaarVerifiedSuccessMockup extends StatelessWidget {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                const Divider(height: 1, thickness: 1, color: _border),
+                Divider(height: 1, thickness: 1, color: _getBorder(context)),
                 const SizedBox(height: 12),
                 Ux4gButton(
                   text: 'Continue to Service',
@@ -12251,7 +12266,7 @@ class _AadhaarVerifiedSuccessCardMockup extends StatelessWidget {
   const _AadhaarVerifiedSuccessCardMockup();
 
   Color _getCardBg(BuildContext context) =>
-      _isDark(context) ? Ux4gPalette.primary900 : Ux4gPalette.primary100;
+      _isDark(context) ? Ux4gPalette.primary800 : Ux4gPalette.primary100;
 
   @override
   Widget build(BuildContext context) {
@@ -12273,7 +12288,7 @@ class _AadhaarVerifiedSuccessCardMockup extends StatelessWidget {
                       width: double.infinity,
                       padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
                       decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: _isDark(context) ? Ux4gPalette.gray900 : Colors.white,
                         borderRadius: BorderRadius.circular(16),
                         boxShadow: [
                           BoxShadow(
@@ -12294,40 +12309,40 @@ class _AadhaarVerifiedSuccessCardMockup extends StatelessWidget {
                             titleStyle: TextStyle(
                               fontSize: 14,
                               fontWeight: FontWeight.w500,
-                              color: Ux4gPalette.green700,
+                              color: _isDark(context) ? Ux4gPalette.green300 : Ux4gPalette.green700,
                               height: 1.3,
                             ),
                             leadingIcon: Icon(
                               Icons.check_circle,
-                              color: Ux4gPalette.green,
+                              color: _isDark(context) ? Ux4gPalette.green400 : Ux4gPalette.green,
                               size: 20,
                             ),
                           ),
                           const SizedBox(height: 20),
 
-                          const Text(
-                            'Authentication\nSuccessful',
+                          Text(
+                    'Authentication\nSuccessful',
                             style: TextStyle(
                               fontSize: 26,
                               fontWeight: FontWeight.w800,
-                              color: _titleColor,
+                              color: _getTitleColor(context),
                               height: 1.2,
                               letterSpacing: -0.3,
                             ),
                           ),
                           const SizedBox(height: 8),
-                          const Text(
-                            'Your Aadhaar identity has been verified. '
+                          Text(
+                    'Your Aadhaar identity has been verified. '
                             'You may now proceed to the service.',
                             style: TextStyle(
                               fontSize: 14,
-                              color: _subtleText,
+                              color: _getSubtleText(context),
                               height: 1.3,
                             ),
                           ),
                           const SizedBox(height: 20),
 
-                          const _TransactionIdCard(
+                          _TransactionIdCard(
                             label: 'Transaction ID',
                             value: 'TXN-2024-AAD-78432',
                           ),
@@ -12372,7 +12387,7 @@ class _TransactionIdCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Ux4gCard(
       cornerRadius: 12,
-      backgroundColor: Ux4gPalette.primary50,
+      backgroundColor: _isDark(context) ? Ux4gPalette.primary900 : Ux4gPalette.primary50,
       borderColor: Colors.transparent,
       borderWidth: 0,
       child: Padding(
@@ -12383,19 +12398,19 @@ class _TransactionIdCard extends StatelessWidget {
           children: [
             Text(
               label,
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 13,
-                color: _subtleText,
+                color: _getSubtleText(context),
                 height: 1.3,
               ),
             ),
             const SizedBox(height: 4),
             Text(
               value,
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w800,
-                color: _titleColor,
+                color: _getTitleColor(context),
                 height: 1.3,
               ),
             ),
@@ -12444,7 +12459,7 @@ Column(
           // Transaction-ID card — light-primary surface.
           Ux4gCard(
             cornerRadius: 12,
-            backgroundColor: Ux4gPalette.primary50,
+            backgroundColor: _isDark(context) ? Ux4gPalette.primary900 : Ux4gPalette.primary50,
             borderColor: Colors.transparent,
             child: Padding(
               padding: EdgeInsets.fromLTRB(16, 14, 16, 16),
@@ -12521,7 +12536,7 @@ Column(
                 width: double.infinity,
                 padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: _isDark(context) ? Ux4gPalette.gray900 : Colors.white,
                   borderRadius: BorderRadius.circular(16),
                   boxShadow: [
                     BoxShadow(
@@ -12558,7 +12573,7 @@ Column(
 
                     Ux4gCard(
                       cornerRadius: 12,
-                      backgroundColor: Ux4gPalette.primary50,
+                      backgroundColor: _isDark(context) ? Ux4gPalette.primary900 : Ux4gPalette.primary50,
                       borderColor: Colors.transparent,
                       child: Padding(
                         padding: EdgeInsets.fromLTRB(16, 14, 16, 16),
@@ -12637,8 +12652,8 @@ class _AadhaarVerificationFailedMockup extends StatelessWidget {
                   Container(
                     width: 64,
                     height: 64,
-                    decoration: const BoxDecoration(
-                      color: Ux4gPalette.red100,
+                    decoration: BoxDecoration(
+                      color: _isDark(context) ? Ux4gPalette.red900 : Ux4gPalette.red100,
                       shape: BoxShape.circle,
                     ),
                     alignment: Alignment.center,
@@ -12658,23 +12673,23 @@ class _AadhaarVerificationFailedMockup extends StatelessWidget {
                   ),
                   const SizedBox(height: 16),
 
-                  const Text(
+                  Text(
                     'Authentication Failed',
                     style: TextStyle(
                       fontSize: 26,
                       fontWeight: FontWeight.w800,
-                      color: _titleColor,
+                      color: _getTitleColor(context),
                       height: 1.2,
                       letterSpacing: -0.3,
                     ),
                   ),
                   const SizedBox(height: 8),
-                  const Text(
+                  Text(
                     'The OTP entered is incorrect. You have 2 attempts '
                     'remaining before your account is temporarily locked.',
                     style: TextStyle(
                       fontSize: 14,
-                      color: _subtleText,
+                      color: _getSubtleText(context),
                       height: 1.35,
                     ),
                   ),
@@ -12692,12 +12707,12 @@ class _AadhaarVerificationFailedMockup extends StatelessWidget {
                     titleStyle: TextStyle(
                       fontSize: 13,
                       fontWeight: FontWeight.w500,
-                      color: Ux4gPalette.red800,
+                      color: _isDark(context) ? Ux4gPalette.red300 : Ux4gPalette.red800,
                       height: 1.35,
                     ),
                     leadingIcon: Icon(
                       Icons.error,
-                      color: Ux4gPalette.red600,
+                      color: _isDark(context) ? Ux4gPalette.red500 : Ux4gPalette.red600,
                       size: 18,
                     ),
                     badge: Container(
@@ -12706,14 +12721,14 @@ class _AadhaarVerificationFailedMockup extends StatelessWidget {
                         vertical: 4,
                       ),
                       decoration: BoxDecoration(
-                        color: Ux4gPalette.red200,
+                        color: _isDark(context) ? Ux4gPalette.red800 : Ux4gPalette.red200,
                         borderRadius: BorderRadius.circular(6),
                       ),
                       child: Text(
                         'Attempt 1 of 2',
                         style: TextStyle(
                           fontSize: 11,
-                          color: Ux4gPalette.red800,
+                          color: _isDark(context) ? Ux4gPalette.red300 : Ux4gPalette.red800,
                           fontWeight: FontWeight.w500,
                           height: 1.2,
                         ),
@@ -12768,7 +12783,7 @@ class _AadhaarVerificationFailedCardMockup extends StatelessWidget {
                       width: double.infinity,
                       padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
                       decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: _isDark(context) ? Ux4gPalette.gray900 : Colors.white,
                         borderRadius: BorderRadius.circular(16),
                         boxShadow: [
                           BoxShadow(
@@ -12784,8 +12799,8 @@ class _AadhaarVerificationFailedCardMockup extends StatelessWidget {
                           Container(
                             width: 64,
                             height: 64,
-                            decoration: const BoxDecoration(
-                              color: Ux4gPalette.red100,
+                            decoration: BoxDecoration(
+                              color: _isDark(context) ? Ux4gPalette.red900 : Ux4gPalette.red100,
                               shape: BoxShape.circle,
                             ),
                             alignment: Alignment.center,
@@ -12805,34 +12820,34 @@ class _AadhaarVerificationFailedCardMockup extends StatelessWidget {
                           ),
                           const SizedBox(height: 16),
 
-                          const Text(
-                            'Authentication Failed',
+                          Text(
+                    'Authentication Failed',
                             style: TextStyle(
                               fontSize: 26,
                               fontWeight: FontWeight.w800,
-                              color: _titleColor,
+                              color: _getTitleColor(context),
                               height: 1.2,
                               letterSpacing: -0.3,
                             ),
                           ),
                           const SizedBox(height: 8),
-                          const Text(
-                            'The OTP entered is incorrect. You have 2 '
+                          Text(
+                    'The OTP entered is incorrect. You have 2 '
                             'attempts remaining before your account is '
                             'temporarily locked.',
                             style: TextStyle(
                               fontSize: 14,
-                              color: _subtleText,
+                              color: _getSubtleText(context),
                               height: 1.35,
                             ),
                           ),
                           const SizedBox(height: 12),
 
                           // Subtle divider seen in the reference image.
-                          const Divider(
+                          Divider(
                             height: 16,
                             thickness: 1,
-                            color: _border,
+                            color: _getBorder(context),
                           ),
                           const SizedBox(height: 4),
 
@@ -12846,12 +12861,12 @@ class _AadhaarVerificationFailedCardMockup extends StatelessWidget {
                             titleStyle: TextStyle(
                               fontSize: 13,
                               fontWeight: FontWeight.w500,
-                              color: Ux4gPalette.red800,
+                              color: _isDark(context) ? Ux4gPalette.red300 : Ux4gPalette.red800,
                               height: 1.35,
                             ),
                             leadingIcon: Icon(
                               Icons.error,
-                              color: Ux4gPalette.red600,
+                              color: _isDark(context) ? Ux4gPalette.red500 : Ux4gPalette.red600,
                               size: 18,
                             ),
                             badge: Container(
@@ -12860,14 +12875,14 @@ class _AadhaarVerificationFailedCardMockup extends StatelessWidget {
                                 vertical: 4,
                               ),
                               decoration: BoxDecoration(
-                                color: Ux4gPalette.red200,
+                                color: _isDark(context) ? Ux4gPalette.red800 : Ux4gPalette.red200,
                                 borderRadius: BorderRadius.circular(6),
                               ),
                               child: Text(
                                 'Attempt 1 of 2',
                                 style: TextStyle(
                                   fontSize: 11,
-                                  color: Ux4gPalette.red800,
+                                  color: _isDark(context) ? Ux4gPalette.red300 : Ux4gPalette.red800,
                                   fontWeight: FontWeight.w500,
                                   height: 1.2,
                                 ),
@@ -13031,7 +13046,7 @@ Column(
                 width: double.infinity,
                 padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: _isDark(context) ? Ux4gPalette.gray900 : Colors.white,
                   borderRadius: BorderRadius.circular(16),
                   boxShadow: [
                     BoxShadow(
@@ -13170,43 +13185,43 @@ class _AadhaarAccountLockedMockup extends StatelessWidget {
                   Container(
                     width: 64,
                     height: 64,
-                    decoration: const BoxDecoration(
-                      color: Color(0xFFFEF2F2), // Very light red
+                    decoration: BoxDecoration(
+                      color: _isDark(context) ? Ux4gPalette.red900 : Ux4gPalette.red50,
                       shape: BoxShape.circle,
                     ),
                     alignment: Alignment.center,
                     child: Container(
                       width: 36,
                       height: 36,
-                      decoration: const BoxDecoration(
-                        color: Ux4gPalette.red100,
+                      decoration: BoxDecoration(
+                        color: _isDark(context) ? Ux4gPalette.red800 : Ux4gPalette.red100,
                         shape: BoxShape.circle,
                       ),
-                      child: const Icon(
+                      child: Icon(
                         Icons.lock,
-                        color: Ux4gPalette.red600,
+                        color: _isDark(context) ? Ux4gPalette.red400 : Ux4gPalette.red600,
                         size: 22,
                       ),
                     ),
                   ),
                   const SizedBox(height: 16),
 
-                  const Text(
+                  Text(
                     'Account Locked',
                     style: TextStyle(
                       fontSize: 26,
                       fontWeight: FontWeight.w800,
-                      color: _titleColor,
+                      color: _getTitleColor(context),
                       height: 1.2,
                       letterSpacing: -0.3,
                     ),
                   ),
                   const SizedBox(height: 8),
-                  const Text(
+                  Text(
                     'Your Aadhaar authentication has been suspended due to too many failed attempts.',
                     style: TextStyle(
                       fontSize: 14,
-                      color: _subtleText,
+                      color: _getSubtleText(context),
                       height: 1.35,
                     ),
                   ),
@@ -13217,36 +13232,36 @@ class _AadhaarAccountLockedMockup extends StatelessWidget {
                     width: double.infinity,
                     padding: const EdgeInsets.all(20),
                     decoration: BoxDecoration(
-                      color: const Color(0xFFFFFBEB), // light yellow
+                      color: _isDark(context) ? Ux4gPalette.yellow950 : Ux4gPalette.yellow50,
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: Column(
                       children: [
-                        const Text(
-                          'Try again in',
+                        Text(
+                    'Try again in',
                           style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.w700,
-                            color: Color(0xFF92400E),
+                            color: _isDark(context) ? Ux4gPalette.orange300 : Ux4gPalette.orange800,
                           ),
                         ),
                         const SizedBox(height: 8),
-                        const Text(
-                          '23:45:00',
+                        Text(
+                    '23:45:00',
                           style: TextStyle(
                             fontSize: 36,
                             fontWeight: FontWeight.w800,
-                            color: Color(0xFF92400E),
+                            color: _isDark(context) ? Ux4gPalette.orange300 : Ux4gPalette.orange800,
                             letterSpacing: 1,
                           ),
                         ),
                         const SizedBox(height: 16),
-                        const Text(
-                          'Your account will be unlocked automatically. If you need immediate assistance, contact UIDAI support.',
+                        Text(
+                    'Your account will be unlocked automatically. If you need immediate assistance, contact UIDAI support.',
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             fontSize: 13,
-                            color: Color(0xFF92400E),
+                            color: _isDark(context) ? Ux4gPalette.orange300 : Ux4gPalette.orange800,
                             height: 1.4,
                           ),
                         ),
@@ -13284,7 +13299,7 @@ class _AadhaarAccountLockedCardMockup extends StatelessWidget {
   const _AadhaarAccountLockedCardMockup();
 
   Color _getCardBg(BuildContext context) =>
-      _isDark(context) ? Ux4gPalette.primary900 : Ux4gPalette.primary100;
+      _isDark(context) ? Ux4gPalette.primary800 : Ux4gPalette.primary100;
 
   @override
   Widget build(BuildContext context) {
@@ -13306,7 +13321,7 @@ class _AadhaarAccountLockedCardMockup extends StatelessWidget {
                       width: double.infinity,
                       padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
                       decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: _isDark(context) ? Ux4gPalette.gray900 : Colors.white,
                         borderRadius: BorderRadius.circular(16),
                         boxShadow: [
                           BoxShadow(
@@ -13323,43 +13338,43 @@ class _AadhaarAccountLockedCardMockup extends StatelessWidget {
                           Container(
                             width: 64,
                             height: 64,
-                            decoration: const BoxDecoration(
-                              color: Color(0xFFFEF2F2),
+                            decoration: BoxDecoration(
+                              color: _isDark(context) ? Ux4gPalette.red900 : Ux4gPalette.red50,
                               shape: BoxShape.circle,
                             ),
                             alignment: Alignment.center,
                             child: Container(
                               width: 36,
                               height: 36,
-                              decoration: const BoxDecoration(
-                                color: Ux4gPalette.red100,
+                              decoration: BoxDecoration(
+                                color: _isDark(context) ? Ux4gPalette.red800 : Ux4gPalette.red100,
                                 shape: BoxShape.circle,
                               ),
-                              child: const Icon(
+                              child: Icon(
                                 Icons.lock,
-                                color: Ux4gPalette.red600,
+                                color: _isDark(context) ? Ux4gPalette.red400 : Ux4gPalette.red600,
                                 size: 22,
                               ),
                             ),
                           ),
                           const SizedBox(height: 16),
 
-                          const Text(
-                            'Account Locked',
+                          Text(
+                    'Account Locked',
                             style: TextStyle(
                               fontSize: 26,
                               fontWeight: FontWeight.w800,
-                              color: _titleColor,
+                              color: _getTitleColor(context),
                               height: 1.2,
                               letterSpacing: -0.3,
                             ),
                           ),
                           const SizedBox(height: 8),
-                          const Text(
-                            'Your Aadhaar authentication has been suspended due to too many failed attempts.',
+                          Text(
+                    'Your Aadhaar authentication has been suspended due to too many failed attempts.',
                             style: TextStyle(
                               fontSize: 14,
-                              color: _subtleText,
+                              color: _getSubtleText(context),
                               height: 1.35,
                             ),
                           ),
@@ -13370,36 +13385,36 @@ class _AadhaarAccountLockedCardMockup extends StatelessWidget {
                             width: double.infinity,
                             padding: const EdgeInsets.all(20),
                             decoration: BoxDecoration(
-                              color: const Color(0xFFFFFBEB),
+                              color: _isDark(context) ? Ux4gPalette.yellow950 : Ux4gPalette.yellow50,
                               borderRadius: BorderRadius.circular(12),
                             ),
                             child: Column(
                               children: [
-                                const Text(
-                                  'Try again in',
+                                Text(
+                    'Try again in',
                                   style: TextStyle(
                                     fontSize: 16,
                                     fontWeight: FontWeight.w700,
-                                    color: Color(0xFF92400E),
+                                    color: _isDark(context) ? Ux4gPalette.orange300 : Ux4gPalette.orange800,
                                   ),
                                 ),
                                 const SizedBox(height: 8),
-                                const Text(
-                                  '23:45:00',
+                                Text(
+                    '23:45:00',
                                   style: TextStyle(
                                     fontSize: 36,
                                     fontWeight: FontWeight.w800,
-                                    color: Color(0xFF92400E),
+                                    color: _isDark(context) ? Ux4gPalette.orange300 : Ux4gPalette.orange800,
                                     letterSpacing: 1,
                                   ),
                                 ),
                                 const SizedBox(height: 16),
-                                const Text(
-                                  'Your account will be unlocked automatically. If you need immediate assistance, contact UIDAI support.',
+                                Text(
+                    'Your account will be unlocked automatically. If you need immediate assistance, contact UIDAI support.',
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                     fontSize: 13,
-                                    color: Color(0xFF92400E),
+                                    color: _isDark(context) ? Ux4gPalette.orange300 : Ux4gPalette.orange800,
                                     height: 1.4,
                                   ),
                                 ),
@@ -13490,7 +13505,7 @@ Container(
               Container(
                 width: 64, height: 64,
                 decoration: BoxDecoration(
-                  color: Color(0xFFFEF2F2),
+                  color: _isDark(context) ? Ux4gPalette.red900 : Ux4gPalette.red50,
                   shape: BoxShape.circle,
                 ),
                 alignment: Alignment.center,
@@ -13529,19 +13544,19 @@ Container(
                 child: Column(
                   children: [
                     Text('Try again in',
-                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: Color(0xFF92400E))),
+                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: _isDark(context) ? Ux4gPalette.orange300 : Ux4gPalette.orange800)),
                     SizedBox(height: 8),
                     Text('23:45:00',
                       style: TextStyle(
                         fontSize: 36, 
                         fontWeight: FontWeight.w800, 
-                        color: Color(0xFF92400E),
+                        color: _isDark(context) ? Ux4gPalette.orange300 : Ux4gPalette.orange800,
                         letterSpacing: 1,
                       )),
                     SizedBox(height: 16),
                     Text('Your account will be unlocked automatically. If you need immediate assistance, contact UIDAI support.',
                       textAlign: TextAlign.center,
-                      style: TextStyle(fontSize: 13, color: Color(0xFF92400E), height: 1.4)),
+                      style: TextStyle(fontSize: 13, color: _isDark(context) ? Ux4gPalette.orange300 : Ux4gPalette.orange800, height: 1.4)),
                   ],
                 ),
               ),
@@ -13636,7 +13651,7 @@ Container(
                   width: double.infinity,
                   padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
                   decoration: BoxDecoration(
-                    color: Colors.white,
+                    color: _isDark(context) ? Ux4gPalette.gray900 : Colors.white,
                     borderRadius: BorderRadius.circular(16),
                     boxShadow: [
                       BoxShadow(
@@ -13653,7 +13668,7 @@ Container(
                       Container(
                         width: 64, height: 64,
                         decoration: BoxDecoration(
-                          color: Color(0xFFFEF2F2),
+                          color: _isDark(context) ? Ux4gPalette.red900 : Ux4gPalette.red50,
                           shape: BoxShape.circle,
                         ),
                         alignment: Alignment.center,
@@ -13692,19 +13707,19 @@ Container(
                         child: Column(
                           children: [
                             Text('Try again in',
-                              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: Color(0xFF92400E))),
+                              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: _isDark(context) ? Ux4gPalette.orange300 : Ux4gPalette.orange800)),
                             SizedBox(height: 8),
                             Text('23:45:00',
                               style: TextStyle(
                                 fontSize: 36, 
                                 fontWeight: FontWeight.w800, 
-                                color: Color(0xFF92400E),
+                                color: _isDark(context) ? Ux4gPalette.orange300 : Ux4gPalette.orange800,
                                 letterSpacing: 1,
                               )),
                             SizedBox(height: 16),
                             Text('Your account will be unlocked automatically. If you need immediate assistance, contact UIDAI support.',
                               textAlign: TextAlign.center,
-                              style: TextStyle(fontSize: 13, color: Color(0xFF92400E), height: 1.4)),
+                              style: TextStyle(fontSize: 13, color: _isDark(context) ? Ux4gPalette.orange300 : Ux4gPalette.orange800, height: 1.4)),
                           ],
                         ),
                       ),
@@ -13778,22 +13793,22 @@ class _OperatorAssistedAuthMockupState
                   const _BackButton(),
                   const SizedBox(height: 16),
 
-                  const Text(
+                  Text(
                     'Operator-Assisted Authentication',
                     style: TextStyle(
                       fontSize: 26,
                       fontWeight: FontWeight.w800,
-                      color: _titleColor,
+                      color: _getTitleColor(context),
                       height: 1.2,
                       letterSpacing: -0.3,
                     ),
                   ),
                   const SizedBox(height: 8),
-                  const Text(
+                  Text(
                     'A certified VLE operator will conduct this Aadhaar verification on your behalf with your consent.',
                     style: TextStyle(
                       fontSize: 14,
-                      color: _subtleText,
+                      color: _getSubtleText(context),
                       height: 1.35,
                     ),
                   ),
@@ -13804,28 +13819,28 @@ class _OperatorAssistedAuthMockupState
                     width: double.infinity,
                     padding: const EdgeInsets.all(20),
                     decoration: BoxDecoration(
-                      color: const Color(0xFFF5F3FF), // Light purple
+                      color: _isDark(context) ? Ux4gPalette.primary900 : Ux4gPalette.primary50,
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text(
-                          'VLE Operator',
+                        Text(
+                    'VLE Operator',
                           style: TextStyle(fontSize: 13, color: _subtleText),
                         ),
                         const SizedBox(height: 4),
-                        const Text(
-                          'Ramesh Kumar',
+                        Text(
+                    'Ramesh Kumar',
                           style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.w800,
-                            color: _titleColor,
+                            color: _getTitleColor(context),
                           ),
                         ),
                         const SizedBox(height: 8),
-                        const Text(
-                          'ID: VLE-MH-2024-00387 · Certified by MeitY',
+                        Text(
+                    'ID: VLE-MH-2024-00387 · Certified by MeitY',
                           style: TextStyle(fontSize: 12, color: _mutedText),
                         ),
                       ],
@@ -13873,7 +13888,7 @@ class _OperatorAssistedAuthCardMockupState
     extends State<_OperatorAssistedAuthCardMockup> {
   bool _consent = false;
   Color _getCardBg(BuildContext context) =>
-      _isDark(context) ? Ux4gPalette.primary900 : Ux4gPalette.primary100;
+      _isDark(context) ? Ux4gPalette.primary800 : Ux4gPalette.primary100;
 
   @override
   Widget build(BuildContext context) {
@@ -13895,7 +13910,7 @@ class _OperatorAssistedAuthCardMockupState
                       width: double.infinity,
                       padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
                       decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: _isDark(context) ? Ux4gPalette.gray900 : Colors.white,
                         borderRadius: BorderRadius.circular(16),
                         boxShadow: [
                           BoxShadow(
@@ -13911,22 +13926,22 @@ class _OperatorAssistedAuthCardMockupState
                           const _BackButton(),
                           const SizedBox(height: 12),
 
-                          const Text(
-                            'Operator-Assisted Authentication',
+                          Text(
+                    'Operator-Assisted Authentication',
                             style: TextStyle(
                               fontSize: 26,
                               fontWeight: FontWeight.w800,
-                              color: _titleColor,
+                              color: _getTitleColor(context),
                               height: 1.2,
                               letterSpacing: -0.3,
                             ),
                           ),
                           const SizedBox(height: 8),
-                          const Text(
-                            'A certified VLE operator will conduct this Aadhaar verification on your behalf with your consent.',
+                          Text(
+                    'A certified VLE operator will conduct this Aadhaar verification on your behalf with your consent.',
                             style: TextStyle(
                               fontSize: 14,
-                              color: _subtleText,
+                              color: _getSubtleText(context),
                               height: 1.35,
                             ),
                           ),
@@ -13937,34 +13952,34 @@ class _OperatorAssistedAuthCardMockupState
                             width: double.infinity,
                             padding: const EdgeInsets.all(20),
                             decoration: BoxDecoration(
-                              color: const Color(0xFFF5F3FF),
+                              color: _isDark(context) ? Ux4gPalette.primary900 : Ux4gPalette.primary50,
                               borderRadius: BorderRadius.circular(12),
                             ),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                const Text(
-                                  'VLE Operator',
+                                Text(
+                    'VLE Operator',
                                   style: TextStyle(
                                     fontSize: 13,
-                                    color: _subtleText,
+                                    color: _getSubtleText(context),
                                   ),
                                 ),
                                 const SizedBox(height: 4),
-                                const Text(
-                                  'Ramesh Kumar',
+                                Text(
+                    'Ramesh Kumar',
                                   style: TextStyle(
                                     fontSize: 18,
                                     fontWeight: FontWeight.w800,
-                                    color: _titleColor,
+                                    color: _getTitleColor(context),
                                   ),
                                 ),
                                 const SizedBox(height: 8),
-                                const Text(
-                                  'ID: VLE-MH-2024-00387 · Certified by MeitY',
+                                Text(
+                    'ID: VLE-MH-2024-00387 · Certified by MeitY',
                                   style: TextStyle(
                                     fontSize: 12,
-                                    color: _mutedText,
+                                    color: _getMutedText(context),
                                   ),
                                 ),
                               ],
@@ -14204,7 +14219,7 @@ Container(
                   width: double.infinity,
                   padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
                   decoration: BoxDecoration(
-                    color: Colors.white,
+                    color: _isDark(context) ? Ux4gPalette.gray900 : Colors.white,
                     borderRadius: BorderRadius.circular(16),
                     boxShadow: [
                       BoxShadow(
